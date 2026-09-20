@@ -40,3 +40,10 @@ uvicorn==0.40.0
 # (disk_lightglue_v0-1_arxiv-pth), fetched by kornia into ~/.cache/torch/hub.
 torch==2.10.0+cpu
 kornia==0.8.3
+# Chandrayaan-2 ingestion (REAL-DATA-09, 2026-09-20). tifffile reads the TMC-2
+# Level-2 GeoTIFF ortho and DEM: strips/tiles plus the four geometry tags
+# (ModelTiepoint 33922, ModelPixelScale 33550, ModelTransformation 34264,
+# GeoKeyDirectory 34735). Pure Python, BSD-3, no binary wheel, no GDAL.
+# Declared as the `chandrayaan2` extra in pyproject.toml since 2026-09-05;
+# installed into the producing environment on 2026-09-20.
+tifffile==2026.9.15
