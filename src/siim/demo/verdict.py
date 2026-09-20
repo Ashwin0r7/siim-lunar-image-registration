@@ -143,15 +143,25 @@ EXCLUDED_FROM_VERDICT: dict[str, str] = {
 
 #: Wrong passes measured on real data: a pass under the rule whose transform was
 #: INCONSISTENT with archive geometry. Sources: REAL-DATA-07 (42 pairs, ~2 m,
-#: 0 / 20 B1, 0 / 17 B4L) and REAL-DATA-08 (100 m rung, 0 / 1 B1, 1 / 6 B4L).
+#: 0 / 20 B1, 0 / 17 B4L) and REAL-DATA-08 (100 m rung, 0 / 1 B1, 1 / 8 B4L).
 #: A bound at the geometry check's floor, on one mare region; not a probability.
+#:
+#: **These counts are derived, not asserted.** E-038 found the B4L denominator
+#: transcribed as 47 where the rows give 49, and two Mini-RF wrong passes in the
+#: PSF re-run counted nowhere. ``tests/test_wrong_pass_tally_matches_artefacts.py``
+#: recomputes every figure below from the recorded row files and fails if this
+#: table and the artefacts disagree, so the transcription cannot drift again.
+#: The PSF-aware re-run (5 / 13 B4L) is a *separate* recorded operator and is
+#: deliberately NOT pooled into the box-average tally below; it is reported
+#: beside it in REAL-DATA-08 Part 2.
 MEASURED_WRONG_PASS: dict[str, dict[str, object]] = {
     "B1": {"n_pass": 46, "n_wrong_pass": 0,
-           "source": "REAL-DATA-07 original (20) + amended (25) at ~2 m + REAL-DATA-08 (1) at 100 m, "
-                     "2026-09-05/06"},
-    "B4L": {"n_pass": 47, "n_wrong_pass": 1,
-            "source": "REAL-DATA-07 original (17) + amended (24) at ~2 m + REAL-DATA-08 box run (6; the "
-                      "wrong pass is frame B at 59 m, 9 inliers, 28 px off), 2026-09-05/06"},
+           "source": "REAL-DATA-07 original (20) + amended (25) at ~2 m + REAL-DATA-08 box run (1) "
+                     "at 100 m, 2026-09-05/06"},
+    "B4L": {"n_pass": 49, "n_wrong_pass": 1,
+            "source": "REAL-DATA-07 original (17) + amended (24) at ~2 m + REAL-DATA-08 box run (8, "
+                      "two per frame on A/B/C/D at the WAC rung; the wrong pass is frame B at 59 m, "
+                      "9 inliers, 28 px off), 2026-09-05/06, denominator corrected 47 -> 49 by E-038"},
     "B4X": {"n_pass": 27, "n_wrong_pass": 0,
             "source": "REAL-DATA-07 amended run at ~2 m, 2026-09-06"},
 }

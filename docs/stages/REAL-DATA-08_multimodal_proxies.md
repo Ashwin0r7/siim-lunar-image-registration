@@ -252,12 +252,27 @@ WAC: 1 of 4 frames, D at 68 m, 9 inliers, CONSISTENT — identical to the box ru
 | D, 118 m | 40 INCONCLUSIVE | 30 INCONCLUSIVE |
 
 The PSF operator changes no verdict on A, C or D and moves B's marginal rows
-by a few inliers in both directions; it produces **three** B4L wrong passes on
-frame B (10, 11, 15 inliers, 28–77 px off) where the box run produced one.
-Frame B at 70° incidence with a 46-px-wide strip is where the engine's false
-acceptances live, at both operators. The wrong-pass tally for B4L across
-REAL-DATA-07/08 is therefore stated as **1 / 23 (box) or 3 / 25 (PSF)**, and
-the coarse-rung rule stands: no pass is reported without its geometry verdict.
+by a few inliers in both directions; at the WAC rung it produces **three** B4L
+wrong passes on frame B (10, 11, 15 inliers, 28–77 px off) where the box run
+produced one. Frame B at 70° incidence with a 46-px-wide strip is where the
+engine's false acceptances live at that rung, under both operators.
+
+**Corrected 2026-09-20 (E-038).** The sentence above counted only the WAC rows.
+The PSF artefact records **five** B4L wrong passes in total: the three WAC
+frame-B rows named above, **plus two on Mini-RF** — frame B at 14.64 m (9
+inliers, 6.2× the discrimination floor) and frame D at 17.12 m (9 inliers,
+12.4× the floor). Those two were counted in neither this tally nor
+`siim.demo.verdict.MEASURED_WRONG_PASS`. **The radar result is unchanged:** a
+wrong pass is not a success, so *"radar registers under no engine, 0 / 48"*
+stands exactly as written above — but the radar proxy did produce two false
+acceptances under the inlier rule, and this stage now says so. The B4L
+wrong-pass tally across REAL-DATA-07/08 is therefore **1 / 49 (box average)**
+and, reported separately rather than pooled, **5 / 13 at the PSF operator**.
+The two figures are not comparable as rates: the box tally spans the ~2 m
+census and the 100 m rung together, the PSF tally is the coarse proxy grid
+alone. Both are now derived from the row files by
+`tests/test_wrong_pass_tally_matches_artefacts.py` rather than transcribed.
+The coarse-rung rule stands: no pass is reported without its geometry verdict.
 
 **What this closes.** The recorded deviation is closed with a measurement,
 and the measurement says the operator was not what limited the classical
