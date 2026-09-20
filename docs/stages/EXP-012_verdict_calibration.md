@@ -170,6 +170,44 @@ No re-matching, no new acquisition, no engine change, no threshold change, no
 tuning of `assess()`, no accuracy claim, no Chandrayaan-2 claim. It composes
 transforms that are already recorded and runs the verdict that already ships.
 
+## 8. AMENDMENT A1 — 2026-09-20, before any residual was computed
+
+**Status when this was written: no loop residual, on any triplet, had been
+computed.** The triplet inventory in §2 was already fixed and is unchanged.
+This amendment therefore cannot be outcome-driven, and is recorded rather than
+applied silently — the failure mode E-035 and the RD-08 operator deviation both
+came from a Part 1 whose method could not do what it said.
+
+**The obstacle.** §3.5 requires `assess()` unchanged. `assess()` derives its
+coverage evidence from the **inlier point coordinates**
+(`src_points[inlier_mask]` → `coverage_metrics`, `verdict.py:269-271`). The
+amended REAL-DATA-07 rows record the resulting coverage *statistics*
+(`coverage_max_uncovered_disc_ratio`, `coverage_occupancy`) but **not the
+correspondences themselves**. The verdict therefore cannot be produced from the
+recorded rows alone, and §7's "no re-matching" makes §3.5 unimplementable.
+
+**The two honest options, and the one taken.** Fabricating a point set that
+reproduces the recorded coverage statistics would be inventing data and is
+refused outright. The stage instead **re-runs engine B1 on the edges of the 13
+admissible triplets** to recover the correspondences it needs. Nothing else
+changes: the same engine, `BASE = {model: affine, ransac_threshold_px: 3.0,
+seed: 0}`, the same tiles at the same recorded windows and decimation, the same
+`north_up_east_right` orientation.
+
+**This strengthens rather than weakens the stage, and adds a control:**
+
+> **S5 (re-match control, must hold).** Every re-matched edge must reproduce
+> its recorded `n_inliers` **exactly**. A single mismatch means the environment
+> or the code has drifted from what produced the amended REAL-DATA-07 run, and
+> **the stage stops** — no residual and no verdict is reported. This is the
+> same species of control as S4 and as REAL-DATA-09's S6.
+
+§7 is amended to read: *no new acquisition, no engine change, no threshold
+change, no tuning of `assess()`, no accuracy claim, no Chandrayaan-2 claim.*
+Re-matching of already-recorded edges, gated by S5, is permitted and is the
+only method change. §2's inventory, §4's hypotheses, and every criterion
+S1–S4 are untouched.
+
 ---
 
 ## Part 2 — Results
