@@ -40,6 +40,7 @@ import re
 import pytest
 
 from siim.demo import api
+from siim.demo import chandrayaan2 as c2
 from siim.demo import evidence as ev
 
 REAL = ["real_da_success", "real_bd_failure", "real_ab_control"]
@@ -145,6 +146,8 @@ def test_the_allow_list_is_exactly_what_the_page_advertises():
     advertised.update(ev.illumination_evidence()["sources"])
     if ev.engines_status()["available"]:
         advertised.update(ev.engines_evidence()["sources"])
+    if c2.chandrayaan2_status()["available"]:
+        advertised.update(c2.chandrayaan2_evidence()["sources"])
     assert set(api.advertised_artefacts()) == advertised
 
 
