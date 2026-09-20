@@ -311,14 +311,78 @@ change that.** Either §53's criterion or the verdict's coverage handling must
 be revisited as a recorded decision; this stage reports the conflict rather
 than resolving it silently.
 
-### S3 — adversarial set: **NOT RUN**
+### S3 — adversarial set: **MET, and the criterion is the wrong instrument**
 
-Part 1 §3.6 specified running the EXP-002 objective-4 adversarial
-constructions through `assess()`, with S3 predicted NOT MET because a
-64-px-wrong transform whose error cancels in the loop already returns
-VERIFIED / high (ADR-0011 N1). **That arm was not implemented in this run.**
-It is reported as not run rather than as an outcome, and §53 criterion 3's
-third clause remains unevaluated.
+*Run 2026-09-21. Artefacts: `experiments/EXP-012/exp012_s3_adversarial.json`
+and `…_s3_gauge_probe.json`. Runners: `scripts/run_exp012_s3.py`,
+`…_s3_gauge.py`.*
+
+**S3 as frozen is MET: zero adversarial cases VERIFIED, 0 of 36.**
+
+| kind | median loop | median true error | verdicts |
+|---|---|---|---|
+| `lattice_all_edges` (adversarial) | 190.079 px | 64.000 px | REJECTED ×12 |
+| `lattice_one_edge` (adversarial) | 62.745 px | 64.000 px | REJECTED ×12 |
+| `symmetric_wrong` (adversarial) | 62.745 px | 64.000 px | REJECTED ×12 |
+| `correct` (control) | 0.361 px | 0.338 px | VERIFIED ×12 |
+
+**Part A was settled analytically, not run.** EXP-002 objective 4's other
+family is single-edge correspondence sets with no third image, so
+`loop_error_px` is absent and `assess()` cannot return VERIFIED for any of
+them — the ceiling is INCONCLUSIVE by construction. Running 96 cases to
+observe a foregone outcome would pad the artefact; the reason is recorded
+instead.
+
+**The rebuild was not trusted.** `make_cycle_case` returns residuals, not the
+transforms behind them, so its construction had to be rebuilt to get
+correspondences. For all 48 triplets the rebuilt edges were composed and their
+loop closure compared with the value the original recorded: **maximum
+difference 0.00e+00 px**. A drifted reconstruction could not have passed.
+
+#### The prediction was wrong, and the reason matters more than the result
+
+Part 1 predicted **NOT MET at HIGH confidence**, reasoning from the per-image
+gauge error that `verdict.py` documents. The prediction failed — **because the
+frozen adversarial set does not contain that case.**
+
+Every adversarial kind in EXP-002 objective 4 is a **per-edge** error: a
+lattice shift applied to one edge, or to each edge independently. That is
+precisely the subspace loop closure is built to detect, and it detected all 36.
+Even `symmetric_wrong` — whose own comment calls it *"the blind spot cycle
+consistency cannot see"* — is a per-edge error as far as the **loop** is
+concerned; it defeats forward/backward cycle consistency, not loop closure, and
+its loop residual is 62.745 px.
+
+The null space ADR-0011 N1 names is **per-image**, and no case in the set has
+that shape. **S3 MET therefore says the verdict rejects per-edge adversarial
+constructions. It does not say the verdict is sound.** Recorded as **E-039**.
+
+#### Supplementary probe — the case the set is missing
+
+*Not part of S3 and does not change it; written to its own artefact.* A
+per-image gauge gives each image its own coordinate error, so the terms cancel
+around the composition:
+
+> `T̂_AB = G_B ∘ T_AB ∘ G_A⁻¹` (and cyclically) ⟹ `T̂_CA ∘ T̂_BC ∘ T̂_AB = I`
+> exactly, **however wrong each edge is**.
+
+| gauge magnitude | n | VERIFIED | median true edge error | confidence |
+|---|---|---|---|---|
+| 8 px | 12 | **12** | 14.04 px | high ×12 |
+| 32 px | 12 | **12** | 57.47 px | high ×12 |
+| 64 px | 12 | **12** | 115.40 px | high ×12 |
+
+**36 of 36 return VERIFIED / high while every edge is wrong** — by up to
+**115 px** — with the loop closing to 1.27e-13 px by construction (the probe's
+own control: a case whose loop does not close is not a gauge case, and the run
+stops).
+
+This is not a defect in the implementation. The invariance is an identity,
+stated in `gtfree.loop_closure`'s docstring and in ADR-0011 N1, and previously
+pinned on **one** hand-built case in `tests/test_demo_verdict.py`. What changes
+here is its status: from an assertion in prose to a measured population with a
+magnitude attached. How often per-image gauge error occurs on real products is
+**unmeasured**, and nothing here estimates it.
 
 ### Summary against the frozen criteria
 
@@ -326,7 +390,7 @@ third clause remains unevaluated.
 |---|---|
 | **S1** VERIFIED reachable on real data | **MET** — 13 / 13 triplets, 39 / 39 edge verdicts VERIFIED |
 | **S2** residual tracks edge quality | **NOT MET** — ρ = 0.0551, prediction refuted |
-| **S3** zero VERIFIED on adversarial set | **NOT RUN** |
+| **S3** zero VERIFIED on adversarial set | **MET — 0 of 36 — but the criterion is the wrong instrument (E-039):** every kind in the frozen set is a per-*edge* error, the subspace loop closure is built to catch. A supplementary per-*image* gauge probe returns **VERIFIED / high on 36 of 36** with edges wrong by up to 115 px |
 | **S4** RD-03 composition control | **MET** — 0.0 px |
 | **S5** re-match control | **MET** — 22 / 22 edges exact |
 

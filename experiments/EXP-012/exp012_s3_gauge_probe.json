@@ -1,0 +1,381 @@
+{
+  "stage": "EXP-012",
+  "what": "supplementary probe -- the per-image gauge case EXP-002's adversarial set does not contain",
+  "not_part_of_s3": "S3 was decided on EXP-002 objective 4's constructions exactly as Part 1 \u00a73.6 fixed, and is MET (exp012_s3_adversarial.json). This probe adds a construction outside that set and does not change S3.",
+  "why_it_matters": "Every adversarial kind in the frozen set is a per-EDGE error, the subspace loop closure is designed to detect -- and it detected all 36 of them. The null space named in ADR-0011 N1 is per-IMAGE, and the set contains no such case, so S3 MET does not clear it.",
+  "construction": "T_AB = G_B o T_AB o G_A^-1 (and cyclically); the per-image terms cancel around the loop",
+  "construction_control": {
+    "statement": "every case's loop closes to ~0, or it is not a gauge case",
+    "met": true,
+    "max_loop_error_px": 1.2710574864626038e-13,
+    "tolerance_px": 1e-09
+  },
+  "n_rows": 36,
+  "n_verified": 36,
+  "verified_fraction": 1.0,
+  "by_gauge_magnitude": {
+    "8.0": {
+      "n": 12,
+      "n_verified": 12,
+      "median_true_error_px": 14.041966256173836,
+      "max_loop_error_px": 1.2710574864626038e-13,
+      "confidences": {
+        "high": 12
+      }
+    },
+    "32.0": {
+      "n": 12,
+      "n_verified": 12,
+      "median_true_error_px": 57.471187975217966,
+      "max_loop_error_px": 1.2710574864626038e-13,
+      "confidences": {
+        "high": 12
+      }
+    },
+    "64.0": {
+      "n": 12,
+      "n_verified": 12,
+      "median_true_error_px": 115.40376917240599,
+      "max_loop_error_px": 1.2710574864626038e-13,
+      "confidences": {
+        "high": 12
+      }
+    }
+  },
+  "rows": [
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9001,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 5.899890522768879,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06856831906852327
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9002,
+      "loop_error_px": 8.038873388460929e-14,
+      "true_transform_error_px": 21.208622001766916,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.09461071363111613
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9003,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 14.190065591368164,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06584378058999052
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9004,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 10.729446366333256,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.07324869762734053
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9005,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 13.151007237234154,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0601676632841772
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9006,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 15.117250110269186,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.08925802618956914
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9007,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 16.807198577812823,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0656261625641072
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9008,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 2.8149722389583753,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.07181553246425873
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9009,
+      "loop_error_px": 1.1457157353758233e-13,
+      "true_transform_error_px": 13.893866920979507,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0665210404919
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9010,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 14.939012296130244,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06720566614877051
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9011,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 22.618269168621023,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06310740008360746
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9012,
+      "loop_error_px": 1.2710574864626038e-13,
+      "true_transform_error_px": 11.133603090006595,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0705832460921588
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9001,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 20.334237770553855,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06856831906852327
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9002,
+      "loop_error_px": 8.038873388460929e-14,
+      "true_transform_error_px": 85.07990338124316,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.09461071363111613
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9003,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 56.32339737916972,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06584378058999052
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9004,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 45.825646786825075,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.07324869762734053
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9005,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 53.38961966347105,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0601676632841772
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9006,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 65.49800851164373,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.08925802618956914
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9007,
+      "loop_error_px": 1.1457157353758233e-13,
+      "true_transform_error_px": 63.16519915996054,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0656261625641072
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9008,
+      "loop_error_px": 1.1557600989637328e-13,
+      "true_transform_error_px": 11.196267553629344,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.07181553246425873
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9009,
+      "loop_error_px": 1.1413338279018579e-13,
+      "true_transform_error_px": 58.61897857126621,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0665210404919
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9010,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 60.97967677592396,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06720566614877051
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9011,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 87.99447492318978,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06310740008360746
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9012,
+      "loop_error_px": 1.2710574864626038e-13,
+      "true_transform_error_px": 46.88994247934933,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0705832460921588
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9001,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 42.86328612586044,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06856831906852327
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9002,
+      "loop_error_px": 5.859285502108464e-14,
+      "true_transform_error_px": 170.24310913022646,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.09461071363111613
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9003,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 112.50126551050545,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06584378058999052
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9004,
+      "loop_error_px": 2.0097183471152322e-14,
+      "true_transform_error_px": 92.62783138348178,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.07324869762734053
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9005,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 107.13463958118902,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0601676632841772
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9006,
+      "loop_error_px": 1.1368683772161603e-13,
+      "true_transform_error_px": 132.75824841226884,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.08925802618956914
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9007,
+      "loop_error_px": 1.1536711261613188e-13,
+      "true_transform_error_px": 125.05971616732269,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0656261625641072
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9008,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 22.785347682995905,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.07181553246425873
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9009,
+      "loop_error_px": 1.1368683772161603e-13,
+      "true_transform_error_px": 118.30627283430653,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0665210404919
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9010,
+      "loop_error_px": 9.951779739544498e-14,
+      "true_transform_error_px": 122.39186443046677,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06720566614877051
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9011,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 175.18744932898153,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.06310740008360746
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9012,
+      "loop_error_px": 1.2710574864626038e-13,
+      "true_transform_error_px": 94.57925926430559,
+      "status": "VERIFIED",
+      "confidence": "high",
+      "coverage_max_gap": 0.0705832460921588
+    }
+  ],
+  "claims_not_supported": [
+    "Synthetic constructions, not real imagery.",
+    "This is a limitation of loop closure as a check, not a defect in its implementation: the invariance is an identity, stated in gtfree.loop_closure's docstring and in ADR-0011 N1.",
+    "It says nothing about how often per-image gauge error occurs on real products; that is unmeasured."
+  ],
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3"
+  },
+  "total_runtime_s": 1.3
+}
