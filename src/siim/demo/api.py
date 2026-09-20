@@ -61,6 +61,7 @@ from siim.demo.chandrayaan2 import (  # noqa: E402
     chandrayaan2_evidence,
     chandrayaan2_status,
 )
+from siim.demo.exp012 import exp012_evidence, exp012_status  # noqa: E402
 from siim.demo.evidence import (  # noqa: E402
     REAL_SCENARIOS,
     DemoDataMissing,
@@ -289,6 +290,16 @@ def evidence_engines() -> dict:
         raise HTTPException(503, str(exc)) from exc
 
 
+@app.get("/api/evidence/verdict-calibration")
+def evidence_verdict_calibration() -> dict:
+    """EXP-012: is VERIFIED reachable on real lunar data, and what does it not
+    guarantee? Read from the recorded artefact; never recomputed."""
+    try:
+        return exp012_evidence()
+    except DemoDataMissing as exc:
+        raise HTTPException(503, str(exc)) from exc
+
+
 @app.get("/api/evidence/chandrayaan2")
 def evidence_chandrayaan2() -> dict:
     """REAL-DATA-09: Chandrayaan-2 TMC-2 against LRO NAC, from its artefacts.
@@ -442,6 +453,10 @@ def advertised_artefacts() -> frozenset[str]:
         pass
     try:
         paths.update(chandrayaan2_evidence()["sources"])
+    except DemoDataMissing:
+        pass
+    try:
+        paths.update(exp012_evidence()["sources"])
     except DemoDataMissing:
         pass
     return frozenset(paths)

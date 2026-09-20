@@ -393,7 +393,8 @@ Promise.all([
   fetch("/api/evidence/illumination").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/engines").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/chandrayaan2").then(r => r.ok ? r.json() : null).catch(() => null),
-]).then(([d, ill, eng, c2]) => {
+  fetch("/api/evidence/verdict-calibration").then(r => r.ok ? r.json() : null).catch(() => null),
+]).then(([d, ill, eng, c2, vc]) => {
   SCEN = d.scenarios;
   const card = s => `
     <button class="case" data-id="${esc(s.id)}">
@@ -422,6 +423,7 @@ Promise.all([
   window.__ILL = ill;
 window.__ENG = eng;
   window.__C2 = c2;
+  window.__VC = vc;
   $("#scope").innerHTML = ill
     ? `<b>Evidence scope</b><br>${esc(ill.scope)}`
     : `<b>Evidence scope</b><br>LRO NAC · Mare Serenitatis`;
@@ -584,6 +586,7 @@ function render(d) {
     ${stepVerdict(vm, v, d)}
     ${illuminationPanel(vm)}
     ${enginesPanel(vm)}
+    ${verdictCalibrationPanel(vm)}
     ${chandrayaan2Panel(vm)}
     ${provenance(d)}
   `;
@@ -915,6 +918,78 @@ function illuminationPanel(vm) {
     <div class="notclaimed">${ill.not_claimed.map(n =>
       `<span>${esc(n)}</span>`).join("")}</div>
     <div class="srcline"><b>sources:</b> ${ill.sources.map(esc).join(" · ")}</div>
+  </div>`;
+}
+
+/* "Does your system ever say yes?" -- the hardest question a reader asks of a
+   demo that has so far only ever REJECTED. EXP-012 answers it, and the same
+   panel carries the two findings that came with the answer: the residual does
+   not track edge strength, and the coverage criterion fails once VERIFIED
+   pairs exist. Both are on the page, not in a footnote. */
+function verdictCalibrationPanel(vm) {
+  const vc = window.__VC;
+  if (!vc || !vm.real) return "";
+  const w = vc.weakest_triplet;
+  return `<div class="card">
+    <div class="stephead">
+      <div class="stepnum">★</div>
+      <div><div class="stepq">Does this system ever say VERIFIED — and what does that not mean?</div>
+      <div class="stepsub">Verdict calibration · EXP-012 · 13 real triplets, unmodified criteria</div></div>
+    </div>
+
+    <div class="tiles" style="margin-bottom:16px">
+      <div class="tile hero good"><div class="lab">triplets VERIFIED</div>
+        <div class="val">${vc.n_all_verified} / ${vc.n_triplets}</div>
+        <div class="note">${vc.n_edge_verdicts} edge verdicts, all VERIFIED</div></div>
+      <div class="tile good"><div class="lab">loop residual range</div>
+        <div class="val">${(+vc.residual_px.min).toFixed(2)}–${(+vc.residual_px.max).toFixed(2)}</div>
+        <div class="note">px, against a ${vc.residual_px.reject_threshold_px} px reject line — no threshold changed</div></div>
+      <div class="tile"><div class="lab">confidence</div>
+        <div class="val">${vc.confidences.high || 0}<span style="font-size:16px;color:var(--ink-3)"> high</span></div>
+        <div class="note">${vc.confidences.moderate || 0} moderate — coverage counted against those</div></div>
+      <div class="tile bad"><div class="lab">S2 — residual vs edge quality</div>
+        <div class="val">${(+vc.s2.spearman_rho).toFixed(3)}</div>
+        <div class="note">Spearman ρ · prediction <b>REFUTED</b></div></div>
+    </div>
+
+    <table>
+      <tr><th>triplet</th><th>window</th><th>weakest edge</th><th>loop residual</th><th>verdict</th></tr>
+      ${vc.rows.map(r => `<tr>
+        <td class="n">${r.frames.map(esc).join(" + ")}</td>
+        <td class="note">${esc(r.window || "")}</td>
+        <td class="n" style="color:${r.min_edge_inliers < 20 ? "var(--warning)" : "var(--ink)"};font-weight:700">${r.min_edge_inliers}</td>
+        <td class="n">${(+r.residual_px).toFixed(4)} px</td>
+        <td style="color:var(--good);font-weight:700">${r.statuses.map(esc).join(", ")}</td>
+      </tr>`).join("")}
+    </table>
+
+    <div class="note" style="margin-top:12px;border-left:2px solid var(--warning);padding-left:10px">
+      <b>What VERIFIED does not mean, measured here rather than assumed.</b>
+      The loop residual does not track edge strength: Spearman ρ = ${(+vc.s2.spearman_rho).toFixed(4)}, indistinguishable from zero.
+      ${w ? `The weakest triplet carries an edge of just <b>${w.min_edge_inliers} inliers</b> — one above the failure cutoff —
+      and its loop still closes at ${(+w.residual_px).toFixed(4)} px.` : ""}
+      A marginal edge rides into VERIFIED on a loop that closes around it, because loop closure constrains the
+      <i>quotient</i> and not the individual transforms.</div>
+
+    <div class="note" style="margin-top:10px">
+      <b>Controls, both run before any result was reported.</b>
+      <b>S4:</b> re-composing REAL-DATA-03's recorded triplet returns its ${(+vc.s4_control.recorded_px).toFixed(4)} px
+      to <b>${(+vc.s4_control.difference_px).toFixed(1)} px</b>.
+      <b>S5:</b> all <b>${vc.s5_control.n_edges} re-matched edges</b> reproduced their recorded inlier counts exactly.
+      S5 failed on its first run and stopped the stage — a row carries both a sorted <code>pair</code> and a directed
+      <code>edge</code>, and matching is not symmetric. No residual was computed until that was fixed.</div>
+
+    <div class="note" style="margin-top:10px">
+      <b>And the criterion this broke.</b> Coverage gap over the ${vc.coverage.n} VERIFIED edges runs
+      ${(+vc.coverage.min).toFixed(3)}–${(+vc.coverage.max).toFixed(3)}, and <b>${vc.coverage.n_over_warn} exceed ${vc.coverage.warn}</b>.
+      The project's own success criterion asks for ≤ ${vc.coverage.warn} on every VERIFIED pair, so producing VERIFIED pairs
+      immediately showed that criterion failing. It is reported, not retuned.</div>
+
+    <div class="note" style="margin-top:10px;font-size:13.5px;color:var(--ink)"><b>${esc(vc.summary)}</b></div>
+    <div class="note" style="margin-top:8px;color:var(--ink-2)"><b>Scope of this evidence:</b> ${esc(vc.scope)}</div>
+    <div class="notclaimed">${vc.not_claimed.map(n => `<span>${esc(n)}</span>`).join("")}</div>
+    <div class="srcline"><b>sources:</b> ${vc.sources.map(s =>
+      `<a class="filelink" href="/artefact/${esc(s)}" target="_blank" rel="noopener">${esc(s)}</a>`).join(" · ")}</div>
   </div>`;
 }
 
