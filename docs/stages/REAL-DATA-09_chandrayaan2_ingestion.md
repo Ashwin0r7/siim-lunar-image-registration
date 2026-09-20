@@ -411,9 +411,56 @@ one thing this repository does not do.
 | **S1** H1, TMC-2 rung | **MET** — 6 passes, all CONSISTENT, 0 wrong passes, engines agree to 0.619 / 2.570 px |
 | **S2** H2, OHRC rung | **NO DATA** — OHRC is over the South Pole; no NAC coverage there |
 | **S3** H3, IIRS rung | **NO DATA** — no IIRS product delivered |
-| **S4** H4, fine-DEM physics (P5) | **NOT RUN** — the TMC-2 DTM is on disk and placed; the render arm was not executed |
+| **S4** H4, fine-DEM physics (P5) | **NOT MET** — see below; H0 is not supported at a 2:1 DEM/GSD ratio either |
 | **S5** H5, the ladder (P6) | **NO DATA** — depends on P2/P3 and P4 |
 | **S6** control | **MET** — the six recorded NAC edges reproduce **4, 5365, 4, 7, 3, 1656** exactly; no Chandrayaan-2 step changed any NAC number |
+
+### S4 — H4, the fine-DEM test of H0: **NOT MET**
+
+Artefact: `experiments/REAL-DATA-09/real_data_09_p5_dem_render_v2.json`.
+Runner: `scripts/run_real_data_09_p5.py`. 15 frames.
+
+This was the **only remaining test of H0**. EXP-007 could only fail it, because
+the 59 m SLDEM is ≈ 30:1 against a native NAC pixel (D-046, demoted to
+*conditional on a fine DEM*). The TMC-2 stereo DEM is **10.1 m against a 5.05 m
+ortho — a 2:1 ratio**, exactly what Part 1 §6 H4 predicted, and it is
+orthorectified by ISRO onto the *same grid* as the ortho, so it is
+co-registered to the imagery by construction.
+
+**The positive control fails, and that is the result.** Leg A —
+`ortho ↔ render(its own DEM, under its own Sun)` — should be near-identity.
+It returns **0 inliers on all 15 frames**; the best leg-B test row is 4
+inliers, below the rule. **0 render-arm passes.**
+
+**This is physics, not a defect, and it was checked rather than assumed.** A
+failed match has two possible causes — a misaligned render, or a render that
+shares no structure with the image — so each pair carries a high-pass
+normalised cross-correlation. On a **fully valid sub-block** (99.9 % valid
+ortho, 0 % DEM nodata, 63 m of relief) the correlation **peaks at a shift of
+(2, 3) px**, i.e. correctly aligned to within one DEM posting, with a
+peak/mean ratio of 18.7 — **and the peak height is only 0.117**. The render is
+in the right place and shares about a tenth of the image's high-frequency
+structure. RootSIFT then finds 3 inliers.
+
+> The full-window diagnostics in the artefact are weaker (peak 0.043–0.082)
+> and their argmax is unreliable: those windows include the swath's large
+> nodata region, and the correlation is dominated by the data/no-data edge —
+> note the recurring dx ≈ 168–171 px peaks. The sub-block figure above is the
+> interpretable one and is quoted as such. The leg-B diagnostic is `null`
+> because the NAC tile and the TMC-2 crop have different shapes.
+
+**What this means.** A 10 m stereo DEM, co-registered to its own orthoimage by
+construction, rendered under that image's own Sun, does not reproduce the
+image's matchable texture on this mare. The structure that RootSIFT matches in
+a NAC or TMC-2 image — small craters, metre-scale relief, albedo — is not in a
+10 m DEM. H0 fails at 2:1 as it failed at 30:1, so it now fails across a **15×
+range of DEM resolution** on mare, and the failure is no longer attributable to
+DEM coarseness.
+
+Part 1 §7 fixed this outcome's consequence in advance: *"S4 NOT MET → H0 not
+supported at a 2:1 DEM/GSD ratio either; the physics-conditioning claim is
+withdrawn from the architecture except as a verifier."* That is recorded as
+**D-052**.
 
 ### What this licenses, and what it does not
 

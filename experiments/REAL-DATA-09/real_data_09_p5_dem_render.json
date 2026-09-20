@@ -1,0 +1,497 @@
+{
+  "stage": "REAL-DATA-09",
+  "pair": "P5",
+  "criterion": "S4 / H4",
+  "question": "Does the TMC-2 DEM, rendered under each image's Sun, carry matchable structure where the 59 m SLDEM did not (RL-039b)?",
+  "dem": {
+    "product_id": "ch2_tmc_ndn_20241214T1937388207_d_dtm_d18",
+    "sha256": null,
+    "gsd_m": 9.446
+  },
+  "ortho": {
+    "product_id": "ch2_tmc_ndn_20241214T1937388207_d_oth_d18",
+    "gsd_m": 4.723
+  },
+  "dem_over_gsd_ratio": 2.0,
+  "engine": "B1 (unmodified RootSIFT)",
+  "base": {
+    "model": "affine",
+    "ransac_threshold_px": 3.0,
+    "seed": 0
+  },
+  "failure_rule": "n_inliers <= 8 fails (D-023)",
+  "n_frames": 15,
+  "leg_a_control_passes": 0,
+  "leg_b_test_passes": 0,
+  "rows": [
+    {
+      "window": "RD03",
+      "frame": "nac.m1271742202lc",
+      "tmc2_block": [
+        1637,
+        56766,
+        2135,
+        57597
+      ],
+      "tmc2_valid_fraction": 0.2955,
+      "nac_incidence_deg": 29.95,
+      "nac_sun_azimuth_deg": 128.892,
+      "nac_sun_elevation_deg": 60.159,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 9.206,
+      "dem_nan_fraction": 0.3638,
+      "dem_height_ptp_m": 49.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 4,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD03",
+      "frame": "nac.m1335207975rc",
+      "tmc2_block": [
+        1634,
+        56771,
+        2136,
+        57590
+      ],
+      "tmc2_valid_fraction": 0.2952,
+      "nac_incidence_deg": 69.76,
+      "nac_sun_azimuth_deg": 98.736,
+      "nac_sun_elevation_deg": 20.239,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 49.016,
+      "dem_nan_fraction": 0.3668,
+      "dem_height_ptp_m": 48.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 3,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD03",
+      "frame": "nac.m1452560468lc",
+      "tmc2_block": [
+        1641,
+        56780,
+        2122,
+        57579
+      ],
+      "tmc2_valid_fraction": 0.2791,
+      "nac_incidence_deg": 68.8,
+      "nac_sun_azimuth_deg": 98.227,
+      "nac_sun_elevation_deg": 21.235,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 48.056,
+      "dem_nan_fraction": 0.3682,
+      "dem_height_ptp_m": 48.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 3,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD03",
+      "frame": "nac.m1182331886lc",
+      "tmc2_block": [
+        1591,
+        56686,
+        2196,
+        57703
+      ],
+      "tmc2_valid_fraction": 0.3434,
+      "nac_incidence_deg": 43.74,
+      "nac_sun_azimuth_deg": 112.622,
+      "nac_sun_elevation_deg": 46.607,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 22.996,
+      "dem_nan_fraction": 0.3761,
+      "dem_height_ptp_m": 60.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 3,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD03",
+      "frame": "nac.m1236465772rc",
+      "tmc2_block": [
+        1347,
+        56696,
+        1919,
+        57659
+      ],
+      "tmc2_valid_fraction": 0.0,
+      "nac_incidence_deg": 44.44,
+      "excluded": "no valid TMC-2 coverage (0.0%)"
+    },
+    {
+      "window": "RD03",
+      "frame": "nac.m1212932972lc",
+      "tmc2_block": [
+        1609,
+        56723,
+        2172,
+        57653
+      ],
+      "tmc2_valid_fraction": 0.3268,
+      "nac_incidence_deg": 45.48,
+      "nac_sun_azimuth_deg": 111.337,
+      "nac_sun_elevation_deg": 44.543,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 24.736,
+      "dem_nan_fraction": 0.3719,
+      "dem_height_ptp_m": 52.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 3,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD03",
+      "frame": "nac.m1205872034rc",
+      "tmc2_block": [
+        1583,
+        56312,
+        2128,
+        57223
+      ],
+      "tmc2_valid_fraction": 0.2824,
+      "nac_incidence_deg": 47.11,
+      "nac_sun_azimuth_deg": 252.328,
+      "nac_sun_elevation_deg": 43.21,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 26.366,
+      "dem_nan_fraction": 0.4073,
+      "dem_height_ptp_m": 61.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 3,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD03",
+      "frame": "nac.m1175268993rc",
+      "tmc2_block": [
+        1294,
+        56691,
+        1899,
+        57693
+      ],
+      "tmc2_valid_fraction": 0.0,
+      "nac_incidence_deg": 48.47,
+      "excluded": "no valid TMC-2 coverage (0.0%)"
+    },
+    {
+      "window": "RD03",
+      "frame": "nac.m1363396554rc",
+      "tmc2_block": [
+        1775,
+        56749,
+        2327,
+        57650
+      ],
+      "tmc2_valid_fraction": 0.6134,
+      "nac_incidence_deg": 52.4,
+      "nac_sun_azimuth_deg": 106.715,
+      "nac_sun_elevation_deg": 37.46,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 31.656,
+      "dem_nan_fraction": 0.0792,
+      "dem_height_ptp_m": 63.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 3,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD03",
+      "frame": "nac.m1199981485rc",
+      "tmc2_block": [
+        1466,
+        56618,
+        2005,
+        57532
+      ],
+      "tmc2_valid_fraction": 0.0384,
+      "nac_incidence_deg": 66.88,
+      "excluded": "no valid TMC-2 coverage (3.8%)"
+    },
+    {
+      "window": "RD03",
+      "frame": "nac.m1096350825rc",
+      "tmc2_block": [
+        1503,
+        56526,
+        2151,
+        57606
+      ],
+      "tmc2_valid_fraction": 0.2577,
+      "nac_incidence_deg": 72.29,
+      "nac_sun_azimuth_deg": 262.112,
+      "nac_sun_elevation_deg": 17.644,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 51.546,
+      "dem_nan_fraction": 0.4807,
+      "dem_height_ptp_m": 59.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 3,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD03",
+      "frame": "nac.m1142297886lc",
+      "tmc2_block": [
+        1520,
+        56682,
+        2139,
+        57702
+      ],
+      "tmc2_valid_fraction": 0.2437,
+      "nac_incidence_deg": 74.65,
+      "nac_sun_azimuth_deg": 265.666,
+      "nac_sun_elevation_deg": 15.425,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 53.906,
+      "dem_nan_fraction": 0.4822,
+      "dem_height_ptp_m": 60.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 4,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD03-long",
+      "frame": "nac.m1271742202lc",
+      "tmc2_block": [
+        1325,
+        56159,
+        2514,
+        58405
+      ],
+      "tmc2_valid_fraction": 0.4398,
+      "nac_incidence_deg": 29.95,
+      "nac_sun_azimuth_deg": 128.892,
+      "nac_sun_elevation_deg": 60.159,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 9.206,
+      "dem_nan_fraction": 0.4174,
+      "dem_height_ptp_m": 102.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 3,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD03-long",
+      "frame": "nac.m1335207975rc",
+      "tmc2_block": [
+        1206,
+        56168,
+        2405,
+        58376
+      ],
+      "tmc2_valid_fraction": 0.3455,
+      "nac_incidence_deg": 69.76,
+      "nac_sun_azimuth_deg": 98.736,
+      "nac_sun_elevation_deg": 20.239,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 49.016,
+      "dem_nan_fraction": 0.513,
+      "dem_height_ptp_m": 102.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 3,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD03-long",
+      "frame": "nac.m1452560468lc",
+      "tmc2_block": [
+        1147,
+        56176,
+        2294,
+        58321
+      ],
+      "tmc2_valid_fraction": 0.265,
+      "nac_incidence_deg": 68.8,
+      "nac_sun_azimuth_deg": 98.227,
+      "nac_sun_elevation_deg": 21.235,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 48.056,
+      "dem_nan_fraction": 0.587,
+      "dem_height_ptp_m": 102.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 4,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD04-long",
+      "frame": "nac.m1271742202lc",
+      "tmc2_block": [
+        1205,
+        58374,
+        2368,
+        60620
+      ],
+      "tmc2_valid_fraction": 0.2617,
+      "nac_incidence_deg": 29.95,
+      "nac_sun_azimuth_deg": 128.355,
+      "nac_sun_elevation_deg": 60.372,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 9.206,
+      "dem_nan_fraction": 0.5905,
+      "dem_height_ptp_m": 123.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 4,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD04-long",
+      "frame": "nac.m1335207975rc",
+      "tmc2_block": [
+        1058,
+        58382,
+        2243,
+        60590
+      ],
+      "tmc2_valid_fraction": 0.1516,
+      "nac_incidence_deg": 69.76,
+      "nac_sun_azimuth_deg": 98.592,
+      "nac_sun_elevation_deg": 20.272,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 49.016,
+      "dem_nan_fraction": 0.7033,
+      "dem_height_ptp_m": 108.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 4,
+        "pass": false
+      },
+      "render_arm_passes": false
+    },
+    {
+      "window": "RD04-long",
+      "frame": "nac.m1299958135lc",
+      "tmc2_block": [
+        1051,
+        58256,
+        2460,
+        60774
+      ],
+      "tmc2_valid_fraction": 0.2809,
+      "nac_incidence_deg": 18.22,
+      "nac_sun_azimuth_deg": 178.641,
+      "nac_sun_elevation_deg": 71.119,
+      "tmc2_sun_azimuth_deg": 268.242487,
+      "tmc2_sun_elevation_deg": 69.255908,
+      "delta_incidence_deg": 2.524,
+      "dem_nan_fraction": 0.5971,
+      "dem_height_ptp_m": 152.0,
+      "leg_a_control": {
+        "n_inliers": 0,
+        "pass": false
+      },
+      "leg_b_test": {
+        "n_inliers": 3,
+        "pass": false
+      },
+      "render_arm_passes": false
+    }
+  ],
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3"
+  },
+  "total_runtime_s": 164.3,
+  "claims_not_supported": [
+    "No ground truth.",
+    "Leg A is near-identity by construction (ISRO orthorectified the ortho and the DTM onto one grid); it is a control on the renderer and the Sun convention, not evidence for H0.",
+    "One region, one TMC-2 strip."
+  ]
+}
