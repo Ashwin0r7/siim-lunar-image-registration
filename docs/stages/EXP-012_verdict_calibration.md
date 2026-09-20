@@ -212,4 +212,135 @@ S1–S4 are untouched.
 
 ## Part 2 — Results
 
-*Empty until Part 1 is committed.*
+**Run 2026-09-20.** Artefact: `experiments/EXP-012/exp012_results.json`.
+Runner: `scripts/run_exp012.py`. Engine B1, `model=affine`,
+`ransac_threshold_px=3.0`, `seed=0`, `north_up_east_right` — every setting
+identical to the amended REAL-DATA-07 run. 13 triplets, 22 unique edges,
+39 edge verdicts, 112 s.
+
+### Headline
+
+**VERIFIED is reachable on real lunar data, and no threshold was touched to
+get there.** All 13 admissible triplets close, with loop residuals of
+**0.3654 – 1.3358 px** against the frozen 2.0 px reject line, and the
+unmodified `assess()` returns **VERIFIED on all 39 edge verdicts** (25 `high`,
+14 `moderate`). These are the first VERIFIED verdicts in the repository.
+
+The prediction in Part 1 §4 was *"MET for R4-6, UNKNOWN for the rest,
+confidence LOW-MEDIUM"*, reasoning that the only prior real loop had returned
+1201 px. The outcome exceeded it: **13 of 13**, not one.
+
+### Controls, both MET, both run before anything was reported
+
+| Control | Requirement | Result |
+|---|---|---|
+| **S4** | Re-composing REAL-DATA-03's recorded triplet returns 1201.0378963072235 px | **MET — difference 0.0 px exactly** |
+| **S5** | Every re-matched edge reproduces its recorded `n_inliers` exactly | **MET — 22 / 22 edges exact** |
+
+S5 reproduced counts spanning **9 to 5437 inliers** bit-for-bit, which is a
+stronger reproducibility statement than this project has previously made: the
+amended REAL-DATA-07 run is re-derivable from the tiles on disk, edge by edge.
+
+**S5 earned its place on the first attempt by failing.** The initial run
+stopped at the third edge — 1715 inliers against a recorded 1656 — while two
+earlier edges reproduced exactly. The cause was not drift: a row carries both
+`pair` (sorted) and `edge` (the direction the engine was actually fed), the
+runner read direction from `pair`, and matching is not symmetric. Two edges
+happened to have alphabetical order equal to execution order and so passed.
+**This is E-036's defect** — a reproduction arm run in the wrong direction —
+**caught the same way, by a gate that demanded the recorded number back.** No
+residual and no verdict was computed until it was fixed.
+
+### S1 — VERIFIED is reachable: **MET**
+
+| # | frames (suffix) | min edge inliers | loop residual px | verdicts |
+|---|---|---|---|---|
+| R3-1 | 331886 + 981485 + 932972 | 190 | 1.1508 | VERIFIED ×3 |
+| R3-2 | 331886 + 932972 + 742202 | 1406 | 0.6776 | VERIFIED ×3 |
+| R3-3 | 331886 + 932972 + 207975 | 68 | 0.4938 | VERIFIED ×3 |
+| R3-4 | 932972 + 207975 + 560468 | 143 | 0.8638 | VERIFIED ×3 |
+| R4-1 | 932972 + 742202 + 958135 | 272 | 0.7383 | VERIFIED ×3 |
+| R4-2 | 932972 + 742202 + 225542 | 284 | 1.3358 | VERIFIED ×3 |
+| R4-3 | 932972 + 742202 + 207975 | **9** | 1.1545 | VERIFIED ×3 |
+| R4-4 | 932972 + 958135 + 225542 | 272 | 0.6326 | VERIFIED ×3 |
+| R4-5 | 932972 + 958135 + 396554 | 28 | 1.1145 | VERIFIED ×3 |
+| **R4-6** | **742202 + 958135 + 225542** | **1608** | **0.8014** | **VERIFIED ×3** |
+| R4-7 | 742202 + 958135 + 069775 | 47 | 0.3654 | VERIFIED ×3 |
+| R4-8 | 742202 + 225542 + 069775 | 47 | 0.7082 | VERIFIED ×3 |
+| R4-9 | 958135 + 225542 + 069775 | 108 | 0.5314 | VERIFIED ×3 |
+
+R4-6 — frames A, D and E2, the frames carrying D-040 and its replication —
+closes at **0.8014 px** with every edge ≥ 1608 inliers. It is the cleanest
+instance and the one the deliverable should show.
+
+The four triplets containing a geometry-INCONCLUSIVE edge (R3-4, R4-1, R4-4,
+R4-5) were **not** excluded, as Part 1 §2 fixed, and all four close.
+
+### S2 — the residual tracks edge quality: **NOT MET**
+
+Spearman ρ between minimum edge inliers and loop residual is **0.0551**
+(n = 13) — not merely weak but the wrong sign, and indistinguishable from zero.
+Part 1 predicted MET at LOW confidence; the prediction is **refuted**.
+
+The clearest counterexample is **R4-3**, whose weakest edge carries **9
+inliers** at Δincidence 39.81° — one above the failure rule's cutoff of 8 — and
+whose loop nonetheless closes at **1.1545 px**, tighter than four triplets
+built from far stronger edges.
+
+**This is the stage's most consequential finding, and it is a warning, not a
+success.** Loop closure does not discriminate on edge strength at this scale,
+so a marginal edge rides into VERIFIED on a loop that closes around it. That is
+consistent with the null space registered in Part 1 §6: loop closure constrains
+the *quotient*, not the individual transforms. A reader must not take VERIFIED
+as a statement that each edge is independently strong.
+
+### Criterion 4 of §53 becomes measurable, and is **NOT MET**
+
+`FINAL_SUCCESS_CRITERIA_AUDIT.md` recorded criterion 4 — *coverage gap ≤ 0.15
+on every VERIFIED pair* — as vacuously true over an empty set. VERIFIED pairs
+now exist, so the criterion can be evaluated, and it fails:
+
+- coverage gap over the 39 VERIFIED edges: **min 0.038, median 0.097, max 0.406**
+- **25 of 39 are ≤ 0.15; 14 are not.**
+
+The 14 are exactly the verdicts `assess()` returned at `moderate` rather than
+`high` confidence — the coverage evidence counted against them as designed, and
+the verdict still reached VERIFIED because loop closure agreed. **Criterion 4
+as phrased in §53 is therefore NOT MET, and no threshold is being adjusted to
+change that.** Either §53's criterion or the verdict's coverage handling must
+be revisited as a recorded decision; this stage reports the conflict rather
+than resolving it silently.
+
+### S3 — adversarial set: **NOT RUN**
+
+Part 1 §3.6 specified running the EXP-002 objective-4 adversarial
+constructions through `assess()`, with S3 predicted NOT MET because a
+64-px-wrong transform whose error cancels in the loop already returns
+VERIFIED / high (ADR-0011 N1). **That arm was not implemented in this run.**
+It is reported as not run rather than as an outcome, and §53 criterion 3's
+third clause remains unevaluated.
+
+### Summary against the frozen criteria
+
+| Criterion | Result |
+|---|---|
+| **S1** VERIFIED reachable on real data | **MET** — 13 / 13 triplets, 39 / 39 edge verdicts VERIFIED |
+| **S2** residual tracks edge quality | **NOT MET** — ρ = 0.0551, prediction refuted |
+| **S3** zero VERIFIED on adversarial set | **NOT RUN** |
+| **S4** RD-03 composition control | **MET** — 0.0 px |
+| **S5** re-match control | **MET** — 22 / 22 edges exact |
+
+### What this licenses, and what it does not
+
+**Licensed.** The deliverable may state that its strictest verdict is
+attainable on real lunar imagery under unmodified criteria, on 13 independent
+triplets over two ground windows, with the residual range quoted. §53
+criterion 4 is now measurable and is reported NOT MET.
+
+**Not licensed.** This is **not** an accuracy claim. Loop closure is exactly
+invariant to per-image gauge error, so a closing loop verifies the transform
+set only up to that gauge — per-frame interior orientation, line-scan jitter,
+attitude drift. There is no ground truth here. The 13 triplets share frames and
+edges and are not independent samples. One region, one instrument; nothing here
+is a Chandrayaan-2 result. And per S2, VERIFIED does not imply every
+contributing edge is strong.

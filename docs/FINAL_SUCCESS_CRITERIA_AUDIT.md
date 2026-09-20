@@ -12,8 +12,8 @@ is reported as a gap in the evidence, not rewritten into one that can be.
 |---|---|---|
 | 1 | H1 MET on real data at ≥ 2 rungs with the frozen rule; p ≤ 0.05 on the illumination separation with ≥ 8 edges | **MET** |
 | 2 | ≥ 1 VERIFIED Chandrayaan-2 pair per sensor against NAC, with check-point error and CI reported in coarse pixels | **NOT MET — blocked on data** |
-| 3 | Verdict FA ≤ 5 %, FR ≤ 20 % on validation sites; zero VERIFIED on the adversarial set | **NOT EVALUABLE** |
-| 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **VACUOUSLY TRUE — no instances** |
+| 3 | Verdict FA ≤ 5 %, FR ≤ 20 % on validation sites; zero VERIFIED on the adversarial set | **STILL NOT EVALUABLE** (see the 2026-09-20 update) |
+| 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET** — 14 of 39 VERIFIED edges exceed 0.15 |
 | 5 | Fresh-clone install, CPU-only, all tests pass, no non-commercial weights | **MET (measured today)** |
 
 ---
@@ -119,7 +119,35 @@ space (ADR-0011 N1), recorded as a known limitation rather than patched.
 
 ---
 
-## 4. Coverage gap on VERIFIED pairs — **vacuously true**
+## UPDATE 2026-09-20 — EXP-012 ran, and two rows above changed
+
+`EXP-012` (verdict calibration) composed the 13 real triplets whose three edges
+each register, and ran the **unmodified** `assess()` on them. Its controls both
+held: REAL-DATA-03's recorded 1201.0378963072235 px loop was reproduced to
+**0.0 px**, and all **22 re-matched edges reproduced their recorded inlier
+counts exactly** (9 through 5437).
+
+**Criterion 4 is now measurable, and is NOT MET.** 39 VERIFIED edge verdicts
+exist; their coverage gaps run **0.038 – 0.406**, and **14 of 39 exceed 0.15**.
+Those 14 are precisely the verdicts returned at `moderate` rather than `high` —
+coverage counted against them as designed, and VERIFIED was still reached
+because loop closure agreed. §53's criterion and the verdict's coverage
+handling are in conflict; EXP-012 Part 2 reports that rather than retuning
+either.
+
+**Criterion 3 is still not evaluable, and EXP-012 does not fix it.** A
+verdict-level false-acceptance rate over these 39 is **0 / 39 against archive
+geometry — but by construction, not by measurement**: triplet admissibility
+required `success == true`, which excludes wrong passes by definition. A set
+that cannot contain a false acceptance cannot estimate their rate. FR still has
+no ground truth, and the adversarial arm (S3) was specified in EXP-012 Part 1
+§3.6 and **not run**.
+
+The section below is superseded by this update and kept as written.
+
+---
+
+## 4. Coverage gap on VERIFIED pairs — **vacuously true** *(superseded above)*
 
 Zero VERIFIED pairs exist (§3), so "every VERIFIED pair has coverage gap
 ≤ 0.15" holds over an empty set and carries no evidence.
