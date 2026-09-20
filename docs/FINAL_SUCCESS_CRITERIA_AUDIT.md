@@ -11,7 +11,7 @@ is reported as a gap in the evidence, not rewritten into one that can be.
 | # | Criterion (§53, verbatim) | Verdict |
 |---|---|---|
 | 1 | H1 MET on real data at ≥ 2 rungs with the frozen rule; p ≤ 0.05 on the illumination separation with ≥ 8 edges | **MET** |
-| 2 | ≥ 1 VERIFIED Chandrayaan-2 pair per sensor against NAC, with check-point error and CI reported in coarse pixels | **NOT MET — blocked on data** |
+| 2 | ≥ 1 VERIFIED Chandrayaan-2 pair per sensor against NAC, with check-point error and CI reported in coarse pixels | **NOT MET** — but no longer blocked on data (see the 2026-09-20 REAL-DATA-09 update) |
 | 3 | Verdict FA ≤ 5 %, FR ≤ 20 % on validation sites; zero VERIFIED on the adversarial set | **STILL NOT EVALUABLE** (see the 2026-09-20 update) |
 | 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET** — 14 of 39 VERIFIED edges exceed 0.15 |
 | 5 | Fresh-clone install, CPU-only, all tests pass, no non-commercial weights | **MET (measured today)** |
@@ -116,6 +116,29 @@ space (ADR-0011 N1), recorded as a known limitation rather than patched.
 **What would close this: EXP-012 (verdict calibration),** designated at
 `MASTER_RESEARCH_AND_ARCHITECTURE_PLAN.md:577` and never run. There is no
 `experiments/EXP-012/` and no calibration/validation site split.
+
+---
+
+## UPDATE 2026-09-20 (later) — REAL-DATA-09 ran on real Chandrayaan-2 data
+
+The PRADAN products arrived: TMC-2 ortho / DTM / calibrated image (equatorial,
+covering the recorded NAC ground) and two OHRC observations (**South Pole**,
+the Chandrayaan-3 region). No IIRS.
+
+**Criterion 2 is no longer blocked on data, and is still NOT MET.** TMC-2
+*registers* to LRO NAC at 5 m — 6 passes across two engines, all
+geometry-CONSISTENT, 0 wrong passes, engines agreeing to 0.619 px and 2.570 px
+— but a registration is not a VERIFIED verdict. The single pairs return
+INCONCLUSIVE (no loop available; coverage gap above 0.15), and the one loop
+that exists, {TMC-2, NAC A, NAC D}, closes to **2.2131 px = 10.5 m** against
+the frozen 2.0 px reject line, so `assess()` returns **REJECTED**. The
+threshold was not moved to change that. The criterion also asks for *per
+sensor* and for *check-point error and CI*: only TMC-2 has usable data, and no
+check points exist.
+
+So criterion 2 now fails on three named counts — no VERIFIED verdict, one
+sensor not three, no check points — rather than on absence of data. That is a
+much more useful statement of where the project stands.
 
 ---
 

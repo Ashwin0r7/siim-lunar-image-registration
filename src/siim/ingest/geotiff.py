@@ -386,13 +386,25 @@ def structural_identity(path: str | Path) -> list[str]:
     return passed
 
 
+#: Above this, refuse to materialise a whole image just to crop it. The TMC-2
+#: ortho is 12.7 GB; `page.asarray()` on it would exhaust memory.
+_WHOLE_IMAGE_LIMIT_BYTES = 512 << 20
+
+
 def decode_window(path: str | Path, row0: int, row1: int, col0: int,
                   col1: int) -> NDArray[np.float32]:
     """Decode ``[row0:row1, col0:col1]`` as ``array[line, sample]`` (C2).
 
-    Reads through ``tifffile``'s page-level access so that strip/tile layout,
-    byte order and predictors are handled by the library rather than
-    re-implemented here. The window is bounds-checked against the product.
+    **Reads only the requested window.** For an uncompressed striped TIFF --
+    which is what PRADAN ships for TMC-2, one strip per row -- each output row
+    is a single seek and read inside its own strip, so a 1000 x 600 px window
+    of a 12.7 GB product costs about a megabyte of I/O. Decoding the page and
+    slicing afterwards would need the whole array in memory and is refused
+    above :data:`_WHOLE_IMAGE_LIMIT_BYTES`.
+
+    Compressed or tiled products fall back to ``tifffile``'s page decode, so
+    the library owns predictors and tile assembly; that path keeps the size
+    guard, and a product too large for it is reported rather than attempted.
     """
     tf = _tifffile()
     path = Path(path)
@@ -403,6 +415,47 @@ def decode_window(path: str | Path, row0: int, row1: int, col0: int,
             raise GeoTiffNotIngested(
                 f"{path.name}: window [{row0}:{row1}, {col0}:{col1}] is "
                 f"outside the product's {lines} x {samples} pixels.")
+
+        dtype = np.dtype(page.dtype)
+        itemsize = int(dtype.itemsize)
+        spp = int(page.samplesperpixel or 1)
+        compression = int(page.compression) if page.compression is not None else 1
+        tiled = bool(page.is_tiled)
+
+        if compression == 1 and not tiled and spp == 1:
+            rps_tag = page.tags.get(278)
+            rows_per_strip = int(np.atleast_1d(rps_tag.value)[0]) if rps_tag else lines
+            rows_per_strip = max(1, min(rows_per_strip, lines))
+            offsets = page.dataoffsets
+            row_bytes = samples * itemsize
+            want = (col1 - col0) * itemsize
+            out = np.empty((row1 - row0, col1 - col0), dtype=dtype)
+            with open(path, "rb") as raw:
+                for i, r in enumerate(range(row0, row1)):
+                    strip = r // rows_per_strip
+                    if strip >= len(offsets):
+                        raise GeoTiffNotIngested(
+                            f"{path.name}: row {r} maps to strip {strip}, but "
+                            f"the file declares only {len(offsets)} strips.")
+                    pos = (int(offsets[strip])
+                           + (r % rows_per_strip) * row_bytes
+                           + col0 * itemsize)
+                    raw.seek(pos)
+                    buf = raw.read(want)
+                    if len(buf) != want:
+                        raise GeoTiffNotIngested(
+                            f"{path.name}: short read at row {r} "
+                            f"({len(buf)} of {want} bytes).")
+                    out[i] = np.frombuffer(buf, dtype=dtype, count=col1 - col0)
+            return np.ascontiguousarray(out).astype(np.float32)
+
+        total = lines * samples * itemsize * spp
+        if total > _WHOLE_IMAGE_LIMIT_BYTES:
+            raise GeoTiffNotIngested(
+                f"{path.name}: {'tiled' if tiled else 'compressed'} product of "
+                f"{total / (1 << 30):.1f} GB cannot be windowed by strip and is "
+                f"too large to decode whole (limit "
+                f"{_WHOLE_IMAGE_LIMIT_BYTES >> 20} MB). Reported, not attempted.")
         arr = page.asarray()
     if arr.ndim == 3:
         arr = arr[..., 0]

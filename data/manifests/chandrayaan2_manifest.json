@@ -1,0 +1,535 @@
+{
+  "stage": "REAL-DATA-09",
+  "written_before_any_product_was_opened": true,
+  "source_root": "realdata/realdata",
+  "placement_deviation": "Part 1 \u00a73 specifies data/raw/chandrayaan2/<instrument>/. The products (23 GB) arrived under realdata/realdata/<INSTRUMENT>/ and are manifested in place, unrenamed, rather than copied. Recorded deviation; no file was modified.",
+  "acknowledgement_required": "We acknowledge the use of data from the Chandrayaan-II, second lunar mission of the Indian Space Research Organisation (ISRO), archived at the Indian Space Science Data Centre (ISSDC).",
+  "marking_required": "\u00a9 reserved ISRO on any printed data product.",
+  "n_products": 6,
+  "products": {
+    "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/data/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_d_img_d18.img": {
+      "instrument": "OHRC",
+      "kind": "image",
+      "product_id": "ch2_ohr_ncp_20240425T1012478407_d_img_d18",
+      "pradan_logical_identifier": "urn:isro:isda:ch2_cho.ohr:data_calibrated:ch2_ohr_ncp_20240425t1012478407_d_img_d18",
+      "label_xml": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/data/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_d_img_d18.xml",
+      "data_file": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/data/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_d_img_d18.img",
+      "data_file_size_bytes": 1103340000,
+      "data_file_sha256": null,
+      "label_fields": {
+        "solar_incidence": 78.476392,
+        "sun_azimuth": 303.534993,
+        "sun_elevation": 11.523608,
+        "projection": "Polar stereographic",
+        "area": "South Pole",
+        "spacecraft_altitude": 102.33,
+        "imaging_orbit_number": 20811.0,
+        "orbit_limb_direction": "Descending",
+        "line_exposure_duration": 178.14,
+        "focal_length": 2080.0,
+        "detector_pixel_width": 5.2,
+        "reference_data_used": "LRO",
+        "upper_left_latitude": -69.074457,
+        "upper_left_longitude": 32.1941,
+        "upper_right_latitude": -69.078172,
+        "upper_right_longitude": 32.495469,
+        "lower_left_latitude": -69.899746,
+        "lower_left_longitude": 32.040158,
+        "lower_right_latitude": -69.903718,
+        "lower_right_longitude": 32.352484,
+        "logical_identifier": "urn:isro:isda:ch2_cho.ohr:data_calibrated:ch2_ohr_ncp_20240425t1012478407_d_img_d18",
+        "start_date_time": "2024-04-25T10:12:47.8407Z",
+        "axes": "2"
+      },
+      "files": [
+        {
+          "path": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/browse/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_b_brw_d18.png",
+          "size_bytes": 8276317,
+          "sha256": "999a699d264eff417d9e634c1ad8db67c7d7d902c90831473612ce404a46438f"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/browse/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_b_brw_d18.xml",
+          "size_bytes": 4770,
+          "sha256": "eeb3f06c3d358471a104ba8959c872ad43312dfe2b7234ef909dec61f0f6eb0c"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/data/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_d_img_d18.img",
+          "size_bytes": 1103340000,
+          "sha256": null
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/data/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_d_img_d18.xml",
+          "size_bytes": 8887,
+          "sha256": "169beefce3176bb123602f934da91fd3e24e890170f792e44cb1f10c588864d4"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/geometry/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_g_grd_d18.csv",
+          "size_bytes": 3870552,
+          "sha256": "162b235d8cb169431d266ca54e4d1cc81a5fdb00b8f4667cd7395660241a0c2d"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/geometry/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_g_grd_d18.xml",
+          "size_bytes": 6208,
+          "sha256": "4a896f43a636d48722ecd215d30f700d3def7d8fec2ba9985fd0d78b6e315e86"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/miscellaneous/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_d_img_d18.lbr",
+          "size_bytes": 133644,
+          "sha256": "b8ef6ddaf4bfb86088d6276740ae09ca4ccbd4bac5b82350655c36a360314037"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/miscellaneous/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_d_img_d18.oat",
+          "size_bytes": 325304,
+          "sha256": "01110743d58dee20867ae7d7764637d88ae7cd9bda3460c4794f759eedfc3f12"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/miscellaneous/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_d_img_d18.oath",
+          "size_bytes": 201,
+          "sha256": "cea7ecc771fedb835b8350b186078b86abc223ff47a0eb9a68b6da978826f7a3"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/miscellaneous/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_d_img_d18.spm",
+          "size_bytes": 128982,
+          "sha256": "2b5d3968609523e2f31a70f5e5d6db610c8675d3e90968daf01c86d74709622e"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/miscellaneous/readme.txt",
+          "size_bytes": 11119,
+          "sha256": "ce6bd023d6b7877697412daaaaa540aa8397ecf0fe5037bdfed555a0e922f047"
+        }
+      ]
+    },
+    "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/data/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_d_img_d18.img": {
+      "instrument": "OHRC",
+      "kind": "image",
+      "product_id": "ch2_ohr_ncp_20240425T1603031918_d_img_d18",
+      "pradan_logical_identifier": "urn:isro:isda:ch2_cho.ohr:data_calibrated:ch2_ohr_ncp_20240425t1603031918_d_img_d18",
+      "label_xml": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/data/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_d_img_d18.xml",
+      "data_file": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/data/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_d_img_d18.img",
+      "data_file_size_bytes": 1081776000,
+      "data_file_sha256": null,
+      "label_fields": {
+        "solar_incidence": 79.097263,
+        "sun_azimuth": 304.447986,
+        "sun_elevation": 10.902737,
+        "projection": "Polar stereographic",
+        "area": "South Pole",
+        "spacecraft_altitude": 101.91,
+        "imaging_orbit_number": 20814.0,
+        "orbit_limb_direction": "Descending",
+        "line_exposure_duration": 181.74,
+        "focal_length": 2080.0,
+        "detector_pixel_width": 5.2,
+        "reference_data_used": "LRO",
+        "upper_left_latitude": -69.08038,
+        "upper_left_longitude": 32.114577,
+        "upper_right_latitude": -69.075784,
+        "upper_right_longitude": 32.4283,
+        "lower_left_latitude": -69.911913,
+        "lower_left_longitude": 32.07059,
+        "lower_right_latitude": -69.907373,
+        "lower_right_longitude": 32.395812,
+        "logical_identifier": "urn:isro:isda:ch2_cho.ohr:data_calibrated:ch2_ohr_ncp_20240425t1603031918_d_img_d18",
+        "start_date_time": "2024-04-25T16:03:03.1918Z",
+        "axes": "2"
+      },
+      "files": [
+        {
+          "path": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/browse/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_b_brw_d18.png",
+          "size_bytes": 8150308,
+          "sha256": "8aca853add02df675ab93232741caecd47a8ec40aaee35f8ba7f5ef9cbcfd43b"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/browse/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_b_brw_d18.xml",
+          "size_bytes": 4770,
+          "sha256": "993b93dddfb7984d420433b9d06d14fe49ea7db1976fe7fdd7108eaa5d078ac6"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/data/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_d_img_d18.img",
+          "size_bytes": 1081776000,
+          "sha256": null
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/data/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_d_img_d18.xml",
+          "size_bytes": 8894,
+          "sha256": "2e1d7a52bf5e8f26bad83227958accd8823d9b525fea5c3a882a8bdbd54a3a29"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/geometry/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_g_grd_d18.csv",
+          "size_bytes": 3794719,
+          "sha256": "b63803c775c0a7fedc1d421ed136b8f269137da2f972c7cc9f5ed9fd9a4113be"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/geometry/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_g_grd_d18.xml",
+          "size_bytes": 6208,
+          "sha256": "fad7f455fbeff1190697e1153f656917217268b2392a26721cd6a99cd22a4165"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/miscellaneous/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_d_img_d18.lbr",
+          "size_bytes": 133644,
+          "sha256": "7a3c26f51ad88db073985b2c80a6e4dad55fc098aa0a0a7a80dbaf3a154abd01"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/miscellaneous/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_d_img_d18.oat",
+          "size_bytes": 325304,
+          "sha256": "b3b76b96146e7ecdcd822f07dc9ca235a72c469217c27f09a9d0d973de7d5faf"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/miscellaneous/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_d_img_d18.oath",
+          "size_bytes": 201,
+          "sha256": "b0a2c6270fa685d0337808739c01506c451397d975d06719a9694f7b872be87b"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/miscellaneous/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_d_img_d18.spm",
+          "size_bytes": 128982,
+          "sha256": "50ffef144a60f261eedce0667b315bb0244baa9191ae14ae08728293d80c2e9a"
+        },
+        {
+          "path": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/miscellaneous/readme.txt",
+          "size_bytes": 11119,
+          "sha256": "ce6bd023d6b7877697412daaaaa540aa8397ecf0fe5037bdfed555a0e922f047"
+        }
+      ]
+    },
+    "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/data/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_d_img_d18.img": {
+      "instrument": "TMC-2",
+      "kind": "image",
+      "product_id": "ch2_tmc_ncn_20241214T1937388207_d_img_d18",
+      "pradan_logical_identifier": "urn:isro:isda:ch2_cho.tmc:data_calibrated:ch2_tmc_ncn_20241214t1937388207_d_img_d18",
+      "label_xml": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/data/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_d_img_d18.xml",
+      "data_file": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/data/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_d_img_d18.img",
+      "data_file_size_bytes": 3136840000,
+      "data_file_sha256": null,
+      "label_fields": {
+        "solar_incidence": 20.744092,
+        "sun_azimuth": 268.242487,
+        "sun_elevation": 69.255908,
+        "projection": "Selenographic",
+        "area": "Equatorial",
+        "spacecraft_altitude": 98.62,
+        "imaging_orbit_number": 23684.0,
+        "orbit_limb_direction": "Ascending",
+        "line_exposure_duration": 3.236,
+        "focal_length": 140.0,
+        "detector_pixel_width": 7.0,
+        "reference_data_used": "SELENE",
+        "upper_left_latitude": -33.625187,
+        "upper_left_longitude": 23.830219,
+        "upper_right_latitude": -33.59905,
+        "upper_right_longitude": 24.610948,
+        "lower_left_latitude": 31.236496,
+        "lower_left_longitude": 21.625465,
+        "lower_right_latitude": 31.255195,
+        "lower_right_longitude": 22.407841,
+        "logical_identifier": "urn:isro:isda:ch2_cho.tmc:data_calibrated:ch2_tmc_ncn_20241214t1937388207_d_img_d18",
+        "start_date_time": "2024-12-14T19:37:38.8207Z",
+        "axes": "2"
+      },
+      "files": [
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/browse/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_b_brw_d18.png",
+          "size_bytes": 7150710,
+          "sha256": "5fce7de1c6cc0b6bae3f798739f827846e1c485401d9a426ba636ce54a09ff76"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/browse/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_b_brw_d18.xml",
+          "size_bytes": 4846,
+          "sha256": "fb6ee9c0c9d2c8952aeeec4bdad743fb18d88d75ce9845e4d5d422967fc0dd25"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/data/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_d_img_d18.img",
+          "size_bytes": 3136840000,
+          "sha256": null
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/data/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_d_img_d18.xml",
+          "size_bytes": 8879,
+          "sha256": "9e1740eb10f398d5300b12f59309cd4f44fc65ab9052dd34fdea5040713ae6da"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/geometry/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_g_grd_d18.csv",
+          "size_bytes": 5590133,
+          "sha256": "bd657914855b2a5c4b40d2b06927616ce45abd9c36e0af736360c083110896d0"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/geometry/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_g_grd_d18.xml",
+          "size_bytes": 6284,
+          "sha256": "e6423418c82f446fe9022b68416ac82f28222b75b26e1a4a1df036c61a53ce22"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/miscellaneous/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_d_img_d18.lbr",
+          "size_bytes": 8212140,
+          "sha256": "82dcad21ec535db94ab330ace54e0dd84308277d83667f5888ec899fcd15c41c"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/miscellaneous/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_d_img_d18.oat",
+          "size_bytes": 19989240,
+          "sha256": "2c980895fb8052a62425fe4ce80b67624519d42147dc3c22ad8bae710793bd31"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/miscellaneous/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_d_img_d18.oath",
+          "size_bytes": 201,
+          "sha256": "14898fe5b685fa1025a6b71388d728add0ae437f6bd104bd4b3a59bef2d650d7"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/miscellaneous/calibrated/20241214/ch2_tmc_ncn_20241214T1937388207_d_img_d18.spm",
+          "size_bytes": 7925670,
+          "sha256": "dc4c388a149f43744c2950e1bdc202efcb2702751ebad3a4fc8e8b291c3e67f4"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ncn_20241214T1937388207_d_img_d18/miscellaneous/readme.txt",
+          "size_bytes": 11119,
+          "sha256": "ce6bd023d6b7877697412daaaaa540aa8397ecf0fe5037bdfed555a0e922f047"
+        }
+      ]
+    },
+    "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.tif": {
+      "instrument": "TMC-2",
+      "kind": "dtm",
+      "product_id": "ch2_tmc_ndn_20241214T1937388207_d_dtm_d18",
+      "pradan_logical_identifier": "urn:isro:isda:ch2_cho.tmc:data_derived:ch2_tmc_ndn_20241214t1937388207_d_dtm_d18",
+      "label_xml": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.xml",
+      "data_file": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.tif",
+      "data_file_size_bytes": 3184017307,
+      "data_file_sha256": null,
+      "label_fields": {
+        "solar_incidence": 20.744092,
+        "sun_azimuth": 268.242487,
+        "sun_elevation": 69.255908,
+        "projection": "Selenographic",
+        "area": "Equatorial",
+        "spacecraft_altitude": 98.62,
+        "imaging_orbit_number": 23684.0,
+        "orbit_limb_direction": "Ascending",
+        "line_exposure_duration": 3.236,
+        "focal_length": 140.0,
+        "detector_pixel_width": 7.0,
+        "reference_data_used": "SELENE",
+        "upper_left_latitude": -33.625187,
+        "upper_left_longitude": 23.830219,
+        "upper_right_latitude": -33.59905,
+        "upper_right_longitude": 24.610948,
+        "lower_left_latitude": 31.236496,
+        "lower_left_longitude": 21.625465,
+        "lower_right_latitude": 31.255195,
+        "lower_right_longitude": 22.407841,
+        "logical_identifier": "urn:isro:isda:ch2_cho.tmc:data_derived:ch2_tmc_ndn_20241214t1937388207_d_dtm_d18",
+        "start_date_time": "2024-12-14T19:37:38.8207Z",
+        "axes": "2"
+      },
+      "files": [
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/browse/derived/20241214/ch2_tmc_ndn_20241214T1937388207_b_bdt_d18.png",
+          "size_bytes": 797272,
+          "sha256": "16ab5fe0aee58c370c4497270a63d9317103a0bf514decb324b9f81d83a97066"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/browse/derived/20241214/ch2_tmc_ndn_20241214T1937388207_b_bdt_d18.xml",
+          "size_bytes": 4843,
+          "sha256": "84aa5fdaed394d367a7e3068fb85fcf889d1d156caee41822a6bd1c64414836c"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.tif",
+          "size_bytes": 3184017307,
+          "sha256": null
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.xml",
+          "size_bytes": 9882,
+          "sha256": "2ecdd21a39615ea3f2d53c24e956ae33a490d933e5e485a0049f0b4f56b0773a"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.lbr",
+          "size_bytes": 8212140,
+          "sha256": "82dcad21ec535db94ab330ace54e0dd84308277d83667f5888ec899fcd15c41c"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.oat",
+          "size_bytes": 19989240,
+          "sha256": "2c980895fb8052a62425fe4ce80b67624519d42147dc3c22ad8bae710793bd31"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.oath",
+          "size_bytes": 201,
+          "sha256": "14898fe5b685fa1025a6b71388d728add0ae437f6bd104bd4b3a59bef2d650d7"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.spm",
+          "size_bytes": 7925670,
+          "sha256": "dc4c388a149f43744c2950e1bdc202efcb2702751ebad3a4fc8e8b291c3e67f4"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_Calib/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18_Bundle/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/miscellaneous/readme.txt",
+          "size_bytes": 11119,
+          "sha256": "ce6bd023d6b7877697412daaaaa540aa8397ecf0fe5037bdfed555a0e922f047"
+        }
+      ]
+    },
+    "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.tif": {
+      "instrument": "TMC-2",
+      "kind": "dtm",
+      "product_id": "ch2_tmc_ndn_20241214T1937388207_d_dtm_d18",
+      "pradan_logical_identifier": "urn:isro:isda:ch2_cho.tmc:data_derived:ch2_tmc_ndn_20241214t1937388207_d_dtm_d18",
+      "label_xml": "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.xml",
+      "data_file": "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.tif",
+      "data_file_size_bytes": 3184017307,
+      "data_file_sha256": null,
+      "label_fields": {
+        "solar_incidence": 20.744092,
+        "sun_azimuth": 268.242487,
+        "sun_elevation": 69.255908,
+        "projection": "Selenographic",
+        "area": "Equatorial",
+        "spacecraft_altitude": 98.62,
+        "imaging_orbit_number": 23684.0,
+        "orbit_limb_direction": "Ascending",
+        "line_exposure_duration": 3.236,
+        "focal_length": 140.0,
+        "detector_pixel_width": 7.0,
+        "reference_data_used": "SELENE",
+        "upper_left_latitude": -33.625187,
+        "upper_left_longitude": 23.830219,
+        "upper_right_latitude": -33.59905,
+        "upper_right_longitude": 24.610948,
+        "lower_left_latitude": 31.236496,
+        "lower_left_longitude": 21.625465,
+        "lower_right_latitude": 31.255195,
+        "lower_right_longitude": 22.407841,
+        "logical_identifier": "urn:isro:isda:ch2_cho.tmc:data_derived:ch2_tmc_ndn_20241214t1937388207_d_dtm_d18",
+        "start_date_time": "2024-12-14T19:37:38.8207Z",
+        "axes": "2"
+      },
+      "files": [
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/browse/derived/20241214/ch2_tmc_ndn_20241214T1937388207_b_bdt_d18.png",
+          "size_bytes": 797272,
+          "sha256": "16ab5fe0aee58c370c4497270a63d9317103a0bf514decb324b9f81d83a97066"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/browse/derived/20241214/ch2_tmc_ndn_20241214T1937388207_b_bdt_d18.xml",
+          "size_bytes": 4843,
+          "sha256": "84aa5fdaed394d367a7e3068fb85fcf889d1d156caee41822a6bd1c64414836c"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.tif",
+          "size_bytes": 3184017307,
+          "sha256": null
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.xml",
+          "size_bytes": 9882,
+          "sha256": "2ecdd21a39615ea3f2d53c24e956ae33a490d933e5e485a0049f0b4f56b0773a"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.lbr",
+          "size_bytes": 8212140,
+          "sha256": "82dcad21ec535db94ab330ace54e0dd84308277d83667f5888ec899fcd15c41c"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.oat",
+          "size_bytes": 19989240,
+          "sha256": "2c980895fb8052a62425fe4ce80b67624519d42147dc3c22ad8bae710793bd31"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.oath",
+          "size_bytes": 201,
+          "sha256": "14898fe5b685fa1025a6b71388d728add0ae437f6bd104bd4b3a59bef2d650d7"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18.spm",
+          "size_bytes": 7925670,
+          "sha256": "dc4c388a149f43744c2950e1bdc202efcb2702751ebad3a4fc8e8b291c3e67f4"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_DTM/ch2_tmc_ndn_20241214T1937388207_d_dtm_d18/miscellaneous/readme.txt",
+          "size_bytes": 11119,
+          "sha256": "ce6bd023d6b7877697412daaaaa540aa8397ecf0fe5037bdfed555a0e922f047"
+        }
+      ]
+    },
+    "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_oth_d18.tif": {
+      "instrument": "TMC-2",
+      "kind": "ortho",
+      "product_id": "ch2_tmc_ndn_20241214T1937388207_d_oth_d18",
+      "pradan_logical_identifier": "urn:isro:isda:ch2_cho.tmc:data_derived:ch2_tmc_ndn_20241214t1937388207_d_oth_d18",
+      "label_xml": "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_oth_d18.xml",
+      "data_file": "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_oth_d18.tif",
+      "data_file_size_bytes": 12730127397,
+      "data_file_sha256": null,
+      "label_fields": {
+        "solar_incidence": 20.744092,
+        "sun_azimuth": 268.242487,
+        "sun_elevation": 69.255908,
+        "projection": "Selenographic",
+        "area": "Equatorial",
+        "spacecraft_altitude": 98.62,
+        "product_accuracy_stdev_CE": 28.729906,
+        "product_accuracy_rmse_CE": 38.754348,
+        "imaging_orbit_number": 23684.0,
+        "orbit_limb_direction": "Ascending",
+        "line_exposure_duration": 3.236,
+        "focal_length": 140.0,
+        "detector_pixel_width": 7.0,
+        "reference_data_used": "SELENE",
+        "upper_left_latitude": -33.625187,
+        "upper_left_longitude": 23.830219,
+        "upper_right_latitude": -33.59905,
+        "upper_right_longitude": 24.610948,
+        "lower_left_latitude": 31.236496,
+        "lower_left_longitude": 21.625465,
+        "lower_right_latitude": 31.255195,
+        "lower_right_longitude": 22.407841,
+        "logical_identifier": "urn:isro:isda:ch2_cho.tmc:data_derived:ch2_tmc_ndn_20241214t1937388207_d_oth_d18",
+        "start_date_time": "2024-12-14T19:37:38.8207Z",
+        "axes": "2"
+      },
+      "files": [
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/browse/derived/20241214/ch2_tmc_ndn_20241214T1937388207_b_bot_d18.png",
+          "size_bytes": 2328144,
+          "sha256": "6b7af6bec14d44ac850322222510edbba0ff30093dd6e26f5c1a97832b25bbda"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/browse/derived/20241214/ch2_tmc_ndn_20241214T1937388207_b_bot_d18.xml",
+          "size_bytes": 4863,
+          "sha256": "9378e8504daee791d4a163c7ab25560521a4e8a7881712f7ff067bea74f81918"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_oth_d18.tif",
+          "size_bytes": 12730127397,
+          "sha256": null
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/data/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_oth_d18.xml",
+          "size_bytes": 9873,
+          "sha256": "433b941099262c4e639d0afb60c6a6ffe51788c56aeb1b392f18b2e3cc17edf6"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_oth_d18.lbr",
+          "size_bytes": 8212140,
+          "sha256": "82dcad21ec535db94ab330ace54e0dd84308277d83667f5888ec899fcd15c41c"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_oth_d18.oat",
+          "size_bytes": 19989240,
+          "sha256": "2c980895fb8052a62425fe4ce80b67624519d42147dc3c22ad8bae710793bd31"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_oth_d18.oath",
+          "size_bytes": 201,
+          "sha256": "14898fe5b685fa1025a6b71388d728add0ae437f6bd104bd4b3a59bef2d650d7"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/miscellaneous/derived/20241214/ch2_tmc_ndn_20241214T1937388207_d_oth_d18.spm",
+          "size_bytes": 7925670,
+          "sha256": "dc4c388a149f43744c2950e1bdc202efcb2702751ebad3a4fc8e8b291c3e67f4"
+        },
+        {
+          "path": "realdata/realdata/TMC-2/TMC-2_ORHTO/ch2_tmc_ndn_20241214T1937388207_d_oth_d18/miscellaneous/readme.txt",
+          "size_bytes": 11119,
+          "sha256": "ce6bd023d6b7877697412daaaaa540aa8397ecf0fe5037bdfed555a0e922f047"
+        }
+      ]
+    }
+  }
+}

@@ -274,4 +274,159 @@ marking.
 
 ## Part 2 — Results
 
-*Empty until Part 1 is committed and the products exist.*
+**Run 2026-09-20.** Products downloaded from PRADAN by the user and manifested
+before any array was decoded (`data/manifests/chandrayaan2_manifest.json`,
+6 products, 23 GB, SHA-256 recorded). Artefacts:
+`experiments/REAL-DATA-09/real_data_09_results_b1.json`,
+`…_lg.json`, `…_s6_control.json`, `…_loop_closure.json`. Runners:
+`scripts/ingest_chandrayaan2.py`, `scripts/run_real_data_09.py`,
+`…_s6.py`, `…_loop.py`.
+
+> We acknowledge the use of data from the Chandrayaan-II, second lunar mission
+> of the Indian Space Research Organisation (ISRO), archived at the Indian
+> Space Science Data Centre (ISSDC).
+
+### Headline
+
+**Chandrayaan-2 TMC-2 registers to LRO NAC at 5 m, under two independent
+engines, with geometry-consistent transforms and zero wrong passes.** This is
+the first sentence in this repository in which "Chandrayaan-2" is a
+measurement rather than an intention.
+
+| engine | successes | best pair | inliers | Δincidence | geometry |
+|---|---|---|---|---|---|
+| **B1** (unmodified RootSIFT) | 3 / 16 | NAC D, RD04-long | **70** | **2.52°** | CONSISTENT |
+| **B4L** (DISK + LightGlue) | 3 / 16 | NAC A, RD03-long | **965** | 9.21° | CONSISTENT |
+
+**Engine agreement, where both pass** (floor 3 px, D-051): **0.619 px** on
+NAC A / RD03-long (B1 57 vs B4L 965 inliers) and **2.570 px** on NAC D /
+RD04-long (B1 70 vs B4L 675). A 2004 hand-designed descriptor and a modern
+learned matcher independently land on the same transform.
+
+### What arrived, and what it means for the pre-registered pairs
+
+| instrument | products | where | consequence |
+|---|---|---|---|
+| TMC-2 | L2 ortho (12.7 GB), DTM, calibrated image | equatorial strip, lat −33.6…+31.3, lon 21.6…24.6 — **contains the recorded NAC ground** | **P1, P5 have data** |
+| OHRC | 2 observations | **South Pole**, ~69.5 S, 32.2 E, incidence 78–79° | P2, P3, P6 **no_data** |
+| IIRS | — | not delivered | P4 **no_data** |
+
+The OHRC products lie over the Chandrayaan-3 landing region — the fallback site
+Part 1 §3 named. Reaching it needs a fresh NAC acquisition there, and no NAC
+tile from that region is on disk. Part 1's refusal table is explicit that the
+target is **not** moved to wherever OHRC happens to look, so P2, P3 and P6 are
+reported `no_data`.
+
+### S0 — ingestion gate: **MET**
+
+Every product either ingested or is reported with the failing step named.
+
+- **TMC-2 ortho and DTM (GeoTIFF).** Read by `siim.ingest.geotiff`. Tags found:
+  ModelPixelScale, ModelTiepoint, GeoKeyDirectory. Structural identity exact —
+  strip byte counts sum to **12 724 187 520 = 371184 × 17140 × 2**. Projection
+  is a **geographic lon/lat grid** (GTModelType 2, no ProjCoordTrans), on the
+  **1737400.0 m** sphere taken from the label's own `GeogSemiMajorAxisGeoKey`,
+  which matches the sphere this project has used throughout. Ortho **5.05 m**,
+  DTM **10.1 m**. One strip per row and uncompressed, so a 300 × 300 window of
+  the 12.7 GB file reads in **0.08 s** without materialising the image.
+- **OHRC (PDS4).** **Ingests through the unmodified `siim.ingest.pds4` reader
+  with no change whatsoever**: 91945 × 12000 and 90148 × 12000, UnsignedByte,
+  offset 0, and the file-size identity exact on both
+  (`0 + 91945×12000×1 = 1 103 340 000 B`). **OHRC is excluded from S1–S5 on
+  coverage, not on format** — a distinction worth stating, because "we could
+  not read it" and "it does not look at our ground" are different failures and
+  only the second one is true here.
+- **IIRS.** Not delivered; nothing is claimed, and no proxy is presented in its
+  place.
+
+### S1 — H1, the TMC-2 rung: **MET**
+
+Criterion: *≥ 1 P1 pair passes the rule under B1 or B4L with a
+geometry-consistent transform, and the engines agree within the floor where
+both pass.* All three clauses hold.
+
+Every B1 row, ordered by Δincidence — the envelope is the story:
+
+| window | NAC frame | Δinc | TMC-2 valid | inliers | geometry | pass |
+|---|---|---|---|---|---|---|
+| RD04-long | m1299958135lc | **2.52°** | 28.1 % | **70** | CONSISTENT | **yes** |
+| RD03 | m1271742202lc | 9.21° | 29.5 % | 4 | CONSISTENT | no |
+| RD03-long | m1271742202lc | 9.21° | 44.0 % | **57** | CONSISTENT | **yes** |
+| RD04-long | m1271742202lc | 9.21° | 26.2 % | **29** | CONSISTENT | **yes** |
+| RD03 | m1182331886lc | 23.00° | 34.3 % | 6 | CONSISTENT | no |
+| RD03 | m1212932972lc | 24.74° | 32.7 % | 0 | no transform | no |
+| RD03 | m1205872034rc | 26.37° | 28.2 % | 0 | no transform | no |
+| RD03 / RD04 | m1363396554rc | 31.66° | 61.3 / 18.8 % | 0 | no transform | no |
+| RD03-long | m1452560468lc | 48.06° | 26.5 % | 3 | INCONSISTENT | no |
+| RD03-long | m1335207975rc | 49.02° | 34.5 % | 3 | INCONSISTENT | no |
+| RD03 | m1096350825rc | 51.55° | 25.8 % | 0 | no transform | no |
+| RD03 | m1142297886lc | 53.91° | 24.4 % | 0 | no transform | no |
+
+**The illumination envelope measured on NAC↔NAC in REAL-DATA-07 reproduces on a
+different spacecraft's sensor.** Everything at Δincidence ≤ 9.2° passes where
+there is enough overlap; everything at ≥ 24.7° produces no transform at all;
+the two rows above 48° that do produce one are INCONSISTENT and correctly fail
+the rule. This is an independent cross-sensor confirmation of D-040 that no
+proxy could have given.
+
+**Wrong passes: 0 in 6 passes** (3 B1 + 3 B4L). The learned engine extends the
+envelope exactly as D-047 says: at Δinc 31.66° B4L returns **31 consistent
+inliers where B1 returns none**.
+
+**Geometry check.** σ_C2 is taken from the label — `product_accuracy_rmse_CE`
+= **38.754348 m** — so Part 1 §5's 50 m assumption is **not** used. The floor is
+`max(150 m, σ_C2) / GSD + 1.2 %`. Best pair: median disagreement **42.02 px**
+against a **51.69 px** floor (excess 0.813) at 4.72 m/px — the transform agrees
+with the archive geometry prediction to about **198 m**, inside a **244 m**
+bound.
+
+### Loop closure over {TMC-2, NAC A, NAC D} — Part 1 §5
+
+Three independently estimated edges in one frame (RD04-long tiles degraded to
+the TMC-2 GSD, north-up-east-right); the closing edge was **not** derived from
+the other two (E-021):
+
+| edge | inliers |
+|---|---|
+| TMC-2 → NAC A | 29 |
+| NAC A → NAC D | 4038 |
+| NAC D → TMC-2 | 91 |
+
+**Residual: 2.2131 px = 10.5 m.**
+
+A cross-mission triangle — one ISRO instrument, two NASA frames — closes to
+**ten and a half metres**. And the project's frozen reject line is **2.0 px**,
+so `assess()` returns **REJECTED**.
+
+**The threshold was not moved.** 2.2131 > 2.0, the verdict is REJECTED, and
+that is what this stage reports. A number that misses a pre-registered bar by
+10 % is exactly the case where a threshold gets quietly relaxed, which is the
+one thing this repository does not do.
+
+### Summary against the frozen criteria
+
+| Criterion | Result |
+|---|---|
+| **S0** ingestion gate | **MET** — TMC-2 ingested and placed; OHRC ingested (format) but excluded on coverage; IIRS not delivered |
+| **S1** H1, TMC-2 rung | **MET** — 6 passes, all CONSISTENT, 0 wrong passes, engines agree to 0.619 / 2.570 px |
+| **S2** H2, OHRC rung | **NO DATA** — OHRC is over the South Pole; no NAC coverage there |
+| **S3** H3, IIRS rung | **NO DATA** — no IIRS product delivered |
+| **S4** H4, fine-DEM physics (P5) | **NOT RUN** — the TMC-2 DTM is on disk and placed; the render arm was not executed |
+| **S5** H5, the ladder (P6) | **NO DATA** — depends on P2/P3 and P4 |
+| **S6** control | **MET** — the six recorded NAC edges reproduce **4, 5365, 4, 7, 3, 1656** exactly; no Chandrayaan-2 step changed any NAC number |
+
+### What this licenses, and what it does not
+
+**Licensed.** The TMC-2 rung of the ladder is demonstrated on the real sensor.
+Per Part 1 §7, *"the words 'Chandrayaan-2' may appear in a result sentence for
+the first time."* The illumination envelope is confirmed cross-sensor. The
+false-acceptance tally gains 6 passes and 0 wrong passes.
+
+**Not licensed.** No OHRC result, no IIRS result, no multimodal claim beyond
+REAL-DATA-08's measured negative. **No VERIFIED Chandrayaan-2 verdict**: the
+single pairs are INCONCLUSIVE (no loop available, coverage gap above 0.15) and
+the one loop that exists is REJECTED at 2.2131 px. §53 criterion 2 — *"≥ 1
+VERIFIED Chandrayaan-2 pair per sensor, with check-point error and CI"* —
+remains **NOT MET**, now for a precise reason rather than for want of data. No
+ground truth, no check points, one TMC-2 strip, one region, no significance
+claim. The DTM has not yet been rendered (S4).

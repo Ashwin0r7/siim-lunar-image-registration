@@ -19,3 +19,5 @@ experiments/**/*.raw
 
 # setuptools editable-install metadata (pip install -e .)
 src/*.egg-info/
+
+realdata/

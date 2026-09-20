@@ -1,0 +1,64 @@
+{
+  "stage": "REAL-DATA-09",
+  "criterion": "S6",
+  "statement": "the `none` arm on the recorded NAC edges reproduces its recorded inlier counts in this run's environment; no Chandrayaan-2 step changes any NAC number",
+  "met": true,
+  "n_edges_checked": 6,
+  "recorded_counts": [
+    3,
+    4,
+    4,
+    7,
+    1656,
+    5365
+  ],
+  "rows": [
+    {
+      "edge": "nac.m1271742202lc -> nac.m1335207975rc",
+      "artefact": "experiments/REAL-DATA-03/loop_closure_triplet.json",
+      "recorded_n_inliers": 4,
+      "n_inliers": 4,
+      "reproduces_recorded": true
+    },
+    {
+      "edge": "nac.m1335207975rc -> nac.m1452560468lc",
+      "artefact": "experiments/REAL-DATA-03/loop_closure_triplet.json",
+      "recorded_n_inliers": 5365,
+      "n_inliers": 5365,
+      "reproduces_recorded": true
+    },
+    {
+      "edge": "nac.m1452560468lc -> nac.m1271742202lc",
+      "artefact": "experiments/REAL-DATA-03/loop_closure_triplet.json",
+      "recorded_n_inliers": 4,
+      "n_inliers": 4,
+      "reproduces_recorded": true
+    },
+    {
+      "edge": "nac.m1271742202lc -> nac.m1335207975rc",
+      "artefact": "experiments/REAL-DATA-04/loop_closure_real_data_04.json",
+      "recorded_n_inliers": 7,
+      "n_inliers": 7,
+      "reproduces_recorded": true
+    },
+    {
+      "edge": "nac.m1335207975rc -> nac.m1299958135lc",
+      "artefact": "experiments/REAL-DATA-04/loop_closure_real_data_04.json",
+      "recorded_n_inliers": 3,
+      "n_inliers": 3,
+      "reproduces_recorded": true
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1271742202lc",
+      "artefact": "experiments/REAL-DATA-04/loop_closure_real_data_04.json",
+      "recorded_n_inliers": 1656,
+      "n_inliers": 1656,
+      "reproduces_recorded": true
+    }
+  ],
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3"
+  },
+  "total_runtime_s": 44.5
+}

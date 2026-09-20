@@ -1,0 +1,188 @@
+{
+  "stage": "REAL-DATA-09",
+  "what": "loop closure over {TMC-2 ortho, NAC A, NAC D} (Part 1 \u00a75)",
+  "frame": "RD04-long tiles degraded to the TMC-2 GSD, north-up-east-right",
+  "tmc2_gsd_m": 4.7232,
+  "degrade_factors": {
+    "nac.m1271742202lc": 3,
+    "nac.m1299958135lc": 2
+  },
+  "tmc2_block_used": [
+    1205,
+    58374,
+    2368,
+    60620
+  ],
+  "engine": "B1 (unmodified RootSIFT)",
+  "base": {
+    "model": "affine",
+    "ransac_threshold_px": 3.0,
+    "seed": 0
+  },
+  "edge_independence": "Each edge was estimated by a separate run of the baseline on its own image pair. The closing edge was NOT derived as (T_AD o T_TA)^-1; that derivation is E-021 and manufactures a zero residual.",
+  "edges": [
+    {
+      "edge": "TMC-2 -> NAC A",
+      "n_inliers": 29,
+      "pass": true,
+      "fit_rmse_px": 0.4096270598431027,
+      "transform_matrix": [
+        [
+          0.8547526131200015,
+          0.05162447097078811,
+          -152.33504901423873
+        ],
+        [
+          -0.05147802229892746,
+          0.8671391358211472,
+          208.0522178634826
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "edge": "NAC A -> NAC D",
+      "n_inliers": 4038,
+      "pass": true,
+      "fit_rmse_px": 0.7994347954477593,
+      "transform_matrix": [
+        [
+          1.2842650642618891,
+          0.004950983946175041,
+          108.72994081410502
+        ],
+        [
+          -0.006328368292364203,
+          1.3237562984339852,
+          160.88829601439238
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "edge": "NAC D -> TMC-2",
+      "n_inliers": 91,
+      "pass": true,
+      "fit_rmse_px": 0.8950621912763413,
+      "transform_matrix": [
+        [
+          0.9018885978331447,
+          -0.056055641407799534,
+          108.40572048572267
+        ],
+        [
+          0.05771493580495672,
+          0.8675396617566902,
+          -373.63996440069536
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3"
+  },
+  "loop_closure_residual_px": 2.2130896751530877,
+  "loop_closure_residual_m": 10.452961239282738,
+  "shape_used": [
+    2246,
+    1163
+  ],
+  "verdict_tmc2_to_nac_a": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+      "Loop closure fails: composing the three estimated transforms around the image triplet leaves 2.21 px of error instead of returning to the start. A uniformly shifted -- and therefore perfectly self-consistent -- wrong answer cannot hide from this.",
+      "Correspondences are clustered: 0.408 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ],
+    "evidence": [
+      {
+        "name": "n_inliers",
+        "value": 29.0,
+        "verdict": "supports",
+        "weight": "supporting",
+        "statement": "29 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+      },
+      {
+        "name": "loop_error_px",
+        "value": 2.2130896751530877,
+        "verdict": "decisive_against",
+        "weight": "decisive",
+        "statement": "Loop closure 2.21 px (reject at >= 2.0). Detection 1.000 at false alarm 0.000 (EXP-003)."
+      },
+      {
+        "name": "coverage_max_gap",
+        "value": 0.40820007322138707,
+        "verdict": "against",
+        "weight": "strong",
+        "statement": "Largest unconstrained region is 0.408 of the image (target <= 0.15). The transform is extrapolating where there are no correspondences."
+      },
+      {
+        "name": "inlier_ratio",
+        "value": 1.0,
+        "verdict": "supports",
+        "weight": "supporting",
+        "statement": "29/29 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+      },
+      {
+        "name": "fit_rmse",
+        "value": 0.4096270598431027,
+        "verdict": "inconclusive",
+        "weight": "excluded",
+        "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+      }
+    ],
+    "metrics": {
+      "n_putative": 29,
+      "n_inliers": 29,
+      "inlier_ratio": 1.0,
+      "coverage_max_gap": 0.40820007322138707,
+      "coverage_occupancy": 0.171875,
+      "fit_rmse": 0.4096270598431027,
+      "loop_error_px": 2.2130896751530877,
+      "engine_agreement_px": null,
+      "transform_model": "affine",
+      "transform_matrix": [
+        [
+          0.8547526131200015,
+          0.05162447097078811,
+          -152.33504901423873
+        ],
+        [
+          -0.05147802229892746,
+          0.8671391358211472,
+          208.0522178634826
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "excluded": {
+      "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+      "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+      "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+    }
+  },
+  "claims_not_supported": [
+    "No ground truth; loop closure is a self-consistency bound.",
+    "Loop closure is exactly invariant to per-image gauge error (ADR-0011 N1): it verifies the transform set only up to that gauge.",
+    "One triplet, one region, one TMC-2 strip. No significance claim."
+  ],
+  "total_runtime_s": 24.5
+}
