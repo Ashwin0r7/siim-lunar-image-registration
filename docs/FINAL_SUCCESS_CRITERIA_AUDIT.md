@@ -12,7 +12,7 @@ is reported as a gap in the evidence, not rewritten into one that can be.
 |---|---|---|
 | 1 | H1 MET on real data at ≥ 2 rungs with the frozen rule; p ≤ 0.05 on the illumination separation with ≥ 8 edges | **MET** |
 | 2 | ≥ 1 VERIFIED Chandrayaan-2 pair per sensor against NAC, with check-point error and CI reported in coarse pixels | **NOT MET** — but no longer blocked on data (see the 2026-09-20 REAL-DATA-09 update) |
-| 3 | Verdict FA ≤ 5 %, FR ≤ 20 % on validation sites; zero VERIFIED on the adversarial set | **STILL NOT EVALUABLE** (see the 2026-09-20 update) |
+| 3 | Verdict FA ≤ 5 %, FR ≤ 20 % on validation sites; zero VERIFIED on the adversarial set | **PARTLY ANSWERED** — the adversarial clause is MET (0 of 36), but for the wrong reason (E-039); FA and FR remain unmeasurable |
 | 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET** — 14 of 39 VERIFIED edges exceed 0.15 |
 | 5 | Fresh-clone install, CPU-only, all tests pass, no non-commercial weights | **MET (measured today)** |
 
@@ -116,6 +116,30 @@ space (ADR-0011 N1), recorded as a known limitation rather than patched.
 **What would close this: EXP-012 (verdict calibration),** designated at
 `MASTER_RESEARCH_AND_ARCHITECTURE_PLAN.md:577` and never run. There is no
 `experiments/EXP-012/` and no calibration/validation site split.
+
+---
+
+## UPDATE 2026-09-21 — criterion 3's adversarial clause is now answered
+
+EXP-012's S3 arm ran (`exp012_s3_adversarial.json`). **The third clause of
+criterion 3 — *zero VERIFIED on the adversarial set* — is MET: 0 of 36.**
+
+**It should not be read as a clean pass, and E-039 records why.** Every
+adversarial construction in EXP-002 objective 4 is a **per-edge** error, which
+is precisely the subspace loop closure exists to detect; it detected all 36.
+The blind spot the verdict actually has is **per-image** gauge error, and the
+set contains no case of that shape — so the criterion could not have failed for
+the reason its own HIGH-confidence prediction named.
+
+A supplementary probe (`exp012_s3_gauge_probe.json`, deliberately **not** folded
+into S3) builds that missing case: **36 of 36 return VERIFIED / high while every
+edge is wrong**, by a median of 14.04, 57.47 and 115.40 px at gauge magnitudes
+8, 32 and 64 px, with the loop closing to 1.27e-13 px by construction.
+
+**The first two clauses of criterion 3 are still unanswered.** A verdict-level
+false-acceptance rate and any false-rejection rate remain unmeasurable for the
+reasons below: no ground truth, and no calibration/validation site split.
+EXP-012 did not change that.
 
 ---
 
