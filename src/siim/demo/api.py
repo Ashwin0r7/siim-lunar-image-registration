@@ -62,6 +62,7 @@ from siim.demo.chandrayaan2 import (  # noqa: E402
     chandrayaan2_status,
 )
 from siim.demo.exp012 import exp012_evidence, exp012_status  # noqa: E402
+from siim.demo.exp013 import exp013_evidence, exp013_status  # noqa: E402
 from siim.demo.evidence import (  # noqa: E402
     REAL_SCENARIOS,
     DemoDataMissing,
@@ -258,6 +259,13 @@ def scenarios() -> dict:
                 if chandrayaan2_status()["available"] else
                 ("NOT AVAILABLE — missing "
                  + ", ".join(chandrayaan2_status()["missing"]))),
+            "gauge_detection": (
+                ("AVAILABLE — read from the EXP-013 artefact and EXP-012's "
+                 "gauge probe. This panel reports a measured limitation of "
+                 "the shipped verdict, not a capability.")
+                if exp013_status()["available"] else
+                ("UNAVAILABLE — missing "
+                 + ", ".join(exp013_status()["missing"]))),
             "engines_panel": (
                 "AVAILABLE — read from the EXP-007 and REAL-DATA-07 artefacts"
                 if engines_status()["available"] else
@@ -296,6 +304,18 @@ def evidence_verdict_calibration() -> dict:
     guarantee? Read from the recorded artefact; never recomputed."""
     try:
         return exp012_evidence()
+    except DemoDataMissing as exc:
+        raise HTTPException(503, str(exc)) from exc
+
+
+@app.get("/api/evidence/gauge-detection")
+def evidence_gauge_detection() -> dict:
+    """EXP-013: the one error the verdict cannot see, and the check that can.
+
+    This panel exists to show the project's own worst measured finding beside
+    its best one. Read from the recorded artefacts; never recomputed."""
+    try:
+        return exp013_evidence()
     except DemoDataMissing as exc:
         raise HTTPException(503, str(exc)) from exc
 
@@ -457,6 +477,10 @@ def advertised_artefacts() -> frozenset[str]:
         pass
     try:
         paths.update(exp012_evidence()["sources"])
+    except DemoDataMissing:
+        pass
+    try:
+        paths.update(exp013_evidence()["sources"])
     except DemoDataMissing:
         pass
     return frozenset(paths)
