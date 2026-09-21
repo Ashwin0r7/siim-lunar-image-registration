@@ -99,12 +99,24 @@ POP_A = [
 ]
 #: Population B: the two low-Δinc long windows and their EXP-007 counts
 #: (tier 1 at k = 2; tier 2 at k = 4 / 8 / 16 / 32), box average, EXP-007's route.
+#: The k = 2 count is EXP-007 TIER 1, which ran on the recorded 4096-line tiles
+#: (``real_triplet_geo_manifest`` / ``real_quad_d_geo_manifest``), not on the
+#: long window -- the long window at k = 2 gives ~42 000 inliers and is not a
+#: recorded number. Part 1 §3 lists the count without saying which window; it
+#: is reproduced where it was recorded, and that is stated for Part 2.
 POP_B = [
     ("RD03-target", "exp007_long_triplet_abc_manifest.json",
-     "nac.m1335207975rc -> nac.m1452560468lc", {2: 5365, 4: 9460, 8: 3054, 16: 1373, 32: 566}),
+     "nac.m1335207975rc -> nac.m1452560468lc", {4: 9460, 8: 3054, 16: 1373, 32: 566},
+     ("REAL-DATA-03", "real_triplet_geo_manifest.json", 5365)),
     ("RD04-target", "exp007_long_triplet_abd_manifest.json",
-     "nac.m1299958135lc -> nac.m1271742202lc", {2: 1656, 4: 3693, 8: 1665, 16: 693, 32: 243}),
+     "nac.m1299958135lc -> nac.m1271742202lc", {4: 3693, 8: 1665, 16: 693, 32: 243},
+     ("REAL-DATA-04", "real_quad_d_geo_manifest.json", 1656)),
 ]
+#: Above this many inliers the verdict engine's coverage statistic (an exact
+#: N x N distance matrix, siim.evaluation.coverage) needs tens of GB; the cell
+#: is then recorded from the engine stage alone and says so. A runner-side
+#: guard, not a change to src/ (Part 1 §7: assess() untouched).
+COVERAGE_POINT_CAP = 20000
 
 # -- Part 1 section 4, frozen ---------------------------------------------
 S0_SELF_SHIFT_PX = 0.05
@@ -190,12 +202,13 @@ def load_contexts(products: dict):
         for t in man["tiles"]:
             ctx = _e7.FrameContext(t["pdsid"], t, products, target)
             out[(wname, t["pdsid"])] = Window(ctx, t["line0"], t["sample0"], t["n_lines"], t["n_samples"])
-    for tname, mname, _edge, _counts in POP_B:
-        man = json.loads((DATA / "manifests" / mname).read_text(encoding="utf-8"))
-        target = tuple(man["target_ground_point_lon_lat"])
-        for t in man["tiles"]:
-            ctx = _e7.FrameContext(t["pdsid"], t, products, target)
-            out[(tname, t["pdsid"])] = Window(ctx, t["line0"], t["sample0"], t["n_lines"], t["n_samples"])
+    for tname, mname, _edge, _counts, (t1name, t1man, _n) in POP_B:
+        for name, mn in ((tname, mname), (t1name, t1man)):
+            man = json.loads((DATA / "manifests" / mn).read_text(encoding="utf-8"))
+            target = tuple(man["target_ground_point_lon_lat"])
+            for t in man["tiles"]:
+                ctx = _e7.FrameContext(t["pdsid"], t, products, target)
+                out[(name, t["pdsid"])] = Window(ctx, t["line0"], t["sample0"], t["n_lines"], t["n_samples"])
     return out
 
 
@@ -233,7 +246,17 @@ def register_oriented(ws: Window, ks: int, a_img: np.ndarray, wr: Window, kr: in
     archive geometry -- run_real_data_07.run_edge's route, with the pipeline."""
     ra, rb = ws.oriented(a_img), wr.oriented(b_img)
     t0 = time.perf_counter()
-    res = register_pair(ra.image, rb.image, engine=engine, **BASE)
+    try:
+        res = register_pair(ra.image, rb.image, engine=engine, **BASE)
+        note = None
+    except MemoryError as exc:
+        # The engine ran; the verdict's coverage matrix did not fit. Keep the
+        # estimate stage's result and say what was skipped (COVERAGE_POINT_CAP).
+        from siim.baselines import run_baseline
+        base = run_baseline(engine, ra.image, rb.image, model=BASE["model"],
+                            ransac_threshold=BASE["ransac_threshold"], seed=BASE["seed"])
+        res = _EngineOnly(base, engine)
+        note = f"pipeline stages refine/reestimate/verify skipped: MemoryError in the verdict's coverage ({exc})"
     wall = time.perf_counter() - t0
     s = res.summary()
     rec = {
@@ -251,6 +274,8 @@ def register_oriented(ws: Window, ks: int, a_img: np.ndarray, wr: Window, kr: in
         "north_up": {"src": ra.record, "dst": rb.record},
         "wall_s": wall,
     }
+    if note:
+        rec["pipeline_note"] = note
     if res.transform is not None:
         tf = rb.inverse @ res.transform @ ra.forward
         rec["transform_matrix_original_pixels"] = np.asarray(tf.matrix).tolist()
@@ -263,7 +288,11 @@ def register_oriented(ws: Window, ks: int, a_img: np.ndarray, wr: Window, kr: in
         tf = None
     if res.n_inliers >= 3:
         from siim.evaluation.coverage import coverage_metrics
-        cov = coverage_metrics(res.src_points[res.inlier_mask], ra.image.shape)
+        pts = res.src_points[res.inlier_mask]
+        if pts.shape[0] > COVERAGE_POINT_CAP:
+            pts = pts[np.random.default_rng(BASE["seed"]).choice(pts.shape[0], COVERAGE_POINT_CAP, replace=False)]
+            rec["coverage_subsampled_to"] = COVERAGE_POINT_CAP
+        cov = coverage_metrics(pts, ra.image.shape)
         rec["coverage_occupancy"] = float(cov.grid_occupancy)
         rec["coverage_max_uncovered_disc_ratio"] = float(cov.max_uncovered_disc_ratio)
     rec["geometry"] = _e7.geometry_check(tf, ws.corners, ws.window(ks), wr.corners,
@@ -272,6 +301,26 @@ def register_oriented(ws: Window, ks: int, a_img: np.ndarray, wr: Window, kr: in
     rec["wrong_pass"] = bool(rec["pass"] and g.startswith("INCONSISTENT"))
     rec["success"] = bool(rec["pass"] and not rec["wrong_pass"])
     return rec
+
+
+class _EngineOnly:
+    """A RegistrationResult look-alike for the MemoryError fallback: the
+    estimate stage only, no refinement, no re-estimation, no verdict."""
+
+    def __init__(self, base, engine: str):
+        self.baseline, self.engine = base, engine
+        p = np.asarray(base.matches.src_points, float).reshape(-1, 2)
+        m = np.asarray(base.inlier_mask, bool).reshape(-1) if np.size(base.inlier_mask) else np.zeros(p.shape[0], bool)
+        self.src_points, self.inlier_mask = p, m
+        self.transform, self.initial_transform = base.transform, base.transform
+        self.n_inliers = int(m.sum())
+
+    def summary(self) -> dict:
+        return {"n_putative": int(self.src_points.shape[0]), "n_inliers": self.n_inliers, "n_refined": 0,
+                "status": "NOT ASSESSED", "confidence": None,
+                "model": None if self.transform is None else self.transform.model,
+                "model_selected_by": "engine_default (verdict skipped)", "heldout_px": None,
+                "decided_by_tie_break": None}
 
 
 # ---------------------------------------------------------------------------
@@ -328,9 +377,16 @@ def self_scale_control(w: Window, r: int) -> dict:
     if min(ca.shape) < 8:
         rec.update({"status": "image too small for the detector", "n_inliers": 0})
         return rec
-    res = register_pair(ca, cb, engine="B1", **BASE)
+    # The estimate stage only: this control measures the detector and the
+    # estimator on identical texture; an identical-texture pair at r = 4 on a
+    # long window returns ~10^4-10^5 inliers, beyond the verdict's O(N^2)
+    # coverage statistic (COVERAGE_POINT_CAP).
+    from siim.baselines import run_baseline
+    res = _EngineOnly(run_baseline("B1", ca, cb, model=BASE["model"],
+                                   ransac_threshold=BASE["ransac_threshold"], seed=BASE["seed"]), "B1")
     rec["n_inliers"] = res.n_inliers
     rec["n_keypoints_src"] = int(len(res.baseline.src_features))
+    rec["stage"] = "estimate only (run_baseline B1); no refine, no verdict"
     if res.transform is not None:
         truth = Transform(np.array([[1, 0, -SELF_SHIFT_MULT], [0, 1, -SELF_SHIFT_MULT], [0, 0, 1.0]]), "translation")
         err = endpoint_error(res.transform, truth, ca.shape, step=4)
@@ -506,24 +562,27 @@ def s0_operator_gate(windows: dict, pop_b_rows: dict, quick: bool) -> dict:
             eq = bool(np.array_equal(degrade_to_gsd(raw, k, psf_fwhm_coarse_px=0.0), _e7.decimate(raw, k),
                                      equal_nan=True))
             out["i_bit_exact"].append({"window": wname, "pdsid": pdsid, "k": k, "equal": eq})
-    for tname, _m, edge, counts in POP_B:
+    for tname, _m, edge, counts, (t1name, _t1m, n1) in POP_B:
         s, d = edge.split(" -> ")
-        ws, wd = windows[(tname, s)], windows[(tname, d)]
-        for k, n_rec in counts.items():
+        for k, n_rec in list(counts.items()) + [(NATIVE_K, n1)]:
             if quick and k not in (8, 32):
                 continue
+            # tier 1 ran on the recorded 4096-line tiles; tier 2 on the long windows
+            src_name = t1name if k == NATIVE_K else tname
+            ws, wd = windows[(src_name, s)], windows[(src_name, d)]
             t0 = time.perf_counter()
             a, b = ws.native_box(k), wd.native_box(k)
             res = _e7.run_engine("b1", a, b, E7_BASE)
             rec = _e7.summarise_result(res, a.shape)
-            rec.update({"target": tname, "edge": edge, "k": k, "recorded_n_inliers": n_rec,
+            rec.update({"target": src_name, "edge": edge, "k": k, "recorded_n_inliers": n_rec,
+                        "tier": "tier1" if k == NATIVE_K else "tier2",
                         "reproduces": bool(rec["n_inliers"] == n_rec), "wall_s": time.perf_counter() - t0})
             row7 = pop_b_rows.get((edge, k))
             if row7 is not None and row7.get("transform_matrix") is not None and rec["transform_matrix"] is not None:
                 rec["transform_max_abs_diff"] = float(np.abs(np.asarray(row7["transform_matrix"]) -
                                                             np.asarray(rec["transform_matrix"])).max())
             out["ii_reproduction"].append(rec)
-            print(f"  [S0 ii] {tname} {edge[4:16]}->{edge[-13:]} k={k:2d} inliers={rec['n_inliers']:5d} "
+            print(f"  [S0 ii] {src_name} {edge[4:16]}->{edge[-13:]} k={k:2d} inliers={rec['n_inliers']:5d} "
                   f"recorded={n_rec:5d} {'REPRODUCES' if rec['reproduces'] else 'DIFFERS'}", flush=True)
     out["i_met"] = all(x["equal"] for x in out["i_bit_exact"])
     out["ii_met"] = all(x["reproduces"] for x in out["ii_reproduction"]) and bool(out["ii_reproduction"])
@@ -563,11 +622,13 @@ def native_transform(row: dict) -> Transform:
 def run_cells(windows: dict, rows: dict, e7rows: dict, pop_a, pop_b, rungs_d, rungs_n, rungs_x,
               rungs_l, rungs_b4l, learned_ok: bool) -> list[dict]:
     cells: list[dict] = []
-    pairs = [("A", w, e, n, rows.get((w, e))) for w, e, n in pop_a]
-    pairs += [("B", t, e, c[2], e7rows.get((e, 2))) for t, _m, e, c in pop_b]
-    for pop, wname, edge, n_native, native_row in pairs:
+    # (population, window, edge, native count, native row, name of the window the native row was recorded on)
+    pairs = [("A", w, e, n, rows.get((w, e)), w) for w, e, n in pop_a]
+    pairs += [("B", t, e, t1[2], e7rows.get((e, NATIVE_K)), t1[0]) for t, _m, e, _c, t1 in pop_b]
+    for pop, wname, edge, n_native, native_row, nat_name in pairs:
         s, d = edge.split(" -> ")
         ws, wd = windows[(wname, s)], windows[(wname, d)]
+        nat_ws, nat_wd = windows[(nat_name, s)], windows[(nat_name, d)]
         native_ok = bool(n_native > RULE)
         t_nat = native_transform(native_row) if native_row is not None else None
         base = {"population": pop, "window": wname, "edge": edge, "pair": sorted((s, d)),
@@ -575,7 +636,8 @@ def run_cells(windows: dict, rows: dict, e7rows: dict, pop_a, pop_b, rungs_d, ru
                 "delta_incidence_deg": abs(ws.ctx.incidence_published - wd.ctx.incidence_published),
                 "native_pixel_m_src": ws.scaled_pixel_m, "native_pixel_m_dst": wd.scaled_pixel_m,
                 "handedness_src": ws.handedness(), "handedness_dst": wd.handedness()}
-        nat_w2s, nat_w2d = ws.window(NATIVE_K), wd.window(NATIVE_K)
+        nat_w2s, nat_w2d = nat_ws.window(NATIVE_K), nat_wd.window(NATIVE_K)
+        base["native_window"] = nat_name
 
         def add(rec: dict, arm: str, r: int, r_run: int, ks: int, kr: int, w_s: Window, w_d: Window,
                 engine: str = "B1", src_img=None):
@@ -637,10 +699,10 @@ def run_cells(windows: dict, rows: dict, e7rows: dict, pop_a, pop_b, rungs_d, ru
         ws.ctx.release(); wd.ctx.release()
         ws._raw = None; wd._raw = None
     # arm L on population B
-    for tname, _m, edge, _c in pop_b:
+    for tname, _m, edge, _c, (t1name, _t1m, _n1) in pop_b:
         s, d = edge.split(" -> ")
         ws, wd = windows[(tname, s)], windows[(tname, d)]
-        rdw = "RD03" if tname == "RD03-target" else "RD04"
+        rdw = t1name
         tile = windows.get((rdw, s))
         if tile is None:
             cells.append({"population": "B", "window": tname, "edge": edge, "arm": "L",
@@ -846,7 +908,19 @@ def main() -> None:
                      "failure_rule": f"n_inliers <= {RULE} (D-023)",
                      "success": "pass and geometry not INCONSISTENT (run_exp007.geometry_check)"},
         "population_A": [{"window": w, "edge": e, "native_n_inliers": n} for w, e, n in pop_a],
-        "population_B": [{"target": t, "edge": e, "recorded_counts": c} for t, _m, e, c in pop_b],
+        "population_B": [{"target": t, "edge": e, "recorded_tier2_counts": c,
+                          "tier1": {"target": t1[0], "manifest": t1[1], "k2_count": t1[2]}}
+                         for t, _m, e, c, t1 in pop_b],
+        "runner_notes": [
+            "EXP-007's tier-1 counts (5365, 1656) were recorded on the 4096-line tiles of "
+            "real_triplet_geo_manifest / real_quad_d_geo_manifest at k = 2, not on the long windows; "
+            "they are reproduced there, and the native-rung transform for population B's rung "
+            "consistency is the tier-1 transform mapped through the frame (TileWindow) to the long window.",
+            f"Coverage statistics in this runner's own records are computed on at most {COVERAGE_POINT_CAP} "
+            "inliers (seeded subsample) because siim.evaluation.coverage builds an exact N x N distance "
+            "matrix; a cell whose verdict stage raised MemoryError for the same reason is recorded from the "
+            "estimate stage with pipeline_note set. The self-scale control uses the estimate stage only.",
+        ],
         "criteria": verdict,
         "n_cells": len(cells), "cells": cells,
         "environment": {"python": platform.python_version(), "numpy": np.__version__,
