@@ -128,7 +128,17 @@ Independent support arrived from the negative control in EXP-002 objective 3: `f
 
 **Rationale.** Spec §15 explicitly asks which coverage metric is most meaningful *and for the justification*. Occupancy and entropy are averages, and an average cannot bound a worst case — a point set can have excellent entropy and still leave one large hole precisely where the user needs accuracy. Choosing the metric that bounds the failure we care about is a principled answer rather than a menu.
 
-**Status:** `PROPOSED` → EXP-007 checks that it actually correlates with local held-out error better than the alternatives do. If it does not, it is the wrong metric and gets replaced.
+**Status:** `REVERSED` (2026-09-21, EXP-014, D-055).
+
+*The line below is left as written under integrity rule 3:* `PROPOSED` → EXP-007 checks that it actually correlates with local held-out error better than the alternatives do. If it does not, it is the wrong metric and gets replaced.
+
+**EXP-007 never ran that check (E-042)** — its stage report does not contain the word *coverage*, and the metric stayed `PROPOSED` for six weeks and seven further stages while being load-bearing. EXP-014 ran it: on 681 correspondence subsets over 10 real NAC tiles and two synthetic regimes, `max_uncovered_disc_ratio` placed **last of the four on both measures and on both arms** — |ρ| **0.603** against 0.681–0.701, and ROC AUC **0.927** against 0.980–0.984 on the real arm. The confound control passed (partial ρ = **0.542** controlling for point count), so this is a ranking of coverage measures and not of proxies for subset size.
+
+**`grid_occupancy` replaces it as primary.** The largest-empty-disc is retained as **secondary**, because it is the only one of the four interpretable in pixels and its sign is correct.
+
+**The rationale above was sound and its conclusion was wrong.** *"An average cannot bound a worst case"* is true, and it is not the binding constraint: the largest empty disc is decided by a **single hole**, so as an *estimator* it has high variance, while occupancy and entropy aggregate over the whole ROI. The right quantity measured noisily loses to a proxy measured precisely — which only a measurement could have shown, and which is why the ADR was written to be falsifiable in the first place.
+
+**Follow-on debt, not discharged here:** `COVERAGE_GAP_WARN = 0.15` in `verdict.py` is this metric's threshold and EXP-014 measures it **4× too tight** (calibrated crossing **0.611**, CI 0.498–0.720; at 0.15 the 95th percentile of worst-case local error is **0.048 px** against the 1.0 px bound). Changing it is a separate decision under the frozen-rule constraint REAL-DATA-03, -04 and -05 impose.
 
 ---
 

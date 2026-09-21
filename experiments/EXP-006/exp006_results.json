@@ -1,0 +1,401 @@
+{
+  "stage": "EXP-006",
+  "part": 2,
+  "preregistration": "docs/stages/EXP-006_protocol_vs_matcher.md",
+  "what": "component ablation: does one protocol step move more real pair outcomes than replacing the entire matcher?",
+  "reframed_by": "MASTER_RESEARCH_AND_ARCHITECTURE_PLAN.md \u00a7553 \u2014 the stand-alone protocol-vs-matcher thesis is unfalsifiable as phrased",
+  "sources": [
+    "experiments/REAL-DATA-07/rows_rd03.json",
+    "experiments/REAL-DATA-07/rows_rd04.json",
+    "experiments/REAL-DATA-07/rows_rd03_nue.json",
+    "experiments/REAL-DATA-07/rows_rd04_nue.json"
+  ],
+  "protocol_step": "orientation: quarter-turn (Part 1 method) vs north-up-east-right (E-037)",
+  "n_paired_pairs": 42,
+  "criteria": {
+    "S0": {
+      "criterion": "S0",
+      "statement": ">= 40 pairs present in both arms, identical pair sets",
+      "met": true,
+      "n_paired": 42,
+      "n_original_only": 0,
+      "n_amended_only": 0,
+      "n_rd03": 23,
+      "n_rd04": 19
+    },
+    "S1": {
+      "criterion": "S1",
+      "statement": "the orientation step flips more outcomes than the matcher swap",
+      "met": true,
+      "mean_changed_protocol": 6.0,
+      "mean_changed_matcher": 2.75,
+      "max_changed_matcher": 4.0,
+      "protocol_per_engine": {
+        "b1": 5,
+        "lg": 7
+      },
+      "matcher_per_contrast": {
+        "original:b1_vs_lg": 3,
+        "amended:b1_vs_lg": 1,
+        "amended:b1_vs_xf": 4,
+        "amended:lg_vs_xf": 3
+      }
+    },
+    "S2": {
+      "criterion": "S2",
+      "statement": "exact McNemar p <= 0.05 on the orientation contrast for at least one matcher, and the matcher contrast's p is larger on the same arm",
+      "met": true,
+      "p_protocol": {
+        "b1": 0.0625,
+        "lg": 0.015625
+      },
+      "p_matcher_amended": {
+        "b1_vs_lg": 1.0,
+        "b1_vs_xf": 0.625,
+        "lg_vs_xf": 0.25
+      },
+      "best_protocol_p": 0.015625,
+      "best_matcher_p": 0.25
+    },
+    "S3": {
+      "criterion": "S3",
+      "statement": "the sign of S1's comparison holds in RD-03 and RD-04 separately",
+      "met": true,
+      "RD03": {
+        "protocol_mean_changed": 2.5,
+        "matcher_mean_changed": 1.3333333333333333,
+        "protocol_exceeds_matcher": true,
+        "n_pairs": 23
+      },
+      "RD04": {
+        "protocol_mean_changed": 3.5,
+        "matcher_mean_changed": 1.3333333333333333,
+        "protocol_exceeds_matcher": true,
+        "n_pairs": 19
+      }
+    },
+    "S4": {
+      "criterion": "S4",
+      "statement": "every outcome the orientation step flips goes fail -> success, or the exceptions are enumerated",
+      "met": true,
+      "success_to_fail_per_engine": {
+        "b1": 0,
+        "lg": 0
+      },
+      "fail_to_success_per_engine": {
+        "b1": 5,
+        "lg": 7
+      },
+      "exceptions": []
+    },
+    "S5": {
+      "criterion": "S5",
+      "statement": "pairs the BEST matcher rescues under the WRONG orientation are fewer than pairs the orientation step rescues outright",
+      "met": true,
+      "n_papered_over_by_matcher": 1,
+      "n_rescued_by_protocol": 7,
+      "note": "'papered over' = succeeded under some matcher on the WRONG orientation but is not a unanimous success on the RIGHT one; 'rescued' = failed under an engine on the wrong orientation and succeeds under the same engine on the right one"
+    }
+  },
+  "success_rates": {
+    "original:b1": {
+      "engine": "B1 RootSIFT",
+      "n": 42,
+      "n_success": 20,
+      "rate": 0.47619047619047616
+    },
+    "original:lg": {
+      "engine": "B4L DISK+LightGlue",
+      "n": 42,
+      "n_success": 17,
+      "rate": 0.40476190476190477
+    },
+    "amended:b1": {
+      "engine": "B1 RootSIFT",
+      "n": 42,
+      "n_success": 25,
+      "rate": 0.5952380952380952
+    },
+    "amended:lg": {
+      "engine": "B4L DISK+LightGlue",
+      "n": 42,
+      "n_success": 24,
+      "rate": 0.5714285714285714
+    },
+    "amended:xf": {
+      "engine": "B4X XFeat",
+      "n": 42,
+      "n_success": 27,
+      "rate": 0.6428571428571429
+    }
+  },
+  "protocol_contrast": {
+    "b1": {
+      "n_paired": 42,
+      "n_changed": 5,
+      "n_agree": 37,
+      "fail_to_success": 5,
+      "success_to_fail": 0,
+      "net": 5,
+      "p_exact_mcnemar": 0.0625,
+      "flips": [
+        {
+          "pair": [
+            "nac.m1182331886lc",
+            "nac.m1199981485rc"
+          ],
+          "window": "RD03",
+          "direction": "fail->success"
+        },
+        {
+          "pair": [
+            "nac.m1199981485rc",
+            "nac.m1212932972lc"
+          ],
+          "window": "RD03",
+          "direction": "fail->success"
+        },
+        {
+          "pair": [
+            "nac.m1212932972lc",
+            "nac.m1315225542lc"
+          ],
+          "window": "RD04",
+          "direction": "fail->success"
+        },
+        {
+          "pair": [
+            "nac.m1271742202lc",
+            "nac.m1315225542lc"
+          ],
+          "window": "RD04",
+          "direction": "fail->success"
+        },
+        {
+          "pair": [
+            "nac.m1315225542lc",
+            "nac.m1341069775rc"
+          ],
+          "window": "RD04",
+          "direction": "fail->success"
+        }
+      ]
+    },
+    "lg": {
+      "n_paired": 42,
+      "n_changed": 7,
+      "n_agree": 35,
+      "fail_to_success": 7,
+      "success_to_fail": 0,
+      "net": 7,
+      "p_exact_mcnemar": 0.015625,
+      "flips": [
+        {
+          "pair": [
+            "nac.m1096350825rc",
+            "nac.m1142297886lc"
+          ],
+          "window": "RD03",
+          "direction": "fail->success"
+        },
+        {
+          "pair": [
+            "nac.m1182331886lc",
+            "nac.m1199981485rc"
+          ],
+          "window": "RD03",
+          "direction": "fail->success"
+        },
+        {
+          "pair": [
+            "nac.m1199981485rc",
+            "nac.m1212932972lc"
+          ],
+          "window": "RD03",
+          "direction": "fail->success"
+        },
+        {
+          "pair": [
+            "nac.m1212932972lc",
+            "nac.m1315225542lc"
+          ],
+          "window": "RD04",
+          "direction": "fail->success"
+        },
+        {
+          "pair": [
+            "nac.m1271742202lc",
+            "nac.m1315225542lc"
+          ],
+          "window": "RD04",
+          "direction": "fail->success"
+        },
+        {
+          "pair": [
+            "nac.m1299958135lc",
+            "nac.m1315225542lc"
+          ],
+          "window": "RD04",
+          "direction": "fail->success"
+        },
+        {
+          "pair": [
+            "nac.m1315225542lc",
+            "nac.m1341069775rc"
+          ],
+          "window": "RD04",
+          "direction": "fail->success"
+        }
+      ]
+    }
+  },
+  "matcher_contrast": {
+    "original": {
+      "b1_vs_lg": {
+        "n_paired": 42,
+        "n_changed": 3,
+        "n_agree": 39,
+        "fail_to_success": 0,
+        "success_to_fail": 3,
+        "net": -3,
+        "p_exact_mcnemar": 0.25,
+        "flips": [
+          {
+            "pair": [
+              "nac.m1096350825rc",
+              "nac.m1142297886lc"
+            ],
+            "window": "RD03",
+            "direction": "success->fail"
+          },
+          {
+            "pair": [
+              "nac.m1271742202lc",
+              "nac.m1335207975rc"
+            ],
+            "window": "RD04",
+            "direction": "success->fail"
+          },
+          {
+            "pair": [
+              "nac.m1299958135lc",
+              "nac.m1315225542lc"
+            ],
+            "window": "RD04",
+            "direction": "success->fail"
+          }
+        ]
+      }
+    },
+    "amended": {
+      "b1_vs_lg": {
+        "n_paired": 42,
+        "n_changed": 1,
+        "n_agree": 41,
+        "fail_to_success": 0,
+        "success_to_fail": 1,
+        "net": -1,
+        "p_exact_mcnemar": 1.0,
+        "flips": [
+          {
+            "pair": [
+              "nac.m1271742202lc",
+              "nac.m1335207975rc"
+            ],
+            "window": "RD04",
+            "direction": "success->fail"
+          }
+        ]
+      },
+      "b1_vs_xf": {
+        "n_paired": 42,
+        "n_changed": 4,
+        "n_agree": 38,
+        "fail_to_success": 3,
+        "success_to_fail": 1,
+        "net": 2,
+        "p_exact_mcnemar": 0.625,
+        "flips": [
+          {
+            "pair": [
+              "nac.m1271742202lc",
+              "nac.m1335207975rc"
+            ],
+            "window": "RD03",
+            "direction": "fail->success"
+          },
+          {
+            "pair": [
+              "nac.m1271742202lc",
+              "nac.m1452560468lc"
+            ],
+            "window": "RD03",
+            "direction": "fail->success"
+          },
+          {
+            "pair": [
+              "nac.m1212932972lc",
+              "nac.m1341069775rc"
+            ],
+            "window": "RD04",
+            "direction": "fail->success"
+          },
+          {
+            "pair": [
+              "nac.m1271742202lc",
+              "nac.m1335207975rc"
+            ],
+            "window": "RD04",
+            "direction": "success->fail"
+          }
+        ]
+      },
+      "lg_vs_xf": {
+        "n_paired": 42,
+        "n_changed": 3,
+        "n_agree": 39,
+        "fail_to_success": 3,
+        "success_to_fail": 0,
+        "net": 3,
+        "p_exact_mcnemar": 0.25,
+        "flips": [
+          {
+            "pair": [
+              "nac.m1271742202lc",
+              "nac.m1335207975rc"
+            ],
+            "window": "RD03",
+            "direction": "fail->success"
+          },
+          {
+            "pair": [
+              "nac.m1271742202lc",
+              "nac.m1452560468lc"
+            ],
+            "window": "RD03",
+            "direction": "fail->success"
+          },
+          {
+            "pair": [
+              "nac.m1212932972lc",
+              "nac.m1341069775rc"
+            ],
+            "window": "RD04",
+            "direction": "fail->success"
+          }
+        ]
+      }
+    }
+  },
+  "claims_not_supported": [
+    "NOT the universal thesis. The orientation step is the one protocol component whose both levels happen to have been recorded, and they were recorded because a defect was found, not because an ablation was designed. This supports at most 'one protocol step outweighs a matcher replacement on 42 mare pairs'.",
+    "NOT a claim about protocol components never ablated here (scale normalisation, tiling, photometric).",
+    "NOT an accuracy claim: the outcome is a binary success under a frozen rule, corroborated against archive geometry at its own ~100 px floor.",
+    "NOT a Chandrayaan-2 result, and not evidence about non-mare terrain."
+  ],
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3"
+  },
+  "total_runtime_s": 0.01
+}
