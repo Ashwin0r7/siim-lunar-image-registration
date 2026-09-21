@@ -330,6 +330,29 @@ Measured today, not asserted:
 
 ---
 
+## A second scorecard this audit never kept — added 2026-09-21
+
+This document has measured **§53's five criteria** every session since it was
+written. §53 is *the project's own bar*. It is not ISRO's.
+
+`MASTER_RESEARCH_AND_ARCHITECTURE_PLAN.md` **§2.2** decomposes the problem
+statement into nine requirements with their own acceptance criteria, and
+**nothing has ever scored them.** Measured for the first time in
+[`PROJECT_GAP_ANALYSIS.md`](PROJECT_GAP_ANALYSIS.md), the result is **2 MET,
+2 partial, 5 not met ≈ 30 %** — against 40 % on §53 — and it exposes two
+problem-statement axes with **no evidence of any kind**:
+
+- **Viewpoint variation.** One of the three variations the PS names. EXP-008
+  does not exist; every real frame is near-nadir (emission ≤ 1.75°).
+- **Scale to 320:1.** Named explicitly in the PS. Best real evidence ≈ 65:1;
+  the synthetic probe stops at 32:1 and measures the *unmodified* baseline
+  rather than the architecture's degrade-to-common-GSD answer.
+
+Both were invisible here because this audit tracked the wrong scorecard.
+**§2.2 is scored in the gap analysis from now on, beside §53.**
+
+---
+
 ## What this audit says to do next — rewritten 2026-09-21
 
 *(The 2026-09-20 list is kept below under integrity rule 3. **All four of its
