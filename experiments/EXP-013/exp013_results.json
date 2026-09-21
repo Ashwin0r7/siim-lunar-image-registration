@@ -1,0 +1,2107 @@
+{
+  "stage": "EXP-013",
+  "part": 2,
+  "preregistration": "docs/stages/EXP-013_gauge_detection.md",
+  "what": "an instrument for the per-image gauge error loop closure cannot see (E-039), reported beside the verdict and never inside it",
+  "alarm_rule": {
+    "gauge_magnitude_alarm_px": 2.0,
+    "explained_fraction_alarm": 0.5,
+    "frozen": "EXP-013 Part 1 section 6, before any statistic; not tuned in Part 2"
+  },
+  "reference_noise_calibration_px": 65.99929204810482,
+  "reference_noise_calibration_note": "median residual_before_px over the 13 real triplets, computed before any detection statistic was read (Part 1 section 5b)",
+  "magnitudes_px": [
+    0.0,
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0,
+    64.0
+  ],
+  "n_seeds": 12,
+  "criteria": {
+    "S0": {
+      "criterion": "S0",
+      "statement": "every synthetic case's loop closes, or it is not a gauge case",
+      "met": true,
+      "max_loop_error_px": 1.2710574864626038e-13,
+      "tolerance_px": 1e-09
+    },
+    "S1": {
+      "criterion": "S1",
+      "statement": ">= 11 of 12 alarms at each of 32 and 64 px",
+      "met": false,
+      "n_alarm_32": 10,
+      "n_alarm_64": 11
+    },
+    "S2": {
+      "criterion": "S2",
+      "statement": "0 of 13 alarms on the real triplets",
+      "met": false,
+      "n_triplets": 13,
+      "n_alarms": 13
+    },
+    "S3": {
+      "criterion": "S3",
+      "statement": "measured detection floor < 84.0 px (the smallest recorded per-edge discrimination floor)",
+      "met": true,
+      "detection_floor_px": 64.0,
+      "per_edge_floor_px": 84.0,
+      "detected_magnitudes_px": [
+        64.0
+      ]
+    },
+    "S4": {
+      "criterion": "S4",
+      "statement": "the real explained fraction sits below the permuted 95th percentile for <= 1 of 13 triplets",
+      "met": false,
+      "n_below_p95": 9,
+      "n_permutations": 200,
+      "instrument_note": "Run exactly as frozen. It is the WRONG instrument and this is reported rather than substituted: permuting node LABELS on a 3-cycle relabels an isomorphic graph, so the permuted fit is the same fit and the control has no discriminating power. The property the control needs -- a disagreement of the same magnitude with no per-node structure -- is measured in supplementary_structureless_null, which is NOT folded into S4. This is E-039's lesson recurring inside the stage written because of it.",
+      "rows": [
+        {
+          "index": 0,
+          "window": "RD03",
+          "real_explained_fraction": 0.7225321838078869,
+          "permuted_p95": 0.74182873018977,
+          "n_draws": 200,
+          "real_below_p95": true
+        },
+        {
+          "index": 1,
+          "window": "RD03",
+          "real_explained_fraction": 0.8264255620658878,
+          "permuted_p95": 0.844437443365313,
+          "n_draws": 200,
+          "real_below_p95": true
+        },
+        {
+          "index": 2,
+          "window": "RD03",
+          "real_explained_fraction": 0.9148474412401504,
+          "permuted_p95": 0.8997123611585269,
+          "n_draws": 200,
+          "real_below_p95": false
+        },
+        {
+          "index": 3,
+          "window": "RD03",
+          "real_explained_fraction": 0.8908826616819875,
+          "permuted_p95": 0.8630410996512994,
+          "n_draws": 200,
+          "real_below_p95": false
+        },
+        {
+          "index": 4,
+          "window": "RD04",
+          "real_explained_fraction": 0.7957105968975828,
+          "permuted_p95": 0.7974812932059869,
+          "n_draws": 200,
+          "real_below_p95": true
+        },
+        {
+          "index": 5,
+          "window": "RD04",
+          "real_explained_fraction": 0.8092606331632942,
+          "permuted_p95": 0.7901198645325419,
+          "n_draws": 200,
+          "real_below_p95": false
+        },
+        {
+          "index": 6,
+          "window": "RD04",
+          "real_explained_fraction": 0.8374070711842989,
+          "permuted_p95": 0.8406336380000694,
+          "n_draws": 200,
+          "real_below_p95": true
+        },
+        {
+          "index": 7,
+          "window": "RD04",
+          "real_explained_fraction": 0.9200195097758828,
+          "permuted_p95": 0.9310930810968676,
+          "n_draws": 200,
+          "real_below_p95": true
+        },
+        {
+          "index": 8,
+          "window": "RD04",
+          "real_explained_fraction": 0.9067319627875816,
+          "permuted_p95": 0.9094744654584354,
+          "n_draws": 200,
+          "real_below_p95": true
+        },
+        {
+          "index": 9,
+          "window": "RD04",
+          "real_explained_fraction": 0.6488674413553643,
+          "permuted_p95": 0.6798743824060609,
+          "n_draws": 200,
+          "real_below_p95": true
+        },
+        {
+          "index": 10,
+          "window": "RD04",
+          "real_explained_fraction": 0.7879232878804502,
+          "permuted_p95": 0.7892184808948799,
+          "n_draws": 200,
+          "real_below_p95": true
+        },
+        {
+          "index": 11,
+          "window": "RD04",
+          "real_explained_fraction": 0.8491165536613117,
+          "permuted_p95": 0.861074638494091,
+          "n_draws": 200,
+          "real_below_p95": true
+        },
+        {
+          "index": 12,
+          "window": "RD04",
+          "real_explained_fraction": 0.846118022676524,
+          "permuted_p95": 0.8373615499411036,
+          "n_draws": 200,
+          "real_below_p95": false
+        }
+      ]
+    },
+    "S6": {
+      "criterion": "S6",
+      "statement": "0 of 12 alarms at gauge magnitude 0",
+      "met": false,
+      "n_alarm": 6,
+      "median_fitted_gauge_px": 55.54866525177357
+    }
+  },
+  "real_triplets": [
+    {
+      "index": 0,
+      "window": "RD03",
+      "frames": [
+        "nac.m1182331886lc",
+        "nac.m1199981485rc",
+        "nac.m1212932972lc"
+      ],
+      "loop_closure_residual_px": 1.1508093853082677,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 72.3% of a 41.11 px archive disagreement, with the largest gauge on nac.m1199981485rc at 45.60 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1182331886lc",
+        "nac.m1199981485rc",
+        "nac.m1212932972lc"
+      ],
+      "fixed_node": "nac.m1182331886lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 41.11257126304713,
+      "residual_after_px": 11.407415366400315,
+      "explained_fraction": 0.7225321838078869,
+      "gauge_magnitude_px": 45.59977604987226,
+      "per_node_px": {
+        "nac.m1182331886lc": 0.0,
+        "nac.m1199981485rc": 45.59977604987226,
+        "nac.m1212932972lc": 30.341154191561404
+      },
+      "edge_floor_px": {
+        "nac.m1182331886lc -> nac.m1199981485rc": 116.25777096997406,
+        "nac.m1199981485rc -> nac.m1212932972lc": 105.79598859805749,
+        "nac.m1212932972lc -> nac.m1182331886lc": 103.11302284749387
+      }
+    },
+    {
+      "index": 1,
+      "window": "RD03",
+      "frames": [
+        "nac.m1182331886lc",
+        "nac.m1212932972lc",
+        "nac.m1271742202lc"
+      ],
+      "loop_closure_residual_px": 0.6776298770783946,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 82.6% of a 53.21 px archive disagreement, with the largest gauge on nac.m1271742202lc at 56.44 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1182331886lc",
+        "nac.m1212932972lc",
+        "nac.m1271742202lc"
+      ],
+      "fixed_node": "nac.m1182331886lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 53.212685774752295,
+      "residual_after_px": 9.236362024317158,
+      "explained_fraction": 0.8264255620658878,
+      "gauge_magnitude_px": 56.44050569922275,
+      "per_node_px": {
+        "nac.m1182331886lc": 0.0,
+        "nac.m1212932972lc": 25.928039327210882,
+        "nac.m1271742202lc": 56.44050569922275
+      },
+      "edge_floor_px": {
+        "nac.m1182331886lc -> nac.m1212932972lc": 103.11302284749387,
+        "nac.m1212932972lc -> nac.m1271742202lc": 83.48098417592972,
+        "nac.m1271742202lc -> nac.m1182331886lc": 84.30350018351396
+      }
+    },
+    {
+      "index": 2,
+      "window": "RD03",
+      "frames": [
+        "nac.m1182331886lc",
+        "nac.m1212932972lc",
+        "nac.m1335207975rc"
+      ],
+      "loop_closure_residual_px": 0.4937878905122818,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 91.5% of a 65.32 px archive disagreement, with the largest gauge on nac.m1335207975rc at 73.08 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1182331886lc",
+        "nac.m1212932972lc",
+        "nac.m1335207975rc"
+      ],
+      "fixed_node": "nac.m1182331886lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 65.32309259521352,
+      "residual_after_px": 5.562428480589017,
+      "explained_fraction": 0.9148474412401504,
+      "gauge_magnitude_px": 73.08486798261029,
+      "per_node_px": {
+        "nac.m1182331886lc": 0.0,
+        "nac.m1212932972lc": 25.693890537076932,
+        "nac.m1335207975rc": 73.08486798261029
+      },
+      "edge_floor_px": {
+        "nac.m1182331886lc -> nac.m1212932972lc": 103.11302284749387,
+        "nac.m1212932972lc -> nac.m1335207975rc": 99.52794373823073,
+        "nac.m1335207975rc -> nac.m1182331886lc": 108.31562601253577
+      }
+    },
+    {
+      "index": 3,
+      "window": "RD03",
+      "frames": [
+        "nac.m1212932972lc",
+        "nac.m1335207975rc",
+        "nac.m1452560468lc"
+      ],
+      "loop_closure_residual_px": 0.8638076153659642,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 89.1% of a 117.30 px archive disagreement, with the largest gauge on nac.m1335207975rc at 94.34 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1212932972lc",
+        "nac.m1335207975rc",
+        "nac.m1452560468lc"
+      ],
+      "fixed_node": "nac.m1212932972lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 117.29805886901137,
+      "residual_after_px": 12.799251973656066,
+      "explained_fraction": 0.8908826616819875,
+      "gauge_magnitude_px": 94.34487297880185,
+      "per_node_px": {
+        "nac.m1212932972lc": 0.0,
+        "nac.m1335207975rc": 94.34487297880185,
+        "nac.m1452560468lc": 92.87271127083051
+      },
+      "edge_floor_px": {
+        "nac.m1212932972lc -> nac.m1335207975rc": 99.52794373823073,
+        "nac.m1335207975rc -> nac.m1452560468lc": 100.36095834727261,
+        "nac.m1452560468lc -> nac.m1212932972lc": 111.51420660347979
+      }
+    },
+    {
+      "index": 4,
+      "window": "RD04",
+      "frames": [
+        "nac.m1212932972lc",
+        "nac.m1271742202lc",
+        "nac.m1299958135lc"
+      ],
+      "loop_closure_residual_px": 0.7382929828718257,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 79.6% of a 74.82 px archive disagreement, with the largest gauge on nac.m1212932972lc at 54.79 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1271742202lc",
+        "nac.m1212932972lc",
+        "nac.m1299958135lc"
+      ],
+      "fixed_node": "nac.m1271742202lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 74.81862137630151,
+      "residual_after_px": 15.284651501910384,
+      "explained_fraction": 0.7957105968975828,
+      "gauge_magnitude_px": 54.78541935295346,
+      "per_node_px": {
+        "nac.m1271742202lc": 0.0,
+        "nac.m1212932972lc": 54.78541935295346,
+        "nac.m1299958135lc": 47.135895988129896
+      },
+      "edge_floor_px": {
+        "nac.m1271742202lc -> nac.m1212932972lc": 100.89070286383055,
+        "nac.m1212932972lc -> nac.m1299958135lc": 95.57019225533323,
+        "nac.m1299958135lc -> nac.m1271742202lc": 105.62166507901651
+      }
+    },
+    {
+      "index": 5,
+      "window": "RD04",
+      "frames": [
+        "nac.m1212932972lc",
+        "nac.m1271742202lc",
+        "nac.m1315225542lc"
+      ],
+      "loop_closure_residual_px": 1.3357603404550296,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 80.9% of a 66.74 px archive disagreement, with the largest gauge on nac.m1212932972lc at 55.00 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1271742202lc",
+        "nac.m1212932972lc",
+        "nac.m1315225542lc"
+      ],
+      "fixed_node": "nac.m1271742202lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 66.74138526776179,
+      "residual_after_px": 12.730209567777528,
+      "explained_fraction": 0.8092606331632942,
+      "gauge_magnitude_px": 54.9962893069131,
+      "per_node_px": {
+        "nac.m1271742202lc": 0.0,
+        "nac.m1212932972lc": 54.9962893069131,
+        "nac.m1315225542lc": 26.89133290317957
+      },
+      "edge_floor_px": {
+        "nac.m1271742202lc -> nac.m1212932972lc": 100.89070286383055,
+        "nac.m1212932972lc -> nac.m1315225542lc": 101.72493135060299,
+        "nac.m1315225542lc -> nac.m1271742202lc": 111.50211927868435
+      }
+    },
+    {
+      "index": 6,
+      "window": "RD04",
+      "frames": [
+        "nac.m1212932972lc",
+        "nac.m1271742202lc",
+        "nac.m1335207975rc"
+      ],
+      "loop_closure_residual_px": 1.1545200518746928,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 83.7% of a 80.39 px archive disagreement, with the largest gauge on nac.m1335207975rc at 91.13 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1271742202lc",
+        "nac.m1212932972lc",
+        "nac.m1335207975rc"
+      ],
+      "fixed_node": "nac.m1271742202lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 80.38882414421187,
+      "residual_after_px": 13.070654361657754,
+      "explained_fraction": 0.8374070711842989,
+      "gauge_magnitude_px": 91.12963364087314,
+      "per_node_px": {
+        "nac.m1271742202lc": 0.0,
+        "nac.m1212932972lc": 54.563894684109385,
+        "nac.m1335207975rc": 91.12963364087314
+      },
+      "edge_floor_px": {
+        "nac.m1271742202lc -> nac.m1212932972lc": 100.89070286383055,
+        "nac.m1212932972lc -> nac.m1335207975rc": 110.59792590222928,
+        "nac.m1335207975rc -> nac.m1271742202lc": 102.86202715440547
+      }
+    },
+    {
+      "index": 7,
+      "window": "RD04",
+      "frames": [
+        "nac.m1212932972lc",
+        "nac.m1299958135lc",
+        "nac.m1315225542lc"
+      ],
+      "loop_closure_residual_px": 0.6326161112578348,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 92.0% of a 81.96 px archive disagreement, with the largest gauge on nac.m1212932972lc at 99.97 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1299958135lc",
+        "nac.m1212932972lc",
+        "nac.m1315225542lc"
+      ],
+      "fixed_node": "nac.m1299958135lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 81.96355900337703,
+      "residual_after_px": 6.55548562960345,
+      "explained_fraction": 0.9200195097758828,
+      "gauge_magnitude_px": 99.9667918486886,
+      "per_node_px": {
+        "nac.m1299958135lc": 0.0,
+        "nac.m1212932972lc": 99.9667918486886,
+        "nac.m1315225542lc": 34.96703501127936
+      },
+      "edge_floor_px": {
+        "nac.m1299958135lc -> nac.m1212932972lc": 95.57019225533323,
+        "nac.m1212932972lc -> nac.m1315225542lc": 101.72493135060299,
+        "nac.m1315225542lc -> nac.m1299958135lc": 116.19971869506735
+      }
+    },
+    {
+      "index": 8,
+      "window": "RD04",
+      "frames": [
+        "nac.m1212932972lc",
+        "nac.m1299958135lc",
+        "nac.m1363396554rc"
+      ],
+      "loop_closure_residual_px": 1.1145046103613865,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 90.7% of a 92.40 px archive disagreement, with the largest gauge on nac.m1212932972lc at 101.85 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1299958135lc",
+        "nac.m1212932972lc",
+        "nac.m1363396554rc"
+      ],
+      "fixed_node": "nac.m1299958135lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 92.39785093058414,
+      "residual_after_px": 8.617766198941213,
+      "explained_fraction": 0.9067319627875816,
+      "gauge_magnitude_px": 101.84563878115355,
+      "per_node_px": {
+        "nac.m1299958135lc": 0.0,
+        "nac.m1212932972lc": 101.84563878115355,
+        "nac.m1363396554rc": 92.41104760501688
+      },
+      "edge_floor_px": {
+        "nac.m1299958135lc -> nac.m1212932972lc": 95.57019225533323,
+        "nac.m1212932972lc -> nac.m1363396554rc": 103.71718168636991,
+        "nac.m1363396554rc -> nac.m1299958135lc": 98.8953352775484
+      }
+    },
+    {
+      "index": 9,
+      "window": "RD04",
+      "frames": [
+        "nac.m1271742202lc",
+        "nac.m1299958135lc",
+        "nac.m1315225542lc"
+      ],
+      "loop_closure_residual_px": 0.8013571789515563,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 64.9% of a 40.57 px archive disagreement, with the largest gauge on nac.m1271742202lc at 53.33 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1299958135lc",
+        "nac.m1271742202lc",
+        "nac.m1315225542lc"
+      ],
+      "fixed_node": "nac.m1299958135lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 40.567088176442255,
+      "residual_after_px": 14.244425468156715,
+      "explained_fraction": 0.6488674413553643,
+      "gauge_magnitude_px": 53.32927416800867,
+      "per_node_px": {
+        "nac.m1299958135lc": 0.0,
+        "nac.m1271742202lc": 53.32927416800867,
+        "nac.m1315225542lc": 35.82764752834993
+      },
+      "edge_floor_px": {
+        "nac.m1299958135lc -> nac.m1271742202lc": 105.62166507901651,
+        "nac.m1271742202lc -> nac.m1315225542lc": 111.50211927868435,
+        "nac.m1315225542lc -> nac.m1299958135lc": 116.19971869506735
+      }
+    },
+    {
+      "index": 10,
+      "window": "RD04",
+      "frames": [
+        "nac.m1271742202lc",
+        "nac.m1299958135lc",
+        "nac.m1341069775rc"
+      ],
+      "loop_closure_residual_px": 0.365405994334115,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 78.8% of a 65.91 px archive disagreement, with the largest gauge on nac.m1341069775rc at 71.01 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1299958135lc",
+        "nac.m1271742202lc",
+        "nac.m1341069775rc"
+      ],
+      "fixed_node": "nac.m1299958135lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 65.91329321720087,
+      "residual_after_px": 13.978674510475784,
+      "explained_fraction": 0.7879232878804502,
+      "gauge_magnitude_px": 71.00824689004098,
+      "per_node_px": {
+        "nac.m1299958135lc": 0.0,
+        "nac.m1271742202lc": 52.89982698770325,
+        "nac.m1341069775rc": 71.00824689004098
+      },
+      "edge_floor_px": {
+        "nac.m1299958135lc -> nac.m1271742202lc": 105.62166507901651,
+        "nac.m1271742202lc -> nac.m1341069775rc": 113.65376218536872,
+        "nac.m1341069775rc -> nac.m1299958135lc": 112.99860487752332
+      }
+    },
+    {
+      "index": 11,
+      "window": "RD04",
+      "frames": [
+        "nac.m1271742202lc",
+        "nac.m1315225542lc",
+        "nac.m1341069775rc"
+      ],
+      "loop_closure_residual_px": 0.70816259382898,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 84.9% of a 66.00 px archive disagreement, with the largest gauge on nac.m1341069775rc at 67.65 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1315225542lc",
+        "nac.m1271742202lc",
+        "nac.m1341069775rc"
+      ],
+      "fixed_node": "nac.m1315225542lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 65.99929204810482,
+      "residual_after_px": 9.958200640131643,
+      "explained_fraction": 0.8491165536613117,
+      "gauge_magnitude_px": 67.65019945433566,
+      "per_node_px": {
+        "nac.m1315225542lc": 0.0,
+        "nac.m1271742202lc": 22.611974641407087,
+        "nac.m1341069775rc": 67.65019945433566
+      },
+      "edge_floor_px": {
+        "nac.m1315225542lc -> nac.m1271742202lc": 111.50211927868435,
+        "nac.m1271742202lc -> nac.m1341069775rc": 113.65376218536872,
+        "nac.m1341069775rc -> nac.m1315225542lc": 114.51697099550013
+      }
+    },
+    {
+      "index": 12,
+      "window": "RD04",
+      "frames": [
+        "nac.m1299958135lc",
+        "nac.m1315225542lc",
+        "nac.m1341069775rc"
+      ],
+      "loop_closure_residual_px": 0.5314137791181464,
+      "status": "OK",
+      "alarm": true,
+      "reason": "A per-image model explains 84.6% of a 58.98 px archive disagreement, with the largest gauge on nac.m1341069775rc at 70.97 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+      "nodes": [
+        "nac.m1299958135lc",
+        "nac.m1315225542lc",
+        "nac.m1341069775rc"
+      ],
+      "fixed_node": "nac.m1299958135lc",
+      "n_edges": 3,
+      "n_grid": 512,
+      "n_nodes": 3,
+      "redundancy": 1,
+      "residual_before_px": 58.978537330986676,
+      "residual_after_px": 9.07573394413867,
+      "explained_fraction": 0.846118022676524,
+      "gauge_magnitude_px": 70.97411046035346,
+      "per_node_px": {
+        "nac.m1299958135lc": 0.0,
+        "nac.m1315225542lc": 35.55723122615343,
+        "nac.m1341069775rc": 70.97411046035346
+      },
+      "edge_floor_px": {
+        "nac.m1299958135lc -> nac.m1315225542lc": 116.19971869506735,
+        "nac.m1315225542lc -> nac.m1341069775rc": 114.51697099550013,
+        "nac.m1341069775rc -> nac.m1299958135lc": 112.99860487752332
+      }
+    }
+  ],
+  "synthetic_by_magnitude": {
+    "0": {
+      "n": 12,
+      "n_alarm": 6,
+      "median_true_edge_error_px": 1.5076286479786363,
+      "median_fitted_gauge_px": 55.54866525177357,
+      "median_explained_fraction": 0.4842649129545218
+    },
+    "1": {
+      "n": 12,
+      "n_alarm": 6,
+      "median_true_edge_error_px": 1.976806861147604,
+      "median_fitted_gauge_px": 55.043863827173894,
+      "median_explained_fraction": 0.4915189947858274
+    },
+    "2": {
+      "n": 12,
+      "n_alarm": 6,
+      "median_true_edge_error_px": 3.4558767721039922,
+      "median_fitted_gauge_px": 54.56421962623601,
+      "median_explained_fraction": 0.49936330702582304
+    },
+    "4": {
+      "n": 12,
+      "n_alarm": 6,
+      "median_true_edge_error_px": 6.707698116116624,
+      "median_fitted_gauge_px": 54.55903110193407,
+      "median_explained_fraction": 0.5164566101883493
+    },
+    "8": {
+      "n": 12,
+      "n_alarm": 8,
+      "median_true_edge_error_px": 14.041966256173836,
+      "median_fitted_gauge_px": 58.80259461737314,
+      "median_explained_fraction": 0.5446841437918226
+    },
+    "16": {
+      "n": 12,
+      "n_alarm": 8,
+      "median_true_edge_error_px": 28.508242446577423,
+      "median_fitted_gauge_px": 66.48460223392382,
+      "median_explained_fraction": 0.5876754718144115
+    },
+    "32": {
+      "n": 12,
+      "n_alarm": 10,
+      "median_true_edge_error_px": 57.471187975217966,
+      "median_fitted_gauge_px": 83.10021632014565,
+      "median_explained_fraction": 0.6738252560266031
+    },
+    "64": {
+      "n": 12,
+      "n_alarm": 11,
+      "median_true_edge_error_px": 115.40376917240599,
+      "median_fitted_gauge_px": 139.75514967020837,
+      "median_explained_fraction": 0.780074585446366
+    }
+  },
+  "synthetic_rows": [
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9001,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 6.465596276840282,
+      "alarm": false,
+      "explained_fraction": 0.20958792523443526,
+      "fitted_gauge_px": 45.01106333440518,
+      "residual_before_px": 80.9439546822234
+    },
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9002,
+      "loop_error_px": 8.038873388460929e-14,
+      "true_transform_error_px": 0.24127156007692552,
+      "alarm": true,
+      "explained_fraction": 0.6375419058589525,
+      "fitted_gauge_px": 55.81529096456106,
+      "residual_before_px": 54.20457238770371
+    },
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9003,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 0.16149462059220934,
+      "alarm": false,
+      "explained_fraction": 0.39537686588694554,
+      "fitted_gauge_px": 57.45703825372782,
+      "residual_before_px": 51.43486755335832
+    },
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9004,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 1.1798388459128364,
+      "alarm": true,
+      "explained_fraction": 0.5882689550205431,
+      "fitted_gauge_px": 55.28203953898609,
+      "residual_before_px": 49.31244110920472
+    },
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9005,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 1.7319878793234995,
+      "alarm": false,
+      "explained_fraction": 0.4313743289273413,
+      "fitted_gauge_px": 45.200282502419384,
+      "residual_before_px": 41.654225927390165
+    },
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9006,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 2.8211388037723886,
+      "alarm": false,
+      "explained_fraction": 0.16969141719119318,
+      "fitted_gauge_px": 23.120452899654047,
+      "residual_before_px": 50.176874196493486
+    },
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9007,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 2.3083966415928234,
+      "alarm": true,
+      "explained_fraction": 0.5371554969817023,
+      "fitted_gauge_px": 39.946791547078995,
+      "residual_before_px": 42.13267719709192
+    },
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9008,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 1.6022611035323484,
+      "alarm": true,
+      "explained_fraction": 0.6488322032262352,
+      "fitted_gauge_px": 38.56820244024542,
+      "residual_before_px": 34.91989467269494
+    },
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9009,
+      "loop_error_px": 1.1457157353758233e-13,
+      "true_transform_error_px": 1.7087369319181467,
+      "alarm": true,
+      "explained_fraction": 0.5744048246620819,
+      "fitted_gauge_px": 64.57313957793788,
+      "residual_before_px": 64.76075246800676
+    },
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9010,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 1.0441094606593422,
+      "alarm": true,
+      "explained_fraction": 0.6134650694108634,
+      "fitted_gauge_px": 84.69758816492642,
+      "residual_before_px": 68.32075681942514
+    },
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9011,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 1.4129961924249241,
+      "alarm": false,
+      "explained_fraction": 0.3568875213979914,
+      "fitted_gauge_px": 78.87053209019882,
+      "residual_before_px": 84.37601824501489
+    },
+    {
+      "gauge_magnitude_px": 0.0,
+      "seed": 9012,
+      "loop_error_px": 1.2710574864626038e-13,
+      "true_transform_error_px": 1.0408105066694413,
+      "alarm": false,
+      "explained_fraction": 0.36421382320810824,
+      "fitted_gauge_px": 61.60236397705401,
+      "residual_before_px": 70.10879598871708
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9001,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 6.123326119651929,
+      "alarm": false,
+      "explained_fraction": 0.21002423000776316,
+      "fitted_gauge_px": 45.546221359280594,
+      "residual_before_px": 80.98866014679759
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9002,
+      "loop_error_px": 8.038873388460929e-14,
+      "true_transform_error_px": 2.5876965309512383,
+      "alarm": true,
+      "explained_fraction": 0.6436993965390281,
+      "fitted_gauge_px": 55.683810601831205,
+      "residual_before_px": 55.14132114999237
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9003,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 1.9025267441782474,
+      "alarm": false,
+      "explained_fraction": 0.4112749822358478,
+      "fitted_gauge_px": 60.011580150757865,
+      "residual_before_px": 52.82383096425462
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9004,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 0.7486419489358899,
+      "alarm": true,
+      "explained_fraction": 0.5862884936115383,
+      "fitted_gauge_px": 54.40391705251659,
+      "residual_before_px": 49.07637954192285
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9005,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 2.0596073646537674,
+      "alarm": false,
+      "explained_fraction": 0.43753061898628987,
+      "fitted_gauge_px": 46.130916302547504,
+      "residual_before_px": 42.110136072272816
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9006,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 2.0510869781169605,
+      "alarm": false,
+      "explained_fraction": 0.17333841882977696,
+      "fitted_gauge_px": 23.622251399073715,
+      "residual_before_px": 50.39824064992713
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9007,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 3.6662632105831756,
+      "alarm": true,
+      "explained_fraction": 0.5455073705853649,
+      "fitted_gauge_px": 39.944416323193316,
+      "residual_before_px": 42.90691812369889
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9008,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 1.497354076899617,
+      "alarm": true,
+      "explained_fraction": 0.6583571958195555,
+      "fitted_gauge_px": 39.99692782875496,
+      "residual_before_px": 35.893460438011815
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9009,
+      "loop_error_px": 1.1457157353758233e-13,
+      "true_transform_error_px": 1.5252193646428438,
+      "alarm": true,
+      "explained_fraction": 0.5784284335225979,
+      "fitted_gauge_px": 66.5137003550177,
+      "residual_before_px": 65.37884903372455
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9010,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 1.7589081527512813,
+      "alarm": true,
+      "explained_fraction": 0.6099501634062896,
+      "fitted_gauge_px": 84.42495184929027,
+      "residual_before_px": 67.70508924094655
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9011,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 3.682873757145872,
+      "alarm": false,
+      "explained_fraction": 0.3623968373721028,
+      "fitted_gauge_px": 80.40148951356917,
+      "residual_before_px": 85.10508323778134
+    },
+    {
+      "gauge_magnitude_px": 1.0,
+      "seed": 9012,
+      "loop_error_px": 1.2710574864626038e-13,
+      "true_transform_error_px": 0.9341210292360164,
+      "alarm": false,
+      "explained_fraction": 0.3700278891113431,
+      "fitted_gauge_px": 61.711174594421635,
+      "residual_before_px": 70.7558359976785
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9001,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 5.795090755083198,
+      "alarm": false,
+      "explained_fraction": 0.21050173322955368,
+      "fitted_gauge_px": 46.08628472166442,
+      "residual_before_px": 81.03764359334372
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9002,
+      "loop_error_px": 8.038873388460929e-14,
+      "true_transform_error_px": 5.244021348582323,
+      "alarm": true,
+      "explained_fraction": 0.6499491855271655,
+      "fitted_gauge_px": 55.572404634759145,
+      "residual_before_px": 56.125811422450624
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9003,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 3.6572288247475346,
+      "alarm": false,
+      "explained_fraction": 0.42675314315552804,
+      "fitted_gauge_px": 62.582672495357585,
+      "residual_before_px": 54.25012008611638
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9004,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 2.020076329373481,
+      "alarm": true,
+      "explained_fraction": 0.5845457547571592,
+      "fitted_gauge_px": 53.55603461771287,
+      "residual_before_px": 48.87051496251535
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9005,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 3.394587825525783,
+      "alarm": false,
+      "explained_fraction": 0.44470315893231704,
+      "fitted_gauge_px": 47.12247805544727,
+      "residual_before_px": 42.65405530748807
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9006,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 3.1736282223224075,
+      "alarm": false,
+      "explained_fraction": 0.177659290175621,
+      "fitted_gauge_px": 24.188372704107003,
+      "residual_before_px": 50.66305097891079
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9007,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 5.428987788628977,
+      "alarm": true,
+      "explained_fraction": 0.554023455119329,
+      "fitted_gauge_px": 39.94237345313865,
+      "residual_before_px": 43.7262413505091
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9008,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 1.4549856118454387,
+      "alarm": true,
+      "explained_fraction": 0.6675735792550671,
+      "fitted_gauge_px": 41.43286689715749,
+      "residual_before_px": 36.88859161164948
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9009,
+      "loop_error_px": 1.1457157353758233e-13,
+      "true_transform_error_px": 2.9263135399138713,
+      "alarm": true,
+      "explained_fraction": 0.5825729916488878,
+      "fitted_gauge_px": 68.45572790375718,
+      "residual_before_px": 66.02798393546595
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9010,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 3.517165718682202,
+      "alarm": true,
+      "explained_fraction": 0.6065467153903481,
+      "fitted_gauge_px": 84.15386090136727,
+      "residual_before_px": 67.1194269510133
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9011,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 6.338128594519768,
+      "alarm": false,
+      "explained_fraction": 0.36811718443169206,
+      "fitted_gauge_px": 81.99443925791614,
+      "residual_before_px": 85.87552769466612
+    },
+    {
+      "gauge_magnitude_px": 2.0,
+      "seed": 9012,
+      "loop_error_px": 1.2710574864626038e-13,
+      "true_transform_error_px": 2.2524116575236226,
+      "alarm": false,
+      "explained_fraction": 0.37607562062693456,
+      "fitted_gauge_px": 61.855712613672445,
+      "residual_before_px": 71.44167600236811
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9001,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 5.331944241311145,
+      "alarm": false,
+      "explained_fraction": 0.21157941384550305,
+      "fitted_gauge_px": 47.18045780859014,
+      "residual_before_px": 81.1484127680665
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9002,
+      "loop_error_px": 8.038873388460929e-14,
+      "true_transform_error_px": 10.564326793454512,
+      "alarm": true,
+      "explained_fraction": 0.6625882064739286,
+      "fitted_gauge_px": 57.16120458445114,
+      "residual_before_px": 58.22821364973855
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9003,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 7.167934279524334,
+      "alarm": false,
+      "explained_fraction": 0.4563488968475955,
+      "fitted_gauge_px": 67.76696116990016,
+      "residual_before_px": 57.20343551677354
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9004,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 4.898183504511936,
+      "alarm": true,
+      "explained_fraction": 0.5818104109756599,
+      "fitted_gauge_px": 51.956857619417,
+      "residual_before_px": 48.55085693488902
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9005,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 6.548588493629101,
+      "alarm": false,
+      "explained_fraction": 0.4615957313082154,
+      "fitted_gauge_px": 49.27344553057903,
+      "residual_before_px": 43.992337260857546
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9006,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 6.866807738604146,
+      "alarm": false,
+      "explained_fraction": 0.18818931180784226,
+      "fitted_gauge_px": 25.73238001720327,
+      "residual_before_px": 51.32020298555678
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9007,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 9.168362414270993,
+      "alarm": true,
+      "explained_fraction": 0.5713174890684832,
+      "fitted_gauge_px": 39.93928575868158,
+      "residual_before_px": 45.4902580367541
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9008,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 1.7118822299241252,
+      "alarm": true,
+      "explained_fraction": 0.6850611590548106,
+      "fitted_gauge_px": 44.323578084108796,
+      "residual_before_px": 38.9369010153827
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9009,
+      "loop_error_px": 1.1457157353758233e-13,
+      "true_transform_error_px": 6.496249283100383,
+      "alarm": true,
+      "explained_fraction": 0.591165743230855,
+      "fitted_gauge_px": 72.34370596684639,
+      "residual_before_px": 67.41573961890407
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9010,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 7.291504785758496,
+      "alarm": true,
+      "explained_fraction": 0.6001233956554055,
+      "fitted_gauge_px": 83.61637427594674,
+      "residual_before_px": 66.04127050212799
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9011,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 11.753809131914277,
+      "alarm": false,
+      "explained_fraction": 0.3801042760077882,
+      "fitted_gauge_px": 85.35229666604916,
+      "residual_before_px": 87.53612604174307
+    },
+    {
+      "gauge_magnitude_px": 4.0,
+      "seed": 9012,
+      "loop_error_px": 1.2710574864626038e-13,
+      "true_transform_error_px": 5.187696855769575,
+      "alarm": false,
+      "explained_fraction": 0.3887691382775045,
+      "fitted_gauge_px": 62.2509142652183,
+      "residual_before_px": 72.92531538007691
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9001,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 5.899890522768879,
+      "alarm": false,
+      "explained_fraction": 0.21421800374058053,
+      "fitted_gauge_px": 49.42059682508357,
+      "residual_before_px": 81.42090231726797
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9002,
+      "loop_error_px": 8.038873388460929e-14,
+      "true_transform_error_px": 21.208622001766916,
+      "alarm": true,
+      "explained_fraction": 0.6876604178932864,
+      "fitted_gauge_px": 66.04405026292613,
+      "residual_before_px": 62.90232531163786
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9003,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 14.190065591368164,
+      "alarm": true,
+      "explained_fraction": 0.5098418764672868,
+      "fitted_gauge_px": 78.26476215460731,
+      "residual_before_px": 63.446282596856406
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9004,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 10.729446366333256,
+      "alarm": true,
+      "explained_fraction": 0.5795264111163584,
+      "fitted_gauge_px": 49.18751241641371,
+      "residual_before_px": 48.287130143623344
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9005,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 13.151007237234154,
+      "alarm": true,
+      "explained_fraction": 0.5020140410909537,
+      "fitted_gauge_px": 54.14986324979184,
+      "residual_before_px": 47.562911658921664
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9006,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 15.117250110269186,
+      "alarm": false,
+      "explained_fraction": 0.21570086467642757,
+      "fitted_gauge_px": 32.067060619432716,
+      "residual_before_px": 53.120407032806135
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9007,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 16.807198577812823,
+      "alarm": true,
+      "explained_fraction": 0.6056842730119456,
+      "fitted_gauge_px": 39.937100834576036,
+      "residual_before_px": 49.45498417492521
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9008,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 2.8149722389583753,
+      "alarm": true,
+      "explained_fraction": 0.7163153690824264,
+      "fitted_gauge_px": 50.16509125955858,
+      "residual_before_px": 43.2266719424262
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9009,
+      "loop_error_px": 1.1457157353758233e-13,
+      "true_transform_error_px": 13.893866920979507,
+      "alarm": true,
+      "explained_fraction": 0.6091832454748185,
+      "fitted_gauge_px": 80.1326925566969,
+      "residual_before_px": 70.52375181591916
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9010,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 14.939012296130244,
+      "alarm": true,
+      "explained_fraction": 0.5891576233342642,
+      "fitted_gauge_px": 82.5606098963077,
+      "residual_before_px": 64.27856641594641
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9011,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 22.618269168621023,
+      "alarm": false,
+      "explained_fraction": 0.40568954516872613,
+      "fitted_gauge_px": 92.6664207038137,
+      "residual_before_px": 91.30458632689759
+    },
+    {
+      "gauge_magnitude_px": 8.0,
+      "seed": 9012,
+      "loop_error_px": 1.2710574864626038e-13,
+      "true_transform_error_px": 11.133603090006595,
+      "alarm": false,
+      "explained_fraction": 0.4158708363068031,
+      "fitted_gauge_px": 63.455325984954435,
+      "residual_before_px": 76.3088134126461
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9001,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 9.894902731602341,
+      "alarm": false,
+      "explained_fraction": 0.22135405138580522,
+      "fitted_gauge_px": 54.07767374063798,
+      "residual_before_px": 82.16709953217325
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9002,
+      "loop_error_px": 8.038873388460929e-14,
+      "true_transform_error_px": 42.49851085592931,
+      "alarm": true,
+      "explained_fraction": 0.733389723859111,
+      "fitted_gauge_px": 85.03289192520315,
+      "residual_before_px": 73.69140561932137
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9003,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 28.234483218678744,
+      "alarm": true,
+      "explained_fraction": 0.5955183857022668,
+      "fitted_gauge_px": 99.58555776848442,
+      "residual_before_px": 76.8853508379989
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9004,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 22.425682429500775,
+      "alarm": true,
+      "explained_fraction": 0.5879154445128973,
+      "fitted_gauge_px": 45.701854720252065,
+      "residual_before_px": 49.27013798025302
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9005,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 26.53612049337712,
+      "alarm": true,
+      "explained_fraction": 0.5874354991159257,
+      "fitted_gauge_px": 65.57029179019844,
+      "residual_before_px": 57.41080999508915
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9006,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 31.87824725702655,
+      "alarm": false,
+      "explained_fraction": 0.2869344905959651,
+      "fitted_gauge_px": 46.744361308140576,
+      "residual_before_px": 58.42701512612289
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9007,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 32.24096274666783,
+      "alarm": true,
+      "explained_fraction": 0.6677711130775245,
+      "fitted_gauge_px": 40.668575835650365,
+      "residual_before_px": 58.69711757686148
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9008,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 5.486833008323515,
+      "alarm": true,
+      "explained_fraction": 0.7657669686454871,
+      "fitted_gauge_px": 62.008872569678495,
+      "residual_before_px": 52.35274634354401
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9009,
+      "loop_error_px": 1.1450203270271934e-13,
+      "true_transform_error_px": 28.782001674476103,
+      "alarm": true,
+      "explained_fraction": 0.646072415933342,
+      "fitted_gauge_px": 95.7479401251147,
+      "residual_before_px": 77.87430266086834
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9010,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 30.27887409243521,
+      "alarm": true,
+      "explained_fraction": 0.5772354929456738,
+      "fitted_gauge_px": 80.52940853566145,
+      "residual_before_px": 62.46588479954926
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9011,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 44.402626219114936,
+      "alarm": false,
+      "explained_fraction": 0.4594314469456171,
+      "fitted_gauge_px": 109.10526719853956,
+      "residual_before_px": 100.38184781840386
+    },
+    {
+      "gauge_magnitude_px": 16.0,
+      "seed": 9012,
+      "loop_error_px": 1.2710574864626038e-13,
+      "true_transform_error_px": 23.048962256978303,
+      "alarm": false,
+      "explained_fraction": 0.47245314257339643,
+      "fitted_gauge_px": 67.39891267764922,
+      "residual_before_px": 84.49335397159611
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9001,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 20.334237770553855,
+      "alarm": false,
+      "explained_fraction": 0.24227830593415978,
+      "fitted_gauge_px": 63.91551232187694,
+      "residual_before_px": 84.4361190410193
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9002,
+      "loop_error_px": 8.038873388460929e-14,
+      "true_transform_error_px": 85.07990338124316,
+      "alarm": true,
+      "explained_fraction": 0.8009601201852027,
+      "fitted_gauge_px": 125.25152018999772,
+      "residual_before_px": 98.70828911099912
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9003,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 56.32339737916972,
+      "alarm": true,
+      "explained_fraction": 0.7061622976393187,
+      "fitted_gauge_px": 142.84484615949737,
+      "residual_before_px": 105.83635310566164
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9004,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 45.825646786825075,
+      "alarm": true,
+      "explained_fraction": 0.6414882144138876,
+      "fitted_gauge_px": 58.095754153291615,
+      "residual_before_px": 56.63262331861055
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9005,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 53.38961966347105,
+      "alarm": true,
+      "explained_fraction": 0.71451422226371,
+      "fitted_gauge_px": 92.02344317553754,
+      "residual_before_px": 82.96617211121936
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9006,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 65.49800851164373,
+      "alarm": false,
+      "explained_fraction": 0.4362353569268195,
+      "fitted_gauge_px": 78.71684285576859,
+      "residual_before_px": 73.90014577139455
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9007,
+      "loop_error_px": 1.1457157353758233e-13,
+      "true_transform_error_px": 63.16519915996054,
+      "alarm": true,
+      "explained_fraction": 0.7568316607700329,
+      "fitted_gauge_px": 71.4886205819338,
+      "residual_before_px": 80.19497151591008
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9008,
+      "loop_error_px": 1.1557600989637328e-13,
+      "true_transform_error_px": 11.196267553629344,
+      "alarm": true,
+      "explained_fraction": 0.82920070442781,
+      "fitted_gauge_px": 86.02807426223556,
+      "residual_before_px": 71.79621224256888
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9009,
+      "loop_error_px": 1.1413338279018579e-13,
+      "true_transform_error_px": 58.61897857126621,
+      "alarm": true,
+      "explained_fraction": 0.7123271897890708,
+      "fitted_gauge_px": 127.06333394450758,
+      "residual_before_px": 95.80976311743808
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9010,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 60.97967677592396,
+      "alarm": true,
+      "explained_fraction": 0.6001131177396342,
+      "fitted_gauge_px": 76.81746994355518,
+      "residual_before_px": 66.03957310557475
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9011,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 87.99447492318978,
+      "alarm": true,
+      "explained_fraction": 0.5587740939641253,
+      "fitted_gauge_px": 146.24949300038867,
+      "residual_before_px": 122.98296515642
+    },
+    {
+      "gauge_magnitude_px": 32.0,
+      "seed": 9012,
+      "loop_error_px": 1.2710574864626038e-13,
+      "true_transform_error_px": 46.88994247934933,
+      "alarm": true,
+      "explained_fraction": 0.5749284309193987,
+      "fitted_gauge_px": 80.17235837805573,
+      "residual_before_px": 104.86281982481184
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9001,
+      "loop_error_px": 6.355287432313019e-14,
+      "true_transform_error_px": 42.86328612586044,
+      "alarm": false,
+      "explained_fraction": 0.3028045623629446,
+      "fitted_gauge_px": 84.81736285774205,
+      "residual_before_px": 91.76634800845056
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9002,
+      "loop_error_px": 5.859285502108464e-14,
+      "true_transform_error_px": 170.24310913022646,
+      "alarm": true,
+      "explained_fraction": 0.8727309554383574,
+      "fitted_gauge_px": 208.52299061669015,
+      "residual_before_px": 154.37285688006872
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9003,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 112.50126551050545,
+      "alarm": true,
+      "explained_fraction": 0.8136624822809936,
+      "fitted_gauge_px": 230.2033181068838,
+      "residual_before_px": 166.8945213153352
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9004,
+      "loop_error_px": 2.0097183471152322e-14,
+      "true_transform_error_px": 92.62783138348178,
+      "alarm": true,
+      "explained_fraction": 0.7593522032144765,
+      "fitted_gauge_px": 102.81515191215342,
+      "residual_before_px": 84.37003446358649
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9005,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 107.13463958118902,
+      "alarm": true,
+      "explained_fraction": 0.833089967967634,
+      "fitted_gauge_px": 150.14451630347455,
+      "residual_before_px": 141.90676187984556
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9006,
+      "loop_error_px": 1.1368683772161603e-13,
+      "true_transform_error_px": 132.75824841226884,
+      "alarm": true,
+      "explained_fraction": 0.6347494718306903,
+      "fitted_gauge_px": 144.94918415954996,
+      "residual_before_px": 114.06496662081146
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9007,
+      "loop_error_px": 1.1536711261613188e-13,
+      "true_transform_error_px": 125.05971616732269,
+      "alarm": true,
+      "explained_fraction": 0.8474914164557792,
+      "fitted_gauge_px": 133.31170408712546,
+      "residual_before_px": 127.86741300016051
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9008,
+      "loop_error_px": 1.1718571004216928e-13,
+      "true_transform_error_px": 22.785347682995905,
+      "alarm": true,
+      "explained_fraction": 0.8910135302132762,
+      "fitted_gauge_px": 134.56111518086675,
+      "residual_before_px": 112.51619122795006
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9009,
+      "loop_error_px": 1.1368683772161603e-13,
+      "true_transform_error_px": 118.30627283430653,
+      "alarm": true,
+      "explained_fraction": 0.8007969676782554,
+      "fitted_gauge_px": 189.8374879027019,
+      "residual_before_px": 138.36066389350958
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9010,
+      "loop_error_px": 9.951779739544498e-14,
+      "true_transform_error_px": 122.39186443046677,
+      "alarm": true,
+      "explained_fraction": 0.7209272190192244,
+      "fitted_gauge_px": 71.04013953598452,
+      "residual_before_px": 94.62893121351375
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9011,
+      "loop_error_px": 5.684341886080802e-14,
+      "true_transform_error_px": 175.18744932898153,
+      "alarm": true,
+      "explained_fraction": 0.6942352519756743,
+      "fitted_gauge_px": 227.51591747896362,
+      "residual_before_px": 177.46738490534827
+    },
+    {
+      "gauge_magnitude_px": 64.0,
+      "seed": 9012,
+      "loop_error_px": 1.2710574864626038e-13,
+      "true_transform_error_px": 94.57925926430559,
+      "alarm": true,
+      "explained_fraction": 0.7099079859622137,
+      "fitted_gauge_px": 116.65885745888957,
+      "residual_before_px": 153.65539623349673
+    }
+  ],
+  "supplementary_structureless_null": {
+    "what": "per-EDGE disagreement of the same magnitude as the real one, with no per-node structure by construction",
+    "why": "S4 as frozen cannot test this (see S4.instrument_note). This arm names the property instead of a procedure, which is E-039's lesson.",
+    "not_part_of_s4": true,
+    "by_redundancy": {
+      "1": {
+        "n": 208,
+        "median": 0.44519322422520224,
+        "p95": 0.8337073314909621,
+        "max": 0.9887535491975642
+      }
+    },
+    "grid_step_px": 128,
+    "real_explained_fractions_at_same_grid_step": [
+      0.7255450895512906,
+      0.8278540251484104,
+      0.9142711190784616,
+      0.891466335589832,
+      0.7975123229883294,
+      0.8112654921090272,
+      0.8377399188095775,
+      0.9208229854689678,
+      0.9070150381980313,
+      0.6494954462755526,
+      0.784678229813685,
+      0.8469927683962094,
+      0.8437904415018403
+    ]
+  },
+  "supplementary_census_graph": {
+    "RD03": {
+      "b1": {
+        "status": "OK",
+        "alarm": true,
+        "reason": "A per-image model explains 84.6% of a 80.33 px archive disagreement, with the largest gauge on nac.m1452560468lc at 92.59 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+        "nodes": [
+          "nac.m1182331886lc",
+          "nac.m1199981485rc",
+          "nac.m1212932972lc",
+          "nac.m1271742202lc",
+          "nac.m1335207975rc",
+          "nac.m1452560468lc"
+        ],
+        "fixed_node": "nac.m1182331886lc",
+        "n_edges": 9,
+        "n_grid": 128,
+        "n_nodes": 6,
+        "redundancy": 4,
+        "residual_before_px": 80.3347449014289,
+        "residual_after_px": 12.37322432855454,
+        "explained_fraction": 0.8459791670000752,
+        "gauge_magnitude_px": 92.58610379870339,
+        "per_node_px": {
+          "nac.m1182331886lc": 0.0,
+          "nac.m1199981485rc": 47.894806618128634,
+          "nac.m1212932972lc": 25.700045759200624,
+          "nac.m1271742202lc": 56.93598648864505,
+          "nac.m1335207975rc": 71.77031809697993,
+          "nac.m1452560468lc": 92.58610379870339
+        },
+        "edge_floor_px": {
+          "nac.m1271742202lc -> nac.m1182331886lc": 84.30350018351396,
+          "nac.m1271742202lc -> nac.m1212932972lc": 83.48098417592972,
+          "nac.m1182331886lc -> nac.m1212932972lc": 103.11302284749387,
+          "nac.m1182331886lc -> nac.m1199981485rc": 116.25777096997406,
+          "nac.m1182331886lc -> nac.m1335207975rc": 108.31562601253577,
+          "nac.m1212932972lc -> nac.m1199981485rc": 105.79598859805749,
+          "nac.m1212932972lc -> nac.m1452560468lc": 111.51420660347979,
+          "nac.m1212932972lc -> nac.m1335207975rc": 99.52794373823073,
+          "nac.m1452560468lc -> nac.m1335207975rc": 100.36095834727261
+        },
+        "structureless_null": {
+          "n": 40,
+          "median": 0.35131871916966795,
+          "p95": 0.5645642744737356,
+          "max": 0.5903878625247847
+        }
+      },
+      "lg": {
+        "status": "OK",
+        "alarm": true,
+        "reason": "A per-image model explains 84.5% of a 80.30 px archive disagreement, with the largest gauge on nac.m1452560468lc at 92.84 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+        "nodes": [
+          "nac.m1182331886lc",
+          "nac.m1199981485rc",
+          "nac.m1212932972lc",
+          "nac.m1271742202lc",
+          "nac.m1335207975rc",
+          "nac.m1452560468lc"
+        ],
+        "fixed_node": "nac.m1182331886lc",
+        "n_edges": 9,
+        "n_grid": 128,
+        "n_nodes": 6,
+        "redundancy": 4,
+        "residual_before_px": 80.29684703301527,
+        "residual_after_px": 12.475270960012116,
+        "explained_fraction": 0.8446356062413918,
+        "gauge_magnitude_px": 92.83694542865334,
+        "per_node_px": {
+          "nac.m1182331886lc": 0.0,
+          "nac.m1199981485rc": 47.717966049929004,
+          "nac.m1212932972lc": 25.18200106115817,
+          "nac.m1271742202lc": 56.75467303179232,
+          "nac.m1335207975rc": 71.70377099569106,
+          "nac.m1452560468lc": 92.83694542865334
+        },
+        "edge_floor_px": {
+          "nac.m1271742202lc -> nac.m1182331886lc": 84.30350018351396,
+          "nac.m1271742202lc -> nac.m1212932972lc": 83.48098417592972,
+          "nac.m1182331886lc -> nac.m1212932972lc": 103.11302284749387,
+          "nac.m1182331886lc -> nac.m1199981485rc": 116.25777096997406,
+          "nac.m1182331886lc -> nac.m1335207975rc": 108.31562601253577,
+          "nac.m1212932972lc -> nac.m1199981485rc": 105.79598859805749,
+          "nac.m1212932972lc -> nac.m1452560468lc": 111.51420660347979,
+          "nac.m1212932972lc -> nac.m1335207975rc": 99.52794373823073,
+          "nac.m1452560468lc -> nac.m1335207975rc": 100.36095834727261
+        },
+        "structureless_null": {
+          "n": 40,
+          "median": 0.3511363308430675,
+          "p95": 0.5642334099879815,
+          "max": 0.5900688009137702
+        }
+      },
+      "xf": {
+        "status": "OK",
+        "alarm": true,
+        "reason": "A per-image model explains 85.7% of a 81.20 px archive disagreement, with the largest gauge on nac.m1452560468lc at 92.15 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+        "nodes": [
+          "nac.m1182331886lc",
+          "nac.m1199981485rc",
+          "nac.m1212932972lc",
+          "nac.m1271742202lc",
+          "nac.m1335207975rc",
+          "nac.m1452560468lc"
+        ],
+        "fixed_node": "nac.m1182331886lc",
+        "n_edges": 11,
+        "n_grid": 128,
+        "n_nodes": 6,
+        "redundancy": 6,
+        "residual_before_px": 81.19690243418037,
+        "residual_after_px": 11.643876058429065,
+        "explained_fraction": 0.8565970411510735,
+        "gauge_magnitude_px": 92.14979241181494,
+        "per_node_px": {
+          "nac.m1182331886lc": 0.0,
+          "nac.m1199981485rc": 47.99389662827668,
+          "nac.m1212932972lc": 25.594268335189515,
+          "nac.m1271742202lc": 55.878828008767606,
+          "nac.m1335207975rc": 71.68236698731583,
+          "nac.m1452560468lc": 92.14979241181494
+        },
+        "edge_floor_px": {
+          "nac.m1271742202lc -> nac.m1182331886lc": 84.30350018351396,
+          "nac.m1271742202lc -> nac.m1212932972lc": 83.48098417592972,
+          "nac.m1271742202lc -> nac.m1452560468lc": 106.65908985339361,
+          "nac.m1271742202lc -> nac.m1335207975rc": 91.17615921905849,
+          "nac.m1182331886lc -> nac.m1212932972lc": 103.11302284749387,
+          "nac.m1182331886lc -> nac.m1199981485rc": 116.25777096997406,
+          "nac.m1182331886lc -> nac.m1335207975rc": 108.31562601253577,
+          "nac.m1212932972lc -> nac.m1199981485rc": 105.79598859805749,
+          "nac.m1212932972lc -> nac.m1452560468lc": 111.51420660347979,
+          "nac.m1212932972lc -> nac.m1335207975rc": 99.52794373823073,
+          "nac.m1452560468lc -> nac.m1335207975rc": 100.36095834727261
+        },
+        "structureless_null": {
+          "n": 40,
+          "median": 0.3142736412425904,
+          "p95": 0.4705960768947323,
+          "max": 0.5288631581332671
+        }
+      }
+    },
+    "RD04": {
+      "b1": {
+        "status": "OK",
+        "alarm": true,
+        "reason": "A per-image model explains 85.1% of a 75.54 px archive disagreement, with the largest gauge on nac.m1341069775rc at 109.43 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+        "nodes": [
+          "nac.m1212932972lc",
+          "nac.m1271742202lc",
+          "nac.m1299958135lc",
+          "nac.m1315225542lc",
+          "nac.m1335207975rc",
+          "nac.m1341069775rc",
+          "nac.m1363396554rc"
+        ],
+        "fixed_node": "nac.m1212932972lc",
+        "n_edges": 13,
+        "n_grid": 128,
+        "n_nodes": 7,
+        "redundancy": 7,
+        "residual_before_px": 75.54017693082312,
+        "residual_after_px": 11.228627850803123,
+        "explained_fraction": 0.8513555526738323,
+        "gauge_magnitude_px": 109.42595426105301,
+        "per_node_px": {
+          "nac.m1212932972lc": 0.0,
+          "nac.m1271742202lc": 62.91354609490888,
+          "nac.m1299958135lc": 100.94942984297894,
+          "nac.m1315225542lc": 95.21111563985278,
+          "nac.m1335207975rc": 88.84638351255664,
+          "nac.m1341069775rc": 109.42595426105301,
+          "nac.m1363396554rc": 86.38132063443143
+        },
+        "edge_floor_px": {
+          "nac.m1299958135lc -> nac.m1315225542lc": 116.19971869506735,
+          "nac.m1299958135lc -> nac.m1271742202lc": 105.62166507901651,
+          "nac.m1299958135lc -> nac.m1341069775rc": 112.99860487752332,
+          "nac.m1299958135lc -> nac.m1212932972lc": 95.57019225533323,
+          "nac.m1299958135lc -> nac.m1363396554rc": 98.8953352775484,
+          "nac.m1315225542lc -> nac.m1271742202lc": 111.50211927868435,
+          "nac.m1315225542lc -> nac.m1341069775rc": 114.51697099550013,
+          "nac.m1315225542lc -> nac.m1212932972lc": 101.72493135060299,
+          "nac.m1271742202lc -> nac.m1341069775rc": 113.65376218536872,
+          "nac.m1271742202lc -> nac.m1212932972lc": 100.89070286383055,
+          "nac.m1271742202lc -> nac.m1335207975rc": 102.86202715440547,
+          "nac.m1212932972lc -> nac.m1363396554rc": 103.71718168636991,
+          "nac.m1212932972lc -> nac.m1335207975rc": 110.59792590222928
+        },
+        "structureless_null": {
+          "n": 40,
+          "median": 0.25033904603247853,
+          "p95": 0.47486950133887607,
+          "max": 0.5151876920861136
+        }
+      },
+      "lg": {
+        "status": "OK",
+        "alarm": true,
+        "reason": "A per-image model explains 84.5% of a 72.62 px archive disagreement, with the largest gauge on nac.m1341069775rc at 109.43 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+        "nodes": [
+          "nac.m1212932972lc",
+          "nac.m1271742202lc",
+          "nac.m1299958135lc",
+          "nac.m1315225542lc",
+          "nac.m1341069775rc",
+          "nac.m1363396554rc"
+        ],
+        "fixed_node": "nac.m1212932972lc",
+        "n_edges": 11,
+        "n_grid": 128,
+        "n_nodes": 6,
+        "redundancy": 6,
+        "residual_before_px": 72.6211453455196,
+        "residual_after_px": 11.289298231065754,
+        "explained_fraction": 0.8445453018214859,
+        "gauge_magnitude_px": 109.42677266166267,
+        "per_node_px": {
+          "nac.m1212932972lc": 0.0,
+          "nac.m1271742202lc": 62.64921471069296,
+          "nac.m1299958135lc": 100.87070937878171,
+          "nac.m1315225542lc": 95.20466075503411,
+          "nac.m1341069775rc": 109.42677266166267,
+          "nac.m1363396554rc": 86.11597392203402
+        },
+        "edge_floor_px": {
+          "nac.m1299958135lc -> nac.m1315225542lc": 116.19971869506735,
+          "nac.m1299958135lc -> nac.m1271742202lc": 105.62166507901651,
+          "nac.m1299958135lc -> nac.m1341069775rc": 112.99860487752332,
+          "nac.m1299958135lc -> nac.m1212932972lc": 95.57019225533323,
+          "nac.m1299958135lc -> nac.m1363396554rc": 98.8953352775484,
+          "nac.m1315225542lc -> nac.m1271742202lc": 111.50211927868435,
+          "nac.m1315225542lc -> nac.m1341069775rc": 114.51697099550013,
+          "nac.m1315225542lc -> nac.m1212932972lc": 101.72493135060299,
+          "nac.m1271742202lc -> nac.m1341069775rc": 113.65376218536872,
+          "nac.m1271742202lc -> nac.m1212932972lc": 100.89070286383055,
+          "nac.m1212932972lc -> nac.m1363396554rc": 103.71718168636991
+        },
+        "structureless_null": {
+          "n": 40,
+          "median": 0.2905871655217645,
+          "p95": 0.4475483701716546,
+          "max": 0.5492073721031825
+        }
+      },
+      "xf": {
+        "status": "OK",
+        "alarm": true,
+        "reason": "A per-image model explains 84.8% of a 74.35 px archive disagreement, with the largest gauge on nac.m1341069775rc at 107.97 px. Loop closure is blind to this by construction, so a closing loop is not evidence against it. This localises the disagreement to an image; it does NOT say whether the estimate or the archive reference is the wrong one.",
+        "nodes": [
+          "nac.m1212932972lc",
+          "nac.m1271742202lc",
+          "nac.m1299958135lc",
+          "nac.m1315225542lc",
+          "nac.m1341069775rc",
+          "nac.m1363396554rc"
+        ],
+        "fixed_node": "nac.m1212932972lc",
+        "n_edges": 12,
+        "n_grid": 128,
+        "n_nodes": 6,
+        "redundancy": 7,
+        "residual_before_px": 74.3480349070225,
+        "residual_after_px": 11.331964290952774,
+        "explained_fraction": 0.8475821949413431,
+        "gauge_magnitude_px": 107.96792350961876,
+        "per_node_px": {
+          "nac.m1212932972lc": 0.0,
+          "nac.m1271742202lc": 61.717746749775195,
+          "nac.m1299958135lc": 99.99720975752041,
+          "nac.m1315225542lc": 93.70640024324263,
+          "nac.m1341069775rc": 107.96792350961876,
+          "nac.m1363396554rc": 86.61035492077181
+        },
+        "edge_floor_px": {
+          "nac.m1299958135lc -> nac.m1315225542lc": 116.19971869506735,
+          "nac.m1299958135lc -> nac.m1271742202lc": 105.62166507901651,
+          "nac.m1299958135lc -> nac.m1341069775rc": 112.99860487752332,
+          "nac.m1299958135lc -> nac.m1212932972lc": 95.57019225533323,
+          "nac.m1299958135lc -> nac.m1363396554rc": 98.8953352775484,
+          "nac.m1315225542lc -> nac.m1271742202lc": 111.50211927868435,
+          "nac.m1315225542lc -> nac.m1341069775rc": 114.51697099550013,
+          "nac.m1315225542lc -> nac.m1212932972lc": 101.72493135060299,
+          "nac.m1271742202lc -> nac.m1341069775rc": 113.65376218536872,
+          "nac.m1271742202lc -> nac.m1212932972lc": 100.89070286383055,
+          "nac.m1341069775rc -> nac.m1212932972lc": 107.4331041404696,
+          "nac.m1212932972lc -> nac.m1363396554rc": 103.71718168636991
+        },
+        "structureless_null": {
+          "n": 40,
+          "median": 0.2578940083893175,
+          "p95": 0.3699296123984102,
+          "max": 0.42117643378598835
+        }
+      }
+    }
+  },
+  "supplementary_cross_engine": {
+    "RD03": {
+      "b1_vs_lg": {
+        "n_common_frames": 6,
+        "max_difference_px": 0.518044698042452,
+        "median_difference_px": 0.1790770125261787,
+        "per_frame_px": {
+          "nac.m1182331886lc": 0.0,
+          "nac.m1199981485rc": 0.1768405681996299,
+          "nac.m1212932972lc": 0.518044698042452,
+          "nac.m1271742202lc": 0.18131345685272748,
+          "nac.m1335207975rc": 0.06654710128887587,
+          "nac.m1452560468lc": 0.25084162994994585
+        }
+      },
+      "b1_vs_xf": {
+        "n_common_frames": 6,
+        "max_difference_px": 1.0571584798774438,
+        "median_difference_px": 0.10243371707957749,
+        "per_frame_px": {
+          "nac.m1182331886lc": 0.0,
+          "nac.m1199981485rc": 0.0990900101480463,
+          "nac.m1212932972lc": 0.10577742401110868,
+          "nac.m1271742202lc": 1.0571584798774438,
+          "nac.m1335207975rc": 0.08795110966410391,
+          "nac.m1452560468lc": 0.4363113868884483
+        }
+      },
+      "lg_vs_xf": {
+        "n_common_frames": 6,
+        "max_difference_px": 0.8758450230247163,
+        "median_difference_px": 0.34409892618950977,
+        "per_frame_px": {
+          "nac.m1182331886lc": 0.0,
+          "nac.m1199981485rc": 0.2759305783476762,
+          "nac.m1212932972lc": 0.41226727403134333,
+          "nac.m1271742202lc": 0.8758450230247163,
+          "nac.m1335207975rc": 0.021404008375228045,
+          "nac.m1452560468lc": 0.6871530168383941
+        }
+      }
+    },
+    "RD04": {
+      "b1_vs_lg": {
+        "n_common_frames": 6,
+        "max_difference_px": 0.2653467123974167,
+        "median_difference_px": 0.0425876745079492,
+        "per_frame_px": {
+          "nac.m1212932972lc": 0.0,
+          "nac.m1271742202lc": 0.2643313842159216,
+          "nac.m1299958135lc": 0.07872046419723233,
+          "nac.m1315225542lc": 0.0064548848186660734,
+          "nac.m1341069775rc": 0.000818400609659875,
+          "nac.m1363396554rc": 0.2653467123974167
+        }
+      },
+      "b1_vs_xf": {
+        "n_common_frames": 6,
+        "max_difference_px": 1.5047153966101519,
+        "median_difference_px": 1.0740097152961106,
+        "per_frame_px": {
+          "nac.m1212932972lc": 0.0,
+          "nac.m1271742202lc": 1.1957993451336861,
+          "nac.m1299958135lc": 0.952220085458535,
+          "nac.m1315225542lc": 1.5047153966101519,
+          "nac.m1341069775rc": 1.4580307514342508,
+          "nac.m1363396554rc": 0.22903428634037937
+        }
+      },
+      "lg_vs_xf": {
+        "n_common_frames": 6,
+        "max_difference_px": 1.4982605117914858,
+        "median_difference_px": 0.9024837910895336,
+        "per_frame_px": {
+          "nac.m1212932972lc": 0.0,
+          "nac.m1271742202lc": 0.9314679609177645,
+          "nac.m1299958135lc": 0.8734996212613027,
+          "nac.m1315225542lc": 1.4982605117914858,
+          "nac.m1341069775rc": 1.4588491520439106,
+          "nac.m1363396554rc": 0.49438099873779606
+        }
+      }
+    }
+  },
+  "claims_not_supported": [
+    "NOT a false-acceptance rate: this adds an instrument, not ground truth. Criterion 3's first two clauses stay unmeasurable.",
+    "NOT a fix to loop closure: the invariance is an identity. This is a second, independent check that looks only at the null space.",
+    "NOT validated on a real gauge error: no real triplet is known to carry one. Detection is synthetic; specificity is real.",
+    "NOT an attribution: the instrument localises a disagreement to an image and cannot say whether the estimate or the archive reference is the wrong one (Part 1 H3). The cross-engine arm bounds that, it does not settle it by itself.",
+    "NOT a Chandrayaan-2 result."
+  ],
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3"
+  },
+  "total_runtime_s": 427.7
+}

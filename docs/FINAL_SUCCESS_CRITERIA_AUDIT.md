@@ -12,8 +12,8 @@ is reported as a gap in the evidence, not rewritten into one that can be.
 |---|---|---|
 | 1 | H1 MET on real data at ≥ 2 rungs with the frozen rule; p ≤ 0.05 on the illumination separation with ≥ 8 edges | **MET** |
 | 2 | ≥ 1 VERIFIED Chandrayaan-2 pair per sensor against NAC, with check-point error and CI reported in coarse pixels | **NOT MET** — but no longer blocked on data (see the 2026-09-20 REAL-DATA-09 update) |
-| 3 | Verdict FA ≤ 5 %, FR ≤ 20 % on validation sites; zero VERIFIED on the adversarial set | **PARTLY ANSWERED** — the adversarial clause is MET (0 of 36), but for the wrong reason (E-039); FA and FR remain unmeasurable |
-| 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET** — 14 of 39 VERIFIED edges exceed 0.15 |
+| 3 | Verdict FA ≤ 5 %, FR ≤ 20 % on validation sites; zero VERIFIED on the adversarial set | **PARTLY ANSWERED** — the adversarial clause is MET (0 of 36), but for the wrong reason (E-039); FA and FR remain unmeasurable. **EXP-013 built the instrument for the blind spot E-039 exposed and measured that it cannot be deployed with the reference on hand (D-054); the blind spot is open** |
+| 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET** — 14 of 39 VERIFIED edges exceed 0.15. **D-053: the verdict stands and is not re-scoped — and the 0.15 line itself was never calibrated** (ADR-0006 is still `PROPOSED`; the acceptance test it assigned to EXP-007 was never run) |
 | 5 | Fresh-clone install, CPU-only, all tests pass, no non-commercial weights | **MET (measured today)** |
 
 ---
@@ -116,6 +116,103 @@ space (ADR-0011 N1), recorded as a known limitation rather than patched.
 **What would close this: EXP-012 (verdict calibration),** designated at
 `MASTER_RESEARCH_AND_ARCHITECTURE_PLAN.md:577` and never run. There is no
 `experiments/EXP-012/` and no calibration/validation site split.
+
+---
+
+## UPDATE 2026-09-21 (later) — EXP-013 ran; the blind spot is measured and NOT closed
+
+`docs/stages/EXP-013_gauge_detection.md`, artefact
+`experiments/EXP-013/exp013_results.json`.
+
+The update above says criterion 3's adversarial clause is MET "for the wrong
+reason", and that the verdict's real blind spot — a **per-image gauge** — had
+been quantified with **no instrument against it**. EXP-013 built the
+instrument. **Four of its six criteria are NOT MET, and the blind spot is
+still open.**
+
+**What was measured.** The check has to be external, because anything computed
+from the edge estimates lives inside the same gauge. The only external
+reference this project holds is archive corner geometry — and EXP-013 measured
+that it carries a **per-frame disagreement of its own of 66–109 px**,
+calibrated at **66.00 px** before any detection statistic was read. That is
+larger than the gauge errors worth catching. At an applied gauge of **zero**
+the fit still returns **55.55 px** and alarms on **6 of 12** cases (S6 NOT
+MET), so there is no operating point; S1 reaches 10 of 12 at 32 px, and S2
+alarms on **13 of 13** real triplets.
+
+**The mechanism is sound, which is what makes the negative bounded rather than
+inconclusive.** On the REAL-DATA-07 census graph — redundancy 4–7 instead of a
+triplet's 1 — the per-node model explains **0.845–0.857** of the disagreement
+against a structureless null whose **maximum over 40 draws** is **0.421–0.590**,
+in all six window × engine graphs. And **RootSIFT, DISK + LightGlue and XFeat
+recover the same per-frame term to within 1.50 px** on terms of 92–109 px, so
+the term belongs to no matcher.
+
+**What it did not settle, as Part 1 predicted it could not.** The instrument
+localises a disagreement to an image; it cannot say whether the archive
+reference or a shared per-frame tile georeferencing carries it. The second
+reading would mean the instrument has found **a real instance of the very
+defect it was built to detect**, in this project's own data. Separating them
+needs an absolute reference finer than the disagreement — LROC NAC regional
+controlled mosaics, published average offset below 13 m (~7–26 px at NAC
+resolution), which this README has recorded as available and unused since
+amendment S9.
+
+**D-054: the check is built and not deployed.** No constant was retuned,
+`assess()` is untouched, and a test parses its imports to keep it that way. The
+deliverable's honest sentence is *"we built the detector and measured that the
+reference available to it is too coarse to run it"* — not *"we detect gauge
+error."*
+
+**E-041** records why four criteria were unanswerable as posed: every triplet
+is a 3-edge cycle, so the per-node model has **8 free parameters against 3
+edges**, and a structureless disagreement of the same magnitude already scores
+**0.834 at its 95th percentile** there against real values whose median is
+**0.837**. S2's 13 of 13 is therefore uninformative in **either** direction.
+Part 1 froze *which rows* were in the population without stating *what the
+population had to satisfy for its own statistic to be falsifiable* —
+E-035's and E-039's defect at two further levels.
+
+**Criterion 3 is unchanged by this stage.** Its first two clauses — a
+verdict-level false-acceptance rate and any false-rejection rate — remain
+unmeasurable for the reasons below. EXP-013 adds an instrument and a measured
+limit on it, not ground truth.
+
+---
+
+## UPDATE 2026-09-21 — criterion 4 has a recorded decision (D-053)
+
+The 2026-09-20 update found criterion 4 **NOT MET**: 14 of 39 VERIFIED edges
+have coverage gap above 0.15. **That verdict stands and is not re-scoped.**
+
+What D-053 adds is that **the 0.15 line itself has never been measured**, so
+"NOT MET" carries less information than it appears to. `verdict.py` cites a
+measurement for each of its other two constants — `INLIER_CUTOFF = 8` from
+EXP-002 (recall 1.000, FPR 0.0112 on 192 held-out cases) and
+`LOOP_ERROR_REJECT_PX = 2.0` from EXP-003 (correct loops 0.258 px median
+against wrong loops 1368 px) — while `COVERAGE_GAP_WARN = 0.15` cites only
+ADR-0006, which is a *rationale for the metric* and not a calibration of the
+number. The 0.15 first appears in
+`MASTER_RESEARCH_AND_ARCHITECTURE_PLAN.md:46` as a design-table target and is
+promoted to a §53 success criterion at line 725 without ever being measured.
+
+**D-006 / ADR-0006 has been `PROPOSED` since 2026-08-24**, and its own
+acceptance rule reads: *"Accept if EXP-007 shows it correlates with local
+held-out error better than the alternatives. Reverse if it does not."*
+**EXP-007 ran and never performed that test** — its stage report does not
+mention coverage once. It went unnoticed for six weeks because until EXP-012
+produced the first VERIFIED verdict the criterion ranged over an empty set.
+
+Withdrawing criterion 4 as unvalidated was considered and **refused**: it would
+replace a recorded failure with silence, and the failure is the more useful
+statement. **Nothing in the verdict changed** — the 14 affected edges were
+returned `moderate` rather than `high` and stay `moderate`.
+
+The acceptance test is now an explicit debt rather than an assumption
+discharged by silence. It needs what EXP-007 was supposed to supply: **local**
+held-out error as a function of distance to the nearest correspondence.
+EXP-010 and EXP-011 built exactly that machinery, so it is a scoring pass over
+recorded tiles, not new data.
 
 ---
 
@@ -233,9 +330,84 @@ Measured today, not asserted:
 
 ---
 
-## What this audit says to do next
+## What this audit says to do next — rewritten 2026-09-21
+
+*(The 2026-09-20 list is kept below under integrity rule 3. Items 1, 2 and 3 of
+it have since been done; item 4 has not.)*
 
 Ranked by what a reviewer would notice first:
+
+1. **A geodetically controlled reference per frame.** This is now the single
+   highest-value unblocked item, and it closes two separate gaps at once.
+   `README.md` amendment S9 already records that LROC NAC regional controlled
+   mosaics carry a published average positional offset **below 13 m** — about
+   **7–26 px** at NAC resolution — against the **~100 px** archive-geometry
+   floor everything real is currently corroborated against. With it:
+   **(a)** the accuracy claim stops being "corroborated to ~100 px" and becomes
+   a measured number, which is the weakest link in criterion 1's otherwise
+   strong result; **(b)** EXP-013's S6 becomes testable and the gauge check
+   gains an operating point (D-054); and **(c)** the two readings EXP-013 §8
+   could not separate — archive-reference error versus a shared per-frame
+   georeferencing error in the tiles — separate, and the second would be a
+   **real instance of the verdict's blind spot in this project's own data**.
+   It needs no new mission data and no permission.
+
+2. **A VERIFIED Chandrayaan-2 verdict (criterion 2).** The only criterion
+   failing on something other than instrument limits. TMC-2 registers to NAC at
+   5 m with 0 wrong passes, and the one available loop misses the frozen 2.0 px
+   line by **10 %** (2.2131 px). REAL-DATA-09 names the route: a NAC
+   acquisition centred on the TMC-2 swath at lon ≈ 22.42 would raise overlap
+   from 26–44 % toward full. **It was investigated on 2026-09-20 and not
+   pursued** — none of the 22 known census frames can centre a full tile east of
+   lon ≈ 22.10, and those reaching 22.10 carry Δinc ≥ 20° against the
+   2.5° / 9.2° of the frames actually used — so it needs a fresh ODE census for
+   an uncertain gain. High value, genuinely uncertain.
+
+3. **ADR-0006's acceptance test, which D-053 turned from an assumption into a
+   debt.** D-006 has been `PROPOSED` since 2026-08-24 and its acceptance rule
+   names EXP-007; EXP-007 ran and never performed it, and nobody noticed for six
+   weeks because the criterion ranged over an empty set until EXP-012. It needs
+   **local** held-out error against distance to the nearest correspondence —
+   machinery EXP-010 and EXP-011 already built — so it is a scoring pass over
+   recorded tiles, not new data. Until it runs, criterion 4 is a failure
+   against an uncalibrated line, which is a weaker statement than it looks.
+
+4. **EXP-006 remains unregistered.** Unchanged from 2026-09-20 and now the
+   oldest open item in the project. The thesis that *the protocol matters more
+   than the matcher* — the claim the whole architecture is organised around —
+   is still carried on one SAR-optical preprint. The data to test it is on disk
+   (42 confirmed pairs, three engines, every protocol knob but tiling) and it
+   runs fully offline. The master plan (§553) directs it be reframed as a
+   component ablation of GAPC rather than run as a standalone thesis.
+
+**A note on what the last three stages have in common.** E-035, E-039 and E-041
+are the same defect at ascending levels — an *arm* that could not produce the
+outcome it was written to detect, a *criterion* frozen against a set lacking the
+property it needed, and a *population and control* frozen without asking what
+would make their statistic falsifiable. Each was caught by a control the stage
+itself had frozen, which is the process working; but the interval between
+occurrences is not lengthening. **The concrete change this implies for every
+future Part 1:** state the parameter count against the constraint count for any
+criterion resting on a goodness-of-fit, and build the null from the *property*
+being tested, never from a permutation or a source assumed to carry it.
+
+**None of the above is fixed by lowering a bar.** Criteria 3 and 4 are
+unevaluable because the verdict was built strictly; that strictness is the
+contribution, and the honest move is to measure it properly, not to relax it
+until something passes. EXP-013 is the clearest case: four of six criteria
+failed, no constant was retuned, and the result is a bounded negative with a
+named next step rather than a softened pass.
+
+---
+
+## What this audit said to do next — 2026-09-20, kept as written
+
+*(Integrity rule 3. Items 1–3 were done on 2026-09-20/21: the Chandrayaan-2
+data arrived and REAL-DATA-09 ran; EXP-012 ran and produced the first VERIFIED
+verdicts; and the "no VERIFIED pair exists" statement is superseded by that
+result, with the blind spot behind it now stated plainly in the README.)*
+
+**Ranked by what a reviewer would notice first:**
 
 1. **Get the Chandrayaan-2 data.** Criterion 2 is the only one failing for lack
    of input rather than lack of work, and it is the criterion the problem

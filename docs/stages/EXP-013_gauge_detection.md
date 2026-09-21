@@ -227,6 +227,305 @@ reports nothing at all.
 
 ---
 
-## Part 2
+# Part 2 — what happened
 
-*Empty. Written only after this Part 1 is committed.*
+**Run 2026-09-21, `scripts/run_exp013.py`, 427.7 s, CPU only, no new data.**
+Artefact: `experiments/EXP-013/exp013_results.json`.
+
+## 0. The result in one paragraph
+
+**Four of the six frozen criteria are NOT MET, and the stage is a negative
+result with a measured cause.** The instrument's mechanism is sound — on a
+graph where the per-node model is over-determined it separates a real
+disagreement from a structureless one decisively, and three independent
+matchers recover the same per-frame term to within 1.5 px. But **the unit of
+analysis Part 1 froze cannot support the statistic**: a three-edge cycle gives
+eight free parameters against three edges, and a disagreement with *no*
+per-node structure at all already scores an explained fraction of **0.834 at
+its 95th percentile** there, against real values with a median of 0.837. On top
+of that, the external reference this project holds is **coarse relative to the
+signal**: its own per-frame disagreement is **66.0 px**, larger than every
+gauge magnitude in the sweep except the last.
+
+So the answer to §1's question is the second branch, and §1 already wrote down
+what that obliges: *the blind spot is confirmed as irreducible with the
+evidence on hand, the deliverable must say so plainly, and the correct
+mitigation moves out of software and into acquisition.*
+
+| | criterion | verdict |
+|---|---|---|
+| **S0** | construction control — the synthetic cases really are gauge cases | **MET** — max loop residual **1.27e-13 px** against a 1e-9 px tolerance |
+| **S1** | detection: ≥ 11 of 12 alarms at each of 32 and 64 px | **NOT MET** — **10** of 12 at 32 px, 11 of 12 at 64 px |
+| **S2** | specificity: 0 of 13 alarms on the real triplets | **NOT MET** — **13 of 13** alarmed |
+| **S3** | detection floor < 84 px | **MET at 64 px — and the pass is vacuous, see §4** |
+| **S4** | the permutation control | **NOT MET** — 9 of 13, against a bar of ≤ 1 |
+| **S6** | 0 of 12 alarms at gauge magnitude 0 | **NOT MET** — **6** of 12 alarmed, median fitted gauge **55.55 px** where the true gauge is ~0 |
+
+Nothing was retuned. The two alarm constants are the ones Part 1 §6 froze
+(`gauge_magnitude_px > 2.0` **and** `explained_fraction > 0.5`), and
+`tests/test_gauge_detection.py` pins them so a later edit is visible.
+
+*(S5 — "`assess()` is untouched" — is a property of the code rather than of the
+run, and is enforced continuously by `tests/test_gauge_detection.py`, which
+parses `verdict.py`'s imports. It is MET and is not carried in the artefact's
+criteria block.)*
+
+## 1. S0 — the construction is what it claims to be — **MET**
+
+All 96 cases close to **1.27e-13 px**, eleven orders of magnitude inside the
+1e-9 px tolerance. This was checked **before any detection statistic was read**,
+and the runner is written to report nothing from the synthetic arm if it fails.
+
+This is the one place E-039's lesson was applied successfully: the adversarial
+population is defined by the *property* it must have — a construction in the
+loop-closure null space, stated as algebra in Part 1 §2 — and the property is
+verified rather than assumed.
+
+## 2. S6 — the zero-gauge control — **NOT MET**, and it explains S1 and S2
+
+At gauge magnitude **0**, the instrument fits a gauge of **55.55 px** (median)
+and raises **6 alarms in 12**.
+
+There is no gauge to find at magnitude 0. What the fit is recovering is the
+**reference noise**, which Part 1 §5(b) required be calibrated from the real
+population before any detection statistic was read. That calibration came out
+at **66.00 px** — the median archive disagreement over the 13 real triplets.
+
+So the sweep gave the instrument a reference whose own error is **larger than
+the signal at every magnitude below 64 px**, and a model with enough freedom to
+absorb it. The consequence runs straight down the table:
+
+| gauge applied | alarms | median true edge error | median fitted gauge | median explained |
+|---|---|---|---|---|
+| 0 px | **6 / 12** | 1.51 px | 55.55 px | 0.484 |
+| 1 px | 6 / 12 | 1.98 px | 55.04 px | 0.492 |
+| 2 px | 6 / 12 | 3.46 px | 54.56 px | 0.499 |
+| 4 px | 6 / 12 | 6.71 px | 54.56 px | 0.516 |
+| 8 px | 8 / 12 | 14.04 px | 58.80 px | 0.545 |
+| 16 px | 8 / 12 | 28.51 px | 66.48 px | 0.588 |
+| 32 px | **10 / 12** | 57.47 px | 83.10 px | 0.674 |
+| 64 px | **11 / 12** | 115.40 px | 139.76 px | 0.780 |
+
+The alarm rate at 0 px and at 4 px is **identical**. The fitted gauge barely
+moves until the applied gauge approaches the reference noise. Read as a
+detector, the first four rows are pure false-alarm rate and the last two are
+signal beginning to emerge from it.
+
+**S6 is the criterion that mattered most, and it is the one that failed
+first.** A detector that fires half the time on nothing has no operating point,
+and every other number in the synthetic arm has to be read through it.
+
+## 3. S1 — detection — **NOT MET**
+
+10 of 12 at 32 px and 11 of 12 at 64 px, against a bar of ≥ 11 at both.
+
+It misses by one case at one magnitude, and **it should not be reported as a
+near miss.** With S6 failing at 6 of 12, the alarms at 32 px are not
+attributable to detection: a detector with a ~50 % false-alarm rate reaching
+10 of 12 is a weak result, not a strong one. The right summary is that
+detection and false alarm are not separated anywhere in this sweep.
+
+## 4. S3 — the sensitivity floor — **MET, and the pass carries no information**
+
+The smallest magnitude reaching the ≥ 11 of 12 bar is **64 px**, which is below
+the 84 px per-edge discrimination floor Part 1 named, so the criterion as
+written is **MET**.
+
+**It is reported as MET and simultaneously as worthless**, because the same
+arm's zero-gauge control fires 6 times in 12. A "detection floor" measured
+against a detector that has no null is a number without a referent. This is S3
+passing without meaning for the second time in two stages: EXP-012's S3 was MET
+for the wrong reason (E-039), and this S3 is MET against a broken null. **The
+criterion is answered as frozen and the reading is given beside it**, which is
+the only honest option once a criterion has been committed.
+
+## 5. S2 — specificity on real data — **NOT MET**
+
+**All 13 real triplets alarmed.** Their archive disagreement runs
+**40.6 – 117.3 px** (median 66.0), the per-node model explains **0.649 – 0.920**
+of it (median 0.837), and the fitted gauges run **45.6 – 101.8 px** — against
+recorded per-edge discrimination floors of **83.5 – 116.3 px**, and loop
+closures of **0.3654 – 1.3358 px**.
+
+Two readings were available, and Part 1 §7 H3 wrote down the unflattering one
+in advance. §6 and §7 below decide what can be decided with controls, rather
+than by choosing.
+
+## 6. S4 — the permutation control — **NOT MET**, and it was the wrong instrument
+
+9 of 13 real explained fractions sit below the 95th percentile of their
+200-permutation null, against a bar of ≤ 1.
+
+**S4 as frozen cannot test what it was written to test.** Permuting node labels
+on a three-node cycle maps the cycle to a cycle carrying the same three
+(estimate, prediction) pairs; it changes the names and — because the residual
+is *not* invariant to composing every gauge with a common transform — which
+node is held at identity, so it produces some spread. But it never removes the
+per-node *structure* the criterion is meant to be testing for. It is a test of
+labelling, not of structure.
+
+The property the control actually needs is **a disagreement of the same
+magnitude with no per-node structure at all**, and Part 1 named a *procedure*
+instead. **This is E-039's lesson recurring inside the stage that exists
+because of E-039** — and, before that, E-035's. Same defect, ascending levels:
+E-035 at the level of an arm, E-039 at the level of a criterion, E-040 at the
+level of an artefact's coordinate frames, and this at the level of a *control*.
+
+### The control S4 should have been — supplementary, not folded into S4
+
+`supplementary_structureless_null` builds the missing case: each edge's
+prediction is replaced by a perturbation of its own estimate at the same
+magnitude, giving a disagreement that is per-*edge* by construction. Fitted
+with the identical model, at the identical grid step, on the identical graphs:
+
+| redundancy | n | null median | null p95 | null max | real values |
+|---|---|---|---|---|---|
+| **1** (the 13 triplets) | 208 | 0.445 | **0.834** | 0.989 | 0.649 – 0.921, median **0.837** |
+
+**The real triplets are inside their own null.** Six of the thirteen fall below
+the null's 95th percentile, and the median real value (0.837) is
+indistinguishable from the null's 95th percentile (0.834). On a three-edge
+cycle the explained fraction is **not a discriminating statistic**, and S2's
+13 of 13 therefore says nothing about whether those triplets carry a gauge.
+
+**This is the stage's central finding, and it is a finding about the
+pre-registration rather than about the Moon.** Part 1 fixed a population — 13
+triplets — without checking that the population could support the statistic the
+criteria would be computed from. `redundancy = n_edges − (n_nodes − 1)` is
+**1** for every one of the 13: eight free parameters against three edges. The
+number was not in Part 1 at all; `GaugeReport.redundancy` was added during
+implementation, which is how the defect surfaced — late, and by luck.
+
+## 7. The instrument itself works — supplementary, on a graph that can carry it
+
+`supplementary_census_graph` runs the same fit on the REAL-DATA-07 census
+graph, reduced to its 2-core (a node of degree 1 can always absorb its own
+edge, so it inflates the explained fraction for free), with a structureless
+null at the same topology:
+
+| window | engine | edges / nodes | redundancy | archive disagreement | explained | null median | null p95 | **null max** |
+|---|---|---|---|---|---|---|---|---|
+| RD03 | B1 | 9 / 6 | 4 | 80.3 px | **0.846** | 0.351 | 0.565 | 0.590 |
+| RD03 | B4L | 9 / 6 | 4 | 80.3 px | **0.845** | 0.351 | 0.564 | 0.590 |
+| RD03 | B4X | 11 / 6 | 6 | 81.2 px | **0.857** | 0.314 | 0.471 | 0.529 |
+| RD04 | B1 | 13 / 7 | 7 | 75.5 px | **0.851** | 0.250 | 0.475 | 0.515 |
+| RD04 | B4L | 11 / 6 | 6 | 72.6 px | **0.845** | 0.291 | 0.448 | 0.549 |
+| RD04 | B4X | 12 / 6 | 7 | 74.3 px | **0.848** | 0.258 | 0.370 | 0.421 |
+
+**In all six graphs the real explained fraction exceeds the *maximum* of forty
+structureless draws**, by a margin of 0.26 to 0.43. Where the model is
+over-determined, the instrument separates a per-image effect from per-edge
+noise without ambiguity. The mechanism Part 1 §3 proposed is real; the triplet
+is simply the wrong place to apply it.
+
+The archive disagreement on these graphs is **72.6 – 81.2 px** and the fitted
+per-frame gauges are **92.1 – 109.4 px** — the same scale as the recorded
+per-edge discrimination floors (83.5 – 116.3 px), which were derived
+independently, from corner-coordinate quantisation.
+
+## 8. Which side carries it — the cross-engine control
+
+If the per-frame term lived in the *matching*, three unrelated matchers would
+not agree on it. `supplementary_cross_engine` compares the per-frame gauges
+recovered from RootSIFT (B1), DISK + LightGlue (B4L) and XFeat (B4X)
+independently:
+
+| window | pair | frames | median difference | max difference |
+|---|---|---|---|---|
+| RD03 | B1 vs B4L | 6 | 0.18 px | 0.52 px |
+| RD03 | B1 vs B4X | 6 | 0.10 px | 1.06 px |
+| RD03 | B4L vs B4X | 6 | 0.34 px | 0.88 px |
+| RD04 | B1 vs B4L | 6 | 0.04 px | 0.27 px |
+| RD04 | B1 vs B4X | 6 | 1.07 px | 1.50 px |
+| RD04 | B4L vs B4X | 6 | 0.90 px | 1.50 px |
+
+**Three independent matchers recover the same per-frame term to within 1.50 px
+on terms of 92 – 109 px** — agreement to better than one part in sixty. A
+per-frame error that RootSIFT, DISK + LightGlue and XFeat all reproduce to that
+precision is **not a property of any of them.**
+
+### What that does and does not settle
+
+It rules out the matcher. It does **not** decide between the two remaining
+readings, and Part 1 §7 H3 said in advance that it could not:
+
+1. **The archive reference carries a per-frame error of ~66 – 109 px.** This is
+   consistent with everything else the project has measured: the recorded
+   `discrimination_floor_px`, derived from corner-coordinate quantisation by a
+   completely different route, is **83.5 – 116.3 px** on exactly these edges. On
+   this reading the instrument is working correctly and is measuring the
+   reference's own error.
+2. **The tiles carry a shared per-frame georeferencing error**, introduced
+   before matching and therefore identical for every engine. On this reading
+   the instrument has found **a real instance of exactly the defect it was
+   built to detect** — a per-image gauge, invisible to loop closure, sitting in
+   the project's own real data.
+
+**These two are indistinguishable by this instrument**, because both are
+per-image and the instrument only localises to an image. Reading (1) is the
+more likely — a quantisation-derived floor and a fitted magnitude agreeing to
+within their own spread would otherwise be a strong coincidence — but the
+honest statement is that it has not been separated, and reading (2) is not
+dismissed for being the uncomfortable one.
+
+**What would separate them:** an independent absolute reference per frame, at a
+resolution finer than the disagreement. The project already knows one exists
+and has not used it — `README.md` records that LROC NAC regional controlled
+mosaics carry a published average positional offset **below 13 m**, roughly
+**7 – 26 px** at NAC resolution, against the ~100 px figures discussed here.
+That is precisely the acquisition change §1's second branch pointed at, and it
+is unblocked.
+
+## 9. What this stage changes
+
+**Nothing in the shipped verdict.** `assess()` is untouched;
+`tests/test_gauge_detection.py` parses its imports and fails if
+`siim.verify.gauge` ever appears among them. No threshold moved in either
+direction. The 36-of-36 blind spot is exactly as open as it was before this
+stage ran.
+
+**What it adds is a bounded negative and a working mechanism.** The blind spot
+cannot be closed with archive corner geometry as the reference, and the reason
+is quantified rather than asserted: the reference's per-frame error is
+66 – 109 px, larger than the gauge errors worth catching. The fit that would
+catch them works — above the maximum of forty structureless draws on every
+graph with redundancy ≥ 4.
+
+**What must now be said in the deliverable.** The honest sentence is not *"we
+detect gauge error"*. It is:
+
+> Loop closure is exactly invariant to per-image gauge error; 36 of 36
+> constructed cases reach VERIFIED / high with edges wrong by up to 115 px. We
+> built the detector, and measured that the reference available to it — archive
+> corner geometry — carries a per-frame error of its own of 66 – 109 px, which
+> is larger than the errors it would need to find. The check is therefore **not
+> deployed**. Closing this needs a geodetic reference, not more software.
+
+## 10. What this stage does NOT claim
+
+Unchanged from Part 1 §8, with two additions forced by the result:
+
+- **Not a false-acceptance rate.** §53 criterion 3's first two clauses remain
+  unmeasurable.
+- **Not a fix to loop closure.** The invariance is an identity.
+- **Not validated on a known real gauge error.** None exists to validate
+  against; that asymmetry is the stage's main limitation.
+- **Not an attribution** (§8).
+- **Not a Chandrayaan-2 result.**
+- **NEW — not a detector with an operating point.** S6 failed; there is no
+  false-alarm rate to quote, and S1's and S3's numbers must never be quoted
+  without S6 beside them.
+- **NEW — not evidence that the 13 real triplets are gauge-free, or gauged.**
+  The statistic does not discriminate at redundancy 1 (§6), so S2's 13 of 13 is
+  uninformative about them in either direction.
+
+## 11. Ledger and index
+
+- **E-041** — S4 was frozen as a control that cannot test the property it
+  names, and the population was frozen without checking that it could support
+  the statistic (`redundancy = 1` on every triplet).
+- **D-054** — the gauge check is **not deployed**, with the measured reason,
+  and the mitigation recorded as an acquisition change rather than a software
+  one.
+- **RL-049** — research-log entry.
+- `experiments/EXP-013/exp013_results.json` — every figure above.
