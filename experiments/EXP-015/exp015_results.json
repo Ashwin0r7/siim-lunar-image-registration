@@ -1,0 +1,601 @@
+{
+  "stage": "EXP-015",
+  "part": 2,
+  "preregistration": "docs/stages/EXP-015_criterion4_restated.md",
+  "what": "restate \u00a753 criterion 4 under the metric that survived EXP-014's validation, with a threshold calibrated the same way, and re-measure",
+  "inputs": [
+    "experiments/EXP-012/exp012_results.json",
+    "experiments/EXP-014/exp014_results.json"
+  ],
+  "computation": "pure re-analysis of recorded artefacts; no re-match, no re-fit, no new byte",
+  "frozen_constants": {
+    "error_bound_px": 1.0,
+    "percentile": 95,
+    "s4_min_reject_fraction": 0.1,
+    "s4_saturation": 0.99,
+    "note": "inherited from EXP-014 / EXP-015 Part 1; not tuned here"
+  },
+  "headline": "Criterion 4' is MET and discriminating.",
+  "criteria": {
+    "S0": {
+      "criterion": "S0",
+      "statement": "crossing_threshold, imported from run_exp014, reproduces that stage's recorded incumbent crossing to 1e-9",
+      "met": true,
+      "recorded": 0.6113534312076709,
+      "recomputed": 0.6113534312076709,
+      "tolerance": 1e-09
+    },
+    "S1": {
+      "criterion": "S1",
+      "statement": "the grid_occupancy floor T at which the 95th percentile of p99 local error crosses 1.0 px",
+      "met": true,
+      "T": 0.078125,
+      "bootstrap_ci95": [
+        0.03125,
+        0.09375
+      ],
+      "bootstrap_n": 200,
+      "sampled_range": [
+        0.015625,
+        0.9375
+      ],
+      "bins": [
+        {
+          "gap_lo": 0.015625,
+          "gap_hi": 0.03125,
+          "gap_mid": 0.03125,
+          "n": 25,
+          "err_pct": 4.315209485816377,
+          "err_median": 1.497832959982303
+        },
+        {
+          "gap_lo": 0.03125,
+          "gap_hi": 0.0625,
+          "gap_mid": 0.0625,
+          "n": 28,
+          "err_pct": 0.6796961842743212,
+          "err_median": 0.2868167613209708
+        },
+        {
+          "gap_lo": 0.0625,
+          "gap_hi": 0.078125,
+          "gap_mid": 0.078125,
+          "n": 16,
+          "err_pct": 1.0143018322365105,
+          "err_median": 0.33999911857980314
+        },
+        {
+          "gap_lo": 0.078125,
+          "gap_hi": 0.09375,
+          "gap_mid": 0.09375,
+          "n": 16,
+          "err_pct": 0.5237696409316183,
+          "err_median": 0.0960464446064064
+        },
+        {
+          "gap_lo": 0.09375,
+          "gap_hi": 0.125,
+          "gap_mid": 0.125,
+          "n": 40,
+          "err_pct": 0.4606372257946737,
+          "err_median": 0.09526486349508143
+        },
+        {
+          "gap_lo": 0.125,
+          "gap_hi": 0.140625,
+          "gap_mid": 0.140625,
+          "n": 19,
+          "err_pct": 0.208907950881093,
+          "err_median": 0.08094228318193485
+        },
+        {
+          "gap_lo": 0.140625,
+          "gap_hi": 0.15625,
+          "gap_mid": 0.15625,
+          "n": 24,
+          "err_pct": 0.262458220049186,
+          "err_median": 0.06338660706446263
+        },
+        {
+          "gap_lo": 0.15625,
+          "gap_hi": 0.171875,
+          "gap_mid": 0.171875,
+          "n": 29,
+          "err_pct": 0.21814795731140937,
+          "err_median": 0.06572524865905778
+        },
+        {
+          "gap_lo": 0.171875,
+          "gap_hi": 0.19270833333333393,
+          "gap_mid": 0.1875,
+          "n": 12,
+          "err_pct": 0.155750570370244,
+          "err_median": 0.07262132862442311
+        },
+        {
+          "gap_lo": 0.19270833333333393,
+          "gap_hi": 0.21875,
+          "gap_mid": 0.203125,
+          "n": 35,
+          "err_pct": 0.21398882775003303,
+          "err_median": 0.0714601492095767
+        },
+        {
+          "gap_lo": 0.21875,
+          "gap_hi": 0.234375,
+          "gap_mid": 0.234375,
+          "n": 16,
+          "err_pct": 0.08257494047847473,
+          "err_median": 0.04797733241258097
+        },
+        {
+          "gap_lo": 0.234375,
+          "gap_hi": 0.25,
+          "gap_mid": 0.25,
+          "n": 23,
+          "err_pct": 0.17139840313513946,
+          "err_median": 0.054373670003633405
+        },
+        {
+          "gap_lo": 0.25,
+          "gap_hi": 0.265625,
+          "gap_mid": 0.265625,
+          "n": 17,
+          "err_pct": 0.1041465806553405,
+          "err_median": 0.05215945266358678
+        },
+        {
+          "gap_lo": 0.265625,
+          "gap_hi": 0.28125,
+          "gap_mid": 0.28125,
+          "n": 15,
+          "err_pct": 0.10028887744829611,
+          "err_median": 0.052283560163048984
+        },
+        {
+          "gap_lo": 0.28125,
+          "gap_hi": 0.3125,
+          "gap_mid": 0.3125,
+          "n": 25,
+          "err_pct": 0.08837694970333367,
+          "err_median": 0.04665590434240622
+        },
+        {
+          "gap_lo": 0.3125,
+          "gap_hi": 0.359375,
+          "gap_mid": 0.34375,
+          "n": 22,
+          "err_pct": 0.09901776310819456,
+          "err_median": 0.055200361515018594
+        },
+        {
+          "gap_lo": 0.359375,
+          "gap_hi": 0.390625,
+          "gap_mid": 0.390625,
+          "n": 20,
+          "err_pct": 0.07847209469761407,
+          "err_median": 0.05294777679064165
+        },
+        {
+          "gap_lo": 0.390625,
+          "gap_hi": 0.4375,
+          "gap_mid": 0.4140625,
+          "n": 16,
+          "err_pct": 0.07535614732698469,
+          "err_median": 0.03991538565457166
+        },
+        {
+          "gap_lo": 0.4375,
+          "gap_hi": 0.484375,
+          "gap_mid": 0.46875,
+          "n": 22,
+          "err_pct": 0.08200611816043993,
+          "err_median": 0.04282730707884573
+        },
+        {
+          "gap_lo": 0.484375,
+          "gap_hi": 0.53125,
+          "gap_mid": 0.515625,
+          "n": 24,
+          "err_pct": 0.05697133672086318,
+          "err_median": 0.04063724337440891
+        },
+        {
+          "gap_lo": 0.53125,
+          "gap_hi": 0.59375,
+          "gap_mid": 0.5625,
+          "n": 16,
+          "err_pct": 0.0506203354935632,
+          "err_median": 0.04111042385723897
+        },
+        {
+          "gap_lo": 0.59375,
+          "gap_hi": 0.71875,
+          "gap_mid": 0.6875,
+          "n": 21,
+          "err_pct": 0.04834758129365122,
+          "err_median": 0.04191328259933801
+        },
+        {
+          "gap_lo": 0.71875,
+          "gap_hi": 0.9375,
+          "gap_mid": 0.8515625,
+          "n": 20,
+          "err_pct": 0.04765656295571301,
+          "err_median": 0.037859867776698045
+        }
+      ]
+    },
+    "S2": {
+      "criterion": "S2",
+      "statement": "criterion 4' (grid_occupancy >= T) on every VERIFIED edge",
+      "met": true,
+      "n_edges": 39,
+      "n_pass": 39,
+      "n_fail": 0,
+      "occupancy_min": 0.078125,
+      "occupancy_max": 1.0,
+      "occupancy_median": 0.9375,
+      "note": "MET here means the 39 pass 4'. It does NOT mean criterion 4 is met -- see S3 and S4 (Part 1 section 4)."
+    },
+    "S3": {
+      "criterion": "S3",
+      "statement": "the ORIGINAL criterion 4 verdict stays recorded beside 4'",
+      "met": true,
+      "original_criterion": "coverage gap <= 0.15 on every VERIFIED pair",
+      "original_verdict": "NOT MET",
+      "original_n_over": 14,
+      "original_n": 39,
+      "original_gap_min": 0.03805337149361736,
+      "original_gap_max": 0.4063049279272992
+    },
+    "S4": {
+      "criterion": "S4",
+      "statement": "T rejects >= 10% of EXP-014's 501 real subsets AND at least one VERIFIED edge sits below 0.99 occupancy",
+      "met": true,
+      "calibration_reject_fraction": 0.10578842315369262,
+      "calibration_rejected": 53,
+      "calibration_n": 501,
+      "n_edges_below_saturation": 25,
+      "saturation_level": 0.99,
+      "note": "if NOT MET, 4' is vacuous at real inlier counts, S2's verdict carries no evidential weight, and it may not be quoted as passing criterion 4 without 'vacuous at real inlier counts' in the same sentence (Part 1 section 5)."
+    },
+    "S5": {
+      "criterion": "S5",
+      "statement": "how many VERIFIED edges lie outside EXP-014's sampled occupancy range, and are therefore judged by extrapolation",
+      "met": true,
+      "sampled_range": [
+        0.015625,
+        0.9375
+      ],
+      "n_outside": 14,
+      "n_total": 39,
+      "fraction_outside": 0.358974358974359
+    }
+  },
+  "verified_edges": [
+    {
+      "edge": "nac.m1182331886lc -> nac.m1199981485rc",
+      "window": "RD03",
+      "confidence": "moderate",
+      "occupancy": 0.671875,
+      "gap": 0.1979441841136386,
+      "n_inliers": 190
+    },
+    {
+      "edge": "nac.m1212932972lc -> nac.m1199981485rc",
+      "window": "RD03",
+      "confidence": "moderate",
+      "occupancy": 0.6875,
+      "gap": 0.1978940716611612,
+      "n_inliers": 293
+    },
+    {
+      "edge": "nac.m1182331886lc -> nac.m1212932972lc",
+      "window": "RD03",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.0675961861702687,
+      "n_inliers": 5437
+    },
+    {
+      "edge": "nac.m1182331886lc -> nac.m1212932972lc",
+      "window": "RD03",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.0675961861702687,
+      "n_inliers": 5437
+    },
+    {
+      "edge": "nac.m1271742202lc -> nac.m1212932972lc",
+      "window": "RD03",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.0470374788234074,
+      "n_inliers": 1406
+    },
+    {
+      "edge": "nac.m1271742202lc -> nac.m1182331886lc",
+      "window": "RD03",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.03805337149361736,
+      "n_inliers": 1656
+    },
+    {
+      "edge": "nac.m1182331886lc -> nac.m1212932972lc",
+      "window": "RD03",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.0675961861702687,
+      "n_inliers": 5437
+    },
+    {
+      "edge": "nac.m1212932972lc -> nac.m1335207975rc",
+      "window": "RD03",
+      "confidence": "high",
+      "occupancy": 0.796875,
+      "gap": 0.14225200824627277,
+      "n_inliers": 144
+    },
+    {
+      "edge": "nac.m1182331886lc -> nac.m1335207975rc",
+      "window": "RD03",
+      "confidence": "moderate",
+      "occupancy": 0.4375,
+      "gap": 0.18923402682059662,
+      "n_inliers": 68
+    },
+    {
+      "edge": "nac.m1212932972lc -> nac.m1335207975rc",
+      "window": "RD03",
+      "confidence": "high",
+      "occupancy": 0.796875,
+      "gap": 0.14225200824627277,
+      "n_inliers": 144
+    },
+    {
+      "edge": "nac.m1452560468lc -> nac.m1335207975rc",
+      "window": "RD03",
+      "confidence": "high",
+      "occupancy": 0.9375,
+      "gap": 0.071128350525899,
+      "n_inliers": 5392
+    },
+    {
+      "edge": "nac.m1212932972lc -> nac.m1452560468lc",
+      "window": "RD03",
+      "confidence": "moderate",
+      "occupancy": 0.59375,
+      "gap": 0.18724755140672067,
+      "n_inliers": 143
+    },
+    {
+      "edge": "nac.m1271742202lc -> nac.m1212932972lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.04900164480757412,
+      "n_inliers": 1679
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1271742202lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.09161488775680188,
+      "n_inliers": 1608
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1212932972lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 0.9375,
+      "gap": 0.09733639023391781,
+      "n_inliers": 272
+    },
+    {
+      "edge": "nac.m1271742202lc -> nac.m1212932972lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.04900164480757412,
+      "n_inliers": 1679
+    },
+    {
+      "edge": "nac.m1315225542lc -> nac.m1271742202lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.04005097002814429,
+      "n_inliers": 2138
+    },
+    {
+      "edge": "nac.m1315225542lc -> nac.m1212932972lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 0.9375,
+      "gap": 0.09516550203892328,
+      "n_inliers": 284
+    },
+    {
+      "edge": "nac.m1271742202lc -> nac.m1212932972lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.04900164480757412,
+      "n_inliers": 1679
+    },
+    {
+      "edge": "nac.m1271742202lc -> nac.m1335207975rc",
+      "window": "RD04",
+      "confidence": "moderate",
+      "occupancy": 0.078125,
+      "gap": 0.4063049279272992,
+      "n_inliers": 9
+    },
+    {
+      "edge": "nac.m1212932972lc -> nac.m1335207975rc",
+      "window": "RD04",
+      "confidence": "moderate",
+      "occupancy": 0.625,
+      "gap": 0.2193081954572755,
+      "n_inliers": 210
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1212932972lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 0.9375,
+      "gap": 0.09733639023391781,
+      "n_inliers": 272
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1315225542lc",
+      "window": "RD04",
+      "confidence": "moderate",
+      "occupancy": 0.765625,
+      "gap": 0.15835014387870397,
+      "n_inliers": 2726
+    },
+    {
+      "edge": "nac.m1315225542lc -> nac.m1212932972lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 0.9375,
+      "gap": 0.09516550203892328,
+      "n_inliers": 284
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1212932972lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 0.9375,
+      "gap": 0.09733639023391781,
+      "n_inliers": 272
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1363396554rc",
+      "window": "RD04",
+      "confidence": "moderate",
+      "occupancy": 0.28125,
+      "gap": 0.29030166195122037,
+      "n_inliers": 28
+    },
+    {
+      "edge": "nac.m1212932972lc -> nac.m1363396554rc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 0.796875,
+      "gap": 0.14067924301069615,
+      "n_inliers": 2597
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1271742202lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.09161488775680188,
+      "n_inliers": 1608
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1315225542lc",
+      "window": "RD04",
+      "confidence": "moderate",
+      "occupancy": 0.765625,
+      "gap": 0.15835014387870397,
+      "n_inliers": 2726
+    },
+    {
+      "edge": "nac.m1315225542lc -> nac.m1271742202lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.04005097002814429,
+      "n_inliers": 2138
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1271742202lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.09161488775680188,
+      "n_inliers": 1608
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1341069775rc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 0.84375,
+      "gap": 0.14236727238583322,
+      "n_inliers": 265
+    },
+    {
+      "edge": "nac.m1271742202lc -> nac.m1341069775rc",
+      "window": "RD04",
+      "confidence": "moderate",
+      "occupancy": 0.453125,
+      "gap": 0.2771528419752202,
+      "n_inliers": 47
+    },
+    {
+      "edge": "nac.m1315225542lc -> nac.m1271742202lc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 1.0,
+      "gap": 0.04005097002814429,
+      "n_inliers": 2138
+    },
+    {
+      "edge": "nac.m1315225542lc -> nac.m1341069775rc",
+      "window": "RD04",
+      "confidence": "moderate",
+      "occupancy": 0.703125,
+      "gap": 0.1816805231718579,
+      "n_inliers": 108
+    },
+    {
+      "edge": "nac.m1271742202lc -> nac.m1341069775rc",
+      "window": "RD04",
+      "confidence": "moderate",
+      "occupancy": 0.453125,
+      "gap": 0.2771528419752202,
+      "n_inliers": 47
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1315225542lc",
+      "window": "RD04",
+      "confidence": "moderate",
+      "occupancy": 0.765625,
+      "gap": 0.15835014387870397,
+      "n_inliers": 2726
+    },
+    {
+      "edge": "nac.m1315225542lc -> nac.m1341069775rc",
+      "window": "RD04",
+      "confidence": "moderate",
+      "occupancy": 0.703125,
+      "gap": 0.1816805231718579,
+      "n_inliers": 108
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1341069775rc",
+      "window": "RD04",
+      "confidence": "high",
+      "occupancy": 0.84375,
+      "gap": 0.14236727238583322,
+      "n_inliers": 265
+    }
+  ],
+  "claims_not_supported": [
+    "NOT an accuracy claim: every error figure is inherited from EXP-014's self-warps, which bound precision rather than accuracy (EXP-010 S1).",
+    "NOT a verdict change: assess() and COVERAGE_GAP_WARN are untouched.",
+    "NOT an adoption of criterion 4' into \u00a753: this stage supplies the measurement for that decision, it does not take it.",
+    "NOT a Chandrayaan-2 result."
+  ],
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3"
+  },
+  "total_runtime_s": 0.94
+}

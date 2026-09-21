@@ -127,3 +127,175 @@ it cannot be softened after them.
   *precision*, not accuracy (EXP-010 S1).
 - **Not a verdict change.** `assess()` and `COVERAGE_GAP_WARN` are untouched.
 - **Not a Chandrayaan-2 result.**
+
+---
+
+# Part 2 — what happened
+
+**Run 2026-09-21, `scripts/run_exp015.py`, 0.1 s, pure re-analysis of recorded
+artefacts.** Artefact: `experiments/EXP-015/exp015_results.json`.
+
+## 0. The result in one paragraph
+
+**All six criteria are MET — and criterion 4 should still not be reported as
+passed.** The restated criterion 4′ passes on all 39 VERIFIED edges, but it
+passes on three margins so thin that the pass carries almost no weight:
+**one edge sits *exactly* on the calibrated floor** (occupancy 0.078125, floor
+0.078125, margin **0.000000**, and a `>` instead of the frozen `≥` would make
+it 38/39 and NOT MET); **S4's anti-vacuity bar clears by 0.58 percentage
+points** (10.58 % against a frozen 10 %); and **14 of 39 edges — 36 % — are
+judged by extrapolation**, sitting above the occupancy range EXP-014 ever
+sampled. The honest conclusion is the one Part 1 §1 listed third, arrived at by
+a different route than predicted: **§53's criterion 4 is mis-specified**, and
+restating it under a validated metric converts a clear failure into a marginal
+pass rather than into a meaningful one.
+
+**The prediction in Part 1 was wrong.** S4 was expected to fail at MEDIUM-HIGH
+confidence on saturation grounds. It passed: 25 of the 39 edges sit below the
+0.99 saturation level, so the metric does still vary where it is applied. The
+reasoning was half right — 14 edges *are* pinned at exactly 1.0 — and the
+conclusion drawn from it was wrong. Recorded as a wrong prediction.
+
+| | criterion | verdict |
+|---|---|---|
+| **S0** | the calibration is EXP-014's instrument, not a new one | **MET** — reproduces 0.6113534312076709 **exactly** |
+| **S1** | the calibrated occupancy floor `T` | **MET** — `T` = **0.078125**, CI **0.03125 – 0.09375** |
+| **S2** | criterion 4′ on the 39 VERIFIED edges | **MET** — 39 / 39 pass, **one by exact equality** |
+| **S3** | the original verdict stays on the scorecard | **MET** — original **NOT MET**, 14 / 39 over 0.15, recorded beside 4′ |
+| **S4** | anti-vacuity: the floor must reject something, and the metric must vary | **MET** — rejects **10.58 %** of the calibration set; **25 / 39** edges below saturation |
+| **S5** | extrapolation honesty | **MET** — **14 / 39 (35.9 %)** lie outside the sampled range |
+
+## 1. S0 — the instrument is the same one — **MET**
+
+`crossing_threshold`, imported from `run_exp014` rather than reimplemented,
+reproduces EXP-014's recorded incumbent crossing to the **last bit**:
+`0.6113534312076709` against `0.6113534312076709`, difference exactly zero.
+
+This is the criterion that makes the rest admissible. A "corrected" criterion
+evaluated with a newly written calibration routine would be free to produce any
+answer and call the difference a correction; this shows the only thing that
+changed is the **metric being calibrated**.
+
+## 2. S1 — the floor — **`T` = 0.078125**
+
+The occupancy at which the 95th percentile of p99 local error crosses 1.0 px
+is **0.078125**, bootstrap CI **0.03125 – 0.09375**.
+
+**That value is exactly 5/64** — five occupied cells of an 8 × 8 grid. It is not
+a coincidence that it looks like a fraction: `grid_occupancy` is a **discrete**
+metric taking only values `k/64`, so both the calibration bins and the
+threshold land on lattice points. §3 is where that stops being a curiosity.
+
+## 3. S2 — the re-measurement, and the tie it turns on — **MET, 39 / 39**
+
+The 39 VERIFIED edges carry occupancy **0.078125 – 1.000000**, median
+**0.9375**. All 39 clear the floor.
+
+**One of them clears it by exactly nothing.**
+
+| rank | occupancy | margin over `T` |
+|---|---|---|
+| 1 | **0.078125** | **+0.000000** |
+| 2 | 0.281250 | +0.203125 |
+| 3 | 0.437500 | +0.359375 |
+| 4 | 0.453125 | +0.375000 |
+| 5 | 0.453125 | +0.375000 |
+
+The lowest-coverage VERIFIED edge sits **exactly on the calibrated floor** —
+both are 5/64, because a discrete metric and a threshold calibrated on it share
+a lattice. Part 1 §3 froze the criterion as **`grid_occupancy ≥ T`**, so the
+edge passes and the freezing was done before any number was seen. But the
+verdict on criterion 4′ **turns on that `≥`**: written `>`, the result is
+**38 / 39 and NOT MET**.
+
+**A criterion whose verdict is decided by the inclusive-versus-exclusive
+comparison on an exact tie is not a criterion anyone should lean on**, and no
+amount of correct pre-registration changes that. It is reported here in the
+headline rather than left for a reader to find in the rows.
+
+## 4. S3 — the original stays — **MET**
+
+Recorded in the same block as 4′, not replaced by it:
+
+> **§53 criterion 4, as written:** coverage gap ≤ 0.15 on every VERIFIED pair.
+> **Verdict: NOT MET — 14 of 39 edges exceed 0.15**, gaps running 0.038–0.406.
+
+A restatement that deletes the finding it restates is a rewrite. Both verdicts
+now sit side by side, and the audit states both.
+
+## 5. S4 — the anti-vacuity criterion — **MET, by 0.58 percentage points**
+
+Both halves were required and both hold, one of them barely:
+
+- **(a)** The floor rejects **53 of EXP-014's 501** real calibration subsets =
+  **10.58 %**, against the frozen bar of **10 %**. **Had the bar been set at
+  10.6 % this criterion would have failed.**
+- **(b)** **25 of 39** VERIFIED edges sit below the 0.99 saturation level, so
+  the metric genuinely varies in the regime where the criterion is applied.
+  This is the half Part 1 expected to fail, and it did not.
+
+**(a) clearing by 0.58 pp is not a comfortable pass.** The bar was frozen at a
+round 10 % with no measurement behind *it* either, and the result landing 0.58
+pp above a number chosen for its roundness is luck, not evidence. Stated
+plainly rather than presented as a pass.
+
+## 6. S5 — how much of this is extrapolation — **14 of 39, 35.9 %**
+
+EXP-014 sampled occupancy **0.016 – 0.938**. **Fourteen of the 39 edges sit at
+exactly 1.000** — above everything the calibration ever observed. They are
+judged by extrapolating a floor into a regime the calibration never entered.
+
+They would pass any floor in `(0, 1]`, so their passing carries no information
+about the threshold. **The effective evidential population is 25 edges, not
+39**, and that is RL-050c — *nothing samples the regime real registrations
+occupy* — arriving as a measured count rather than a caveat.
+
+## 7. What this stage concludes
+
+**Criterion 4 is not rescued, and must not be reported as passed.** Collecting
+the three margins:
+
+1. the pass depends on an **exact tie** resolved by a `≥`;
+2. the anti-vacuity bar clears by **0.58 pp** against a round number with no
+   measurement behind it;
+3. **36 %** of the population is above the calibration's range and would pass
+   any floor at all.
+
+Any one of those would be a caveat. Together they mean 4′ separates the 39
+edges from failure by almost nothing, and the correct reading of §53's
+criterion 4 is the third branch Part 1 §1 listed: **it is mis-specified.** It
+attempts to bound worst-case local error through a coverage statistic on
+registrations carrying 1656–5437 inliers, where coverage is at or near
+saturation for a third of them and the discriminating range is a handful of
+lattice points wide.
+
+**The artefact's own one-line verdict reads *"Criterion 4' is MET and
+discriminating."*** That sentence is mechanically true against the frozen
+criteria and it is **insufficient**, which is why it is quoted here rather than
+repeated as the finding. The artefact is not rewritten — integrity rule 4 — and
+Part 2 is where it is read properly.
+
+**What this vindicates.** EXP-014 §7 declined to declare criterion 4 MET by
+substituting a looser threshold for the same metric, calling that "the move the
+audit's closing line forbids". Doing the principled version instead produced a
+pass so marginal that leaning on it would have been the same error with better
+paperwork. **The refusal was right, and it is worth more than the pass would
+have been.**
+
+## 8. What this stage does NOT claim
+
+- **Not an accuracy claim.** Every error figure is inherited from EXP-014's
+  self-warps, which bound **precision**, not accuracy (EXP-010 S1).
+- **Not a verdict change.** `assess()` and `COVERAGE_GAP_WARN = 0.15` are
+  untouched.
+- **Not an adoption of 4′ into §53**, and on this evidence it should not be
+  adopted. The measurement is supplied; the decision is D-057's.
+- **Not a Chandrayaan-2 result.**
+
+## 9. Ledger and index
+
+- **D-057** — §53 criterion 4 is recorded as **mis-specified**; it stays
+  **NOT MET** on the scorecard in its original form, 4′ is **not** adopted, and
+  what would settle it is named.
+- **RL-052** — research-log entry.
+- `experiments/EXP-015/exp015_results.json` — every figure above.
