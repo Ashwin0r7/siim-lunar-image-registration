@@ -135,6 +135,26 @@ def test_the_page_keeps_the_verdict_separation_visible(page):
     assert "assess()" in page
 
 
+def test_a_vacuous_s3_is_not_styled_as_a_win(page, ev):
+    """Found by looking, 2026-09-21: the first browser check after five panels.
+
+    S3 is MET as frozen and Part 2 calls the pass vacuous, because the
+    zero-gauge control (S6) fired. The tile was green and read "64 px vs the
+    84 px floor" -- a judge would read it as a sensitivity win. No string test
+    caught it because every string was true. The tile must say "vacuous" next
+    to the number whenever S6 is NOT MET, and must not take the good style.
+    """
+    s3, s6 = ev["criteria"]["S3"], ev["criteria"]["S6"]
+    if not (s3["met"] and not s6["met"]):
+        pytest.skip("only meaningful while S3 is MET and S6 is NOT MET")
+    i = page.index("S3 — sensitivity floor")
+    tile = page[i - 200: i + 700]
+    assert "and vacuous" in tile, "the S3 tile must say the pass is vacuous when S6 fired"
+    assert "zero-gauge control (S6) fired" in tile
+    # the class expression must route a vacuous S3 to the failure style
+    assert '!crit.S6.met) ? "bad"' in page
+
+
 def test_the_panel_sits_after_the_verdict_calibration_panel(page):
     """The 36/36 is only honest next to the 13/13; order carries that."""
     assert page.index("${verdictCalibrationPanel(vm)}") < page.index("${gaugePanel(vm)}")

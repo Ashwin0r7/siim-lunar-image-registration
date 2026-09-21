@@ -1131,9 +1131,11 @@ function gaugePanel(vm) {
       <div class="tile ${cls(crit.S1)}"><div class="lab">S1 — detection</div>
         <div class="val">${word(crit.S1)}</div>
         <div class="note">the instrument flags the gauge cases loop closure passes</div></div>
-      <div class="tile ${cls(crit.S3)}"><div class="lab">S3 — sensitivity floor</div>
+      <div class="tile ${(crit.S3 && crit.S3.met && crit.S6 && !crit.S6.met) ? "bad" : cls(crit.S3)}"><div class="lab">S3 — sensitivity floor</div>
         <div class="val">${gd.detection_floor_px === null ? "none" : (+gd.detection_floor_px) + " px"}</div>
-        <div class="note">vs the per-edge archive check's ${gd.per_edge_floor_px} px floor</div></div>
+        <div class="note">${(crit.S3 && crit.S3.met && crit.S6 && !crit.S6.met)
+          ? `MET as frozen — <b>and vacuous</b>: the zero-gauge control (S6) fired, so this floor has no null to be measured against`
+          : `vs the per-edge archive check's ${gd.per_edge_floor_px} px floor`}</div></div>
       <div class="tile ${cls(crit.S2)}"><div class="lab">S2 — specificity on real data</div>
         <div class="val">${gd.specificity.n_alarms} / ${gd.specificity.n_triplets}</div>
         <div class="note">alarms on real triplets — <b>${word(crit.S2)}</b></div></div>
