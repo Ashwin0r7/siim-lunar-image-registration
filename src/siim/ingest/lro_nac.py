@@ -714,9 +714,13 @@ def write_manifest(
             "NASA/GSFC/Arizona State University. Verify before publication."
         ),
         "chandrayaan2_status": (
-            "NOT OBTAINED. ODE does not index Chandrayaan-2. OHRC/TMC-2/IIRS "
-            "require an authenticated account at pradan.issdc.gov.in. No "
-            "multi-modal claim is supported by this manifest."
+            "NOT IN THIS MANIFEST, and not obtainable through it: ODE does not "
+            "index Chandrayaan-2, and OHRC/TMC-2/IIRS require an authenticated "
+            "account at pradan.issdc.gov.in. Chandrayaan-2 TMC-2 and OHRC "
+            "products were obtained separately on 2026-09-20 and are listed, "
+            "with SHA-256, in data/manifests/chandrayaan2_manifest.json "
+            "(REAL-DATA-09). No multi-modal claim is supported by either "
+            "manifest: no IIRS product was delivered."
         ),
         "note": note,
         "n_entries": len(entries),

@@ -783,7 +783,10 @@ def illumination_evidence() -> dict[str, Any]:
             "NOT an azimuth result: these edges vary in INCIDENCE only.",
             "NOT a located threshold: the cliff is bracketed only between "
             "11.73° (works) and 38.85° (fails).",
-            "NO Chandrayaan-2, NO multi-modal registration, NO learned matcher.",
+            "NO Chandrayaan-2 evidence in this panel, NO multi-modal "
+            "registration, NO learned matcher: these are LRO NAC ↔ LRO NAC "
+            "edges under RootSIFT. The Chandrayaan-2 result is measured "
+            "separately in the REAL-DATA-09 panel and is not borrowed here.",
         ],
         "sources": sorted({r["source"] for r in rows}),
     }
@@ -969,10 +972,17 @@ def engines_evidence() -> dict[str, Any]:
             "truth exists.",
             "NOT an envelope extension at native scale: on 42 pairs both engines' "
             "largest ≥ 0.8 bin is 10–15°, and nothing passes above 40°.",
-            "NOT a replication of the low-incidence success: candidate E2 failed "
-            "both decisive edges, and four frames fail against every partner.",
-            "NO Chandrayaan-2, NO multi-modal registration, NO azimuth result; no "
-            "learned matcher claim beyond the two artefacts named below.",
+            "NOT the original run's replication conclusion. The 2026-09-05 rows "
+            "shown beside the amended ones reported replication NOT MET and four "
+            "frames failing every partner; E-037 then found five census frames "
+            "are mirror images by their own corner metadata, and with the "
+            "orientation corrected the replication is MET and D-049 is WITHDRAWN "
+            "(D-049-N2). Both runs are served so the correction is visible — not "
+            "so the withdrawn finding still stands.",
+            "NO Chandrayaan-2 evidence in this panel, NO multi-modal registration, "
+            "NO azimuth result; no learned matcher claim beyond the two artefacts "
+            "named below. The Chandrayaan-2 result is measured separately in the "
+            "REAL-DATA-09 panel.",
         ],
         "sources": ["experiments/EXP-007/exp007_results.json",
                     "experiments/REAL-DATA-07/real_data_07_results.json"]

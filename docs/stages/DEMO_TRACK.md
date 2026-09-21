@@ -227,14 +227,28 @@ existed to remove. A test asserts it is not offered.
 | **Two-engines panel** (2026-09-05, R12 beat 1) | **done** — EXP-007's four failing edges at native scale and at 7–30 m, RootSIFT beside DISK + LightGlue, with each pass's archive-geometry verdict; REAL-DATA-07's success rate per 5° bin for both engines on 42 pairs, wrong-pass counts, pooled p, replication NOT MET. Read from the two artefacts, which the panel links |
 | **Live registration** (2026-09-05, R12 beat 4) | **done** — `Your own pair · live`: two uploaded images through estimate → refine → re-estimate → verify (B1, B4L, B4X, or B1 + B4L with engine agreement), labelled `live` / `user_supplied`, long side capped at 1024 px, no product for a REJECTED pair |
 | **Browser check of the two additions** (2026-09-05, Chrome, `python scripts/run_demo.py --port 8017`) | **done — three defects found by looking, none by the string tests, all fixed and pinned in `tests/test_demo_engines.py`:** (1) the generic scenario handler overrode the live card's and posted `__live__` to `/api/run`; (2) boot's auto-select of the first case fired seconds later on a loaded CPU and replaced an opened live card; (3) the three preview images were broken because the API already returns full data URLs and the template prefixed them again. After the fixes: the two-engines panel renders with all eleven bins and both engines' bars; a 512² self-warp pair registers live in 7.5 s with 2019 inliers, 1579 refined, `translation` selected by held-out evidence, verdict INCONCLUSIVE (no third image), previews shown. Screenshots below the fold come back blank from the capture tool at this page's depth; the DOM was checked instead |
-| The 320:1 localisation beat (R12 beat 3) | **not built — no artefact exists.** REAL-DATA-08 reached the 100 m rung by proxy only; the OHRC-in-IIRS beat waits on REAL-DATA-09 |
-| Chandrayaan-2 / multi-modal | **blocked** on the PRADAN download (2026-09-06) — and claimed nowhere. REAL-DATA-08's radar proxy is a measured negative and is not in the demo |
+| The 320:1 localisation beat (R12 beat 3) | **not built, and now known not to be buildable from the delivered data.** REAL-DATA-08 reached the 100 m rung by proxy only; the beat needed OHRC inside IIRS, and REAL-DATA-09 delivered **no IIRS at all** while both OHRC observations sit over the South Pole where this project holds no NAC. Recorded as `no_data`, not as pending |
+| **Chandrayaan-2 panel** (2026-09-20, `siim.demo.chandrayaan2`, `/api/evidence/chandrayaan2`) | **done** — REAL-DATA-09 on the page. TMC-2 L2 ortho ↔ LRO NAC at 5 m: B1 3 successes (70/57/29 inliers), B4L 3 (965/675/31), **all geometry-CONSISTENT, 0 wrong passes**, engines agreeing to 0.619 / 2.570 px against a 3 px floor. The RD-07 illumination envelope reproduced cross-sensor. σ_C2 = 38.75 m read from the label, not assumed. **The negatives stay on the page and a test pins them there:** the loop {TMC-2, NAC A, NAC D} closes at 2.2131 px = 10.5 m and is **REJECTED** at the frozen 2.0 px line, which was not moved; S4's H0 refutation at a 2:1 DEM/GSD ratio (D-052); OHRC excluded on coverage; no IIRS |
+| **Verdict-calibration panel** (2026-09-20, `siim.demo.exp012`, `/api/evidence/verdict-calibration`) | **done** — EXP-012 on the page: the first VERIFIED verdicts, 13/13 triplets at 0.3654–1.3358 px with **no threshold touched**, both controls (1201.0378963072235 px reproduced to 0.0 px; 22/22 re-matched edges exact). **Carries its own refutations:** S2 NOT MET (ρ = 0.0551 — loop closure does not track edge strength), and §53 criterion 4 NOT MET (14 of 39 VERIFIED edges exceed the 0.15 coverage bound) |
+| Multi-modal | **still claimed nowhere, and now for a measured reason rather than a pending download.** REAL-DATA-08's radar proxy is a measured negative and is not in the demo; no IIRS product was delivered, so no spectral-modality claim exists to make. TMC-2 ↔ NAC is panchromatic-to-panchromatic and the panel says so |
 
 ## Deliberately not claimed
 
-Multi-modal capability · Chandrayaan-2 anything · ground-truth-verified real registration ·
+Multi-modal capability · ground-truth-verified real registration ·
 Sun-**azimuth** invariance · illumination as a universal cause of registration failure ·
 a located illumination threshold (bracketed only to 11.73°–38.85° on the six edges; on 42 pairs
-nothing passes above 40° and four frames fail regardless) · any learned-engine claim beyond the
-two artefacts the engines panel links · any EXP-004 result · any number from the live card. A test scans every real-data response for these terms and requires each
-occurrence to sit next to a negation.
+nothing passes above 40°, and the only frames still failing every partner after the E-037
+correction are the two darkest at 72–75°, which is D-029's ceiling question) · any
+learned-engine claim beyond the two artefacts the engines panel links · any EXP-004 result ·
+any number from the live card. A test scans every real-data response for these terms and
+requires each occurrence to sit next to a negation.
+
+**Chandrayaan-2 is claimed exactly as far as it was measured, and no further.** Since
+2026-09-20 the demo *does* carry a Chandrayaan-2 panel, because REAL-DATA-09 produced a real
+Chandrayaan-2 measurement. What is claimed: TMC-2 L2 ortho **registers** to LRO NAC at 5 m,
+geometry-consistent, 0 wrong passes, two engines agreeing. What is **not** claimed and is
+stated on the same panel: no **VERIFIED** Chandrayaan-2 verdict exists (the one available
+loop closes at 2.2131 px against a 2.0 px line that was not moved), only one of the three
+named sensors returned usable data, no check points exist so no accuracy is reported, and
+nothing here is a multi-modal result. Until 2026-09-20 this line read *"Chandrayaan-2
+anything"*; it is narrowed here because the evidence changed, not because the bar did.
