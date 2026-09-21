@@ -21,6 +21,11 @@ are pinned here.
    mark read "REGISTRATION SUCCEEDS", above a REJECTED verdict and a 64 px
    ground-truth error, which is the claim the rest of the page exists to
    refute. It now names the rule that passed instead of asserting an outcome.
+   *(Historical note, retained under integrity rule 3: on 2026-09-22 every
+   synthetic scenario was removed from the page, which now offers recorded
+   real-data cases only. The API still serves the adversarial case and the
+   test below still pins its behaviour; the two template checks that pinned
+   the page's adversarial mark were deleted with the mark.)*
 
 3. **A question asked of the wrong verdict.** The note explaining why the
    decisive check did not run was headed *Why not "VERIFIED"?* on every real
@@ -178,11 +183,12 @@ def test_the_provenance_table_links_every_path_it_prints(page):
 
 
 def test_the_adversarial_case_passes_the_inlier_rule_and_is_still_wrong():
-    """The fact the page's top mark has to survive.
+    """The fact any top-of-page mark would have to survive.
 
     D-023 (reject at <= 8 inliers) passes here, comfortably, on an answer that
     is 64 px wrong. A mark derived from the inlier count alone must therefore
-    not read as an outcome -- which is why the page names the rule instead.
+    not read as an outcome. The page no longer offers this synthetic case at
+    all; the API still serves it and this remains true of it.
     """
     j = _client().post("/api/run", json={"scenario": "coherent_wrong"}).json()
     assert j["adversarial_construction"] is True
@@ -192,24 +198,19 @@ def test_the_adversarial_case_passes_the_inlier_rule_and_is_still_wrong():
     assert gt["available"] is True and gt["true_error_median_px"] > 8.0
 
 
-def test_the_page_marks_the_adversarial_case_by_the_rule_that_passed(page):
-    """"REGISTRATION SUCCEEDS" must be unreachable for an adversarial case."""
-    body = page[page.index("function outcomePill"):]
-    body = body[:body.index("\n}\n")]
-    assert "d.adversarial_construction" in body
-    assert (body.index("d.adversarial_construction")
-            < body.index("REGISTRATION SUCCEEDS")), (
-        "the adversarial branch must be taken before the success wording")
-    assert "INLIER RULE PASSES" in body and "WRONG" in body
-    assert page.count("✓ REGISTRATION SUCCEEDS") == 1, (
-        "the success mark must be emitted from exactly one place -- the "
-        "outcome mark's non-adversarial branch")
+def test_the_page_offers_no_synthetic_case(page):
+    """Recorded real data only: no synthetic scenario may be offered or drawn.
 
-
-def test_the_outcome_mark_goes_through_the_one_function_that_knows(page):
-    """No second, unguarded copy of the mark may render the pill."""
-    assert re.search(r'class="pill outcome-\$\{esc\(outcomePill\(', page)
-    assert not re.search(r'class="pill outcome-\$\{vm\.outcome\}"', page)
+    The API still lists the synthetic scenarios; the page filters them out at
+    boot and refuses any non-real payload in render(), so a synthetic case
+    cannot reach the screen even by a hand-crafted request.
+    """
+    assert 'data_source === "real_lro_nac"' in page
+    assert 'if (d.data_source !== "real_lro_nac") return null;' in page
+    assert "cases-synth" not in page
+    assert "CONTROLLED SYNTHETIC" not in page
+    assert "adversarial_construction" not in page
+    assert "on real LRO NAC / Chandrayaan-2 data" in page
 
 
 # ---------------------------------------------------------------------------
