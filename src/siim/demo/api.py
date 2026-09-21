@@ -61,6 +61,7 @@ from siim.demo.chandrayaan2 import (  # noqa: E402
     chandrayaan2_evidence,
     chandrayaan2_status,
 )
+from siim.demo.exp006 import exp006_evidence, exp006_status  # noqa: E402
 from siim.demo.exp012 import exp012_evidence, exp012_status  # noqa: E402
 from siim.demo.exp013 import exp013_evidence, exp013_status  # noqa: E402
 from siim.demo.evidence import (  # noqa: E402
@@ -259,6 +260,13 @@ def scenarios() -> dict:
                 if chandrayaan2_status()["available"] else
                 ("NOT AVAILABLE — missing "
                  + ", ".join(chandrayaan2_status()["missing"]))),
+            "component_ablation": (
+                ("AVAILABLE — read from the EXP-006 artefact. The "
+                 "architecture's own justification, measured on 42 real pairs "
+                 "rather than carried on a citation.")
+                if exp006_status()["available"] else
+                ("UNAVAILABLE — missing "
+                 + ", ".join(exp006_status()["missing"]))),
             "gauge_detection": (
                 ("AVAILABLE — read from the EXP-013 artefact and EXP-012's "
                  "gauge probe. This panel reports a measured limitation of "
@@ -304,6 +312,18 @@ def evidence_verdict_calibration() -> dict:
     guarantee? Read from the recorded artefact; never recomputed."""
     try:
         return exp012_evidence()
+    except DemoDataMissing as exc:
+        raise HTTPException(503, str(exc)) from exc
+
+
+@app.get("/api/evidence/component-ablation")
+def evidence_component_ablation() -> dict:
+    """EXP-006: does one protocol step move more outcomes than swapping the matcher?
+
+    The architecture's own justification, measured rather than cited. Read from
+    the recorded artefact; never recomputed."""
+    try:
+        return exp006_evidence()
     except DemoDataMissing as exc:
         raise HTTPException(503, str(exc)) from exc
 
@@ -481,6 +501,10 @@ def advertised_artefacts() -> frozenset[str]:
         pass
     try:
         paths.update(exp013_evidence()["sources"])
+    except DemoDataMissing:
+        pass
+    try:
+        paths.update(exp006_evidence()["sources"])
     except DemoDataMissing:
         pass
     return frozenset(paths)

@@ -139,3 +139,196 @@ quoted as a protocol-vs-matcher comparison:
 - **Not an accuracy claim.** The outcome variable is a binary success under a
   frozen rule, corroborated against archive geometry at its own ~100 px floor.
 - **Not a Chandrayaan-2 result**, and not evidence about any non-mare terrain.
+
+---
+
+# Part 2 — what happened
+
+**Run 2026-09-21, `scripts/run_exp006.py`, under a second, CPU only, no new
+data and no re-match.** Artefact: `experiments/EXP-006/exp006_results.json`.
+**42 paired pairs** (RD-03 23, RD-04 19) — the complete census, identical in
+both arms.
+
+## 0. The result in one paragraph
+
+**All six criteria MET.** On the 42 real lunar pairs, correcting **one step of
+the protocol** — the orientation convention — changes **2.2× as many pair
+outcomes** as replacing the entire feature matcher, and it changes them in a
+way a matcher swap does not: **every one of its 12 flips is an improvement**,
+while matcher swaps produce 6 improvements and 5 regressions. The orientation
+contrast reaches **p = 0.0156** (exact McNemar, B4L); **no matcher contrast
+comes close to significance** (p ≥ 0.25). ADR-0001's architectural bet — *the
+matcher is a replaceable part; the protocol is the contribution* — has, for the
+first time, evidence on lunar imagery rather than a SAR-optical citation.
+
+**And the claim this licenses is strictly bounded**, exactly as Part 1 §2
+required: *at least one protocol step outweighs a matcher replacement on 42
+mare pairs.* Not the universal thesis, which §553 rules unfalsifiable as
+phrased and which nothing here rescues.
+
+| | criterion | verdict |
+|---|---|---|
+| **S0** | ≥ 40 pairs in both arms, identical sets | **MET** — 42, 0 unmatched on either side |
+| **S1** | the protocol step flips more outcomes than the matcher swap | **MET** — 6.0 vs 2.75 mean |
+| **S2** | McNemar p ≤ 0.05 for the protocol on ≥ 1 matcher, and larger p for the matcher | **MET** — 0.0156 vs 0.25 |
+| **S3** | the sign holds in RD-03 and RD-04 separately | **MET** — 2.5 vs 1.33 and 3.5 vs 1.33 |
+| **S4** | flips go fail → success, or exceptions are enumerated | **MET** — **12 of 12**, zero regressions |
+| **S5** | a better matcher must not paper over the protocol defect | **MET** — 1 papered over vs 7 rescued |
+
+## 1. The factorial
+
+Success under the frozen rule (`n_inliers > 8` **and** CONSISTENT with archive
+corner geometry), over the same 42 pairs:
+
+| | B1 RootSIFT | B4L DISK+LightGlue | B4X XFeat |
+|---|---|---|---|
+| **quarter-turn** (Part 1 orientation) | 20 / 42 · 0.476 | 17 / 42 · 0.405 | — |
+| **north-up-east-right** (E-037) | **25 / 42 · 0.595** | **24 / 42 · 0.571** | **27 / 42 · 0.643** |
+
+Read down a column — fixing the protocol step: **+5** (B1), **+7** (B4L).
+Read across a row — swapping the matcher: **−3** (original), **−1** and **+2**
+and **+3** (amended). The protocol step is worth more than any matcher
+available, and it is worth more than the *spread* of all three matchers.
+
+## 2. S1 and S2 — how much moves, and whether it is real
+
+Paired, on the identical 42 pairs, with an **exact** McNemar (the discordant
+counts are single digits, so a chi-square approximation would be wrong):
+
+**PROTOCOL — the orientation step, same matcher:**
+
+| matcher | changed | fail→success | success→fail | p (exact) |
+|---|---|---|---|---|
+| B1 RootSIFT | 5 | **5** | **0** | 0.0625 |
+| B4L DISK+LightGlue | **7** | **7** | **0** | **0.0156** |
+
+**MATCHER — engine swap, same orientation:**
+
+| arm | swap | changed | fail→success | success→fail | p (exact) |
+|---|---|---|---|---|---|
+| quarter-turn | B1 ↔ B4L | 3 | 0 | 3 | 0.2500 |
+| north-up-east-right | B1 ↔ B4L | 1 | 0 | 1 | 1.0000 |
+| north-up-east-right | B1 ↔ B4X | 4 | 3 | 1 | 0.6250 |
+| north-up-east-right | B4L ↔ B4X | 3 | 3 | 0 | 0.2500 |
+
+**Mean outcomes changed: 6.0 by the protocol step, 2.75 by a matcher swap — a
+factor of 2.18.** Totals across all contrasts: the protocol moves **12** pair
+outcomes, **12 of them improvements**; matcher swaps move **11**, of which **6**
+are improvements and **5** are regressions.
+
+**Report the B1 p-value honestly: 0.0625 is not ≤ 0.05.** S2 as frozen asks for
+significance on *at least one* matcher and gets it on B4L at 0.0156, with every
+matcher contrast at p ≥ 0.25. But the B1 arm on its own does not clear the
+line, and a five-flip McNemar cannot: with 5 discordant pairs all in one
+direction the smallest attainable two-sided p is exactly 0.0625. **The B1
+result is as significant as it is arithmetically possible for it to be**, and
+that is a limit of the sample, not a weakness of the effect. Stated rather than
+rounded down.
+
+## 3. S4 — direction, which is the part a matcher swap cannot match
+
+**Twelve flips, twelve improvements, zero regressions**, across both matchers
+and both windows. The orientation step never broke a pair that was working.
+
+Contrast with the matcher axis, where swapping engines moves pairs **both
+ways** in three of four contrasts — B1 ↔ B4X gains 3 and loses 1. That is the
+qualitative difference the ablation exposes and the raw counts alone would
+hide: **a protocol fix is monotone; a matcher swap is a trade.** A team that
+reaches for a better matcher is buying some pairs and selling others; a team
+that fixes the coordinate convention is not.
+
+## 4. S5 — the criterion that could have refuted the thesis
+
+Part 1 predicted S5 **MET at LOW confidence** and said it was the one to bet
+against: a learned matcher with 5–25× the inlier yield inside its envelope
+(D-047-N1) is exactly the kind of component that could absorb an orientation
+defect and make the protocol step look unnecessary.
+
+**It does not.** Pairs where *some* matcher succeeds under the **wrong**
+orientation but that are not unanimous successes under the **right** one:
+**1**. Pairs the orientation step rescues outright: **7**. A better matcher
+papers over the defect **one seventh** as often as fixing the protocol removes
+it.
+
+The prediction was wrong in the direction that strengthens the thesis, and it
+is recorded as a wrong prediction rather than quietly dropped.
+
+## 5. The mechanism, confirmed by a prediction that could have failed
+
+**Post-hoc — not pre-registered, and labelled as such.** Having seen which
+pairs flipped, the mechanism makes a sharp, falsifiable prediction, and it is
+worth testing precisely because Part 1 did not think to.
+
+E-037 identified **five of the fourteen** census frames as mirror images by
+their own corner metadata (`frames_mirrored` in
+`real_data_07_amendment_analysis.json`). A reflection is not undone by a
+quarter-turn — but between **two** mirrored frames the reflection **cancels**,
+because a mirror↔mirror match is handedness-consistent. So the orientation fix
+should change outcomes on pairs with **exactly one** mirrored member, and on
+**no others**.
+
+The 42 pairs split: **26** with no mirrored frame, **12** with exactly one,
+**4** with two.
+
+- **All 12 flips have exactly one mirrored member.** 12 of 12.
+- **No two-mirrored pair flipped**, as cancellation requires.
+- **No zero-mirrored pair flipped.**
+
+Under a null that flips fall where pairs are, P(all 12 land in a subset holding
+12/42 of the pairs) = **2.96 × 10⁻⁷**.
+
+This is the strongest form the result takes: the protocol step's gains land
+**exactly** where its stated mechanism says they must, including on the
+negative half of the prediction, which had four chances to fail and did not.
+
+## 6. What this does and does not license
+
+**Licensed:** on 42 geometry-confirmed mare pairs, a single coordinate-convention
+step in the protocol changes 2.2× as many outcomes as replacing the matcher,
+changes all of them for the better, reaches significance where no matcher swap
+does, and does so through a mechanism that predicts which pairs it will move.
+
+**Not licensed, and pre-registered as such before any number was seen:**
+
+- **The universal thesis.** The orientation step is **the one protocol
+  component whose both levels happen to have been recorded**, and they were
+  recorded because a defect was found (E-037), not because an ablation was
+  designed. §553's judgement that *"the protocol matters more than the
+  matcher"* is unfalsifiable as phrased **stands**, and nothing here revives
+  it.
+- **A protocol-vs-matcher claim about components never ablated**: scale
+  normalisation, tiling and the photometric arm are not in this design.
+- **Any accuracy claim.** The outcome is a binary success corroborated against
+  archive geometry at its own ~100 px floor. It says nothing about how
+  accurate a succeeding registration is.
+- **Anything outside mare terrain, one region, one instrument** — and nothing
+  about Chandrayaan-2.
+
+**The reframing was the right call, and it is worth saying why.** Asked as
+*"is the protocol more important than the matcher?"* this has no truth value,
+which is why it sat unregistered for the project's whole life. Asked as *"does
+this one step move more outcomes than swapping this component, on these 42
+pairs, with these criteria frozen first?"* it took under a second to answer
+from artefacts that already existed. §553's instruction to reframe rather than
+run was correct, and the six-week delay was the cost of not reframing sooner.
+
+## 7. Secondary arms — reported, not part of any criterion
+
+Neither is paired or contrast-controlled, so neither may be quoted as a
+protocol-vs-matcher comparison (Part 1 §5):
+
+- **Verification step** (archive-geometry consistency): on these 42 pairs it
+  converts **0** passes into non-successes under any engine — the amended run
+  has **0 wrong passes in 76**. Its value is recorded at the coarse rung
+  instead, in REAL-DATA-08, as E-038's corrected tally gives it.
+- **Refinement + model selection** (EXP-010, EXP-011): dense error **0.0975 px**
+  under the affine default against **0.0018 px** under refine-then-reselect on
+  self-warps. A **precision** result, a different response variable from this
+  stage's binary outcome, and not poolable with it.
+
+## 8. Ledger and index
+
+- **D-056** — ADR-0001's architectural bet is supported in its bounded form on
+  lunar data; the universal claim stays unsupported and §553 stands.
+- **RL-051** — research-log entry.
+- `experiments/EXP-006/exp006_results.json` — every figure above.

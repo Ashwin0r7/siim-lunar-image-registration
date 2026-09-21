@@ -395,7 +395,8 @@ Promise.all([
   fetch("/api/evidence/chandrayaan2").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/verdict-calibration").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/gauge-detection").then(r => r.ok ? r.json() : null).catch(() => null),
-]).then(([d, ill, eng, c2, vc, gd]) => {
+  fetch("/api/evidence/component-ablation").then(r => r.ok ? r.json() : null).catch(() => null),
+]).then(([d, ill, eng, c2, vc, gd, ca]) => {
   SCEN = d.scenarios;
   const card = s => `
     <button class="case" data-id="${esc(s.id)}">
@@ -426,6 +427,7 @@ window.__ENG = eng;
   window.__C2 = c2;
   window.__VC = vc;
   window.__GD = gd;
+  window.__CA = ca;
   $("#scope").innerHTML = ill
     ? `<b>Evidence scope</b><br>${esc(ill.scope)}`
     : `<b>Evidence scope</b><br>LRO NAC · Mare Serenitatis`;
@@ -587,6 +589,7 @@ function render(d) {
     ${stepEvidence(vm, v, isFailStory)}
     ${stepVerdict(vm, v, d)}
     ${illuminationPanel(vm)}
+    ${ablationPanel(vm)}
     ${enginesPanel(vm)}
     ${verdictCalibrationPanel(vm)}
     ${gaugePanel(vm)}
@@ -921,6 +924,91 @@ function illuminationPanel(vm) {
     <div class="notclaimed">${ill.not_claimed.map(n =>
       `<span>${esc(n)}</span>`).join("")}</div>
     <div class="srcline"><b>sources:</b> ${ill.sources.map(esc).join(" · ")}</div>
+  </div>`;
+}
+
+/* "Why this architecture?" -- the question a judge asks that no accuracy number
+   answers. The project's answer is that the matcher is a swappable engine and
+   the protocol around it is the contribution, and until 2026-09-21 that answer
+   was a citation to a SAR-optical preprint. EXP-006 made it a measurement, and
+   this panel shows the factorial that produced it -- including the bound on
+   what it licenses, which is the half a reader is entitled to see. */
+function ablationPanel(vm) {
+  const ca = window.__CA;
+  if (!ca || !vm.real) return "";
+  const h = ca.headline;
+  const arms = [...new Set(ca.factorial.map(f => f.arm))];
+  const engs = [...new Set(ca.factorial.map(f => f.engine))];
+  const cell = (arm, eng) => {
+    const f = ca.factorial.find(x => x.arm === arm && x.engine === eng);
+    if (!f) return `<td class="note">—</td>`;
+    const best = arm !== "quarter-turn";
+    return `<td class="n"${best ? ' style="font-weight:700"' : ''}>${f.n_success} / ${f.n}
+      <span style="color:var(--ink-3);font-weight:400"> · ${(+f.rate).toFixed(3)}</span></td>`;
+  };
+  return `<div class="card">
+    <div class="stephead">
+      <div class="stepnum">◆</div>
+      <div><div class="stepq">Why a protocol, rather than just a better matcher?</div>
+      <div class="stepsub">Component ablation · EXP-006 · ${ca.n_pairs} real pairs, one protocol step against three matchers</div></div>
+    </div>
+
+    <div class="tiles" style="margin-bottom:16px">
+      <div class="tile hero good"><div class="lab">protocol vs matcher</div>
+        <div class="val">${(+h.ratio).toFixed(2)}×</div>
+        <div class="note">outcomes moved: ${(+h.mean_changed_protocol).toFixed(1)} by one protocol step, ${(+h.mean_changed_matcher).toFixed(2)} by a whole-matcher swap</div></div>
+      <div class="tile good"><div class="lab">protocol flips</div>
+        <div class="val">${h.protocol_improvements} <span style="font-size:16px;color:var(--ink-3)">/ ${h.protocol_flips}</span></div>
+        <div class="note">improvements · <b>${h.protocol_regressions} regressions</b></div></div>
+      <div class="tile ${h.matcher_regressions > 0 ? "bad" : ""}"><div class="lab">matcher flips</div>
+        <div class="val">${h.matcher_improvements} <span style="font-size:16px;color:var(--ink-3)">/ ${h.matcher_flips}</span></div>
+        <div class="note">improvements · <b>${h.matcher_regressions} regressions</b> — a swap is a trade</div></div>
+      <div class="tile"><div class="lab">significance</div>
+        <div class="val">${(+h.best_protocol_p).toFixed(4)}</div>
+        <div class="note">best protocol p vs <b>${(+h.best_matcher_p).toFixed(3)}</b> best matcher p (exact McNemar)</div></div>
+    </div>
+
+    <table style="margin-bottom:14px">
+      <tr><th>orientation step</th>${engs.map(e => `<th>${esc(e)}</th>`).join("")}</tr>
+      ${arms.map(a => `<tr><td class="note">${esc(a)}</td>${engs.map(e => cell(a, e)).join("")}</tr>`).join("")}
+    </table>
+    <div class="note" style="margin-bottom:14px">Read <b>down</b> a column to see one protocol step fixed; read <b>across</b> a row to
+      see the matcher replaced. The step is worth more than any matcher available, and more than the spread of all three.</div>
+
+    <table>
+      <tr><th>contrast</th><th>changed</th><th>gained</th><th>lost</th><th>p (exact McNemar)</th></tr>
+      ${ca.protocol_contrast.map(c => `<tr>
+        <td><b>protocol</b> · ${esc(c.engine)}</td>
+        <td class="n">${c.changed}</td>
+        <td class="n" style="color:var(--good);font-weight:700">+${c.gained}</td>
+        <td class="n">${c.lost}</td>
+        <td class="n"${(+c.p_exact) <= 0.05 ? ' style="font-weight:700"' : ''}>${(+c.p_exact).toFixed(4)}</td></tr>`).join("")}
+      ${ca.matcher_contrast.map(c => `<tr style="color:var(--ink-2)">
+        <td>matcher · ${esc(c.swap)} <span class="note">(${esc(c.arm)})</span></td>
+        <td class="n">${c.changed}</td>
+        <td class="n">+${c.gained}</td>
+        <td class="n"${c.lost > 0 ? ' style="color:var(--bad);font-weight:700"' : ''}>${c.lost}</td>
+        <td class="n">${(+c.p_exact).toFixed(4)}</td></tr>`).join("")}
+    </table>
+
+    <div class="note" style="margin-top:12px;border-left:2px solid var(--good);padding-left:10px">
+      <b>The criterion written to refute this, and it held.</b> If a good enough matcher could recover what the
+      protocol defect cost, the architecture's claim would have no support here. Pairs rescued by a better matcher
+      under the <i>wrong</i> protocol: <b>${ca.s5.papered_over_by_matcher}</b>. Pairs rescued by fixing the protocol:
+      <b>${ca.s5.rescued_by_protocol}</b>.</div>
+
+    <div class="note" style="margin-top:10px;border-left:2px solid var(--warning);padding-left:10px">
+      <b>What this does not license, stated before the numbers were seen.</b> The step measured is the one protocol
+      component whose <i>both</i> levels happen to have been recorded — and they were recorded because a defect was
+      found, not because an ablation was designed. So this supports <b>“at least one protocol step outweighs a
+      matcher replacement on ${ca.n_pairs} mare pairs”</b>, and not the general claim. The master plan rules the
+      general claim unfalsifiable as phrased, and that judgement still stands.</div>
+
+    <div class="note" style="margin-top:10px;font-size:13.5px;color:var(--ink)"><b>${esc(ca.summary)}</b></div>
+    <div class="note" style="margin-top:8px;color:var(--ink-2)"><b>Scope of this evidence:</b> ${esc(ca.scope)}</div>
+    <div class="notclaimed">${ca.not_claimed.map(n => `<span>${esc(n)}</span>`).join("")}</div>
+    <div class="srcline"><b>sources:</b> ${ca.sources.map(x =>
+      `<a class="filelink" href="/artefact/${esc(x)}" target="_blank" rel="noopener">${esc(x)}</a>`).join(" · ")}</div>
   </div>`;
 }
 

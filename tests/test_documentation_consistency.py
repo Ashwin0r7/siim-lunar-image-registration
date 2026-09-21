@@ -170,14 +170,36 @@ def test_readme_does_not_claim_scale_normalisation_is_implemented():
     assert "NOT implemented" in rd
 
 
-def test_readme_does_not_claim_an_unregistered_experiment_exists():
+def test_readme_states_exp006_as_the_bounded_claim_not_the_general_one():
+    """EXP-006 ran on 2026-09-21; the guard inverts rather than disappears.
+
+    Until then this test asserted the README said EXP-006 was *"not
+    pre-registered and has not been started"*, which protected against claiming
+    an unregistered result. The stage has since run, so the risk changed shape:
+    the danger is no longer claiming a result that does not exist, it is
+    claiming a **broader** result than the one that does. Master plan §553
+    rules the general protocol-dominance thesis unfalsifiable as phrased, and
+    EXP-006 measured one step chosen because its both levels happened to be
+    recorded (D-056). So the README must carry the bound, not just the ratio.
+    """
     rd = _read("README.md")
-    assert "EXP-006 exists" not in rd
-    assert "not pre-registered and has not been started" in rd
+    assert "at least one protocol step outweighs a matcher replacement" in rd, (
+        "the README quotes EXP-006's effect but not the bound on what it "
+        "licenses; that turns a bounded result into the general thesis")
+    assert "unfalsifiable as phrased" in rd
+    assert "because a defect was found" in rd, (
+        "the README must say the ablated step was recovered from a defect "
+        "rather than designed as an ablation — that is why the claim is bounded")
 
 
-@pytest.mark.parametrize("stage", ["EXP-004", "EXP-006"])
+@pytest.mark.parametrize("stage", ["EXP-004"])
 def test_unstarted_experiments_are_never_described_as_started(stage):
+    """EXP-004 is still pre-registered and not implemented.
+
+    EXP-006 was in this list until 2026-09-21 and is out of it because it ran,
+    not because the rule was relaxed — see the test above, which replaced its
+    guard with the inverse one.
+    """
     for rel in ("README.md", "docs/stages/STAGE-INDEX.md"):
         text = _read(rel)
         if stage not in text:

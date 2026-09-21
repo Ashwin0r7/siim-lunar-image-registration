@@ -332,8 +332,22 @@ Measured today, not asserted:
 
 ## What this audit says to do next — rewritten 2026-09-21
 
-*(The 2026-09-20 list is kept below under integrity rule 3. Items 1, 2 and 3 of
-it have since been done; item 4 has not.)*
+*(The 2026-09-20 list is kept below under integrity rule 3. **All four of its
+items are now done** — the Chandrayaan-2 data arrived and REAL-DATA-09 ran,
+EXP-012 produced the first VERIFIED verdicts, the blind spot behind them is
+stated plainly in the README, and EXP-006 ran on 2026-09-21.)*
+
+**What closed since this list was first written, and what it cost.** Three
+stages ran on 2026-09-21 and two of them returned **negatives**:
+
+- **EXP-013** built the detector for the verdict's known blind spot and
+  measured that the reference available to it is too coarse to run it — a
+  bounded negative (D-054), and the reason item 1 below is now top of the list.
+- **EXP-014** ran ADR-0006's six-week-overdue acceptance test and **refuted
+  it**: the primary coverage metric is the worst of four, and its threshold is
+  4× too tight (D-055, E-042).
+- **EXP-006** is the one that landed positive, and it replaced the
+  architecture's founding citation with a measurement (D-056).
 
 Ranked by what a reviewer would notice first:
 
@@ -372,13 +386,17 @@ Ranked by what a reviewer would notice first:
    recorded tiles, not new data. Until it runs, criterion 4 is a failure
    against an uncalibrated line, which is a weaker statement than it looks.
 
-4. **EXP-006 remains unregistered.** Unchanged from 2026-09-20 and now the
-   oldest open item in the project. The thesis that *the protocol matters more
-   than the matcher* — the claim the whole architecture is organised around —
-   is still carried on one SAR-optical preprint. The data to test it is on disk
-   (42 confirmed pairs, three engines, every protocol knob but tiling) and it
-   runs fully offline. The master plan (§553) directs it be reframed as a
-   component ablation of GAPC rather than run as a standalone thesis.
+4. **~~EXP-006~~ — DONE 2026-09-21, and it replaced a citation with a
+   measurement.** Reframed as §553 directs, it found that one protocol step
+   changes **2.18×** as many outcomes as replacing the entire matcher (mean 6.0
+   vs 2.75; p = **0.0156** against no significant matcher contrast), with **all
+   12 of its flips improvements** against the matcher axis's 6 gains / 5
+   losses, and all 12 landing on pairs the mechanism predicts (P = 2.96e-07).
+   **D-056** records the bounded claim. What is *not* closed is the general
+   thesis: the step used was the one whose both levels happened to be recorded.
+   **The successor item is RL-051b** — ablate a component *designed* as an
+   ablation (scale normalisation: both levels implementable, neither recorded),
+   which is the only route from "at least one step" toward the general claim.
 
 **A note on what the last three stages have in common.** E-035, E-039 and E-041
 are the same defect at ascending levels — an *arm* that could not produce the

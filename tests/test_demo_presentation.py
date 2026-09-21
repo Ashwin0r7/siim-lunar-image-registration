@@ -42,6 +42,7 @@ import pytest
 from siim.demo import api
 from siim.demo import chandrayaan2 as c2
 from siim.demo import evidence as ev
+from siim.demo import exp006 as e6
 from siim.demo import exp012 as e12
 from siim.demo import exp013 as e13
 
@@ -154,6 +155,8 @@ def test_the_allow_list_is_exactly_what_the_page_advertises():
         advertised.update(e12.exp012_evidence()["sources"])
     if e13.exp013_status()["available"]:
         advertised.update(e13.exp013_evidence()["sources"])
+    if e6.exp006_status()["available"]:
+        advertised.update(e6.exp006_evidence()["sources"])
     assert set(api.advertised_artefacts()) == advertised
 
 
