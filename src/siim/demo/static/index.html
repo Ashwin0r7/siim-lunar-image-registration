@@ -394,7 +394,8 @@ Promise.all([
   fetch("/api/evidence/engines").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/chandrayaan2").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/verdict-calibration").then(r => r.ok ? r.json() : null).catch(() => null),
-]).then(([d, ill, eng, c2, vc]) => {
+  fetch("/api/evidence/gauge-detection").then(r => r.ok ? r.json() : null).catch(() => null),
+]).then(([d, ill, eng, c2, vc, gd]) => {
   SCEN = d.scenarios;
   const card = s => `
     <button class="case" data-id="${esc(s.id)}">
@@ -424,6 +425,7 @@ Promise.all([
 window.__ENG = eng;
   window.__C2 = c2;
   window.__VC = vc;
+  window.__GD = gd;
   $("#scope").innerHTML = ill
     ? `<b>Evidence scope</b><br>${esc(ill.scope)}`
     : `<b>Evidence scope</b><br>LRO NAC · Mare Serenitatis`;
@@ -587,6 +589,7 @@ function render(d) {
     ${illuminationPanel(vm)}
     ${enginesPanel(vm)}
     ${verdictCalibrationPanel(vm)}
+    ${gaugePanel(vm)}
     ${chandrayaan2Panel(vm)}
     ${provenance(d)}
   `;
@@ -990,6 +993,107 @@ function verdictCalibrationPanel(vm) {
     <div class="notclaimed">${vc.not_claimed.map(n => `<span>${esc(n)}</span>`).join("")}</div>
     <div class="srcline"><b>sources:</b> ${vc.sources.map(s =>
       `<a class="filelink" href="/artefact/${esc(s)}" target="_blank" rel="noopener">${esc(s)}</a>`).join(" · ")}</div>
+  </div>`;
+}
+
+/* The panel that shows the project's own worst finding beside its best one.
+
+   EXP-012 reached VERIFIED on 13 of 13 real triplets. The same stage measured
+   that the evidence which got it there -- loop closure -- is exactly invariant
+   to a per-image coordinate error, and that 36 of 36 constructed cases come
+   back VERIFIED / high with every edge wrong. A deliverable that shows only
+   the first number is selling a safety claim it has already measured to be
+   incomplete, so both are on the page and the failing criteria stay visible. */
+function gaugePanel(vm) {
+  const gd = window.__GD;
+  if (!gd || !vm.real) return "";
+  const b = gd.blind_spot;
+  const crit = gd.criteria || {};
+  const word = c => (c && c.met) ? "MET" : "NOT MET";
+  const cls = c => (c && c.met) ? "good" : "bad";
+  const sweep = (gd.detection_sweep || []);
+  const cg = (gd.census_graph || []);
+  const xe = (gd.cross_engine || []);
+  const xeMax = xe.length ? Math.max(...xe.map(x => +x.max_difference_px)) : null;
+  return `<div class="card">
+    <div class="stephead">
+      <div class="stepnum">!</div>
+      <div><div class="stepq">What can this system be wrong about and still say VERIFIED?</div>
+      <div class="stepsub">Gauge detection · EXP-013 · the null space of loop closure, and an instrument for it</div></div>
+    </div>
+
+    <div class="note" style="margin-bottom:14px;border-left:2px solid var(--bad);padding-left:10px">
+      <b>The defect, stated first.</b> Give every image its own coordinate error and the terms cancel
+      around the loop: <code>E_ca ∘ E_bc ∘ E_ab = G_a ∘ (T_ca ∘ T_bc ∘ T_ab) ∘ G_a⁻¹ = I</code>.
+      The loop closes to zero by algebra, however wrong each edge is — so no amount of loop-closure
+      precision helps. Run through the shipped verdict unchanged,
+      <b>${b.n_verified} of ${b.n_cases}</b> such cases return VERIFIED with <b>high</b> confidence.</div>
+
+    <table style="margin-bottom:16px">
+      <tr><th>gauge applied</th><th>cases</th><th>returned VERIFIED</th><th>median true edge error</th><th>loop residual</th></tr>
+      ${Object.entries(b.by_magnitude).map(([m, k]) => `<tr>
+        <td class="n">${esc(String(+m))} px</td>
+        <td class="n">${k.n}</td>
+        <td class="n" style="color:var(--bad);font-weight:700">${k.n_verified}</td>
+        <td class="n">${(+k.median_true_error_px).toFixed(2)} px</td>
+        <td class="n">${sci(k.max_loop_error_px)} px</td></tr>`).join("")}
+    </table>
+
+    <div class="tiles" style="margin-bottom:16px">
+      <div class="tile ${cls(crit.S1)}"><div class="lab">S1 — detection</div>
+        <div class="val">${word(crit.S1)}</div>
+        <div class="note">the instrument flags the gauge cases loop closure passes</div></div>
+      <div class="tile ${cls(crit.S3)}"><div class="lab">S3 — sensitivity floor</div>
+        <div class="val">${gd.detection_floor_px === null ? "none" : (+gd.detection_floor_px) + " px"}</div>
+        <div class="note">vs the per-edge archive check's ${gd.per_edge_floor_px} px floor</div></div>
+      <div class="tile ${cls(crit.S2)}"><div class="lab">S2 — specificity on real data</div>
+        <div class="val">${gd.specificity.n_alarms} / ${gd.specificity.n_triplets}</div>
+        <div class="note">alarms on real triplets — <b>${word(crit.S2)}</b></div></div>
+      <div class="tile ${cls(crit.S6)}"><div class="lab">S6 — zero-gauge control</div>
+        <div class="val">${word(crit.S6)}</div>
+        <div class="note">nothing applied, nothing should fire</div></div>
+    </div>
+
+    <div class="note" style="margin-top:10px;border-left:2px solid var(--warning);padding-left:10px">
+      <b>S2 failed, and the cause was measured rather than guessed.</b> On a three-edge cycle the per-image
+      model has eight free parameters against three edges, so it can explain a great deal by having enough
+      room — a structureless disagreement of the same size already scores highly. On the
+      REAL-DATA-07 census graph, where the model is genuinely over-determined, the real disagreement is
+      explained far better than that null:
+    </div>
+
+    <table style="margin-top:10px">
+      <tr><th>window</th><th>engine</th><th>edges / nodes</th><th>redundancy</th><th>archive disagreement</th><th>explained by per-image</th><th>structureless null (p95)</th></tr>
+      ${cg.map(c => `<tr>
+        <td class="note">${esc(c.window)}</td>
+        <td class="n">${esc(c.engine)}</td>
+        <td class="n">${c.n_edges} / ${c.n_nodes}</td>
+        <td class="n">${c.redundancy}</td>
+        <td class="n">${(+c.residual_before_px).toFixed(1)} px</td>
+        <td class="n" style="font-weight:700">${(+c.explained_fraction).toFixed(3)}</td>
+        <td class="n" style="color:var(--ink-3)">${(+c.structureless_null_p95).toFixed(3)}</td></tr>`).join("")}
+    </table>
+
+    ${xeMax === null ? "" : `<div class="note" style="margin-top:12px;border-left:2px solid var(--good);padding-left:10px">
+      <b>Which side is wrong — and the control that answers it.</b> The instrument localises a disagreement
+      to an image; on its own it cannot say whether the matcher or the archive reference carries it, and
+      that was written down as H3 <i>before</i> the stage ran. Three independent engines — RootSIFT,
+      DISK + LightGlue and XFeat — recover the <b>same per-frame term to within ${(+xeMax).toFixed(2)} px</b>
+      on terms of tens of pixels. A per-frame error that three unrelated matchers agree on to that precision
+      is not a property of any of them.</div>`}
+
+    <div class="note" style="margin-top:10px">
+      <b>The check runs beside the verdict, never inside it.</b> <code>assess()</code> is untouched, and a
+      test parses its imports to keep it that way: REAL-DATA-03, -04 and -05 each declare they applied that
+      rule unchanged, so a new rejection path inside it would retroactively alter what those stages were
+      evaluated under. Both alarm constants were frozen before any statistic was computed and were not tuned
+      afterwards.</div>
+
+    <div class="note" style="margin-top:10px;font-size:13.5px;color:var(--ink)"><b>${esc(gd.summary)}</b></div>
+    <div class="note" style="margin-top:8px;color:var(--ink-2)"><b>Scope of this evidence:</b> ${esc(gd.scope)}</div>
+    <div class="notclaimed">${gd.not_claimed.map(n => `<span>${esc(n)}</span>`).join("")}</div>
+    <div class="srcline"><b>sources:</b> ${gd.sources.map(x =>
+      `<a class="filelink" href="/artefact/${esc(x)}" target="_blank" rel="noopener">${esc(x)}</a>`).join(" · ")}</div>
   </div>`;
 }
 
