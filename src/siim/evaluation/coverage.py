@@ -24,7 +24,7 @@ from dataclasses import dataclass
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 from scipy import ndimage
-from scipy.spatial import ConvexHull, QhullError
+from scipy.spatial import ConvexHull, QhullError, cKDTree
 
 from ..geometry import as_points
 
@@ -146,9 +146,13 @@ def coverage_metrics(
             hull_ratio = 0.0  # degenerate (collinear) point set
 
     if pts.shape[0] >= 2:
-        d2 = ((pts[:, None, :] - pts[None, :, :]) ** 2).sum(axis=2)
-        np.fill_diagonal(d2, np.inf)
-        median_nn = float(np.median(np.sqrt(d2.min(axis=1))))
+        # E-044/E-048: the exact pairwise form is an N x N x 2 tensor, 16 N^2
+        # bytes -- 0.70 GiB at 6.6k points and 5.20 GiB at the 18.7k a
+        # native-resolution long window produces. It killed two stage runs
+        # before anything was recorded, because assess() calls this on every
+        # inlier: a registration that succeeds TOO well crashed the verify
+        # stage. A k-d tree gives the identical answer in O(N log N).
+        median_nn = float(np.median(cKDTree(pts).query(pts, k=2)[0][:, 1]))
     else:
         median_nn = float("nan")
 
