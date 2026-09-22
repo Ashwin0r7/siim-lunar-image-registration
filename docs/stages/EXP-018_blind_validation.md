@@ -625,30 +625,37 @@ frame when a rung is empty. Four rungs were empty and took the nearest frame,
 which is why the incidence set is bottom-heavy — **a property of what the
 archive holds over this ground, fixed by a rule written before the census.**
 
-| rung | product | incidence | emission | map res (m) | frame lines × samples | tile line0, sample0 | clamped | J determinant | sign |
+| rung | product | incidence | emission | map res (m) | frame lines × samples | tile line0, sample0 | clamped | J determinant | mirrored? |
 |---|---|---|---|---|---|---|---|---|---|
-| 70 | `nac.m1447850428rc` | **10.88°** | 1.18° | 0.885 | 33792 × 5064 | 23625, 1536 | 0 / 0 | −0.771738 | **−1** |
-| 60 | `nac.m188085530rc` | 15.85° | 1.17° | 0.783 | 52224 × 5064 | 29286, 760 | 0 / 0 | −0.550820 | **−1** |
-| 20 | `nac.m1177606647lc` | 16.21° | 1.74° | 0.989 | 30720 × 5064 | 13535, 233 | 0 / 0 | +0.976607 | +1 |
-| 25 | `nac.m1282310415lc` | 29.45° | 1.73° | 0.880 | 52224 × 5064 | 23167, 600 | 0 / 0 | −0.790538 | **−1** |
-| 30 | `nac.m1121081627rc` | 40.06° | 1.17° | 0.854 | 52224 × 5064 | 24255, 1267 | 0 / 0 | −0.738601 | **−1** |
-| 40 | `nac.m1190561570lc` | 44.94° | 1.72° | 0.840 | 52224 × 5064 | 21898, 1960 | 0 / 0 | −0.729385 | **−1** |
-| 50 | `nac.m1157600009rc` | **73.64°** | 1.17° | 1.003 | 52224 × 5064 | 26444, 12 | 0 / 0 | −0.990175 | **−1** |
+| 70 | `nac.m1447850428rc` | **10.88°** | 1.18° | 0.885 | 33792 × 5064 | 23625, 1536 | 0 / 0 | −0.771738 | no |
+| 60 | `nac.m188085530rc` | 15.85° | 1.17° | 0.783 | 52224 × 5064 | 29286, 760 | 0 / 0 | −0.550820 | no |
+| 20 | `nac.m1177606647lc` | 16.21° | 1.74° | 0.989 | 30720 × 5064 | 13535, 233 | 0 / 0 | **+0.976607** | **YES** |
+| 25 | `nac.m1282310415lc` | 29.45° | 1.73° | 0.880 | 52224 × 5064 | 23167, 600 | 0 / 0 | −0.790538 | no |
+| 30 | `nac.m1121081627rc` | 40.06° | 1.17° | 0.854 | 52224 × 5064 | 24255, 1267 | 0 / 0 | −0.738601 | no |
+| 40 | `nac.m1190561570lc` | 44.94° | 1.72° | 0.840 | 52224 × 5064 | 21898, 1960 | 0 / 0 | −0.729385 | no |
+| 50 | `nac.m1157600009rc` | **73.64°** | 1.17° | 1.003 | 52224 × 5064 | 26444, 12 | 0 / 0 | −0.990175 | no |
 
 Acquired 2012-04-03 to 2023-08-28. Resolution ratio across the set
 **1.281** (0.783–1.003 m), inside RD-07's in-sample range (R5 will report it
 per pair).
 
-**S0(d) — six of the seven frames are mirrored.** RD-07 found 5 of 14 (E-037);
-this window gives **6 of 7**, read from the archive's own corner columns
-before any pixel was fetched. `north_up_east_right` is applied to every frame,
-as the frozen pipeline requires. This is the strongest available *incidental*
-check on EXP-006's finding (D-056): the one protocol step measured to outweigh
-a matcher replacement is load-bearing on **86 % of this held-out set**, and
-had this stage inherited RD-07's original quarter-turn convention it would
-have been running the wrong orientation on six of seven frames. Nothing is
-tuned on that observation; it is recorded because it was knowable before the
-data and would otherwise look like hindsight in Part 2.
+**S0(d) — one of the seven frames is mirrored.** The convention is
+`siim.ingest.orientation`'s and is not a matter of taste: a normal
+north-up-east-right view has a **negative** Jacobian determinant
+(`dN/dy < 0` with `dE/dx > 0`), and **a positive determinant is the mirror
+image** (`orientation.py`, `mirrored = det > 0`). By that rule
+`nac.m1177606647lc` (+0.976607) is mirrored and the other six are not — so
+**1 of 7 here against RD-07's 5 of 14**, read from the archive's own corner
+columns before any pixel was fetched. `north_up_east_right` is applied to
+every frame regardless, as the frozen pipeline requires, and it performs the
+left–right flip on that one frame only.
+
+*(Historical note, retained under integrity rule 3: this paragraph first
+claimed the opposite — "six of the seven frames are mirrored … load-bearing on
+86 % of this held-out set" — by reading the sign backwards. The error and how
+it was caught are recorded as **E-047**; the table above always carried the
+correct determinants, and no criterion, frame or threshold depended on the
+mistaken reading.)*
 
 ### A1.5 S5 from geometry — MET, with the margin stated
 
