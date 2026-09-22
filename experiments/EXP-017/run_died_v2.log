@@ -1,0 +1,203 @@
+EXP-017: S0(iii) reproduction control
+  image diff 0.00e+00  dense-median diff 0.00e+00  met=True
+arm A
+  A RD03/1271742202lc: 498x831 joint 0.30 ptp 49 m  res-rms 3.3 m  gsd 5.052
+  A RD03/1271742202lc                  e= 0 n=  895 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 2s
+  A RD03/1271742202lc                  e= 1 n=  841 INCONCLUSIVE similarity  G med   0.007 p99   0.044 | L1 med   0.006 | sig FIRE | 2s
+  A RD03/1271742202lc                  e= 2 n=  808 INCONCLUSIVE similarity  G med   0.014 p99   0.088 | L1 med   0.012 | sig FIRE | 2s
+  A RD03/1271742202lc                  e= 3 n=  771 INCONCLUSIVE similarity  G med   0.021 p99   0.132 | L1 med   0.019 | sig FIRE | 2s
+  A RD03/1271742202lc                  e= 5 n=  716 INCONCLUSIVE similarity  G med   0.036 p99   0.220 | L1 med   0.033 | sig FIRE | 2s
+  A RD03/1271742202lc                  e=10 n=  698 INCONCLUSIVE affine      G med   0.057 p99   0.439 | L1 med   0.055 | sig FIRE | 2s
+  A RD03/1271742202lc                  e=15 n=  672 INCONCLUSIVE affine      G med   0.088 p99   0.674 | L1 med   0.089 | sig FIRE | 2s
+  A RD03/1271742202lc                  e=20 n=  656 INCONCLUSIVE affine      G med   0.119 p99   0.914 | L1 med   0.117 | sig FIRE | 2s
+  A RD03/1271742202lc                  e=25 n=  653 INCONCLUSIVE affine      G med   0.154 p99   1.165 | L1 med   0.154 | sig FIRE | 2s
+  A RD03/1271742202lc                  e=30 n=  652 INCONCLUSIVE affine      G med   0.188 p99   1.440 | L1 med   0.178 | sig FIRE | 2s
+  A RD03/1335207975rc: 502x819 joint 0.30 ptp 47 m  res-rms 3.3 m  gsd 5.052
+  A RD03/1335207975rc                  e= 0 n=  886 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 2s
+  A RD03/1335207975rc                  e= 1 n=  837 INCONCLUSIVE similarity  G med   0.007 p99   0.047 | L1 med   0.006 | sig FIRE | 2s
+  A RD03/1335207975rc                  e= 2 n=  802 INCONCLUSIVE similarity  G med   0.014 p99   0.095 | L1 med   0.013 | sig FIRE | 2s
+  A RD03/1335207975rc                  e= 3 n=  760 INCONCLUSIVE similarity  G med   0.021 p99   0.143 | L1 med   0.019 | sig FIRE | 2s
+  A RD03/1335207975rc                  e= 5 n=  731 INCONCLUSIVE similarity  G med   0.035 p99   0.238 | L1 med   0.032 | sig FIRE | 2s
+  A RD03/1335207975rc                  e=10 n=  692 INCONCLUSIVE affine      G med   0.056 p99   0.477 | L1 med   0.056 | sig FIRE | 2s
+  A RD03/1335207975rc                  e=15 n=  666 INCONCLUSIVE affine      G med   0.086 p99   0.721 | L1 med   0.091 | sig FIRE | 2s
+  A RD03/1335207975rc                  e=20 n=  646 INCONCLUSIVE affine      G med   0.115 p99   0.985 | L1 med   0.116 | sig FIRE | 2s
+  A RD03/1335207975rc                  e=25 n=  637 INCONCLUSIVE affine      G med   0.148 p99   1.264 | L1 med   0.154 | sig FIRE | 2s
+  A RD03/1335207975rc                  e=30 n=  631 INCONCLUSIVE affine      G med   0.183 p99   1.561 | L1 med   0.180 | sig FIRE | 2s
+  A RD03/1452560468lc: 481x799 joint 0.28 ptp 47 m  res-rms 3.3 m  gsd 5.052
+  A RD03/1452560468lc                  e= 0 n=  759 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 1s
+  A RD03/1452560468lc                  e= 1 n=  709 INCONCLUSIVE similarity  G med   0.007 p99   0.047 | L1 med   0.006 | sig FIRE | 1s
+  A RD03/1452560468lc                  e= 2 n=  683 INCONCLUSIVE similarity  G med   0.014 p99   0.093 | L1 med   0.012 | sig FIRE | 1s
+  A RD03/1452560468lc                  e= 3 n=  666 INCONCLUSIVE similarity  G med   0.020 p99   0.140 | L1 med   0.019 | sig FIRE | 1s
+  A RD03/1452560468lc                  e= 5 n=  628 INCONCLUSIVE similarity  G med   0.034 p99   0.232 | L1 med   0.032 | sig FIRE | 1s
+  A RD03/1452560468lc                  e=10 n=  597 INCONCLUSIVE similarity  G med   0.068 p99   0.474 | L1 med   0.065 | sig FIRE | 2s
+  A RD03/1452560468lc                  e=15 n=  573 INCONCLUSIVE projective  G med   0.097 p99   0.796 | L1 med   0.095 | sig FIRE | 2s
+  A RD03/1452560468lc                  e=20 n=  564 INCONCLUSIVE projective  G med   0.123 p99   1.022 | L1 med   0.125 | sig FIRE | 2s
+  A RD03/1452560468lc                  e=25 n=  560 INCONCLUSIVE affine      G med   0.151 p99   1.230 | L1 med   0.162 | sig FIRE | 2s
+  A RD03/1452560468lc                  e=30 n=  563 INCONCLUSIVE affine      G med   0.185 p99   1.535 | L1 med   0.193 | sig FIRE | 2s
+  A RD03/1182331886lc: 605x1017 joint 0.34 ptp 60 m  res-rms 3.4 m  gsd 5.052
+  A RD03/1182331886lc                  e= 0 n= 1341 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 3s
+  A RD03/1182331886lc                  e= 1 n= 1215 INCONCLUSIVE similarity  G med   0.009 p99   0.043 | L1 med   0.006 | sig FIRE | 3s
+  A RD03/1182331886lc                  e= 2 n= 1140 INCONCLUSIVE similarity  G med   0.018 p99   0.087 | L1 med   0.012 | sig FIRE | 3s
+  A RD03/1182331886lc                  e= 3 n= 1076 INCONCLUSIVE affine      G med   0.017 p99   0.131 | L1 med   0.018 | sig FIRE | 3s
+  A RD03/1182331886lc                  e= 5 n= 1001 INCONCLUSIVE affine      G med   0.029 p99   0.219 | L1 med   0.031 | sig FIRE | 2s
+  A RD03/1182331886lc                  e=10 n= 1003 INCONCLUSIVE affine      G med   0.058 p99   0.444 | L1 med   0.061 | sig FIRE | 3s
+  A RD03/1182331886lc                  e=15 n=  957 INCONCLUSIVE affine      G med   0.088 p99   0.675 | L1 med   0.092 | sig FIRE | 4s
+  A RD03/1182331886lc                  e=20 n=  931 INCONCLUSIVE affine      G med   0.119 p99   0.907 | L1 med   0.126 | sig FIRE | 4s
+  A RD03/1182331886lc                  e=25 n=  928 INCONCLUSIVE affine      G med   0.154 p99   1.172 | L1 med   0.161 | sig FIRE | 4s
+  A RD03/1182331886lc                  e=30 n=  924 INCONCLUSIVE affine      G med   0.192 p99   1.456 | L1 med   0.202 | sig FIRE | 4s
+  A RD03/1212932972lc: 563x930 joint 0.33 ptp 52 m  res-rms 3.2 m  gsd 5.052
+  A RD03/1212932972lc                  e= 0 n= 1257 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 3s
+  A RD03/1212932972lc                  e= 1 n= 1140 INCONCLUSIVE similarity  G med   0.008 p99   0.042 | L1 med   0.007 | sig FIRE | 3s
+  A RD03/1212932972lc                  e= 2 n= 1078 INCONCLUSIVE similarity  G med   0.017 p99   0.084 | L1 med   0.014 | sig FIRE | 2s
+  A RD03/1212932972lc                  e= 3 n= 1030 INCONCLUSIVE similarity  G med   0.025 p99   0.126 | L1 med   0.022 | sig FIRE | 2s
+  A RD03/1212932972lc                  e= 5 n=  965 INCONCLUSIVE affine      G med   0.028 p99   0.200 | L1 med   0.032 | sig FIRE | 2s
+  A RD03/1212932972lc                  e=10 n=  943 INCONCLUSIVE affine      G med   0.055 p99   0.401 | L1 med   0.064 | sig FIRE | 2s
+  A RD03/1212932972lc                  e=15 n=  895 INCONCLUSIVE affine      G med   0.085 p99   0.617 | L1 med   0.091 | sig FIRE | 3s
+  A RD03/1212932972lc                  e=20 n=  902 INCONCLUSIVE affine      G med   0.114 p99   0.831 | L1 med   0.133 | sig FIRE | 3s
+  A RD03/1212932972lc                  e=25 n=  875 INCONCLUSIVE affine      G med   0.146 p99   1.059 | L1 med   0.157 | sig FIRE | 3s
+  A RD03/1212932972lc                  e=30 n=  897 INCONCLUSIVE affine      G med   0.181 p99   1.319 | L1 med   0.208 | sig FIRE | 3s
+  A RD03/1205872034rc: 545x911 joint 0.28 ptp 59 m  res-rms 2.8 m  gsd 5.052
+  A RD03/1205872034rc                  e= 0 n= 1403 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 3s
+  A RD03/1205872034rc                  e= 1 n= 1250 INCONCLUSIVE similarity  G med   0.008 p99   0.037 | L1 med   0.007 | sig FIRE | 2s
+  A RD03/1205872034rc                  e= 2 n= 1183 INCONCLUSIVE similarity  G med   0.016 p99   0.074 | L1 med   0.014 | sig FIRE | 2s
+  A RD03/1205872034rc                  e= 3 n= 1117 INCONCLUSIVE similarity  G med   0.024 p99   0.111 | L1 med   0.021 | sig FIRE | 2s
+  A RD03/1205872034rc                  e= 5 n= 1073 INCONCLUSIVE affine      G med   0.028 p99   0.161 | L1 med   0.031 | sig FIRE | 2s
+  A RD03/1205872034rc                  e=10 n= 1032 INCONCLUSIVE affine      G med   0.056 p99   0.330 | L1 med   0.062 | sig FIRE | 2s
+  A RD03/1205872034rc                  e=15 n= 1010 INCONCLUSIVE projective  G med   0.088 p99   0.508 | L1 med   0.096 | sig FIRE | 2s
+  A RD03/1205872034rc                  e=20 n= 1013 INCONCLUSIVE affine      G med   0.115 p99   0.680 | L1 med   0.129 | sig FIRE | 2s
+  A RD03/1205872034rc                  e=25 n=  990 INCONCLUSIVE affine      G med   0.148 p99   0.879 | L1 med   0.163 | sig FIRE | 3s
+  A RD03/1205872034rc                  e=30 n= 1010 INCONCLUSIVE affine      G med   0.184 p99   1.090 | L1 med   0.203 | sig FIRE | 3s
+  A RD03/1363396554rc: 552x901 joint 0.61 ptp 63 m  res-rms 3.4 m  gsd 5.052
+  A RD03/1363396554rc                  e= 0 n= 2185 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 4s
+  A RD03/1363396554rc                  e= 1 n= 1939 INCONCLUSIVE similarity  G med   0.012 p99   0.051 | L1 med   0.006 | sig FIRE | 4s
+  A RD03/1363396554rc                  e= 2 n= 1842 INCONCLUSIVE affine      G med   0.011 p99   0.096 | L1 med   0.012 | sig FIRE | 4s
+  A RD03/1363396554rc                  e= 3 n= 1768 INCONCLUSIVE affine      G med   0.017 p99   0.144 | L1 med   0.018 | sig FIRE | 4s
+  A RD03/1363396554rc                  e= 5 n= 1669 INCONCLUSIVE affine      G med   0.029 p99   0.233 | L1 med   0.030 | sig FIRE | 4s
+  A RD03/1363396554rc                  e=10 n= 1600 INCONCLUSIVE affine      G med   0.057 p99   0.480 | L1 med   0.059 | sig FIRE | 4s
+  A RD03/1363396554rc                  e=15 n= 1583 INCONCLUSIVE affine      G med   0.089 p99   0.715 | L1 med   0.090 | sig FIRE | 4s
+  A RD03/1363396554rc                  e=20 n= 1564 INCONCLUSIVE affine      G med   0.117 p99   0.991 | L1 med   0.121 | sig FIRE | 4s
+  A RD03/1363396554rc                  e=25 n= 1529 INCONCLUSIVE affine      G med   0.153 p99   1.250 | L1 med   0.157 | sig FIRE | 4s
+  A RD03/1363396554rc                  e=30 n= 1488 INCONCLUSIVE affine      G med   0.187 p99   1.559 | L1 med   0.193 | sig FIRE | 4s
+  A RD03/1096350825rc: 648x1080 joint 0.26 ptp 59 m  res-rms 3.2 m  gsd 5.052
+  A RD03/1096350825rc                  e= 0 n= 1351 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 3s
+  A RD03/1096350825rc                  e= 1 n= 1249 INCONCLUSIVE similarity  G med   0.008 p99   0.042 | L1 med   0.007 | sig FIRE | 3s
+  A RD03/1096350825rc                  e= 2 n= 1174 INCONCLUSIVE similarity  G med   0.016 p99   0.085 | L1 med   0.014 | sig FIRE | 2s
+  A RD03/1096350825rc                  e= 3 n= 1113 INCONCLUSIVE similarity  G med   0.024 p99   0.127 | L1 med   0.021 | sig FIRE | 3s
+  A RD03/1096350825rc                  e= 5 n= 1038 INCONCLUSIVE similarity  G med   0.039 p99   0.211 | L1 med   0.035 | sig FIRE | 2s
+  A RD03/1096350825rc                  e=10 n= 1036 INCONCLUSIVE affine      G med   0.057 p99   0.420 | L1 med   0.064 | sig FIRE | 3s
+  A RD03/1096350825rc                  e=15 n= 1005 INCONCLUSIVE affine      G med   0.086 p99   0.642 | L1 med   0.098 | sig FIRE | 3s
+  A RD03/1096350825rc                  e=20 n=  991 INCONCLUSIVE affine      G med   0.118 p99   0.874 | L1 med   0.132 | sig FIRE | 4s
+  A RD03/1096350825rc                  e=25 n=  989 INCONCLUSIVE affine      G med   0.150 p99   1.116 | L1 med   0.169 | sig FIRE | 4s
+  A RD03/1096350825rc                  e=30 n=  983 INCONCLUSIVE projective  G med   0.220 p99   1.430 | L1 med   0.219 | sig FIRE | 4s
+  A RD03/1142297886lc: 619x1020 joint 0.24 ptp 60 m  res-rms 3.7 m  gsd 5.052
+  A RD03/1142297886lc                  e= 0 n=  759 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 2s
+  A RD03/1142297886lc                  e= 1 n=  680 INCONCLUSIVE similarity  G med   0.008 p99   0.051 | L1 med   0.006 | sig FIRE | 2s
+  A RD03/1142297886lc                  e= 2 n=  644 INCONCLUSIVE similarity  G med   0.015 p99   0.102 | L1 med   0.012 | sig FIRE | 2s
+  A RD03/1142297886lc                  e= 3 n=  612 INCONCLUSIVE similarity  G med   0.023 p99   0.153 | L1 med   0.018 | sig FIRE | 2s
+  A RD03/1142297886lc                  e= 5 n=  575 INCONCLUSIVE similarity  G med   0.038 p99   0.255 | L1 med   0.030 | sig FIRE | 2s
+  A RD03/1142297886lc                  e=10 n=  561 INCONCLUSIVE similarity  G med   0.076 p99   0.518 | L1 med   0.059 | sig FIRE | 2s
+  A RD03/1142297886lc                  e=15 n=  529 INCONCLUSIVE affine      G med   0.097 p99   0.784 | L1 med   0.091 | sig FIRE | 3s
+  A RD03/1142297886lc                  e=20 n=  519 INCONCLUSIVE affine      G med   0.125 p99   1.075 | L1 med   0.120 | sig FIRE | 3s
+  A RD03/1142297886lc                  e=25 n=  496 INCONCLUSIVE similarity  G med   0.199 p99   1.384 | L1 med   0.160 | sig FIRE | 3s
+  A RD03/1142297886lc                  e=30 n=  514 INCONCLUSIVE affine      G med   0.210 p99   1.634 | L1 med   0.194 | sig FIRE | 3s
+  A RD03-long/1271742202lc: 1189x2246 joint 0.44 ptp 101 m  res-rms 6.0 m  gsd 5.052
+  A RD03-long/1271742202lc             e= 0 n= 9263 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 25s
+  A RD03-long/1271742202lc             e= 1 n= 8023 INCONCLUSIVE projective  G med   0.008 p99   0.053 | L1 med   0.006 | sig ---- | 21s
+  A RD03-long/1271742202lc             e= 2 n= 7277 INCONCLUSIVE projective  G med   0.015 p99   0.106 | L1 med   0.012 | sig ---- | 19s
+  A RD03-long/1271742202lc             e= 3 n= 6786 INCONCLUSIVE projective  G med   0.023 p99   0.159 | L1 med   0.017 | sig ---- | 18s
+  A RD03-long/1271742202lc             e= 5 n= 6601 INCONCLUSIVE projective  G med   0.038 p99   0.267 | L1 med   0.029 | sig ---- | 19s
+  A RD03-long/1271742202lc             e=10 n= 6974 INCONCLUSIVE projective  G med   0.077 p99   0.534 | L1 med   0.059 | sig ---- | 27s
+  A RD03-long/1271742202lc             e=15 n= 6654 INCONCLUSIVE projective  G med   0.117 p99   0.811 | L1 med   0.089 | sig ---- | 24331s
+  A RD03-long/1271742202lc             e=20 n= 6394 INCONCLUSIVE projective  G med   0.157 p99   1.111 | L1 med   0.120 | sig ---- | 50s
+  A RD03-long/1271742202lc             e=25 n= 6653 INCONCLUSIVE projective  G med   0.201 p99   1.426 | L1 med   0.153 | sig ---- | 43s
+  A RD03-long/1271742202lc             e=30 n= 6380 INCONCLUSIVE projective  G med   0.249 p99   1.764 | L1 med   0.189 | sig ---- | 46s
+  A RD03-long/1335207975rc: 1199x2208 joint 0.35 ptp 101 m  res-rms 5.6 m  gsd 5.052
+  A RD03-long/1335207975rc             e= 0 n= 6943 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 44s
+  A RD03-long/1335207975rc             e= 1 n= 5824 INCONCLUSIVE projective  G med   0.007 p99   0.048 | L1 med   0.006 | sig ---- | 31s
+  A RD03-long/1335207975rc             e= 2 n= 5316 INCONCLUSIVE projective  G med   0.014 p99   0.096 | L1 med   0.012 | sig ---- | 28s
+  A RD03-long/1335207975rc             e= 3 n= 5008 INCONCLUSIVE projective  G med   0.021 p99   0.144 | L1 med   0.018 | sig ---- | 26s
+  A RD03-long/1335207975rc             e= 5 n= 4800 INCONCLUSIVE projective  G med   0.035 p99   0.240 | L1 med   0.029 | sig ---- | 29s
+  A RD03-long/1335207975rc             e=10 n= 5019 INCONCLUSIVE projective  G med   0.070 p99   0.487 | L1 med   0.058 | sig ---- | 33s
+  A RD03-long/1335207975rc             e=15 n= 4841 INCONCLUSIVE projective  G med   0.107 p99   0.738 | L1 med   0.089 | sig ---- | 40s
+  A RD03-long/1335207975rc             e=20 n= 4785 INCONCLUSIVE projective  G med   0.144 p99   1.000 | L1 med   0.121 | sig ---- | 37s
+  A RD03-long/1335207975rc             e=25 n= 4783 INCONCLUSIVE projective  G med   0.184 p99   1.286 | L1 med   0.155 | sig ---- | 35s
+  A RD03-long/1335207975rc             e=30 n= 4693 INCONCLUSIVE projective  G med   0.228 p99   1.594 | L1 med   0.190 | sig ---- | 34s
+  A RD03-long/1452560468lc: 1147x2145 joint 0.27 ptp 101 m  res-rms 5.3 m  gsd 5.052
+  A RD03-long/1452560468lc             e= 0 n= 4869 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 21s
+  A RD03-long/1452560468lc             e= 1 n= 4102 INCONCLUSIVE projective  G med   0.006 p99   0.044 | L1 med   0.006 | sig ---- | 19s
+  A RD03-long/1452560468lc             e= 2 n= 3761 INCONCLUSIVE projective  G med   0.013 p99   0.088 | L1 med   0.012 | sig ---- | 18s
+  A RD03-long/1452560468lc             e= 3 n= 3546 INCONCLUSIVE projective  G med   0.019 p99   0.132 | L1 med   0.017 | sig ---- | 18s
+  A RD03-long/1452560468lc             e= 5 n= 3423 INCONCLUSIVE projective  G med   0.032 p99   0.221 | L1 med   0.029 | sig ---- | 18s
+  A RD03-long/1452560468lc             e=10 n= 3576 INCONCLUSIVE projective  G med   0.064 p99   0.445 | L1 med   0.059 | sig ---- | 22s
+  A RD03-long/1452560468lc             e=15 n= 3405 INCONCLUSIVE projective  G med   0.098 p99   0.674 | L1 med   0.090 | sig ---- | 26s
+  A RD03-long/1452560468lc             e=20 n= 3389 INCONCLUSIVE projective  G med   0.133 p99   0.915 | L1 med   0.122 | sig ---- | 27s
+  A RD03-long/1452560468lc             e=25 n= 3311 INCONCLUSIVE projective  G med   0.170 p99   1.174 | L1 med   0.157 | sig ---- | 26s
+  A RD03-long/1452560468lc             e=30 n= 3385 INCONCLUSIVE projective  G med   0.209 p99   1.456 | L1 med   0.193 | sig ---- | 27s
+  A RD04-long/1271742202lc: 1163x2246 joint 0.26 ptp 123 m  res-rms 8.9 m  gsd 5.052
+  A RD04-long/1271742202lc             e= 0 n= 2414 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 13s
+  A RD04-long/1271742202lc             e= 1 n= 2020 INCONCLUSIVE affine      G med   0.016 p99   0.128 | L1 med   0.011 | sig FIRE | 13s
+  A RD04-long/1271742202lc             e= 2 n= 1890 INCONCLUSIVE projective  G med   0.021 p99   0.236 | L1 med   0.021 | sig FIRE | 14s
+  A RD04-long/1271742202lc             e= 3 n= 1818 INCONCLUSIVE projective  G med   0.033 p99   0.352 | L1 med   0.032 | sig FIRE | 15s
+  A RD04-long/1271742202lc             e= 5 n= 1792 INCONCLUSIVE projective  G med   0.054 p99   0.588 | L1 med   0.053 | sig FIRE | 23s
+  A RD04-long/1271742202lc             e=10 n= 1704 INCONCLUSIVE projective  G med   0.112 p99   1.175 | L1 med   0.108 | sig FIRE | 23s
+  A RD04-long/1271742202lc             e=15 n= 1672 INCONCLUSIVE projective  G med   0.166 p99   1.793 | L1 med   0.159 | sig FIRE | 22s
+  A RD04-long/1271742202lc             e=20 n= 1674 INCONCLUSIVE projective  G med   0.216 p99   2.496 | L1 med   0.208 | sig FIRE | 23s
+  A RD04-long/1271742202lc             e=25 n= 1638 INCONCLUSIVE projective  G med   0.267 p99   3.245 | L1 med   0.255 | sig FIRE | 23s
+  A RD04-long/1271742202lc             e=30 n= 1629 INCONCLUSIVE projective  G med   0.310 p99   4.075 | L1 med   0.292 | sig FIRE | 22s
+  A RD04-long/1335207975rc: 1185x2208 joint 0.15 ptp 108 m  res-rms 8.9 m  gsd 5.052
+  A RD04-long/1335207975rc             e= 0 n= 1365 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 9s
+  A RD04-long/1335207975rc             e= 1 n= 1165 INCONCLUSIVE similarity  G med   0.015 p99   0.130 | L1 med   0.015 | sig FIRE | 10s
+  A RD04-long/1335207975rc             e= 2 n= 1089 INCONCLUSIVE projective  G med   0.024 p99   0.218 | L1 med   0.030 | sig FIRE | 11s
+  A RD04-long/1335207975rc             e= 3 n= 1077 INCONCLUSIVE projective  G med   0.035 p99   0.332 | L1 med   0.043 | sig FIRE | 12s
+  A RD04-long/1335207975rc             e= 5 n= 1042 INCONCLUSIVE projective  G med   0.061 p99   0.548 | L1 med   0.073 | sig FIRE | 20s
+  A RD04-long/1335207975rc             e=10 n=  999 INCONCLUSIVE projective  G med   0.128 p99   1.092 | L1 med   0.160 | sig FIRE | 20s
+  A RD04-long/1335207975rc             e=15 n=  973 INCONCLUSIVE projective  G med   0.186 p99   1.689 | L1 med   0.227 | sig FIRE | 20s
+  A RD04-long/1335207975rc             e=20 n=  999 INCONCLUSIVE projective  G med   0.252 p99   2.288 | L1 med   0.312 | sig FIRE | 20s
+  A RD04-long/1335207975rc             e=25 n=  934 INCONCLUSIVE projective  G med   0.251 p99   3.211 | L1 med   0.295 | sig FIRE | 20s
+  A RD04-long/1335207975rc             e=30 n=  928 INCONCLUSIVE projective  G med   0.314 p99   3.952 | L1 med   0.367 | sig FIRE | 20s
+  A RD04-long/1299958135lc: 1409x2518 joint 0.28 ptp 152 m  res-rms 10.8 m  gsd 5.052
+  A RD04-long/1299958135lc             e= 0 n= 3973 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 22s
+  A RD04-long/1299958135lc             e= 1 n= 3203 INCONCLUSIVE projective  G med   0.012 p99   0.103 | L1 med   0.010 | sig ---- | 21s
+  A RD04-long/1299958135lc             e= 2 n= 2959 INCONCLUSIVE projective  G med   0.025 p99   0.206 | L1 med   0.019 | sig ---- | 21s
+  A RD04-long/1299958135lc             e= 3 n= 2815 INCONCLUSIVE projective  G med   0.037 p99   0.309 | L1 med   0.029 | sig ---- | 23s
+  A RD04-long/1299958135lc             e= 5 n= 2853 INCONCLUSIVE projective  G med   0.061 p99   0.514 | L1 med   0.049 | sig ---- | 33s
+  A RD04-long/1299958135lc             e=10 n= 2720 INCONCLUSIVE projective  G med   0.124 p99   1.036 | L1 med   0.099 | sig ---- | 33s
+  A RD04-long/1299958135lc             e=15 n= 2798 INCONCLUSIVE projective  G med   0.191 p99   1.571 | L1 med   0.153 | sig ---- | 33s
+  A RD04-long/1299958135lc             e=20 n= 2773 INCONCLUSIVE projective  G med   0.248 p99   2.150 | L1 med   0.202 | sig ---- | 33s
+  A RD04-long/1299958135lc             e=25 n= 2714 INCONCLUSIVE projective  G med   0.293 p99   2.809 | L1 med   0.227 | sig ---- | 32s
+  A RD04-long/1299958135lc             e=30 n= 2664 INCONCLUSIVE projective  G med   0.356 p99   3.531 | L1 med   0.269 | sig ---- | 34s
+arm B
+  B nac.m1096350825rc l1356: ptp 78 m res-rms 3.5 m gsd 2.60
+  B nac.m1096350825rc.geo.l1356s690.n4 e= 0 n=12713 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 67s
+  B nac.m1096350825rc.geo.l1356s690.n4 e= 1 n= 8871 INCONCLUSIVE affine      G med   0.012 p99   0.088 | L1 med   0.011 | sig FIRE | 42s
+  B nac.m1096350825rc.geo.l1356s690.n4 e= 2 n= 7348 INCONCLUSIVE affine      G med   0.024 p99   0.174 | L1 med   0.023 | sig FIRE | 34s
+  B nac.m1096350825rc.geo.l1356s690.n4 e= 3 n= 6803 INCONCLUSIVE affine      G med   0.036 p99   0.261 | L1 med   0.034 | sig FIRE | 33s
+  B nac.m1096350825rc.geo.l1356s690.n4 e= 5 n= 7530 INCONCLUSIVE affine      G med   0.060 p99   0.438 | L1 med   0.056 | sig FIRE | 37s
+  B nac.m1096350825rc.geo.l1356s690.n4 e=10 n= 7324 INCONCLUSIVE affine      G med   0.122 p99   0.881 | L1 med   0.113 | sig FIRE | 37s
+  B nac.m1096350825rc.geo.l1356s690.n4 e=15 n= 6970 INCONCLUSIVE affine      G med   0.184 p99   1.345 | L1 med   0.171 | sig FIRE | 35s
+  B nac.m1096350825rc.geo.l1356s690.n4 e=20 n= 7272 INCONCLUSIVE affine      G med   0.248 p99   1.830 | L1 med   0.230 | sig FIRE | 36s
+  B nac.m1096350825rc.geo.l1356s690.n4 e=25 n= 6797 INCONCLUSIVE affine      G med   0.313 p99   2.373 | L1 med   0.291 | sig FIRE | 33s
+  B nac.m1096350825rc.geo.l1356s690.n4 e=30 n= 6876 INCONCLUSIVE affine      G med   0.382 p99   2.959 | L1 med   0.349 | sig FIRE | 34s
+  B nac.m1096350825rc l9806: ptp 45 m res-rms 3.8 m gsd 2.60
+  B nac.m1096350825rc.geo.l9806s49.n40 e= 0 n=14925 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 75s
+  B nac.m1096350825rc.geo.l9806s49.n40 e= 1 n=11636 INCONCLUSIVE similarity  G med   0.016 p99   0.106 | L1 med   0.013 | sig FIRE | 58s
+  B nac.m1096350825rc.geo.l9806s49.n40 e= 2 n=10399 INCONCLUSIVE similarity  G med   0.030 p99   0.211 | L1 med   0.023 | sig FIRE | 50s
+  B nac.m1096350825rc.geo.l9806s49.n40 e= 3 n= 9914 INCONCLUSIVE affine      G med   0.039 p99   0.313 | L1 med   0.035 | sig FIRE | 47s
+  B nac.m1096350825rc.geo.l9806s49.n40 e= 5 n= 9171 INCONCLUSIVE affine      G med   0.065 p99   0.523 | L1 med   0.058 | sig FIRE | 45s
+  B nac.m1096350825rc.geo.l9806s49.n40 e=10 n= 7934 INCONCLUSIVE affine      G med   0.131 p99   1.052 | L1 med   0.119 | sig FIRE | 40s
+  B nac.m1096350825rc.geo.l9806s49.n40 e=15 n= 7825 INCONCLUSIVE affine      G med   0.199 p99   1.596 | L1 med   0.180 | sig FIRE | 39s
+  B nac.m1096350825rc.geo.l9806s49.n40 e=20 n= 9014 INCONCLUSIVE affine      G med   0.270 p99   2.170 | L1 med   0.244 | sig FIRE | 44s
+  B nac.m1096350825rc.geo.l9806s49.n40 e=25 n= 9260 INCONCLUSIVE affine      G med   0.341 p99   2.814 | L1 med   0.310 | sig FIRE | 47s
+  B nac.m1096350825rc.geo.l9806s49.n40 e=30 n= 8130 INCONCLUSIVE affine      G med   0.414 p99   3.564 | L1 med   0.376 | sig FIRE | 47s
+  B nac.m1142297886lc l2403: ptp 64 m res-rms 3.5 m gsd 2.45
+  B nac.m1142297886lc.geo.l2403s2157.n e= 0 n=13893 INCONCLUSIVE translation G med   0.000 p99   0.000 | L1 med   0.000 | sig ---- | 76s
+  B nac.m1142297886lc.geo.l2403s2157.n e= 1 n=10065 INCONCLUSIVE affine      G med   0.012 p99   0.092 | L1 med   0.012 | sig FIRE | 63s
+  B nac.m1142297886lc.geo.l2403s2157.n e= 2 n= 8647 INCONCLUSIVE affine      G med   0.025 p99   0.181 | L1 med   0.023 | sig FIRE | 50s
+  B nac.m1142297886lc.geo.l2403s2157.n e= 3 n= 8008 INCONCLUSIVE affine      G med   0.038 p99   0.271 | L1 med   0.035 | sig FIRE | 50s
+  B nac.m1142297886lc.geo.l2403s2157.n e= 5 n= 8435 INCONCLUSIVE affine      G med   0.064 p99   0.449 | L1 med   0.059 | sig FIRE | 49s
+  B nac.m1142297886lc.geo.l2403s2157.n e=10 n= 7848 INCONCLUSIVE affine      G med   0.127 p99   0.912 | L1 med   0.117 | sig FIRE | 46s
+  B nac.m1142297886lc.geo.l2403s2157.n e=15 n= 8192 INCONCLUSIVE affine      G med   0.193 p99   1.390 | L1 med   0.179 | sig FIRE | 53s
+  B nac.m1142297886lc.geo.l2403s2157.n e=20 n= 8237 INCONCLUSIVE affine      G med   0.262 p99   1.898 | L1 med   0.243 | sig FIRE | 48s
+  B nac.m1142297886lc.geo.l2403s2157.n e=25 n= 7598 INCONCLUSIVE affine      G med   0.329 p99   2.508 | L1 med   0.306 | sig FIRE | 48s
+  B nac.m1142297886lc.geo.l2403s2157.n e=30 n= 8021 INCONCLUSIVE affine      G med   0.406 p99   3.162 | L1 med   0.371 | sig FIRE | 53s
+  B nac.m1175268993rc l2249: ptp 49 m res-rms 2.8 m gsd 2.42

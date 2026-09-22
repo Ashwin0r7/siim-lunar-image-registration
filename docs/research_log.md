@@ -1092,7 +1092,7 @@ with no shared instrument in it.
 **Question.** "Multi-modal" is in the problem statement's title and the project
 had **one** piece of evidence for it: REAL-DATA-08's radar negative, 0 of 48.
 No IIRS product was ever delivered (RL-046), so the axis was data-REFUSED
-rather than untested. What does the *question* SS2.2 asks of IIRS -- *reflectance
+rather than untested. What does the *question* §2.2 asks of IIRS -- *reflectance
 bands: same envelope as pan; thermal: envelope stated* -- return when it is put
 to the closest public instrument of the same kind?
 
@@ -1102,7 +1102,7 @@ ortho EXP-019 validated and normalised to the **same** standard geometry
 (i = 30 deg, e = 0, alpha = 30 deg). So between an MI band and the TC pan reference
 there is no illumination difference and no georeferencing difference *by
 construction*: the only variables are wavelength and GSD. IIRS is 800-5000 nm
-at 80 m, so this is **not** an IIRS result and Part 1 SS6 forbade the word in any
+at 80 m, so this is **not** an IIRS result and Part 1 §6 forbade the word in any
 claim sentence. The thermal half, which MI cannot reach at all, is answered by
 a real thermal instrument: **Diviner GDR L3 bolometric temperature at 236.9 m**,
 28:1.
@@ -1112,7 +1112,7 @@ a real thermal instrument: **Diviner GDR L3 bolometric temperature at 236.9 m**,
 **S2 is MET as Part 1 froze it** (E-053). Seven of nine bands register under the
 frozen rule; every one of the seven lands within **1.334x** of a synthetic pan
 image built from the same instrument's own band mean (the other six run
-0.566-0.894, i.e. *better* than pan). **That is SS2.2's reflectance clause, met.**
+0.566-0.894, i.e. *better* than pan). **That is §2.2's reflectance clause, met.**
 
 **What S1's failure actually measured.** Not wavelength. The median error
 against the analytic label map is **54.1 m** where the bar was 8.42 m, and the
@@ -1121,13 +1121,13 @@ matches the label map to **3e-5**; the residual is a near-pure translation; and
 the learned engine, with **1360-2024 inliers** against RootSIFT's 9-41, puts it
 at **83.17-91.43 m**. **Two Kaguya products, one mission, one map frame and one
 control network, are offset from each other by about 85 m** (D-063) -- a term
-Part 1 SS2.1 had called "small and unmeasured".
+Part 1 §2.1 had called "small and unmeasured".
 
 **Which bands fail, and why it is not about colour.** The two failures are
 **1001 nm (MV5)** and **1000 nm (MN1)** -- the same wavelength through the
 imager's two detectors. The NIR bands are resampled from a **62 m** native
 sampling onto the 14.8 m grid and yield **3025-3516 keypoints** against the VIS
-bands' **10 821-15 546**: they are smoother than their own grid. Part 1 SS5 named
+bands' **10 821-15 546**: they are smoother than their own grid. Part 1 §5 named
 that confound in advance ("a resolution difference masquerading as a wavelength
 difference") and is why the comparator is the band mean.
 
@@ -1169,6 +1169,89 @@ Part 2 reads it as frozen.
 **Status:** closed -- **D-062** (what the multimodality row may say), **D-063**
 (the 85 m inter-product term). **Open:** an IIRS product, which no software can
 supply; and a second window to see whether the band-vs-pan ratio holds.
+
+
+### RL-056 - Viewpoint, measured for the first time: the failure the stage was built around does not happen, and the acceptance that does fail is §2.2's own wording (EXP-017)
+
+**Question.** The problem statement names three variations and this project had
+**zero evidence** on the second. Every real frame on disk is near-nadir
+(emission 1.17-1.77 deg) and the TMC-2 product PRADAN delivered is the nadir band
+only, so there is no real off-nadir pair to test. What there is: a real 10 m DTM
+co-registered by construction with a real 5 m orthoimage, from which an oblique
+view can be **constructed** with exact ground truth. Every number below is
+*synthetic viewpoint on real terrain*, and every error is an upper bound on
+precision.
+
+**Result.** `[MEASURED]` `experiments/EXP-017/exp017_results.json`, 6908 s, 310
+cells, 31 windows. **S2, S4 MET; S0, S1a, S3, S5 NOT MET; S1b MET.** Third
+launch of the stage; the two earlier deaths were non-scientific (a job-object
+interrupt and the E-044 MemoryError recorded as E-048) and nothing frozen
+changed.
+
+**The thing that did not happen.** A global 2-D transform's dense **median**
+error stays under 0.5 px at **every** emission angle to 30 deg: **no window has an
+onset**, so `e*_med` is null on all 13 reported windows and the two criteria
+written to characterise that onset (S3, S5) are **undefined rather than
+refuted**. The p99 crosses 1.0 px at **10-30 deg** (median 25).
+
+**Why, measured rather than assumed.** A global affine absorbs the plane, and on
+this mare the plane is almost all of it: peak-to-peak relief **47-123 m**
+collapses to **2.85-8.93 m RMS** once removed, against Part 1's prediction of
+**15-40 m**. So the parallax a 2-D model cannot absorb is **0.33-1.02 px at
+30 deg**. §20's `delta-h . tan(e)` read as peak-to-peak predicts the 0.5 px
+crossing at e = 2-5 deg and is therefore **early by >= 6x**; read as residual-relief
+RMS it lands within a sweep step (**D-065**).
+
+**What did fail, and it is the requirement itself.** §2.2's acceptance --
+*"local model residuals white; no systematic relief signature"* -- holds on
+**13 of 13** windows at e = 0 and **0 of 13 from e = 5 deg**, for both local arms
+(**S1a NOT MET, envelope 0 deg**). The residual a local model leaves is small and
+**smooth**, and a whiteness test fires on a smooth field at any amplitude: L1's
+median residual at e = 5 is **0.032 px** and the test still fires. So *"residuals
+white"* and *"residuals small"* are different requirements, the first
+unattainable above 0 deg with these instruments, and **D-064** records what a
+deliverable may claim instead -- the bound envelope, with its arm named.
+
+**The bound reading, and the first measured case for orthorectifying.**
+`[MEASURED]` Median / p99 over the reported windows: at 20 deg the global model
+gives 0.119 / 0.985 px, **L1** (96-parameter piecewise affine) 0.125 / 0.938,
+**L2** (6 parameters plus the independent 59 m SLDEM) 0.142 / **0.738**. The
+bound clause (median < 0.5 px and p99 < 1.0 px on >= 12 of 15) holds for **L1 to
+5 deg** and **L2 to 20 deg**. A 96-parameter local model buys almost nothing;
+six parameters plus the DEM the deliverable actually has buys the envelope.
+
+**The selector responds, and the GT-free signal is the strong one.**
+`[MEASURED]` Spearman rho between the selected model's DOF and e = **0.530**
+(p = 8.5e-11, n = 130); between the best candidate's **held-out** median and e =
+**0.949** (p = 6.1e-66). The ladder climbs translation -> similarity/projective ->
+affine/projective and **saturates** (at 30 deg: affine 7, projective 6), exactly as
+predicted. `decided_by_tie_break` falls from 1.00 at e = 0 to 0.46-0.62
+(rho = -0.785 against e).
+
+**The blind spot, confirmed.** On all 130 arm-A cells the frozen rule passes
+(median 1101 inliers) and the verdict returns **INCONCLUSIVE -- never REJECTED**
+-- including at 30 deg where the dense p99 is **1.535 px**. Nothing in the verdict
+is sensitive to emission angle, and the one signal that is (the held-out
+residual, rho = 0.949) is computed and not used to reject. Recorded as a blind
+spot beside the verdict, not patched.
+
+**Controls.** The shift null fires on **1 of 15** windows at e = 0 (max allowed
+1) and the pixel-permutation null on **12 of 15** -- the anti-conservative
+control Part 1 named, firing four times harder than predicted. S0(iii)'s
+reproduction is exact (0.0 image diff). Occupancy is **1.000 at every e**, so
+the predicted clustering of the height slab does not occur.
+
+**Failures found.** **E-054** -- the circular L3 control exceeds its 0.05 px
+tolerance on 2 of 15 windows at e = 25-30 deg (0.058 and 0.051 px), so **S0 is NOT
+MET** and both windows are excluded from every criterion. The excess is spline
+interpolation error under a steep field; the tolerance was borrowed from
+EXP-014's resolution line rather than derived for this harness, and it is **not**
+loosened after the fact.
+
+**Status:** closed -- **D-064** (the acceptance), **D-065** (§20's reading).
+**Open:** a real TMC-2 fore/aft pair, which is the only way to ask whether the
+*matcher* survives 25 deg; this construction can only ask whether the *model class*
+does.
 
 
 ## Open threads summary

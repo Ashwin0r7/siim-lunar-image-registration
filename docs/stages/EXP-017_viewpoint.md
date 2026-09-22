@@ -504,4 +504,253 @@ user action.
 
 ## Part 2
 
-*Empty. Written only after this Part 1 is committed.*
+**Written 2026-09-23, after the run.** Artefact:
+`experiments/EXP-017/exp017_results.json` (6908 s = 1 h 55 m; 310 cells over
+31 windows; Python 3.13.7, NumPy 2.3.3). **This is the third launch of this
+stage**; the first two deaths were non-scientific and nothing frozen changed —
+a job-object `^C` (`run_died_v1.log`) and the E-044 MemoryError that E-048
+records (`run_died_v2.log`), plus a third console-close on 2026-09-22
+(`run_died_v3.log`). No criterion, threshold, window, seed or engine differs
+between them.
+
+### 6. The answer, in one paragraph
+
+**The project's first viewpoint evidence of any kind, and the thing it
+measured first is that the failure this stage was designed around does not
+happen on this terrain.** A global 2-D transform's **dense median error stays
+under 0.5 px at every emission angle in the sweep, out to 30°** — so **no
+window has an onset** (S2), and two criteria that were written to characterise
+that onset (S3, S5) are **undefined rather than refuted**. The mechanism is
+measured, not guessed: after a global affine absorbs the plane, the **residual
+relief is 2.85–8.93 m RMS**, where Part 1 predicted 15–40 m, so the parallax a
+2-D model *cannot* absorb is 0.33–1.02 px at 30° instead of the several px §20's
+peak-to-peak reading implies. What **does** fail is the literal §2.2 acceptance:
+*"local model residuals white; no systematic relief signature"* holds at
+**e = 0 and nowhere else** — **S1a NOT MET with an envelope of 0° for both
+local arms**. The bound reading holds and separates the arms usefully:
+**L1 (piecewise affine) to 5°, L2 (orthorectified with the 59 m SLDEM — the DEM
+the deliverable actually has) to 20°.** The selector responds exactly as §2.2
+requires (**S4 MET**, ρ = 0.530 on model DOF and **0.949** on the held-out
+residual). And the blind spot Part 1 predicted is confirmed: **the verdict is
+INCONCLUSIVE at every e on every window and rejects nothing**, including at 30°
+where the p99 error is 1.5 px.
+
+### 7. Criteria, answered exactly as frozen
+
+| ID | Verdict | The number |
+|---|---|---|
+| **S0** | **NOT MET** | **13 of 15** arm-A windows pass every clause. Two — `RD03/1142297886lc` and `RD04-long/1299958135lc` — fail clause **(iv)** only: the circular L3 control's dense median reaches **0.058 px** and **0.051 px** at e = 30 against a 0.05 px tolerance. Both are excluded from S1–S5 as Part 1 requires. **Clause (v) held**: the shift null fires on **1 of 15** at e = 0 (max allowed 1) — and the pixel-permutation null fires on **12 of 15**, which is the anti-conservative control Part 1 predicted at ≥ 3. (i)–(iii), (vi) held on all 15; S0(iii)'s reproduction is exact (0.0 image diff, 0.0 dense-median diff) |
+| **S1** | **S1a NOT MET (envelope 0° for L1 and L2); S1b MET** | Literal clause, L1: 13/13 windows white-and-unsignatured at e = 0, **3/13 at e = 1–3, 0/13 from e = 5**. L2: 13/13 at 0, **11/13 at e = 1–3**, 0/13 from 5. Bound clause (median < 0.5 px **and** p99 < 1.0 px on ≥ 12 of 15): **L1 holds to e = 5°**, **L2 to e = 20°** |
+| **S2** | **MET** (a measurement) | **0 of 13** windows reach `e*_med` inside the sweep: G's dense median at 30° runs **0.181–0.314 px**. `e*_p99` (p99 > 1.0 px) is reached at **10–30°**, median 25°. §20's peak-to-peak rule predicts the 0.5 px crossing at **e = 2–5°** on these windows and is therefore early by **≥ 6×**, not the ≥ 2× predicted. **Success under the frozen rule at every e on every window: true. Never REJECTED: true** |
+| **S3** | **NOT MET — and undefined, not refuted** | The criterion reads *"fires on ≥ 80 % of the (window, e) cells with e ≥ e\*_med"*. There are **no cells at or above e\*_med, because there are no onsets**: `n_cells_at_or_above_onset = 0`, `fraction = null`. S0(v) held, so the criterion could have been read had the onset existed. **This is a null by construction and is reported as one** |
+| **S4** | **MET** | **S4a**: Spearman ρ between selected-model DOF and e = **0.530** (p = 8.5e-11, n = 130) — bar > 0.3 at p < 0.05. **S4b**: ρ between the best candidate's held-out median and e = **0.949** (p = 6.1e-66) — bar > 0.5. `decided_by_tie_break` falls from **1.00 at e = 0 to 0.46–0.62** above it (ρ = −0.785 against e) |
+| **S5** | **NOT MET — and undefined for the same reason as S3** | Both clauses compare geometric means of `P_rms(e*_med)`, and **no arm has an onset**: arm A `null`, arm C `null`, arm B `0 of 10` tiles crossing. Arm B's max `P_rms` at 30° is **0.928 px**, which the clause compares against arm A's onset — which does not exist. **Undefined, reported as undefined** |
+
+### 8. S1a — the literal §2.2 acceptance is unattainable beyond 0°, and that is the finding
+
+§2.2's acceptance for this axis is *"Local model residuals white; no systematic
+relief signature."* Operationalised exactly as §2.3 froze it — Moran's I
+against a value-permutation null for whiteness, and a three-clause signature
+test (R² over a **shift** null, predicted sign, |slope| within 2× of
+`tan(e)/GSD`) — it holds on **13 of 13** windows at e = 0 and on **0 of 13**
+from e = 5° for both local arms.
+
+**This is not a failure of the local models. It is a property of the
+acceptance.** The residual a local model leaves is *small* — L1's median is
+0.032 px at e = 5 and 0.193 px at e = 30 — and it is *structured*, because
+relief is spatially smooth and any model that does not carry the DEM leaves a
+smooth remainder. A whiteness test on a smooth field fires at any amplitude,
+including amplitudes far below every accuracy bound this project uses. So:
+
+> **On real mare relief, "residuals white" and "residuals small" are different
+> requirements, and the first is unattainable above 0° while the second holds
+> to 5–20°.**
+
+That is the same shape as **D-057** (§53 criterion 4 measured mis-specified),
+at a different requirement, and Part 1 §1 fixed the consequence in advance:
+*"§2.2's acceptance as literally written is unattainable with these instruments
+on real relief, and the stage says so."* It is said. **The acceptance is not
+rewritten here** — a criterion is not re-scoped by the stage that fails it; the
+envelope under the bound reading is reported beside it and the master plan's
+row is left for a decision (D-064) rather than edited.
+
+### 9. S1b — the bound reading, and the first measured case for orthorectifying
+
+| e | G median / p99 | L1 median / p99 | **L2** median / p99 |
+|---|---|---|---|
+| 1° | 0.008 / 0.047 | 0.006 / 0.044 | 0.007 / **0.035** |
+| 5° | 0.035 / 0.232 | 0.032 / 0.218 | 0.035 / **0.175** |
+| 10° | 0.058 / 0.474 | 0.061 / 0.435 | 0.069 / **0.357** |
+| 20° | 0.119 / 0.985 | 0.125 / 0.938 | 0.142 / **0.738** |
+| 30° | 0.192 / 1.535 | 0.193 / 1.512 | 0.227 / **1.171** |
+
+*(medians over the 13 reported windows, in reference pixels)*
+
+**L1, a 96-parameter piecewise affine, buys almost nothing over the global
+model** — 0.938 px p99 against 0.985 at 20°. **L2, six parameters plus an
+independent DEM, buys the envelope**: its bound clause holds to **20°** where
+L1's holds to **5°**, and its p99 is lower than L1's at every level. §2.2's
+engineering requirement — *"DEM orthorectification when relief × tan(e) >
+0.5 px"* — is therefore supported **in the bound reading, with the DEM the
+deliverable actually has** (the 59 m SLDEM, not the DTM that built the field),
+and L2's residual is what §20 says it should be: the DEM's own error times
+`tan(e)/GSD`.
+
+### 10. S2 — why there is no onset, measured rather than assumed
+
+Part 1 §2.5 recorded two readings of "relief" and said *"which reading §20's
+0.5 px is right under is one of this stage's outputs"*. The answer:
+
+| window class | relief ptp | **residual relief RMS** | §20 ptp predicts 0.5 px at | measured `e*_med` | `e*_p99` |
+|---|---|---|---|---|---|
+| RD03 short (8) | 47–63 m | **2.85–3.43 m** | 3–5° | **none ≤ 30°** | 20–30° |
+| RD03 long (3) | 101 m | **5.27–5.98 m** | 2° | **none** | 20–25° |
+| RD04 long (2) | 108–123 m | **8.87–8.93 m** | 2° | **none** | 10° |
+
+A global affine absorbs the **plane**, and on this mare the plane is almost all
+of the relief: peak-to-peak 47–123 m collapses to **2.9–8.9 m RMS** once it is
+removed. Part 1 predicted 15–40 m — **wrong by 2–5×**, and that single number
+is why three criteria came back undefined. At 30° the parallax a 2-D model
+cannot absorb is `P_rms` **0.33–1.02 px**, and the dense median error tracks it
+at 0.18–0.31 px.
+
+**So §20's wording is what changes** (Part 1 §6 fixed this consequence in
+advance): `Δh · tan(e)` with `Δh` read as peak-to-peak is **early by ≥ 6×** on
+every window here; with `Δh` read as residual-relief RMS it predicts the
+measured p99 crossing to within a sweep step. The peak-to-peak figure is kept
+beside it, as required.
+
+### 11. S3 and S5 — two criteria undefined because the failure never happened
+
+Both were written to characterise an onset. There is no onset, so neither has
+cells to read:
+
+- **S3** asks what fraction of cells *at or above* `e*_med` carry a relief
+  signature. `n_cells_at_or_above_onset = 0`. The criterion is **NOT MET and
+  the reason is "null by construction"**, which is a different statement from
+  "the residual carries no relief signature" — the signature test in fact fires
+  on **90 of 117** e > 0 cells (77 %), and S0(v)'s calibration held, so had an
+  onset existed the criterion would have been readable.
+- **S5** compares geometric means of `P_rms(e*_med)` across arms; with no
+  onsets on arms A or C and **0 of 10** arm-B tiles crossing, every term is
+  `null`. Reported: arm B's maximum `P_rms` at 30° is **0.928 px**, and arm C's
+  six synthetic fields reach `e*_p99` at 25–30°.
+
+**Neither is reported as evidence about breadth.** Part 1 §6 forbids
+re-scoping, and a criterion whose statistic is undefined says nothing in either
+direction.
+
+### 12. S4 — the selector does respond, and the deliverable's own signal is the strong one
+
+The §2.2 requirement *"model class chosen by residual test"* is satisfied by the
+selector the pipeline ships:
+
+| e | selected model (13 windows) |
+|---|---|
+| 0° | translation ×13 |
+| 1° | similarity 9, projective 3, affine 1 |
+| 5° | projective 5, similarity 4, affine 4 |
+| 15° | projective 7, affine 6 |
+| 30° | affine 7, projective 6 |
+
+ρ(DOF, e) = **0.530**; ρ(held-out median, e) = **0.949**. The held-out residual
+— the GT-free quantity a deployed pipeline can actually compute — is the signal
+that tracks viewpoint almost perfectly, and the model-class ladder is the
+weaker one, exactly as Part 1 predicted (*"the selection saturates at affine;
+projective is not the parallax field's shape either"* — at 30° the split is
+affine 7 / projective 6, i.e. saturated). `decided_by_tie_break` falls from
+1.00 at e = 0 to 0.46–0.62, ρ = **−0.785**: as viewpoint grows the evidence
+decides the model instead of the simplicity rule.
+
+### 13. The blind spot, confirmed and quantified
+
+`pass_at_every_e = true` and `never_rejected = true`: on **all 130 arm-A
+cells**, the frozen rule passes (median 983–1365 inliers) and the shipped
+verdict returns **INCONCLUSIVE** — never REJECTED — including at 30°, where the
+dense p99 error is **1.535 px** and the worst window's `P_rms` is 1.02 px.
+
+Part 1 predicted exactly this at HIGH confidence and called it *"the
+deliverable's viewpoint blind spot stated in one line: a map wrong by up to
+~18 px off the slab, passed."* The measured version is milder than the
+prediction — the errors are 1–2 px, not 18, because the residual relief is
+small — and the structural point stands: **nothing in the verdict is sensitive
+to emission angle**, and the only signal that is (the held-out residual, ρ =
+0.949) is computed and **not** used as a rejection criterion. That is recorded
+as a blind spot beside the verdict, not patched (Part 1 §7).
+
+### 14. The predictions, graded
+
+| prediction (Part 1 §4) | outcome |
+|---|---|
+| S0 MET, HIGH; clause (v) most likely to fail | **WRONG on both counts.** S0 is NOT MET — but through clause **(iv)**, the circular L3 control, on 2 of 15 windows at the top of the sweep; clause (v) held exactly at its limit (1 of 15) |
+| **S1a NOT MET at e ≥ 2° for L1 (MEDIUM-HIGH), at e ≥ 3° for L2 (MEDIUM)** | **Right, and stronger than predicted**: the envelope is **0°** for both. The reasoning offered — "residual relief 15–40 m leaves 0.1–0.3 px of smooth structure" — was **wrong in its premise** (2.9–8.9 m) and **right in its conclusion**, which is worth recording: the residual is smooth at *any* amplitude, so whiteness fails for a reason independent of the amplitude that was predicted |
+| S1b MET for L1 to e = 10° (MEDIUM); for L2 to 5° (LOW-MEDIUM) | **Half wrong, in opposite directions.** L1 holds to **5°** (predicted 10°); L2 holds to **20°** (predicted 5°) — the arm predicted weakest is the strongest, because the SLDEM–DTM difference is far smaller than the ≥ 15 m RMS assumed |
+| S2 MET; `e*_med` 3–10° long / 5–15° short; §20 early by ≥ 2× on ≥ 12 of 15 | **MET as a measurement, and every number wrong**: there is **no** `e*_med` at all inside the sweep, and §20 is early by **≥ 6×** rather than ≥ 2× |
+| **Residual relief 15–40 m RMS** | **WRONG — 2.85–8.93 m.** This single quantity explains S2, S3 and S5 |
+| "Success under the frozen rule at every e on every window" — HIGH | **Right** |
+| "The verdict is never REJECTED at any e" — HIGH | **Right** |
+| S3 MET (MEDIUM-HIGH); pixel-permutation null fires on ≥ 3 of 15 at e = 0 (MEDIUM) | **S3 undefined** (no onset). The null prediction is **right and then some: 12 of 15** |
+| S4a MET (MEDIUM, ρ 0.3–0.5, saturating at affine); S4b MET (HIGH, ρ > 0.7) | **Both right**, ρ = 0.530 and 0.949, and the saturation is visible at 30° |
+| S5 MET (MEDIUM-LOW) | **Undefined** |
+| `grid_occupancy` falls with e on ≥ 12 of 15 (MEDIUM) | **WRONG.** Occupancy is **1.000 at every e on every window** and falls at 30° on **1 of 13**. The height slab RANSAC keeps is not spatially clustered on this terrain, because the residual relief is small and the plane carries the rest |
+| The GT-free signature test first fires at ≥ 2× `e*_med` with DTM heights, at ≥ 3× or never with SLDEM (LOW-MEDIUM) | **Unreadable as stated** (no `e*_med`), and reported instead as counts: with DTM heights it fires on **3–8 of 13** windows at every e > 0 with no trend; with SLDEM heights on **0–2 of 13**. The deployable version of the test is therefore close to blind here |
+
+**Four of thirteen predictions right, one right for the wrong reason, three
+undefined, five wrong.** The central wrong one — residual relief — is the
+stage's most useful output.
+
+**Also reported beside the criteria (Part 1 §8).** The refinement's per-point
+shift grows with viewpoint exactly as §5 predicted it would — median **0.0005 px
+at e = 0**, **0.143 px at 30°**, and consistently **larger on slopes ≥ 5°**
+(0.163 px at 30°) — but the Spearman correlation between shift and local slope
+is only **0.11–0.15**, so the effect is real in the mean and weak per point.
+The verdict's status and confidence are recorded for all 130 cells (all
+INCONCLUSIVE; confidence falls from moderate to low as `n_refined` drops).
+
+### 15. What this stage does NOT claim (Part 1 §7, restated against the results)
+
+Every disclaimer stands, and two matter more now that the numbers are small:
+
+- **Not a real off-nadir result.** The oblique image is the nadir image's own
+  photons displaced by a DEM: identical texture, identical illumination,
+  identical interpolation kernel. **Every error here is an upper bound on
+  precision**, and a real TMC-2 fore/aft pair would differ from this
+  construction by ≈ **1.9 px RMS at 25°** from the DTM's own 20.9 m height
+  RMSE alone (§5). The small errors measured here are therefore *not* a
+  prediction that a real stereo pair registers to 0.2 px.
+- **Not occlusion, radiometry or a sensor model**; not a Chandrayaan-2
+  fore/aft, OHRC or slewed-NAC result; one mare region, one TMC-2 strip, 15
+  windows of which **13 are reported**; one engine; `assess()` untouched.
+- **Not a claim that §2.2's acceptance is wrong** — only that it is
+  unattainable above 0° with these instruments on this terrain, which is a
+  measurement about the acceptance, offered to the decision that owns it.
+
+### 16. Ledger and index
+
+- **D-064** — §2.2's viewpoint acceptance is recorded **mis-specified in its
+  literal form** (whiteness) and **satisfiable in its bound form**, with the
+  measured envelopes: **L1 5°, L2 20°**, global model median < 0.5 px to 30°.
+  The row is **not** rewritten; the decision records what a deliverable may
+  claim and what it may not, exactly as D-057 did for §53 criterion 4.
+- **D-065** — §20's `Δh · tan(e)` is read as **residual-relief RMS**, not
+  peak-to-peak, on the evidence that the peak-to-peak reading is early by ≥ 6×
+  on 13 of 13 windows; the peak-to-peak figure stays recorded beside it.
+- **E-054** — S0(iv)'s tolerance and the two windows it excluded (§17).
+- `STAGE-INDEX.md`, `STAGE_HISTORY.md` and `research_log.md` rows land with
+  this commit.
+
+### 17. E-054 — the harness control that failed, and why it is a tolerance rather than a defect
+
+Clause S0(iv) requires the **circular** arm L3 — orthorectification with the
+very DTM that built the displacement field — to return a dense median under
+**0.05 px at every e**. On 11 of 13 reported windows it does (worst 0.04 px).
+On the two excluded windows it reaches **0.058 px** (`RD03/1142297886lc`) and
+**0.051 px** (`RD04-long/1299958135lc`), both **only at e = 25–30°**.
+
+The residual is the harness's own precision: the field is applied by a
+fixed-point inversion to 1e-6 px and sampled with an order-3 spline, and at 30°
+the field's gradient is largest exactly where the DEM is roughest. So the
+excess is **interpolation, not a wrong map** — and it is still a **failure of
+the clause as frozen**, so both windows are excluded from every criterion, as
+Part 1 requires. Recorded rather than argued away: the tolerance may not be
+loosened after seeing which windows exceed it (Part 1 §6).

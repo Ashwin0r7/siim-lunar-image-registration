@@ -1,0 +1,2 @@
+D:\MyData\downloads\SIH\scripts\run_exp007.py:117: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a.reshape(a.shape[0] // k, k, a.shape[1] // k, k), axis=(1, 3))

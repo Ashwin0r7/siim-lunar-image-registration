@@ -120,7 +120,50 @@ space (ADR-0011 N1), recorded as a known limitation rather than patched.
 ---
 
 
-## UPDATE 2026-09-23 (later) — the multimodality axis is answered, and SS53 does not move (EXP-020)
+## UPDATE 2026-09-23 (later still) — viewpoint has evidence for the first time, and one more §2.2 acceptance is measured mis-specified (EXP-017)
+
+**What ran.** EXP-017 constructed an oblique view from a real 10 m TMC-2 DTM
+co-registered with a real 5 m ortho and swept emission angle 0–30° over 31
+windows, with exact ground truth by construction. **S2, S4 MET (S1b MET); S0,
+S1a, S3, S5 NOT MET.**
+
+**§53 does not move.** No criterion here touches the five. That is stated
+rather than implied, because this audit's own lesson — the section *"A second
+scorecard this audit never kept"* — is that a stage can be excellent and move
+this scorecard by zero. The scorecard it moves is §2.2's.
+
+**§2.2's viewpoint row: NEVER TESTED → measured, with its acceptance split in
+two.**
+
+- The row's acceptance is *"local model residuals white; no systematic relief
+  signature"*. Operationalised exactly as pre-registered, it holds at **e = 0
+  and nowhere else** on both local arms. **D-064** records that the literal form
+  is **mis-specified** for this instrument class on this terrain — a smooth
+  residual fires a whiteness test at any amplitude, including 0.032 px — and
+  that the **bound** form is what a deliverable may claim: **5°** for a
+  96-parameter piecewise affine, **20°** for six parameters plus the 59 m
+  SLDEM, and a global model's dense median under 0.5 px to **30°**.
+- This is the **second** acceptance measured mis-specified as written (after
+  §53 criterion 4, D-057), and the pattern is worth naming: *an acceptance
+  phrased as a property of the residual's **shape** (white, uniform) is not the
+  same requirement as one phrased as a bound on its **size**, and on real data
+  the two diverge by an order of magnitude in what they admit.*
+
+**What the row may now say.** Viewpoint invariance is **measured on real
+relief**, in a construction that carries no occlusion, no view-dependent
+radiometry and no sensor model — so every number is an upper bound on
+precision, and a real TMC-2 fore/aft pair remains the acquisition that would
+test the matcher rather than the model class.
+
+**A blind spot this audit should carry.** On all 130 arm-A cells the verdict
+returns INCONCLUSIVE and **never REJECTED**, including at 30° where the dense
+p99 error is 1.535 px. Criterion 3's false-rejection clause is unmeasurable for
+the usual reason; this is the complementary observation on the acceptance side,
+recorded beside the verdict rather than patched into it.
+
+---
+
+## UPDATE 2026-09-23 (later) — the multimodality axis is answered, and §53 does not move (EXP-020)
 
 **What ran.** EXP-020 put nine Kaguya MI reflectance bands (414–1548 nm, 14.8 m)
 and a Diviner bolometric-temperature map (236.9 m) against panchromatic
@@ -128,15 +171,15 @@ references over the same mare window, plus the Chandrayaan-2 TMC-2 block and a
 null block. **S0, S6 MET; S2 MET as Part 1 froze it (E-053); S1, S3, S4, S5 NOT
 MET.**
 
-**SS53 is unchanged by this stage, and that is the point.** Criterion 2 still
+**§53 is unchanged by this stage, and that is the point.** Criterion 2 still
 needs a VERIFIED Chandrayaan-2 verdict per sensor; criterion 3 still has no
 measurable FA/FR; criterion 4 is still mis-specified (D-057). **A stage can be
 worth running and move this scorecard by zero** — which is exactly the failure
-mode `PROJECT_GAP_ANALYSIS.md` SS4 recorded for EXP-013/014/015, and it is not one
-here **because the scorecard this stage moves is SS2.2**, which is now tracked
-beside SS53.
+mode `PROJECT_GAP_ANALYSIS.md` §4 recorded for EXP-013/014/015, and it is not one
+here **because the scorecard this stage moves is §2.2**, which is now tracked
+beside §53.
 
-**SS2.2's multimodality row: NOT MET → answered, in the scope D-062 fixes.**
+**§2.2's multimodality row: NOT MET → answered, in the scope D-062 fixes.**
 - *reflectance bands: same envelope as pan* — **MET**: 7 of 9 bands register
   under the frozen rule and every succeeding band is within **1.334×** of a pan
   comparator built from the same instrument's own band mean.
