@@ -133,7 +133,10 @@ def test_the_live_card_is_not_wired_as_a_scenario_and_survives_the_boot_race(pag
     assert 'if (current === "__live__")' in page
     assert 'current === null && !document.getElementById("live-src")' in page
     # the preview images take the API's data URLs verbatim
-    assert 'src="${esc(d.source_png)}"' in page and 'src="${esc(d.registered_png)}"' in page
+    assert 'src="${esc(d.source_png)}"' in page, "the source preview must take the API's data URL"
+    assert ('src="${esc(reg)}"' in page or 'src="${esc(d.registered_png)}"' in page), (
+        "the registered preview must take the API's data URL (the live card binds it to `reg` "
+        "first so the whole block can be omitted when the verdict refuses)")
     assert 'src="data:image/png;base64,${d.' not in page
 
 
