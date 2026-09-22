@@ -260,3 +260,39 @@ def test_an_unknown_engine_is_refused_before_any_decode():
                                       "engine": "MAGIC"})
     assert r.status_code == 400
     assert "engine must be one of" in r.json()["detail"]
+
+
+# ---------------------------------------------------------------------------
+# a run is a thing you can watch, stop, and recover from
+# ---------------------------------------------------------------------------
+
+def test_a_run_in_flight_can_be_cancelled(script):
+    card = _fn(script, "liveCard")
+    assert 'id="live-cancel"' in card and "hidden" in card, (
+        "a 60-second operation needs a way out that is not the back button")
+    wire = _fn(script, "wireLive")
+    assert "LIVE.abort.abort()" in wire
+    run = _fn(script, "runLive")
+    assert "AbortController" in run
+    assert 'e.name === "AbortError"' in run and "Cancelled." in run
+    assert "cancel.hidden = false" in run and "cancel.hidden = true" in run
+
+
+def test_a_file_dropped_anywhere_on_the_card_lands_in_a_slot(script):
+    wire = _fn(script, "wireLive")
+    block = wire[wire.index('document.getElementById("live")'):]
+    assert 'card.addEventListener("drop"' in block, (
+        "a file dropped on the margin otherwise navigates away and loses the page")
+    assert 'ev.target.closest(".drop")' in block, "the slots must keep their own handling"
+
+
+def test_the_result_is_scrolled_into_view(script):
+    run = _fn(script, "runLive")
+    assert "scrollIntoView" in run
+
+
+def test_a_refusal_suggests_the_engine_that_needs_nothing_extra(script):
+    run = _fn(script, "runLive")
+    assert "learned|extra" in run
+    assert "choose <b>RootSIFT</b>" in run
+    assert "Check that both files are images of the same ground." in run
