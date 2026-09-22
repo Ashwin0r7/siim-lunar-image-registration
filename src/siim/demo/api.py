@@ -64,7 +64,9 @@ from siim.demo.chandrayaan2 import (  # noqa: E402
 from siim.demo.exp006 import exp006_evidence, exp006_status  # noqa: E402
 from siim.demo.exp012 import exp012_evidence, exp012_status  # noqa: E402
 from siim.demo.exp013 import exp013_evidence, exp013_status  # noqa: E402
+from siim.demo.exp017 import exp017_evidence, exp017_status  # noqa: E402
 from siim.demo.exp019 import exp019_evidence, exp019_status  # noqa: E402
+from siim.demo.exp020 import exp020_evidence, exp020_status  # noqa: E402
 from siim.demo.evidence import (  # noqa: E402
     REAL_SCENARIOS,
     DemoDataMissing,
@@ -355,6 +357,33 @@ def evidence_controlled_reference() -> dict:
         raise HTTPException(503, str(exc)) from exc
 
 
+@app.get("/api/evidence/viewpoint")
+def evidence_viewpoint() -> dict:
+    """EXP-017: where a 2-D model stops being valid over real relief.
+
+    The problem statement's second named variation, on which this project had
+    no evidence of any kind until this stage. Read from the recorded artefact;
+    never recomputed."""
+    try:
+        return exp017_evidence()
+    except DemoDataMissing as exc:
+        raise HTTPException(503, str(exc)) from exc
+
+
+@app.get("/api/evidence/multimodality")
+def evidence_multimodality() -> dict:
+    """EXP-020: nine reflectance bands and a thermal map against panchromatic.
+
+    The problem statement is titled for multi-modal registration and no IIRS
+    product was ever delivered, so this panel says what was measured with the
+    closest public instrument of the same kind -- and says, first, that it is
+    not IIRS. Read from the recorded artefacts; never recomputed."""
+    try:
+        return exp020_evidence()
+    except DemoDataMissing as exc:
+        raise HTTPException(503, str(exc)) from exc
+
+
 @app.get("/api/evidence/chandrayaan2")
 def evidence_chandrayaan2() -> dict:
     """REAL-DATA-09: Chandrayaan-2 TMC-2 against LRO NAC, from its artefacts.
@@ -524,6 +553,14 @@ def advertised_artefacts() -> frozenset[str]:
         pass
     try:
         paths.update(exp019_evidence()["sources"])
+    except DemoDataMissing:
+        pass
+    try:
+        paths.update(exp020_evidence()["sources"])
+    except DemoDataMissing:
+        pass
+    try:
+        paths.update(exp017_evidence()["sources"])
     except DemoDataMissing:
         pass
     return frozenset(paths)

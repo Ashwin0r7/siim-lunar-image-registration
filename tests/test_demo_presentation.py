@@ -50,7 +50,9 @@ from siim.demo import evidence as ev
 from siim.demo import exp006 as e6
 from siim.demo import exp012 as e12
 from siim.demo import exp013 as e13
+from siim.demo import exp017 as e17
 from siim.demo import exp019 as e19
+from siim.demo import exp020 as e20
 
 REAL = ["real_da_success", "real_bd_failure", "real_ab_control"]
 
@@ -165,6 +167,10 @@ def test_the_allow_list_is_exactly_what_the_page_advertises():
         advertised.update(e6.exp006_evidence()["sources"])
     if e19.exp019_status()["available"]:
         advertised.update(e19.exp019_evidence()["sources"])
+    if e20.exp020_status()["available"]:
+        advertised.update(e20.exp020_evidence()["sources"])
+    if e17.exp017_status()["available"]:
+        advertised.update(e17.exp017_evidence()["sources"])
     assert set(api.advertised_artefacts()) == advertised
 
 

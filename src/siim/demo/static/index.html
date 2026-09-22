@@ -478,6 +478,7 @@ footer.foot b{color:var(--ink-2);font-weight:500}
       <a href="#m05">05 Engines</a>
       <a href="#m06">06 Chandrayaan-2</a>
       <a href="#m07">07 Reference</a>
+      <a href="#m09">09 Viewpoint</a>
       <a href="#m10">10 Modality</a>
       <a href="#prov">Provenance</a>
     </nav>
@@ -584,7 +585,8 @@ Promise.all([
   fetch("/api/evidence/component-ablation").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/controlled-reference").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/multimodality").then(r => r.ok ? r.json() : null).catch(() => null),
-]).then(([d, ill, eng, c2, vc, gd, ca, cr, mm]) => {
+  fetch("/api/evidence/viewpoint").then(r => r.ok ? r.json() : null).catch(() => null),
+]).then(([d, ill, eng, c2, vc, gd, ca, cr, mm, vp]) => {
   // Only recorded real-data cases are offered. The API also lists synthetic
   // scenarios; this page never renders them and never calls /api/run for one.
   SCEN = d.scenarios.filter(s => s.data_source === "real_lro_nac");
@@ -615,11 +617,12 @@ Promise.all([
   window.__CA = ca;
   window.__CR = cr;
   window.__MM = mm;
+  window.__VP = vp;
   $("#scope").innerHTML = ill
     ? `Evidence scope — ${esc(ill.scope)}`
     : `Evidence scope — LRO NAC · Mare Serenitatis`;
-  const nMod = [ill, eng, c2, vc, gd, ca, cr, mm].filter(Boolean).length;
-  setIndicator(`Recorded · ${nMod} of 8 modules on disk`, false);
+  const nMod = [ill, eng, c2, vc, gd, ca, cr, mm, vp].filter(Boolean).length;
+  setIndicator(`Recorded · ${nMod} of 9 modules on disk`, false);
   renderHero();
   // Auto-select the first case only if the reader has not already chosen one
   // (or opened the live card) while the fetches were in flight -- on a loaded
@@ -796,6 +799,7 @@ function render(d) {
     ${enginesPanel(vm)}
     ${chandrayaan2Panel(vm)}
     ${controlledReferencePanel(vm)}
+    ${viewpointPanel(vm)}
     ${multimodalityPanel(vm)}
     ${provenance(d)}
   `;
@@ -2117,6 +2121,107 @@ function multimodalityPanel(vm) {
       ${(mm.not_claimed || []).map(x => `<li>${esc(x)}</li>`).join("")}
     </ul></div>
     <div class="note">Scope \u2014 ${esc(mm.scope)}</div>`);
+}
+
+
+// Module 09 - EXP-017. The second variation the problem statement names, and
+// the panel has to carry a shape most results do not have: two criteria that
+// are UNDEFINED because the failure they were written for never happened.
+function viewpointPanel(vm) {
+  const vp = window.__VP;
+  if (!vp) return unavailable("m09", "09", "Module 09 \u00b7 viewpoint",
+    "Where does a flat 2-D model stop being valid over real relief?",
+    "/api/evidence/viewpoint");
+  const c = vp.criteria || {};
+  const fmt = (x, n) => (x === null || x === undefined) ? "\u2014" : (+x).toFixed(n === undefined ? 3 : n);
+  const rows = vp.by_e || [];
+  const wins = vp.windows || [];
+  return mod("m09", modHead("09", "Module 09 \u00b7 viewpoint",
+      "Where does a flat 2-D model stop being valid over real relief?",
+      "EXP-017 \u00b7 synthetic viewpoint on real terrain \u00b7 a real 10 m DTM on a real 5 m ortho, exact ground truth"), `
+    <div class="note call ink" style="margin-top:0">
+      <b>What this is, before any number.</b> ${esc(vp.construction.why_not_real)}. So the oblique view is
+      <b>constructed</b>: ${esc(vp.construction.what)}. The images differ by geometry alone \u2014 same photons,
+      same illumination, same interpolation \u2014 so every error here is an upper bound on
+      <b>${esc(vp.construction.bound_on)}</b>, and a real fore/aft pair would differ from this
+      construction by about <b>1.9 px RMS at 25\u00b0</b> from the DTM's own height error alone.</div>
+
+    <div class="tiles">
+      <div class="tile ${c.S2.met ? "good" : "bad"}"><div class="lab">S2 \u2014 where it breaks</div>
+        <div class="val">${c.S2.n_with_onset} <small>/ ${rows.length ? wins.length : 0} windows</small></div>
+        <div class="note">reach a 0.5 px median error anywhere in a 0\u201330\u00b0 sweep \u2014 <b>none do</b>;
+          the p99 crosses 1 px at 10\u201330\u00b0</div></div>
+      <div class="tile bad"><div class="lab">S1a \u2014 \u00a72.2 literally</div>
+        <div class="val">${c.S1a.envelope_L1 === null ? "\u2014" : c.S1a.envelope_L1 + "\u00b0"}</div>
+        <div class="note"><i>residuals white</i> holds at e = 0 and nowhere else, on both local arms
+          \u00b7 ${st("NOT MET", "fail")}</div></div>
+      <div class="tile good"><div class="lab">S1b \u2014 the bound reading</div>
+        <div class="val">${c.S1b.envelope_L2 === null ? "\u2014" : c.S1b.envelope_L2 + "\u00b0"}</div>
+        <div class="note">median &lt; 0.5 px and p99 &lt; 1 px, orthorectified with the 59 m SLDEM;
+          <b>${c.S1b.envelope_L1}\u00b0</b> for a 96-parameter piecewise affine</div></div>
+      <div class="tile ${c.S4.met ? "good" : "bad"}"><div class="lab">S4 \u2014 does the selector notice</div>
+        <div class="val">${fmt(c.S4.rho_heldout)}</div>
+        <div class="note">Spearman \u03c1 of the held-out residual against emission angle
+          (model DOF: ${fmt(c.S4.rho_dof)}) \u00b7 n = ${c.S4.n}</div></div>
+    </div>
+
+    <div class="note call fail">
+      <b>Two criteria came back undefined, and that is reported rather than rounded.</b> S3 asks what
+      fraction of cells <i>at or above the onset</i> carry a relief signature; there are
+      <b>${c.S3.n_cells_at_or_above_onset} such cells</b>, because there is no onset. S5 compares arms at
+      their onsets and has none to compare. Neither is evidence that viewpoint is harmless \u2014 they are
+      nulls by construction, and the stage says so instead of reporting a pass.</div>
+
+    <div class="tscroll"><table>
+      <thead><tr><th class="n">emission</th><th class="n">global median / p99</th>
+        <th class="n">piecewise affine</th><th class="n">SLDEM-orthorectified</th>
+        <th class="n">white (L1 / L2)</th><th class="n">within bound (L1 / L2)</th><th>verdict</th></tr></thead>
+      <tbody>${rows.map(r => `<tr>
+        <td class="n">${r.e_deg}\u00b0</td>
+        <td class="n">${fmt(r.G.median)} / ${fmt(r.G.p99)}</td>
+        <td class="n">${fmt(r.L1.median)} / ${fmt(r.L1.p99)}</td>
+        <td class="n">${fmt(r.L2.median)} / ${fmt(r.L2.p99)}</td>
+        <td class="n ${r.literal_ok_L1 === 0 ? "failc" : ""}">${r.literal_ok_L1} / ${r.literal_ok_L2}</td>
+        <td class="n">${r.bound_ok_L1} / ${r.bound_ok_L2}</td>
+        <td class="note">${esc((r.status || []).join(", "))}</td></tr>`).join("")}</tbody>
+    </table></div>
+
+    <div class="note call ink">
+      <b>Why nothing breaks: the relief that matters is small.</b> A global affine absorbs the plane, and on
+      this mare the plane is nearly all of the relief \u2014 peak-to-peak <b>47\u2013123 m</b> becomes
+      <b>2.85\u20138.93 m RMS</b> once it is removed. The pre-registration predicted 15\u201340 m and was wrong by
+      2\u20135\u00d7, and that single number is why three criteria have no onset to read. It also makes the
+      master plan's peak-to-peak rule <b>early by \u2265 6\u00d7</b> on every window.</div>
+
+    <div class="tscroll"><table>
+      <thead><tr><th>window</th><th class="n">relief ptp</th><th class="n">residual RMS</th>
+        <th class="n">the rule predicts 0.5 px at</th><th class="n">measured median onset</th>
+        <th class="n">p99 onset</th><th class="n">median error at 30\u00b0</th></tr></thead>
+      <tbody>${wins.map(w => `<tr>
+        <td class="code">${esc(w.window)}</td>
+        <td class="n">${fmt(w.relief_ptp_m, 0)} m</td>
+        <td class="n" style="font-weight:600">${fmt(w.relief_res_rms_m, 2)} m</td>
+        <td class="n neut">${w.sec20_ptp_predicts === null ? "\u2014" : w.sec20_ptp_predicts + "\u00b0"}</td>
+        <td class="n">${w.e_star_med === null ? "none \u2264 30\u00b0" : w.e_star_med + "\u00b0"}</td>
+        <td class="n">${w.e_star_p99 === null ? "\u2014" : w.e_star_p99 + "\u00b0"}</td>
+        <td class="n">${fmt(w.G_median_at_30)} px</td></tr>`).join("")}</tbody>
+    </table></div>
+
+    <div class="note call fail">
+      <b>The blind spot, measured.</b> On every one of the 130 cells the frozen rule passes and the shipped
+      verdict returns <b>INCONCLUSIVE \u2014 never REJECTED</b>, including at 30\u00b0 where the dense p99 error is
+      <b>${fmt(vp.blind_spot.p99_at_30)} px</b>. ${esc(vp.blind_spot.what)}. Recorded beside the verdict,
+      not patched into it.</div>
+
+    <div class="note">
+      <b>The control that would have been wrong.</b> ${esc(vp.nulls.why)} \u2014 at e = 0, with nothing applied,
+      the shift null fires on <b>${vp.nulls.shift_null_fires_at_e0} of 15</b> windows (the maximum allowed was
+      ${vp.nulls.max_allowed}) and the pixel permutation on <b>${vp.nulls.pixel_perm_fires_at_e0} of 15</b>.</div>
+
+    <div class="note" style="margin-top:14px"><b>Not claimed.</b><ul>
+      ${(vp.not_claimed || []).map(x => `<li>${esc(x)}</li>`).join("")}
+    </ul></div>
+    <div class="note">Scope \u2014 ${esc(vp.scope)}</div>`);
 }
 
 function provenance(d) {
