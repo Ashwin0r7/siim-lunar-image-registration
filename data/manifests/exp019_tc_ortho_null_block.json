@@ -1,0 +1,66 @@
+{
+  "stage": "EXP-019",
+  "product": "TCO_MAPS02_N21E021N18E024SC",
+  "block": "null",
+  "role": "null block: >= 25 km from any source footprint, same product",
+  "modality": "panchromatic ortho mosaic, photometrically normalised to i = 30 deg, e = 0 deg, alpha = 30 deg (USGS), reflectance",
+  "source_url": "https://data.darts.isas.jaxa.jp/pub/pds3/sln-l-tc-5-ortho-map-seamless-v2.0/lon021/data/TCO_MAPs02_N21E021N18E024SC.img",
+  "label_url": "https://data.darts.isas.jaxa.jp/pub/pds3/sln-l-tc-5-ortho-map-seamless-v2.0/lon021/data/TCO_MAPs02_N21E021N18E024SC.lbl",
+  "label_path": "data\\metadata\\kaguya_tc\\TCO_MAPS02_N21E021N18E024SC.lbl",
+  "label_sha256": "1820190c5119bc35b64241e7608f1186241ffad73fdd4dee23f29432886b05a7",
+  "credit": "SELENE (Kaguya) Terrain Camera Ortho Map Seamless V2.0, SLN-L-TC-5-ORTHO-MAP-SEAMLESS-V2.0, produced by LISM, distributed by JAXA/ISAS DARTS",
+  "block_npy": "data\\raw\\reference\\TCO_MAPS02_N21E021N18E024SC.null.rows6119_9721.npy",
+  "window_lat": [
+    18.3,
+    19.3
+  ],
+  "window_lon": [
+    21.88,
+    22.17
+  ],
+  "row0": 6119,
+  "row1_exclusive": 9721,
+  "col0": 3167,
+  "col1_exclusive": 4214,
+  "byte_start": 59097600,
+  "byte_count": 150876000,
+  "bytes_sha256": "19d964c29e954309b1be5f6d1e258cc3575a5889efc1437c4959eb63debd4449",
+  "product_file_sha256": "29aefec5230bb8f538de25610c46bb11f2a3cd1acb2901e3e4335acadd01e6dc",
+  "product_file_bytes": 233280000,
+  "product_file_path": "data\\raw\\reference\\TCO_MAPs02_N21E021N18E024SC.img",
+  "bytes_note": "product_file_sha256 is of the archive's whole .img (the server ignores HTTP Range, E-049); bytes_sha256 is of the contiguous row window [row0_fetch, row1_fetch) covering BOTH blocks, and each block is a row slice of that window",
+  "row0_fetch": 2736,
+  "row1_fetch_exclusive": 9721,
+  "grid": {
+    "ppd_lat": 3600.0,
+    "ppd_lon": 3600.0,
+    "lat_top_deg": 21.000138888888888,
+    "lon_left_deg": 20.999861111111112,
+    "map_scale_m": 8.42315289562,
+    "projection": "SIMPLE, planetocentric, pixel-registered",
+    "source": "LINE/SAMPLE_PROJECTION_OFFSET (authoritative)"
+  },
+  "label_summary_vs_offsets": {
+    "MAXIMUM_LATITUDE": 21.0,
+    "MINIMUM_LATITUDE": 18.000278,
+    "WESTERNMOST_LONGITUDE": 21.0,
+    "EASTERNMOST_LONGITUDE": 23.999722,
+    "top_edge_from_LPO": 21.000138888888888,
+    "left_edge_from_SPO": 20.999861111111112,
+    "summary_vs_offsets_px": [
+      0.499999999995282,
+      0.499999999995282
+    ]
+  },
+  "dn": {
+    "sample_type": "MSB_UNSIGNED_INTEGER",
+    "bits": 16,
+    "scaling_factor": 0.01,
+    "offset": 0.0,
+    "dummy": 0.0,
+    "dummy_fraction": 0.0
+  },
+  "unit": "reflectance (I/F), photometrically normalised",
+  "retrieved_utc": "2026-09-22T18:38:11Z",
+  "preregistration": "docs/stages/EXP-019_controlled_reference.md Part 1 3.1"
+}
