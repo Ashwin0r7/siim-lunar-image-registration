@@ -64,6 +64,7 @@ from siim.demo.chandrayaan2 import (  # noqa: E402
 from siim.demo.exp006 import exp006_evidence, exp006_status  # noqa: E402
 from siim.demo.exp012 import exp012_evidence, exp012_status  # noqa: E402
 from siim.demo.exp013 import exp013_evidence, exp013_status  # noqa: E402
+from siim.demo.exp019 import exp019_evidence, exp019_status  # noqa: E402
 from siim.demo.evidence import (  # noqa: E402
     REAL_SCENARIOS,
     DemoDataMissing,
@@ -340,6 +341,20 @@ def evidence_gauge_detection() -> dict:
         raise HTTPException(503, str(exc)) from exc
 
 
+@app.get("/api/evidence/controlled-reference")
+def evidence_controlled_reference() -> dict:
+    """EXP-019: what the ground positions are worth when another mission says
+    where the ground is.
+
+    The panel that turns "corroborated at ~100 px" into a measured 137.6 m and
+    produces the project's first accuracy-class number. Read from the recorded
+    artefacts; never recomputed."""
+    try:
+        return exp019_evidence()
+    except DemoDataMissing as exc:
+        raise HTTPException(503, str(exc)) from exc
+
+
 @app.get("/api/evidence/chandrayaan2")
 def evidence_chandrayaan2() -> dict:
     """REAL-DATA-09: Chandrayaan-2 TMC-2 against LRO NAC, from its artefacts.
@@ -505,6 +520,10 @@ def advertised_artefacts() -> frozenset[str]:
         pass
     try:
         paths.update(exp006_evidence()["sources"])
+    except DemoDataMissing:
+        pass
+    try:
+        paths.update(exp019_evidence()["sources"])
     except DemoDataMissing:
         pass
     return frozenset(paths)

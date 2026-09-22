@@ -626,7 +626,7 @@ lives on the archive side.
   Below 15.5° it is **7 of 8**; above 39.7° it is **0 of 5**. The envelope is
   real but **not a clean threshold** — three frames inside it fail — which is
   REAL-DATA-07's D-049 pattern seen from a new direction.
-- **B4L (DISK + LightGlue), no criterion.** **16 of 21** cells pass against
+- **B4L (DISK + LightGlue), no criterion.** **17 of 21** cells pass against
   RootSIFT's 13, with 316–778 inliers where B1 has 3–25, and it rescues every
   frame in the 36–40° band plus two that B1 fails inside it. It does **not**
   rescue the 72–75° frames (3 inliers), nor `m1205872034rc`. On the 11 cells

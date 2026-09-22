@@ -508,7 +508,8 @@ Promise.all([
   fetch("/api/evidence/verdict-calibration").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/gauge-detection").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/component-ablation").then(r => r.ok ? r.json() : null).catch(() => null),
-]).then(([d, ill, eng, c2, vc, gd, ca]) => {
+  fetch("/api/evidence/controlled-reference").then(r => r.ok ? r.json() : null).catch(() => null),
+]).then(([d, ill, eng, c2, vc, gd, ca, cr]) => {
   // Only recorded real-data cases are offered. The API also lists synthetic
   // scenarios; this page never renders them and never calls /api/run for one.
   SCEN = d.scenarios.filter(s => s.data_source === "real_lro_nac");
@@ -537,11 +538,12 @@ Promise.all([
   window.__VC = vc;
   window.__GD = gd;
   window.__CA = ca;
+  window.__CR = cr;
   $("#scope").innerHTML = ill
     ? `Evidence scope — ${esc(ill.scope)}`
     : `Evidence scope — LRO NAC · Mare Serenitatis`;
-  const nMod = [ill, eng, c2, vc, gd, ca].filter(Boolean).length;
-  setIndicator(`Recorded · ${nMod} of 6 modules on disk`, false);
+  const nMod = [ill, eng, c2, vc, gd, ca, cr].filter(Boolean).length;
+  setIndicator(`Recorded · ${nMod} of 7 modules on disk`, false);
   renderHero();
   // Auto-select the first case only if the reader has not already chosen one
   // (or opened the live card) while the fetches were in flight -- on a loaded
@@ -714,6 +716,7 @@ function render(d) {
     ${ablationPanel(vm)}
     ${enginesPanel(vm)}
     ${chandrayaan2Panel(vm)}
+    ${controlledReferencePanel(vm)}
     ${provenance(d)}
   `;
 
@@ -1518,6 +1521,103 @@ function renderLive(d) {
       ${d.registered_png ? `<figure><img src="${esc(d.registered_png)}" alt="source warped into the reference grid"><figcaption>source warped into the reference grid</figcaption></figure>` : ""}
     </div>
     ${notClaimed(d.caveats)}`;
+}
+
+
+// Module 07 — EXP-019. The panel that answers "against what?" with something
+// other than the archive that produced the images. It leads with the criterion
+// that did NOT pass, because that is the one a judge should see first.
+function controlledReferencePanel(vm) {
+  const cr = window.__CR;
+  if (!cr) return unavailable("m07", "07", "Module 07 · the controlled reference",
+    "What are these ground positions worth when another mission says where the ground is?",
+    "/api/evidence/controlled-reference");
+  const c = cr.criteria || {};
+  const word = k => (c[k] && c[k].met) ? "MET" : "NOT MET";
+  const cls = k => (c[k] && c[k].met) ? "good" : "bad";
+  const acc = cr.accuracy, fl = cr.floor, at = cr.attribution, tr = cr.triangle;
+  const rows = cr.registrations || [];
+  const per = (at.per_frame || []).filter(r => !r.is_fixed_node);
+  const r8 = (at.arm_R_only || {});
+  return mod("m07", modHead("07", "Module 07 · the controlled reference",
+      "What are these ground positions worth when another mission says where the ground is?",
+      "EXP-019 · SELENE (Kaguya) TC ortho, 8.42 m — a different agency, spacecraft, sensor, decade and control network"), `
+    <div class="note call ink" style="margin-top:0">
+      <b>Why this panel exists.</b> Every real result above is corroborated against one thing: the archive's own
+      corner geometry, which discriminates at <b>84–116 px</b>. Three findings were limited by that single fact —
+      there was no accuracy number, the gauge detector of module 03 calibrated at <b>66.00 px</b> of reference
+      noise and could not be deployed, and its H3 (<i>is a per-frame term the archive's error or the
+      estimate's?</i>) was undecidable by construction. This is what a second mission's answer changes.</div>
+
+    <div class="tiles">
+      <div class="tile ${cls("S3")}"><div class="lab">S3 — accuracy, the PS bar</div>
+        <div class="val">${(+acc.median_ref_px).toFixed(3)} <small>reference px</small></div>
+        <div class="note">${(+acc.median_m).toFixed(2)} m, CI95 ${(+acc.ci95_ref_px[0]).toFixed(3)}–${(+acc.ci95_ref_px[1]).toFixed(3)} · bar
+          ${acc.bar_ref_px} px (${(+acc.bar_m).toFixed(2)} m) on ${acc.n_pairs} pairs — ${st(word("S3"), c.S3.met ? "pass" : "fail")}</div></div>
+      <div class="tile ${cls("S2")}"><div class="lab">S2 — archive vs control</div>
+        <div class="val">${(+fl.frozen_reading_m).toFixed(1)} <small>m</small></div>
+        <div class="note">CI95 ${fl.frozen_reading_ci95_m[0].toFixed(1)}–${fl.frozen_reading_ci95_m[1].toFixed(1)} m over
+          ${fl.frozen_reading_n_frames} frames, +${fl.direction_east_m} m east — the “~100 px floor”, measured</div></div>
+      <div class="tile ${cls("S1")}"><div class="lab">S1 — does it register</div>
+        <div class="val">${cr.n_nac_pass} <small>/ ${cr.n_nac} NAC</small></div>
+        <div class="note">plus the Chandrayaan-2 TMC-2 block (${cr.tmc2_pass ? "yes" : "no"}), at 6.5–10.5 : 1 across sensors</div></div>
+      <div class="tile ${cls("S5")}"><div class="lab">S5 — the C2 triangle</div>
+        <div class="val">${(+tr.closure_ref_px).toFixed(3)} <small>reference px</small></div>
+        <div class="note">against a frozen ${tr.bar_ref_px} px — <b>missed by ${(+tr.missed_by_pct).toFixed(1)}%</b>,
+          ${(+tr.closure_m).toFixed(2)} m, and the line was not moved · ${st("NOT MET", "fail")}</div></div>
+    </div>
+
+    <div class="note call fail">
+      <b>The criterion that failed, in full.</b> The triangle
+      {TMC-2 → NAC (recorded), NAC → reference, reference → TMC-2} closes at
+      <b>${(+tr.closure_ref_px).toFixed(3)} reference px = ${(+tr.closure_m).toFixed(2)} m</b> against the frozen
+      <b>${tr.bar_ref_px} reference px</b>. Its weakest leg is the TMC-2 → reference edge with
+      <b>${tr.edges.tmc2_to_ref.n_inliers} inliers</b>. ${esc(tr.note || "")}</div>
+
+    <div class="note call pass">
+      <b>What the ${(+acc.median_m).toFixed(2)} m is.</b> ${esc(acc.what_it_is)} <b>What it is not:</b> ${esc(acc.what_it_is_not)} —
+      so this is an upper bound on the sum of two independent registration errors, and it is the first
+      accuracy-class number here that is not a self-warp.</div>
+
+    <div class="note call ink">
+      <b>Module 03's open question, decided.</b> ${esc(at.question)} Measured against a product EXP-013 never saw,
+      its per-frame terms track the archive-vs-controlled offsets at <b>r = ${(+r8.pearson_r).toFixed(3)}</b>
+      (Spearman ${(+r8.spearman_rho).toFixed(3)}, permutation p = ${r8.p_value_permutation}, against a null whose
+      p95 is ${(+r8.null_abs_r_p95).toFixed(3)}) on ${r8.n} frames, with a median difference of
+      <b>${(100 * r8.difference_fraction).toFixed(1)}%</b> of the terms' size. The answer is ${esc(at.answer)} —
+      and the margin over the null is 0.06, which is why the sentence says <i>substantially</i>.</div>
+
+    <div class="tscroll"><table>
+      <thead><tr><th>frame</th><th class="n">EXP-013 term</th><th class="n">measured here</th><th class="n">difference</th><th>arm</th></tr></thead>
+      <tbody>${per.map(r => `<tr>
+        <td class="code">${esc(r.window)} ${esc(String(r.frame).replace("nac.", ""))}</td>
+        <td class="n">${(+r.exp013_px).toFixed(2)} px</td>
+        <td class="n" style="font-weight:600">${(+r.measured_px).toFixed(2)} px</td>
+        <td class="n ${Math.abs(r.exp013_px - r.measured_px) > 30 ? "failc" : ""}">${Math.abs(r.exp013_px - r.measured_px).toFixed(2)} px</td>
+        <td class="note">${esc(r.arm)}${r.arm === "C" ? " (chained)" : ""}</td></tr>`).join("")}</tbody>
+    </table></div>
+
+    <div class="tscroll"><table>
+      <thead><tr><th>source</th><th class="n">|i − 30°|</th><th class="n">inliers</th><th class="n">archive vs control</th><th class="n">scale recovered</th><th>verdict</th></tr></thead>
+      <tbody>${rows.map(r => `<tr>
+        <td class="code">${esc(r.source)}</td>
+        <td class="n">${r.delta_to_standard_geometry_deg === null ? "—" : (+r.delta_to_standard_geometry_deg).toFixed(2) + "°"}</td>
+        <td class="n ${r.pass ? "" : "failc"}" style="font-weight:600">${r.n_inliers}</td>
+        <td class="n">${r.archive_vs_controlled_m === null || r.archive_vs_controlled_m === undefined ? "—" : (+r.archive_vs_controlled_m).toFixed(1) + " m"}</td>
+        <td class="n">${r.recovered_scale === null || r.recovered_scale === undefined ? "—" : (+r.recovered_scale).toFixed(4)}</td>
+        <td class="note">${esc(r.verdict || "—")}${r.confidence ? " / " + esc(r.confidence) : ""}</td></tr>`).join("")}</tbody>
+    </table></div>
+
+    <div class="note">
+      <b>The stage's own false-accept measurement.</b> ${esc(cr.null.what)} — <b>${cr.null.n_pass} of ${cr.null.n_cells}</b>
+      passed, a false-accept fraction of ${cr.null.false_accept_fraction}. Beside every criterion, DISK + LightGlue
+      passes <b>${cr.second_engine.n_pass} of ${cr.second_engine.n_cells}</b> cells to RootSIFT's ${cr.second_engine.b1_n_pass};
+      it enters no criterion here.</div>
+
+    <div class="note" style="margin-top:14px"><b>Not claimed.</b><ul>
+      ${(cr.not_claimed || []).map(x => `<li>${esc(x)}</li>`).join("")}
+    </ul></div>
+    <div class="note">Scope — ${esc(cr.scope)}</div>`);
 }
 
 function provenance(d) {

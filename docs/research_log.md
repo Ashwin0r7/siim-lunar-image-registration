@@ -1064,7 +1064,7 @@ by 8.9 %, on the one edge with 9 inliers, and the line was not moved. Note
 recorded in Part 2: 2.0 *reference* px is 16.85 m where EXP-012's 2.0 px is
 about 2 m, so a pass here would have been the weaker statement.
 
-**Beside the criteria.** B4L passes **16 of 21** cells to B1's 13, rescuing every
+**Beside the criteria.** B4L passes **17 of 21** cells to B1's 13, rescuing every
 frame in the 36-40 deg band; where both pass the two engines' maps agree to
 **0.03-1.62 reference px**, where either fails they disagree by 206-4405. The
 Chandrayaan-2 cell recovers a scale of **1.1944** against the geometry's
