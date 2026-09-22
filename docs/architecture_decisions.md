@@ -306,3 +306,53 @@ This was not cosmetic. Re-running the EXP-001 axes across regimes changed two co
 **Rationale.** "Realistic terrain" is a claim, and spec §70 requires claims to be checkable against authoritative sources. A target median slope with a stated baseline is checkable; "looks lunar" is not. Separating amplitude (slope) from spectrum (feature density) also makes the two controllable independently — measured at **24× density variation with the median held at 9.10°** — which the old single `relief` parameter could not do.
 
 **Status:** `ACCEPTED` (2026-08-24, EXP-002).
+
+## ADR-0013 — The deliverable has an operator, and the live pair is the interface it is judged through
+
+**Decision.** The demo's **live** card is treated as a first-class part of the
+deliverable, not a convenience: it accepts two images by **drag, click or
+paste**, shows what it accepted (name, pixel size, file size, and the
+decimation the run will apply) **before** anything is sent, refuses a
+non-image and an under-64 px image **in the browser** with the pipeline's own
+reason, keeps the Register control **disabled until both slots are filled**,
+reports elapsed seconds while the run is in flight, and renders the result as
+**a verdict, a swipe comparison, the correspondence overlay, and two
+downloads** (the registered PNG and the raw JSON). It also offers **two
+recorded example pairs** — one that registers and one that does not — so a
+reader with no lunar imagery can exercise the system in one click, including
+its refusal.
+
+**Alternatives.** (a) Keep two bare file inputs and a Register button: the
+smallest thing that works, and what the page had. (b) A wizard with steps and
+validation screens. (c) An upload-and-email/batch queue for large tiles.
+
+**Evidence.** The 2026-09-23 browser session, on the running server:
+
+| step | measured |
+|---|---|
+| example pair "matched illumination" loaded | both slots filled, `512 × 1024 px · 341 KB` shown per slot, Register enabled |
+| Register pressed | status ticked `Registering… 2 s · estimate → refine → re-estimate → verify`, button disabled |
+| result (succeeding pair) | `INCONCLUSIVE`, swipe comparison present, correspondence canvas 1024 px wide, three actions offered |
+| example pair "large illumination difference" | `Done in 0.6 s · 5 inliers of 16 putative · verdict REJECTED` |
+| the same, registered image | **not offered** — the page does not draw an alignment the verdict refused |
+| layout | no horizontal overflow at 1382 px; the two slots side by side, stacked under 760 px |
+
+**Trade-offs.** The card is ~200 lines of page script rather than ~30, and it
+carries its own failure modes (a slot that accepts the wrong thing, a result
+view that outlives its data). Those are pinned by
+`tests/test_demo_live_upload.py`, which executes the page's own
+`liveCard()` and `renderLive()` under node against payloads shaped like the
+API's — including the **REJECTED** payload, where the test asserts that no
+registered image is offered. A string test cannot see a `ReferenceError`
+inside a template literal, and this page has shipped one before.
+
+**Rationale.** Everything else on this page is *read*; this is the one part a
+judge **operates**, and an operator forms their opinion of a system from the
+first thing that goes wrong. The two failure modes that matter are (i) the
+system looking broken when it is merely busy — answered by the elapsed
+counter — and (ii) the system looking successful when it refused — answered by
+suppressing the registered image and keeping the refusal text. Offering the
+failing example as prominently as the succeeding one is the same rule the rest
+of the page follows: **a demo that shows only its good case is a brochure.**
+
+**Status:** `ACCEPTED` (2026-09-23, demo).

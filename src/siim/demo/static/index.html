@@ -385,6 +385,78 @@ ul.caveats li{margin-bottom:6px;line-height:1.5}
 .liveimgs figure{margin:0}
 .liveimgs img{max-width:260px;border:1px solid var(--rule);display:block}
 
+/* ------------------------------------------------ live upload (two slots)
+   The judge's first interaction with the system is dropping two files into
+   it, so this has to work the way a file drop works everywhere else: drag
+   anywhere onto the slot, click it, or paste. Same visual language as the
+   rest of the page -- hairline rules, monospace micro-labels, no icons. */
+.drops{display:grid;grid-template-columns:1fr 44px 1fr;gap:0 14px;align-items:stretch;margin:18px 0 6px}
+.drop{position:relative;border:1px dashed var(--rule-2);background:var(--bg-2);
+  min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:16px;cursor:pointer;transition:border-color .15s,background .15s}
+.drop:hover,.drop:focus-visible{border-color:var(--ink-3);background:var(--bg-3);outline:none}
+.drop.over{border-color:var(--accent);background:var(--accent-soft);border-style:solid}
+.drop.filled{border-style:solid;border-color:var(--rule-2);justify-content:flex-start;cursor:default}
+.drop .role{font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
+  color:var(--ink-3);position:absolute;top:10px;left:12px}
+.drop .hint{font:400 12.5px/1.5 var(--sans);color:var(--ink-3);max-width:24ch}
+.drop .hint b{color:var(--ink-2);font-weight:500}
+.drop img.thumb{max-width:100%;max-height:150px;margin-top:22px;border:1px solid var(--rule);
+  display:block;image-rendering:auto}
+.drop .meta{margin-top:8px;font:400 10.5px/1.5 var(--mono);color:var(--ink-3);word-break:break-all}
+.drop .meta b{color:var(--ink-2);font-weight:500}
+.drop .clear{position:absolute;top:6px;right:8px;background:none;border:none;color:var(--ink-3);
+  font:500 14px/1 var(--mono);cursor:pointer;padding:4px 6px}
+.drop .clear:hover{color:var(--fail)}
+.drop input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.swapcol{display:flex;align-items:center;justify-content:center}
+.swapbtn{background:none;border:1px solid var(--rule-2);color:var(--ink-2);cursor:pointer;
+  font:500 12px/1 var(--mono);padding:10px 8px}
+.swapbtn:hover:not(:disabled){border-color:var(--ink-2);color:var(--ink)}
+.swapbtn:disabled{opacity:.35;cursor:default}
+.examples{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0 0}
+.examples .lab{font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
+  color:var(--ink-3)}
+.exbtn{background:none;border:1px solid var(--rule-2);color:var(--ink-2);cursor:pointer;
+  font:400 12px/1.3 var(--sans);padding:8px 11px;text-align:left}
+.exbtn:hover{border-color:var(--ink-2);color:var(--ink)}
+.exbtn small{display:block;font:400 10.5px/1.4 var(--mono);color:var(--ink-3);margin-top:2px}
+.runrow{display:grid;grid-template-columns:minmax(220px,1fr) minmax(160px,220px);gap:16px 24px;
+  align-items:end;margin-top:18px}
+.runrow label{display:block;font:500 10.5px/1.4 var(--mono);letter-spacing:var(--track);
+  text-transform:uppercase;color:var(--ink-3)}
+.runrow select{display:block;width:100%;margin-top:8px;font:13px/1.3 var(--sans);color:var(--ink);
+  background:var(--bg-2);border:1px solid var(--rule-2);padding:9px 10px}
+.runrow .runbtn{margin-top:0}
+.livestatus{margin-top:12px;font:400 11.5px/1.6 var(--mono);color:var(--ink-3);min-height:1.6em}
+.livestatus.err{color:var(--fail)}
+.livestatus b{color:var(--ink-2);font-weight:500}
+.spin{display:inline-block;width:9px;height:9px;border:1px solid var(--accent);
+  border-top-color:transparent;border-radius:50%;margin-right:8px;vertical-align:-1px;
+  animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+.swipe{position:relative;margin-top:14px;border:1px solid var(--rule);background:#000;
+  overflow:hidden;line-height:0}
+.swipe img{display:block;width:100%}
+.swipe img.top{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+.swipe .divider{position:absolute;top:0;bottom:0;width:1px;background:var(--accent);pointer-events:none}
+.swipe .tag{position:absolute;bottom:8px;font:500 10px/1 var(--mono);letter-spacing:var(--track);
+  text-transform:uppercase;color:var(--ink-2);background:rgba(11,13,16,.72);padding:5px 7px}
+.swipe .tag.l{left:8px} .swipe .tag.r{right:8px}
+.swiperange{width:100%;margin-top:8px;accent-color:var(--accent)}
+.dlrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.dlbtn{background:none;border:1px solid var(--rule-2);color:var(--ink-2);cursor:pointer;
+  font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
+  padding:9px 12px;text-decoration:none;display:inline-block}
+.dlbtn:hover{border-color:var(--ink-2);color:var(--ink)}
+@media (max-width:760px){
+  .drops{grid-template-columns:1fr;gap:12px}
+  .swapcol{order:1}
+  .swapbtn{width:100%;padding:8px}
+  .runrow{grid-template-columns:1fr}
+}
+
 /* ---------------------------------------------------------------- footer */
 footer.foot{border-top:1px solid var(--rule);padding:22px 0 40px;font:400 11px/1.7 var(--mono);
   color:var(--ink-3)}
@@ -405,6 +477,8 @@ footer.foot b{color:var(--ink-2);font-weight:500}
       <a href="#m04">04 Ablation</a>
       <a href="#m05">05 Engines</a>
       <a href="#m06">06 Chandrayaan-2</a>
+      <a href="#m07">07 Reference</a>
+      <a href="#m10">10 Modality</a>
       <a href="#prov">Provenance</a>
     </nav>
     <span class="ind" id="ind" aria-live="polite">Booting</span>
@@ -509,7 +583,8 @@ Promise.all([
   fetch("/api/evidence/gauge-detection").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/component-ablation").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/controlled-reference").then(r => r.ok ? r.json() : null).catch(() => null),
-]).then(([d, ill, eng, c2, vc, gd, ca, cr]) => {
+  fetch("/api/evidence/multimodality").then(r => r.ok ? r.json() : null).catch(() => null),
+]).then(([d, ill, eng, c2, vc, gd, ca, cr, mm]) => {
   // Only recorded real-data cases are offered. The API also lists synthetic
   // scenarios; this page never renders them and never calls /api/run for one.
   SCEN = d.scenarios.filter(s => s.data_source === "real_lro_nac");
@@ -539,11 +614,12 @@ Promise.all([
   window.__GD = gd;
   window.__CA = ca;
   window.__CR = cr;
+  window.__MM = mm;
   $("#scope").innerHTML = ill
     ? `Evidence scope — ${esc(ill.scope)}`
     : `Evidence scope — LRO NAC · Mare Serenitatis`;
-  const nMod = [ill, eng, c2, vc, gd, ca, cr].filter(Boolean).length;
-  setIndicator(`Recorded · ${nMod} of 7 modules on disk`, false);
+  const nMod = [ill, eng, c2, vc, gd, ca, cr, mm].filter(Boolean).length;
+  setIndicator(`Recorded · ${nMod} of 8 modules on disk`, false);
   renderHero();
   // Auto-select the first case only if the reader has not already chosen one
   // (or opened the live card) while the fetches were in flight -- on a loaded
@@ -616,7 +692,10 @@ $("#live-open").onclick = () => {
   $("#stage").innerHTML = liveCard();
   setIndicator("Live · computed in this request", true);
   $("#main").scrollIntoView();
-  $("#live-run").onclick = runLive;
+  // One call wires the drop zones, the paste handler, the example pairs, the
+  // swap, the clear buttons and the run button, and repaints whatever the
+  // reader had already loaded if they navigate back to this card.
+  wireLive();
 };
 
 async function run() {
@@ -717,6 +796,7 @@ function render(d) {
     ${enginesPanel(vm)}
     ${chandrayaan2Panel(vm)}
     ${controlledReferencePanel(vm)}
+    ${multimodalityPanel(vm)}
     ${provenance(d)}
   `;
 
@@ -1449,60 +1529,305 @@ function drawEngineBins() {
   svg.innerHTML = p.join("");
 }
 
-/* ---------------------------------------------------- live registration */
+/* ---------------------------------------------------- live registration
+   The judge's first interaction with the system is putting two images into
+   it. Everything below exists so that step cannot go wrong quietly: drop,
+   click or paste; see what was accepted and what it will be resized to;
+   start from a recorded pair if you brought no images; watch the run instead
+   of guessing; and leave with the registered image and the raw JSON. */
+
+//: The two example pairs, from the tile PNGs the page already serves. One
+//: succeeds and one fails, and the failing one is offered as prominently as
+//: the succeeding one -- a demo that only shows its good case is a brochure.
+const LIVE_EXAMPLES = {
+  match: {src: "/assets/tile_nac.m1299958135lc.png", ref: "/assets/tile_nac.m1271742202lc.png",
+          label: "Matched illumination", sub: "LRO NAC · Δ incidence 11.73° · registers"},
+  cross: {src: "/assets/tile_nac.m1335207975rc.png", ref: "/assets/tile_nac.m1271742202lc.png",
+          label: "Large illumination difference", sub: "LRO NAC · Δ incidence 39.81° · expected to fail"},
+};
+
+//: Slot state. `b64` is what the API gets; the rest is what the reader sees.
+const LIVE = {src: null, ref: null, running: false, abort: null, last: null};
+
 function liveCard() {
+  const slot = (id, role, hint) => `
+    <div class="drop" id="drop-${id}" data-slot="${id}" role="button" tabindex="0"
+         aria-label="${esc(role)} image: drop a file here, click to browse, or paste">
+      <span class="role">${esc(role)}</span>
+      <button class="clear" data-clear="${id}" title="remove" aria-label="remove the ${esc(role)} image"
+              hidden>&times;</button>
+      <input type="file" id="live-${id}" accept="image/*">
+      <div class="hint" id="hint-${id}"><b>Drop an image</b><br>click to browse, or paste</div>
+      <img class="thumb" id="thumb-${id}" alt="" hidden>
+      <div class="meta" id="meta-${id}"></div>
+    </div>`;
   return mod("live", modHead("L", "Live · your own pair",
       "Register two images of your own — now",
       "estimate → refine → re-estimate → verify · computed in this request · labelled live"), `
-    <div class="note">Two overlapping images (PNG/JPEG/TIFF, any size; the long side is
-      down-sampled to 1024 px for the live run). The unmodified rule, the same verdict engine and the
-      same pipeline order as every recorded stage; nothing here is a recorded number.</div>
-    <div class="liveform">
-      <label>source<input type="file" id="live-src" accept="image/*"></label>
-      <label>reference<input type="file" id="live-ref" accept="image/*"></label>
-      <label>engine<select id="live-eng">
-        <option value="B1">RootSIFT (B1)</option>
-        <option value="B4L">DISK + LightGlue (B4L)</option>
-        <option value="B4X">XFeat (B4X)</option>
-        <option value="both">B1 + B4L with agreement</option></select></label>
-      <button class="runbtn" id="live-run">Register</button>
+    <div class="note">Two <b>overlapping</b> images of the same ground (PNG, JPEG or TIFF, any size).
+      The long side is down-sampled to 1024 px for the live run, so a full tile is fine.
+      The rule, the verdict engine and the pipeline order are the ones every recorded stage used;
+      only the images are new, and <b>nothing produced here is a recorded number</b>.</div>
+
+    <div class="drops">
+      ${slot("src", "Source", "")}
+      <div class="swapcol"><button class="swapbtn" id="live-swap" disabled
+        title="swap source and reference" aria-label="swap source and reference">⇄</button></div>
+      ${slot("ref", "Reference", "")}
     </div>
-    <div id="live-out" class="note"></div>`);
+
+    <div class="examples">
+      <span class="lab">No images? Start from a recorded pair</span>
+      <button class="exbtn" data-example="match">${esc(LIVE_EXAMPLES.match.label)}
+        <small>${esc(LIVE_EXAMPLES.match.sub)}</small></button>
+      <button class="exbtn" data-example="cross">${esc(LIVE_EXAMPLES.cross.label)}
+        <small>${esc(LIVE_EXAMPLES.cross.sub)}</small></button>
+    </div>
+
+    <div class="runrow">
+      <label>engine<select id="live-eng">
+        <option value="B1">RootSIFT — classical, fastest</option>
+        <option value="B4L">DISK + LightGlue — learned, best across illumination</option>
+        <option value="B4X">XFeat — learned, lightest</option>
+        <option value="both">Both — RootSIFT and DISK, with an agreement check</option>
+      </select></label>
+      <button class="runbtn" id="live-run" disabled>Register</button>
+    </div>
+    <div class="livestatus" id="live-status" role="status" aria-live="polite">Add two images to begin.</div>
+    <div id="live-out"></div>`);
 }
 
-function fileB64(input) {
-  return new Promise((res, rej) => {
-    const f = input.files && input.files[0];
-    if (!f) return rej(new Error("choose a file"));
+/* ------------------------------------------------------------ slot state */
+function liveStatus(text, isErr, busy) {
+  const el = $("#live-status");
+  if (!el) return;
+  el.classList.toggle("err", !!isErr);
+  el.innerHTML = (busy ? '<span class="spin"></span>' : "") + text;
+}
+
+// `keep` leaves an explicit message (an example loaded, a run finished, an
+// error) on screen instead of replacing it with the generic prompt. Without
+// it the result summary was overwritten by "Ready — press Register" the
+// instant a run ended, which is the opposite of what a reader needs.
+function liveReady(keep) {
+  const run = $("#live-run"), swap = $("#live-swap");
+  const ready = !!(LIVE.src && LIVE.ref) && !LIVE.running;
+  if (run) run.disabled = !ready;
+  if (swap) swap.disabled = !(LIVE.src || LIVE.ref) || LIVE.running;
+  if (!LIVE.running && !keep) {
+    if (LIVE.src && LIVE.ref) liveStatus("Ready — press <b>Register</b>.", false, false);
+    else if (LIVE.src || LIVE.ref) liveStatus("One more image: add the " +
+      (LIVE.src ? "<b>reference</b>" : "<b>source</b>") + ".", false, false);
+    else liveStatus("Add two images to begin.", false, false);
+  }
+}
+
+function paintSlot(id) {
+  const s = LIVE[id];
+  const drop = document.getElementById("drop-" + id);
+  const hint = document.getElementById("hint-" + id);
+  const img = document.getElementById("thumb-" + id);
+  const meta = document.getElementById("meta-" + id);
+  const clear = drop && drop.querySelector("[data-clear]");
+  if (!drop) return;
+  drop.classList.toggle("filled", !!s);
+  if (hint) hint.hidden = !!s;
+  if (clear) clear.hidden = !s;
+  if (img) { img.hidden = !s; if (s) img.src = s.url; else img.removeAttribute("src"); }
+  if (meta) meta.innerHTML = s ? `<b>${esc(s.name)}</b><br>${s.w} × ${s.h} px · ${s.kb} KB` +
+    (s.k > 1 ? `<br>run at ${Math.round(s.w / s.k)} × ${Math.round(s.h / s.k)} (÷${s.k})` : "") : "";
+  liveReady();
+}
+
+// Resolves once the slot is painted, so a caller that loads two files can say
+// something after both are on screen rather than before.
+function setSlot(id, file) {
+  return new Promise(resolve => {
+    if (!file) return resolve(false);
+    if (!/^image\//.test(file.type || "") && !/\.(png|jpe?g|tiff?|bmp)$/i.test(file.name || "")) {
+      liveStatus(`That file is <b>${esc(file.type || "an unknown type")}</b>. ` +
+        "Use a PNG, JPEG or TIFF image.", true, false);
+      return resolve(false);
+    }
     const r = new FileReader();
-    r.onload = () => res(String(r.result).split(",")[1]);
-    r.onerror = rej;
-    r.readAsDataURL(f);
+    r.onerror = () => {
+      liveStatus("That file could not be read. Try another.", true, false);
+      resolve(false);
+    };
+    r.onload = () => {
+      const url = String(r.result);
+      const probe = new Image();
+      probe.onload = () => {
+        if (probe.width < 64 || probe.height < 64) {
+          LIVE[id] = null;
+          paintSlot(id);
+          liveStatus(`That image is ${probe.width} × ${probe.height} px. ` +
+            "The pipeline needs at least 64 px on each side.", true, false);
+          return resolve(false);
+        }
+        const k = Math.max(1, Math.ceil(Math.max(probe.width, probe.height) / 1024));
+        LIVE[id] = {b64: url.split(",")[1], url, name: file.name || (id + " image"),
+                    w: probe.width, h: probe.height, k,
+                    kb: Math.max(1, Math.round((file.size || url.length * 0.75) / 1024))};
+        paintSlot(id);
+        resolve(true);
+      };
+      probe.onerror = () => {
+        liveStatus("That file is not a readable image.", true, false);
+        resolve(false);
+      };
+      probe.src = url;
+    };
+    r.readAsDataURL(file);
   });
 }
 
-async function runLive() {
-  const out = $("#live-out");
+async function loadExample(which) {
+  const ex = LIVE_EXAMPLES[which];
+  if (!ex) return;
+  liveStatus("Loading the recorded pair…", false, true);
   try {
-    out.textContent = "Reading files…";
-    const [s, r] = await Promise.all([fileB64($("#live-src")), fileB64($("#live-ref"))]);
-    out.textContent = "Registering… (seconds to a minute on CPU)";
-    const resp = await fetch("/api/register", {
-      method: "POST", headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({source_png: s, reference_png: r, engine: $("#live-eng").value})});
-    const d = await resp.json();
-    if (!resp.ok) { out.textContent = "Refused: " + (d.detail || resp.status); return; }
-    out.innerHTML = renderLive(d);
-  } catch (e) { out.textContent = "Error: " + e.message; }
+    const grab = async (url, id) => {
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error(url + " -> " + resp.status);
+      const blob = await resp.blob();
+      await setSlot(id, new File([blob], url.split("/").pop(), {type: blob.type || "image/png"}));
+    };
+    await Promise.all([grab(ex.src, "src"), grab(ex.ref, "ref")]);
+    liveStatus(`Loaded <b>${esc(ex.label)}</b> — ${esc(ex.sub)}. Press <b>Register</b>.`, false, false);
+  } catch (e) {
+    liveStatus("The recorded pair could not be loaded: " + esc(e.message), true, false);
+  }
 }
 
+function wireLive() {
+  ["src", "ref"].forEach(id => {
+    const drop = document.getElementById("drop-" + id);
+    const input = document.getElementById("live-" + id);
+    if (!drop || !input) return;
+    drop.onclick = ev => { if (!ev.target.closest("[data-clear]")) input.click(); };
+    drop.onkeydown = ev => {
+      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); input.click(); }
+    };
+    input.onchange = () => setSlot(id, input.files && input.files[0]);
+    drop.ondragover = ev => { ev.preventDefault(); drop.classList.add("over"); };
+    drop.ondragleave = () => drop.classList.remove("over");
+    drop.ondrop = ev => {
+      ev.preventDefault(); drop.classList.remove("over");
+      const f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0];
+      setSlot(id, f);
+    };
+    const clear = drop.querySelector("[data-clear]");
+    if (clear) clear.onclick = ev => {
+      ev.stopPropagation(); LIVE[id] = null; input.value = ""; paintSlot(id);
+    };
+  });
+  const swap = $("#live-swap");
+  if (swap) swap.onclick = () => {
+    const a = LIVE.src; LIVE.src = LIVE.ref; LIVE.ref = a;
+    paintSlot("src"); paintSlot("ref");
+    liveStatus("Swapped — matching is <b>not</b> symmetric, so the two directions can differ.",
+      false, false);
+  };
+  document.querySelectorAll("[data-example]").forEach(b => {
+    b.onclick = () => loadExample(b.dataset.example);
+  });
+  // Paste fills the first empty slot, which is what a reader expects after
+  // copying an image from a viewer or a screenshot tool.
+  document.onpaste = ev => {
+    if (!document.getElementById("drop-src")) return;
+    const items = (ev.clipboardData && ev.clipboardData.items) || [];
+    for (const it of items) {
+      if (it.kind === "file" && /^image\//.test(it.type)) {
+        const f = it.getAsFile();
+        setSlot(LIVE.src ? (LIVE.ref ? "src" : "ref") : "src", f);
+        liveStatus("Pasted image added.", false, false);
+        ev.preventDefault();
+        return;
+      }
+    }
+  };
+  const run = $("#live-run");
+  if (run) run.onclick = runLive;
+  paintSlot("src"); paintSlot("ref");
+}
+
+/* -------------------------------------------------------------- the run */
+async function runLive() {
+  if (!LIVE.src || !LIVE.ref || LIVE.running) return;
+  const out = $("#live-out");
+  out.innerHTML = "";
+  LIVE.running = true; liveReady();
+  const run = $("#live-run");
+  const t0 = Date.now();
+  const tick = setInterval(() => liveStatus(
+    `Registering… <b>${((Date.now() - t0) / 1000).toFixed(0)} s</b> · ` +
+    "estimate → refine → re-estimate → verify, on CPU", false, true), 250);
+  liveStatus("Registering…", false, true);
+  if (run) run.textContent = "Registering…";
+  LIVE.abort = new AbortController();
+  try {
+    const resp = await fetch("/api/register", {
+      method: "POST", headers: {"Content-Type": "application/json"},
+      signal: LIVE.abort.signal,
+      body: JSON.stringify({source_png: LIVE.src.b64, reference_png: LIVE.ref.b64,
+                            engine: $("#live-eng").value})});
+    const d = await resp.json().catch(() => ({}));
+    if (!resp.ok) {
+      liveStatus("Refused: " + esc(d.detail || ("HTTP " + resp.status)) +
+        ". Nothing was estimated.", true, false);
+      return;
+    }
+    LIVE.last = d;
+    out.innerHTML = renderLive(d);
+    wireLiveResult(d);
+    liveStatus(`Done in <b>${(+d.timing.wall_s).toFixed(1)} s</b> · ` +
+      `${d.summary.n_inliers} inliers of ${d.summary.n_putative} putative · ` +
+      `verdict <b>${esc(d.verdict.status)}</b>`, false, false);
+  } catch (e) {
+    if (e.name === "AbortError") liveStatus("Cancelled.", false, false);
+    else liveStatus("The request failed: " + esc(e.message), true, false);
+  } finally {
+    clearInterval(tick);
+    LIVE.running = false; LIVE.abort = null;
+    if (run) run.textContent = "Register";
+    liveReady(true);          // keep the completion (or error) line on screen
+  }
+}
+
+/* ------------------------------------------------------- the result view */
 function renderLive(d) {
   const v = d.verdict, s = d.summary;
   const agr = d.engine_agreement;
-  return `<div class="verdict ${esc(v.status)}" style="margin-top:12px">
+  const reg = d.registered_png;
+  return `
+    <div class="verdict ${esc(v.status)}" style="margin-top:14px">
       <div class="vhead"><span class="vstat">${esc(v.status)}</span>
-      <span class="conf">confidence ${esc(v.confidence)} · LIVE · user-supplied images</span></div>
+      <span class="conf">confidence ${esc(v.confidence)} · LIVE · your images · not a recorded number</span></div>
       <ul class="reasons">${v.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul></div>
+
+    ${reg ? `
+    <div class="note" style="margin-top:14px"><b>Drag the slider.</b> Left of it is your source
+      <i>warped into the reference's grid</i>; right of it is the reference itself. If the alignment is
+      right, features run straight across the divider.</div>
+    <div class="swipe" id="live-swipe">
+      <img src="${esc(d.reference_png)}" alt="reference">
+      <img class="top" id="live-swipe-top" src="${esc(reg)}" alt="source warped into the reference grid"
+           style="clip-path:inset(0 50% 0 0)">
+      <div class="divider" id="live-swipe-div" style="left:50%"></div>
+      <span class="tag l">registered source</span><span class="tag r">reference</span>
+    </div>
+    <input class="swiperange" id="live-swipe-range" type="range" min="0" max="100" value="50"
+           aria-label="compare the registered source against the reference">` : `
+    <div class="note call fail" style="margin-top:14px"><b>No registered image.</b> The verdict is
+      ${esc(v.status)}, so no warped product is offered — the page does not draw an alignment it
+      would not certify.</div>`}
+
+    <div class="note" style="margin-top:14px"><b>Correspondences.</b> Blue survived geometric
+      verification; red was rejected. Straight, parallel blue lines are what a correct alignment looks
+      like; a fan of crossing lines is what a wrong one looks like, whatever the count says.</div>
+    <canvas id="live-corr"></canvas>
+
     <div class="tscroll"><table>
       <thead><tr><th>engine</th><th class="n">putative</th><th class="n">inliers</th><th class="n">refined</th><th>model</th><th>selected by</th><th class="n">wall</th></tr></thead>
       <tbody><tr><td>${esc(s.engine)}</td><td class="n">${s.n_putative}</td><td class="n">${s.n_inliers}</td>
@@ -1515,12 +1840,84 @@ function renderLive(d) {
       <tbody>${v.evidence.map(e => `<tr><td class="code">${esc(e.name)}</td><td class="n">${e.value == null ? "—" : (+e.value).toFixed(3)}</td>
         <td>${esc(e.verdict)}</td><td>${esc(e.weight)}</td></tr>`).join("")}</tbody>
     </table></div>
+
+    <div class="dlrow">
+      ${reg ? `<a class="dlbtn" id="live-dl-img" href="${esc(reg)}"
+        download="registered.png">Download the registered image</a>` : ""}
+      <button class="dlbtn" id="live-dl-json">Download this result as JSON</button>
+      <button class="dlbtn" id="live-again">Run another pair</button>
+    </div>
+
     <div class="liveimgs">
-      <figure><img src="${esc(d.source_png)}" alt="source"><figcaption>source</figcaption></figure>
-      <figure><img src="${esc(d.reference_png)}" alt="reference"><figcaption>reference</figcaption></figure>
-      ${d.registered_png ? `<figure><img src="${esc(d.registered_png)}" alt="source warped into the reference grid"><figcaption>source warped into the reference grid</figcaption></figure>` : ""}
+      <figure><img src="${esc(d.source_png)}" alt="source as the pipeline saw it"><figcaption>source, as the pipeline saw it</figcaption></figure>
+      <figure><img src="${esc(d.reference_png)}" alt="reference as the pipeline saw it"><figcaption>reference, as the pipeline saw it</figcaption></figure>
     </div>
     ${notClaimed(d.caveats)}`;
+}
+
+function wireLiveResult(d) {
+  const range = document.getElementById("live-swipe-range");
+  const top = document.getElementById("live-swipe-top");
+  const div = document.getElementById("live-swipe-div");
+  if (range && top && div) {
+    const move = () => {
+      const p = +range.value;
+      top.style.clipPath = `inset(0 ${100 - p}% 0 0)`;
+      div.style.left = p + "%";
+    };
+    range.oninput = move; move();
+  }
+  const dl = document.getElementById("live-dl-json");
+  if (dl) dl.onclick = () => {
+    const blob = new Blob([JSON.stringify(d, null, 1)], {type: "application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "siim_live_result.json";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  };
+  const again = document.getElementById("live-again");
+  if (again) again.onclick = () => {
+    LIVE.src = null; LIVE.ref = null; LIVE.last = null;
+    ["src", "ref"].forEach(id => {
+      const input = document.getElementById("live-" + id);
+      if (input) input.value = "";
+      paintSlot(id);
+    });
+    $("#live-out").innerHTML = "";
+    document.getElementById("drop-src").scrollIntoView({behavior: "smooth", block: "center"});
+  };
+  drawLiveCorrespondences(d);
+}
+
+function drawLiveCorrespondences(d) {
+  const c = document.getElementById("live-corr");
+  if (!c || !d.correspondences) return;
+  const ctx = c.getContext("2d");
+  const a = new Image(), b = new Image();
+  let n = 0;
+  const go = () => {
+    if (++n < 2) return;
+    const W = a.width + b.width, H = Math.max(a.height, b.height);
+    c.width = W; c.height = H;
+    ctx.fillStyle = "#000"; ctx.fillRect(0, 0, W, H);
+    ctx.drawImage(a, 0, 0); ctx.drawImage(b, a.width, 0);
+    const src = d.correspondences.src || [], dst = d.correspondences.dst || [];
+    const inl = d.correspondences.inlier || [];
+    [false, true].forEach(want => {
+      ctx.strokeStyle = want ? "rgba(57,135,229,.70)" : "rgba(208,59,59,.45)";
+      ctx.lineWidth = want ? 1.1 : 0.9;
+      ctx.beginPath();
+      for (let i = 0; i < src.length; i++) {
+        if (!!inl[i] !== want) continue;
+        ctx.moveTo(src[i][0], src[i][1]);
+        ctx.lineTo(dst[i][0] + a.width, dst[i][1]);
+      }
+      ctx.stroke();
+    });
+  };
+  a.onload = go; b.onload = go;
+  a.src = d.source_png; b.src = d.reference_png;
 }
 
 
@@ -1620,10 +2017,112 @@ function controlledReferencePanel(vm) {
     <div class="note">Scope — ${esc(cr.scope)}</div>`);
 }
 
+
+// Module 10 - EXP-020. The title word of the problem statement, with the
+// substitution stated first and the 85 m that sits under every number of it.
+function multimodalityPanel(vm) {
+  const mm = window.__MM;
+  if (!mm) return unavailable("m10", "10", "Module 10 \u00b7 multi-modality",
+    "The problem statement says multi-modal. What was actually measured?",
+    "/api/evidence/multimodality");
+  const c = mm.criteria || {};
+  const f = mm.s2_as_frozen, s1 = mm.s1, ip = mm.inter_product_offset;
+  const th = mm.thermal, cm = mm.cross_mission, c2 = mm.chandrayaan2;
+  const fmt = (x, n) => (x === null || x === undefined) ? "\u2014" : (+x).toFixed(n === undefined ? 1 : n);
+  return mod("m10", modHead("10", "Module 10 \u00b7 multi-modality",
+      "The problem statement says multi-modal. What was actually measured?",
+      "EXP-020 \u00b7 nine Kaguya MI reflectance bands and a Diviner thermal map against panchromatic"), `
+    <div class="note call fail" style="margin-top:0">
+      <b>Read this before the numbers.</b> ${esc(mm.substitution.why)}. This panel is
+      <b>not an IIRS result</b>: it uses ${esc(mm.substitution.instrument)} where IIRS is
+      ${esc(mm.substitution.iirs)}. What makes the comparison worth anything is what is held fixed \u2014
+      ${esc(mm.substitution.held_fixed)}.</div>
+
+    <div class="tiles">
+      <div class="tile ${f.met ? "good" : "bad"}"><div class="lab">\u00a72.2 \u2014 same envelope as pan</div>
+        <div class="val">${fmt(f.worst_ratio, 3)}\u00d7</div>
+        <div class="note">worst band (${fmt(f.worst_band_nm, 0)} nm) against a pan comparator built from the same
+          instrument's own band mean \u00b7 bar ${f.bar}\u00d7 on ${f.n_succeed} succeeding bands \u2014
+          ${st(f.met ? "MET" : "NOT MET", f.met ? "pass" : "fail")}</div></div>
+      <div class="tile ${s1.met ? "good" : "bad"}"><div class="lab">S1 \u2014 the absolute bound</div>
+        <div class="val">${fmt(s1.median_err_m)} <small>m</small></div>
+        <div class="note">${s1.n_pass} of ${s1.n_bands} bands register; <b>0</b> land inside
+          ${fmt(s1.bar_m, 2)} m \u2014 and the next tile is why \u00b7 ${st("NOT MET", "fail")}</div></div>
+      <div class="tile bad"><div class="lab">the 85 m underneath</div>
+        <div class="val">${fmt(ip.estimate_m[0])}\u2013${fmt(ip.estimate_m[1])} <small>m</small></div>
+        <div class="note">two Kaguya products, one mission, one control network \u00b7 measured with
+          ${ip.b4l_inliers[0]}\u2013${ip.b4l_inliers[1]} inliers, linear part matching the labels to ${esc(ip.linear_part_agreement)}</div></div>
+      <div class="tile ${th.met ? "good" : "bad"}"><div class="lab">\u00a72.2 \u2014 thermal envelope</div>
+        <div class="val">${th.n_keypoints_thermal} <small>keypoints</small></div>
+        <div class="note">at ${fmt(th.ratio, 1)} : 1, ${th.n_inliers} inliers \u2014 <b>${esc(th.failure_mode)}</b>,
+          the failure mode named in advance \u00b7 ${st("NOT MET", "fail")}</div></div>
+    </div>
+
+    <div class="tscroll"><table>
+      <thead><tr><th class="n">band</th><th class="n">inliers</th><th class="n">vs label map</th>
+        <th class="n">vs pan (wavelength only)</th><th class="n">ratio to pan</th><th class="n">keypoints</th><th class="n">contrast</th></tr></thead>
+      <tbody>${(mm.bands || []).map(b => `<tr>
+        <td class="n code">${fmt(b.wavelength_nm, 0)} nm</td>
+        <td class="n ${b.pass ? "" : "failc"}" style="font-weight:600">${b.n_inliers}</td>
+        <td class="n">${fmt(b.err_median_m)} m</td>
+        <td class="n">${fmt(b.vs_pan_m)} m</td>
+        <td class="n">${b.ratio_to_pan === null || b.ratio_to_pan === undefined ? "\u2014" : fmt(b.ratio_to_pan, 3)}</td>
+        <td class="n neut">${b.n_keypoints}</td>
+        <td class="n neut">${fmt(b.contrast, 4)}</td></tr>`).join("")}
+        <tr><td class="n code">pan (band mean)</td>
+          <td class="n" style="font-weight:600">${mm.pan_comparator.n_inliers}</td>
+          <td class="n">${fmt(mm.pan_comparator.err_median_m)} m</td>
+          <td class="n">\u2014</td><td class="n">1.000</td><td class="n neut">\u2014</td>
+          <td class="n neut">${fmt(mm.pan_comparator.contrast, 4)}</td></tr></tbody>
+    </table></div>
+
+    <div class="note call ink">
+      <b>The two bands that fail are the two 1000 nm bands</b> \u2014 the same wavelength through the imager's
+      two detectors. The NIR bands are resampled from a <b>62 m</b> native sampling onto the 14.8 m grid, so
+      they carry roughly a quarter of the keypoints the VIS bands do (see the table). That confound was named
+      in the pre-registration, before the run, which is why the comparator is the band <i>mean</i> and not a
+      VIS band. <b>It is not a claim that 1000 nm is intrinsically harder to register.</b></div>
+
+    <div class="tscroll"><table>
+      <thead><tr><th colspan="4">The problem statement's own pairing: Chandrayaan-2 TMC-2 panchromatic against one reflectance band</th></tr>
+        <tr><th class="n">band</th><th class="n">inliers</th><th class="n">error vs label map</th><th>outcome</th></tr></thead>
+      <tbody>${(c2.per_band || []).map(b => `<tr>
+        <td class="n code">${fmt(b.wavelength_nm, 0)} nm</td>
+        <td class="n ${b.pass ? "" : "failc"}">${b.n_inliers}</td>
+        <td class="n">${fmt(b.err_median_m)} m</td>
+        <td class="note">${b.pass ? "registers" : "fails the rule"}</td></tr>`).join("")}</tbody>
+    </table></div>
+    <div class="note">Bar for this arm was <b>${fmt(c2.bar_m, 0)} m</b> \u2014 the Chandrayaan-2 label's own
+      \u03c3 of 38.75 m plus an assumed \u2264 21 m Kaguya-internal term. That term turned out to be
+      <b>~85 m</b>, so the criterion is NOT MET by less than the quantity its bar left out, and the bar was
+      not moved.</div>
+
+    <div class="note call ink">
+      <b>Across a mission boundary, at 15.9 : 1 \u2014 and the engine decides it.</b> The frozen arm put each band
+      against the LRO NAC frames module 07 placed: <b>0 of ${cm.frozen_arm_cells}</b> cells passed under RootSIFT.
+      Two supplements rule out the harness explanations: cropping the source to the overlap leaves
+      <b>${cm.cropped_b1.n_pass} of ${cm.cropped_b1.n_cells}</b>, and swapping the direction changes 5 inliers into 3.
+      The learned engine on the same cropped cells returns up to <b>${cm.cropped_b4l.max_inliers} inliers</b> and passes
+      <b>${cm.cropped_b4l.n_pass} of ${cm.cropped_b4l.n_cells}</b> \u2014 of which <b>${cm.cropped_b4l.n_right}</b> are right at
+      ${fmt(cm.cropped_b4l.err_range_m[0])}\u2013${fmt(cm.cropped_b4l.err_range_m[1])} m and
+      <b>${cm.cropped_b4l.n_wrong_pass}</b> is a wrong pass. So the case is reachable, by the matcher the criterion
+      was not frozen on.</div>
+
+    <div class="note">
+      <b>The null.</b> Every band and the pan comparator against a block of the same product 25 km away:
+      <b>${mm.null.n_pass} of ${mm.null.n_cells}</b> passed, a false-accept fraction of ${mm.null.false_accept_fraction}.
+      <b>${esc(f.note)}</b></div>
+
+    <div class="note" style="margin-top:14px"><b>Not claimed.</b><ul>
+      ${(mm.not_claimed || []).map(x => `<li>${esc(x)}</li>`).join("")}
+    </ul></div>
+    <div class="note">Scope \u2014 ${esc(mm.scope)}</div>`);
+}
+
 function provenance(d) {
   if (!d.provenance || !d.provenance.products) return "";
   const p = d.provenance;
-  return mod("prov", modHead("07", "Provenance", "Every byte traceable",
+  return mod("prov", modHead("11", "Provenance", "Every byte traceable",
       "The products, the byte ranges, the hashes, and the files every figure above was read from"), `
     <div class="note">${esc(p.mission)} · ${esc(p.archive)} · region
       <b>${esc(p.region)}</b> · target ground point

@@ -717,6 +717,16 @@ Total ≈ 65 pd. Critical path: 0 → 1 → 3 → 4 → 6. Phases 2 and 5 run in
 
 Three beats, all from recorded artefacts: (1) a Chandrayaan-2 ↔ NAC pair at the TMC-2 or IIRS rung registered under > 40° Δincidence with the render arm, beside the raw-pair failure — the physics beat; (2) the B → D real edge REJECTED with its 1e-13 px residual — the honesty beat (exists); (3) a 320:1 OHRC-in-IIRS localisation with error in IIRS pixels and its CI — the scale beat. Every displayed number opens its artefact (exists).
 
+### 52.1 What the demo actually became (2026-09-23)
+
+*(Recorded rather than rewritten: beat 1's render arm was **refuted** — D-052 — and beat 3's 320:1 localisation is **measured absent from any window on disk**, EXP-016. The page carries what was measured instead, and says so.)*
+
+**Eight recorded modules plus one live card.** 01 illumination envelope · 02 verdict calibration · 03 gauge detection (the project's worst measured finding, on the page by design) · 04 component ablation · 05 engines · 06 Chandrayaan-2 · 07 the controlled reference (EXP-019) · 10 multi-modality (EXP-020) · 11 provenance. Every figure is read from an artefact the page also serves under `/artefact/…`, and the allow-list of servable paths is derived from the same evidence functions the panels render, so a path can never be shown without being openable.
+
+**The live card is the deliverable's operator interface (ADR-0013).** Two images by drag, click or paste; what was accepted is shown before anything is sent (name, pixel size, file size, and the decimation the run will apply); non-images and under-64 px images are refused in the browser with the pipeline's own reason; Register stays disabled until both slots are filled; elapsed seconds tick during the run; the result is a verdict, a **swipe comparison** of the registered source against the reference, the **correspondence overlay** (inliers blue, rejected red), and downloads of the registered PNG and the raw JSON. **Two recorded example pairs** are offered — one that registers and one that does not — so the system can be exercised, including its refusal, with no imagery to hand.
+
+**The rule that governs the card:** when the verdict refuses, **no registered image is drawn**. The page does not render an alignment it would not certify, and `tests/test_demo_live_upload.py` executes the page's own renderer against a REJECTED payload to keep it that way.
+
 ## 53. Final success criteria
 
 - H1 MET on real data at ≥ 2 rungs with the frozen rule; p ≤ 0.05 on the illumination separation with ≥ 8 edges.
