@@ -1,0 +1,56 @@
+RD03/nac.m1182331886lc: crop [89,105,550,724] = 461 x 619 px (was 596 x 1477); overlap was 0.062 of the source
+D:\softwares\Lib\site-packages\kornia\feature\integrated.py:550: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  hw1_ = torch.tensor(hw1, device=dev)
+D:\softwares\Lib\site-packages\kornia\feature\integrated.py:554: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  hw2_ = torch.tensor(hw2, device=dev)
+Loaded LightGlue model
+      414 nm inl=  304 PASS err=   56.12 m
+      749 nm inl=  243 PASS err=   52.72 m
+      901 nm inl=    3 fail err= 5785.03 m
+      950 nm inl=    3 fail err= 1081.74 m
+     1001 nm inl=    3 fail err= 2358.64 m
+     1000 nm inl=    3 fail err= 8217.21 m
+     1049 nm inl=    4 fail err= 4004.19 m
+     1248 nm inl=    3 fail err= 2553.95 m
+     1548 nm inl=    4 fail err= 2966.69 m
+RD03/nac.m1212932972lc: crop [99,118,544,704] = 445 x 586 px (was 596 x 1477); overlap was 0.051 of the source
+      414 nm inl=   11 PASS err=   65.38 m
+      749 nm inl=    3 fail err= 5682.60 m
+      901 nm inl=    3 fail err= 5506.79 m
+      950 nm inl=    0 fail err=     nan m
+     1001 nm inl=    0 fail err=     nan m
+     1000 nm inl=    4 fail err= 2829.44 m
+     1049 nm inl=    4 fail err= 2293.03 m
+     1248 nm inl=    4 fail err= 2368.50 m
+     1548 nm inl=   13 PASS err= 2629.97 m
+D:\MyData\downloads\SIH\src\siim\preprocessing\degrade.py:76: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a.reshape(a.shape[0] // k, k, a.shape[1] // k, k), axis=(1, 3))
+RD04/nac.m1212932972lc: crop [62,875,506,1461] = 444 x 586 px (was 596 x 1477); overlap was 0.051 of the source
+      414 nm inl=    8 fail err=   39.01 m
+      749 nm inl=   14 PASS err=   85.49 m
+      901 nm inl=    3 fail err= 3053.00 m
+      950 nm inl=    3 fail err= 6360.63 m
+     1001 nm inl=    3 fail err= 1991.44 m
+     1000 nm inl=    4 fail err= 2509.28 m
+     1049 nm inl=    6 fail err= 1300.77 m
+     1248 nm inl=    4 fail err= 2258.34 m
+     1548 nm inl=    6 fail err= 2548.11 m
+RD03/nac.m1363396554rc: crop [149,134,593,710] = 444 x 576 px (was 596 x 1477); overlap was 0.046 of the source
+      414 nm inl=    0 fail err=     nan m
+      749 nm inl=    4 fail err= 2141.50 m
+      901 nm inl=    4 fail err= 2382.61 m
+      950 nm inl=    3 fail err= 3115.90 m
+     1001 nm inl=    0 fail err=     nan m
+     1000 nm inl=    3 fail err= 2544.02 m
+     1049 nm inl=    3 fail err= 7674.10 m
+     1248 nm inl=    5 fail err= 2520.24 m
+     1548 nm inl=    3 fail err= 2912.13 m
+Traceback (most recent call last):
+  File "D:\MyData\downloads\SIH\scripts\run_exp020_armN_cropped.py", line 167, in <module>
+    main()
+    ~~~~^^
+  File "D:\MyData\downloads\SIH\scripts\run_exp020_armN_cropped.py", line 163, in main
+    f"{doc['err_median_m']} m\nwrote {OUT} in {doc['total_runtime_s']:.0f}s")
+                                      ^^^
+NameError: name 'OUT' is not defined. Did you mean: 'out'?
+EXIT=1

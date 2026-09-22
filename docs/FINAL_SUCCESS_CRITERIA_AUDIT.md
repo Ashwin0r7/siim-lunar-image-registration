@@ -120,6 +120,41 @@ space (ADR-0011 N1), recorded as a known limitation rather than patched.
 ---
 
 
+## UPDATE 2026-09-23 (later) — the multimodality axis is answered, and SS53 does not move (EXP-020)
+
+**What ran.** EXP-020 put nine Kaguya MI reflectance bands (414–1548 nm, 14.8 m)
+and a Diviner bolometric-temperature map (236.9 m) against panchromatic
+references over the same mare window, plus the Chandrayaan-2 TMC-2 block and a
+null block. **S0, S6 MET; S2 MET as Part 1 froze it (E-053); S1, S3, S4, S5 NOT
+MET.**
+
+**SS53 is unchanged by this stage, and that is the point.** Criterion 2 still
+needs a VERIFIED Chandrayaan-2 verdict per sensor; criterion 3 still has no
+measurable FA/FR; criterion 4 is still mis-specified (D-057). **A stage can be
+worth running and move this scorecard by zero** — which is exactly the failure
+mode `PROJECT_GAP_ANALYSIS.md` SS4 recorded for EXP-013/014/015, and it is not one
+here **because the scorecard this stage moves is SS2.2**, which is now tracked
+beside SS53.
+
+**SS2.2's multimodality row: NOT MET → answered, in the scope D-062 fixes.**
+- *reflectance bands: same envelope as pan* — **MET**: 7 of 9 bands register
+  under the frozen rule and every succeeding band is within **1.334×** of a pan
+  comparator built from the same instrument's own band mean.
+- *thermal: envelope stated* — **stated**: at **28 : 1**, 49 keypoints and 0
+  inliers, failure mode **starvation**, named in advance.
+- **What is still NOT MET:** the row names **IIRS**, and no IIRS product exists
+  (RL-046). The evidence is a substitute instrument, and D-062 fixes the
+  sentence the deliverable may use.
+
+**A number every other row in this audit now inherits.** MI MAP V3 and TC Ortho
+Seamless V2 — two products of one mission, one map frame, one control network —
+are offset from each other by **83–91 m** (D-063), measured with 1360–2024
+inliers and a linear part matching the labels to 3e-5. EXP-019's 137.6 m
+archive-vs-Kaguya disagreement and this 85 m inter-product term are the two
+floors under every "corroborated" sentence here.
+
+---
+
 ## UPDATE 2026-09-23 — the reference changed, and two criteria move (EXP-019)
 
 **What ran.** EXP-019 registered 20 REAL-DATA-07 NAC tiles and the

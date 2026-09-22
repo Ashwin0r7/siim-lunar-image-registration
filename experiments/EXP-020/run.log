@@ -1,0 +1,106 @@
+EXP-020 | MI (9, 1477, 596) | TC ref (2593, 1047) | null (3602, 1047) | Diviner (120, 65)
+
+== S0 gates ==
+  grid gates: MI True, Diviner True
+  band co-registration: 3564 inliers, median 0.030066881431635096 px -> True
+  reproduction: 1656 vs recorded 1656
+  analytic map round trip 2.84e-12 px (affine residuals 2.27e-13, 1.29e-11)
+
+== arms P and B: MI against the TC pan reference ==
+  [P] P/pan                        inl=   14 PASS err=  72.42 m contrast=0.056 (3s)
+  [B] B/band1_414nm                inl=   31 PASS err=  55.92 m contrast=0.092 (4s)
+  [B] B/band2_749nm                inl=   41 PASS err=  50.26 m contrast=0.084 (4s)
+  [B] B/band3_901nm                inl=   11 PASS err=  54.13 m contrast=0.064 (6s)
+  [B] B/band4_950nm                inl=    9 PASS err=  40.96 m contrast=0.055 (6s)
+  [B] B/band5_1001nm               inl=    8 fail err= 143.33 m contrast=0.053 (14s)
+  [B] B/band6_1000nm               inl=    6 fail err= 159.27 m contrast=0.049 (2s)
+  [B] B/band7_1049nm               inl=    9 PASS err=  96.63 m contrast=0.050 (1s)
+  [B] B/band8_1248nm               inl=   16 PASS err=  42.29 m contrast=0.054 (1s)
+  [B] B/band9_1548nm               inl=   11 PASS err=  64.77 m contrast=0.051 (1s)
+
+== arm C: MI against the Chandrayaan-2 TMC-2 ortho ==
+D:\MyData\downloads\SIH\src\siim\preprocessing\degrade.py:76: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a.reshape(a.shape[0] // k, k, a.shape[1] // k, k), axis=(1, 3))
+  [C] B/band1_414nm                inl=    7 fail err=  128.12 m
+  [C] B/band2_749nm                inl=   12 PASS err=   72.66 m
+  [C] B/band3_901nm                inl=    9 PASS err=   80.75 m
+  [C] B/band4_950nm                inl=    6 fail err=  150.29 m
+  [C] B/band5_1001nm               inl=    8 fail err=  168.59 m
+  [C] B/band6_1000nm               inl=    4 fail err= 6301.85 m
+  [C] B/band7_1049nm               inl=    4 fail err= 5789.54 m
+  [C] B/band8_1248nm               inl=    4 fail err= 5691.61 m
+  [C] B/band9_1548nm               inl=    4 fail err= 8094.46 m
+
+== arm N: MI against the NAC frames EXP-019 placed ==
+  [N] RD03/nac.m1182331886lc          414 nm inl=    5 fail err= 6882.57 m
+  [N] RD03/nac.m1182331886lc          749 nm inl=    4 fail err= 6084.61 m
+  [N] RD03/nac.m1182331886lc          901 nm inl=    5 fail err= 5515.25 m
+  [N] RD03/nac.m1182331886lc          950 nm inl=    4 fail err= 6733.11 m
+  [N] RD03/nac.m1182331886lc         1001 nm inl=    4 fail err= 7454.19 m
+  [N] RD03/nac.m1182331886lc         1000 nm inl=    3 fail err= 6002.35 m
+  [N] RD03/nac.m1182331886lc         1049 nm inl=    4 fail err= 6641.81 m
+  [N] RD03/nac.m1182331886lc         1248 nm inl=    4 fail err= 7015.53 m
+  [N] RD03/nac.m1182331886lc         1548 nm inl=    3 fail err= 8510.16 m
+  [N] RD03/nac.m1212932972lc          414 nm inl=    4 fail err= 6661.42 m
+  [N] RD03/nac.m1212932972lc          749 nm inl=    5 fail err= 7351.98 m
+  [N] RD03/nac.m1212932972lc          901 nm inl=    4 fail err= 5102.05 m
+  [N] RD03/nac.m1212932972lc          950 nm inl=    5 fail err= 5388.59 m
+  [N] RD03/nac.m1212932972lc         1001 nm inl=    5 fail err= 6515.15 m
+  [N] RD03/nac.m1212932972lc         1000 nm inl=    4 fail err=24892.30 m
+  [N] RD03/nac.m1212932972lc         1049 nm inl=    3 fail err= 8625.98 m
+  [N] RD03/nac.m1212932972lc         1248 nm inl=    3 fail err= 6518.36 m
+  [N] RD03/nac.m1212932972lc         1548 nm inl=    3 fail err= 5498.00 m
+  [N] RD04/nac.m1212932972lc          414 nm inl=    4 fail err= 8152.43 m
+  [N] RD04/nac.m1212932972lc          749 nm inl=    4 fail err= 5603.07 m
+  [N] RD04/nac.m1212932972lc          901 nm inl=    4 fail err= 6368.16 m
+  [N] RD04/nac.m1212932972lc          950 nm inl=    4 fail err= 6764.60 m
+  [N] RD04/nac.m1212932972lc         1001 nm inl=    5 fail err= 5738.80 m
+  [N] RD04/nac.m1212932972lc         1000 nm inl=    4 fail err= 6668.08 m
+  [N] RD04/nac.m1212932972lc         1049 nm inl=    3 fail err= 6890.11 m
+  [N] RD04/nac.m1212932972lc         1248 nm inl=    3 fail err= 6667.66 m
+  [N] RD04/nac.m1212932972lc         1548 nm inl=    3 fail err= 9048.41 m
+  [N] RD03/nac.m1363396554rc          414 nm inl=    5 fail err= 6151.51 m
+  [N] RD03/nac.m1363396554rc          749 nm inl=    5 fail err= 6970.67 m
+  [N] RD03/nac.m1363396554rc          901 nm inl=    4 fail err= 6943.27 m
+  [N] RD03/nac.m1363396554rc          950 nm inl=    4 fail err= 6704.38 m
+  [N] RD03/nac.m1363396554rc         1001 nm inl=    4 fail err= 6800.69 m
+  [N] RD03/nac.m1363396554rc         1000 nm inl=    4 fail err=13021.14 m
+  [N] RD03/nac.m1363396554rc         1049 nm inl=    4 fail err= 5890.30 m
+  [N] RD03/nac.m1363396554rc         1248 nm inl=    4 fail err= 7100.82 m
+  [N] RD03/nac.m1363396554rc         1548 nm inl=    4 fail err= 6269.81 m
+
+== arm T: Diviner bolometric temperature against TC pan at 28:1 ==
+  [T] diviner inl=0 kp 49/60 fail err=nan m
+
+== arm 0: the same sources against the TC NULL block ==
+  [0] P/pan                        inl=    3 fail (expected)
+  [0] B/band1_414nm                inl=    4 fail (expected)
+  [0] B/band2_749nm                inl=    5 fail (expected)
+  [0] B/band3_901nm                inl=    4 fail (expected)
+  [0] B/band4_950nm                inl=    4 fail (expected)
+  [0] B/band5_1001nm               inl=    4 fail (expected)
+  [0] B/band6_1000nm               inl=    3 fail (expected)
+  [0] B/band7_1049nm               inl=    3 fail (expected)
+  [0] B/band8_1248nm               inl=    3 fail (expected)
+  [0] B/band9_1548nm               inl=    3 fail (expected)
+
+== B4L beside (no criterion) ==
+D:\softwares\Lib\site-packages\kornia\feature\integrated.py:550: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  hw1_ = torch.tensor(hw1, device=dev)
+D:\softwares\Lib\site-packages\kornia\feature\integrated.py:554: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  hw2_ = torch.tensor(hw2, device=dev)
+Loaded LightGlue model
+  [B4L] P/pan                        inl= 1938 PASS err=  90.83 m
+  [B4L] B/band1_414nm                inl= 1899 PASS err=  84.29 m
+  [B4L] B/band2_749nm                inl= 2024 PASS err=  83.17 m
+  [B4L] B/band3_901nm                inl= 1595 PASS err=  91.43 m
+  [B4L] B/band4_950nm                inl= 1360 PASS err=  86.34 m
+  [B4L] B/band5_1001nm               inl=    3 fail err=6165.95 m
+  [B4L] B/band6_1000nm               inl=    3 fail err= 927.60 m
+  [B4L] B/band7_1049nm               inl=    0 fail err=    nan m
+  [B4L] B/band8_1248nm               inl=    4 fail err=1729.87 m
+  [B4L] B/band9_1548nm               inl=    0 fail err=    nan m
+
+S0 MET | S1 NOT MET (7/9, median err 54.1279961079254) | S2 NOT MET (worst ratio 1.334244779512924) | S3 NOT MET (2) | S4 NOT MET (0 bands, 0 frames) | S5 NOT MET | S6 MET (0 passes)
+wrote D:\MyData\downloads\SIH\experiments\EXP-020\exp020_results.json in 831s
+EXIT=0

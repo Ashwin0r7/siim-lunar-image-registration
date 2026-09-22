@@ -1,0 +1,46 @@
+RD03/nac.m1182331886lc: crop [89,105,550,724] = 461 x 619 px (was 596 x 1477); overlap was 0.062 of the source
+      414 nm inl=    4 fail err= 3072.43 m
+      749 nm inl=    5 fail err= 3029.93 m
+      901 nm inl=    4 fail err= 1163.26 m
+      950 nm inl=    4 fail err= 4244.81 m
+     1001 nm inl=    4 fail err= 3317.35 m
+     1000 nm inl=    3 fail err=31917.04 m
+     1049 nm inl=    3 fail err= 4292.52 m
+     1248 nm inl=    3 fail err= 1216.64 m
+     1548 nm inl=    3 fail err= 5607.79 m
+RD03/nac.m1212932972lc: crop [99,118,544,704] = 445 x 586 px (was 596 x 1477); overlap was 0.051 of the source
+      414 nm inl=    4 fail err= 4934.27 m
+      749 nm inl=    4 fail err= 3091.86 m
+      901 nm inl=    4 fail err= 3635.56 m
+      950 nm inl=    4 fail err= 3673.28 m
+     1001 nm inl=    3 fail err= 3763.36 m
+     1000 nm inl=    4 fail err= 4255.59 m
+     1049 nm inl=    3 fail err=22372.11 m
+     1248 nm inl=    3 fail err=10697.80 m
+     1548 nm inl=    3 fail err= 5105.51 m
+D:\MyData\downloads\SIH\src\siim\preprocessing\degrade.py:76: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a.reshape(a.shape[0] // k, k, a.shape[1] // k, k), axis=(1, 3))
+RD04/nac.m1212932972lc: crop [62,875,506,1461] = 444 x 586 px (was 596 x 1477); overlap was 0.051 of the source
+      414 nm inl=    4 fail err= 3776.10 m
+      749 nm inl=    4 fail err= 1940.83 m
+      901 nm inl=    4 fail err= 3001.43 m
+      950 nm inl=    4 fail err= 2407.32 m
+     1001 nm inl=    4 fail err= 5152.55 m
+     1000 nm inl=    3 fail err= 3244.26 m
+     1049 nm inl=    3 fail err= 4957.72 m
+     1248 nm inl=    3 fail err=24145.88 m
+     1548 nm inl=    3 fail err=18861.77 m
+RD03/nac.m1363396554rc: crop [149,134,593,710] = 444 x 576 px (was 596 x 1477); overlap was 0.046 of the source
+      414 nm inl=    3 fail err= 3283.83 m
+      749 nm inl=    4 fail err= 6083.69 m
+      901 nm inl=    4 fail err= 3481.08 m
+      950 nm inl=    4 fail err= 3178.65 m
+     1001 nm inl=    4 fail err= 3256.99 m
+     1000 nm inl=    3 fail err= 4607.27 m
+     1049 nm inl=    3 fail err= 6253.63 m
+     1248 nm inl=    3 fail err= 4599.60 m
+     1548 nm inl=    3 fail err=79145.59 m
+
+0/36 cells pass; 0 bands on 0 frames; median err None m
+wrote D:\MyData\downloads\SIH\experiments\EXP-020\exp020_armN_cropped.json in 97s
+EXIT=0

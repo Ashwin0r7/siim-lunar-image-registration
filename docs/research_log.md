@@ -1087,6 +1087,90 @@ reference, so manual check points remain the only route to an accuracy number
 with no shared instrument in it.
 
 
+### RL-055 - Multi-modality, measured: nine bands behave like pan, and the products underneath them disagree by 85 m (EXP-020)
+
+**Question.** "Multi-modal" is in the problem statement's title and the project
+had **one** piece of evidence for it: REAL-DATA-08's radar negative, 0 of 48.
+No IIRS product was ever delivered (RL-046), so the axis was data-REFUSED
+rather than untested. What does the *question* SS2.2 asks of IIRS -- *reflectance
+bands: same envelope as pan; thermal: envelope stated* -- return when it is put
+to the closest public instrument of the same kind?
+
+**The substitution, and its cost, stated before the run.** Kaguya **MI MAP V3**:
+nine bands 414-1548 nm at 14.8 m, map-projected on the same graticule as the TC
+ortho EXP-019 validated and normalised to the **same** standard geometry
+(i = 30 deg, e = 0, alpha = 30 deg). So between an MI band and the TC pan reference
+there is no illumination difference and no georeferencing difference *by
+construction*: the only variables are wavelength and GSD. IIRS is 800-5000 nm
+at 80 m, so this is **not** an IIRS result and Part 1 SS6 forbade the word in any
+claim sentence. The thermal half, which MI cannot reach at all, is answered by
+a real thermal instrument: **Diviner GDR L3 bolometric temperature at 236.9 m**,
+28:1.
+
+**Result.** `[MEASURED]` `experiments/EXP-020/exp020_results.json`, 831 s.
+**S0, S6 MET; S1, S2 (as the runner evaluated it), S3, S4, S5 NOT MET** -- and
+**S2 is MET as Part 1 froze it** (E-053). Seven of nine bands register under the
+frozen rule; every one of the seven lands within **1.334x** of a synthetic pan
+image built from the same instrument's own band mean (the other six run
+0.566-0.894, i.e. *better* than pan). **That is SS2.2's reflectance clause, met.**
+
+**What S1's failure actually measured.** Not wavelength. The median error
+against the analytic label map is **54.1 m** where the bar was 8.42 m, and the
+same offset sits on the pan comparator (**72.4 m**). The recovered linear part
+matches the label map to **3e-5**; the residual is a near-pure translation; and
+the learned engine, with **1360-2024 inliers** against RootSIFT's 9-41, puts it
+at **83.17-91.43 m**. **Two Kaguya products, one mission, one map frame and one
+control network, are offset from each other by about 85 m** (D-063) -- a term
+Part 1 SS2.1 had called "small and unmeasured".
+
+**Which bands fail, and why it is not about colour.** The two failures are
+**1001 nm (MV5)** and **1000 nm (MN1)** -- the same wavelength through the
+imager's two detectors. The NIR bands are resampled from a **62 m** native
+sampling onto the 14.8 m grid and yield **3025-3516 keypoints** against the VIS
+bands' **10 821-15 546**: they are smoother than their own grid. Part 1 SS5 named
+that confound in advance ("a resolution difference masquerading as a wavelength
+difference") and is why the comparator is the band mean.
+
+**The engines trade, again.** `[MEASURED]` RootSIFT registers **7 of 9** bands
+including three NIR; DISK + LightGlue registers **5 of 10** cells -- pan and the
+four brightest VIS bands -- and fails **every** NIR band. A learned matcher is
+*more* dependent on the high-frequency content the NIR bands lack. D-056's "a
+matcher swap is a trade, not a monotone gain", on a new axis.
+
+**The problem statement's own pairing.** `[MEASURED]` Two MI bands register to
+the **Chandrayaan-2 TMC-2 ortho**: 749 nm at **72.66 m** (12 inliers) and 901 nm
+at **80.75 m** (9). The bar was 60 m -- built from sigma_C2 = 38.75 m plus an
+assumed <= 21 m Kaguya-internal term that turned out to be ~85 m -- so S3 is NOT
+MET **by less than the term its bar omitted**, and the bar was not moved.
+
+**The thermal clause, answered with a bound.** `[MEASURED]` Diviner tbol at
+**28.1:1** over a 120 x 65 thermal window: **49 keypoints, 0 inliers**. The
+failure mode is **starvation**, distinguished from descriptor failure by the
+recorded counts and predicted as such in Part 1 at 70 %.
+
+**Arm N, and the two supplements that explain it.** The frozen arm (MI bands
+against the NAC frames EXP-019 placed) is **0 of 36**. Framing is not the cause
+(cropping the source to the footprint: still 0 of 36). Direction is not the
+cause (swapping source and reference: 5 inliers becomes 3). **The matcher is:**
+on the same cropped cells B4L returns up to **304 inliers** and registers 5 of
+36, of which **4 are right at 52.7-85.5 m** and **1 is a wrong pass** (1548 nm,
+13 inliers, 2630 m out). So the cross-mission, cross-modality, 15.9:1 case is
+reachable -- by the learned engine, not the classical one -- and S4 stays NOT
+MET because it was frozen on B1.
+
+**Failures found.** **E-052** -- a block offset folded into a grid origin *and*
+left in the offset field, so `MapBlock` subtracted it twice: the grid was wrong
+by 2216 km and surfaced as a plausible-looking 2 216 898 m error rather than an
+exception. Caught by the smoke run, before any artefact. **E-053** -- S2
+evaluated against S1's bound instead of its own clause, inverting the verdict of
+the criterion the PS row actually asks for; the artefact is not rewritten and
+Part 2 reads it as frozen.
+
+**Status:** closed -- **D-062** (what the multimodality row may say), **D-063**
+(the 85 m inter-product term). **Open:** an IIRS product, which no software can
+supply; and a second window to see whether the band-vs-pan ratio holds.
+
+
 ## Open threads summary
 
 | ID | Thread | Experiment | Critical path? |

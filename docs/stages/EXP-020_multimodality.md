@@ -400,4 +400,253 @@ The 33 % of the window that the selected cycle does not cover is carried as
 
 ## Part 2
 
-*Empty. Written only after this Part 1 is committed.*
+**Written 2026-09-23, after the run.** Artefact:
+`experiments/EXP-020/exp020_results.json` (831 s, Python 3.13.7, NumPy 2.3.3,
+OpenCV 5.0.0, Windows 11). Supplements, both labelled as such and folded into
+no criterion: `exp020_armN_cropped.json` (B1) and
+`exp020_armN_cropped_b4l.json` (B4L).
+
+### 6. The answer, in one paragraph
+
+**Nine reflectance bands of a multispectral imager register to a panchromatic
+image of the same ground, and they behave like the pan image does — but every
+absolute number in this stage is dominated by a disagreement between two
+products of the *same mission* that nobody had measured.** Seven of nine MI
+bands pass the frozen rule against the Kaguya TC pan ortho, and each of the
+seven lands within **1.334×** of the error of a synthetic pan image built from
+the same instrument's own band mean, so **§2.2's clause — *reflectance bands:
+same envelope as pan* — is MET as frozen (S2)**. What is NOT met is **S1's
+absolute bound**: the median error against the analytic label map is **54.1 m**
+where the bar was 8.42 m, and the reason is not wavelength. The same offset
+appears in the pan comparator (**72.4 m**), the linear part of every recovered
+transform matches the label map to **3 × 10⁻⁵**, and the learned engine — which
+finds **1360–2024 inliers** where RootSIFT finds 9–41 — puts it at **83–91 m**.
+**Two Kaguya products, one map frame, one control network, disagree by about
+85 m**, and this stage measured it. On the problem statement's own pairing
+shape, **two MI bands register to the Chandrayaan-2 TMC-2 ortho** (749 nm at
+72.7 m, 901 nm at 80.8 m) — S3 NOT MET against its 60 m bar, by the same
+budget. The thermal clause is answered with a bound: Diviner bolometric
+temperature at **28 : 1** yields **49 keypoints and 0 inliers** — **starvation,
+the failure mode Part 1 named in advance**. The null block returns **0 of 10**.
+
+### 7. Criteria, answered exactly as frozen
+
+| ID | Verdict | The number |
+|---|---|---|
+| **S0** | **MET** | Grid gates pass for MI and Diviner; the **band co-registration control** — the assumption this project had never checked — returns **3564 inliers and a median displacement of 0.0301 px** between band 2 and band 5 against a 0.05 px tolerance; the reproduction gate re-runs a recorded REAL-DATA-07 edge to **1656 = 1656**; the analytic map round-trips to **2.8e-12 px** with affine residuals of 2.3e-13 and 2.8e-14 |
+| **S1** | **NOT MET** | **7 of 9** bands pass the frozen rule (bar ≥ 7) — but **0 of 9** land within **1.0 reference px (8.42 m)**. Median error over the seven: **54.13 m**; range **40.96 – 96.63 m**. The criterion's two clauses split, and §8 is why |
+| **S2** | **MET as frozen** | Seven bands succeed (bar ≥ 7), the pan comparator succeeds, and the **worst band-to-pan ratio is 1.334** (1049 nm) against a bar of **2.0**; the other six run **0.566 – 0.894**, i.e. *better* than the pan comparator. **The artefact's own S2 field says NOT MET because the runner coupled S2's band count to S1's metre bound instead of to the success rule Part 1 names — E-053. The artefact is not rewritten; the criterion is read here as frozen** |
+| **S3** | **NOT MET** | **2 of 9** bands register to the Chandrayaan-2 TMC-2 block (749 nm, 12 inliers, **72.66 m**; 901 nm, 9 inliers, **80.75 m**), and the bar was **< 60 m**. Missed by **21 %**, on the same offset budget S1 fails on |
+| **S4** | **NOT MET** | **0 of 36** cells. Two supplements say why, and neither reason is the one the criterion was written to test — see §11 |
+| **S5** | **NOT MET, envelope stated** | Diviner `tbol` at **28.1 : 1**: **49 keypoints** on a 120 × 65 thermal window against **60** on the 92 × 37 degraded pan, **0 putatives survive**, 0 inliers. **Failure mode: starvation**, as predicted, distinguished from descriptor failure by the recorded keypoint counts |
+| **S6** | **MET** | **0 of 10** cells pass against the null block 25 km away; false-accept fraction **0.000** |
+
+### 8. Why S1 fails, and why it is not about wavelength
+
+The recovered transforms are not wrong — they are **displaced**. On the pan
+comparator the estimated linear part is `[[0.87888, −0.00024], [0.00024,
+0.87888]]` against the label map's `[[0.87891, 0], [0, 0.87891]]`: agreement to
+**3 × 10⁻⁵**, i.e. the scale and rotation between the two products are exactly
+what their labels say. The disagreement is a near-pure **translation**, and the
+better the matcher, the more precisely it is measured:
+
+| engine | inliers (pan) | median error |
+|---|---|---|
+| B1 (RootSIFT) | 14 | 72.42 m |
+| **B4L (DISK + LightGlue)** | **1938** | **90.83 m** |
+
+Per band, RootSIFT's errors scatter between 40.96 and 96.63 m on 9–41 inliers;
+B4L's VIS bands, with 1360–2024 inliers, land at **83.17 – 91.43 m**. The
+honest reading is that **the MI MAP V3 mosaic and the TC Ortho Seamless V2
+mosaic are offset from each other by roughly 85 m (≈ 5.7 MI px, ≈ 10 TC px)**,
+and S1's 8.42 m bar was written as if the two products' relative
+georeferencing were exact. Part 1 §2.1 said the analytic map is *"exact only to
+the extent that the two products are correctly georeferenced relative to each
+other"* and that within Kaguya the term was "small and unmeasured". **It is no
+longer unmeasured, and it is not small.**
+
+**The wavelength-only quantity, reported beside.** Each band's disagreement
+with the *pan comparator's own solution* removes the common product offset and
+leaves what the wavelength costs:
+
+| band | 414 | 749 | 901 | 950 | 1001 | 1000 | 1049 | 1248 | 1548 |
+|---|---|---|---|---|---|---|---|---|---|
+| vs pan (m) | 18.8 | 25.4 | 52.8 | 32.9 | 111.1 | 142.3 | 91.0 | 42.8 | 70.7 |
+
+The five VIS bands sit at **18.8 – 52.8 m**; the NIR bands at **42.8 –
+142.3 m**. So wavelength does cost something, and it costs more in the NIR —
+which §9 attributes.
+
+### 9. The two bands that fail, and what they have in common
+
+The failures are **1001 nm (MV5)** and **1000 nm (MN1)** — the same
+wavelength, measured by the imager's two different detectors at the VIS/NIR
+boundary. The recorded keypoint counts explain it without any new statistic:
+
+| | VIS bands (414–1001 nm) | NIR bands (1000–1548 nm) |
+|---|---|---|
+| keypoints on the degraded source | **10 821 – 15 546** | **3 025 – 3 516** |
+| native GSD before the MAP grid | 20 m | **62 m** |
+
+The NIR bands are resampled from a **62 m** native sampling onto the 14.8 m MAP
+grid, so they are *smoother than their own grid* and a corner detector finds a
+quarter as much to key on. **Part 1 §5 named this confound before the run** —
+*"a resolution difference masquerading as a wavelength difference"* — and it is
+why S2's comparator is the band **mean** rather than a VIS band. The stage
+therefore does **not** claim that 1000 nm is intrinsically harder to register;
+it claims that *these* 1000 nm products carry a quarter of the detectable
+structure, which is a property of the instrument's optics and of LISM's
+resampling, not of the modality question.
+
+**And the two engines disagree about it, in the direction that matters.**
+RootSIFT registers **7 of 9** bands including three NIR bands; DISK + LightGlue
+registers **5 of 10** cells — the pan comparator and the four brightest VIS
+bands — and fails **every NIR band** (0–4 inliers). A learned matcher trained
+on terrestrial photographs is *more* dependent on the high-frequency content
+the NIR bands lack. This is D-056's *"a matcher swap is a trade, not a monotone
+gain"* appearing on a new axis, and it is reported beside the criteria, not
+inside them.
+
+### 10. S3 — the problem statement's own pairing, end to end
+
+`TMC-2 ortho (Chandrayaan-2, ISRO, panchromatic, 4.9 m)` ↔ `MI band (SELENE,
+JAXA, one reflectance band, 14.8 m)` is the shape §2.2 asks for with IIRS in
+the second slot. Two bands register:
+
+| band | inliers | error vs the label map |
+|---|---|---|
+| 749 nm | 12 | **72.66 m** |
+| 901 nm | 9 | **80.75 m** |
+
+against a bar of **60 m** = the label's own `σ_C2` (38.75 m, REAL-DATA-09) plus
+the ≤ 21 m Part 1 allowed for the Kaguya-internal term. The Kaguya-internal
+term turned out to be **~85 m**, not ≤ 21 m, so the bar was built on a
+measurement that did not exist yet and the criterion is NOT MET **by a margin
+smaller than the term it omitted**. That is stated rather than repaired: the
+bar may not move (Part 1 §6), and the honest summary is *two bands of a
+spectrometer-class instrument register to Chandrayaan-2's panchromatic ortho,
+with an error consistent with the two missions' georeferencing budget and not
+demonstrably better than it*.
+
+### 11. S4 — the frozen arm failed, and the supplements say it was the matcher
+
+Arm N put each MI band against the NAC frames EXP-019 placed, and **0 of 36
+cells passed** (3–5 inliers each). Two supplements, both labelled and folded
+into no criterion, test the two obvious harness explanations:
+
+1. **Framing.** In the frozen arm the source was the whole **1477 × 596** MI
+   mosaic against a **585 × 292** NAC matching image: the overlap is
+   **4.6 – 6.2 %** of the source area. Re-run with the MI source cut to each
+   NAC tile's footprint plus 2 km — the construction EXP-019 used everywhere —
+   **0 of 36 cells still pass** (3–5 inliers). *Framing is not the cause.*
+2. **Direction.** Matching is not symmetric (E-036). Swapping source and
+   reference on one cell changes 5 inliers into 3. *Direction is not the cause.*
+
+**The cause is the matcher.** On the same cropped cell, **DISK + LightGlue
+returns 274 inliers (MI → NAC) and 433 (NAC → MI)** where RootSIFT returns 5
+and 3. Run over the supplement's full set, B4L registers **5 of 36** cells, on
+**3** of the four frames and **3** of the nine bands — and that count needs a
+caveat of its own: **one of the five is a wrong pass** (1548 nm, 13 inliers, the
+transform **2 630 m** out). The **four** that are right land at **52.7 – 85.5 m**
+(414 nm with 304 and 11 inliers, 749 nm with 243 and 14), i.e. inside the same
+~85 m inter-product budget every other arm carries. RootSIFT on the identical
+cells passes **0 of 36**.
+
+So the cross-mission, cross-modality, 15.9 : 1 case **is** reachable — by the
+learned engine, not by the classical one — and S4 stays **NOT MET** because the
+criterion was frozen on B1, which is the right way round: the criterion
+measured what it said it would, and the supplement measured why.
+
+### 12. S5 — the thermal clause, answered with a bound
+
+| quantity | value |
+|---|---|
+| ratio | **28.1 : 1** (236.9 m against the TC pan degraded to 235.8 m) |
+| thermal window | **120 × 65 px**, 66.7 % valid (Amendment A1's day cycle) |
+| pan window | 92 × 37 px |
+| keypoints | **49** thermal, **60** pan |
+| inliers | **0** |
+| failure mode | **starvation** (Part 1's rule: < 50 thermal keypoints ⇒ starvation, not descriptor) |
+
+**The envelope, stated as §2.2 asks:** on this mare window, a Diviner
+bolometric-temperature map does **not** register to a panchromatic image at
+28 : 1, and the reason recorded is that the thermal side yields 49 keypoints —
+below the number a 6-parameter model needs to be constrained at all, before any
+question of whether temperature and reflectance share structure can be asked.
+A larger window, a finer thermal product, or both, is what would move it; this
+stage does not have any of them and says so.
+
+### 13. The predictions, graded
+
+| prediction (Part 1 §4.2) | outcome |
+|---|---|
+| S0 MET, HIGH, with (ii) the clause that could genuinely fail | **Right**, and (ii) passed decisively: 0.0301 px |
+| S1 MET, MEDIUM-HIGH, 8–9 of 9, median 0.3–1.0 reference px | **HALF WRONG.** 7 of 9 register (inside the bar), but the median error is **6.4 reference px**, six to twenty times the predicted band. The prediction assumed the two Kaguya products were mutually registered; they are offset by ~85 m |
+| **the band most likely to fail is 414 nm, MEDIUM** | **WRONG.** 414 nm has the **highest contrast of all nine (0.0924)** and the second-most keypoints; the failures are the two 1000 nm bands, and §9 gives the mechanism |
+| S2 MET, MEDIUM, worst ratio 1.2–2.0 | **Right**, worst ratio **1.334** |
+| S3 MET at 45 % | **Wrong direction by a little**: two bands register (the criterion's count clause is met) and both miss the 60 m bar |
+| S4 MET, MEDIUM, 3–6 bands on 2–4 frames | **WRONG**, 0 of 36 on B1 — and the supplement shows the learned engine reaching it |
+| **S5 NOT MET at 70 %, failure mode starvation** | **Right, including the mechanism named in advance** |
+| S6 MET (0 of 10), HIGH | **Right** |
+| Overall: "S0, S1, S2, S4, S6 MET; S3 a coin flip; S5 NOT MET" | **Four of eight right.** The stage's central assumption — that two products of one mission on one map frame agree — was wrong, and finding that is worth more than the criteria it cost |
+
+### 14. Defects found
+
+**E-052 — a block offset folded into a grid origin, twice (found by the smoke
+test, before any recorded statistic).** The MI mosaic manifest first wrote
+`lat_top_deg = 90 − row0/ppd + 0.5/ppd` *and* kept `row0` in the manifest;
+`MapBlock` subtracts `row0` again, so the grid was wrong by 69.76° — **2216 km**
+— which surfaced as an error statistic of 2 216 898 m rather than as a crash.
+The convention is that `lat_top_deg` / `lon_left_deg` are the **global**
+graticule's edges and `row0` / `col0` carry the block offset. Fixed in the
+acquisition, the block re-sliced, and the reason written into the code beside
+the formula. **Same family as E-040** (a coordinate frame paired with the wrong
+partner), reached by a new route.
+
+**E-053 — S2 was evaluated against S1's bound instead of its own clause.**
+Part 1 §4 S2 counts *bands that succeeded*; the runner counted *bands within
+the 8.42 m bound*, which is S1's conjunct. With 7 bands succeeding and the
+worst ratio at 1.334, the frozen criterion is **MET** and the artefact's field
+says NOT MET. **The artefact is not rewritten** (integrity rule 4); §7 reads
+the criterion as frozen and this row is the record. Third instance this
+session of the same shape — a clause stated in prose and implemented as a
+different clause in code (E-051, then this) — and the mechanical guard is the
+same: evaluate each criterion from the artefact's own recorded per-cell fields,
+in a function that quotes the Part 1 sentence it implements.
+
+**Not a defect, recorded anyway:** the frozen Diviner product was empty over
+the window and was a night cycle; Amendment A1 handled both before any
+statistic.
+
+### 15. What this stage does NOT claim (Part 1 §7, restated against the results)
+
+Every disclaimer in Part 1 §7 stands, and two are now load-bearing:
+
+- **This is NOT an IIRS result.** No IIRS product exists in this repository.
+  Kaguya MI is 414–1548 nm at 14.8 m; IIRS is 800–5000 nm at 80 m. The word
+  IIRS appears in no claim sentence, as Part 1 §6 required.
+- **This is NOT accuracy.** Every number is a disagreement against a label map,
+  and the two products' relative georeferencing — which the error statistic
+  assumes — is measured here at **~85 m**, so no number in this stage is
+  better than that floor. What *is* claimed is the **comparison**: bands
+  against pan, on the same grid, with the same offset in both.
+- Not a thermal-imaging result; not an illumination result (MI and TC share a
+  standard geometry by construction); one mare window; one engine in every
+  criterion; `assess()` untouched.
+
+### 16. Ledger and index
+
+- **D-062** — what the §2.2 multimodality row may now say, and what it may not:
+  *nine reflectance bands of a multispectral imager register to panchromatic on
+  the same map frame, seven of nine under the frozen rule, every one within
+  1.334× of a pan comparator built from the same instrument; two bands register
+  to Chandrayaan-2's TMC-2 ortho; a thermal map at 28 : 1 does not, by
+  starvation* — and **not** that IIRS registers, nor that any of it is accurate
+  better than the ~85 m inter-product term this stage measured.
+- **D-063** — the inter-product term itself: MI MAP V3 and TC Ortho Seamless V2
+  disagree by **~85 m** (B4L, 1360–2024 inliers), with the linear part matching
+  their labels to 3e-5. Every later stage that composes these two products
+  carries it.
+- **E-052**, **E-053** (§14).
+- `STAGE-INDEX.md`, `STAGE_HISTORY.md` and `research_log.md` rows land with
+  this commit.
