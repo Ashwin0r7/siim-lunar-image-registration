@@ -239,11 +239,36 @@ def _n_valid(img: np.ndarray) -> int:
     return int(np.isfinite(img).sum())
 
 
+#: Below this many pixels on a side no engine is called: the cell is recorded
+#: as n_keypoints = 0 (a 12 x 6 image at r = 320 IS the measurement).
+MIN_SIDE_PX = 2
+
+
+def engine_error_record(exc: BaseException, shape_src, shape_dst, n_valid_src: int,
+                        n_valid_dst: int) -> dict:
+    """The cell record for an engine that raised (or an image too small to
+    call one on). A reported-only engine must never take a run down; a cell
+    whose engine cannot run is a failed cell and is recorded as one."""
+    return {"engine_error": (f"{type(exc).__name__}: {exc}" if exc is not None
+                             else f"image smaller than {MIN_SIDE_PX} px on a side; engine not called"),
+            "n_keypoints_src": 0, "n_keypoints_dst": 0, "n_putative": 0, "n_inliers": 0, "n_refined": 0,
+            "pass": False, "success": False, "wrong_pass": False,
+            "status": "NOT ASSESSED", "confidence": None, "model": None,
+            "model_selected_by": "none", "heldout_px": None, "decided_by_tie_break": None,
+            "fit_rmse_px": None, "fit_rmse_is_not_accuracy": True,
+            "shape_src": list(shape_src), "shape_dst": list(shape_dst),
+            "n_valid_src": int(n_valid_src), "n_valid_dst": int(n_valid_dst),
+            "geometry": {"verdict": "no transform", "status": "no transform"}, "wall_s": 0.0}
+
+
 def register_oriented(ws: Window, ks: int, a_img: np.ndarray, wr: Window, kr: int,
                       b_img: np.ndarray, engine: str = "B1") -> dict:
     """Orient both images (E-037), register, map the final transform back to
     ORIGINAL (decimated, un-oriented) tile pixels and check it against the
-    archive geometry -- run_real_data_07.run_edge's route, with the pipeline."""
+    archive geometry -- run_real_data_07.run_edge's route, with the pipeline.
+    An engine that raises is recorded, never propagated."""
+    if min(a_img.shape) < MIN_SIDE_PX or min(b_img.shape) < MIN_SIDE_PX:
+        return engine_error_record(None, a_img.shape, b_img.shape, _n_valid(a_img), _n_valid(b_img))
     ra, rb = ws.oriented(a_img), wr.oriented(b_img)
     t0 = time.perf_counter()
     try:
@@ -257,6 +282,13 @@ def register_oriented(ws: Window, ks: int, a_img: np.ndarray, wr: Window, kr: in
                             ransac_threshold=BASE["ransac_threshold"], seed=BASE["seed"])
         res = _EngineOnly(base, engine)
         note = f"pipeline stages refine/reestimate/verify skipped: MemoryError in the verdict's coverage ({exc})"
+    except Exception as exc:  # noqa: BLE001 -- recorded, never propagated
+        rec = engine_error_record(exc, ra.image.shape, rb.image.shape, _n_valid(ra.image), _n_valid(rb.image))
+        rec["north_up"] = {"src": ra.record, "dst": rb.record}
+        rec["wall_s"] = time.perf_counter() - t0
+        print(f"    !! {engine} raised on {ra.image.shape} vs {rb.image.shape}: {rec['engine_error'][:120]}",
+              flush=True)
+        return rec
     wall = time.perf_counter() - t0
     s = res.summary()
     rec = {
@@ -382,8 +414,15 @@ def self_scale_control(w: Window, r: int) -> dict:
     # long window returns ~10^4-10^5 inliers, beyond the verdict's O(N^2)
     # coverage statistic (COVERAGE_POINT_CAP).
     from siim.baselines import run_baseline
-    res = _EngineOnly(run_baseline("B1", ca, cb, model=BASE["model"],
-                                   ransac_threshold=BASE["ransac_threshold"], seed=BASE["seed"]), "B1")
+    try:
+        res = _EngineOnly(run_baseline("B1", ca, cb, model=BASE["model"],
+                                       ransac_threshold=BASE["ransac_threshold"], seed=BASE["seed"]), "B1")
+    except Exception as exc:  # noqa: BLE001 -- recorded, never propagated
+        rec.update({"engine_error": f"{type(exc).__name__}: {exc}", "n_inliers": 0, "n_keypoints_src": 0,
+                    "status": "engine raised", "clause_shift": "n/a (engine raised)",
+                    "clause_inliers": "n/a (engine raised)"})
+        print(f"    !! self-scale control raised at r={r}: {rec['engine_error'][:120]}", flush=True)
+        return rec
     rec["n_inliers"] = res.n_inliers
     rec["n_keypoints_src"] = int(len(res.baseline.src_features))
     rec["stage"] = "estimate only (run_baseline B1); no refine, no verdict"
@@ -658,6 +697,7 @@ def run_cells(windows: dict, rows: dict, e7rows: dict, pop_a, pop_b, rungs_d, ru
             g = rec["geometry"].get("verdict", rec["geometry"].get("status", ""))
             rc = rec.get("rung_consistency", {})
             print(f"  [{pop} {wname:11s} {edge[4:16]}->{edge[-13:]}] {arm} r={r:3d}(run {r_run:3d}) {engine:3s} "
+                  f"{'ENGINE-ERROR ' if rec.get('engine_error') else ''}"
                   f"N={rec['n_valid_src']:8d} kp={rec['n_keypoints_src']:5d} put={rec['n_putative']:5d} "
                   f"inl={rec['n_inliers']:5d} {'SUCCESS' if rec['success'] else ('WRONG-PASS' if rec['wrong_pass'] else 'fail'):10s} "
                   f"geom={g[:12]:12s} cons={rc.get('median_coarse_px', float('nan')):.3f}px "

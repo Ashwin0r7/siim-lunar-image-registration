@@ -108,6 +108,35 @@ def test_logistic_recovers_a_pixel_count_effect(m):
     assert out["p_beta_r"] > 0.05
 
 
+def test_an_engine_that_raises_is_recorded_and_the_cell_continues(m, monkeypatch):
+    """B4L is reported-only and must never take a criterion cell down (the
+    first full run died on torch instance_norm at a 12 x 6 image)."""
+    from siim.ingest.footprint import FrameCorners
+    img = np.random.default_rng(0).random((64, 48))
+    corners = FrameCorners((22.0, 20.0), (21.9, 20.0), (22.0, 20.5), (21.9, 20.5), 4096, 2048)
+
+    class Ctx:
+        pdsid = "synthetic"
+        scaled_pixel_m = 1.0
+
+        def raw(self):
+            return img
+    Ctx.corners = corners
+    w = m.Window(Ctx(), 0, 0, *img.shape)
+
+    def boom(*a, **k):
+        raise ValueError("Expected more than 1 spatial element when training")
+    monkeypatch.setattr(m, "register_pair", boom)
+    rec = m.register_oriented(w, 8, img, w, 8, img, engine="B4L")
+    assert rec["engine_error"].startswith("ValueError: Expected more than 1")
+    assert rec["n_inliers"] == 0 and rec["success"] is False and rec["pass"] is False
+    assert rec["geometry"]["verdict"] == "no transform"
+    # too small on a side: the engine is not called at all
+    tiny = np.ones((1, 6))
+    rec2 = m.register_oriented(w, 320, tiny, w, 320, tiny)
+    assert rec2["n_keypoints_src"] == 0 and "engine not called" in rec2["engine_error"]
+
+
 def test_runner_refuses_to_overwrite(m, tmp_path, monkeypatch):
     target = tmp_path / "exp016_results.json"
     target.write_text("{}", encoding="utf-8")
