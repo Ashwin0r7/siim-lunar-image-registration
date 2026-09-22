@@ -383,3 +383,43 @@ def test_the_triplet_endpoint_refuses_the_two_engine_mode():
                                               "c_png": "AAAA", "engine": "both"})
     assert r.status_code == 400
     assert "one engine" in r.json()["detail"]
+
+
+def test_the_match_points_csv_carries_its_own_provenance(script):
+    """The PS asks for match points as a deliverable; a CSV with no header is a
+    liability, because the coordinates are the pipeline's pixels, not the
+    file's, and the verdict they belong to is not in the numbers."""
+    node = _node()
+    if node is None:
+        pytest.skip("node is not available on this machine")
+    fn = _fn(script, "wireLiveResult")
+    harness = (
+        "let written = null;\n"
+        "class Blob { constructor(parts) { written = parts.join(''); } }\n"
+        "const URL = {createObjectURL: () => 'blob:stub', revokeObjectURL: () => {}};\n"
+        "const els = {};\n"
+        "const mk = id => ({id, onclick: null, click(){}, style:{}, set href(v){}, set download(v){}});\n"
+        "const document = {getElementById: id => (els[id] = els[id] || mk(id)),\n"
+        "                  createElement: () => mk('a')};\n"
+        "const setTimeout = (f) => {};\n"
+        f"const d = {json.dumps(_PAYLOAD)};\n"
+        "function drawLiveCorrespondences() {}\n"
+        "const LIVE = {}; const $ = () => null; const paintSlot = () => {};\n"
+        f"{fn}\n"
+        "wireLiveResult(d, false);\n"
+        "els['live-dl-points'].onclick();\n"
+        "console.log(JSON.stringify(written));\n")
+    with tempfile.TemporaryDirectory() as t:
+        f = Path(t) / "csv.js"
+        f.write_text(harness, encoding="utf-8")
+        r = subprocess.run([node, str(f)], capture_output=True, text=True, env={**os.environ})
+    assert r.returncode == 0, r.stderr[-600:]
+    csv = json.loads(r.stdout)
+    assert csv.startswith("# SIIM live registration - match points")
+    assert "NOT a recorded number" in csv
+    assert "verdict INCONCLUSIVE" in csv
+    assert "down-sampled to 1024 px" in csv
+    body = [ln for ln in csv.splitlines() if not ln.startswith("#")]
+    assert body[0] == "source_x,source_y,reference_x,reference_y,inlier,refined"
+    assert body[1] == "1,2,5,6,1,1", body[1]
+    assert body[2] == "3,4,7,8,0,0", body[2]

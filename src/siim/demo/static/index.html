@@ -1935,9 +1935,18 @@ function renderLive(d) {
         <td>${esc(e.verdict)}</td><td>${esc(e.weight)}</td></tr>`).join("")}</tbody>
     </table></div>
 
+    ${s.transform_matrix || d.summary.transform_matrix ? `
+    <details class="note" style="margin-top:12px"><summary><b>The transform, as estimated</b>
+      — ${esc(s.model)}, selected by ${esc(s.model_selected_by)}</summary>
+      <pre class="code" style="white-space:pre-wrap;margin:8px 0 0">${esc(
+        JSON.stringify(s.transform_matrix || d.summary.transform_matrix, null, 1))}</pre>
+      <div>Source pixel → reference pixel, on the images as the pipeline saw them
+        (long side down-sampled to 1024 px).</div></details>` : ""}
+
     <div class="dlrow">
       ${reg ? `<a class="dlbtn" id="live-dl-img" href="${esc(reg)}"
         download="registered.png">Download the registered image</a>` : ""}
+      <button class="dlbtn" id="live-dl-points">Download the match points (CSV)</button>
       <button class="dlbtn" id="live-dl-json">Download this result as JSON</button>
       <button class="dlbtn" id="live-again">Run another pair</button>
     </div>
@@ -2041,6 +2050,33 @@ function wireLiveResult(d, triplet) {
     };
     range.oninput = move; move();
   }
+  const pts = document.getElementById("live-dl-points");
+  if (pts) pts.onclick = () => {
+    const c = d.correspondences || {};
+    const src = c.src || [], dst = c.dst || [], inl = c.inlier || [], ref = c.refined || [];
+    const NL = String.fromCharCode(10);
+    const rows = ["source_x,source_y,reference_x,reference_y,inlier,refined"];
+    for (let i = 0; i < src.length; i++) {
+      rows.push([src[i][0], src[i][1], dst[i][0], dst[i][1],
+                 inl[i] ? 1 : 0, ref[i] ? 1 : 0].join(","));
+    }
+    // A header the reader can act on: these are the pipeline's own pixels, not
+    // the file's, and the verdict that the points belong to is named.
+    const head = [
+      "# SIIM live registration - match points",
+      "# computed in this request on user-supplied images; NOT a recorded number",
+      `# engine ${d.engine} | model ${(d.summary || {}).model} | verdict ${d.verdict.status}`,
+      "# coordinates are pixels of the images as the pipeline saw them "
+      + "(long side down-sampled to 1024 px)",
+      "# inlier = survived geometric verification; refined = sub-pixel refinement succeeded",
+    ].join(NL);
+    const blob = new Blob([head + NL + rows.join(NL) + NL], {type: "text/csv"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "siim_match_points.csv";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  };
   const dl = document.getElementById("live-dl-json");
   if (dl) dl.onclick = () => {
     const blob = new Blob([JSON.stringify(d, null, 1)], {type: "application/json"});
