@@ -236,6 +236,9 @@ a.filelink:hover{color:var(--accent);text-decoration-color:var(--accent)}
 .tile .val{font-size:30px;font-weight:600;letter-spacing:-.03em;line-height:1.05;
   margin-top:8px;font-variant-numeric:tabular-nums}
 .tile .val small{font-size:.55em;color:var(--ink-3);font-weight:500;letter-spacing:0}
+/* a tile whose value is a WORD rather than a number: 30px overflows a
+   four-across tile at 'STARVATION' and the browser clips it silently. */
+.tile .val.word{font-size:21px;letter-spacing:-.01em;overflow-wrap:anywhere}
 .tile.hero .val{font-size:44px}
 .tile .note{font-size:12px;color:var(--ink-3);margin-top:6px;line-height:1.45}
 .tile.good .val{color:var(--accent)} .tile.bad .val{color:var(--fail)}
@@ -2366,7 +2369,7 @@ function scalePanel(vm) {
         <div class="note">every rung to 320:1 was the bar \u00b7 ${st("NOT MET", "fail")} \u00b7 the
           <b>measured envelope</b> is what the deliverable carries</div></div>
       <div class="tile good"><div class="lab">S2 \u2014 why it stops</div>
-        <div class="val">${esc(s2.verdict || "\u2014")}</div>
+        <div class="val word">${esc(s2.verdict || "\u2014")}</div>
         <div class="note">pixel count decides, ratio does not: <b>\u03b2<sub>N</sub> = ${f(s2.beta_N)}</b>
           (p = ${f(s2.p_beta_N, 4)}) against <b>\u03b2<sub>r</sub> = ${f(s2.beta_r, 5)}</b>
           (p = ${f(s2.p_beta_r, 4)})</div></div>
