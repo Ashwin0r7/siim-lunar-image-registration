@@ -1,0 +1,49 @@
+{
+  "criterion": "S0(e)",
+  "edges": [
+    {
+      "edge": "nac.m1299958135lc -> nac.m1271742202lc",
+      "recorded_n_inliers": 1608,
+      "n_inliers": 1608,
+      "reproduces": true,
+      "wall_s": 11.9
+    },
+    {
+      "edge": "nac.m1299958135lc -> nac.m1315225542lc",
+      "recorded_n_inliers": 2726,
+      "n_inliers": 2726,
+      "reproduces": true,
+      "wall_s": 14.5
+    },
+    {
+      "edge": "nac.m1315225542lc -> nac.m1271742202lc",
+      "recorded_n_inliers": 2138,
+      "n_inliers": 2138,
+      "reproduces": true,
+      "wall_s": 11.4
+    }
+  ],
+  "rd03_loop": {
+    "criterion": "S4",
+    "met": true,
+    "chain": [
+      "nac.m1271742202lc -> nac.m1335207975rc",
+      "nac.m1335207975rc -> nac.m1452560468lc",
+      "nac.m1452560468lc -> nac.m1271742202lc"
+    ],
+    "shape": [
+      2048,
+      1024
+    ],
+    "recorded_px": 1201.0378963072235,
+    "recomputed_px": 1201.0378963072235,
+    "abs_difference_px": 0.0,
+    "tolerance_px": 1e-06
+  },
+  "met": true,
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3"
+  },
+  "total_runtime_s": 37.9
+}

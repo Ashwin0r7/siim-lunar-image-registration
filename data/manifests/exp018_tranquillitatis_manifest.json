@@ -1,0 +1,535 @@
+{
+  "dataset": "LRO NAC (LROC) real image tiles via PDS",
+  "stage": "EXP-018",
+  "region": "tranquillitatis",
+  "pair": [
+    "nac.m1177606647lc",
+    "nac.m1282310415lc",
+    "nac.m1121081627rc",
+    "nac.m1190561570lc",
+    "nac.m1157600009rc",
+    "nac.m188085530rc",
+    "nac.m1447850428rc"
+  ],
+  "pair_role": "exp018_held_out_window",
+  "window": "tranquillitatis",
+  "target_ground_point_lon_lat": [
+    23.47,
+    0.67
+  ],
+  "incidence_deg": [
+    16.21,
+    29.45,
+    40.06,
+    44.94,
+    73.64,
+    15.85,
+    10.88
+  ],
+  "n_mirrored_frames": 1,
+  "retrieved_utc": "2026-09-22T02:32:26Z",
+  "fetch_log": [
+    {
+      "pdsid": "nac.m1177606647lc",
+      "bytes": 41484288,
+      "seconds": 28.9,
+      "kB_per_s": 1435.1
+    },
+    {
+      "pdsid": "nac.m1282310415lc",
+      "bytes": 41484288,
+      "seconds": 29.1,
+      "kB_per_s": 1424.0
+    },
+    {
+      "pdsid": "nac.m1121081627rc",
+      "bytes": 41484288,
+      "seconds": 28.4,
+      "kB_per_s": 1461.3
+    },
+    {
+      "pdsid": "nac.m1190561570lc",
+      "bytes": 41484288,
+      "seconds": 29.1,
+      "kB_per_s": 1425.7
+    },
+    {
+      "pdsid": "nac.m1157600009rc",
+      "bytes": 41484288,
+      "seconds": 28.2,
+      "kB_per_s": 1471.3
+    },
+    {
+      "pdsid": "nac.m188085530rc",
+      "bytes": 41484288,
+      "seconds": 29.3,
+      "kB_per_s": 1416.2
+    },
+    {
+      "pdsid": "nac.m1447850428rc",
+      "bytes": 41484288,
+      "seconds": 28.9,
+      "kB_per_s": 1436.3
+    }
+  ],
+  "total_fetch_s": 216.1,
+  "chandrayaan2_status": "NOT OBTAINED. No Chandrayaan-2 data is present.",
+  "licence": "NASA PDS public domain; credit NASA/GSFC/Arizona State University.",
+  "tiles": [
+    {
+      "pdsid": "nac.m1177606647lc",
+      "role": "EXP-018 held-out frame",
+      "image_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1022/DATA/ESM2/2015034/NAC/M1177606647LC.IMG",
+      "img_file_name": "M1177606647LC.IMG",
+      "byte_start": 137087544,
+      "byte_count": 41484288,
+      "bytes_sha256": "5bac10037a8c37eb01d736de0cb4ee59787cf0f7d5442cc4d14927df690ece7a",
+      "line0": 13535,
+      "n_lines": 4096,
+      "sample0": 233,
+      "n_samples": 2048,
+      "decimation": 2,
+      "parent_shape_lines_samples": [
+        30720,
+        5064
+      ],
+      "data_type": "SignedLSB2",
+      "numpy_dtype": "<i2",
+      "scaling_factor": 3.05185094759972e-05,
+      "unit": "Scaled I/F",
+      "index_convention": "array[row=line, column=sample], 0-based",
+      "retrieved_utc": "2026-09-22T02:29:22Z",
+      "fetch": "strict 8 MB chunks with retries (fetch_byte_range_chunked)",
+      "region": "tranquillitatis",
+      "label_path": "data/metadata/tranquillitatis/nac.m1177606647lc.xml",
+      "tile_npy": "data/processed/tranquillitatis/nac.m1177606647lc.geo.l13535s233.n4096.tile.npy",
+      "incidence_deg": 16.21,
+      "emission_deg": 1.74,
+      "utc_start": "2015-02-03T12:43:00.589000Z",
+      "ode_map_resolution_m": 0.989,
+      "rung_deg": 20.0,
+      "jacobian_determinant": 0.9766067408904504,
+      "jacobian_determinant_sign": 1,
+      "selection_method": "EXP-018 Part 1 section 3.5 incidence ladder, from labels and corners only",
+      "target_ground_point_lon_lat": [
+        23.47,
+        0.67
+      ],
+      "index_geometry_sources": [
+        "exp018_tranquillitatis_index_geometry.json"
+      ],
+      "index_corners_lon_lat": {
+        "upper_left": [
+          23.41,
+          0.15
+        ],
+        "upper_right": [
+          23.57,
+          0.14
+        ],
+        "lower_left": [
+          23.45,
+          1.18
+        ],
+        "lower_right": [
+          23.61,
+          1.17
+        ]
+      },
+      "lro_flight_direction": "+X",
+      "orbit_node": "A",
+      "geolocation_status": "GEOMETRY-DRIVEN (REAL-DATA-03, D-033): window from named archive corners; not a geographic registration",
+      "azimuth_status": "Sub-solar AZIMUTH not used; incidence-varied only (RL-032b)"
+    },
+    {
+      "pdsid": "nac.m1282310415lc",
+      "role": "EXP-018 held-out frame",
+      "image_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1035/DATA/ESM3/2018150/NAC/M1282310415LC.IMG",
+      "img_file_name": "M1282310415LC.IMG",
+      "byte_start": 234640440,
+      "byte_count": 41484288,
+      "bytes_sha256": "d18e5fae5a14938ec85a82b4565e6814468064c5ec632f4d79d6137bd96c6143",
+      "line0": 23167,
+      "n_lines": 4096,
+      "sample0": 600,
+      "n_samples": 2048,
+      "decimation": 2,
+      "parent_shape_lines_samples": [
+        52224,
+        5064
+      ],
+      "data_type": "SignedLSB2",
+      "numpy_dtype": "<i2",
+      "scaling_factor": 3.05185094759972e-05,
+      "unit": "Scaled I/F",
+      "index_convention": "array[row=line, column=sample], 0-based",
+      "retrieved_utc": "2026-09-22T02:29:53Z",
+      "fetch": "strict 8 MB chunks with retries (fetch_byte_range_chunked)",
+      "region": "tranquillitatis",
+      "label_path": "data/metadata/tranquillitatis/nac.m1282310415lc.xml",
+      "tile_npy": "data/processed/tranquillitatis/nac.m1282310415lc.geo.l23167s600.n4096.tile.npy",
+      "incidence_deg": 29.45,
+      "emission_deg": 1.73,
+      "utc_start": "2018-05-30T09:05:48.097000Z",
+      "ode_map_resolution_m": 0.88,
+      "rung_deg": 25.0,
+      "jacobian_determinant": -0.7905383187736067,
+      "jacobian_determinant_sign": -1,
+      "selection_method": "EXP-018 Part 1 section 3.5 incidence ladder, from labels and corners only",
+      "target_ground_point_lon_lat": [
+        23.47,
+        0.67
+      ],
+      "index_geometry_sources": [
+        "exp018_tranquillitatis_index_geometry.json"
+      ],
+      "index_corners_lon_lat": {
+        "upper_left": [
+          23.38,
+          1.42
+        ],
+        "upper_right": [
+          23.53,
+          1.43
+        ],
+        "lower_left": [
+          23.47,
+          -0.14
+        ],
+        "lower_right": [
+          23.61,
+          -0.13
+        ]
+      },
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "geolocation_status": "GEOMETRY-DRIVEN (REAL-DATA-03, D-033): window from named archive corners; not a geographic registration",
+      "azimuth_status": "Sub-solar AZIMUTH not used; incidence-varied only (RL-032b)"
+    },
+    {
+      "pdsid": "nac.m1121081627rc",
+      "role": "EXP-018 held-out frame",
+      "image_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1015/DATA/ESM/2013110/NAC/M1121081627RC.IMG",
+      "img_file_name": "M1121081627RC.IMG",
+      "byte_start": 245659704,
+      "byte_count": 41484288,
+      "bytes_sha256": "9e7450e215d28f3ba930278036e8589c985e9d0691531857d0ce6ef5a1775dc6",
+      "line0": 24255,
+      "n_lines": 4096,
+      "sample0": 1267,
+      "n_samples": 2048,
+      "decimation": 2,
+      "parent_shape_lines_samples": [
+        52224,
+        5064
+      ],
+      "data_type": "SignedLSB2",
+      "numpy_dtype": "<i2",
+      "scaling_factor": 3.05185094759972e-05,
+      "unit": "Scaled I/F",
+      "index_convention": "array[row=line, column=sample], 0-based",
+      "retrieved_utc": "2026-09-22T02:30:23Z",
+      "fetch": "strict 8 MB chunks with retries (fetch_byte_range_chunked)",
+      "region": "tranquillitatis",
+      "label_path": "data/metadata/tranquillitatis/nac.m1121081627rc.xml",
+      "tile_npy": "data/processed/tranquillitatis/nac.m1121081627rc.geo.l24255s1267.n4096.tile.npy",
+      "incidence_deg": 40.06,
+      "emission_deg": 1.17,
+      "utc_start": "2013-04-20T07:19:19.860000Z",
+      "ode_map_resolution_m": 0.854,
+      "rung_deg": 30.0,
+      "jacobian_determinant": -0.738600607060027,
+      "jacobian_determinant_sign": -1,
+      "selection_method": "EXP-018 Part 1 section 3.5 incidence ladder, from labels and corners only",
+      "target_ground_point_lon_lat": [
+        23.47,
+        0.67
+      ],
+      "index_geometry_sources": [
+        "exp018_tranquillitatis_index_geometry.json"
+      ],
+      "index_corners_lon_lat": {
+        "upper_left": [
+          23.52,
+          -0.02
+        ],
+        "upper_right": [
+          23.37,
+          -0.02
+        ],
+        "lower_left": [
+          23.56,
+          1.35
+        ],
+        "lower_right": [
+          23.4,
+          1.35
+        ]
+      },
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "geolocation_status": "GEOMETRY-DRIVEN (REAL-DATA-03, D-033): window from named archive corners; not a geographic registration",
+      "azimuth_status": "Sub-solar AZIMUTH not used; incidence-varied only (RL-032b)"
+    },
+    {
+      "pdsid": "nac.m1190561570lc",
+      "role": "EXP-018 held-out frame",
+      "image_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1024/DATA/ESM2/2015184/NAC/M1190561570LC.IMG",
+      "img_file_name": "M1190561570LC.IMG",
+      "byte_start": 221788008,
+      "byte_count": 41484288,
+      "bytes_sha256": "bb2f967e3e98121e865a2bb8f812fe1042ef2289b39ba3bce90172b1cff51d46",
+      "line0": 21898,
+      "n_lines": 4096,
+      "sample0": 1960,
+      "n_samples": 2048,
+      "decimation": 2,
+      "parent_shape_lines_samples": [
+        52224,
+        5064
+      ],
+      "data_type": "SignedLSB2",
+      "numpy_dtype": "<i2",
+      "scaling_factor": 3.05185094759972e-05,
+      "unit": "Scaled I/F",
+      "index_convention": "array[row=line, column=sample], 0-based",
+      "retrieved_utc": "2026-09-22T02:30:54Z",
+      "fetch": "strict 8 MB chunks with retries (fetch_byte_range_chunked)",
+      "region": "tranquillitatis",
+      "label_path": "data/metadata/tranquillitatis/nac.m1190561570lc.xml",
+      "tile_npy": "data/processed/tranquillitatis/nac.m1190561570lc.geo.l21898s1960.n4096.tile.npy",
+      "incidence_deg": 44.94,
+      "emission_deg": 1.72,
+      "utc_start": "2015-07-03T11:18:23.545000Z",
+      "ode_map_resolution_m": 0.84,
+      "rung_deg": 40.0,
+      "jacobian_determinant": -0.7293846752450481,
+      "jacobian_determinant_sign": -1,
+      "selection_method": "EXP-018 Part 1 section 3.5 incidence ladder, from labels and corners only",
+      "target_ground_point_lon_lat": [
+        23.47,
+        0.67
+      ],
+      "index_geometry_sources": [
+        "exp018_tranquillitatis_index_geometry.json"
+      ],
+      "index_corners_lon_lat": {
+        "upper_left": [
+          23.36,
+          1.35
+        ],
+        "upper_right": [
+          23.5,
+          1.36
+        ],
+        "lower_left": [
+          23.42,
+          -0.14
+        ],
+        "lower_right": [
+          23.56,
+          -0.14
+        ]
+      },
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "geolocation_status": "GEOMETRY-DRIVEN (REAL-DATA-03, D-033): window from named archive corners; not a geographic registration",
+      "azimuth_status": "Sub-solar AZIMUTH not used; incidence-varied only (RL-032b)"
+    },
+    {
+      "pdsid": "nac.m1157600009rc",
+      "role": "EXP-018 held-out frame",
+      "image_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1020/DATA/ESM/2014167/NAC/M1157600009RC.IMG",
+      "img_file_name": "M1157600009RC.IMG",
+      "byte_start": 267829896,
+      "byte_count": 41484288,
+      "bytes_sha256": "600f5734bbfd98724cf891d5d8bb92b4ad556e2daf37c86af5dc6e9f7275fa2e",
+      "line0": 26444,
+      "n_lines": 4096,
+      "sample0": 12,
+      "n_samples": 2048,
+      "decimation": 2,
+      "parent_shape_lines_samples": [
+        52224,
+        5064
+      ],
+      "data_type": "SignedLSB2",
+      "numpy_dtype": "<i2",
+      "scaling_factor": 3.05185094759972e-05,
+      "unit": "Scaled I/F",
+      "index_convention": "array[row=line, column=sample], 0-based",
+      "retrieved_utc": "2026-09-22T02:31:25Z",
+      "fetch": "strict 8 MB chunks with retries (fetch_byte_range_chunked)",
+      "region": "tranquillitatis",
+      "label_path": "data/metadata/tranquillitatis/nac.m1157600009rc.xml",
+      "tile_npy": "data/processed/tranquillitatis/nac.m1157600009rc.geo.l26444s12.n4096.tile.npy",
+      "incidence_deg": 73.64,
+      "emission_deg": 1.17,
+      "utc_start": "2014-06-16T23:19:02.662000Z",
+      "ode_map_resolution_m": 1.003,
+      "rung_deg": 50.0,
+      "jacobian_determinant": -0.9901748192372861,
+      "jacobian_determinant_sign": -1,
+      "selection_method": "EXP-018 Part 1 section 3.5 incidence ladder, from labels and corners only",
+      "target_ground_point_lon_lat": [
+        23.47,
+        0.67
+      ],
+      "index_geometry_sources": [
+        "exp018_tranquillitatis_index_geometry.json"
+      ],
+      "index_corners_lon_lat": {
+        "upper_left": [
+          23.41,
+          1.64
+        ],
+        "upper_right": [
+          23.57,
+          1.64
+        ],
+        "lower_left": [
+          23.46,
+          -0.14
+        ],
+        "lower_right": [
+          23.62,
+          -0.13
+        ]
+      },
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "geolocation_status": "GEOMETRY-DRIVEN (REAL-DATA-03, D-033): window from named archive corners; not a geographic registration",
+      "azimuth_status": "Sub-solar AZIMUTH not used; incidence-varied only (RL-032b)"
+    },
+    {
+      "pdsid": "nac.m188085530rc",
+      "role": "EXP-018 held-out frame",
+      "image_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1011/DATA/SCI/2012094/NAC/M188085530RC.IMG",
+      "img_file_name": "M188085530RC.IMG",
+      "byte_start": 296613672,
+      "byte_count": 41484288,
+      "bytes_sha256": "e14a497f15e4cdbbe2f9efabc4ec8a4fb2b12de0a769dcd1781b8308aca116e3",
+      "line0": 29286,
+      "n_lines": 4096,
+      "sample0": 760,
+      "n_samples": 2048,
+      "decimation": 2,
+      "parent_shape_lines_samples": [
+        52224,
+        5064
+      ],
+      "data_type": "SignedLSB2",
+      "numpy_dtype": "<i2",
+      "scaling_factor": 3.05185094759972e-05,
+      "unit": "Scaled I/F",
+      "index_convention": "array[row=line, column=sample], 0-based",
+      "retrieved_utc": "2026-09-22T02:31:56Z",
+      "fetch": "strict 8 MB chunks with retries (fetch_byte_range_chunked)",
+      "region": "tranquillitatis",
+      "label_path": "data/metadata/tranquillitatis/nac.m188085530rc.xml",
+      "tile_npy": "data/processed/tranquillitatis/nac.m188085530rc.geo.l29286s760.n4096.tile.npy",
+      "incidence_deg": 15.85,
+      "emission_deg": 1.17,
+      "utc_start": "2012-04-03T09:44:22.897000Z",
+      "ode_map_resolution_m": 0.783,
+      "rung_deg": 60.0,
+      "jacobian_determinant": -0.5508203380901211,
+      "jacobian_determinant_sign": -1,
+      "selection_method": "EXP-018 Part 1 section 3.5 incidence ladder, from labels and corners only",
+      "target_ground_point_lon_lat": [
+        23.47,
+        0.67
+      ],
+      "index_geometry_sources": [
+        "exp018_tranquillitatis_index_geometry.json"
+      ],
+      "index_corners_lon_lat": {
+        "upper_left": [
+          23.52,
+          0.13
+        ],
+        "upper_right": [
+          23.35,
+          0.13
+        ],
+        "lower_left": [
+          23.54,
+          1.03
+        ],
+        "lower_right": [
+          23.36,
+          1.03
+        ]
+      },
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "geolocation_status": "GEOMETRY-DRIVEN (REAL-DATA-03, D-033): window from named archive corners; not a geographic registration",
+      "azimuth_status": "Sub-solar AZIMUTH not used; incidence-varied only (RL-032b)"
+    },
+    {
+      "pdsid": "nac.m1447850428rc",
+      "role": "EXP-018 held-out frame",
+      "image_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1056C/DATA/ESM5/2023240/NAC/M1447850428RC.IMG",
+      "img_file_name": "M1447850428RC.IMG",
+      "byte_start": 239279064,
+      "byte_count": 41484288,
+      "bytes_sha256": "001113cd04968c31864b549bfb3149822fdaed0469b0140d909cdcb5e7c39e4d",
+      "line0": 23625,
+      "n_lines": 4096,
+      "sample0": 1536,
+      "n_samples": 2048,
+      "decimation": 2,
+      "parent_shape_lines_samples": [
+        33792,
+        5064
+      ],
+      "data_type": "SignedLSB2",
+      "numpy_dtype": "<i2",
+      "scaling_factor": 3.05185094759972e-05,
+      "unit": "Scaled I/F",
+      "index_convention": "array[row=line, column=sample], 0-based",
+      "retrieved_utc": "2026-09-22T02:32:26Z",
+      "fetch": "strict 8 MB chunks with retries (fetch_byte_range_chunked)",
+      "region": "tranquillitatis",
+      "label_path": "data/metadata/tranquillitatis/nac.m1447850428rc.xml",
+      "tile_npy": "data/processed/tranquillitatis/nac.m1447850428rc.geo.l23625s1536.n4096.tile.npy",
+      "incidence_deg": 10.88,
+      "emission_deg": 1.18,
+      "utc_start": "2023-08-28T08:26:01.406000Z",
+      "ode_map_resolution_m": 0.885,
+      "rung_deg": 70.0,
+      "jacobian_determinant": -0.7717384603300979,
+      "jacobian_determinant_sign": -1,
+      "selection_method": "EXP-018 Part 1 section 3.5 incidence ladder, from labels and corners only",
+      "target_ground_point_lon_lat": [
+        23.47,
+        0.67
+      ],
+      "index_geometry_sources": [
+        "exp018_tranquillitatis_index_geometry.json"
+      ],
+      "index_corners_lon_lat": {
+        "upper_left": [
+          23.48,
+          -0.11
+        ],
+        "upper_right": [
+          23.34,
+          -0.1
+        ],
+        "lower_left": [
+          23.56,
+          0.91
+        ],
+        "lower_right": [
+          23.42,
+          0.92
+        ]
+      },
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "geolocation_status": "GEOMETRY-DRIVEN (REAL-DATA-03, D-033): window from named archive corners; not a geographic registration",
+      "azimuth_status": "Sub-solar AZIMUTH not used; incidence-varied only (RL-032b)"
+    }
+  ]
+}
