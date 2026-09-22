@@ -1,0 +1,52 @@
+{
+  "stage": "EXP-020",
+  "product": "DGDR_TBOL_AVG_CYL_20090705N_128_IMG",
+  "modality": "bolometric temperature (K), Diviner nadir-only, GDR L3 average",
+  "source_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/2009/cylindrical/img/dgdr_tbol_avg_cyl_20090705n_128_img.img",
+  "label_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/2009/cylindrical/img/dgdr_tbol_avg_cyl_20090705n_128_img.lbl",
+  "label_path": "data\\metadata\\diviner\\DGDR_TBOL_AVG_CYL_20090705N_128_IMG.lbl",
+  "credit": "LRO Diviner Lunar Radiometer Experiment GDR L3 bolometric temperature, LRO-L-DLRE-5-GDR-V1.0, D. A. Paige / UCLA, PDS Geosciences Node",
+  "block_npy": "data\\raw\\reference\\DGDR_TBOL_AVG_CYL_20090705N_128_IMG.rows8915_9035.npy",
+  "window_lat": [
+    19.419999999999998,
+    20.34
+  ],
+  "window_lon": [
+    21.779999999999998,
+    22.270000000000003
+  ],
+  "row0": 8915,
+  "row1_exclusive": 9035,
+  "col0": 2787,
+  "col1_exclusive": 2852,
+  "byte_start": 821606400,
+  "byte_count": 11059200,
+  "bytes_sha256": "94b87025ecf1fb219e53608914c78bc8a5c6abdf814edfdef6d3542a45966f6c",
+  "server_honours_range": true,
+  "grid": {
+    "ppd_lat": 128.0,
+    "ppd_lon": 128.0,
+    "lat_top_deg": 90.0,
+    "lon_left_deg": 0.0,
+    "map_scale_m": 236.901175,
+    "projection": "SIMPLE CYLINDRICAL, planetocentric, area-registered edges from LINE/SAMPLE_PROJECTION_OFFSET",
+    "source": "LINE/SAMPLE_PROJECTION_OFFSET (authoritative)"
+  },
+  "label_summary": {
+    "MAXIMUM_LATITUDE": 90.0,
+    "MINIMUM_LATITUDE": -90.0,
+    "WESTERNMOST_LONGITUDE": 0.0,
+    "EASTERNMOST_LONGITUDE": 360.0
+  },
+  "dn": {
+    "sample_type": "LSB_INTEGER",
+    "bits": 16,
+    "scaling_factor": 0.02,
+    "offset": 0.0,
+    "missing_constant": -32768.0,
+    "missing_fraction": 1.0
+  },
+  "unit": "K",
+  "retrieved_utc": "2026-09-22T19:09:23Z",
+  "preregistration": "docs/stages/EXP-020_multimodality.md Part 1 section 3"
+}

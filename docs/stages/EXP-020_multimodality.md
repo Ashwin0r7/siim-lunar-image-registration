@@ -336,6 +336,68 @@ what it may not), and an **E-nnn** for any defect S0 exposes.
 
 ---
 
+## Amendment A1 — the frozen thermal product has no data over the window, and the replacement rule (2026-09-23, before any registration)
+
+**This amendment is written after the acquisition and before any statistic.**
+Nothing below concerns a matcher, an inlier count or an error; it is a
+data-availability fact and the rule that answers it, both recorded before the
+runner exists.
+
+### A1.1 What happened
+
+Part 1 §3 froze `dgdr_tbol_avg_cyl_20090705n_128_img`, chosen from ODE's
+footprint index — which, for a **global** product, reports the whole Moon and
+therefore cannot say whether a particular window holds data. The fetched block
+over the window is **100 % `MISSING_CONSTANT`**: `missing_fraction 1.0000`,
+recorded in `data/manifests/exp020_diviner_tbol_block.json`, which is kept
+exactly as written.
+
+**A second thing was wrong with that choice, and it is the more interesting
+one.** The `n` suffix marks a **night** map cycle. Night-time bolometric
+temperature over mare is governed by **thermal inertia and rock abundance** —
+a field with no reason to share structure with a reflectance image. Daytime
+bolometric temperature is governed by **insolation on slopes and by albedo**,
+which is the only channel through which a thermal map can carry the same
+scene a reflectance image carries. Part 1 §4.2 predicted S5 NOT MET with
+*starvation* as the failure mode; a night map would have made that prediction
+untestable for a second reason that has nothing to do with scale, and the
+stage would have reported a negative for the wrong cause.
+
+### A1.2 The replacement rule, frozen here
+
+> **The thermal product is the earliest DAY cycle (`d`), in the archive's own
+> date order, whose block over the window holds ≥ 50 % valid samples.**
+
+Day rather than night for the physical reason above, stated before any
+registration; earliest-with-coverage rather than best-looking, so that no
+choice is made on appearance. The probe is a 16-row block per candidate — a
+count of valid samples, not a statistic.
+
+### A1.3 The probe, recorded
+
+| cycle | valid fraction over the window rows | T range (K) |
+|---|---|---|
+| `dgdr_tbol_avg_cyl_20090705n_128_img` (the frozen one) | **0.000** | — |
+| `dgdr_tbol_avg_cyl_20090705d_128_img` | 0.000 | — |
+| **`dgdr_tbol_avg_cyl_20090727d_128_img`** | **0.668** | **322.8 – 335.1** |
+| `dgdr_tbol_avg_cyl_20090823d_128_img` | 0.108 | 367.9 – 368.9 |
+| `dgdr_tbol_avg_cyl_20090920d_128_img` | 0.260 | 382.8 – 384.8 |
+
+**Selected: `dgdr_tbol_avg_cyl_20090727d_128_img`**, the first day cycle
+clearing 50 %. Its block is written to
+`data/manifests/exp020_diviner_tbol_day_block.json`; the night cycle's
+empty-block manifest stays on disk as the record of what was frozen first.
+
+### A1.4 What does not change
+
+S5's bar (**2.0 thermal px = 473.8 m**), its prediction (**NOT MET at 70 %**,
+failure mode *starvation* if the thermal keypoint count is under 50), the
+28 : 1 ratio, the window, the engine and every other criterion are untouched.
+The 33 % of the window that the selected cycle does not cover is carried as
+`NaN` and reported with the cell.
+
+---
+
 ## Part 2
 
 *Empty. Written only after this Part 1 is committed.*

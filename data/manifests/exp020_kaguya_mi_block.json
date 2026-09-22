@@ -1,0 +1,204 @@
+{
+  "stage": "EXP-020",
+  "product": "KAGUYA_MI_MAP_V3_MOSAIC",
+  "tiles": [
+    {
+      "product_id": "MI_MAP_03_N20E021N19E022SC",
+      "lon_dir": "lon021",
+      "label_url": "https://data.darts.isas.jaxa.jp/pub/pds3/sln-l-mi-5-map-v3.0/lon021/data/MI_MAP_03_N20E021N19E022SC.lbl",
+      "bands": 9,
+      "lines": 2048,
+      "samples": 2048,
+      "bits": 16,
+      "sample_type": "MSB_INTEGER",
+      "scaling_factor": 2e-05,
+      "offset": 0.0,
+      "ppd": 2048.0,
+      "lat_top_deg": 20.000244140625,
+      "lon_left_deg": 20.999755859375,
+      "image_start_byte": 16777216,
+      "label_summary": {
+        "MAXIMUM_LATITUDE": 20.0,
+        "MINIMUM_LATITUDE": 19.00048828,
+        "WESTERNMOST_LONGITUDE": 21.0,
+        "EASTERNMOST_LONGITUDE": 21.99951172
+      },
+      "filter_name": "\"MV1\", \"MV2\", \"MV3\", \"MV4\", \"MV5\", \"MN1\", \"MN2\", \"MN3\", \"MN4\"",
+      "center_filter_wavelength_nm": [
+        414.0,
+        749.0,
+        901.0,
+        950.0,
+        1001.0,
+        1000.0,
+        1049.0,
+        1248.0,
+        1548.0
+      ]
+    },
+    {
+      "product_id": "MI_MAP_03_N20E022N19E023SC",
+      "lon_dir": "lon022",
+      "label_url": "https://data.darts.isas.jaxa.jp/pub/pds3/sln-l-mi-5-map-v3.0/lon022/data/MI_MAP_03_N20E022N19E023SC.lbl",
+      "bands": 9,
+      "lines": 2048,
+      "samples": 2048,
+      "bits": 16,
+      "sample_type": "MSB_INTEGER",
+      "scaling_factor": 2e-05,
+      "offset": 0.0,
+      "ppd": 2048.0,
+      "lat_top_deg": 20.000244140625,
+      "lon_left_deg": 21.999755859375,
+      "image_start_byte": 16777216,
+      "label_summary": {
+        "MAXIMUM_LATITUDE": 20.0,
+        "MINIMUM_LATITUDE": 19.00048828,
+        "WESTERNMOST_LONGITUDE": 22.0,
+        "EASTERNMOST_LONGITUDE": 22.99951172
+      },
+      "filter_name": "\"MV1\", \"MV2\", \"MV3\", \"MV4\", \"MV5\", \"MN1\", \"MN2\", \"MN3\", \"MN4\"",
+      "center_filter_wavelength_nm": [
+        414.0,
+        749.0,
+        901.0,
+        950.0,
+        1001.0,
+        1000.0,
+        1049.0,
+        1248.0,
+        1548.0
+      ]
+    },
+    {
+      "product_id": "MI_MAP_03_N21E021N20E022SC",
+      "lon_dir": "lon021",
+      "label_url": "https://data.darts.isas.jaxa.jp/pub/pds3/sln-l-mi-5-map-v3.0/lon021/data/MI_MAP_03_N21E021N20E022SC.lbl",
+      "bands": 9,
+      "lines": 2048,
+      "samples": 2048,
+      "bits": 16,
+      "sample_type": "MSB_INTEGER",
+      "scaling_factor": 2e-05,
+      "offset": 0.0,
+      "ppd": 2048.0,
+      "lat_top_deg": 21.000244140625,
+      "lon_left_deg": 20.999755859375,
+      "image_start_byte": 16777216,
+      "label_summary": {
+        "MAXIMUM_LATITUDE": 21.0,
+        "MINIMUM_LATITUDE": 20.00048828,
+        "WESTERNMOST_LONGITUDE": 21.0,
+        "EASTERNMOST_LONGITUDE": 21.99951172
+      },
+      "filter_name": "\"MV1\", \"MV2\", \"MV3\", \"MV4\", \"MV5\", \"MN1\", \"MN2\", \"MN3\", \"MN4\"",
+      "center_filter_wavelength_nm": [
+        414.0,
+        749.0,
+        901.0,
+        950.0,
+        1001.0,
+        1000.0,
+        1049.0,
+        1248.0,
+        1548.0
+      ]
+    },
+    {
+      "product_id": "MI_MAP_03_N21E022N20E023SC",
+      "lon_dir": "lon022",
+      "label_url": "https://data.darts.isas.jaxa.jp/pub/pds3/sln-l-mi-5-map-v3.0/lon022/data/MI_MAP_03_N21E022N20E023SC.lbl",
+      "bands": 9,
+      "lines": 2048,
+      "samples": 2048,
+      "bits": 16,
+      "sample_type": "MSB_INTEGER",
+      "scaling_factor": 2e-05,
+      "offset": 0.0,
+      "ppd": 2048.0,
+      "lat_top_deg": 21.000244140625,
+      "lon_left_deg": 21.999755859375,
+      "image_start_byte": 16777216,
+      "label_summary": {
+        "MAXIMUM_LATITUDE": 21.0,
+        "MINIMUM_LATITUDE": 20.00048828,
+        "WESTERNMOST_LONGITUDE": 22.0,
+        "EASTERNMOST_LONGITUDE": 22.99951172
+      },
+      "filter_name": "\"MV1\", \"MV2\", \"MV3\", \"MV4\", \"MV5\", \"MN1\", \"MN2\", \"MN3\", \"MN4\"",
+      "center_filter_wavelength_nm": [
+        414.0,
+        749.0,
+        901.0,
+        950.0,
+        1001.0,
+        1000.0,
+        1049.0,
+        1248.0,
+        1548.0
+      ]
+    }
+  ],
+  "tile_sha256": {
+    "MI_MAP_03_N20E021N19E022SC": "46c9805bb272c1238dd8eff3439f76bb4ea493d95fbd66b2af89b8828dac9a98",
+    "MI_MAP_03_N20E022N19E023SC": "08e3742381babf927ace1af0a2da542d01d89abe2eff70b4b56b28c5630b1950",
+    "MI_MAP_03_N21E021N20E022SC": "4b6bf334fb25de19ff7afa51688921d8c2bfb48e16f6adb1db83e03817c4b4de",
+    "MI_MAP_03_N21E022N20E023SC": "88f1be6c2e271cd2190524ee6770fd71a3d9cd5552b4675f8b685f63eeff1ef4"
+  },
+  "credit": "SELENE (Kaguya) Multiband Imager MAP V3.0, SLN-L-MI-5-MAP-V3.0, produced by LISM, distributed by JAXA/ISAS DARTS",
+  "modality": "9-band VIS/NIR reflectance, photometrically normalised to i = 30 deg, e = 0 deg, alpha = 30 deg (LISM ORIGINAL)",
+  "block_npy": "data\\raw\\reference\\kaguya_mi_block_rows142868_144345.npy",
+  "block_shape": [
+    9,
+    1477,
+    596
+  ],
+  "window_lat": [
+    19.52,
+    20.24
+  ],
+  "window_lon": [
+    21.88,
+    22.17
+  ],
+  "row0": 142868,
+  "row1_exclusive": 144345,
+  "col0": 44810,
+  "col1_exclusive": 45406,
+  "grid": {
+    "ppd_lat": 2048.0,
+    "ppd_lon": 2048.0,
+    "lat_top_deg": 90.000244140625,
+    "lon_left_deg": -0.000244140625,
+    "map_scale_m": 14.806323445,
+    "projection": "SIMPLE CYLINDRICAL, planetocentric, pixel-registered",
+    "source": "LINE/SAMPLE_PROJECTION_OFFSET of each tile (authoritative)"
+  },
+  "valid_fraction_per_band": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "bands_nm": [
+    414.0,
+    749.0,
+    901.0,
+    950.0,
+    1001.0,
+    1000.0,
+    1049.0,
+    1248.0,
+    1548.0
+  ],
+  "filter_names": "\"MV1\", \"MV2\", \"MV3\", \"MV4\", \"MV5\", \"MN1\", \"MN2\", \"MN3\", \"MN4\"",
+  "invalid_rule": "sample <= 0 is invalid (reflectance is positive; the label's INVALID_TYPE names saturation/minus/dummy/other without values)",
+  "unit": "reflectance (I/F), photometrically normalised",
+  "retrieved_utc": "2026-09-22T19:16:42Z",
+  "preregistration": "docs/stages/EXP-020_multimodality.md Part 1 section 3"
+}
