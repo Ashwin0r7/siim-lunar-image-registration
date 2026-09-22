@@ -1,0 +1,1737 @@
+{
+  "stage": "EXP-018",
+  "window": "fra_mauro",
+  "spec": {
+    "priority": 2,
+    "arm": "H",
+    "terrain": "hummocky highland ejecta",
+    "centre_lon_lat": [
+      342.53,
+      -3.65
+    ],
+    "name": "Apollo 14 / Fra Mauro"
+  },
+  "separation_km": {
+    "rd03_km": 1378.0134112691928,
+    "rd04_km": 1372.3477805233167
+  },
+  "ode_query": {
+    "pt": "CDRNAC4",
+    "minlat": -3.67,
+    "maxlat": -3.63,
+    "westernlon": 342.51,
+    "easternlon": 342.54999999999995,
+    "limit": 2000
+  },
+  "filters": {
+    "incidence_max": 75.0,
+    "emission_max": 1.8,
+    "swath_contains_target": "corner-map inversion, full tile unclamped",
+    "lr_same_orbit": "one frame, lower emission kept",
+    "ladder": [
+      20.0,
+      25.0,
+      30.0,
+      40.0,
+      50.0,
+      60.0,
+      70.0
+    ],
+    "ladder_half_width": 5.0,
+    "max_frames": 8
+  },
+  "funnel": {
+    "ode_returned": 96,
+    "after_incidence_emission": 32,
+    "after_lr_dedupe": 28,
+    "after_s0_untouched": 28,
+    "admissible": 7
+  },
+  "ladder": [
+    {
+      "rung_deg": 20.0,
+      "pdsid": "nac.m1361298694rc",
+      "incidence_deg": 24.73,
+      "how": "within +/-5 deg"
+    },
+    {
+      "rung_deg": 25.0,
+      "pdsid": "nac.m1282577603lc",
+      "incidence_deg": 26.2,
+      "how": "within +/-5 deg"
+    },
+    {
+      "rung_deg": 30.0,
+      "pdsid": "nac.m1271994785lc",
+      "incidence_deg": 27.04,
+      "how": "within +/-5 deg"
+    },
+    {
+      "rung_deg": 40.0,
+      "pdsid": "nac.m1190828703rc",
+      "incidence_deg": 41.71,
+      "how": "within +/-5 deg"
+    },
+    {
+      "rung_deg": 50.0,
+      "pdsid": "nac.m1228486722lc",
+      "incidence_deg": 43.12,
+      "how": "rung empty within +/-5 deg; nearest unused admissible frame taken instead"
+    },
+    {
+      "rung_deg": 60.0,
+      "pdsid": "nac.m1354252889rc",
+      "incidence_deg": 62.08,
+      "how": "within +/-5 deg"
+    },
+    {
+      "rung_deg": 70.0,
+      "pdsid": "nac.m1193183104rc",
+      "incidence_deg": 14.89,
+      "how": "rung empty within +/-5 deg; nearest unused admissible frame taken instead"
+    }
+  ],
+  "chosen": [
+    {
+      "pdsid": "nac.m1361298694rc",
+      "incidence_deg": 24.73,
+      "emission_deg": 1.16,
+      "map_resolution_m": 0.981,
+      "utc_start": "2020-11-29T14:17:07.134000Z",
+      "admissible": true,
+      "index_incidence_deg": 24.73,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 0.981,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23393,
+        "sample0": 39
+      },
+      "window_detail": {
+        "target_pixel_line": 25440.520448787476,
+        "target_pixel_sample": 1062.8085414417283,
+        "unclamped_line0": 23393,
+        "unclamped_sample0": 39,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.9589228597405437,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1361298694rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rung_deg": 20.0
+    },
+    {
+      "pdsid": "nac.m1282577603lc",
+      "incidence_deg": 26.2,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.82,
+      "utc_start": "2018-06-02T11:18:55.894000Z",
+      "admissible": true,
+      "index_incidence_deg": 26.2,
+      "index_emission_deg": 1.72,
+      "index_resolution_m": 0.82,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 22727,
+        "sample0": 1782
+      },
+      "window_detail": {
+        "target_pixel_line": 24774.777455092506,
+        "target_pixel_sample": 2805.98138008571,
+        "unclamped_line0": 22727,
+        "unclamped_sample0": 1782,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.6575342964315289,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1282577603lc.xml",
+      "jacobian_determinant_sign": -1,
+      "rung_deg": 25.0
+    },
+    {
+      "pdsid": "nac.m1271994785lc",
+      "incidence_deg": 27.04,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.846,
+      "utc_start": "2018-01-30T23:38:37.909000Z",
+      "admissible": true,
+      "index_incidence_deg": 27.04,
+      "index_emission_deg": 1.72,
+      "index_resolution_m": 0.846,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 25494,
+        "sample0": 2999
+      },
+      "window_detail": {
+        "target_pixel_line": 27541.859333465272,
+        "target_pixel_sample": 4022.177031110396,
+        "unclamped_line0": 25494,
+        "unclamped_sample0": 2999,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.704756170130012,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1271994785lc.xml",
+      "jacobian_determinant_sign": -1,
+      "rung_deg": 30.0
+    },
+    {
+      "pdsid": "nac.m1190828703rc",
+      "incidence_deg": 41.71,
+      "emission_deg": 1.16,
+      "map_resolution_m": 0.793,
+      "utc_start": "2015-07-06T13:30:36.164000Z",
+      "admissible": true,
+      "index_incidence_deg": 41.71,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 0.793,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19337,
+        "sample0": 803
+      },
+      "window_detail": {
+        "target_pixel_line": 21384.86149465613,
+        "target_pixel_sample": 1826.8900243669013,
+        "unclamped_line0": 19337,
+        "unclamped_sample0": 803,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.6197148632928402,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1190828703rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rung_deg": 40.0
+    },
+    {
+      "pdsid": "nac.m1228486722lc",
+      "incidence_deg": 43.12,
+      "emission_deg": 1.71,
+      "map_resolution_m": 0.726,
+      "utc_start": "2016-09-14T10:04:15.482000Z",
+      "admissible": true,
+      "index_incidence_deg": 43.12,
+      "index_emission_deg": 1.71,
+      "index_resolution_m": 0.726,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 15408,
+        "sample0": 1741
+      },
+      "window_detail": {
+        "target_pixel_line": 17455.066712049058,
+        "target_pixel_sample": 2764.1429543900704,
+        "unclamped_line0": 15408,
+        "unclamped_sample0": 1741,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": 0.5098290497872014,
+      "lro_flight_direction": "+X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1228486722lc.xml",
+      "jacobian_determinant_sign": 1,
+      "rung_deg": 50.0
+    },
+    {
+      "pdsid": "nac.m1354252889rc",
+      "incidence_deg": 62.08,
+      "emission_deg": 1.17,
+      "map_resolution_m": 0.907,
+      "utc_start": "2020-09-09T01:07:01.745000Z",
+      "admissible": true,
+      "index_incidence_deg": 62.08,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 0.907,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23649,
+        "sample0": 2671
+      },
+      "window_detail": {
+        "target_pixel_line": 25696.901948726638,
+        "target_pixel_sample": 3694.7802428906093,
+        "unclamped_line0": 23649,
+        "unclamped_sample0": 2671,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": 0.8091815674062385,
+      "lro_flight_direction": "+X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1354252889rc.xml",
+      "jacobian_determinant_sign": 1,
+      "rung_deg": 60.0
+    },
+    {
+      "pdsid": "nac.m1193183104rc",
+      "incidence_deg": 14.89,
+      "emission_deg": 1.16,
+      "map_resolution_m": 0.801,
+      "utc_start": "2015-08-02T19:30:37.340000Z",
+      "admissible": true,
+      "index_incidence_deg": 14.89,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 0.801,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 26742,
+        "sample0": 2512
+      },
+      "window_detail": {
+        "target_pixel_line": 28789.717855463303,
+        "target_pixel_sample": 3535.231079002797,
+        "unclamped_line0": 26742,
+        "unclamped_sample0": 2512,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.6201400447836446,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1193183104rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rung_deg": 70.0
+    }
+  ],
+  "candidates": [
+    {
+      "pdsid": "nac.m102265088lc",
+      "incidence_deg": 76.23,
+      "emission_deg": 13.68,
+      "map_resolution_m": 1.074,
+      "utc_start": "2009-07-15T02:43:41.360000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m102265088rc",
+      "incidence_deg": 76.4,
+      "emission_deg": 10.76,
+      "map_resolution_m": 1.067,
+      "utc_start": "2009-07-15T02:43:41.360000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m104627085lc",
+      "incidence_deg": 50.38,
+      "emission_deg": 7.68,
+      "map_resolution_m": 1.079,
+      "utc_start": "2009-08-11T10:50:18.074000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m104634241lc",
+      "incidence_deg": 51.38,
+      "emission_deg": 11.34,
+      "map_resolution_m": 1.087,
+      "utc_start": "2009-08-11T12:49:34.546000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m106985205lc",
+      "incidence_deg": 23.82,
+      "emission_deg": 12.31,
+      "map_resolution_m": 1.144,
+      "utc_start": "2009-09-07T17:52:18.727000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m109345337lc",
+      "incidence_deg": 3.77,
+      "emission_deg": 12.59,
+      "map_resolution_m": 0.525,
+      "utc_start": "2009-10-05T01:27:49.850000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m109345337rc",
+      "incidence_deg": 3.83,
+      "emission_deg": 15.43,
+      "map_resolution_m": 0.528,
+      "utc_start": "2009-10-05T01:27:49.850000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m111708164lc",
+      "incidence_deg": 29.87,
+      "emission_deg": 3.75,
+      "map_resolution_m": 0.511,
+      "utc_start": "2009-11-01T09:48:16.873000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m175388134rc",
+      "incidence_deg": 44.91,
+      "emission_deg": 15.59,
+      "map_resolution_m": 0.417,
+      "utc_start": "2011-11-08T10:41:07.077000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m114064206lc",
+      "incidence_deg": 57.86,
+      "emission_deg": 16.7,
+      "map_resolution_m": 0.525,
+      "utc_start": "2009-11-28T16:15:38.876000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m114064206rc",
+      "incidence_deg": 57.94,
+      "emission_deg": 19.53,
+      "map_resolution_m": 0.528,
+      "utc_start": "2009-11-28T16:15:38.876000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m114071006lc",
+      "incidence_deg": 56.94,
+      "emission_deg": 22.24,
+      "map_resolution_m": 0.534,
+      "utc_start": "2009-11-28T18:08:59.186000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m116425798lc",
+      "incidence_deg": 85.43,
+      "emission_deg": 5.28,
+      "map_resolution_m": 0.504,
+      "utc_start": "2009-12-26T00:15:31.325000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m116425798rc",
+      "incidence_deg": 85.51,
+      "emission_deg": 8.11,
+      "map_resolution_m": 0.505,
+      "utc_start": "2009-12-26T00:15:31.325000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m177745319rc",
+      "incidence_deg": 72.89,
+      "emission_deg": 10.51,
+      "map_resolution_m": 0.859,
+      "utc_start": "2011-12-05T17:27:32.134000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1404729066lc",
+      "incidence_deg": 19.56,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.792,
+      "utc_start": "2022-04-16T06:16:39.481000Z",
+      "admissible": false,
+      "rejected_by": "L/R of one orbit: nac.m1404729066rc kept (lower emission)"
+    },
+    {
+      "pdsid": "nac.m1404729066rc",
+      "incidence_deg": 19.68,
+      "emission_deg": 1.16,
+      "map_resolution_m": 0.79,
+      "utc_start": "2022-04-16T06:16:39.481000Z",
+      "admissible": false,
+      "index_incidence_deg": 19.68,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 0.79,
+      "lines_samples": [
+        48128,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 26757,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 28804.95318415552,
+        "target_pixel_sample": 974.3790745458166,
+        "unclamped_line0": 26757,
+        "unclamped_sample0": -49,
+        "clamped_lines": 0,
+        "clamped_samples": 49,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": 0.6106112811885512,
+      "lro_flight_direction": "+X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1404729066rc.xml",
+      "jacobian_determinant_sign": 1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m1387126865rc",
+      "incidence_deg": 21.1,
+      "emission_deg": 1.17,
+      "map_resolution_m": 1.011,
+      "utc_start": "2021-09-24T12:46:37.820000Z",
+      "admissible": false,
+      "index_incidence_deg": 21.1,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 1.011,
+      "lines_samples": [
+        11264,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 7168,
+        "sample0": 2695
+      },
+      "window_detail": {
+        "target_pixel_line": 9441.128747856423,
+        "target_pixel_sample": 3718.407646320142,
+        "unclamped_line0": 7394,
+        "unclamped_sample0": 2695,
+        "clamped_lines": -226,
+        "clamped_samples": 0,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": 1.0653322105922982,
+      "lro_flight_direction": "+X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1387126865rc.xml",
+      "jacobian_determinant_sign": 1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m1382430835lc",
+      "incidence_deg": 76.95,
+      "emission_deg": 1.74,
+      "map_resolution_m": 2.049,
+      "utc_start": "2021-08-01T04:19:29.154000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1361298694rc",
+      "incidence_deg": 24.73,
+      "emission_deg": 1.16,
+      "map_resolution_m": 0.981,
+      "utc_start": "2020-11-29T14:17:07.134000Z",
+      "admissible": true,
+      "index_incidence_deg": 24.73,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 0.981,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23393,
+        "sample0": 39
+      },
+      "window_detail": {
+        "target_pixel_line": 25440.520448787476,
+        "target_pixel_sample": 1062.8085414417283,
+        "unclamped_line0": 23393,
+        "unclamped_sample0": 39,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.9589228597405437,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1361298694rc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m1354252889rc",
+      "incidence_deg": 62.08,
+      "emission_deg": 1.17,
+      "map_resolution_m": 0.907,
+      "utc_start": "2020-09-09T01:07:01.745000Z",
+      "admissible": true,
+      "index_incidence_deg": 62.08,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 0.907,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23649,
+        "sample0": 2671
+      },
+      "window_detail": {
+        "target_pixel_line": 25696.901948726638,
+        "target_pixel_sample": 3694.7802428906093,
+        "unclamped_line0": 23649,
+        "unclamped_sample0": 2671,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": 0.8091815674062385,
+      "lro_flight_direction": "+X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1354252889rc.xml",
+      "jacobian_determinant_sign": 1
+    },
+    {
+      "pdsid": "nac.m1276697229lc",
+      "incidence_deg": 84.07,
+      "emission_deg": 1.72,
+      "map_resolution_m": 1.687,
+      "utc_start": "2018-03-26T09:52:43.153000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1276697229rc",
+      "incidence_deg": 84.2,
+      "emission_deg": 1.16,
+      "map_resolution_m": 1.685,
+      "utc_start": "2018-03-26T09:52:43.153000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1277874875lc",
+      "incidence_deg": 81.58,
+      "emission_deg": 1.7,
+      "map_resolution_m": 0.834,
+      "utc_start": "2018-04-09T01:00:08.294000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1271994785lc",
+      "incidence_deg": 27.04,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.846,
+      "utc_start": "2018-01-30T23:38:37.909000Z",
+      "admissible": true,
+      "index_incidence_deg": 27.04,
+      "index_emission_deg": 1.72,
+      "index_resolution_m": 0.846,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 25494,
+        "sample0": 2999
+      },
+      "window_detail": {
+        "target_pixel_line": 27541.859333465272,
+        "target_pixel_sample": 4022.177031110396,
+        "unclamped_line0": 25494,
+        "unclamped_sample0": 2999,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.704756170130012,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1271994785lc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m1282577603lc",
+      "incidence_deg": 26.2,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.82,
+      "utc_start": "2018-06-02T11:18:55.894000Z",
+      "admissible": true,
+      "index_incidence_deg": 26.2,
+      "index_emission_deg": 1.72,
+      "index_resolution_m": 0.82,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 22727,
+        "sample0": 1782
+      },
+      "window_detail": {
+        "target_pixel_line": 24774.777455092506,
+        "target_pixel_sample": 2805.98138008571,
+        "unclamped_line0": 22727,
+        "unclamped_sample0": 1782,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.6575342964315289,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1282577603lc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m1254361175lc",
+      "incidence_deg": 6.66,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.768,
+      "utc_start": "2017-07-10T21:25:08.056000Z",
+      "admissible": false,
+      "rejected_by": "L/R of one orbit: nac.m1254361175rc kept (lower emission)"
+    },
+    {
+      "pdsid": "nac.m1254361175rc",
+      "incidence_deg": 6.76,
+      "emission_deg": 1.15,
+      "map_resolution_m": 0.767,
+      "utc_start": "2017-07-10T21:25:08.056000Z",
+      "admissible": false,
+      "index_incidence_deg": 6.76,
+      "index_emission_deg": 1.15,
+      "index_resolution_m": 0.767,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19741,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 21788.79082774026,
+        "target_pixel_sample": 809.8534675587946,
+        "unclamped_line0": 19741,
+        "unclamped_sample0": -214,
+        "clamped_lines": 0,
+        "clamped_samples": 214,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": -0.6205410409074876,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1254361175rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m1323712937rc",
+      "incidence_deg": 73.04,
+      "emission_deg": 1.17,
+      "map_resolution_m": 1.917,
+      "utc_start": "2019-09-21T13:47:50.450000Z",
+      "admissible": false,
+      "index_incidence_deg": 73.04,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 1.917,
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 34871,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 36918.74636212932,
+        "target_pixel_sample": 2397.200589427291,
+        "unclamped_line0": 34871,
+        "unclamped_sample0": 1374,
+        "clamped_lines": 0,
+        "clamped_samples": -890,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": 3.76912119837026,
+      "lro_flight_direction": "+X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1323712937rc.xml",
+      "jacobian_determinant_sign": 1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m1247299730lc",
+      "incidence_deg": 87.67,
+      "emission_deg": 21.47,
+      "map_resolution_m": 1.552,
+      "utc_start": "2017-04-20T03:54:23.453000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1247306764rc",
+      "incidence_deg": 88.55,
+      "emission_deg": 2.75,
+      "map_resolution_m": 1.453,
+      "utc_start": "2017-04-20T05:51:37.298000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1241423438lc",
+      "incidence_deg": 20.89,
+      "emission_deg": 1.94,
+      "map_resolution_m": 1.008,
+      "utc_start": "2017-02-11T03:36:10.158000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1241423438rc",
+      "incidence_deg": 21.05,
+      "emission_deg": 0.98,
+      "map_resolution_m": 1.006,
+      "utc_start": "2017-02-11T03:36:10.158000Z",
+      "admissible": false,
+      "index_incidence_deg": 21.05,
+      "index_emission_deg": 0.98,
+      "index_resolution_m": 1.006,
+      "lines_samples": [
+        45056,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 12744,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 14791.20009782772,
+        "target_pixel_sample": 504.2868386224242,
+        "unclamped_line0": 12744,
+        "unclamped_sample0": -519,
+        "clamped_lines": 0,
+        "clamped_samples": 519,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": -1.001541617764785,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1241423438rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m1307260604rc",
+      "incidence_deg": 91.6,
+      "emission_deg": 1.17,
+      "map_resolution_m": 2.004,
+      "utc_start": "2019-03-15T03:42:17.527000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1228486722lc",
+      "incidence_deg": 43.12,
+      "emission_deg": 1.71,
+      "map_resolution_m": 0.726,
+      "utc_start": "2016-09-14T10:04:15.482000Z",
+      "admissible": true,
+      "index_incidence_deg": 43.12,
+      "index_emission_deg": 1.71,
+      "index_resolution_m": 0.726,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 15408,
+        "sample0": 1741
+      },
+      "window_detail": {
+        "target_pixel_line": 17455.066712049058,
+        "target_pixel_sample": 2764.1429543900704,
+        "unclamped_line0": 15408,
+        "unclamped_sample0": 1741,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": 0.5098290497872014,
+      "lro_flight_direction": "+X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1228486722lc.xml",
+      "jacobian_determinant_sign": 1
+    },
+    {
+      "pdsid": "nac.m1293156688rc",
+      "incidence_deg": 81.78,
+      "emission_deg": 1.17,
+      "map_resolution_m": 1.823,
+      "utc_start": "2018-10-02T21:57:02.125000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1214385124rc",
+      "incidence_deg": 123.49,
+      "emission_deg": 53.03,
+      "map_resolution_m": 2.725,
+      "utc_start": "2016-04-04T04:57:37.582000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1216734177rc",
+      "incidence_deg": 95.13,
+      "emission_deg": 45.11,
+      "map_resolution_m": 2.285,
+      "utc_start": "2016-05-01T09:28:30.419000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1212029075rc",
+      "incidence_deg": 151.22,
+      "emission_deg": 48.24,
+      "map_resolution_m": 2.464,
+      "utc_start": "2016-03-07T22:30:08.972000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1200214031rc",
+      "incidence_deg": 72.34,
+      "emission_deg": 64.54,
+      "map_resolution_m": 2.11,
+      "utc_start": "2015-10-23T04:32:44.247000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1203810997rc",
+      "incidence_deg": 74.67,
+      "emission_deg": 67.66,
+      "map_resolution_m": 2.531,
+      "utc_start": "2015-12-03T19:42:09.734000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1190828703rc",
+      "incidence_deg": 41.71,
+      "emission_deg": 1.16,
+      "map_resolution_m": 0.793,
+      "utc_start": "2015-07-06T13:30:36.164000Z",
+      "admissible": true,
+      "index_incidence_deg": 41.71,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 0.793,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19337,
+        "sample0": 803
+      },
+      "window_detail": {
+        "target_pixel_line": 21384.86149465613,
+        "target_pixel_sample": 1826.8900243669013,
+        "unclamped_line0": 19337,
+        "unclamped_sample0": 803,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.6197148632928402,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1190828703rc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m1193183104rc",
+      "incidence_deg": 14.89,
+      "emission_deg": 1.16,
+      "map_resolution_m": 0.801,
+      "utc_start": "2015-08-02T19:30:37.340000Z",
+      "admissible": true,
+      "index_incidence_deg": 14.89,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 0.801,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 26742,
+        "sample0": 2512
+      },
+      "window_detail": {
+        "target_pixel_line": 28789.717855463303,
+        "target_pixel_sample": 3535.231079002797,
+        "unclamped_line0": 26742,
+        "unclamped_sample0": 2512,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.6201400447836446,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/fra_mauro/nac.m1193183104rc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m1195502319rc",
+      "incidence_deg": 17.53,
+      "emission_deg": 66.68,
+      "map_resolution_m": 2.238,
+      "utc_start": "2015-08-29T15:44:12.480000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1106038747lc",
+      "incidence_deg": 40.25,
+      "emission_deg": 1.74,
+      "map_resolution_m": 0.883,
+      "utc_start": "2012-10-28T04:44:39.803000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 342.53, lat -3.65) is outside the frame: it solves to normalised (line 0.1398, sample -0.1020), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1116642521rc",
+      "incidence_deg": 13.63,
+      "emission_deg": 4.34,
+      "map_resolution_m": 0.884,
+      "utc_start": "2013-02-27T22:14:14.526000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1136669722lc",
+      "incidence_deg": 38.17,
+      "emission_deg": 1.73,
+      "map_resolution_m": 0.958,
+      "utc_start": "2013-10-17T17:20:55.097000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1017/DATA/ESM/2013290/NAC/M1136669722LC.xml"
+    },
+    {
+      "pdsid": "nac.m1162576153rc",
+      "incidence_deg": 16.65,
+      "emission_deg": 1.16,
+      "map_resolution_m": 0.953,
+      "utc_start": "2014-08-13T13:34:46.093000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1020/DATA/ESM/2014225/NAC/M1162576153RC.xml"
+    },
+    {
+      "pdsid": "nac.m1164931338lc",
+      "incidence_deg": 10.97,
+      "emission_deg": 1.74,
+      "map_resolution_m": 0.963,
+      "utc_start": "2014-09-09T19:47:51.417000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1020/DATA/ESM/2014252/NAC/M1164931338LC.xml"
+    },
+    {
+      "pdsid": "nac.m188342770rc",
+      "incidence_deg": 21.09,
+      "emission_deg": 34.94,
+      "map_resolution_m": 1.266,
+      "utc_start": "2012-04-06T09:11:42.892000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m188357066rc",
+      "incidence_deg": 19.09,
+      "emission_deg": 1.18,
+      "map_resolution_m": 1.052,
+      "utc_start": "2012-04-06T13:09:59.447000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1011/DATA/SCI/2012097/NAC/M188357066RC.xml"
+    },
+    {
+      "pdsid": "nac.m188371363lc",
+      "incidence_deg": 17.1,
+      "emission_deg": 33.14,
+      "map_resolution_m": 1.246,
+      "utc_start": "2012-04-06T17:08:15.895000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1096608496lc",
+      "incidence_deg": 67.65,
+      "emission_deg": 1.74,
+      "map_resolution_m": 1.026,
+      "utc_start": "2012-07-11T01:13:49.207000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1012/DATA/SCI/2012193/NAC/M1096608496LC.xml"
+    },
+    {
+      "pdsid": "nac.m190715993lc",
+      "incidence_deg": 45.6,
+      "emission_deg": 1.76,
+      "map_resolution_m": 0.79,
+      "utc_start": "2012-05-03T20:25:26.333000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1011/DATA/SCI/2012124/NAC/M190715993LC.xml"
+    },
+    {
+      "pdsid": "nac.m168319885lc",
+      "incidence_deg": 37.34,
+      "emission_deg": 22.26,
+      "map_resolution_m": 0.428,
+      "utc_start": "2011-08-18T15:16:58.292000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m168319885rc",
+      "incidence_deg": 37.38,
+      "emission_deg": 25.06,
+      "map_resolution_m": 0.431,
+      "utc_start": "2011-08-18T15:16:58.292000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1101324207rc",
+      "incidence_deg": 14.57,
+      "emission_deg": 1.17,
+      "map_resolution_m": 0.889,
+      "utc_start": "2012-09-03T15:08:59.690000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1012/DATA/SCI/2012247/NAC/M1101324207RC.xml"
+    },
+    {
+      "pdsid": "nac.m157709871lc",
+      "incidence_deg": 23.17,
+      "emission_deg": 1.68,
+      "map_resolution_m": 0.468,
+      "utc_start": "2011-04-17T20:03:23.661000Z",
+      "admissible": false,
+      "rejected_by": "L/R of one orbit: nac.m157709871rc kept (lower emission)"
+    },
+    {
+      "pdsid": "nac.m157709871rc",
+      "incidence_deg": 23.23,
+      "emission_deg": 1.13,
+      "map_resolution_m": 0.467,
+      "utc_start": "2011-04-17T20:03:23.661000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1007/DATA/SCI/2011107/NAC/M157709871RC.xml"
+    },
+    {
+      "pdsid": "nac.m170674592lc",
+      "incidence_deg": 10.29,
+      "emission_deg": 2.81,
+      "map_resolution_m": 0.494,
+      "utc_start": "2011-09-14T21:22:04.858000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m148278998lc",
+      "incidence_deg": 88.51,
+      "emission_deg": 10.28,
+      "map_resolution_m": 0.821,
+      "utc_start": "2010-12-29T16:22:10.935000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m148278998rc",
+      "incidence_deg": 88.57,
+      "emission_deg": 13.09,
+      "map_resolution_m": 0.824,
+      "utc_start": "2010-12-29T16:22:10.935000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m131765772rc",
+      "incidence_deg": 81.84,
+      "emission_deg": 1.97,
+      "map_resolution_m": 0.473,
+      "utc_start": "2010-06-21T13:21:44.517000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m140019848rc",
+      "incidence_deg": 5.29,
+      "emission_deg": 1.14,
+      "map_resolution_m": 0.499,
+      "utc_start": "2010-09-25T02:09:40.731000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1005/DATA/SCI/2010268/NAC/M140019848RC.xml"
+    },
+    {
+      "pdsid": "nac.m132943081rc",
+      "incidence_deg": 84.47,
+      "emission_deg": 3.19,
+      "map_resolution_m": 0.5,
+      "utc_start": "2010-07-05T04:23:33.734000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m124687860rc",
+      "incidence_deg": 5.97,
+      "emission_deg": 1.92,
+      "map_resolution_m": 0.484,
+      "utc_start": "2010-03-31T15:16:34.186000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m150633128lc",
+      "incidence_deg": 59.9,
+      "emission_deg": 17.21,
+      "map_resolution_m": 0.489,
+      "utc_start": "2011-01-25T22:17:41.035000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m150633128rc",
+      "incidence_deg": 59.97,
+      "emission_deg": 14.39,
+      "map_resolution_m": 0.486,
+      "utc_start": "2011-01-25T22:17:41.035000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m150639913lc",
+      "incidence_deg": 60.83,
+      "emission_deg": 25.42,
+      "map_resolution_m": 0.522,
+      "utc_start": "2011-01-26T00:10:45.756000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m150639913rc",
+      "incidence_deg": 60.91,
+      "emission_deg": 28.25,
+      "map_resolution_m": 0.527,
+      "utc_start": "2011-01-26T00:10:45.756000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m117609776rc",
+      "incidence_deg": 80.85,
+      "emission_deg": 1.74,
+      "map_resolution_m": 0.478,
+      "utc_start": "2010-01-08T17:08:29.552000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m127049821rc",
+      "incidence_deg": 29.12,
+      "emission_deg": 14.55,
+      "map_resolution_m": 0.488,
+      "utc_start": "2010-04-27T23:22:35.072000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m152994220rc",
+      "incidence_deg": 32.51,
+      "emission_deg": 1.13,
+      "map_resolution_m": 0.472,
+      "utc_start": "2011-02-22T06:09:13.079000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1006/DATA/SCI/2011053/NAC/M152994220RC.xml"
+    },
+    {
+      "pdsid": "nac.m119971387rc",
+      "incidence_deg": 53.37,
+      "emission_deg": 12.11,
+      "map_resolution_m": 0.487,
+      "utc_start": "2010-02-05T01:08:40.888000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m129404545rc",
+      "incidence_deg": 55.93,
+      "emission_deg": 14.52,
+      "map_resolution_m": 0.489,
+      "utc_start": "2010-05-25T05:27:58.143000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m162426054lc",
+      "incidence_deg": 76.07,
+      "emission_deg": 1.68,
+      "map_resolution_m": 0.477,
+      "utc_start": "2011-06-11T10:06:26.605000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m162426054rc",
+      "incidence_deg": 76.13,
+      "emission_deg": 1.13,
+      "map_resolution_m": 0.476,
+      "utc_start": "2011-06-11T10:06:26.605000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1452805616rc",
+      "incidence_deg": 72.27,
+      "emission_deg": 1.16,
+      "map_resolution_m": 1.92,
+      "utc_start": "2023-10-24T16:52:28.509000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1057B/DATA/ESM5/2023297/NAC/M1452805616RC.xml"
+    },
+    {
+      "pdsid": "nac.m1463354686lc",
+      "incidence_deg": 27.24,
+      "emission_deg": 1.12,
+      "map_resolution_m": 0.746,
+      "utc_start": "2024-02-23T19:10:18.703000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1058C/DATA/ESM5/2024054/NAC/M1463354686LC.xml"
+    },
+    {
+      "pdsid": "nac.m1463354686rc",
+      "incidence_deg": 27.35,
+      "emission_deg": 1.74,
+      "map_resolution_m": 0.745,
+      "utc_start": "2024-02-23T19:10:18.703000Z",
+      "admissible": false,
+      "rejected_by": "L/R of one orbit: nac.m1463354686lc kept (lower emission)"
+    },
+    {
+      "pdsid": "nac.m1468032206lc",
+      "incidence_deg": 87.22,
+      "emission_deg": 27.28,
+      "map_resolution_m": 1.76,
+      "utc_start": "2024-04-17T22:28:59.113000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1468032206rc",
+      "incidence_deg": 87.37,
+      "emission_deg": 30.18,
+      "map_resolution_m": 1.784,
+      "utc_start": "2024-04-17T22:28:59.113000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1480925501lc",
+      "incidence_deg": 64.74,
+      "emission_deg": 8.36,
+      "map_resolution_m": 0.875,
+      "utc_start": "2024-09-14T03:57:13.879000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1497312287lc",
+      "incidence_deg": 83.56,
+      "emission_deg": 15.93,
+      "map_resolution_m": 1.994,
+      "utc_start": "2025-03-22T19:50:20.650000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1509018771lc",
+      "incidence_deg": 61.7,
+      "emission_deg": 11.77,
+      "map_resolution_m": 0.979,
+      "utc_start": "2025-08-05T07:38:23.161000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1509018771rc",
+      "incidence_deg": 61.85,
+      "emission_deg": 14.68,
+      "map_resolution_m": 0.983,
+      "utc_start": "2025-08-05T07:38:23.161000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1519557937lc",
+      "incidence_deg": 14.83,
+      "emission_deg": 3.93,
+      "map_resolution_m": 0.694,
+      "utc_start": "2025-12-05T07:11:10.126000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1519557937rc",
+      "incidence_deg": 14.93,
+      "emission_deg": 6.79,
+      "map_resolution_m": 0.695,
+      "utc_start": "2025-12-05T07:11:10.126000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1521899682lc",
+      "incidence_deg": 45.12,
+      "emission_deg": 1.71,
+      "map_resolution_m": 0.709,
+      "utc_start": "2026-01-01T09:40:14.881000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1066A/DATA/ESM6/2026001/NAC/M1521899682LC.xml"
+    },
+    {
+      "pdsid": "nac.m1525402249lc",
+      "incidence_deg": 87.54,
+      "emission_deg": 10.03,
+      "map_resolution_m": 0.866,
+      "utc_start": "2026-02-10T22:36:21.884000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1525402249rc",
+      "incidence_deg": 87.68,
+      "emission_deg": 7.15,
+      "map_resolution_m": 0.861,
+      "utc_start": "2026-02-10T22:36:21.884000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1527744289lc",
+      "incidence_deg": 57.64,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.843,
+      "utc_start": "2026-03-10T01:10:22.289000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1066C/DATA/ESM6/2026069/NAC/M1527744289LC.xml"
+    },
+    {
+      "pdsid": "nac.m1534756366lc",
+      "incidence_deg": 32.56,
+      "emission_deg": 22.7,
+      "map_resolution_m": 0.888,
+      "utc_start": "2026-05-30T04:58:18.653000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1534756366rc",
+      "incidence_deg": 32.71,
+      "emission_deg": 25.6,
+      "map_resolution_m": 0.897,
+      "utc_start": "2026-05-30T04:58:18.653000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1534763380lc",
+      "incidence_deg": 31.62,
+      "emission_deg": 0.6,
+      "map_resolution_m": 0.821,
+      "utc_start": "2026-05-30T06:55:12.774000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: nac.m1534763380lc: unexpected archive root in 'https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1067C/DATA/ESM6/2026150/NAC/M1534763380LC.IMG'; refusing to guess the volume layout"
+    },
+    {
+      "pdsid": "nac.m1534763380rc",
+      "incidence_deg": 31.74,
+      "emission_deg": 3.48,
+      "map_resolution_m": 0.821,
+      "utc_start": "2026-05-30T06:55:12.774000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    }
+  ],
+  "s0_untouched": {
+    "git_head": "5486664835a0f94c2e4e24a6637029fd53d89c30",
+    "n_files_scanned": 501,
+    "n_files_read": 420,
+    "hits_per_id": {
+      "nac.m1404729066rc": 0,
+      "nac.m1387126865rc": 0,
+      "nac.m1361298694rc": 0,
+      "nac.m1354252889rc": 0,
+      "nac.m1271994785lc": 0,
+      "nac.m1282577603lc": 0,
+      "nac.m1254361175rc": 0,
+      "nac.m1323712937rc": 0,
+      "nac.m1241423438rc": 0,
+      "nac.m1228486722lc": 0,
+      "nac.m1190828703rc": 0,
+      "nac.m1193183104rc": 0,
+      "nac.m1106038747lc": 0,
+      "nac.m1136669722lc": 0,
+      "nac.m1162576153rc": 0,
+      "nac.m1164931338lc": 0,
+      "nac.m188357066rc": 0,
+      "nac.m1096608496lc": 0,
+      "nac.m190715993lc": 0,
+      "nac.m1101324207rc": 0,
+      "nac.m157709871rc": 0,
+      "nac.m140019848rc": 0,
+      "nac.m152994220rc": 0,
+      "nac.m1452805616rc": 0,
+      "nac.m1463354686lc": 0,
+      "nac.m1521899682lc": 0,
+      "nac.m1527744289lc": 0,
+      "nac.m1534763380lc": 0
+    },
+    "untouched": [
+      "nac.m1404729066rc",
+      "nac.m1387126865rc",
+      "nac.m1361298694rc",
+      "nac.m1354252889rc",
+      "nac.m1271994785lc",
+      "nac.m1282577603lc",
+      "nac.m1254361175rc",
+      "nac.m1323712937rc",
+      "nac.m1241423438rc",
+      "nac.m1228486722lc",
+      "nac.m1190828703rc",
+      "nac.m1193183104rc",
+      "nac.m1106038747lc",
+      "nac.m1136669722lc",
+      "nac.m1162576153rc",
+      "nac.m1164931338lc",
+      "nac.m188357066rc",
+      "nac.m1096608496lc",
+      "nac.m190715993lc",
+      "nac.m1101324207rc",
+      "nac.m157709871rc",
+      "nac.m140019848rc",
+      "nac.m152994220rc",
+      "nac.m1452805616rc",
+      "nac.m1463354686lc",
+      "nac.m1521899682lc",
+      "nac.m1527744289lc",
+      "nac.m1534763380lc"
+    ],
+    "dropped": []
+  },
+  "s5_from_geometry": {
+    "n_lt15": 8,
+    "n_15to30": 9,
+    "n_ge30": 4,
+    "n_ge40": 1,
+    "n_total": 21,
+    "n_frames": 7,
+    "n_confirmed_triangles": 35,
+    "min_incidence_deg": 14.89,
+    "max_incidence_deg": 62.08,
+    "checks": {
+      "n_lt15": true,
+      "n_ge30": false,
+      "n_ge40": false,
+      "n_total": true,
+      "one_frame_le_30": true,
+      "one_frame_ge_60": true,
+      "at_least_one_triangle": true,
+      "at_most_8_frames": true
+    },
+    "met": false,
+    "minima": {
+      "n_lt15": 5,
+      "n_ge30": 5,
+      "n_ge40": 3,
+      "n_total": 12,
+      "max_frames": 8,
+      "one_frame_incidence_le": 30.0,
+      "one_frame_incidence_ge": 60.0
+    },
+    "confirmed_pairs": [
+      {
+        "edge": "nac.m1193183104rc -> nac.m1361298694rc",
+        "delta_incidence_deg": 9.84
+      },
+      {
+        "edge": "nac.m1193183104rc -> nac.m1282577603lc",
+        "delta_incidence_deg": 11.309999999999999
+      },
+      {
+        "edge": "nac.m1193183104rc -> nac.m1271994785lc",
+        "delta_incidence_deg": 12.149999999999999
+      },
+      {
+        "edge": "nac.m1193183104rc -> nac.m1190828703rc",
+        "delta_incidence_deg": 26.82
+      },
+      {
+        "edge": "nac.m1193183104rc -> nac.m1228486722lc",
+        "delta_incidence_deg": 28.229999999999997
+      },
+      {
+        "edge": "nac.m1193183104rc -> nac.m1354252889rc",
+        "delta_incidence_deg": 47.19
+      },
+      {
+        "edge": "nac.m1361298694rc -> nac.m1282577603lc",
+        "delta_incidence_deg": 1.4699999999999989
+      },
+      {
+        "edge": "nac.m1361298694rc -> nac.m1271994785lc",
+        "delta_incidence_deg": 2.3099999999999987
+      },
+      {
+        "edge": "nac.m1361298694rc -> nac.m1190828703rc",
+        "delta_incidence_deg": 16.98
+      },
+      {
+        "edge": "nac.m1361298694rc -> nac.m1228486722lc",
+        "delta_incidence_deg": 18.389999999999997
+      },
+      {
+        "edge": "nac.m1361298694rc -> nac.m1354252889rc",
+        "delta_incidence_deg": 37.349999999999994
+      },
+      {
+        "edge": "nac.m1282577603lc -> nac.m1271994785lc",
+        "delta_incidence_deg": 0.8399999999999999
+      },
+      {
+        "edge": "nac.m1282577603lc -> nac.m1190828703rc",
+        "delta_incidence_deg": 15.510000000000002
+      },
+      {
+        "edge": "nac.m1282577603lc -> nac.m1228486722lc",
+        "delta_incidence_deg": 16.919999999999998
+      },
+      {
+        "edge": "nac.m1282577603lc -> nac.m1354252889rc",
+        "delta_incidence_deg": 35.879999999999995
+      },
+      {
+        "edge": "nac.m1271994785lc -> nac.m1190828703rc",
+        "delta_incidence_deg": 14.670000000000002
+      },
+      {
+        "edge": "nac.m1271994785lc -> nac.m1228486722lc",
+        "delta_incidence_deg": 16.08
+      },
+      {
+        "edge": "nac.m1271994785lc -> nac.m1354252889rc",
+        "delta_incidence_deg": 35.04
+      },
+      {
+        "edge": "nac.m1190828703rc -> nac.m1228486722lc",
+        "delta_incidence_deg": 1.4099999999999966
+      },
+      {
+        "edge": "nac.m1190828703rc -> nac.m1354252889rc",
+        "delta_incidence_deg": 20.369999999999997
+      },
+      {
+        "edge": "nac.m1228486722lc -> nac.m1354252889rc",
+        "delta_incidence_deg": 18.96
+      }
+    ],
+    "unconfirmed": []
+  },
+  "data_read": "ODE metadata, PDS4 labels and index rows only; NO image byte",
+  "generated_utc": "2026-09-21T19:07:06Z",
+  "runtime_s": 809.1
+}

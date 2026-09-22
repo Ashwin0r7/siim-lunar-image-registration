@@ -1,0 +1,31 @@
+﻿== EXP-018 census: Apollo 16 / Descartes (15.5, -8.97) priority 1 arm H ==
+separation from RD-03 901 km, RD-04 890 km
+
+ODE returned 56 CDRNAC4 products intersecting the 0.04 deg box
+
+S0(a): 477 files scanned, 17 of 17 candidates untouched, dropped []
+
+fetching labels + index rows for 17 candidates ...
+   nac.m106777343rc: inc 28.38 em 1.18 res 1.098 -> ADMISSIBLE
+   nac.m109134835lc: inc 7.64 em 1.71 res 0.517 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m113853974rc: inc 54.72 em 0.12 res 0.507 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1282366833rc: inc 30.24 em 1.16 res 0.785 -> ValueError: (lon 15.5, lat -8.97) is outside the frame: it solves to normalised 
+   nac.m1297638087rc: inc 28.35 em 1.16 res 0.799 -> ValueError: (lon 15.5, lat -8.97) is outside the frame: it solves to normalised 
+   nac.m1182366809lc: inc 41.79 em 1.73 res 0.885 -> ADMISSIBLE
+   nac.m1114063911lc: inc 43.88 em 0.33 res 0.876 -> ADMISSIBLE
+   nac.m1105824495rc: inc 38.02 em 1.17 res 0.921 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1108182629lc: inc 65.27 em 1.73 res 0.943 -> ADMISSIBLE
+   nac.m1136456506rc: inc 35.95 em 1.2 res 0.903 -> ADMISSIBLE
+   nac.m1164718010rc: inc 11.26 em 1.17 res 0.706 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m181065865rc: inc 67.54 em 1.17 res 0.963 -> ValueError: (lon 15.5, lat -8.97) is outside the frame: it solves to normalised 
+   nac.m155131889rc: inc 12.27 em 1.13 res 0.478 -> ValueError: (lon 15.5, lat -8.97) is outside the frame: it solves to normalised 
+   nac.m192853222lc: inc 70.58 em 1.73 res 0.898 -> ValueError: (lon 15.5, lat -8.97) is outside the frame: it solves to normalised 
+   nac.m129187331lc: inc 54.19 em 1.69 res 0.486 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1458459013rc: inc 37.21 em 1.16 res 0.641 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1493600771lc: inc 46.64 em 1.71 res 0.694 -> ADMISSIBLE
+
+ladder: [(20.0, 'nac.m106777343rc', 28.38), (25.0, 'nac.m1136456506rc', 35.95), (30.0, 'nac.m1182366809lc', 41.79), (40.0, 'nac.m1114063911lc', 43.88), (50.0, 'nac.m1493600771lc', 46.64), (60.0, 'nac.m1108182629lc', 65.27)]
+
+S5 from geometry: NOT MET {'n_lt15': True, 'n_ge30': False, 'n_ge40': False, 'n_total': True, 'one_frame_le_30': True, 'one_frame_ge_60': True, 'at_least_one_triangle': True, 'at_most_8_frames': True}
+
+written: experiments\EXP-018\census_apollo16.json

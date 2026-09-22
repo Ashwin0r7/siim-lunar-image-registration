@@ -1,0 +1,161 @@
+== REAL-DATA-02: independent tile overlap verification ==
+
+criteria fixed before classification: CONFIRMED if the pessimistic (p5) shared fraction of the worse-covered tile is >= 0.50;
+INSUFFICIENT if the optimistic (p95) fraction is < 0.20; otherwise UNKNOWN.
+
+-- corner naming --
+   nac.m106777343rc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node D, flight -X, scale ratio 1.0059 / 0.9943
+   nac.m109134835lc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node D, flight +X, scale ratio 1.0163 / 1.0294
+   nac.m1105824495rc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node D, flight +X, scale ratio 1.0023 / 1.0064
+   nac.m1108182629lc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node D, flight +X, scale ratio 0.9998 / 0.9641
+   nac.m1114063911lc: line 0 at MIN latitude (= REAL-DATA-01 hypothesis H2), node D, flight +X, scale ratio 1.0049 / 0.9636
+   nac.m1136456506rc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node D, flight +X, scale ratio 1.0055 / 1.0191
+   nac.m113853974rc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node D, flight +X, scale ratio 0.9924 / 1.0078
+   nac.m1164718010rc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node D, flight +X, scale ratio 1.0030 / 1.0086
+   nac.m1182366809lc: line 0 at MIN latitude (= REAL-DATA-01 hypothesis H2), node D, flight -X, scale ratio 1.0104 / 1.0330
+   nac.m1225876972lc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node A, flight +X, scale ratio 1.0085 / 1.0080
+   nac.m1271742202lc: line 0 at MIN latitude (= REAL-DATA-01 hypothesis H2), node A, flight -X, scale ratio 1.0117 / 1.0011
+   nac.m1282366833rc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node D, flight -X, scale ratio 1.0101 / 1.0148
+   nac.m129187331lc: line 0 at MIN latitude (= REAL-DATA-01 hypothesis H2), node D, flight -X, scale ratio 1.0030 / 0.9859
+   nac.m1297638087rc: line 0 at MIN latitude (= REAL-DATA-01 hypothesis H2), node D, flight +X, scale ratio 1.0011 / 0.9883
+   nac.m1322281266lc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node A, flight +X, scale ratio 1.0021 / 1.0062
+   nac.m1335207975rc: line 0 at MIN latitude (= REAL-DATA-01 hypothesis H2), node A, flight -X, scale ratio 1.0046 / 0.9943
+   nac.m1458459013rc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node D, flight -X, scale ratio 0.9964 / 0.9939
+   nac.m1493600771lc: line 0 at MAX latitude (= REAL-DATA-01 hypothesis H1), node D, flight +X, scale ratio 0.9962 / 1.0185
+   nac.m155131889rc: line 0 at MIN latitude (= REAL-DATA-01 hypothesis H2), node D, flight +X, scale ratio 1.0029 / 1.0102
+   nac.m181065865rc: line 0 at MIN latitude (= REAL-DATA-01 hypothesis H2), node D, flight +X, scale ratio 1.0014 / 0.9966
+   nac.m192853222lc: line 0 at MIN latitude (= REAL-DATA-01 hypothesis H2), node D, flight -X, scale ratio 1.0061 / 1.0175
+   pixel-scale agreement over 42 comparisons: 0.9636 .. 1.0330
+   flight-direction partition: {'+X': ['MAX', 'MIN'], '-X': ['MAX', 'MIN']} (clean: False)
+   NORTH_AZIMUTH check: has_power=True -- frames split 12/9 on line direction and their NORTH_AZIMUTH group means differ by 30.72 deg (>= 15 deg): the column tracks the line direction and can test the corner naming
+
+-- overlap --
+exp018_apollo16::m106777343rc-m1136456506rc OVERLAP_CONFIRMED
+   A 10.055 km2   B 6.954 km2   intersection 6.9539 km2
+   IoU 0.6916   of A 69.16%   of B 100.00%   min 69.16%
+   p5-p95 of min fraction: 66.14% .. 72.23%
+   tile centres 0.001 km apart; tile is 4.61 x 2.18 km
+   alternative corner reading would give min 54.50%
+   even at the pessimistic end of the geometric uncertainty 0.661 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m106777343rc-m1182366809lc OVERLAP_CONFIRMED
+   A 10.055 km2   B 6.776 km2   intersection 6.7764 km2
+   IoU 0.6739   of A 67.39%   of B 100.00%   min 67.39%
+   p5-p95 of min fraction: 64.57% .. 70.33%
+   tile centres 0.001 km apart; tile is 4.61 x 2.18 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.646 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m106777343rc-m1114063911lc OVERLAP_CONFIRMED
+   A 10.055 km2   B 6.217 km2   intersection 6.2168 km2
+   IoU 0.6183   of A 61.83%   of B 100.00%   min 61.83%
+   p5-p95 of min fraction: 58.68% .. 65.11%
+   tile centres 0.001 km apart; tile is 4.61 x 2.18 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.587 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m106777343rc-m1493600771lc OVERLAP_UNKNOWN
+   A 10.055 km2   B 4.168 km2   intersection 4.1683 km2
+   IoU 0.4145   of A 41.45%   of B 100.00%   min 41.45%
+   p5-p95 of min fraction: 39.33% .. 43.66%
+   tile centres 0.001 km apart; tile is 4.61 x 2.18 km
+   alternative corner reading would give min 8.67%
+   the uncertainty interval [0.393, 0.437] straddles the criteria (confirm >= 0.50, insufficient < 0.20); the geometry does not decide this pair
+
+exp018_apollo16::m106777343rc-m1108182629lc OVERLAP_CONFIRMED
+   A 10.055 km2   B 7.213 km2   intersection 7.2131 km2
+   IoU 0.7174   of A 71.74%   of B 100.00%   min 71.74%
+   p5-p95 of min fraction: 68.66% .. 74.84%
+   tile centres 0.001 km apart; tile is 4.61 x 2.18 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.687 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m1136456506rc-m1182366809lc OVERLAP_CONFIRMED
+   A 6.954 km2   B 6.776 km2   intersection 6.5625 km2
+   IoU 0.9155   of A 94.37%   of B 96.84%   min 94.37%
+   p5-p95 of min fraction: 89.28% .. 94.89%
+   tile centres 0.000 km apart; tile is 3.83 x 1.82 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.893 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m1136456506rc-m1114063911lc OVERLAP_CONFIRMED
+   A 6.954 km2   B 6.217 km2   intersection 6.2093 km2
+   IoU 0.8920   of A 89.29%   of B 99.88%   min 89.29%
+   p5-p95 of min fraction: 82.95% .. 91.96%
+   tile centres 0.001 km apart; tile is 3.83 x 1.82 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.829 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m1136456506rc-m1493600771lc OVERLAP_CONFIRMED
+   A 6.954 km2   B 4.168 km2   intersection 4.1683 km2
+   IoU 0.5994   of A 59.94%   of B 100.00%   min 59.94%
+   p5-p95 of min fraction: 56.80% .. 63.19%
+   tile centres 0.001 km apart; tile is 3.83 x 1.82 km
+   alternative corner reading would give min 24.06%
+   even at the pessimistic end of the geometric uncertainty 0.568 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m1136456506rc-m1108182629lc OVERLAP_CONFIRMED
+   A 6.954 km2   B 7.213 km2   intersection 6.9290 km2
+   IoU 0.9573   of A 99.64%   of B 96.06%   min 96.06%
+   p5-p95 of min fraction: 88.82% .. 96.20%
+   tile centres 0.000 km apart; tile is 3.83 x 1.82 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.888 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m1182366809lc-m1114063911lc OVERLAP_CONFIRMED
+   A 6.776 km2   B 6.217 km2   intersection 6.2168 km2
+   IoU 0.9174   of A 91.74%   of B 100.00%   min 91.74%
+   p5-p95 of min fraction: 84.59% .. 94.60%
+   tile centres 0.001 km apart; tile is 3.73 x 1.82 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.846 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m1182366809lc-m1493600771lc OVERLAP_CONFIRMED
+   A 6.776 km2   B 4.168 km2   intersection 4.1683 km2
+   IoU 0.6151   of A 61.51%   of B 100.00%   min 61.51%
+   p5-p95 of min fraction: 58.32% .. 64.50%
+   tile centres 0.001 km apart; tile is 3.73 x 1.82 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.583 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m1182366809lc-m1108182629lc OVERLAP_CONFIRMED
+   A 6.776 km2   B 7.213 km2   intersection 6.5854 km2
+   IoU 0.8894   of A 97.18%   of B 91.30%   min 91.30%
+   p5-p95 of min fraction: 86.77% .. 92.57%
+   tile centres 0.001 km apart; tile is 3.73 x 1.82 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.868 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m1114063911lc-m1493600771lc OVERLAP_CONFIRMED
+   A 6.217 km2   B 4.168 km2   intersection 4.1654 km2
+   IoU 0.6697   of A 67.00%   of B 99.93%   min 67.00%
+   p5-p95 of min fraction: 62.67% .. 70.24%
+   tile centres 0.000 km apart; tile is 3.66 x 1.70 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.627 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m1114063911lc-m1108182629lc OVERLAP_CONFIRMED
+   A 6.217 km2   B 7.213 km2   intersection 6.2158 km2
+   IoU 0.8616   of A 99.98%   of B 86.17%   min 86.17%
+   p5-p95 of min fraction: 80.52% .. 89.08%
+   tile centres 0.000 km apart; tile is 3.66 x 1.70 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.805 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+exp018_apollo16::m1493600771lc-m1108182629lc OVERLAP_CONFIRMED
+   A 4.168 km2   B 7.213 km2   intersection 4.1683 km2
+   IoU 0.5779   of A 100.00%   of B 57.79%   min 57.79%
+   p5-p95 of min fraction: 54.74% .. 60.87%
+   tile centres 0.000 km apart; tile is 2.94 x 1.42 km
+   alternative corner reading would give min 0.00%
+   even at the pessimistic end of the geometric uncertainty 0.547 of the worse-covered tile is shared ground, at or above the 0.50 criterion
+
+-- projected windows for a geometry-driven re-selection (specification, not a measurement) --
+exp018_apollo16      would share 69.2% of the worse-covered tile (IoU 0.692)
+   nac.m106777343rc: line0 20601 (+2998), sample0 2590 (+764)
+   nac.m1136456506rc: line0 20053 (+3612), sample0 1389 (-766)
+
+-- secondary corroboration (NOT used in the classification) --
+figure: experiments\EXP-018\tile_overlap_apollo16.png
+
+report: experiments\EXP-018\overlap_apollo16.json

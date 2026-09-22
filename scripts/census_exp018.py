@@ -250,7 +250,8 @@ def census(window: str) -> None:
     s0["window"] = window
     if s0_out.exists():
         prev = json.loads(s0_out.read_text(encoding="utf-8"))
-        prev.setdefault("later_windows", []).append(s0)
+        later = [w for w in prev.get("later_windows", []) if w.get("window") != window]
+        prev["later_windows"] = later + [s0]
         s0_out.write_text(json.dumps(prev, indent=2), encoding="utf-8")
     else:
         s0_out.write_text(json.dumps(s0, indent=2), encoding="utf-8")
@@ -265,13 +266,23 @@ def census(window: str) -> None:
     prod_by_id = {p.pdsid: p for p in prods}
     ids = [r["pdsid"] for r in rows if r["admissible"]]
     print(f"fetching labels + index rows for {len(ids)} candidates ...", flush=True)
-    vols = _geo.volumes_from_ode(ids)
+    vols: dict = {}
+    for pdsid in ids:
+        # Per product, so one frame served from a volume layout the index-row
+        # reader does not know (the PDS4-migrated LROLRC_1067C root, found on
+        # the Fra Mauro census 2026-09-22) excludes that frame, not the census.
+        try:
+            vols.update(_geo.volumes_from_ode([pdsid]))
+        except SystemExit as exc:
+            vols[pdsid] = {"error": str(exc)}
     records: dict = {}
     for r in rows:
         if not r["admissible"]:
             continue
         pdsid = r["pdsid"]
         try:
+            if "error" in vols.get(pdsid, {"error": "no ODE volume"}):
+                raise ValueError(vols.get(pdsid, {}).get("error", "no ODE volume"))
             lbl = fetch_label(prod_by_id[pdsid], DATA / "metadata" / window)
             text = lbl.read_text(encoding="utf-8")
             struct = parse_image_structure(text)

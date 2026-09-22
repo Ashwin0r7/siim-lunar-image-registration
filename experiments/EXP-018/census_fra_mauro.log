@@ -1,0 +1,42 @@
+== EXP-018 census: Apollo 14 / Fra Mauro (342.53, -3.65) priority 2 arm H ==
+separation from RD-03 1378 km, RD-04 1372 km
+
+ODE returned 96 CDRNAC4 products intersecting the 0.04 deg box
+
+S0(a): 501 files scanned, 28 of 28 candidates untouched, dropped []
+
+fetching labels + index rows for 28 candidates ...
+   nac.m1404729066rc: inc 19.68 em 1.16 res 0.79 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1387126865rc: inc 21.1 em 1.17 res 1.011 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1361298694rc: inc 24.73 em 1.16 res 0.981 -> ADMISSIBLE
+   nac.m1354252889rc: inc 62.08 em 1.17 res 0.907 -> ADMISSIBLE
+   nac.m1271994785lc: inc 27.04 em 1.72 res 0.846 -> ADMISSIBLE
+   nac.m1282577603lc: inc 26.2 em 1.72 res 0.82 -> ADMISSIBLE
+   nac.m1254361175rc: inc 6.76 em 1.15 res 0.767 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1323712937rc: inc 73.04 em 1.17 res 1.917 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1241423438rc: inc 21.05 em 0.98 res 1.006 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1228486722lc: inc 43.12 em 1.71 res 0.726 -> ADMISSIBLE
+   nac.m1190828703rc: inc 41.71 em 1.16 res 0.793 -> ADMISSIBLE
+   nac.m1193183104rc: inc 14.89 em 1.16 res 0.801 -> ADMISSIBLE
+   nac.m1106038747lc: inc 40.25 em 1.74 res 0.883 -> ValueError: (lon 342.53, lat -3.65) is outside the frame: it solves to normalise
+   nac.m1136669722lc: inc 38.17 em 1.73 res 0.958 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m1162576153rc: inc 16.65 em 1.16 res 0.953 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m1164931338lc: inc 10.97 em 1.74 res 0.963 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m188357066rc: inc 19.09 em 1.18 res 1.052 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m1096608496lc: inc 67.65 em 1.74 res 1.026 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m190715993lc: inc 45.6 em 1.76 res 0.79 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m1101324207rc: inc 14.57 em 1.17 res 0.889 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m157709871rc: inc 23.23 em 1.13 res 0.467 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m140019848rc: inc 5.29 em 1.14 res 0.499 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m152994220rc: inc 32.51 em 1.13 res 0.472 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m1452805616rc: inc 72.27 em 1.16 res 1.92 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m1463354686lc: inc 27.24 em 1.12 res 0.746 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m1521899682lc: inc 45.12 em 1.71 res 0.709 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m1527744289lc: inc 57.64 em 1.72 res 0.843 -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov
+   nac.m1534763380lc: inc 31.62 em 0.6 res 0.821 -> ValueError: nac.m1534763380lc: unexpected archive root in 'https://pds.mcp.nasa.
+
+ladder: [(20.0, 'nac.m1361298694rc', 24.73), (25.0, 'nac.m1282577603lc', 26.2), (30.0, 'nac.m1271994785lc', 27.04), (40.0, 'nac.m1190828703rc', 41.71), (50.0, 'nac.m1228486722lc', 43.12), (60.0, 'nac.m1354252889rc', 62.08), (70.0, 'nac.m1193183104rc', 14.89)]
+
+S5 from geometry: NOT MET {'n_lt15': True, 'n_ge30': False, 'n_ge40': False, 'n_total': True, 'one_frame_le_30': True, 'one_frame_ge_60': True, 'at_least_one_triangle': True, 'at_most_8_frames': True}
+
+written: experiments\EXP-018\census_fra_mauro.json
