@@ -1,0 +1,35 @@
+== EXP-018 census: Apollo 11 / Mare Tranquillitatis (23.47, 0.67) priority 3 arm M ==
+separation from RD-03 589 km, RD-04 578 km
+
+ODE returned 106 CDRNAC4 products intersecting the 0.04 deg box
+
+S0(a): 518 files scanned, 21 of 21 candidates untouched, dropped []
+
+fetching labels + index rows for 21 candidates ...
+   nac.m111443315rc: inc 26.24 em 0.93 res 0.518 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m175124932rc: inc 40.98 em 1.12 res 0.399 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1404462373rc: inc 16.21 em 1.16 res 0.856 -> ValueError: (lon 23.47, lat 0.67) is outside the frame: it solves to normalised 
+   nac.m1282310415lc: inc 29.45 em 1.73 res 0.88 -> ADMISSIBLE
+   nac.m1254093845lc: inc 9.5 em 1.72 res 0.817 -> ADMISSIBLE
+   nac.m1302291967lc: inc 30.56 em 1.73 res 0.946 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1190561570lc: inc 44.94 em 1.72 res 0.84 -> ADMISSIBLE
+   nac.m1192915976rc: inc 18.19 em 1.16 res 0.84 -> ValueError: (lon 23.47, lat 0.67) is outside the frame: it solves to normalised 
+   nac.m1177606647lc: inc 16.21 em 1.74 res 0.989 -> ADMISSIBLE
+   nac.m1111656414rc: inc 71.8 em 1.17 res 0.997 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1121081627rc: inc 40.06 em 1.17 res 0.854 -> ADMISSIBLE
+   nac.m1134046721rc: inc 7.26 em 1.18 res 1.015 -> ADMISSIBLE
+   nac.m1126979192rc: inc 73.51 em 1.17 res 1.023 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1157600009rc: inc 73.64 em 1.17 res 1.003 -> ADMISSIBLE
+   nac.m188085530rc: inc 15.85 em 1.17 res 0.783 -> ADMISSIBLE
+   nac.m190444453lc: inc 42.8 em 1.75 res 0.785 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m170409762lc: inc 13.96 em 1.69 res 0.49 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m139755141rc: inc 8.77 em 1.14 res 0.502 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1447850428rc: inc 10.88 em 1.18 res 0.885 -> ADMISSIBLE
+   nac.m1456058565rc: inc 66.67 em 1.15 res 1.517 -> a full tile centred on the target does not fit unclamped (no clamping, Part 1 se
+   nac.m1519291490rc: inc 11.31 em 1.15 res 0.733 -> ValueError: (lon 23.47, lat 0.67) is outside the frame: it solves to normalised 
+
+ladder: [(20.0, 'nac.m1177606647lc', 16.21), (25.0, 'nac.m1282310415lc', 29.45), (30.0, 'nac.m1121081627rc', 40.06), (40.0, 'nac.m1190561570lc', 44.94), (50.0, 'nac.m1157600009rc', 73.64), (60.0, 'nac.m188085530rc', 15.85), (70.0, 'nac.m1447850428rc', 10.88)]
+
+S5 from geometry: MET {'n_lt15': True, 'n_ge30': True, 'n_ge40': True, 'n_total': True, 'one_frame_le_30': True, 'one_frame_ge_60': True, 'at_least_one_triangle': True, 'at_most_8_frames': True}
+
+written: experiments\EXP-018\census_tranquillitatis.json

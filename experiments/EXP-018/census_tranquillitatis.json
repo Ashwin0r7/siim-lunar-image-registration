@@ -1,0 +1,1980 @@
+{
+  "stage": "EXP-018",
+  "window": "tranquillitatis",
+  "spec": {
+    "priority": 3,
+    "arm": "M",
+    "terrain": "mare",
+    "centre_lon_lat": [
+      23.47,
+      0.67
+    ],
+    "name": "Apollo 11 / Mare Tranquillitatis"
+  },
+  "separation_km": {
+    "rd03_km": 588.7556081723563,
+    "rd04_km": 577.6517771251226
+  },
+  "ode_query": {
+    "pt": "CDRNAC4",
+    "minlat": 0.65,
+    "maxlat": 0.6900000000000001,
+    "westernlon": 23.45,
+    "easternlon": 23.49,
+    "limit": 2000
+  },
+  "filters": {
+    "incidence_max": 75.0,
+    "emission_max": 1.8,
+    "swath_contains_target": "corner-map inversion, full tile unclamped",
+    "lr_same_orbit": "one frame, lower emission kept",
+    "ladder": [
+      20.0,
+      25.0,
+      30.0,
+      40.0,
+      50.0,
+      60.0,
+      70.0
+    ],
+    "ladder_half_width": 5.0,
+    "max_frames": 8
+  },
+  "funnel": {
+    "ode_returned": 106,
+    "after_incidence_emission": 25,
+    "after_lr_dedupe": 21,
+    "after_s0_untouched": 21,
+    "admissible": 9
+  },
+  "ladder": [
+    {
+      "rung_deg": 20.0,
+      "pdsid": "nac.m1177606647lc",
+      "incidence_deg": 16.21,
+      "how": "within +/-5 deg"
+    },
+    {
+      "rung_deg": 25.0,
+      "pdsid": "nac.m1282310415lc",
+      "incidence_deg": 29.45,
+      "how": "within +/-5 deg"
+    },
+    {
+      "rung_deg": 30.0,
+      "pdsid": "nac.m1121081627rc",
+      "incidence_deg": 40.06,
+      "how": "rung empty within +/-5 deg; nearest unused admissible frame taken instead"
+    },
+    {
+      "rung_deg": 40.0,
+      "pdsid": "nac.m1190561570lc",
+      "incidence_deg": 44.94,
+      "how": "within +/-5 deg"
+    },
+    {
+      "rung_deg": 50.0,
+      "pdsid": "nac.m1157600009rc",
+      "incidence_deg": 73.64,
+      "how": "rung empty within +/-5 deg; nearest unused admissible frame taken instead"
+    },
+    {
+      "rung_deg": 60.0,
+      "pdsid": "nac.m188085530rc",
+      "incidence_deg": 15.85,
+      "how": "rung empty within +/-5 deg; nearest unused admissible frame taken instead"
+    },
+    {
+      "rung_deg": 70.0,
+      "pdsid": "nac.m1447850428rc",
+      "incidence_deg": 10.88,
+      "how": "rung empty within +/-5 deg; nearest unused admissible frame taken instead"
+    }
+  ],
+  "chosen": [
+    {
+      "pdsid": "nac.m1177606647lc",
+      "incidence_deg": 16.21,
+      "emission_deg": 1.74,
+      "map_resolution_m": 0.989,
+      "utc_start": "2015-02-03T12:43:00.589000Z",
+      "admissible": true,
+      "index_incidence_deg": 16.21,
+      "index_emission_deg": 1.74,
+      "index_resolution_m": 0.989,
+      "lines_samples": [
+        30720,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 13535,
+        "sample0": 233
+      },
+      "window_detail": {
+        "target_pixel_line": 15582.64043583535,
+        "target_pixel_sample": 1256.555690072555,
+        "unclamped_line0": 13535,
+        "unclamped_sample0": 233,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": 0.9766067408904504,
+      "lro_flight_direction": "+X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1177606647lc.xml",
+      "jacobian_determinant_sign": 1,
+      "rung_deg": 20.0
+    },
+    {
+      "pdsid": "nac.m1282310415lc",
+      "incidence_deg": 29.45,
+      "emission_deg": 1.73,
+      "map_resolution_m": 0.88,
+      "utc_start": "2018-05-30T09:05:48.097000Z",
+      "admissible": true,
+      "index_incidence_deg": 29.45,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 0.88,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23167,
+        "sample0": 600
+      },
+      "window_detail": {
+        "target_pixel_line": 25214.54509609081,
+        "target_pixel_sample": 1623.3278278768798,
+        "unclamped_line0": 23167,
+        "unclamped_sample0": 600,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.7905383187736067,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1282310415lc.xml",
+      "jacobian_determinant_sign": -1,
+      "rung_deg": 25.0
+    },
+    {
+      "pdsid": "nac.m1121081627rc",
+      "incidence_deg": 40.06,
+      "emission_deg": 1.17,
+      "map_resolution_m": 0.854,
+      "utc_start": "2013-04-20T07:19:19.860000Z",
+      "admissible": true,
+      "index_incidence_deg": 40.06,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 0.854,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 24255,
+        "sample0": 1267
+      },
+      "window_detail": {
+        "target_pixel_line": 26302.094890510947,
+        "target_pixel_sample": 2290.7452919020066,
+        "unclamped_line0": 24255,
+        "unclamped_sample0": 1267,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.738600607060027,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/tranquillitatis/nac.m1121081627rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rung_deg": 30.0
+    },
+    {
+      "pdsid": "nac.m1190561570lc",
+      "incidence_deg": 44.94,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.84,
+      "utc_start": "2015-07-03T11:18:23.545000Z",
+      "admissible": true,
+      "index_incidence_deg": 44.94,
+      "index_emission_deg": 1.72,
+      "index_resolution_m": 0.84,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 21898,
+        "sample0": 1960
+      },
+      "window_detail": {
+        "target_pixel_line": 23945.13767389573,
+        "target_pixel_sample": 2983.1548588913292,
+        "unclamped_line0": 21898,
+        "unclamped_sample0": 1960,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.7293846752450481,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1190561570lc.xml",
+      "jacobian_determinant_sign": -1,
+      "rung_deg": 40.0
+    },
+    {
+      "pdsid": "nac.m1157600009rc",
+      "incidence_deg": 73.64,
+      "emission_deg": 1.17,
+      "map_resolution_m": 1.003,
+      "utc_start": "2014-06-16T23:19:02.662000Z",
+      "admissible": true,
+      "index_incidence_deg": 73.64,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 1.003,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 26444,
+        "sample0": 12
+      },
+      "window_detail": {
+        "target_pixel_line": 28491.335615321652,
+        "target_pixel_sample": 1035.4299505223842,
+        "unclamped_line0": 26444,
+        "unclamped_sample0": 12,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.9901748192372861,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1157600009rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rung_deg": 50.0
+    },
+    {
+      "pdsid": "nac.m188085530rc",
+      "incidence_deg": 15.85,
+      "emission_deg": 1.17,
+      "map_resolution_m": 0.783,
+      "utc_start": "2012-04-03T09:44:22.897000Z",
+      "admissible": true,
+      "index_incidence_deg": 15.85,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 0.783,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 29286,
+        "sample0": 760
+      },
+      "window_detail": {
+        "target_pixel_line": 31333.8,
+        "target_pixel_sample": 1783.5568181819153,
+        "unclamped_line0": 29286,
+        "unclamped_sample0": 760,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.5508203380901211,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m188085530rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rung_deg": 60.0
+    },
+    {
+      "pdsid": "nac.m1447850428rc",
+      "incidence_deg": 10.88,
+      "emission_deg": 1.18,
+      "map_resolution_m": 0.885,
+      "utc_start": "2023-08-28T08:26:01.406000Z",
+      "admissible": true,
+      "index_incidence_deg": 10.88,
+      "index_emission_deg": 1.18,
+      "index_resolution_m": 0.885,
+      "lines_samples": [
+        33792,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23625,
+        "sample0": 1536
+      },
+      "window_detail": {
+        "target_pixel_line": 25672.68871866295,
+        "target_pixel_sample": 2559.706128133721,
+        "unclamped_line0": 23625,
+        "unclamped_sample0": 1536,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.7717384603300979,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/tranquillitatis/nac.m1447850428rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rung_deg": 70.0
+    }
+  ],
+  "candidates": [
+    {
+      "pdsid": "nac.m102000149rc",
+      "incidence_deg": 79.75,
+      "emission_deg": 11.76,
+      "map_resolution_m": 1.181,
+      "utc_start": "2009-07-12T01:08:02.537000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m102014464rc",
+      "incidence_deg": 81.76,
+      "emission_deg": 22.55,
+      "map_resolution_m": 1.23,
+      "utc_start": "2009-07-12T05:06:37.568000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m104362199rc",
+      "incidence_deg": 53.97,
+      "emission_deg": 6.27,
+      "map_resolution_m": 1.179,
+      "utc_start": "2009-08-08T09:15:32.766000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m106719774lc",
+      "incidence_deg": 27.23,
+      "emission_deg": 13.5,
+      "map_resolution_m": 1.269,
+      "utc_start": "2009-09-04T16:08:27.426000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m109080308rc",
+      "incidence_deg": 2.19,
+      "emission_deg": 15.54,
+      "map_resolution_m": 0.538,
+      "utc_start": "2009-10-01T23:50:40.981000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m111443315lc",
+      "incidence_deg": 26.16,
+      "emission_deg": 3.75,
+      "map_resolution_m": 0.519,
+      "utc_start": "2009-10-29T08:14:07.674000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m111443315rc",
+      "incidence_deg": 26.24,
+      "emission_deg": 0.93,
+      "map_resolution_m": 0.518,
+      "utc_start": "2009-10-29T08:14:07.674000Z",
+      "admissible": false,
+      "index_incidence_deg": 26.24,
+      "index_emission_deg": 0.93,
+      "index_resolution_m": 0.518,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 8192,
+        "n_samples": 4096,
+        "decimation": 4,
+        "line0": 20349,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 24444.808510638297,
+        "target_pixel_sample": 969.5106382979632,
+        "unclamped_line0": 20349,
+        "unclamped_sample0": -1078,
+        "clamped_lines": 0,
+        "clamped_samples": 1078,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": 0.2615006493245192,
+      "lro_flight_direction": "+X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m111443315rc.xml",
+      "jacobian_determinant_sign": 1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m175124932rc",
+      "incidence_deg": 40.98,
+      "emission_deg": 1.12,
+      "map_resolution_m": 0.399,
+      "utc_start": "2011-11-05T09:34:24.703000Z",
+      "admissible": false,
+      "index_incidence_deg": 40.98,
+      "index_emission_deg": 1.12,
+      "index_resolution_m": 0.399,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 8192,
+        "n_samples": 4096,
+        "decimation": 4,
+        "line0": 19840,
+        "sample0": 968
+      },
+      "window_detail": {
+        "target_pixel_line": 23935.541666666664,
+        "target_pixel_sample": 3111.6354166669944,
+        "unclamped_line0": 19840,
+        "unclamped_sample0": 1064,
+        "clamped_lines": 0,
+        "clamped_samples": -96,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": 0.13353224659970891,
+      "lro_flight_direction": "+X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m175124932rc.xml",
+      "jacobian_determinant_sign": 1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m113799518rc",
+      "incidence_deg": 54.21,
+      "emission_deg": 17.3,
+      "map_resolution_m": 0.529,
+      "utc_start": "2009-11-25T14:44:11.226000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m116161085rc",
+      "incidence_deg": 81.78,
+      "emission_deg": 6.34,
+      "map_resolution_m": 0.511,
+      "utc_start": "2009-12-22T22:43:38.135000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m177481212rc",
+      "incidence_deg": 69.07,
+      "emission_deg": 6.22,
+      "map_resolution_m": 0.473,
+      "utc_start": "2011-12-02T16:05:44.874000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1404462373lc",
+      "incidence_deg": 16.09,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.857,
+      "utc_start": "2022-04-13T04:11:45.871000Z",
+      "admissible": false,
+      "rejected_by": "L/R of one orbit: nac.m1404462373rc kept (lower emission)"
+    },
+    {
+      "pdsid": "nac.m1404462373rc",
+      "incidence_deg": 16.21,
+      "emission_deg": 1.16,
+      "map_resolution_m": 0.856,
+      "utc_start": "2022-04-13T04:11:45.871000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 23.47, lat 0.67) is outside the frame: it solves to normalised (line 0.4759, sample -0.0143), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1277607697lc",
+      "incidence_deg": 84.96,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.893,
+      "utc_start": "2018-04-05T22:47:10.048000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1274103575lc",
+      "incidence_deg": 48.7,
+      "emission_deg": 62.16,
+      "map_resolution_m": 1.929,
+      "utc_start": "2018-02-24T09:25:08.583000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1282310415lc",
+      "incidence_deg": 29.45,
+      "emission_deg": 1.73,
+      "map_resolution_m": 0.88,
+      "utc_start": "2018-05-30T09:05:48.097000Z",
+      "admissible": true,
+      "index_incidence_deg": 29.45,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 0.88,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23167,
+        "sample0": 600
+      },
+      "window_detail": {
+        "target_pixel_line": 25214.54509609081,
+        "target_pixel_sample": 1623.3278278768798,
+        "unclamped_line0": 23167,
+        "unclamped_sample0": 600,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.7905383187736067,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1282310415lc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m1254093845lc",
+      "incidence_deg": 9.5,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.817,
+      "utc_start": "2017-07-07T19:09:37.922000Z",
+      "admissible": true,
+      "index_incidence_deg": 9.5,
+      "index_emission_deg": 1.72,
+      "index_resolution_m": 0.817,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23230,
+        "sample0": 773
+      },
+      "window_detail": {
+        "target_pixel_line": 25277.029629111763,
+        "target_pixel_sample": 1796.1393151478553,
+        "unclamped_line0": 23230,
+        "unclamped_sample0": 773,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.6583503403092891,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1254093845lc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m1317571303lc",
+      "incidence_deg": 33.95,
+      "emission_deg": 6.08,
+      "map_resolution_m": 0.762,
+      "utc_start": "2019-07-12T11:47:16.300000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1317571303rc",
+      "incidence_deg": 34.07,
+      "emission_deg": 8.95,
+      "map_resolution_m": 0.764,
+      "utc_start": "2019-07-12T11:47:16.300000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1302291967lc",
+      "incidence_deg": 30.56,
+      "emission_deg": 1.73,
+      "map_resolution_m": 0.946,
+      "utc_start": "2019-01-16T15:31:39.947000Z",
+      "admissible": false,
+      "index_incidence_deg": 30.56,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 0.946,
+      "lines_samples": [
+        39936,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 15876,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 17923.399527791855,
+        "target_pixel_sample": 521.2552050054076,
+        "unclamped_line0": 15876,
+        "unclamped_sample0": -502,
+        "clamped_lines": 0,
+        "clamped_samples": 502,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": -0.9097957529944536,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1302291967lc.xml",
+      "jacobian_determinant_sign": -1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m1214089667lc",
+      "incidence_deg": 122.7,
+      "emission_deg": 32.35,
+      "map_resolution_m": 1.473,
+      "utc_start": "2016-03-31T18:53:20.855000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1197661005lc",
+      "incidence_deg": 31.31,
+      "emission_deg": 67.61,
+      "map_resolution_m": 2.393,
+      "utc_start": "2015-09-23T15:22:17.773000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1211726595lc",
+      "incidence_deg": 149.48,
+      "emission_deg": 50.96,
+      "map_resolution_m": 2.741,
+      "utc_start": "2016-03-04T10:28:48.649000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1190561570lc",
+      "incidence_deg": 44.94,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.84,
+      "utc_start": "2015-07-03T11:18:23.545000Z",
+      "admissible": true,
+      "index_incidence_deg": 44.94,
+      "index_emission_deg": 1.72,
+      "index_resolution_m": 0.84,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 21898,
+        "sample0": 1960
+      },
+      "window_detail": {
+        "target_pixel_line": 23945.13767389573,
+        "target_pixel_sample": 2983.1548588913292,
+        "unclamped_line0": 21898,
+        "unclamped_sample0": 1960,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.7293846752450481,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1190561570lc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m1192915976lc",
+      "incidence_deg": 18.06,
+      "emission_deg": 1.72,
+      "map_resolution_m": 0.841,
+      "utc_start": "2015-07-30T17:18:29.125000Z",
+      "admissible": false,
+      "rejected_by": "L/R of one orbit: nac.m1192915976rc kept (lower emission)"
+    },
+    {
+      "pdsid": "nac.m1192915976rc",
+      "incidence_deg": 18.19,
+      "emission_deg": 1.16,
+      "map_resolution_m": 0.84,
+      "utc_start": "2015-07-30T17:18:29.125000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 23.47, lat 0.67) is outside the frame: it solves to normalised (line 0.5099, sample -0.0407), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1177606647lc",
+      "incidence_deg": 16.21,
+      "emission_deg": 1.74,
+      "map_resolution_m": 0.989,
+      "utc_start": "2015-02-03T12:43:00.589000Z",
+      "admissible": true,
+      "index_incidence_deg": 16.21,
+      "index_emission_deg": 1.74,
+      "index_resolution_m": 0.989,
+      "lines_samples": [
+        30720,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 13535,
+        "sample0": 233
+      },
+      "window_detail": {
+        "target_pixel_line": 15582.64043583535,
+        "target_pixel_sample": 1256.555690072555,
+        "unclamped_line0": 13535,
+        "unclamped_sample0": 233,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": 0.9766067408904504,
+      "lro_flight_direction": "+X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1177606647lc.xml",
+      "jacobian_determinant_sign": 1
+    },
+    {
+      "pdsid": "nac.m1169345323rc",
+      "incidence_deg": 66.55,
+      "emission_deg": 55.11,
+      "map_resolution_m": 1.981,
+      "utc_start": "2014-10-30T21:54:16.265000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1118716779rc",
+      "incidence_deg": 13.86,
+      "emission_deg": 25.47,
+      "map_resolution_m": 0.956,
+      "utc_start": "2013-03-23T22:25:11.803000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1118723881lc",
+      "incidence_deg": 12.73,
+      "emission_deg": 3.53,
+      "map_resolution_m": 0.868,
+      "utc_start": "2013-03-24T00:23:34.454000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1118723881rc",
+      "incidence_deg": 12.89,
+      "emission_deg": 6.43,
+      "map_resolution_m": 0.869,
+      "utc_start": "2013-03-24T00:23:34.454000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1118730984lc",
+      "incidence_deg": 11.75,
+      "emission_deg": 16.62,
+      "map_resolution_m": 0.902,
+      "utc_start": "2013-03-24T02:21:57.010000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1118730984rc",
+      "incidence_deg": 11.91,
+      "emission_deg": 13.71,
+      "map_resolution_m": 0.894,
+      "utc_start": "2013-03-24T02:21:57.010000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1118738086lc",
+      "incidence_deg": 10.77,
+      "emission_deg": 33.59,
+      "map_resolution_m": 1.043,
+      "utc_start": "2013-03-24T04:20:19.268000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1111656414lc",
+      "incidence_deg": 71.65,
+      "emission_deg": 1.74,
+      "map_resolution_m": 0.998,
+      "utc_start": "2013-01-01T05:12:27.225000Z",
+      "admissible": false,
+      "rejected_by": "L/R of one orbit: nac.m1111656414rc kept (lower emission)"
+    },
+    {
+      "pdsid": "nac.m1111656414rc",
+      "incidence_deg": 71.8,
+      "emission_deg": 1.17,
+      "map_resolution_m": 0.997,
+      "utc_start": "2013-01-01T05:12:27.225000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.8,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 0.997,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19439,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 21486.03428571429,
+        "target_pixel_sample": 236.22632311971688,
+        "unclamped_line0": 19439,
+        "unclamped_sample0": -787,
+        "clamped_lines": 0,
+        "clamped_samples": 787,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": 0.9987104673290077,
+      "lro_flight_direction": "+X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/tranquillitatis/nac.m1111656414rc.xml",
+      "jacobian_determinant_sign": 1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m1121074527rc",
+      "incidence_deg": 41.09,
+      "emission_deg": 22.22,
+      "map_resolution_m": 0.92,
+      "utc_start": "2013-04-20T05:21:00.394000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1121081627rc",
+      "incidence_deg": 40.06,
+      "emission_deg": 1.17,
+      "map_resolution_m": 0.854,
+      "utc_start": "2013-04-20T07:19:19.860000Z",
+      "admissible": true,
+      "index_incidence_deg": 40.06,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 0.854,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 24255,
+        "sample0": 1267
+      },
+      "window_detail": {
+        "target_pixel_line": 26302.094890510947,
+        "target_pixel_sample": 2290.7452919020066,
+        "unclamped_line0": 24255,
+        "unclamped_sample0": 1267,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.738600607060027,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/tranquillitatis/nac.m1121081627rc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m1121088726lc",
+      "incidence_deg": 38.98,
+      "emission_deg": 20.84,
+      "map_resolution_m": 0.913,
+      "utc_start": "2013-04-20T09:17:39.210000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1121088726rc",
+      "incidence_deg": 39.15,
+      "emission_deg": 17.92,
+      "map_resolution_m": 0.902,
+      "utc_start": "2013-04-20T09:17:39.210000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1114007294rc",
+      "incidence_deg": 42.61,
+      "emission_deg": 16.12,
+      "map_resolution_m": 1.021,
+      "utc_start": "2013-01-28T10:13:47.010000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1114014396rc",
+      "incidence_deg": 43.6,
+      "emission_deg": 3.83,
+      "map_resolution_m": 0.984,
+      "utc_start": "2013-01-28T12:12:09.328000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1114021499rc",
+      "incidence_deg": 44.56,
+      "emission_deg": 22.43,
+      "map_resolution_m": 1.055,
+      "utc_start": "2013-01-28T14:10:31.807000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1114035714rc",
+      "incidence_deg": 46.45,
+      "emission_deg": 48.12,
+      "map_resolution_m": 1.373,
+      "utc_start": "2013-01-28T18:07:26.998000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1123426954rc",
+      "incidence_deg": 68.73,
+      "emission_deg": 29.9,
+      "map_resolution_m": 1.145,
+      "utc_start": "2013-05-17T10:48:07.073000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1123434065lc",
+      "incidence_deg": 67.59,
+      "emission_deg": 9.86,
+      "map_resolution_m": 1.024,
+      "utc_start": "2013-05-17T12:46:38.263000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1123434065rc",
+      "incidence_deg": 67.75,
+      "emission_deg": 12.77,
+      "map_resolution_m": 1.027,
+      "utc_start": "2013-05-17T12:46:38.263000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1123441176lc",
+      "incidence_deg": 66.6,
+      "emission_deg": 9.6,
+      "map_resolution_m": 1.02,
+      "utc_start": "2013-05-17T14:45:09.517000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1123441176rc",
+      "incidence_deg": 66.76,
+      "emission_deg": 6.69,
+      "map_resolution_m": 1.015,
+      "utc_start": "2013-05-17T14:45:09.517000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1123448288lc",
+      "incidence_deg": 65.62,
+      "emission_deg": 27.06,
+      "map_resolution_m": 1.118,
+      "utc_start": "2013-05-17T16:43:40.796000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1116358477lc",
+      "incidence_deg": 13.72,
+      "emission_deg": 29.77,
+      "map_resolution_m": 1.002,
+      "utc_start": "2013-02-24T15:20:09.623000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1116365580lc",
+      "incidence_deg": 14.7,
+      "emission_deg": 11.89,
+      "map_resolution_m": 0.889,
+      "utc_start": "2013-02-24T17:18:33.135000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1116365580rc",
+      "incidence_deg": 14.85,
+      "emission_deg": 8.98,
+      "map_resolution_m": 0.883,
+      "utc_start": "2013-02-24T17:18:33.135000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1116372683lc",
+      "incidence_deg": 15.68,
+      "emission_deg": 8.44,
+      "map_resolution_m": 0.884,
+      "utc_start": "2013-02-24T19:16:56.533000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1116372683rc",
+      "incidence_deg": 15.84,
+      "emission_deg": 11.35,
+      "map_resolution_m": 0.886,
+      "utc_start": "2013-02-24T19:16:56.533000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1116379787lc",
+      "incidence_deg": 16.64,
+      "emission_deg": 26.45,
+      "map_resolution_m": 0.99,
+      "utc_start": "2013-02-24T21:15:19.914000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1116379787rc",
+      "incidence_deg": 16.83,
+      "emission_deg": 29.39,
+      "map_resolution_m": 1.003,
+      "utc_start": "2013-02-24T21:15:19.914000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1134046721rc",
+      "incidence_deg": 7.26,
+      "emission_deg": 1.18,
+      "map_resolution_m": 1.015,
+      "utc_start": "2013-09-17T08:44:14.269000Z",
+      "admissible": true,
+      "index_incidence_deg": 7.26,
+      "index_emission_deg": 1.18,
+      "index_resolution_m": 1.015,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 5079,
+        "sample0": 1542
+      },
+      "window_detail": {
+        "target_pixel_line": 7126.231084234011,
+        "target_pixel_sample": 2565.7445417053773,
+        "unclamped_line0": 5079,
+        "unclamped_sample0": 1542,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": 1.053925300646854,
+      "lro_flight_direction": "+X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1134046721rc.xml",
+      "jacobian_determinant_sign": 1
+    },
+    {
+      "pdsid": "nac.m1126972080lc",
+      "incidence_deg": 72.36,
+      "emission_deg": 20.51,
+      "map_resolution_m": 1.083,
+      "utc_start": "2013-06-27T11:33:33.620000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1126979192lc",
+      "incidence_deg": 73.35,
+      "emission_deg": 1.74,
+      "map_resolution_m": 1.024,
+      "utc_start": "2013-06-27T13:32:05.103000Z",
+      "admissible": false,
+      "rejected_by": "L/R of one orbit: nac.m1126979192rc kept (lower emission)"
+    },
+    {
+      "pdsid": "nac.m1126979192rc",
+      "incidence_deg": 73.51,
+      "emission_deg": 1.17,
+      "map_resolution_m": 1.023,
+      "utc_start": "2013-06-27T13:32:05.103000Z",
+      "admissible": false,
+      "index_incidence_deg": 73.51,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 1.023,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 27509,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 29556.45630091401,
+        "target_pixel_sample": 52.42559399725271,
+        "unclamped_line0": 27509,
+        "unclamped_sample0": -971,
+        "clamped_lines": 0,
+        "clamped_samples": 971,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": -1.039877697527218,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1126979192rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m1126986303lc",
+      "incidence_deg": 74.32,
+      "emission_deg": 17.28,
+      "map_resolution_m": 1.071,
+      "utc_start": "2013-06-27T15:30:36.576000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1126986303rc",
+      "incidence_deg": 74.5,
+      "emission_deg": 20.2,
+      "map_resolution_m": 1.078,
+      "utc_start": "2013-06-27T15:30:36.576000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1129325970lc",
+      "incidence_deg": 45.37,
+      "emission_deg": 26.34,
+      "map_resolution_m": 1.129,
+      "utc_start": "2013-07-24T17:25:02.856000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1129325970rc",
+      "incidence_deg": 45.56,
+      "emission_deg": 23.39,
+      "map_resolution_m": 1.114,
+      "utc_start": "2013-07-24T17:25:02.856000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1129340193rc",
+      "incidence_deg": 47.53,
+      "emission_deg": 14.26,
+      "map_resolution_m": 1.049,
+      "utc_start": "2013-07-24T21:22:06.081000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1129347305rc",
+      "incidence_deg": 48.51,
+      "emission_deg": 31.06,
+      "map_resolution_m": 1.168,
+      "utc_start": "2013-07-24T23:20:37.739000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1149338748rc",
+      "incidence_deg": 13.1,
+      "emission_deg": 31.62,
+      "map_resolution_m": 1.157,
+      "utc_start": "2014-03-13T08:31:20.846000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1149360102lc",
+      "incidence_deg": 9.96,
+      "emission_deg": 26.07,
+      "map_resolution_m": 1.102,
+      "utc_start": "2014-03-13T14:27:15.384000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1149360102rc",
+      "incidence_deg": 10.15,
+      "emission_deg": 23.13,
+      "map_resolution_m": 1.087,
+      "utc_start": "2014-03-13T14:27:15.384000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1157600009rc",
+      "incidence_deg": 73.64,
+      "emission_deg": 1.17,
+      "map_resolution_m": 1.003,
+      "utc_start": "2014-06-16T23:19:02.662000Z",
+      "admissible": true,
+      "index_incidence_deg": 73.64,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 1.003,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 26444,
+        "sample0": 12
+      },
+      "window_detail": {
+        "target_pixel_line": 28491.335615321652,
+        "target_pixel_sample": 1035.4299505223842,
+        "unclamped_line0": 26444,
+        "unclamped_sample0": 12,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.9901748192372861,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1157600009rc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m1171733209lc",
+      "incidence_deg": 90.22,
+      "emission_deg": 16.59,
+      "map_resolution_m": 1.025,
+      "utc_start": "2014-11-27T13:12:22.146000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1171733209rc",
+      "incidence_deg": 90.39,
+      "emission_deg": 13.68,
+      "map_resolution_m": 1.017,
+      "utc_start": "2014-11-27T13:12:22.146000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1179958952rc",
+      "incidence_deg": 12.41,
+      "emission_deg": 6.44,
+      "map_resolution_m": 0.979,
+      "utc_start": "2015-03-02T18:08:05.164000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1159956344rc",
+      "incidence_deg": 46.99,
+      "emission_deg": 4.34,
+      "map_resolution_m": 1.014,
+      "utc_start": "2014-07-14T05:51:16.955000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m188071231rc",
+      "incidence_deg": 17.71,
+      "emission_deg": 33.2,
+      "map_resolution_m": 1.102,
+      "utc_start": "2012-04-03T05:46:04.312000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m188085530rc",
+      "incidence_deg": 15.85,
+      "emission_deg": 1.17,
+      "map_resolution_m": 0.783,
+      "utc_start": "2012-04-03T09:44:22.897000Z",
+      "admissible": true,
+      "index_incidence_deg": 15.85,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 0.783,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 29286,
+        "sample0": 760
+      },
+      "window_detail": {
+        "target_pixel_line": 31333.8,
+        "target_pixel_sample": 1783.5568181819153,
+        "unclamped_line0": 29286,
+        "unclamped_sample0": 760,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.5508203380901211,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m188085530rc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m188099822lc",
+      "incidence_deg": 13.78,
+      "emission_deg": 33.81,
+      "map_resolution_m": 1.113,
+      "utc_start": "2012-04-03T13:42:34.616000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m190444453lc",
+      "incidence_deg": 42.8,
+      "emission_deg": 1.75,
+      "map_resolution_m": 0.785,
+      "utc_start": "2012-04-30T16:59:45.871000Z",
+      "admissible": false,
+      "index_incidence_deg": 42.8,
+      "index_emission_deg": 1.75,
+      "index_resolution_m": 0.785,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 15338,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 17385.377172719855,
+        "target_pixel_sample": 194.48621693022724,
+        "unclamped_line0": 15338,
+        "unclamped_sample0": -829,
+        "clamped_lines": 0,
+        "clamped_samples": 829,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": -0.5430864694743738,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m190444453lc.xml",
+      "jacobian_determinant_sign": -1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m170409762lc",
+      "incidence_deg": 13.96,
+      "emission_deg": 1.69,
+      "map_resolution_m": 0.49,
+      "utc_start": "2011-09-11T19:48:14.585000Z",
+      "admissible": false,
+      "index_incidence_deg": 13.96,
+      "index_emission_deg": 1.69,
+      "index_resolution_m": 0.49,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 8192,
+        "n_samples": 4096,
+        "decimation": 4,
+        "line0": 25039,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 29134.93684210526,
+        "target_pixel_sample": 2.5688240423704656e-10,
+        "unclamped_line0": 25039,
+        "unclamped_sample0": -2047,
+        "clamped_lines": 0,
+        "clamped_samples": 2047,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": -0.23124724962359688,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m170409762lc.xml",
+      "jacobian_determinant_sign": -1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m131494509lc",
+      "incidence_deg": 79.22,
+      "emission_deg": 7.16,
+      "map_resolution_m": 0.476,
+      "utc_start": "2010-06-18T10:00:42.288000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m139755141rc",
+      "incidence_deg": 8.77,
+      "emission_deg": 1.14,
+      "map_resolution_m": 0.502,
+      "utc_start": "2010-09-22T00:37:53.643000Z",
+      "admissible": false,
+      "index_incidence_deg": 8.77,
+      "index_emission_deg": 1.14,
+      "index_resolution_m": 0.502,
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 8192,
+        "n_samples": 4096,
+        "decimation": 4,
+        "line0": 0,
+        "sample0": 968
+      },
+      "window_detail": {
+        "target_pixel_line": 2777.8191489361657,
+        "target_pixel_sample": 3830.9135638297025,
+        "unclamped_line0": -1318,
+        "unclamped_sample0": 1783,
+        "clamped_lines": 1318,
+        "clamped_samples": -815,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": -0.26150189311252753,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m139755141rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m162154734rc",
+      "incidence_deg": 73.47,
+      "emission_deg": 7.14,
+      "map_resolution_m": 0.473,
+      "utc_start": "2011-06-08T06:44:26.366000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m132678405rc",
+      "incidence_deg": 87.99,
+      "emission_deg": 3.19,
+      "map_resolution_m": 0.504,
+      "utc_start": "2010-07-02T02:52:17.405000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m150361817lc",
+      "incidence_deg": 62.54,
+      "emission_deg": 12.22,
+      "map_resolution_m": 0.477,
+      "utc_start": "2011-01-22T18:55:49.626000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m150361817rc",
+      "incidence_deg": 62.61,
+      "emission_deg": 9.41,
+      "map_resolution_m": 0.474,
+      "utc_start": "2011-01-22T18:55:49.626000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m150368601rc",
+      "incidence_deg": 63.51,
+      "emission_deg": 31.85,
+      "map_resolution_m": 0.539,
+      "utc_start": "2011-01-22T20:48:53.596000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m117338434lc",
+      "incidence_deg": 83.56,
+      "emission_deg": 5.85,
+      "map_resolution_m": 0.483,
+      "utc_start": "2010-01-05T13:46:06.833000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m117338434rc",
+      "incidence_deg": 83.63,
+      "emission_deg": 8.67,
+      "map_resolution_m": 0.484,
+      "utc_start": "2010-01-05T13:46:06.833000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m135032851lc",
+      "incidence_deg": 61.14,
+      "emission_deg": 22.25,
+      "map_resolution_m": 0.538,
+      "utc_start": "2010-07-29T08:53:03.840000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m135039651lc",
+      "incidence_deg": 62.01,
+      "emission_deg": 14.16,
+      "map_resolution_m": 0.519,
+      "utc_start": "2010-07-29T10:46:23.421000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m135039651rc",
+      "incidence_deg": 62.09,
+      "emission_deg": 16.98,
+      "map_resolution_m": 0.521,
+      "utc_start": "2010-07-29T10:46:23.421000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m119693197lc",
+      "incidence_deg": 55.08,
+      "emission_deg": 21.04,
+      "map_resolution_m": 0.902,
+      "utc_start": "2010-02-01T19:52:10.638000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m119699983rc",
+      "incidence_deg": 55.99,
+      "emission_deg": 20.05,
+      "map_resolution_m": 0.907,
+      "utc_start": "2010-02-01T21:45:17.008000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m129133239rc",
+      "incidence_deg": 53.13,
+      "emission_deg": 5.6,
+      "map_resolution_m": 0.479,
+      "utc_start": "2010-05-22T02:06:12.843000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m122054682rc",
+      "incidence_deg": 27.69,
+      "emission_deg": 8.96,
+      "map_resolution_m": 0.487,
+      "utc_start": "2010-03-01T03:50:15.616000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1443167025lc",
+      "incidence_deg": 46.64,
+      "emission_deg": 13.77,
+      "map_resolution_m": 0.925,
+      "utc_start": "2023-07-05T03:29:18.474000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1443167025rc",
+      "incidence_deg": 46.79,
+      "emission_deg": 16.67,
+      "map_resolution_m": 0.93,
+      "utc_start": "2023-07-05T03:29:18.474000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1443174042rc",
+      "incidence_deg": 47.76,
+      "emission_deg": 34.52,
+      "map_resolution_m": 1.083,
+      "utc_start": "2023-07-05T05:26:15.100000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1447850428rc",
+      "incidence_deg": 10.88,
+      "emission_deg": 1.18,
+      "map_resolution_m": 0.885,
+      "utc_start": "2023-08-28T08:26:01.406000Z",
+      "admissible": true,
+      "index_incidence_deg": 10.88,
+      "index_emission_deg": 1.18,
+      "index_resolution_m": 0.885,
+      "lines_samples": [
+        33792,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23625,
+        "sample0": 1536
+      },
+      "window_detail": {
+        "target_pixel_line": 25672.68871866295,
+        "target_pixel_sample": 2559.706128133721,
+        "unclamped_line0": 23625,
+        "unclamped_sample0": 1536,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "jacobian_determinant": -0.7717384603300979,
+      "lro_flight_direction": "-X",
+      "orbit_node": "D",
+      "label_path": "data/metadata/tranquillitatis/nac.m1447850428rc.xml",
+      "jacobian_determinant_sign": -1
+    },
+    {
+      "pdsid": "nac.m1456058565rc",
+      "incidence_deg": 66.67,
+      "emission_deg": 1.15,
+      "map_resolution_m": 1.517,
+      "utc_start": "2023-12-01T08:28:18.618000Z",
+      "admissible": false,
+      "index_incidence_deg": 66.67,
+      "index_emission_deg": 1.15,
+      "index_resolution_m": 1.517,
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 24931,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 26978.935811969033,
+        "target_pixel_sample": 2450.3893932785672,
+        "unclamped_line0": 24931,
+        "unclamped_sample0": 1427,
+        "clamped_lines": 0,
+        "clamped_samples": -943,
+        "fully_inside_frame": false
+      },
+      "jacobian_determinant": -2.3585368707177357,
+      "lro_flight_direction": "-X",
+      "orbit_node": "A",
+      "label_path": "data/metadata/tranquillitatis/nac.m1456058565rc.xml",
+      "jacobian_determinant_sign": -1,
+      "rejected_by": "a full tile centred on the target does not fit unclamped (no clamping, Part 1 section 3.5)"
+    },
+    {
+      "pdsid": "nac.m1468954313rc",
+      "incidence_deg": 83.53,
+      "emission_deg": 41.68,
+      "map_resolution_m": 1.934,
+      "utc_start": "2024-04-28T14:37:26.303000Z",
+      "admissible": false,
+      "rejected_by": "incidence > 75.0 (D-029) or night/absent"
+    },
+    {
+      "pdsid": "nac.m1484169495lc",
+      "incidence_deg": 73.79,
+      "emission_deg": 15.39,
+      "map_resolution_m": 0.804,
+      "utc_start": "2024-10-21T17:03:48.236000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1519291490rc",
+      "incidence_deg": 11.31,
+      "emission_deg": 1.15,
+      "map_resolution_m": 0.733,
+      "utc_start": "2025-12-02T05:10:23.512000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 23.47, lat 0.67) is outside the frame: it solves to normalised (line 0.4065, sample 1.1108), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1521633149lc",
+      "incidence_deg": 41.57,
+      "emission_deg": 4.83,
+      "map_resolution_m": 0.76,
+      "utc_start": "2025-12-29T07:38:01.626000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    },
+    {
+      "pdsid": "nac.m1521633149rc",
+      "incidence_deg": 41.68,
+      "emission_deg": 1.96,
+      "map_resolution_m": 0.758,
+      "utc_start": "2025-12-29T07:38:01.626000Z",
+      "admissible": false,
+      "rejected_by": "emission > 1.8"
+    }
+  ],
+  "s0_untouched": {
+    "git_head": "531ad297ca67cb2214649d40ad3cd5be141383e2",
+    "n_files_scanned": 518,
+    "n_files_read": 435,
+    "hits_per_id": {
+      "nac.m111443315rc": 0,
+      "nac.m175124932rc": 0,
+      "nac.m1404462373rc": 0,
+      "nac.m1282310415lc": 0,
+      "nac.m1254093845lc": 0,
+      "nac.m1302291967lc": 0,
+      "nac.m1190561570lc": 0,
+      "nac.m1192915976rc": 0,
+      "nac.m1177606647lc": 0,
+      "nac.m1111656414rc": 0,
+      "nac.m1121081627rc": 0,
+      "nac.m1134046721rc": 0,
+      "nac.m1126979192rc": 0,
+      "nac.m1157600009rc": 0,
+      "nac.m188085530rc": 0,
+      "nac.m190444453lc": 0,
+      "nac.m170409762lc": 0,
+      "nac.m139755141rc": 0,
+      "nac.m1447850428rc": 0,
+      "nac.m1456058565rc": 0,
+      "nac.m1519291490rc": 0
+    },
+    "untouched": [
+      "nac.m111443315rc",
+      "nac.m175124932rc",
+      "nac.m1404462373rc",
+      "nac.m1282310415lc",
+      "nac.m1254093845lc",
+      "nac.m1302291967lc",
+      "nac.m1190561570lc",
+      "nac.m1192915976rc",
+      "nac.m1177606647lc",
+      "nac.m1111656414rc",
+      "nac.m1121081627rc",
+      "nac.m1134046721rc",
+      "nac.m1126979192rc",
+      "nac.m1157600009rc",
+      "nac.m188085530rc",
+      "nac.m190444453lc",
+      "nac.m170409762lc",
+      "nac.m139755141rc",
+      "nac.m1447850428rc",
+      "nac.m1456058565rc",
+      "nac.m1519291490rc"
+    ],
+    "dropped": []
+  },
+  "s5_from_geometry": {
+    "n_lt15": 7,
+    "n_15to30": 8,
+    "n_ge30": 5,
+    "n_ge40": 3,
+    "n_total": 20,
+    "n_frames": 7,
+    "n_confirmed_triangles": 30,
+    "min_incidence_deg": 10.88,
+    "max_incidence_deg": 73.64,
+    "checks": {
+      "n_lt15": true,
+      "n_ge30": true,
+      "n_ge40": true,
+      "n_total": true,
+      "one_frame_le_30": true,
+      "one_frame_ge_60": true,
+      "at_least_one_triangle": true,
+      "at_most_8_frames": true
+    },
+    "met": true,
+    "minima": {
+      "n_lt15": 5,
+      "n_ge30": 5,
+      "n_ge40": 3,
+      "n_total": 12,
+      "max_frames": 8,
+      "one_frame_incidence_le": 30.0,
+      "one_frame_incidence_ge": 60.0
+    },
+    "confirmed_pairs": [
+      {
+        "edge": "nac.m1447850428rc -> nac.m188085530rc",
+        "delta_incidence_deg": 4.969999999999999
+      },
+      {
+        "edge": "nac.m1447850428rc -> nac.m1177606647lc",
+        "delta_incidence_deg": 5.33
+      },
+      {
+        "edge": "nac.m1447850428rc -> nac.m1282310415lc",
+        "delta_incidence_deg": 18.57
+      },
+      {
+        "edge": "nac.m1447850428rc -> nac.m1121081627rc",
+        "delta_incidence_deg": 29.18
+      },
+      {
+        "edge": "nac.m1447850428rc -> nac.m1190561570lc",
+        "delta_incidence_deg": 34.059999999999995
+      },
+      {
+        "edge": "nac.m1447850428rc -> nac.m1157600009rc",
+        "delta_incidence_deg": 62.76
+      },
+      {
+        "edge": "nac.m188085530rc -> nac.m1177606647lc",
+        "delta_incidence_deg": 0.3600000000000012
+      },
+      {
+        "edge": "nac.m188085530rc -> nac.m1282310415lc",
+        "delta_incidence_deg": 13.6
+      },
+      {
+        "edge": "nac.m188085530rc -> nac.m1121081627rc",
+        "delta_incidence_deg": 24.21
+      },
+      {
+        "edge": "nac.m188085530rc -> nac.m1190561570lc",
+        "delta_incidence_deg": 29.089999999999996
+      },
+      {
+        "edge": "nac.m1177606647lc -> nac.m1282310415lc",
+        "delta_incidence_deg": 13.239999999999998
+      },
+      {
+        "edge": "nac.m1177606647lc -> nac.m1121081627rc",
+        "delta_incidence_deg": 23.85
+      },
+      {
+        "edge": "nac.m1177606647lc -> nac.m1190561570lc",
+        "delta_incidence_deg": 28.729999999999997
+      },
+      {
+        "edge": "nac.m1177606647lc -> nac.m1157600009rc",
+        "delta_incidence_deg": 57.43
+      },
+      {
+        "edge": "nac.m1282310415lc -> nac.m1121081627rc",
+        "delta_incidence_deg": 10.610000000000003
+      },
+      {
+        "edge": "nac.m1282310415lc -> nac.m1190561570lc",
+        "delta_incidence_deg": 15.489999999999998
+      },
+      {
+        "edge": "nac.m1282310415lc -> nac.m1157600009rc",
+        "delta_incidence_deg": 44.19
+      },
+      {
+        "edge": "nac.m1121081627rc -> nac.m1190561570lc",
+        "delta_incidence_deg": 4.8799999999999955
+      },
+      {
+        "edge": "nac.m1121081627rc -> nac.m1157600009rc",
+        "delta_incidence_deg": 33.58
+      },
+      {
+        "edge": "nac.m1190561570lc -> nac.m1157600009rc",
+        "delta_incidence_deg": 28.700000000000003
+      }
+    ],
+    "unconfirmed": [
+      [
+        "nac.m1157600009rc",
+        "nac.m188085530rc"
+      ]
+    ]
+  },
+  "data_read": "ODE metadata, PDS4 labels and index rows only; NO image byte",
+  "generated_utc": "2026-09-22T02:23:59Z",
+  "runtime_s": 1487.0
+}

@@ -567,8 +567,140 @@ prediction that was not made.
 
 ## Amendment A1 — census, frame list, S0 grep record, S5 counts from geometry
 
-*Empty until the Part 1 above is committed. Appended before any pixel byte is
-fetched; may add records, may not alter §2, §5, §6 or §8.*
+**Appended 2026-09-22, after the Part 1 commit (`e8071c4`) and the runner
+commit (`cb3fa51`), and BEFORE any image byte was fetched.** It adds records
+only; §2, §5, §6 and §8 are untouched. Everything below is derived from ODE
+metadata, PDS4 labels and archive index rows — **no pixel of any candidate
+frame has been read at the time of writing.**
+
+### A1.1 Two windows were censused and REJECTED at S5 first, in the frozen order
+
+§3.4 fixes the priority order and §3.4's rule says the census moves on only
+when S5 fails from geometry. It failed twice, and both records are committed
+(`531ad29`) rather than discarded:
+
+| priority | window | outcome | why |
+|---|---|---|---|
+| 1 | **Apollo 16 / Descartes** (15.50° E, −8.97°) | **S5 NOT MET** | the admissible ladder could not supply the high-Δinc pairs S1's high range needs |
+| 2 | **Apollo 14 / Fra Mauro** (342.53° E, −3.65°) | **S5 NOT MET** | `n_ge30` and `n_ge40` both false; the ladder it can build spans 14.89°–62.08° but too few pairs land above 30° |
+| **3** | **Apollo 11 / Mare Tranquillitatis** (23.47° E, 0.67°) | **S5 MET — this is the held-out set** | all eight clauses hold, with margin (A1.5) |
+
+**The arm is therefore M (mare), not H (highlands).** §5.3 predicted arm H's
+S1c at **LOW** confidence and said *"I record that I would bet against it
+there"*; that bet is now **not taken**, because arm H could not supply a set
+capable of failing the criterion. §5.3's arm-M column is the operative
+prediction: all graded predictions hold, at MEDIUM. **The terrain-transfer
+question is not answered by this stage** — §9's scope sentence stands, and
+gap item C5 (highlands on real data) stays open. Recording that plainly: the
+cheaper, weaker arm is the one the archive allowed.
+
+### A1.2 Separation (S0(b))
+
+Great-circle on a 1 738 km radius from the in-sample ground:
+**588.76 km from RD-03** and **577.65 km from RD-04**. §3.3's rule is 50 km;
+both clear it by more than 11×.
+
+### A1.3 The ODE census and the funnel
+
+Query: `pt=CDRNAC4`, `minlat=0.65`, `maxlat=0.69`, `westernlon=23.45`,
+`easternlon=23.49`, `limit=2000`. Filters exactly as §3.5 froze them.
+
+| stage | count |
+|---|---|
+| ODE returned | **106** |
+| after incidence ≤ 75° and emission ≤ 1.8° | **25** |
+| after L/R-of-one-orbit dedupe (lower emission kept) | **21** |
+| after the S0(a) untouched grep | **21** (nothing dropped) |
+| **admissible** (full 4096 × 2048 tile centred on the target, corner-map inversion, **no clamping**) | **9** |
+| chosen by the incidence ladder | **7** |
+
+Twelve of the 21 were excluded because a full tile centred on the target does
+not fit inside the frame **unclamped** — the rule RD-07 used to exclude its
+frame E1, applied here without exception.
+
+### A1.4 The ≤ 8 frames, and their handedness before any pixel exists
+
+Ladder rungs {20, 25, 30, 40, 50, 60, 70}°, ±5°, nearest unused admissible
+frame when a rung is empty. Four rungs were empty and took the nearest frame,
+which is why the incidence set is bottom-heavy — **a property of what the
+archive holds over this ground, fixed by a rule written before the census.**
+
+| rung | product | incidence | emission | map res (m) | frame lines × samples | tile line0, sample0 | clamped | J determinant | sign |
+|---|---|---|---|---|---|---|---|---|---|
+| 70 | `nac.m1447850428rc` | **10.88°** | 1.18° | 0.885 | 33792 × 5064 | 23625, 1536 | 0 / 0 | −0.771738 | **−1** |
+| 60 | `nac.m188085530rc` | 15.85° | 1.17° | 0.783 | 52224 × 5064 | 29286, 760 | 0 / 0 | −0.550820 | **−1** |
+| 20 | `nac.m1177606647lc` | 16.21° | 1.74° | 0.989 | 30720 × 5064 | 13535, 233 | 0 / 0 | +0.976607 | +1 |
+| 25 | `nac.m1282310415lc` | 29.45° | 1.73° | 0.880 | 52224 × 5064 | 23167, 600 | 0 / 0 | −0.790538 | **−1** |
+| 30 | `nac.m1121081627rc` | 40.06° | 1.17° | 0.854 | 52224 × 5064 | 24255, 1267 | 0 / 0 | −0.738601 | **−1** |
+| 40 | `nac.m1190561570lc` | 44.94° | 1.72° | 0.840 | 52224 × 5064 | 21898, 1960 | 0 / 0 | −0.729385 | **−1** |
+| 50 | `nac.m1157600009rc` | **73.64°** | 1.17° | 1.003 | 52224 × 5064 | 26444, 12 | 0 / 0 | −0.990175 | **−1** |
+
+Acquired 2012-04-03 to 2023-08-28. Resolution ratio across the set
+**1.281** (0.783–1.003 m), inside RD-07's in-sample range (R5 will report it
+per pair).
+
+**S0(d) — six of the seven frames are mirrored.** RD-07 found 5 of 14 (E-037);
+this window gives **6 of 7**, read from the archive's own corner columns
+before any pixel was fetched. `north_up_east_right` is applied to every frame,
+as the frozen pipeline requires. This is the strongest available *incidental*
+check on EXP-006's finding (D-056): the one protocol step measured to outweigh
+a matcher replacement is load-bearing on **86 % of this held-out set**, and
+had this stage inherited RD-07's original quarter-turn convention it would
+have been running the wrong orientation on six of seven frames. Nothing is
+tuned on that observation; it is recorded because it was knowable before the
+data and would otherwise look like hindsight in Part 2.
+
+### A1.5 S5 from geometry — MET, with the margin stated
+
+Counts over the **20 CONFIRMED** pairs (`verify_tile_overlap.py
+--require-confirmed`, CONFIRM_AT = 0.50 at the pessimistic end, unchanged):
+
+| clause | required | measured | |
+|---|---|---|---|
+| `n_<15` | ≥ 5 | **7** | ✓ |
+| `n_15–30` | — | 8 | (reported) |
+| `n_≥30` | ≥ 5 | **5** | ✓ *exactly at the minimum* |
+| `n_≥40` | ≥ 3 | **3** | ✓ *exactly at the minimum* |
+| `n_total` | ≥ 12 | **20** | ✓ |
+| a frame with incidence ≤ 30° | 1 | 10.88° | ✓ |
+| a frame with incidence ≥ 60° | 1 | 73.64° | ✓ |
+| CONFIRMED triangles | ≥ 1 | **30** | ✓ |
+| frames | ≤ 8 | 7 | ✓ |
+
+**Two clauses sit exactly on their minimum**, which is worth saying out loud
+before any result exists: `n_≥30 = 5` and `n_≥40 = 3` are the smallest sets
+that make S1's high range and S1c *capable of failing* at all (§5.1's "why
+S5's minima are what they are"). So S1's high-Δinc verdict will rest on five
+pairs and S1c on three. That is enough to fail and not much more, and Part 2
+will not describe a pass there as strong evidence.
+
+**One pair is excluded as unconfirmed** and is listed rather than dropped
+silently: `nac.m1157600009rc` ↔ `nac.m188085530rc`. Seven frames give 21
+unordered pairs; 20 enter.
+
+Δincidence of the 20 CONFIRMED pairs: 0.36, 4.88, 4.97, 5.33, 10.61, 13.24,
+13.60, 15.49, 18.57, 23.85, 24.21, 28.70, 28.73, 29.09, 29.18, 33.58, 34.06,
+44.19, 57.43, 62.76°.
+
+### A1.6 S0(a) — the untouched grep
+
+`experiments/EXP-018/exp018_s0_untouched.json`, run at git HEAD
+**`531ad29`**, over the whole repository tree: **518 files scanned, 435 read**
+(file names and contents), both spellings (`Mnnnnnnnnn[LR]C` and
+`nac.mnnnnnnnnn[lr]c`), all **21** post-dedupe candidates.
+
+**Total hits: 0. No frame was dropped.** The held-out set is untouched by
+this repository's entire history, by the same test that closed the
+"untouched tiles exist" branch in §3.1.
+
+### A1.7 What happens next, in this order
+
+Fetch ≤ 8 tiles (byte ranges, SHA-256 per tile, decimation 2) → manifest with
+`retrieved_utc` → re-verify overlap on the recorded tiles → **S0(e)
+reproduction gate** → the single run. If the reproduction gate fails, the
+stage stops there and reports it (§4 step 6).
+
+---
 
 ---
 
