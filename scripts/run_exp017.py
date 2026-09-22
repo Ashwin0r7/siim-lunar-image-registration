@@ -521,6 +521,54 @@ def _seed(win_idx, e_idx, tag):
     return np.random.default_rng([NULL_SEED, win_idx, e_idx, tag])
 
 
+#: E-044/E-048 guard. ``coverage_metrics`` builds an exact N x N x 2 difference
+#: tensor for its median nearest-neighbour term -- 16 N^2 bytes, i.e. 5.20 GiB
+#: at the 18 681 inliers arm B's own texture produces, which is what killed
+#: this run once. Coverage is a SECONDARY reported quantity here (Part 1
+#: section 2.2(e)), never a criterion, so it may not take a criterion cell
+#: down. The fix belongs in ``src/siim/evaluation/coverage.py`` and is
+#: deliberately deferred: EXP-018's frozen S0(f) forbids any ``src/`` change
+#: between its runner commit and its run. Until then, this is runner-side.
+COVERAGE_EXACT_MAX_POINTS = 12_000
+
+
+def _coverage_guarded(dst_in, win) -> dict | None:
+    """Coverage for one cell, or a recorded reason it could not be computed.
+
+    Full point set first, so the recorded numbers are the true ones wherever
+    the machine allows it. On ``MemoryError`` the set is subsampled ONCE,
+    deterministically, and the result is flagged ``subsampled_from`` so it is
+    never silently compared with an exact row. A biased number that announces
+    itself is usable; one that does not is not.
+    """
+    if not dst_in.shape[0]:
+        return None
+
+    def _m(pts):
+        c = coverage_metrics(pts, win.image.shape, roi=win.valid)
+        return {"grid_occupancy": c.grid_occupancy,
+                "max_uncovered_disc_ratio": c.max_uncovered_disc_ratio,
+                "n_points": int(pts.shape[0])}
+
+    n = int(dst_in.shape[0])
+    try:
+        if n <= COVERAGE_EXACT_MAX_POINTS:
+            return _m(dst_in)
+        raise MemoryError(f"{n} points exceeds the {COVERAGE_EXACT_MAX_POINTS} "
+                          f"exact ceiling ({16 * n * n / 2**30:.2f} GiB tensor)")
+    except MemoryError as exc:
+        idx = np.random.default_rng([NULL_SEED, n]).choice(
+            n, COVERAGE_EXACT_MAX_POINTS, replace=False)
+        try:
+            out = _m(dst_in[np.sort(idx)])
+        except MemoryError as exc2:            # pragma: no cover - belt and braces
+            return {"error": f"MemoryError: {exc2}", "n_points": n}
+        out["subsampled_from"] = n
+        out["subsample_reason"] = str(exc)
+        out["comparable_with_exact_rows"] = False
+        return out
+
+
 def run_cell(win: Window, e: float, win_idx: int, e_idx: int, n_null: int) -> dict:
     t0 = time.perf_counter()
     row = {"arm": win.arm, "window": win.name, "e_deg": e, "gsd_m": win.gsd,
@@ -615,9 +663,7 @@ def run_cell(win: Window, e: float, win_idx: int, e_idx: int, n_null: int) -> di
 
     # secondaries: coverage, refinement shift vs slope
     dst_in = res.dst_points[res.inlier_mask]
-    cov = coverage_metrics(dst_in, win.image.shape, roi=win.valid) if dst_in.shape[0] else None
-    row["coverage"] = None if cov is None else {"grid_occupancy": cov.grid_occupancy,
-                                                 "max_uncovered_disc_ratio": cov.max_uncovered_disc_ratio}
+    row["coverage"] = _coverage_guarded(dst_in, win)
     if res.refinement is not None and res.refinement.ok.any():
         ok = res.refinement.ok
         sh = np.hypot(*res.refinement.shift[ok].T)
