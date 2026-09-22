@@ -4,10 +4,15 @@
 the pre-flight checks, the exact click order, the words to say, the number to
 point at in each shot, and what to do when something goes wrong on camera.
 
-**Length target 5:30.** Every beat has a timecode. If you run long, cut beat 8
-(ablation) first and beat 10 (provenance) last — never cut **beat 5**, the
-trap, or **beat 7**, what the system can still be wrong about. Those two are
-why this entry is not interchangeable with every other one.
+**Length target 7:30**, rewritten 2026-09-23 when four modules and a live
+path were added. Every beat has a timecode.
+
+**If you are capped at five minutes**, cut in this order: beat 8 (ablation),
+then beat 9b's viewpoint and modality paragraphs (keep scale), then beat 10
+(provenance). **Never cut beat 5** (the trap), **beat 7** (what the system can
+still be wrong about), or **beat 9c's refusal** (the live REJECTED with no
+registered image). Those three are why this entry is not interchangeable with
+every other one — everybody else will show you an alignment that worked.
 
 **The one rule: never say a number the page is not showing.** Every figure on
 screen is read from a recorded artefact and the page prints that artefact's
@@ -24,7 +29,7 @@ be faked. Every number in this script has been checked against the live page
 | 1 | No heavy job is running | `Get-CimInstance Win32_Process -Filter "Name='python.exe'"` | **only `run_demo.py`.** This is the one check you cannot skip — see the box below |
 | 2 | Tests green | `python -m pytest -o addopts="" -q` | all pass. Read the count off *this* run for beat 10; do not quote it from memory |
 | 3 | Demo starts | `python scripts/run_demo.py --open` | it prints every real-data artefact it looked for, then a URL. **Read that printout** — a missing artefact appears here, not on camera |
-| 4 | Page loads | browser opens at `http://127.0.0.1:8000/` (or the next free port) | hero, then modules 01–07 |
+| 4 | Page loads | browser opens at `http://127.0.0.1:8000/` (or the next free port) | hero, then modules 01–11 and the **Live** card in the nav |
 | 5 | Offline is real | turn Wi-Fi **off**, reload | identical page. Say so on camera; it is true and it is rare |
 | 6 | Frame is clean | 1920 × 1080, zoom 100 %, bookmarks bar hidden (`Ctrl+Shift+B`), notifications off | the page is near-black; a white bookmarks bar ruins the shot |
 | 7 | Cursor is slow | ~1 s per scroll step | fast scrolling through a dense page reads as panic |
@@ -264,9 +269,136 @@ left to right and **slow down — this is the beat of the whole video.**
 
 ---
 
-## 10. Provenance — the close (5:00–5:30)
+## 9a. Against what? — the controlled reference (5:00–5:35)
 
-**Shot.** Module 07. Click one artefact link.
+**Shot.** Module 07. Land on the tile that reads **137.6 m**, then the one that
+reads **2.24 m**.
+
+> "Everything you have seen so far was checked against the archive's own
+> corner geometry, and we have always said that only resolves to about a
+> hundred pixels. This week we stopped saying *about*. We brought in a
+> product from a different mission — Kaguya, a different agency, a different
+> spacecraft, a different decade, tied to its own control network — and
+> registered it to twenty of our tiles."
+
+**Point at:** `137.6 m`.
+
+> "The archive and Kaguya's control network disagree by a hundred and
+> thirty-seven metres, systematically eastward. That is the hundred-pixel
+> floor, measured instead of estimated."
+
+**Point at:** `2.24 m` and the CI beside it.
+
+> "And here is the number we could not produce until now. Register A to the
+> reference, the reference to B — never A to B — and compose. That chain
+> agrees with the direct registration to **two point two four metres**, with
+> a confidence interval, on seventeen pairs. It is the first accuracy-class
+> number in this project that is not the image checked against itself."
+
+**Say the limit out loud. Do not let a judge find it:**
+
+> "It is a bound on the sum of two registration errors, not an absolute
+> accuracy — both legs share the reference, so the reference's own error
+> cancels. Manual check points are the only way past that, and we say so on
+> the page."
+
+---
+
+## 9b. The three variations the problem statement names (5:35–6:35)
+
+*This is the beat that answers the brief directly. Move quickly — three
+modules, one sentence each, one number each.*
+
+**Shot.** Module 08. The four tiles.
+
+> "Scale. The problem statement asks for two-to-one through three-hundred-
+> twenty-to-one. We built the ladder on real imagery and it stops at
+> **thirty-two to one**."
+
+**Pause. Then the second tile.**
+
+> "The useful part is *why*. We ran a control that halves the ratio while
+> holding the pixel count fixed. The ratio's coefficient comes out at
+> **zero point zero zero zero two, p equals zero point nine nine nine**. It
+> is not the ratio. It is the number of pixels — and that number is
+> **two thousand and forty-eight**."
+
+**Point at:** the arithmetic table.
+
+> "Which turns every sensor pair into arithmetic instead of another
+> experiment. The pairing the problem statement actually names — the
+> high-resolution camera inside the hyperspectral grid at three-twenty to one
+> — holds about five and a half thousand pixels. That is **above** our floor.
+> The rung that failed on our disk had five hundred and seventy."
+
+**Shot.** Still module 08, the arm-N table.
+
+> "And this one costs us something. Our own architecture says scale
+> normalisation is a required stage. We ablated it. Without it, ten out of
+> ten, at every rung. It ties. We superseded our own decision and left the
+> row in the ledger."
+
+**Shot.** Module 09.
+
+> "Viewpoint. We had no evidence of any kind — every frame we hold is
+> near-nadir. So we built an oblique view from a real terrain model on a real
+> orthoimage, where the ground truth is exact. A flat model holds to thirty
+> degrees. What fails is the problem statement's own wording — *residuals
+> white* — which holds at zero degrees and nowhere else, at amplitudes as
+> small as three hundredths of a pixel. We report that as mis-specified, with
+> the measurement that shows it."
+
+**Shot.** Module 10.
+
+> "Multi-modality. No hyperspectral product was ever delivered to us, so we
+> asked the same question with the closest public instrument: nine reflectance
+> bands on the same map frame. **Seven of nine register**, all within
+> one-point-three times the panchromatic comparator. Thermal starves — forty-
+> nine keypoints, zero inliers — and we state that as a bound. It is not
+> IIRS, and that word appears in no claim we make."
+
+---
+
+## 9c. Now do it to our system, live (6:35–7:05)
+
+*The only beat where the machine is not reading a recorded file. If the room
+has a laptop, this is the moment to hand it over.*
+
+**Shot.** Click **Live** in the nav. Drop the two example images.
+
+> "Everything so far is recorded and traceable. This is not. Drop two images
+> and it registers them here, in this request, and labels the result live."
+
+**Let it run. Land on the verdict.**
+
+> "INCONCLUSIVE — because two images cannot close a loop, and loop closure is
+> the only check we measured that catches a coherent wrong answer. The page
+> says so and then tells you what to do about it."
+
+**Click the third slot. Drop the third image. Run.**
+
+> "Three images, three independent edges, and the composition returns to the
+> identity. **VERIFIED.** Same verdict code, same frozen thresholds, on
+> images it has never seen."
+
+**Then the refusal — this is the part to keep if you cut anything else:**
+
+> "And here is one it refuses."
+
+**Load the forty-degree pair. Run.**
+
+> "Five inliers. **REJECTED** — and notice what is *not* on the screen. There
+> is no registered image. It will not hand you an alignment it cannot
+> defend."
+
+---
+
+## 10. Provenance — the close (7:05–7:30)
+
+**Shot.** Module 11 — provenance. Click one artefact link.
+
+*(It was module 07 before the reference, scale, viewpoint and modality
+panels were added; provenance is now the last module on the page.)*
 
 > "Every figure you have seen names the file it came from. Here are the
 > products, the byte ranges we fetched, and the SHA-256 of those bytes."
@@ -278,11 +410,13 @@ left to right and **slow down — this is the beat of the whole video.**
 
 **Back to the page, end on the hero.**
 
-> "Twenty-one completed pre-registered stages, each with its criteria frozen
-> in Git before its data existed. An error ledger with forty-six entries —
-> our own mistakes, including the ones that invalidated our own criteria. A
-> decision ledger with fifty-eight. Negative results published so nobody
-> repeats them."
+> "Twenty-five completed pre-registered stages, each with its criteria frozen
+> in Git before its data existed. An error ledger with fifty-six entries —
+> our own mistakes, including the ones that invalidated our own criteria, and
+> the two from this week that say a criterion we wrote could never have been
+> satisfied. A decision ledger with sixty-seven, and one of them supersedes
+> our own architecture because its ablation tied. Negative results published
+> so nobody repeats them."
 
 > "We built a system that refuses to certify what it cannot defend. Then we
 > held it to the same standard."
