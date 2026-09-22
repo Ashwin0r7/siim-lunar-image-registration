@@ -713,4 +713,219 @@ stage stops there and reports it (§4 step 6).
 
 ## Part 2
 
-*Empty. Written only after this Part 1 is committed.*
+**Run 2026-09-22.** One window, one pass, 20 CONFIRMED pairs × 3 engines = 60
+edge rows, 7 triangles, **9.9 min**. Artefacts:
+`experiments/EXP-018/exp018_results.json`,
+`experiments/EXP-018/rows_tranquillitatis_nue.json`,
+`experiments/EXP-018/exp018_s0_gate.json`,
+`data/manifests/exp018_tranquillitatis_manifest.json`.
+
+### 6. The answer, in one paragraph
+
+**Of the ten graded predictions this document froze, eight held and two
+failed — and the two that failed are exactly the two §5.3 named as the most
+likely to fail.** The advertised illumination envelope's hard edge is
+**refuted**: registration succeeded out of sample at **Δinc 44.19° and
+57.43°**, where in-sample nothing passed above 40°. The engine-agreement
+floor is **breached**: two engines disagree by **5.24 px** against a 3.0 px
+line and an in-sample maximum of 2.16 px, which is **D-051's own stated
+reversal condition**. Against that, the two claims the project leans on
+hardest both survived: **zero wrong passes** on all three engines out of
+sample, and **7 of 7 triangles closing at 0.40–1.11 px with all 21 edge
+verdicts VERIFIED** — the first VERIFIED verdicts this project has produced
+on ground it had never opened. The phrase *"every figure is in-sample"* is
+retired; the phrase *"nothing passes above 40°"* is retired with it.
+
+### 7. Criteria, answered exactly as frozen
+
+| ID | frozen verdict | the numbers |
+|---|---|---|
+| **S0** | **MET** (all six clauses) | (a) 0 grep hits for all 21 candidates over 518 files at HEAD `531ad29`, no frame dropped; (b) 588.76 / 577.65 km from RD-03 / RD-04; (c) **20 of 21** pairs CONFIRMED before any matching, the one exclusion named; (d) orientation applied, per-frame Jacobian signs recorded — **but the reported count is wrong, see E-049**; (e) **the gate holds exactly** — 1608 / 2726 / 2138 reproduced as 1608 / 2726 / 2138, RD-03's loop re-composed to **1201.0378963072 px**; (f) runner committed before the fetch, no `src/` change between that commit and the run |
+| **S1** | **NOT MET** — through S1c alone | S1a, S1b and S1d are each MET: **no range rejects at the frozen two-sided 0.05** for any engine. **S1c NOT MET:** the point prediction was 0 successes at Δinc ≥ 40°, and there are **3** |
+| **S2** | **MET** | **0 wrong passes out of sample on every engine** — B1 0/12 passes, B4L 0/12, B4X 0/17. S2b: `P(X ≥ 0)` = 1.0 against every `p_upper`; §53's FA ≤ 5 % line likewise not rejected. **Weak by arithmetic and said to be** (§5.2: at n_pass = 12 it can only fail at k ≥ 3) |
+| **S3** | **NOT MET** — through S3a | **S3a NOT MET:** 34 qualifying pairs; B1–B4L max **1.04 px** (n=10) and B1–B4X max **2.29 px** (n=12) both hold, but **B4L–B4X reaches 5.2406 px** (n=12) against the 3.0 px floor. **S3b CANNOT CHECK** — 0 INCONSISTENT passes occurred, so it is null by construction and is **not** reported as MET |
+| **S4** | **MET** | **7 triangles, 7 closing, 21 of 21 edge verdicts VERIFIED.** Residuals **0.4001, 0.4132, 0.4624, 0.5409, 0.8530, 1.0419, 1.1120 px** — every one under the 2.0 px line frozen before the data, and the range sits *inside* EXP-012's in-sample 0.3654–1.3358 px |
+| **S5** | **MET, from geometry, before any pixel** | 20 CONFIRMED pairs ≥ 12; 7 at Δinc < 15 ≥ 5; **5 at ≥ 30 and 3 at ≥ 40, both exactly on the minimum**; 30 triangles; 7 frames ≤ 8; incidence 10.88°–73.64° |
+
+### 8. S1c — the envelope's hard edge is a property of 42 pairs, not of the pipeline
+
+Every pair at Δinc ≥ 40°, all three engines, with the geometry verdict:
+
+| Δinc | B1 | B4L | B4X | archive geometry |
+|---|---|---|---|---|
+| **44.19°** | **318 ✓** | **1337 ✓** | **375 ✓** | CONSISTENT for all three |
+| **57.43°** | **10 ✓** | 0 ✗ | **29 ✓** | CONSISTENT for both passes |
+| 62.76° | 3 ✗ | 0 ✗ | 6 ✗ | INCONSISTENT (B1, B4X) |
+
+So **B1 passes 2 of 3 above 40° where in-sample it passed 0 of 4**, and B4L
+1 of 3. **Not one of those passes is a wrong pass** — every one is consistent
+with archive corner geometry, checked after the decision. The 44.19° pair is
+not marginal either: 318, 1337 and 375 inliers across three independent
+engines.
+
+**What this costs and what it buys, both stated.** It buys a wider envelope:
+the deliverable may now say *successes observed to 57.43° Δincidence on mare,
+nothing at 62.76°*, which is a better number than the one it replaces. It
+costs the generality of the old claim: **"nothing passes above 40°" was a
+description of the 42 Mare Serenitatis pairs and did not survive contact with
+a second mare window.** §5.3 predicted S1c **MET at MEDIUM on arm M** and
+recorded a bet against it only on highlands. The bet was placed on the wrong
+arm; the prediction is **WRONG**, and this is the first thing Part 2 says.
+
+**The pooled rate transferred and the shape did not** — the more interesting
+half, and it is not a criterion:
+
+| engine | < 15° | 15–30° | ≥ 30° | pooled |
+|---|---|---|---|---|
+| **B1 out of sample** | 3/7 = **0.429** | 7/8 = **0.875** | 2/5 = **0.400** | 12/20 = **0.600** |
+| B1 predicted | 0.786 | 0.632 | 0.222 | **0.595** |
+| **B4L out of sample** | 5/7 = 0.714 | 6/8 = 0.750 | 1/5 = 0.200 | 12/20 = **0.600** |
+| B4L predicted | 0.786 | 0.632 | 0.111 | 0.571 |
+
+The pooled prediction is almost exactly right (0.600 against 0.595 and 0.571).
+Underneath it, **B1's low-Δinc range collapsed from 0.786 to 0.429** — the
+closest call in the document, `P(X ≤ 3) = 0.0420` against a 0.025 rejection
+bar, a miss in the *downward* direction that the frozen two-sided test does
+not catch — while the mid and high ranges over-performed. A pooled figure that
+lands while every component moves is a warning about pooled figures, and it is
+recorded as one rather than as a success. B4X pooled 17/20 = 0.85 against
+0.643 nearly rejects *upward* (`P(X ≥ 17) = 0.0388`).
+
+### 9. S3a — D-051's own reversal condition, fired out of sample
+
+D-051 reads: *"Reversed by: a geometry-consistent all-success triple
+disagreeing by > 3 px, or an inconsistent one under 30 px."* The first clause
+has now happened.
+
+The breach is **one edge**, `nac.m188085530rc → nac.m1282310415lc` at Δinc
+13.60°, and its mechanism is worth more than the number:
+
+| engine | inliers | verdict | archive geometry | occupancy |
+|---|---|---|---|---|
+| B1 | 5 | **fails** the frozen rule | INCONSISTENT | 0.047 |
+| B4L | **9** | passes | CONSISTENT | 0.094 |
+| B4X | **13** | passes | CONSISTENT | 0.172 |
+
+**The two engines that disagree by 5.24 px are two marginal passes** — 9 and
+13 inliers, one and five above the cutoff of 8 — **both with coverage under
+0.18**, i.e. both extrapolating across more than 80 % of the overlap. B1, on
+the same pair, fails and is caught by geometry. So the 3 px floor did not fail
+where registrations are strong; it failed exactly where the evidence is
+thinnest, and the pipeline's other signals were already saying so. The
+agreement floor is not wrong about strong pairs — **it was calibrated on a
+set that contained no pair this weak that two engines both passed.**
+
+`B1–B4L` (max 1.04 px) and `B1–B4X` (max 2.29 px) both stay inside the floor
+across 22 pairs, so the in-sample 2.16 px figure reproduces for every engine
+pair involving B1.
+
+§5.3 predicted S3a **MET at MEDIUM** on arm M, naming relief parallax as the
+physical risk on highlands. **The prediction is WRONG, and the reason it gave
+is not the reason it failed** — this is mare, the emission difference on that
+edge is small, and the cause is marginal-pass coverage, not parallax. Both
+halves are recorded.
+
+### 10. What held, and why it matters more than what broke
+
+**S2 — zero wrong passes, out of sample, on all three engines.** 41 passes
+across B1, B4L and B4X, every one consistent with archive corner geometry.
+The in-sample count was 0/46, 1/49, 0/27; out of sample it is 0/12, 0/12,
+0/17. This is the project's central safety claim and it transferred. **It
+remains a bound at the geometry check's ~250 px floor and is not an FA
+rate** (§0.1), and S2b is arithmetically weak (§5.2) — S2a carries the weight.
+
+**S4 — the first out-of-sample VERIFIED verdicts.** Seven triangles formed,
+seven closed, 21 of 21 edge verdicts VERIFIED under the unmodified
+`assess()`, at 0.4001–1.1120 px against a line frozen before the data. And the
+same run reproduces EXP-012's refuted S2 out of sample: the weakest triangle
+carries a **10-inlier** edge and still closes at 0.4624 px; Spearman ρ between
+minimum edge inliers and loop residual is **0.0901** (in-sample 0.0551). A
+marginal edge rides into VERIFIED on a loop that closes around it, on ground
+this project had never opened. **Loop closure is exactly blind to per-image
+gauge error** (§5.2, EXP-012 §6) and a closing loop is still not an accuracy
+statement.
+
+### 11. Reported beside the criteria, not graded (§7)
+
+- **R1 — the Δincidence separation does NOT reproduce for B1.** Exact test on
+  20 held-out pairs: B1 **p = 0.575**, B4L p = 0.0784, B4X p = 0.0272, against
+  an in-sample pooled **p = 0.0012**. §6.7 forbids calling anything
+  significant below n = 20 and this is n = 20, so no significance is claimed
+  in either direction — but the honest reading is that **on this window
+  Δincidence does not order B1's outcomes at all**, which is the same message
+  S1c delivers from the other end. The project's strongest single result is
+  the one that looks weakest out of sample.
+- **R2 — B4L's yield advantage does not reproduce.** Median B4L/B1 inlier
+  ratio **1.36** (range 0.270–21.36, n = 7) against an in-sample 5–25×
+  (D-047-N1) and a predicted median in [3, 30]. **The prediction missed**, and
+  R2 is reported, not graded, so it changes no criterion.
+- **R3 — no data.** The window holds no frame pairing with Δinc ≤ 25° whose
+  higher incidence is ≥ 65°, so the incidence-ceiling comparison has n = 0 in
+  both decisive bins. Reported as no data, not as agreement.
+- **R4 — EXP-012's refutation reproduces**, above.
+- **R5** — resolution ratios 1.006–1.130, emission differences 0.01°–0.57°,
+  recorded per pair beside every S3/S4 row.
+- **R6 — §53 criterion 4 fails out of sample too.** Over the 21 VERIFIED
+  edges, `max_uncovered_disc_ratio` runs **0.0346–0.4316 and 6 of 21 exceed
+  0.15**; 15 edges are `high` confidence and 6 `moderate`. Under EXP-015's
+  restated form 4′, `grid_occupancy` runs 0.125–1.000 and **all 21 clear the
+  calibrated floor T = 0.078125**. Both are already recorded as mis-specified
+  (D-057) and neither is graded here; the out-of-sample numbers are added to
+  that record and change nothing.
+
+### 12. The predictions, graded — including the overall one
+
+| prediction (§5.3, arm M column) | confidence | outcome |
+|---|---|---|
+| S0 MET | HIGH | **MET** ✓ |
+| S1a (B1 ranges) MET | MEDIUM | **MET** ✓ (narrowly, and downward) |
+| S1b (B4L) MET | MEDIUM | **MET** ✓ |
+| S1c — 0 above 40° | MEDIUM | **NOT MET — WRONG** ✗ |
+| S1d (B4X pooled) MET | MEDIUM | **MET** ✓ |
+| S2a — 0 wrong passes | MEDIUM | **MET** ✓ |
+| S2b — bound | HIGH | **MET** ✓ |
+| S3a — ≤ 3 px | MEDIUM | **NOT MET — WRONG** ✗ |
+| S3b — CANNOT CHECK | MEDIUM | **CANNOT CHECK** ✓ |
+| S4 — loops < 2.0 px | MEDIUM | **MET** ✓ |
+| S5 MET **on priority 1** | MEDIUM | **WRONG** ✗ — priority 1 and 2 both failed S5; priority 3 passed |
+
+**The overall prediction was WRONG in the most instructive way available.**
+§5.3 closed: *"I predict at least one graded prediction fails on arm H (most
+likely S1c or S3a), at MEDIUM confidence; and that all graded predictions hold
+on arm M, at MEDIUM confidence."* Arm H was never reachable — it could not
+supply a set capable of failing the criteria — and on arm M **two predictions
+failed: S1c and S3a, precisely the two named.** The document identified which
+of its claims were fragile and was wrong about where the fragility lived. That
+is a better outcome than being right, and it is why the arm was fixed in
+advance (§8) rather than chosen after.
+
+### 13. What this stage does NOT claim (§9, restated against the results)
+
+- **Not an FA or FR measurement.** 0 wrong passes in 41 out-of-sample passes
+  is a bound at a ~250 px floor. **FR: not measurable.** §53 criterion 3 stays
+  **NOT EVALUABLE** for both clauses.
+- **Not an accuracy claim.** No ground truth, no check points. Loop closure is
+  blind to per-image gauge; geometry corroborates at its floor.
+- **Not "the envelope reaches 57°".** One mare window, 7 frames, 20 pairs,
+  Δincidence only, near-nadir, native NAC rung. What is licensed is:
+  *successes were observed at 44.19° and 57.43° on this window, so the
+  in-sample "nothing above 40°" is not a property of the pipeline.*
+- **Not a highlands or terrain-transfer result.** Arm H was censused twice and
+  rejected at S5 from geometry; gap item **C5 stays open** (A1.1).
+- **Not a Chandrayaan-2, viewpoint, scale or multi-modal result.**
+- **Not a verdict recalibration.** No constant in `verdict.py`, `agreement.py`
+  or the runner changed as a consequence of this stage (§8). D-051's reversal
+  is recorded as a superseding note (**D-051-N1**), and what replaces the 3 px
+  floor is deliberately left to a stage that can calibrate it.
+
+### 14. Ledger and index
+
+- **D-059** — the envelope's upper edge is restated from the held-out result.
+- **D-051-N1** — the engine-agreement floor is reversed by its own condition;
+  the constant is **not** retuned here.
+- **E-049** — S0(d)'s `n_mirrored` counts edge rows, not frames.
+- `STAGE-INDEX.md`, `STAGE_HISTORY.md`, `research_log.md` **RL-053**;
+  `PROJECT_GAP_ANALYSIS.md` **B1 closed**, hostile-reviewer point 7 answered;
+  `FINAL_SUCCESS_CRITERIA_AUDIT.md` criterion 3 restated with the
+  out-of-sample wrong-pass count and the words *"FA and FR remain
+  unmeasurable"*.

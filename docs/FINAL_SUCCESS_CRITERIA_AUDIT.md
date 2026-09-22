@@ -119,6 +119,36 @@ space (ADR-0011 N1), recorded as a known limitation rather than patched.
 
 ---
 
+
+## UPDATE 2026-09-22 — criterion 3 measured out of sample for the first time (EXP-018)
+
+**Criterion 3 stays NOT EVALUABLE for FA and FR, and that is now a measured
+statement rather than an untested one.** EXP-018 opened one held-out window
+once and reports, on data no stage had touched:
+
+- **Wrong passes: 0 in 41 out-of-sample passes** — B1 0/12, B4L 0/12,
+  B4X 0/17, every pass CONSISTENT with archive corner geometry. In-sample the
+  counts were 0/46, 1/49, 0/27.
+- **This is still not an FA rate.** It is a bound at the geometry check's own
+  ~250 px discrimination floor: a wrong pass means a transform wrong by
+  *more than about 250 px*, and nothing here sees an error below that. EXP-018
+  Part 2 does not call it an FA rate and neither does this audit.
+- **FR is not measured at all.** A REJECTED pair that was in fact registrable
+  is indistinguishable from one that was not, without ground truth. There is
+  none.
+- **The adversarial clause is unchanged** and still MET for the wrong reason
+  (E-039).
+
+**What did change.** The clause *"on validation sites"* now has validation
+sites. Two of the project's advertised numbers **failed** there — the
+illumination envelope's 40° edge (**D-059**) and the 3 px engine-agreement
+floor (**D-051-N1**) — and two of the load-bearing ones held: zero wrong
+passes, and **7 of 7 triplets VERIFIED at 0.4001–1.1120 px**, the first
+VERIFIED verdicts produced on ground this project had never opened.
+
+**FA and FR remain unmeasurable.** Closing them needs ground truth, which is
+item A3 (geodetic check points) and is not on disk.
+
 ## UPDATE 2026-09-21 (later) — EXP-013 ran; the blind spot is measured and NOT closed
 
 `docs/stages/EXP-013_gauge_detection.md`, artefact

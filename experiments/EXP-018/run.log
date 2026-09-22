@@ -1,0 +1,84 @@
+S0(e) reproduction gate on the recorded tiles
+  gate nac.m1299958135lc -> nac.m1271742202lc: 1608 (recorded 1608) OK
+  gate nac.m1299958135lc -> nac.m1315225542lc: 2726 (recorded 2726) OK
+  gate nac.m1315225542lc -> nac.m1271742202lc: 2138 (recorded 2138) OK
+  gate RD-03 loop: 1201.0378963072 px (recorded 1201.0378963072) OK
+S5 from geometry: {'n_lt15': 7, 'n_15to30': 8, 'n_ge30': 5, 'n_ge40': 3, 'n_total': 20, 'n_frames': 7, 'n_confirmed_triangles': 30, 'min_incidence_deg': 10.88, 'max_incidence_deg': 73.64, 'checks': {'n_lt15': True, 'n_ge30': True, 'n_ge40': True, 'n_total': True, 'one_frame_le_30': True, 'one_frame_ge_60': True, 'at_least_one_triangle': True, 'at_most_8_frames': True}, 'met': True, 'minima': {'n_lt15': 5, 'n_ge30': 5, 'n_ge40': 3, 'n_total': 12, 'max_frames': 8, 'one_frame_incidence_le': 30.0, 'one_frame_incidence_ge': 60.0}}
+
+held-out run: 20 CONFIRMED pairs x 3 engines
+  [tranquillitatis] 1447850428rc->m188085530rc dInc= 4.97 b1   inl=   13 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (18s)
+Loaded LightGlue model
+  [tranquillitatis] 1447850428rc->m188085530rc dInc= 4.97 lg   inl= 1028 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (44s)
+  [tranquillitatis] 1447850428rc->m188085530rc dInc= 4.97 xf   inl=  428 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (13s)
+  [tranquillitatis] 1447850428rc->1177606647lc dInc= 5.33 b1   inl=  905 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (19s)
+  [tranquillitatis] 1447850428rc->1177606647lc dInc= 5.33 lg   inl= 1376 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (42s)
+  [tranquillitatis] 1447850428rc->1177606647lc dInc= 5.33 xf   inl=  314 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (11s)
+  [tranquillitatis] 1447850428rc->1282310415lc dInc=18.57 b1   inl=  131 SUCCESS  geom=INCONCLUSIVE  (16s)
+  [tranquillitatis] 1447850428rc->1282310415lc dInc=18.57 lg   inl=  496 SUCCESS  geom=INCONCLUSIVE  (43s)
+  [tranquillitatis] 1447850428rc->1282310415lc dInc=18.57 xf   inl=  118 SUCCESS  geom=INCONCLUSIVE  (16s)
+  [tranquillitatis] 1447850428rc->1121081627rc dInc=29.18 b1   inl=  334 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (15s)
+  [tranquillitatis] 1447850428rc->1121081627rc dInc=29.18 lg   inl= 1308 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (42s)
+  [tranquillitatis] 1447850428rc->1121081627rc dInc=29.18 xf   inl=  388 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (11s)
+  [tranquillitatis] 1447850428rc->1190561570lc dInc=34.06 b1   inl=    5 fail  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (21s)
+  [tranquillitatis] 1447850428rc->1190561570lc dInc=34.06 lg   inl=    0 fail  geom=no transform  (34s)
+  [tranquillitatis] 1447850428rc->1190561570lc dInc=34.06 xf   inl=   16 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (16s)
+  [tranquillitatis] 1447850428rc->1157600009rc dInc=62.76 b1   inl=    3 fail  geom=INCONSISTENT WITH ARCHIVE GEOMETRY  (23s)
+  [tranquillitatis] 1447850428rc->1157600009rc dInc=62.76 lg   inl=    0 fail  geom=no transform  (38s)
+  [tranquillitatis] 1447850428rc->1157600009rc dInc=62.76 xf   inl=    6 fail  geom=INCONSISTENT WITH ARCHIVE GEOMETRY  (18s)
+  [tranquillitatis] m188085530rc->1177606647lc dInc= 0.36 b1   inl=    4 fail  geom=INCONSISTENT WITH ARCHIVE GEOMETRY  (19s)
+  [tranquillitatis] m188085530rc->1177606647lc dInc= 0.36 lg   inl=   29 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (40s)
+  [tranquillitatis] m188085530rc->1177606647lc dInc= 0.36 xf   inl=   80 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (17s)
+  [tranquillitatis] m188085530rc->1282310415lc dInc=13.60 b1   inl=    5 fail  geom=INCONSISTENT WITH ARCHIVE GEOMETRY  (19s)
+  [tranquillitatis] m188085530rc->1282310415lc dInc=13.60 lg   inl=    9 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (172s)
+  [tranquillitatis] m188085530rc->1282310415lc dInc=13.60 xf   inl=   13 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (24s)
+  [tranquillitatis] m188085530rc->1121081627rc dInc=24.21 b1   inl=   50 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (13s)
+  [tranquillitatis] m188085530rc->1121081627rc dInc=24.21 lg   inl= 1068 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (50s)
+  [tranquillitatis] m188085530rc->1121081627rc dInc=24.21 xf   inl=  407 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (9s)
+  [tranquillitatis] m188085530rc->1190561570lc dInc=29.09 b1   inl=    5 fail  geom=INCONSISTENT WITH ARCHIVE GEOMETRY  (16s)
+  [tranquillitatis] m188085530rc->1190561570lc dInc=29.09 lg   inl=    0 fail  geom=no transform  (36s)
+  [tranquillitatis] m188085530rc->1190561570lc dInc=29.09 xf   inl=    6 fail  geom=INCONCLUSIVE  (15s)
+  [tranquillitatis] 1177606647lc->1282310415lc dInc=13.24 b1   inl= 6623 SUCCESS  geom=INCONCLUSIVE  (33s)
+  [tranquillitatis] 1177606647lc->1282310415lc dInc=13.24 lg   inl= 2004 SUCCESS  geom=INCONCLUSIVE  (53s)
+  [tranquillitatis] 1177606647lc->1282310415lc dInc=13.24 xf   inl= 1001 SUCCESS  geom=INCONCLUSIVE  (16s)
+  [tranquillitatis] 1177606647lc->1121081627rc dInc=23.85 b1   inl=   22 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (28s)
+  [tranquillitatis] 1177606647lc->1121081627rc dInc=23.85 lg   inl=    3 fail  geom=INCONSISTENT WITH ARCHIVE GEOMETRY  (55s)
+  [tranquillitatis] 1177606647lc->1121081627rc dInc=23.85 xf   inl=   65 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (24s)
+  [tranquillitatis] 1177606647lc->1190561570lc dInc=28.73 b1   inl= 1002 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (33s)
+  [tranquillitatis] 1177606647lc->1190561570lc dInc=28.73 lg   inl= 1363 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (54s)
+  [tranquillitatis] 1177606647lc->1190561570lc dInc=28.73 xf   inl=  437 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (16s)
+  [tranquillitatis] 1177606647lc->1157600009rc dInc=57.43 b1   inl=   10 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (32s)
+  [tranquillitatis] 1177606647lc->1157600009rc dInc=57.43 lg   inl=    0 fail  geom=no transform  (43s)
+  [tranquillitatis] 1177606647lc->1157600009rc dInc=57.43 xf   inl=   29 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (26s)
+  [tranquillitatis] 1282310415lc->1121081627rc dInc=10.61 b1   inl=    5 fail  geom=INCONSISTENT WITH ARCHIVE GEOMETRY  (36s)
+  [tranquillitatis] 1282310415lc->1121081627rc dInc=10.61 lg   inl=    3 fail  geom=INCONCLUSIVE  (57s)
+  [tranquillitatis] 1282310415lc->1121081627rc dInc=10.61 xf   inl=   35 SUCCESS  geom=INCONCLUSIVE  (26s)
+  [tranquillitatis] 1282310415lc->1190561570lc dInc=15.49 b1   inl= 8694 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (38s)
+  [tranquillitatis] 1282310415lc->1190561570lc dInc=15.49 lg   inl= 2350 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (50s)
+  [tranquillitatis] 1282310415lc->1190561570lc dInc=15.49 xf   inl= 1242 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (15s)
+  [tranquillitatis] 1282310415lc->1157600009rc dInc=44.19 b1   inl=  318 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (30s)
+  [tranquillitatis] 1282310415lc->1157600009rc dInc=44.19 lg   inl= 1337 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (57s)
+  [tranquillitatis] 1282310415lc->1157600009rc dInc=44.19 xf   inl=  375 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (14s)
+  [tranquillitatis] 1121081627rc->1190561570lc dInc= 4.88 b1   inl=    4 fail  geom=INCONSISTENT WITH ARCHIVE GEOMETRY  (36s)
+  [tranquillitatis] 1121081627rc->1190561570lc dInc= 4.88 lg   inl=    0 fail  geom=no transform  (47s)
+  [tranquillitatis] 1121081627rc->1190561570lc dInc= 4.88 xf   inl=   31 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (25s)
+  [tranquillitatis] 1121081627rc->1157600009rc dInc=33.58 b1   inl=    3 fail  geom=INCONSISTENT WITH ARCHIVE GEOMETRY  (35s)
+  [tranquillitatis] 1121081627rc->1157600009rc dInc=33.58 lg   inl=    0 fail  geom=no transform  (46s)
+  [tranquillitatis] 1121081627rc->1157600009rc dInc=33.58 xf   inl=    7 fail  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (24s)
+  [tranquillitatis] 1190561570lc->1157600009rc dInc=28.70 b1   inl= 3142 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (29s)
+  [tranquillitatis] 1190561570lc->1157600009rc dInc=28.70 lg   inl= 1720 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (53s)
+  [tranquillitatis] 1190561570lc->1157600009rc dInc=28.70 xf   inl=  934 SUCCESS  geom=CONSISTENT WITH ARCHIVE GEOMETRY  (16s)
+  LOOP 081627rc+606647lc+850428rc: 1.1120 px -> VERIFIED
+  LOOP 081627rc+850428rc+085530rc: 0.8530 px -> VERIFIED
+  LOOP 600009rc+606647lc+561570lc: 0.4624 px -> VERIFIED
+  LOOP 600009rc+606647lc+310415lc: 0.4132 px -> VERIFIED
+  LOOP 600009rc+561570lc+310415lc: 0.4001 px -> VERIFIED
+  LOOP 606647lc+561570lc+310415lc: 0.5409 px -> VERIFIED
+  LOOP 606647lc+310415lc+850428rc: 1.0419 px -> VERIFIED
+
+== criteria ==
+  S1: NOT MET
+  S2: MET
+  S3: NOT MET
+  S4: MET
+  S5: MET
+wrote experiments\EXP-018\exp018_results.json in 1991.8s

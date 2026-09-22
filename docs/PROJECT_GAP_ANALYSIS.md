@@ -53,7 +53,7 @@ This is the scorecard that matters to a judge, and it is the harshest.
 | 5 Verification | 5 | ~2.5 | EXP-012 ran; calibration/validation site split never created; FA/FR unmeasurable |
 | 6 Real Chandrayaan-2 | 8 | ~4 | TMC-2 only; **EXP-009 never ran** |
 | 7 Ablation | 3 | **3** | EXP-006, done 2026-09-21 |
-| 8 **Blind validation** | 2 | **0** | **never attempted** |
+| 8 **Blind validation** | 2 | **2** | **DONE 2026-09-22 — EXP-018.** Freeze, run, report, once |
 | 9 Hardening | 4 | **4** | done |
 | 10 Demo | 3 | ~2 | **the 320:1 beat was planned and never built** |
 | 11 Final benchmark | 2 | ~1.5 | p = 0.0012 ✓; aggregate tables partial |
@@ -91,7 +91,7 @@ That gap *is* the finding of this document, and §5 is about how it happened.
 
 | # | item | why | cost | blocked? |
 |---|---|---|---|---|
-| B1 | **Blind validation (roadmap phase 8)** | Every number in this project is in-sample. No held-out site has ever been opened once. This is the cheapest large credibility gain available | 0.5 day | no |
+| ~~B1~~ | ~~**Blind validation (roadmap phase 8)**~~ | **DONE 2026-09-22 — EXP-018.** One held-out window (Mare Tranquillitatis, 20 CONFIRMED pairs, 0 grep hits in 518 files) opened once against ten frozen predictions. **Eight held, two failed:** the envelope's 40° edge is refuted (passes at 44.19° and 57.43°, D-059) and D-051's agreement floor is reversed by its own condition (5.24 px, D-051-N1). **0 wrong passes in 41 out-of-sample passes; 7/7 triangles VERIFIED at 0.40–1.11 px.** "Every figure is in-sample" is retired | ~~0.5 day~~ | ~~no~~ |
 | B2 | **VERIFIED Chandrayaan-2 verdict** (criterion 2) | The loop misses the frozen 2.0 px line by 10 %. Needs NAC centred on the TMC-2 swath | 1 day | needs a fresh ODE census — the existing 22-frame census cannot centre a tile east of lon 22.10 |
 | B3 | **Calibration/validation site split** (criterion 3) | FA/FR are unmeasurable without it | 1 day | needs ground truth → A3 |
 | B4 | **Coverage calibration at real inlier counts** (RL-050c) | Criterion 4 is answerable in neither direction until occupancy > 0.938 is sampled | 0.5 day | no |
@@ -121,7 +121,7 @@ Ranked by how much damage the question does.
 4. **"It's called multi-modal."** No IIRS. The only cross-modality evidence is a **measured negative** (radar, 0/48). Genuinely data-blocked, but the title word is unsupported.
 5. **"Your verdict can be fooled."** Yes — 36 of 36 constructed cases reach VERIFIED / `high` with edges wrong by up to 115 px (E-039). A detector was built and measured **undeployable** with the reference on hand (D-054). Stated openly, which is the right posture, but it is a live defect.
 6. **"Everything is one region."** Mare Serenitatis, one instrument family, near-nadir, one illumination axis. Every envelope, every p-value, every engine ranking inherits that scope.
-7. **"Nothing was held out."** No blind validation. Every figure is in-sample, including the ones with CIs.
+7. ~~**"Nothing was held out."**~~ **ANSWERED 2026-09-22 (EXP-018).** One window no stage had touched, opened once, against ten numbers frozen as predictions with tolerances. Eight survived; **two did not, and both failures are published with the numbers that broke them** (D-059, D-051-N1). The remaining honest caveat is smaller and is stated: **one** held-out window, mare, 20 pairs, Δincidence only — and the two highland candidates **could not supply an anti-vacuous set at all**, so terrain transfer is still untested (C5).
 8. **"Your own success criterion 4 fails."** It does — and the project now also shows the criterion is mis-specified, which is a better answer than a pass would have been, but it must be *led with*, not discovered.
 9. **The 42-pair census is exhausted.** No further frame can centre a tile east of lon ≈ 22.10, which blocks the cheap route to criterion 2.
 10. **Demo fragility.** Four panels added today, none seen in a browser. The project's own history says string tests miss what looking catches.

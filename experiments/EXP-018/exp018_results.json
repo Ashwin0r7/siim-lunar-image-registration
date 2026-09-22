@@ -1,0 +1,3019 @@
+{
+  "stage": "EXP-018",
+  "window": "tranquillitatis",
+  "preregistration": "docs/stages/EXP-018_blind_validation.md Part 1 (commit e8071c4)",
+  "frozen_pipeline": {
+    "engines": [
+      "b1",
+      "lg",
+      "xf"
+    ],
+    "base": {
+      "model": "affine",
+      "ransac_threshold_px": 3.0,
+      "seed": 0
+    },
+    "orientation": "north_up_east_right",
+    "failure_rule": "n_inliers <= 8 (D-023)",
+    "source_is_lower_incidence_frame": true
+  },
+  "frozen_predictions": {
+    "P1": {
+      "B1": {
+        "lt15": [
+          14,
+          11,
+          0.786
+        ],
+        "15to30": [
+          19,
+          12,
+          0.632
+        ],
+        "ge30": [
+          9,
+          2,
+          0.222
+        ],
+        "pooled": [
+          42,
+          25,
+          0.595
+        ]
+      },
+      "B4L": {
+        "lt15": [
+          14,
+          11,
+          0.786
+        ],
+        "15to30": [
+          19,
+          12,
+          0.632
+        ],
+        "ge30": [
+          9,
+          1,
+          0.111
+        ],
+        "pooled": [
+          42,
+          24,
+          0.571
+        ]
+      },
+      "B4X": {
+        "pooled": [
+          42,
+          27,
+          0.643
+        ]
+      }
+    },
+    "P1_ge40_in_sample": [
+      4,
+      0
+    ],
+    "P2_upper": {
+      "B1": 0.0631,
+      "B4L": 0.0929,
+      "B4X": 0.105
+    },
+    "P2_in_sample": {
+      "B1": [
+        46,
+        0
+      ],
+      "B4L": [
+        49,
+        1
+      ],
+      "B4X": [
+        27,
+        0
+      ]
+    },
+    "P3": {
+      "agree_px": 3.0,
+      "inconsistent_min_px": 30.0
+    },
+    "P4_loop_reject_px": 2.0
+  },
+  "criteria": {
+    "S0": {
+      "a_untouched": "experiments/EXP-018/exp018_s0_untouched.json (pre-A1)",
+      "b_separation": "Part 1 section 3.3 (> 500 km from RD-03/RD-04)",
+      "c_overlap_before_pixels": {
+        "n_confirmed": 20,
+        "n_cases": 21,
+        "excluded": [
+          [
+            "nac.m1157600009rc",
+            "nac.m188085530rc"
+          ]
+        ]
+      },
+      "d_orientation": {
+        "n_mirrored": 4,
+        "jacobian_sign_per_frame": {
+          "nac.m1177606647lc": 1,
+          "nac.m1282310415lc": -1,
+          "nac.m1121081627rc": -1,
+          "nac.m1190561570lc": -1,
+          "nac.m1157600009rc": -1,
+          "nac.m188085530rc": -1,
+          "nac.m1447850428rc": -1
+        }
+      },
+      "e_reproduction_gate": {
+        "criterion": "S0(e)",
+        "edges": [
+          {
+            "edge": "nac.m1299958135lc -> nac.m1271742202lc",
+            "recorded_n_inliers": 1608,
+            "n_inliers": 1608,
+            "reproduces": true,
+            "wall_s": 11.4
+          },
+          {
+            "edge": "nac.m1299958135lc -> nac.m1315225542lc",
+            "recorded_n_inliers": 2726,
+            "n_inliers": 2726,
+            "reproduces": true,
+            "wall_s": 10.7
+          },
+          {
+            "edge": "nac.m1315225542lc -> nac.m1271742202lc",
+            "recorded_n_inliers": 2138,
+            "n_inliers": 2138,
+            "reproduces": true,
+            "wall_s": 10.4
+          }
+        ],
+        "rd03_loop": {
+          "criterion": "S4",
+          "met": true,
+          "chain": [
+            "nac.m1271742202lc -> nac.m1335207975rc",
+            "nac.m1335207975rc -> nac.m1452560468lc",
+            "nac.m1452560468lc -> nac.m1271742202lc"
+          ],
+          "shape": [
+            2048,
+            1024
+          ],
+          "recorded_px": 1201.0378963072235,
+          "recomputed_px": 1201.0378963072235,
+          "abs_difference_px": 0.0,
+          "tolerance_px": 1e-06
+        },
+        "met": true
+      },
+      "f_frozen_code": {
+        "head": "201f1b1b7cea2bb2b6abfdedf340df9712c40bdd",
+        "runner_commit": null,
+        "head_utc": "2026-09-22T08:23:30+05:30",
+        "src_dirty_now": ""
+      }
+    },
+    "S1": {
+      "S1a_B1": {
+        "ranges": {
+          "lt15": {
+            "n": 7,
+            "k": 3,
+            "p": 0.786,
+            "rate": 0.42857142857142855,
+            "P_X_le_k": 0.042016177957089035,
+            "P_X_ge_k": 0.9936281783143539,
+            "rejects": false,
+            "vacuous": false,
+            "in_sample": {
+              "n": 14,
+              "successes": 11
+            },
+            "predictive": {
+              "a": 11.5,
+              "b": 3.5,
+              "interval_95": [
+                2,
+                7
+              ],
+              "k_inside_interval": true,
+              "p_two_sided": 0.18504498839009276
+            }
+          },
+          "15to30": {
+            "n": 8,
+            "k": 7,
+            "p": 0.632,
+            "rate": 0.875,
+            "P_X_le_k": 0.9745471378006947,
+            "P_X_ge_k": 0.14401809370999336,
+            "rejects": false,
+            "vacuous": false,
+            "in_sample": {
+              "n": 19,
+              "successes": 12
+            },
+            "predictive": {
+              "a": 12.5,
+              "b": 7.5,
+              "interval_95": [
+                2,
+                8
+              ],
+              "k_inside_interval": true,
+              "p_two_sided": 0.35987042583351103
+            }
+          },
+          "ge30": {
+            "n": 5,
+            "k": 2,
+            "p": 0.222,
+            "rate": 0.4,
+            "P_X_le_k": 0.923787898182208,
+            "P_X_ge_k": 0.308295855401472,
+            "rejects": false,
+            "vacuous": false,
+            "in_sample": {
+              "n": 9,
+              "successes": 2
+            },
+            "predictive": {
+              "a": 2.5,
+              "b": 7.5,
+              "interval_95": [
+                0,
+                4
+              ],
+              "k_inside_interval": true,
+              "p_two_sided": 0.7294580419580412
+            }
+          },
+          "pooled": {
+            "n": 20,
+            "k": 12,
+            "p": 0.595,
+            "rate": 0.6,
+            "P_X_le_k": 0.601960085082607,
+            "P_X_ge_k": 0.5775591147538861,
+            "rejects": false,
+            "vacuous": false,
+            "in_sample": {
+              "n": 42,
+              "successes": 25
+            },
+            "predictive": {
+              "a": 25.5,
+              "b": 17.5,
+              "interval_95": [
+                7,
+                17
+              ],
+              "k_inside_interval": true,
+              "p_two_sided": 1.0
+            }
+          }
+        },
+        "met": true,
+        "vacuous_ranges": [],
+        "note": null
+      },
+      "S1b_B4L": {
+        "ranges": {
+          "lt15": {
+            "n": 7,
+            "k": 5,
+            "p": 0.786,
+            "rate": 0.7142857142857143,
+            "P_X_le_k": 0.46144337112953226,
+            "P_X_ge_k": 0.8270657658309757,
+            "rejects": false,
+            "vacuous": false,
+            "in_sample": {
+              "n": 14,
+              "successes": 11
+            },
+            "predictive": {
+              "a": 11.5,
+              "b": 3.5,
+              "interval_95": [
+                2,
+                7
+              ],
+              "k_inside_interval": true,
+              "p_two_sided": 0.9685005684017018
+            }
+          },
+          "15to30": {
+            "n": 8,
+            "k": 6,
+            "p": 0.632,
+            "rate": 0.75,
+            "P_X_le_k": 0.8559819062900067,
+            "P_X_ge_k": 0.385651033877345,
+            "rejects": false,
+            "vacuous": false,
+            "in_sample": {
+              "n": 19,
+              "successes": 12
+            },
+            "predictive": {
+              "a": 12.5,
+              "b": 7.5,
+              "interval_95": [
+                2,
+                8
+              ],
+              "k_inside_interval": true,
+              "p_two_sided": 0.7966331048155333
+            }
+          },
+          "ge30": {
+            "n": 5,
+            "k": 1,
+            "p": 0.111,
+            "rate": 0.2,
+            "P_X_le_k": 0.901932916711204,
+            "P_X_ge_k": 0.44472412537655104,
+            "rejects": false,
+            "vacuous": false,
+            "in_sample": {
+              "n": 9,
+              "successes": 1
+            },
+            "predictive": {
+              "a": 1.5,
+              "b": 8.5,
+              "interval_95": [
+                0,
+                3
+              ],
+              "k_inside_interval": true,
+              "p_two_sided": 0.9853310751748248
+            }
+          },
+          "pooled": {
+            "n": 20,
+            "k": 12,
+            "p": 0.571,
+            "rate": 0.6,
+            "P_X_le_k": 0.6836006821215208,
+            "P_X_ge_k": 0.4900029334409281,
+            "rejects": false,
+            "vacuous": false,
+            "in_sample": {
+              "n": 42,
+              "successes": 24
+            },
+            "predictive": {
+              "a": 24.5,
+              "b": 18.5,
+              "interval_95": [
+                6,
+                16
+              ],
+              "k_inside_interval": true,
+              "p_two_sided": 0.982724342996339
+            }
+          }
+        },
+        "met": true,
+        "vacuous_ranges": [],
+        "note": null
+      },
+      "S1c_zero_above_40": {
+        "per_engine": {
+          "B1": {
+            "n_ge40": 3,
+            "successes": 2,
+            "status": "NOT MET",
+            "in_sample": {
+              "n": 4,
+              "successes": 0
+            },
+            "successful_edges": [
+              "nac.m1177606647lc -> nac.m1157600009rc",
+              "nac.m1282310415lc -> nac.m1157600009rc"
+            ]
+          },
+          "B4L": {
+            "n_ge40": 3,
+            "successes": 1,
+            "status": "NOT MET",
+            "in_sample": {
+              "n": 4,
+              "successes": 0
+            },
+            "successful_edges": [
+              "nac.m1282310415lc -> nac.m1157600009rc"
+            ]
+          }
+        },
+        "status": "NOT MET"
+      },
+      "S1d_B4X_pooled": {
+        "ranges": {
+          "pooled": {
+            "n": 20,
+            "k": 17,
+            "p": 0.643,
+            "rate": 0.85,
+            "P_X_le_k": 0.9896848763220087,
+            "P_X_ge_k": 0.03879224197709418,
+            "rejects": false,
+            "vacuous": false,
+            "in_sample": {
+              "n": 42,
+              "successes": 27
+            },
+            "predictive": {
+              "a": 27.5,
+              "b": 15.5,
+              "interval_95": [
+                8,
+                17
+              ],
+              "k_inside_interval": true,
+              "p_two_sided": 0.1366192365338028
+            }
+          }
+        },
+        "met": true
+      },
+      "met": false,
+      "status": "NOT MET"
+    },
+    "S2": {
+      "per_engine": {
+        "B1": {
+          "n_pass": 12,
+          "n_wrong_pass": 0,
+          "wrong_pass_edges": [],
+          "S2b_bound": {
+            "n": 12,
+            "k": 0,
+            "p_upper": 0.0631,
+            "P_X_ge_k": 1.0,
+            "rejects": false,
+            "vacuous": false
+          },
+          "FA_le_5pct_line": {
+            "n": 12,
+            "k": 0,
+            "p_upper": 0.05,
+            "P_X_ge_k": 1.0,
+            "rejects": false,
+            "vacuous": false
+          },
+          "in_sample": {
+            "n_pass": 46,
+            "n_wrong_pass": 0
+          }
+        },
+        "B4L": {
+          "n_pass": 12,
+          "n_wrong_pass": 0,
+          "wrong_pass_edges": [],
+          "S2b_bound": {
+            "n": 12,
+            "k": 0,
+            "p_upper": 0.0929,
+            "P_X_ge_k": 1.0,
+            "rejects": false,
+            "vacuous": false
+          },
+          "FA_le_5pct_line": {
+            "n": 12,
+            "k": 0,
+            "p_upper": 0.05,
+            "P_X_ge_k": 1.0,
+            "rejects": false,
+            "vacuous": false
+          },
+          "in_sample": {
+            "n_pass": 49,
+            "n_wrong_pass": 1
+          }
+        },
+        "B4X": {
+          "n_pass": 17,
+          "n_wrong_pass": 0,
+          "wrong_pass_edges": [],
+          "S2b_bound": {
+            "n": 17,
+            "k": 0,
+            "p_upper": 0.105,
+            "P_X_ge_k": 1.0,
+            "rejects": false,
+            "vacuous": false
+          },
+          "FA_le_5pct_line": {
+            "n": 17,
+            "k": 0,
+            "p_upper": 0.05,
+            "P_X_ge_k": 1.0,
+            "rejects": false,
+            "vacuous": false
+          },
+          "in_sample": {
+            "n_pass": 27,
+            "n_wrong_pass": 0
+          }
+        }
+      },
+      "S2a_point": {
+        "status": "MET"
+      },
+      "S2b_bound": {
+        "status": "MET",
+        "note": "weak by arithmetic (Part 1 section 5.2): at n_pass = 12 it can only fail at k >= 3"
+      },
+      "status": "MET",
+      "floor_note": "a wrong pass is a transform wrong by >~ 250 px (the geometry check's floor); this is a bound, not an FA rate, and FR is not measured"
+    },
+    "S3": {
+      "S3a": {
+        "status": "NOT MET",
+        "n_qualifying_pairs": 34,
+        "max_median_px": 5.240630974435531,
+        "violations": [
+          {
+            "edge": "nac.m188085530rc -> nac.m1282310415lc",
+            "engines": [
+              "lg",
+              "xf"
+            ],
+            "median_px": 5.240630974435531,
+            "within_floor": false
+          }
+        ],
+        "per_engine_pair": {
+          "B1-B4L": {
+            "n": 10,
+            "max_px": 1.0409387779000658,
+            "median_px": 0.44527867539268795
+          },
+          "B1-B4X": {
+            "n": 12,
+            "max_px": 2.292810526113266,
+            "median_px": 0.5533812211344102
+          },
+          "B4L-B4X": {
+            "n": 12,
+            "max_px": 5.240630974435531,
+            "median_px": 0.5117531054145078
+          }
+        },
+        "floor_px": 3.0,
+        "in_sample_max_px": 2.16
+      },
+      "S3b": {
+        "status": "CANNOT CHECK",
+        "n_inconsistent_passes": 0,
+        "rows": [],
+        "min_px": 30.0,
+        "note": "null by construction when no INCONSISTENT pass occurs"
+      },
+      "status": "NOT MET"
+    },
+    "S4": {
+      "status": "MET",
+      "n_triangles": 7,
+      "n_closing_and_verified": 7,
+      "residuals_px": [
+        1.1120353074477367,
+        0.8530166691837435,
+        0.4624333475501391,
+        0.4131682007387318,
+        0.4001280127525218,
+        0.5409380290423735,
+        1.0418994317842465
+      ],
+      "reject_line_px": 2.0,
+      "in_sample_range_px": [
+        0.3654,
+        1.3358
+      ],
+      "gauge_note": "exactly blind to per-image gauge error (EXP-012 section 6); a closing loop is not an accuracy statement"
+    },
+    "S5": {
+      "n_lt15": 7,
+      "n_15to30": 8,
+      "n_ge30": 5,
+      "n_ge40": 3,
+      "n_total": 20,
+      "n_frames": 7,
+      "n_confirmed_triangles": 30,
+      "min_incidence_deg": 10.88,
+      "max_incidence_deg": 73.64,
+      "checks": {
+        "n_lt15": true,
+        "n_ge30": true,
+        "n_ge40": true,
+        "n_total": true,
+        "one_frame_le_30": true,
+        "one_frame_ge_60": true,
+        "at_least_one_triangle": true,
+        "at_most_8_frames": true
+      },
+      "met": true,
+      "minima": {
+        "n_lt15": 5,
+        "n_ge30": 5,
+        "n_ge40": 3,
+        "n_total": 12,
+        "max_frames": 8,
+        "one_frame_incidence_le": 30.0,
+        "one_frame_incidence_ge": 60.0
+      }
+    }
+  },
+  "reported": {
+    "R1_separation": {
+      "B1": {
+        "n": 20,
+        "n_success": 12,
+        "statistic": 46.0,
+        "p_value": 0.5746844486782567,
+        "exact": true,
+        "perfectly_separated": false,
+        "note": "not called significant below n = 20 (Part 1 section 6.7)"
+      },
+      "B4L": {
+        "n": 20,
+        "n_success": 12,
+        "statistic": 67.0,
+        "p_value": 0.0784313725490196,
+        "exact": true,
+        "perfectly_separated": false,
+        "note": "not called significant below n = 20 (Part 1 section 6.7)"
+      },
+      "B4X": {
+        "n": 20,
+        "n_success": 17,
+        "statistic": 44.0,
+        "p_value": 0.027192982456140352,
+        "exact": true,
+        "perfectly_separated": false,
+        "note": "not called significant below n = 20 (Part 1 section 6.7)"
+      }
+    },
+    "R2_b4l_over_b1_inliers": {
+      "n": 7,
+      "rows": [
+        {
+          "edge": "nac.m1447850428rc -> nac.m1282310415lc",
+          "ratio": 3.786259541984733,
+          "delta_incidence_deg": 18.57
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m1121081627rc",
+          "ratio": 3.9161676646706587,
+          "delta_incidence_deg": 29.18
+        },
+        {
+          "edge": "nac.m188085530rc -> nac.m1121081627rc",
+          "ratio": 21.36,
+          "delta_incidence_deg": 24.21
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1282310415lc",
+          "ratio": 0.302581911520459,
+          "delta_incidence_deg": 13.239999999999998
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1190561570lc",
+          "ratio": 1.3602794411177646,
+          "delta_incidence_deg": 28.729999999999997
+        },
+        {
+          "edge": "nac.m1282310415lc -> nac.m1190561570lc",
+          "ratio": 0.270301357257879,
+          "delta_incidence_deg": 15.489999999999998
+        },
+        {
+          "edge": "nac.m1190561570lc -> nac.m1157600009rc",
+          "ratio": 0.547422024188415,
+          "delta_incidence_deg": 28.700000000000003
+        }
+      ],
+      "median_ratio": 1.3602794411177646,
+      "prediction": "median in [3, 30] (in-sample 5-25x, D-047-N1)"
+    },
+    "R3_incidence_ceiling": {
+      "le55": {
+        "n": 11,
+        "rate": 0.6363636363636364
+      },
+      "65to70": {
+        "n": 0,
+        "rate": null
+      },
+      "ge70": {
+        "n": 0,
+        "rate": null
+      },
+      "prediction": "rate(ge70) < rate(le55) on Delta-inc <= 25 pairs"
+    },
+    "R4_min_inliers_vs_loop": {
+      "spearman_rho": 0.0900937462695559,
+      "n": 7,
+      "in_sample": 0.055
+    },
+    "R5_per_pair": {
+      "nac.m1447850428rc -> nac.m188085530rc": {
+        "resolution_ratio": 1.1302681992337165,
+        "emission_difference_deg": 0.010000000000000009,
+        "emission_deg": [
+          1.18,
+          1.17
+        ]
+      },
+      "nac.m1447850428rc -> nac.m1177606647lc": {
+        "resolution_ratio": 1.1175141242937854,
+        "emission_difference_deg": 0.56,
+        "emission_deg": [
+          1.18,
+          1.74
+        ]
+      },
+      "nac.m1447850428rc -> nac.m1282310415lc": {
+        "resolution_ratio": 1.0056818181818181,
+        "emission_difference_deg": 0.55,
+        "emission_deg": [
+          1.18,
+          1.73
+        ]
+      },
+      "nac.m1447850428rc -> nac.m1121081627rc": {
+        "resolution_ratio": 1.0362997658079625,
+        "emission_difference_deg": 0.010000000000000009,
+        "emission_deg": [
+          1.18,
+          1.17
+        ]
+      },
+      "nac.m1447850428rc -> nac.m1190561570lc": {
+        "resolution_ratio": 1.0535714285714286,
+        "emission_difference_deg": 0.54,
+        "emission_deg": [
+          1.18,
+          1.72
+        ]
+      },
+      "nac.m1447850428rc -> nac.m1157600009rc": {
+        "resolution_ratio": 1.1333333333333333,
+        "emission_difference_deg": 0.010000000000000009,
+        "emission_deg": [
+          1.18,
+          1.17
+        ]
+      },
+      "nac.m188085530rc -> nac.m1177606647lc": {
+        "resolution_ratio": 1.2630906768837802,
+        "emission_difference_deg": 0.5700000000000001,
+        "emission_deg": [
+          1.17,
+          1.74
+        ]
+      },
+      "nac.m188085530rc -> nac.m1282310415lc": {
+        "resolution_ratio": 1.1238825031928479,
+        "emission_difference_deg": 0.56,
+        "emission_deg": [
+          1.17,
+          1.73
+        ]
+      },
+      "nac.m188085530rc -> nac.m1121081627rc": {
+        "resolution_ratio": 1.090676883780332,
+        "emission_difference_deg": 0.0,
+        "emission_deg": [
+          1.17,
+          1.17
+        ]
+      },
+      "nac.m188085530rc -> nac.m1190561570lc": {
+        "resolution_ratio": 1.0727969348659003,
+        "emission_difference_deg": 0.55,
+        "emission_deg": [
+          1.17,
+          1.72
+        ]
+      },
+      "nac.m1177606647lc -> nac.m1282310415lc": {
+        "resolution_ratio": 1.1238636363636363,
+        "emission_difference_deg": 0.010000000000000009,
+        "emission_deg": [
+          1.74,
+          1.73
+        ]
+      },
+      "nac.m1177606647lc -> nac.m1121081627rc": {
+        "resolution_ratio": 1.1580796252927401,
+        "emission_difference_deg": 0.5700000000000001,
+        "emission_deg": [
+          1.74,
+          1.17
+        ]
+      },
+      "nac.m1177606647lc -> nac.m1190561570lc": {
+        "resolution_ratio": 1.1773809523809524,
+        "emission_difference_deg": 0.020000000000000018,
+        "emission_deg": [
+          1.74,
+          1.72
+        ]
+      },
+      "nac.m1177606647lc -> nac.m1157600009rc": {
+        "resolution_ratio": 1.0141557128412537,
+        "emission_difference_deg": 0.5700000000000001,
+        "emission_deg": [
+          1.74,
+          1.17
+        ]
+      },
+      "nac.m1282310415lc -> nac.m1121081627rc": {
+        "resolution_ratio": 1.0304449648711944,
+        "emission_difference_deg": 0.56,
+        "emission_deg": [
+          1.73,
+          1.17
+        ]
+      },
+      "nac.m1282310415lc -> nac.m1190561570lc": {
+        "resolution_ratio": 1.0476190476190477,
+        "emission_difference_deg": 0.010000000000000009,
+        "emission_deg": [
+          1.73,
+          1.72
+        ]
+      },
+      "nac.m1282310415lc -> nac.m1157600009rc": {
+        "resolution_ratio": 1.1397727272727272,
+        "emission_difference_deg": 0.56,
+        "emission_deg": [
+          1.73,
+          1.17
+        ]
+      },
+      "nac.m1121081627rc -> nac.m1190561570lc": {
+        "resolution_ratio": 1.0166666666666666,
+        "emission_difference_deg": 0.55,
+        "emission_deg": [
+          1.17,
+          1.72
+        ]
+      },
+      "nac.m1121081627rc -> nac.m1157600009rc": {
+        "resolution_ratio": 1.1744730679156907,
+        "emission_difference_deg": 0.0,
+        "emission_deg": [
+          1.17,
+          1.17
+        ]
+      },
+      "nac.m1190561570lc -> nac.m1157600009rc": {
+        "resolution_ratio": 1.194047619047619,
+        "emission_difference_deg": 0.55,
+        "emission_deg": [
+          1.72,
+          1.17
+        ]
+      }
+    },
+    "R6_verified_edges": {
+      "n": 21,
+      "rows": [
+        {
+          "edge": "nac.m1177606647lc -> nac.m1121081627rc",
+          "confidence": "moderate",
+          "grid_occupancy": 0.25,
+          "max_uncovered_disc_ratio": 0.2942954984247404
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m1177606647lc",
+          "confidence": "high",
+          "grid_occupancy": 1.0,
+          "max_uncovered_disc_ratio": 0.06464961762518036
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m1121081627rc",
+          "confidence": "high",
+          "grid_occupancy": 0.890625,
+          "max_uncovered_disc_ratio": 0.11781165165684283
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m1121081627rc",
+          "confidence": "high",
+          "grid_occupancy": 0.890625,
+          "max_uncovered_disc_ratio": 0.11781165165684283
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m188085530rc",
+          "confidence": "moderate",
+          "grid_occupancy": 0.15625,
+          "max_uncovered_disc_ratio": 0.40149808730718517
+        },
+        {
+          "edge": "nac.m188085530rc -> nac.m1121081627rc",
+          "confidence": "moderate",
+          "grid_occupancy": 0.46875,
+          "max_uncovered_disc_ratio": 0.19275374693636388
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1157600009rc",
+          "confidence": "moderate",
+          "grid_occupancy": 0.125,
+          "max_uncovered_disc_ratio": 0.4315842811783741
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1190561570lc",
+          "confidence": "high",
+          "grid_occupancy": 0.890625,
+          "max_uncovered_disc_ratio": 0.1236383662852101
+        },
+        {
+          "edge": "nac.m1190561570lc -> nac.m1157600009rc",
+          "confidence": "high",
+          "grid_occupancy": 1.0,
+          "max_uncovered_disc_ratio": 0.03455430861905104
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1157600009rc",
+          "confidence": "moderate",
+          "grid_occupancy": 0.125,
+          "max_uncovered_disc_ratio": 0.4315842811783741
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1282310415lc",
+          "confidence": "high",
+          "grid_occupancy": 0.96875,
+          "max_uncovered_disc_ratio": 0.1170775851720005
+        },
+        {
+          "edge": "nac.m1282310415lc -> nac.m1157600009rc",
+          "confidence": "high",
+          "grid_occupancy": 0.953125,
+          "max_uncovered_disc_ratio": 0.12031392678740023
+        },
+        {
+          "edge": "nac.m1190561570lc -> nac.m1157600009rc",
+          "confidence": "high",
+          "grid_occupancy": 1.0,
+          "max_uncovered_disc_ratio": 0.03455430861905104
+        },
+        {
+          "edge": "nac.m1282310415lc -> nac.m1190561570lc",
+          "confidence": "high",
+          "grid_occupancy": 1.0,
+          "max_uncovered_disc_ratio": 0.052071938857759556
+        },
+        {
+          "edge": "nac.m1282310415lc -> nac.m1157600009rc",
+          "confidence": "high",
+          "grid_occupancy": 0.953125,
+          "max_uncovered_disc_ratio": 0.12031392678740023
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1190561570lc",
+          "confidence": "high",
+          "grid_occupancy": 0.890625,
+          "max_uncovered_disc_ratio": 0.1236383662852101
+        },
+        {
+          "edge": "nac.m1282310415lc -> nac.m1190561570lc",
+          "confidence": "high",
+          "grid_occupancy": 1.0,
+          "max_uncovered_disc_ratio": 0.052071938857759556
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1282310415lc",
+          "confidence": "high",
+          "grid_occupancy": 0.96875,
+          "max_uncovered_disc_ratio": 0.1170775851720005
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1282310415lc",
+          "confidence": "high",
+          "grid_occupancy": 0.96875,
+          "max_uncovered_disc_ratio": 0.1170775851720005
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m1282310415lc",
+          "confidence": "moderate",
+          "grid_occupancy": 0.734375,
+          "max_uncovered_disc_ratio": 0.17289569528404664
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m1177606647lc",
+          "confidence": "high",
+          "grid_occupancy": 1.0,
+          "max_uncovered_disc_ratio": 0.06464961762518036
+        }
+      ],
+      "note": "both coverage metrics are recorded as mis-specified (D-057)"
+    }
+  },
+  "triangles": [
+    {
+      "window": "tranquillitatis",
+      "frames": [
+        "nac.m1121081627rc",
+        "nac.m1177606647lc",
+        "nac.m1447850428rc"
+      ],
+      "cycle": [
+        "nac.m1121081627rc -> nac.m1177606647lc",
+        "nac.m1177606647lc -> nac.m1447850428rc",
+        "nac.m1447850428rc -> nac.m1121081627rc"
+      ],
+      "inverted_leg": [
+        true,
+        true,
+        false
+      ],
+      "shape_used": [
+        2048,
+        1024
+      ],
+      "loop_closure_residual_px": 1.1120353074477367,
+      "min_edge_inliers": 22,
+      "edge_inliers": {
+        "nac.m1177606647lc -> nac.m1121081627rc": 22,
+        "nac.m1447850428rc -> nac.m1177606647lc": 905,
+        "nac.m1447850428rc -> nac.m1121081627rc": 334
+      },
+      "edge_geometry_recorded": {
+        "nac.m1177606647lc -> nac.m1121081627rc": "CONSISTENT WITH ARCHIVE GEOMETRY",
+        "nac.m1447850428rc -> nac.m1177606647lc": "CONSISTENT WITH ARCHIVE GEOMETRY",
+        "nac.m1447850428rc -> nac.m1121081627rc": "CONSISTENT WITH ARCHIVE GEOMETRY"
+      },
+      "verdicts": [
+        {
+          "edge": "nac.m1177606647lc -> nac.m1121081627rc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "moderate",
+            "reasons": [
+              "Correspondences are clustered: 0.294 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+              "Loop closure agrees, but coverage is weak: trust the alignment near the correspondences more than far from them."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 22.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "22 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 1.1120353074477367,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 1.112 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.2942954984247404,
+                "verdict": "against",
+                "weight": "strong",
+                "statement": "Largest unconstrained region is 0.294 of the image (target <= 0.15). The transform is extrapolating where there are no correspondences."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.1981981981981982,
+                "verdict": "against",
+                "weight": "supporting",
+                "statement": "22/111 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 1.677889106429022,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 111,
+              "n_inliers": 22,
+              "inlier_ratio": 0.1981981981981982,
+              "coverage_max_gap": 0.2942954984247404,
+              "coverage_occupancy": 0.25,
+              "fit_rmse": 1.677889106429022,
+              "loop_error_px": 1.1120353074477367,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  1.0479581610099369,
+                  -0.015585314701349731,
+                  -48.64581258963818
+                ],
+                [
+                  0.02490125636733946,
+                  1.278604652294589,
+                  -269.196241775355
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m1177606647lc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 905.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "905 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 1.1120353074477367,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 1.112 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.06464961762518036,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.065)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.8916256157635468,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "905/1015 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 1.0908824462805384,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 1015,
+              "n_inliers": 905,
+              "inlier_ratio": 0.8916256157635468,
+              "coverage_max_gap": 0.06464961762518036,
+              "coverage_occupancy": 1.0,
+              "fit_rmse": 1.0908824462805384,
+              "loop_error_px": 1.1120353074477367,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.8930681784200826,
+                  -0.04606967870240109,
+                  121.60542019001997
+                ],
+                [
+                  0.03486765528967738,
+                  0.9028427122482592,
+                  75.56569771220063
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m1121081627rc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 334.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "334 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 1.1120353074477367,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 1.112 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.11781165165684283,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.118)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.7785547785547785,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "334/429 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 1.2585553922301744,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 429,
+              "n_inliers": 334,
+              "inlier_ratio": 0.7785547785547785,
+              "coverage_max_gap": 0.11781165165684283,
+              "coverage_occupancy": 0.890625,
+              "fit_rmse": 1.2585553922301744,
+              "loop_error_px": 1.1120353074477367,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.9330115839429188,
+                  -0.06127450737775836,
+                  76.78270378749272
+                ],
+                [
+                  0.06799370291483244,
+                  1.1537077217048866,
+                  -170.477559373855
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        }
+      ],
+      "statuses": [
+        "VERIFIED",
+        "VERIFIED",
+        "VERIFIED"
+      ],
+      "any_verified": true
+    },
+    {
+      "window": "tranquillitatis",
+      "frames": [
+        "nac.m1121081627rc",
+        "nac.m1447850428rc",
+        "nac.m188085530rc"
+      ],
+      "cycle": [
+        "nac.m1121081627rc -> nac.m1447850428rc",
+        "nac.m1447850428rc -> nac.m188085530rc",
+        "nac.m188085530rc -> nac.m1121081627rc"
+      ],
+      "inverted_leg": [
+        true,
+        false,
+        false
+      ],
+      "shape_used": [
+        2048,
+        1024
+      ],
+      "loop_closure_residual_px": 0.8530166691837435,
+      "min_edge_inliers": 13,
+      "edge_inliers": {
+        "nac.m1447850428rc -> nac.m1121081627rc": 334,
+        "nac.m1447850428rc -> nac.m188085530rc": 13,
+        "nac.m188085530rc -> nac.m1121081627rc": 50
+      },
+      "edge_geometry_recorded": {
+        "nac.m1447850428rc -> nac.m1121081627rc": "CONSISTENT WITH ARCHIVE GEOMETRY",
+        "nac.m1447850428rc -> nac.m188085530rc": "CONSISTENT WITH ARCHIVE GEOMETRY",
+        "nac.m188085530rc -> nac.m1121081627rc": "CONSISTENT WITH ARCHIVE GEOMETRY"
+      },
+      "verdicts": [
+        {
+          "edge": "nac.m1447850428rc -> nac.m1121081627rc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 334.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "334 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.8530166691837435,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.853 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.11781165165684283,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.118)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.7785547785547785,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "334/429 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 1.2585553922301744,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 429,
+              "n_inliers": 334,
+              "inlier_ratio": 0.7785547785547785,
+              "coverage_max_gap": 0.11781165165684283,
+              "coverage_occupancy": 0.890625,
+              "fit_rmse": 1.2585553922301744,
+              "loop_error_px": 0.8530166691837435,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.9330115839429188,
+                  -0.06127450737775836,
+                  76.78270378749272
+                ],
+                [
+                  0.06799370291483244,
+                  1.1537077217048866,
+                  -170.477559373855
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m188085530rc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "moderate",
+            "reasons": [
+              "Correspondences are clustered: 0.401 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+              "Loop closure agrees, but coverage is weak: trust the alignment near the correspondences more than far from them."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 13.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "13 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.8530166691837435,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.853 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.40149808730718517,
+                "verdict": "against",
+                "weight": "strong",
+                "statement": "Largest unconstrained region is 0.401 of the image (target <= 0.15). The transform is extrapolating where there are no correspondences."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.15853658536585366,
+                "verdict": "against",
+                "weight": "supporting",
+                "statement": "13/82 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 1.2548439188197735,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 82,
+              "n_inliers": 13,
+              "inlier_ratio": 0.15853658536585366,
+              "coverage_max_gap": 0.40149808730718517,
+              "coverage_occupancy": 0.15625,
+              "fit_rmse": 1.2548439188197735,
+              "loop_error_px": 0.8530166691837435,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.8183520495793091,
+                  -0.060649555630750376,
+                  153.67885302706793
+                ],
+                [
+                  0.1164251969582773,
+                  1.7564670394358293,
+                  -762.480272858777
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m188085530rc -> nac.m1121081627rc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "moderate",
+            "reasons": [
+              "Correspondences are clustered: 0.193 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+              "Loop closure agrees, but coverage is weak: trust the alignment near the correspondences more than far from them."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 50.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "50 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.8530166691837435,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.853 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.19275374693636388,
+                "verdict": "against",
+                "weight": "strong",
+                "statement": "Largest unconstrained region is 0.193 of the image (target <= 0.15). The transform is extrapolating where there are no correspondences."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.43103448275862066,
+                "verdict": "against",
+                "weight": "supporting",
+                "statement": "50/116 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 1.1467334811915653,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 116,
+              "n_inliers": 50,
+              "inlier_ratio": 0.43103448275862066,
+              "coverage_max_gap": 0.19275374693636388,
+              "coverage_occupancy": 0.46875,
+              "fit_rmse": 1.1467334811915653,
+              "loop_error_px": 0.8530166691837435,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  1.1399475374652592,
+                  0.005083808926001734,
+                  -95.34216211978475
+                ],
+                [
+                  -0.012048832584349025,
+                  0.6563480249158546,
+                  332.9457499048651
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        }
+      ],
+      "statuses": [
+        "VERIFIED",
+        "VERIFIED",
+        "VERIFIED"
+      ],
+      "any_verified": true
+    },
+    {
+      "window": "tranquillitatis",
+      "frames": [
+        "nac.m1157600009rc",
+        "nac.m1177606647lc",
+        "nac.m1190561570lc"
+      ],
+      "cycle": [
+        "nac.m1157600009rc -> nac.m1177606647lc",
+        "nac.m1177606647lc -> nac.m1190561570lc",
+        "nac.m1190561570lc -> nac.m1157600009rc"
+      ],
+      "inverted_leg": [
+        true,
+        false,
+        false
+      ],
+      "shape_used": [
+        2048,
+        1024
+      ],
+      "loop_closure_residual_px": 0.4624333475501391,
+      "min_edge_inliers": 10,
+      "edge_inliers": {
+        "nac.m1177606647lc -> nac.m1157600009rc": 10,
+        "nac.m1177606647lc -> nac.m1190561570lc": 1002,
+        "nac.m1190561570lc -> nac.m1157600009rc": 3142
+      },
+      "edge_geometry_recorded": {
+        "nac.m1177606647lc -> nac.m1157600009rc": "CONSISTENT WITH ARCHIVE GEOMETRY",
+        "nac.m1177606647lc -> nac.m1190561570lc": "CONSISTENT WITH ARCHIVE GEOMETRY",
+        "nac.m1190561570lc -> nac.m1157600009rc": "CONSISTENT WITH ARCHIVE GEOMETRY"
+      },
+      "verdicts": [
+        {
+          "edge": "nac.m1177606647lc -> nac.m1157600009rc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "moderate",
+            "reasons": [
+              "Correspondences are clustered: 0.432 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+              "Loop closure agrees, but coverage is weak: trust the alignment near the correspondences more than far from them."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 10.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "10 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.4624333475501391,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.462 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.4315842811783741,
+                "verdict": "against",
+                "weight": "strong",
+                "statement": "Largest unconstrained region is 0.432 of the image (target <= 0.15). The transform is extrapolating where there are no correspondences."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.17543859649122806,
+                "verdict": "against",
+                "weight": "supporting",
+                "statement": "10/57 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 0.4237608728480217,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 57,
+              "n_inliers": 10,
+              "inlier_ratio": 0.17543859649122806,
+              "coverage_max_gap": 0.4315842811783741,
+              "coverage_occupancy": 0.125,
+              "fit_rmse": 0.4237608728480217,
+              "loop_error_px": 0.4624333475501391,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.9820621597783024,
+                  -0.06668036371382846,
+                  29.59623310561426
+                ],
+                [
+                  0.07637763586817786,
+                  0.9858010823575079,
+                  27.98220277044959
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1190561570lc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 1002.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "1002 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.4624333475501391,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.462 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.1236383662852101,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.124)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.907608695652174,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "1002/1104 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 1.206985621387296,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 1104,
+              "n_inliers": 1002,
+              "inlier_ratio": 0.907608695652174,
+              "coverage_max_gap": 0.1236383662852101,
+              "coverage_occupancy": 0.890625,
+              "fit_rmse": 1.206985621387296,
+              "loop_error_px": 0.4624333475501391,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  1.170580062005587,
+                  -0.08975776202594592,
+                  13.326320804248667
+                ],
+                [
+                  0.08989354501141578,
+                  1.167291432854859,
+                  -152.2695946864667
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1190561570lc -> nac.m1157600009rc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 3142.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "3142 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.4624333475501391,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.462 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.03455430861905104,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.035)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.9815682599187754,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "3142/3201 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 0.7960014510958369,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 3201,
+              "n_inliers": 3142,
+              "inlier_ratio": 0.9815682599187754,
+              "coverage_max_gap": 0.03455430861905104,
+              "coverage_occupancy": 1.0,
+              "fit_rmse": 0.7960014510958369,
+              "loop_error_px": 0.4624333475501391,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.8391763947934057,
+                  0.0070678551043026755,
+                  19.310935623623493
+                ],
+                [
+                  8.883368754777274e-05,
+                  0.8442496604799423,
+                  157.3053777883879
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        }
+      ],
+      "statuses": [
+        "VERIFIED",
+        "VERIFIED",
+        "VERIFIED"
+      ],
+      "any_verified": true
+    },
+    {
+      "window": "tranquillitatis",
+      "frames": [
+        "nac.m1157600009rc",
+        "nac.m1177606647lc",
+        "nac.m1282310415lc"
+      ],
+      "cycle": [
+        "nac.m1157600009rc -> nac.m1177606647lc",
+        "nac.m1177606647lc -> nac.m1282310415lc",
+        "nac.m1282310415lc -> nac.m1157600009rc"
+      ],
+      "inverted_leg": [
+        true,
+        false,
+        false
+      ],
+      "shape_used": [
+        2048,
+        1024
+      ],
+      "loop_closure_residual_px": 0.4131682007387318,
+      "min_edge_inliers": 10,
+      "edge_inliers": {
+        "nac.m1177606647lc -> nac.m1157600009rc": 10,
+        "nac.m1177606647lc -> nac.m1282310415lc": 6623,
+        "nac.m1282310415lc -> nac.m1157600009rc": 318
+      },
+      "edge_geometry_recorded": {
+        "nac.m1177606647lc -> nac.m1157600009rc": "CONSISTENT WITH ARCHIVE GEOMETRY",
+        "nac.m1177606647lc -> nac.m1282310415lc": "INCONCLUSIVE",
+        "nac.m1282310415lc -> nac.m1157600009rc": "CONSISTENT WITH ARCHIVE GEOMETRY"
+      },
+      "verdicts": [
+        {
+          "edge": "nac.m1177606647lc -> nac.m1157600009rc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "moderate",
+            "reasons": [
+              "Correspondences are clustered: 0.432 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+              "Loop closure agrees, but coverage is weak: trust the alignment near the correspondences more than far from them."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 10.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "10 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.4131682007387318,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.413 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.4315842811783741,
+                "verdict": "against",
+                "weight": "strong",
+                "statement": "Largest unconstrained region is 0.432 of the image (target <= 0.15). The transform is extrapolating where there are no correspondences."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.17543859649122806,
+                "verdict": "against",
+                "weight": "supporting",
+                "statement": "10/57 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 0.4237608728480217,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 57,
+              "n_inliers": 10,
+              "inlier_ratio": 0.17543859649122806,
+              "coverage_max_gap": 0.4315842811783741,
+              "coverage_occupancy": 0.125,
+              "fit_rmse": 0.4237608728480217,
+              "loop_error_px": 0.4131682007387318,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.9820621597783024,
+                  -0.06668036371382846,
+                  29.59623310561426
+                ],
+                [
+                  0.07637763586817786,
+                  0.9858010823575079,
+                  27.98220277044959
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1282310415lc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 6623.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "6623 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.4131682007387318,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.413 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.1170775851720005,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.117)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.9857121595475518,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "6623/6719 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 0.9338868721621835,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 6719,
+              "n_inliers": 6623,
+              "inlier_ratio": 0.9857121595475518,
+              "coverage_max_gap": 0.1170775851720005,
+              "coverage_occupancy": 0.96875,
+              "fit_rmse": 0.9338868721621835,
+              "loop_error_px": 0.4131682007387318,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  1.1112130188846283,
+                  -0.1030681714044583,
+                  35.55189217453449
+                ],
+                [
+                  0.10376584241884439,
+                  1.1204074755200786,
+                  -64.06437873801951
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1282310415lc -> nac.m1157600009rc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 318.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "318 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.4131682007387318,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.413 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.12031392678740023,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.120)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.8688524590163934,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "318/366 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 0.5423027719728062,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 366,
+              "n_inliers": 318,
+              "inlier_ratio": 0.8688524590163934,
+              "coverage_max_gap": 0.12031392678740023,
+              "coverage_occupancy": 0.953125,
+              "fit_rmse": 0.5423027719728062,
+              "loop_error_px": 0.4131682007387318,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.8813691543744716,
+                  0.021301164017522606,
+                  0.14897531514873208
+                ],
+                [
+                  -0.012931643171642134,
+                  0.878810273337457,
+                  84.73771728003692
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        }
+      ],
+      "statuses": [
+        "VERIFIED",
+        "VERIFIED",
+        "VERIFIED"
+      ],
+      "any_verified": true
+    },
+    {
+      "window": "tranquillitatis",
+      "frames": [
+        "nac.m1157600009rc",
+        "nac.m1190561570lc",
+        "nac.m1282310415lc"
+      ],
+      "cycle": [
+        "nac.m1157600009rc -> nac.m1190561570lc",
+        "nac.m1190561570lc -> nac.m1282310415lc",
+        "nac.m1282310415lc -> nac.m1157600009rc"
+      ],
+      "inverted_leg": [
+        true,
+        true,
+        false
+      ],
+      "shape_used": [
+        2048,
+        1024
+      ],
+      "loop_closure_residual_px": 0.4001280127525218,
+      "min_edge_inliers": 318,
+      "edge_inliers": {
+        "nac.m1190561570lc -> nac.m1157600009rc": 3142,
+        "nac.m1282310415lc -> nac.m1190561570lc": 8694,
+        "nac.m1282310415lc -> nac.m1157600009rc": 318
+      },
+      "edge_geometry_recorded": {
+        "nac.m1190561570lc -> nac.m1157600009rc": "CONSISTENT WITH ARCHIVE GEOMETRY",
+        "nac.m1282310415lc -> nac.m1190561570lc": "CONSISTENT WITH ARCHIVE GEOMETRY",
+        "nac.m1282310415lc -> nac.m1157600009rc": "CONSISTENT WITH ARCHIVE GEOMETRY"
+      },
+      "verdicts": [
+        {
+          "edge": "nac.m1190561570lc -> nac.m1157600009rc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 3142.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "3142 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.4001280127525218,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.400 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.03455430861905104,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.035)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.9815682599187754,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "3142/3201 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 0.7960014510958369,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 3201,
+              "n_inliers": 3142,
+              "inlier_ratio": 0.9815682599187754,
+              "coverage_max_gap": 0.03455430861905104,
+              "coverage_occupancy": 1.0,
+              "fit_rmse": 0.7960014510958369,
+              "loop_error_px": 0.4001280127525218,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.8391763947934057,
+                  0.0070678551043026755,
+                  19.310935623623493
+                ],
+                [
+                  8.883368754777274e-05,
+                  0.8442496604799423,
+                  157.3053777883879
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1282310415lc -> nac.m1190561570lc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 8694.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "8694 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.4001280127525218,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.400 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.052071938857759556,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.052)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.9894161829976101,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "8694/8787 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 0.9067225381600506,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 8787,
+              "n_inliers": 8694,
+              "inlier_ratio": 0.9894161829976101,
+              "coverage_max_gap": 0.052071938857759556,
+              "coverage_occupancy": 1.0,
+              "fit_rmse": 0.9067225381600506,
+              "loop_error_px": 0.4001280127525218,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  1.0509132151785747,
+                  0.016477845602567744,
+                  -22.61141615960412
+                ],
+                [
+                  -0.0148853461420867,
+                  1.041211148867743,
+                  -86.58064658594094
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1282310415lc -> nac.m1157600009rc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 318.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "318 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.4001280127525218,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.400 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.12031392678740023,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.120)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.8688524590163934,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "318/366 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 0.5423027719728062,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 366,
+              "n_inliers": 318,
+              "inlier_ratio": 0.8688524590163934,
+              "coverage_max_gap": 0.12031392678740023,
+              "coverage_occupancy": 0.953125,
+              "fit_rmse": 0.5423027719728062,
+              "loop_error_px": 0.4001280127525218,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.8813691543744716,
+                  0.021301164017522606,
+                  0.14897531514873208
+                ],
+                [
+                  -0.012931643171642134,
+                  0.878810273337457,
+                  84.73771728003692
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        }
+      ],
+      "statuses": [
+        "VERIFIED",
+        "VERIFIED",
+        "VERIFIED"
+      ],
+      "any_verified": true
+    },
+    {
+      "window": "tranquillitatis",
+      "frames": [
+        "nac.m1177606647lc",
+        "nac.m1190561570lc",
+        "nac.m1282310415lc"
+      ],
+      "cycle": [
+        "nac.m1177606647lc -> nac.m1190561570lc",
+        "nac.m1190561570lc -> nac.m1282310415lc",
+        "nac.m1282310415lc -> nac.m1177606647lc"
+      ],
+      "inverted_leg": [
+        false,
+        true,
+        true
+      ],
+      "shape_used": [
+        2048,
+        1024
+      ],
+      "loop_closure_residual_px": 0.5409380290423735,
+      "min_edge_inliers": 1002,
+      "edge_inliers": {
+        "nac.m1177606647lc -> nac.m1190561570lc": 1002,
+        "nac.m1282310415lc -> nac.m1190561570lc": 8694,
+        "nac.m1177606647lc -> nac.m1282310415lc": 6623
+      },
+      "edge_geometry_recorded": {
+        "nac.m1177606647lc -> nac.m1190561570lc": "CONSISTENT WITH ARCHIVE GEOMETRY",
+        "nac.m1282310415lc -> nac.m1190561570lc": "CONSISTENT WITH ARCHIVE GEOMETRY",
+        "nac.m1177606647lc -> nac.m1282310415lc": "INCONCLUSIVE"
+      },
+      "verdicts": [
+        {
+          "edge": "nac.m1177606647lc -> nac.m1190561570lc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 1002.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "1002 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.5409380290423735,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.541 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.1236383662852101,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.124)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.907608695652174,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "1002/1104 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 1.206985621387296,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 1104,
+              "n_inliers": 1002,
+              "inlier_ratio": 0.907608695652174,
+              "coverage_max_gap": 0.1236383662852101,
+              "coverage_occupancy": 0.890625,
+              "fit_rmse": 1.206985621387296,
+              "loop_error_px": 0.5409380290423735,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  1.170580062005587,
+                  -0.08975776202594592,
+                  13.326320804248667
+                ],
+                [
+                  0.08989354501141578,
+                  1.167291432854859,
+                  -152.2695946864667
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1282310415lc -> nac.m1190561570lc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 8694.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "8694 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.5409380290423735,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.541 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.052071938857759556,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.052)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.9894161829976101,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "8694/8787 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 0.9067225381600506,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 8787,
+              "n_inliers": 8694,
+              "inlier_ratio": 0.9894161829976101,
+              "coverage_max_gap": 0.052071938857759556,
+              "coverage_occupancy": 1.0,
+              "fit_rmse": 0.9067225381600506,
+              "loop_error_px": 0.5409380290423735,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  1.0509132151785747,
+                  0.016477845602567744,
+                  -22.61141615960412
+                ],
+                [
+                  -0.0148853461420867,
+                  1.041211148867743,
+                  -86.58064658594094
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1177606647lc -> nac.m1282310415lc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 6623.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "6623 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 0.5409380290423735,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 0.541 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.1170775851720005,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.117)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.9857121595475518,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "6623/6719 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 0.9338868721621835,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 6719,
+              "n_inliers": 6623,
+              "inlier_ratio": 0.9857121595475518,
+              "coverage_max_gap": 0.1170775851720005,
+              "coverage_occupancy": 0.96875,
+              "fit_rmse": 0.9338868721621835,
+              "loop_error_px": 0.5409380290423735,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  1.1112130188846283,
+                  -0.1030681714044583,
+                  35.55189217453449
+                ],
+                [
+                  0.10376584241884439,
+                  1.1204074755200786,
+                  -64.06437873801951
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        }
+      ],
+      "statuses": [
+        "VERIFIED",
+        "VERIFIED",
+        "VERIFIED"
+      ],
+      "any_verified": true
+    },
+    {
+      "window": "tranquillitatis",
+      "frames": [
+        "nac.m1177606647lc",
+        "nac.m1282310415lc",
+        "nac.m1447850428rc"
+      ],
+      "cycle": [
+        "nac.m1177606647lc -> nac.m1282310415lc",
+        "nac.m1282310415lc -> nac.m1447850428rc",
+        "nac.m1447850428rc -> nac.m1177606647lc"
+      ],
+      "inverted_leg": [
+        false,
+        true,
+        false
+      ],
+      "shape_used": [
+        2048,
+        1024
+      ],
+      "loop_closure_residual_px": 1.0418994317842465,
+      "min_edge_inliers": 131,
+      "edge_inliers": {
+        "nac.m1177606647lc -> nac.m1282310415lc": 6623,
+        "nac.m1447850428rc -> nac.m1282310415lc": 131,
+        "nac.m1447850428rc -> nac.m1177606647lc": 905
+      },
+      "edge_geometry_recorded": {
+        "nac.m1177606647lc -> nac.m1282310415lc": "INCONCLUSIVE",
+        "nac.m1447850428rc -> nac.m1282310415lc": "INCONCLUSIVE",
+        "nac.m1447850428rc -> nac.m1177606647lc": "CONSISTENT WITH ARCHIVE GEOMETRY"
+      },
+      "verdicts": [
+        {
+          "edge": "nac.m1177606647lc -> nac.m1282310415lc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 6623.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "6623 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 1.0418994317842465,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 1.042 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.1170775851720005,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.117)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.9857121595475518,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "6623/6719 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 0.9338868721621835,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 6719,
+              "n_inliers": 6623,
+              "inlier_ratio": 0.9857121595475518,
+              "coverage_max_gap": 0.1170775851720005,
+              "coverage_occupancy": 0.96875,
+              "fit_rmse": 0.9338868721621835,
+              "loop_error_px": 1.0418994317842465,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  1.1112130188846283,
+                  -0.1030681714044583,
+                  35.55189217453449
+                ],
+                [
+                  0.10376584241884439,
+                  1.1204074755200786,
+                  -64.06437873801951
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m1282310415lc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "moderate",
+            "reasons": [
+              "Correspondences are clustered: 0.173 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+              "Loop closure agrees, but coverage is weak: trust the alignment near the correspondences more than far from them."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 131.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "131 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 1.0418994317842465,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 1.042 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.17289569528404664,
+                "verdict": "against",
+                "weight": "strong",
+                "statement": "Largest unconstrained region is 0.173 of the image (target <= 0.15). The transform is extrapolating where there are no correspondences."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.6208530805687204,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "131/211 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 1.6297081836862228,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 211,
+              "n_inliers": 131,
+              "inlier_ratio": 0.6208530805687204,
+              "coverage_max_gap": 0.17289569528404664,
+              "coverage_occupancy": 0.734375,
+              "fit_rmse": 1.6297081836862228,
+              "loop_error_px": 1.0418994317842465,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.9921308141323679,
+                  -0.14335443577970017,
+                  160.82817155651475
+                ],
+                [
+                  0.13366696745439918,
+                  1.0068790427994012,
+                  32.52043785302044
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        },
+        {
+          "edge": "nac.m1447850428rc -> nac.m1177606647lc",
+          "verdict": {
+            "status": "VERIFIED",
+            "confidence": "high",
+            "reasons": [
+              "Independent loop closure agrees, correspondences are numerous and well spread. This is the strongest evidence the system can produce without ground truth."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 905.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "905 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 1.0418994317842465,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 1.042 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.06464961762518036,
+                "verdict": "supports",
+                "weight": "strong",
+                "statement": "Correspondences span the overlap (largest gap 0.065)."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.8916256157635468,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "905/1015 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 1.0908824462805384,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 1015,
+              "n_inliers": 905,
+              "inlier_ratio": 0.8916256157635468,
+              "coverage_max_gap": 0.06464961762518036,
+              "coverage_occupancy": 1.0,
+              "fit_rmse": 1.0908824462805384,
+              "loop_error_px": 1.0418994317842465,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  0.8930681784200826,
+                  -0.04606967870240109,
+                  121.60542019001997
+                ],
+                [
+                  0.03486765528967738,
+                  0.9028427122482592,
+                  75.56569771220063
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          }
+        }
+      ],
+      "statuses": [
+        "VERIFIED",
+        "VERIFIED",
+        "VERIFIED"
+      ],
+      "any_verified": true
+    }
+  ],
+  "n_rows": 60,
+  "n_pairs": 20,
+  "rows_artefact": "experiments/EXP-018/rows_tranquillitatis_nue.json",
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3",
+    "opencv": "5.0.0",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "total_runtime_s": 1991.8,
+  "claims_not_supported": [
+    "Not an FA or FR measurement: the wrong-pass count is a bound at a ~250 px floor; FR is not measured.",
+    "Not an accuracy claim: no ground truth; geometry corroboration at its floor; loop closure up to per-image gauge.",
+    "One window, <= 8 frames, one illumination axis (Delta-incidence), near-nadir, native NAC rung only.",
+    "Held-out rows are never pooled with the 42 in-sample pairs."
+  ]
+}
