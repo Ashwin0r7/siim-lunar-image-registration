@@ -1,0 +1,14 @@
+TCO_MAPS02_N21E021N18E024SC: 10800 x 10800, 3600.0 px/deg, 8.423153 m/px
+  grid from offsets: top edge 21.000139 deg, left edge 20.999861 deg
+  label summary vs offsets: +0.500 / +0.500 px
+  want rows [2736, 9721) cols [3167, 4214): 150.9 MB of a 233.3 MB product (E-049: the server ignores Range, so the whole file is fetched once)
+   34/233 MB (4.39 MB/s)
+   67/233 MB (4.68 MB/s)
+   101/233 MB (4.82 MB/s)
+   134/233 MB (4.99 MB/s)
+   168/233 MB (5.09 MB/s)
+   201/233 MB (5.13 MB/s)
+   product sha256=29aefec5230bb8f5...  window (6985, 10800) sha256=19d964c29e954309... (47s)
+ref: rows [2736, 5329) (2593, 1047) dummy 0.0000 -> exp019_tc_ortho_ref_block.json
+null: rows [6119, 9721) (3602, 1047) dummy 0.0000 -> exp019_tc_ortho_null_block.json
+EXIT=0

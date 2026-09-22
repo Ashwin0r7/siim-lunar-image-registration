@@ -473,4 +473,268 @@ deployability (either a superseding note on D-054 or a recorded refusal), a
 
 ## Part 2
 
-*Empty. Written only after this Part 1 is committed.*
+**Written 2026-09-23, after the run.** Artefact:
+`experiments/EXP-019/exp019_results.json` (537 s, Python 3.13.7, NumPy 2.3.3,
+OpenCV 5.0.0, Windows 11; one run, no re-runs, nothing re-scoped). Reference
+blocks: `data/manifests/exp019_tc_ortho_{ref,null}_block.json`, product
+SHA-256 `29aefec5…`, `DUMMY` fraction **0.0000** in both.
+
+### 6. The answer, in one paragraph
+
+**A reference from another mission registers, and the numbers it gives are the
+ones the project has been missing.** RootSIFT registers **12 of 20** NAC tiles
+and the Chandrayaan-2 TMC-2 block to the SELENE TC ortho across a 6.5–10.5 : 1
+sensor scale ratio (**S1 MET**). The archive's corner geometry and Kaguya's
+control network disagree by a median of **137.6 m** on those 12 frames — 142
+native pixels — and the disagreement is **systematically eastward**
+(+101 ± 74 m east, +36 ± 64 m north): this is the ~100 px corroboration floor
+the project has been quoting, now *measured* instead of estimated (**S2 MET**).
+Composing A → reference → B, using **no A ↔ B correspondence at all**, agrees
+with the recorded direct A → B registration to a median of **0.266 reference
+pixels — 2.24 m — with a 95 % CI of [0.222, 0.413] reference px over 17
+pairs**: §2.2's sub-pixel row, whose acceptance is *median < 0.5 coarser
+pixels on independent check points with a 95 % CI*, is **MET** (**S3 MET**) —
+**and Part 1 predicted it NOT MET at 65 % confidence, so that prediction is
+wrong and is graded wrong in §12.** EXP-013's H3 — *are the per-frame gauge
+terms the archive's error or the estimate's?* — comes back **archive**: the
+terms it recovered with no knowledge of this reference track the measured
+archive-vs-controlled offsets at **r = 0.751** (Spearman 0.738, permutation
+p = 0.026, median difference **9.7 %** of the terms' size) on the eight arm-R
+frames, and **r = 0.746 at p = 0.001** pooled over eleven (**S4 MET**). The
+Chandrayaan-2 triangle through the independent mission closes at **2.177
+reference px = 18.33 m** against a frozen 2.0 reference px (16.85 m) line —
+**missed by 8.9 %, S5 NOT MET, and the threshold was not moved**. The stage's
+own false-accept measurement is **0 of 21** on a disjoint block of the same
+product (**S6 MET**).
+
+### 7. Criteria, answered exactly as frozen
+
+| ID | Verdict | The number |
+|---|---|---|
+| **S0** | **MET** | Grid gate: the label's corner summaries sit **4.7e-12 to 8.0e-4 px** from the projection-offset grid; the (lon, lat) → pixel → (lon, lat) round trip over 10⁴ points closes to **0.0°** exactly. Reproduction: 1656 / 5437 / 1608 recorded inliers reproduced **exactly**, three of three. Self-reference: a 7-px shift recovered to **2.52e-05 px** with 6668 inliers. Provenance and every frame's determinant sign recorded |
+| **S1** | **MET** | **12 of 20** NAC tiles (bar ≥ 8) **and** the TMC-2 block (9 inliers). Inlier counts on the passes run **10 → 739** |
+| **S2** | **MET** | **137.61 m** median over the 12 arm-R frames (bar < 300 m), bootstrap CI95 **[108.5, 160.3] m**, range **42.4 – 238.1 m**, p95 dispersion about the median **97.6 m**; **16.34 reference px / 142.4 native px** at the median. *The artefact's own S2 field reports 153.86 m over 19 frames because the runner let arm C into it against Part 1 §6 — see **E-051**; the criterion is read here on arm R alone, as frozen, and is MET either way* |
+| **S3** | **MET** | **0.266 reference px = 2.24 m** median over **17** pairs (bar < 0.5 reference px = 4.21 m), bootstrap CI95 **[0.222, 0.413] reference px**. Restricted to the 15 pairs whose *recorded* edge passed: **0.259 reference px = 2.18 m**, worst pair 0.839 |
+| **S4** | **MET** | arm R only, **n = 8**: Pearson **r = 0.751**, Spearman **0.738**, median absolute difference **7.27 px** against a median term of **74.65 px** = **9.7 %** (bar ≤ 30 %), permutation **p = 0.026** against a null p95 of **\|r\| = 0.694**. Pooled with arm C, **n = 11**: r = **0.746**, p = **0.001**, null p95 **0.590** |
+| **S5** | **NOT MET** | Closure **2.177 reference px = 18.33 m** against **2.0 reference px = 16.85 m**; p99 4.72 reference px over 416 grid points. All three edges present: TMC-2 → NAC recorded at 57 inliers, NAC → reference 253, TMC-2 → reference **9** |
+| **S6** | **MET** | **0 of 21** cells pass on the null block; false-accept fraction **0.000**. Inlier counts there are 0–4, i.e. below the rule by a margin, not at it |
+
+### 8. S3 — what the 2.24 m is, and what it is not
+
+The construction is: register A to the reference, register B to the reference,
+compose, and compare against the **recorded** A → B transform from
+REAL-DATA-07. No correspondence between A and B enters the composed estimate,
+so the comparison is neither a self-warp nor a fit residual — it is the first
+number in this repository that answers *"against what?"* with something other
+than the archive that produced the images.
+
+**Three things it is not, stated before anyone else says them:**
+
+1. **Not absolute accuracy in the SELENE frame.** Both legs share one
+   reference block, so whatever that block's own georeferencing error is, it
+   is common-mode and cancels in the composition. What survives is each leg's
+   *independent* registration error — different images, different keypoints,
+   different illumination — which is exactly the quantity that bounds the
+   direct A → B map. The right sentence is: *the direct estimate agrees, to
+   0.27 reference px, with an estimate built entirely from a third product it
+   never saw.*
+2. **Machine-made throughout.** §2.2's phrase *"independent check points"* is
+   honoured in the sense of an independent instrument chain, not of a human
+   annotator. Manual check points remain unbuilt.
+3. **The bar is in the reference's pixels.** 0.5 reference px is **4.21 m**,
+   which is 3.2–5.2 pixels of the source frames. Sub-pixel *in the coarser
+   image's pixels* is what §2.2 asks for and what is claimed; nothing here is
+   sub-pixel in a NAC pixel.
+
+**The check caught a bad edge, which is the strongest thing it did.** Two of
+the 17 pairs have a *recorded* edge that did not pass the frozen rule. One —
+`m1236465772rc → m1199981485rc`, **4 recorded inliers** — comes back **21.047
+reference px (177 m)** wrong, the single outlier in the set and the reason
+S3's p99 is 40.99. The other — `m1271742202lc → m1452560468lc`, **6 recorded
+inliers** — agrees to **0.433 reference px**: a rejected edge that was in fact
+right. A reference that flags one and clears the other is doing the job the
+archive floor could not do at ~100 px.
+
+### 9. S4 — EXP-013's H3, decided, and the caveat that comes with n = 8
+
+`siim.verify.gauge`'s docstring states the limitation this criterion attacks:
+*"A per-frame bias in the archive reference has the same shape as a per-frame
+gauge in the estimate and is indistinguishable by this instrument."* EXP-013
+fitted per-frame terms of **25.70 – 109.43 px** to the disagreement between
+edge estimates and archive corner geometry, and three engines agreed on them
+to 1.50 px. This stage measured the archive-vs-controlled offset of the same
+frames with a product EXP-013 never touched. They track:
+
+| window | frame | EXP-013 term (px) | measured here (px) | arm |
+|---|---|---|---|---|
+| RD03 | m1182331886lc | 0.00 (fixed node) | 0.00 | R |
+| RD03 | m1199981485rc | 47.89 | 73.65 | R |
+| RD03 | m1212932972lc | 25.70 | 30.08 | R |
+| RD03 | m1271742202lc | 56.94 | 50.63 | R |
+| RD03 | m1335207975rc | 71.77 | 69.31 | C |
+| RD03 | m1452560468lc | 92.59 | 90.36 | R |
+| RD04 | m1212932972lc | 0.00 (fixed node) | 0.00 | R |
+| RD04 | m1271742202lc | 62.91 | 54.68 | R |
+| RD04 | m1299958135lc | 100.95 | 99.47 | R |
+| RD04 | m1315225542lc | 95.21 | 56.20 | R |
+| RD04 | m1335207975rc | 88.85 | 83.06 | C |
+| RD04 | m1341069775rc | 109.43 | 163.23 | C |
+| RD04 | m1363396554rc | 86.38 | 76.63 | R |
+
+**What this licenses.** The per-frame terms EXP-013 could not attribute are, to
+within 9.7 %, the archive reference's own per-frame error. So the 36-of-36
+gauge blind spot (E-039) — constructed synthetically, and real as an identity —
+is **not evidenced on these real frames**: what might have been a shared
+per-frame estimate error is the reference being wrong, in a direction a second
+mission can measure. D-054's *built, not deployed* has a deployment path for
+the first time, against **this** reference rather than against archive corners,
+and Part 1 §6 forbids taking it here: the deployment is a separate stage with
+its own pre-registration.
+
+**What it does not license, said plainly.** `r = 0.751` on **eight** free
+frames sits only just above the permutation null's p95 of **0.694** — the
+margin Part 1 warned about when it called S4 "the criterion with the least
+margin". The pooled reading (n = 11, r = 0.746, p = 0.001, null p95 0.590) is
+the stronger one and it is *not* the criterion, because arm C depends on a
+recorded edge. Two frames disagree materially — `m1315225542lc` (95.21 vs
+56.20) and the chained `m1341069775rc` (109.43 vs 163.23) — so the claim is
+**"the terms are substantially reference error"**, not "the terms are
+reference error".
+
+### 10. S2 — a 137.6 m disagreement with a direction
+
+The 12 arm-R frames disagree with the controlled frame by **42.4 – 238.1 m**,
+median **137.6 m**, and the disagreement is not isotropic: **+101.2 ± 74.2 m
+east, +36.4 ± 64.1 m north**. A 0.01° corner quantisation is ≈ 285 m in
+longitude at this latitude, so the median sits at about half a quantisation
+step, which is what a quantised reference should produce — and the eastward
+mean is a *systematic* term that quantisation alone does not explain.
+
+This is the number behind every "corroborated at ~100 px" sentence in the
+repository. It is now measured rather than inferred, on 12 frames, against a
+product built by another agency — and it is **not** attributed: a disagreement
+bounds the sum of two errors. What S4 adds is that the *per-frame structure* of
+it is shared with EXP-013's independent fit, which is evidence that most of it
+lives on the archive side.
+
+### 11. Reported beside the criteria, not graded (Part 1 §8)
+
+- **The illumination envelope, re-measured against a photometrically
+  normalised reference.** The TC ortho is normalised to (i = 30°, e = 0,
+  α = 30°), so |i − 30°| is a Δ-incidence to a *fixed* geometry. Successes run
+  to **38.80°** (10 inliers) and **36.88°** (25); failures start at **12.43°**.
+  Below 15.5° it is **7 of 8**; above 39.7° it is **0 of 5**. The envelope is
+  real but **not a clean threshold** — three frames inside it fail — which is
+  REAL-DATA-07's D-049 pattern seen from a new direction.
+- **B4L (DISK + LightGlue), no criterion.** **16 of 21** cells pass against
+  RootSIFT's 13, with 316–778 inliers where B1 has 3–25, and it rescues every
+  frame in the 36–40° band plus two that B1 fails inside it. It does **not**
+  rescue the 72–75° frames (3 inliers), nor `m1205872034rc`. On the 11 cells
+  where both pass, the two engines' maps agree to **0.03–1.62 reference px**
+  (0.2–13.6 m) except `m1199981485rc` at 4.81; where either fails they disagree
+  by **206–4405 reference px**, which is engine agreement behaving exactly as
+  D-051 says it should.
+- **The Chandrayaan-2 cell in full.** 9 inliers, 11 putative, 2 refined, fit
+  RMSE 0.613 px, verdict **INCONCLUSIVE / low** — *"correspondences are
+  clustered: 0.470 of the overlap has no nearby constraint"* — occupancy
+  **0.094**. Recovered scale **1.1944** against the geometry's predicted
+  **1.1995**: **0.4 %**, corroboration on a quantity the matcher never saw.
+  B4L on the same cell gets **99 inliers** and the two engines agree to **2.71
+  reference px (22.8 m)**. The PRADAN acknowledgement is carried in the cell.
+- **Recovered scale** across the arm-R passes agrees with the geometry's
+  prediction to **≤ 3.45 %**, the worst case being the 10-inlier cell.
+- **Coverage** (D-055 order): occupancy median **0.875** on the passes, range
+  0.094 – 1.000; the C2 cell is the worst at 0.094.
+- **Refined-point counts** on the passes: 2 – 522. The two smallest (2 and 5)
+  are the C2 cell and the 10-inlier `m1452560468lc`.
+- **GSD mismatch** after integer `k`: **−7.4 % to +3.1 %** on the NAC frames.
+  The TMC-2 block's is **+16.3 %**, not the +12.1 % Part 1 §3.2 computed: the
+  block's own metres-per-pixel at this latitude is **4.899 m**, where Part 1
+  used the 4.7232 m recorded by REAL-DATA-09. The larger figure is the one the
+  run used and is recorded in the artefact.
+- **Cost.** 537 s wall clock for 63 registrations, plus a 233 MB download
+  (47 s at 5 MB/s) and 47 s of local slicing. The reference costs four minutes
+  and is reusable by every later stage.
+
+### 12. The predictions, graded — including the one that was wrong
+
+| prediction (Part 1 §4.2) | outcome |
+|---|---|
+| S0 MET, HIGH | **Right.** |
+| S1 MET, MEDIUM-HIGH, 9–13 of 20 | **Right** (12), and the per-stratum shape was **half right**: the ≤ 23° stratum went 8 of 10 (predicted ≥ 8), but the ≥ 36° stratum went **2 of 6** where "fail" was predicted at MEDIUM-HIGH — `m1199981485rc` (36.88°) and `m1452560468lc` (38.80°) passed |
+| S2 MET, MEDIUM, median 80–250 m | **Right**, 137.6 m, inside the predicted band |
+| **S3 NOT MET, MEDIUM-HIGH (65 %), median 1.0–2.0 reference px** | **WRONG.** The median is **0.266 reference px**, four to eight times better than predicted, and the criterion is **MET**. The 20 % branch — *"a median under 0.5 reference px would be a genuine surprise"* — is what happened. The prediction assumed each leg contributes an independent ~0.5 reference px; on 253–739 inliers over a 500 × 250 px window the per-leg error is far below that, and the shared reference removes the common term |
+| S4 MET at 55 % — "the prediction most worth being wrong about" | **Right, at the weaker end**: r = 0.751 against a bar of 0.70 and a null p95 of 0.694 |
+| S5 NOT MET, MEDIUM (60 %) | **Right**, and closer than predicted: 2.177 against 2.0 reference px |
+| S6 MET (0 of 21), MEDIUM-HIGH | **Right**, with no cell above 4 inliers |
+| Overall: "S0, S1, S2, S6 MET; S3 NOT MET with a number; S4 a coin-flip; S5 NOT MET" | **Six of seven right; S3 is the miss, and it is the miss that matters** — the stage was designed expecting to report a bound, and it reported a pass |
+
+Part 1 §4.2 also said: *"If every criterion passes, that is itself suspicious
+and Part 2 must say why it is not."* Six of seven passed. The reason it is not
+a sweep: **S5 failed**, on the one edge with 9 inliers; S3's own set contains a
+21-px outlier that the criterion's median absorbs; S4 cleared its bar by 0.051
+against a null p95 only 0.006 below it; and S1 failed on **8 of 20** frames.
+
+### 13. Defects found (E-051), and what is NOT rewritten
+
+**E-051 — arm C entered S2, which Part 1 §6 forbids, and the chain does not
+check that the edge it chains through succeeded.** The runner's S2 pools every
+frame that has a displacement field, including the seven arm-C frames. Two of
+those are catastrophic — `m1096350825rc` at **1635 m and 4338 m**,
+`m1142297886lc` at **4600 m** — because arm C selects "the recorded edge with
+the most inliers to a frame that passed", and for the 72–75° frames the best
+such edge has **4–5 inliers**, i.e. a recorded *failure*. Chaining through a
+failed registration produces a meaningless position, and pooling it into S2
+moved the median from **137.61 m to 153.86 m** and the p95 dispersion from
+97.6 m to 4210 m. **The artefact is not rewritten** (integrity rule 4): §7
+reads the criterion on arm R as frozen, states both numbers, and this row is
+the record. The arm-C frames whose chain used a *passing* edge
+(`m1335207975rc` 117.9 / 88.0 m, `m1341069775rc` 251.0 m, `m1175268993rc`
+172.7 m) are consistent with the arm-R range and are reported in §9's table
+with their arm marked.
+
+**Not a defect, recorded anyway:** Part 1 §3.2's TMC-2 GSD mismatch (+12.1 %)
+is superseded by the run's own **+16.3 %** (§11).
+
+### 14. What this stage does NOT claim (Part 1 §7, restated against the results)
+
+Every disclaimer in Part 1 §7 stands. In particular: **not ground truth** (a
+second mission is a second opinion), **not absolute selenographic accuracy**
+(§8), **not manual check points**, **not multi-modal** (TC is panchromatic),
+**not viewpoint or terrain transfer** (one mare region, near-nadir sources, an
+orthorectified reference against unrectified tiles), **not a verdict change**
+(`assess()`, `select_model` and `siim.verify.gauge` are untouched; the 13
+INCONCLUSIVE / 1 REJECTED verdicts are recorded as they came), and **one
+engine in every criterion**.
+
+One addition the results force: **S3's 2.24 m is a disagreement between two
+estimates that share a reference**, so it is an upper bound on the direct
+estimate's error *relative to the reference path* and not on its error in the
+SELENE frame. The deliverable's accuracy sentence is therefore:
+
+> The direct registration of two NAC frames agrees, to a median of **0.266
+> reference pixels (2.24 m, 95 % CI 0.222–0.413 reference px)**, with an
+> estimate composed entirely through a product from another mission that the
+> direct estimate never saw. That is an upper bound on the sum of two
+> independent registration errors, and it is the first accuracy-class number
+> in this repository that is not a self-warp.
+
+That sentence may not be shortened.
+
+### 15. Ledger and index
+
+- **D-060** — the corroboration floor: the project's external check moves from
+  archive corner geometry (84–116 px discrimination, 66.00 px reference noise)
+  to the SELENE TC ortho (composed-check agreement **0.27 reference px =
+  2.24 m**, per-frame archive disagreement **137.6 m**). Adopted as the
+  reference *for later stages to use*; nothing in `src/` is retuned here.
+- **D-061** — EXP-013's H3 resolved toward the archive, with S4's margin
+  stated. A note on D-054, which stays *built, not deployed*.
+- **E-050** — the DARTS archive answers HTTP Range with 200 and the whole
+  product; the strict fetcher slices it correctly and therefore downloads the
+  file once per chunk. (The acquisition commit and the two block manifests
+  call this *E-049*, a number already taken by EXP-018's `n_mirrored` row; the
+  manifests are recorded artefacts and are **not** rewritten.)
+- **E-051** — arm C in S2, and the unchecked chain (§13).
+- `STAGE-INDEX.md`, `STAGE_HISTORY.md` and `research_log.md` rows land with
+  this commit.

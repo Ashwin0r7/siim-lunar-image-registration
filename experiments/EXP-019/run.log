@@ -1,0 +1,126 @@
+EXP-019 | reference (2593, 1047) | null (3602, 1047) | margin 237 px
+
+== S0 gates ==
+  grid gate: corners 0.0008 px, round trip 0.00e+00 deg -> MET
+  self-reference: 6668 inliers, error 2.5152226149962275e-05 px
+  [S0 iii] RD03 m1271742202l->m1182331886lc  1656 recorded  1656 REPRODUCES
+D:\MyData\downloads\SIH\scripts\run_exp007.py:117: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a.reshape(a.shape[0] // k, k, a.shape[1] // k, k), axis=(1, 3))
+  [S0 iii] RD03 m1182331886l->m1212932972lc  5437 recorded  5437 REPRODUCES
+  [S0 iii] RD04 m1299958135l->m1271742202lc  1608 recorded  1608 REPRODUCES
+
+== arm R: sources against the controlled reference ==
+  [R] RD03/nac.m1271742202lc           k= 9 |i-30|= 0.05 inl=  253 PASS D=114.0 m (1s)
+  [R] RD03/nac.m1335207975rc           k= 9 |i-30|=39.76 inl=    6 fail  (1s)
+  [R] RD03/nac.m1452560468lc           k=10 |i-30|=38.80 inl=   10 PASS D=203.7 m (1s)
+  [R] RD03/nac.m1182331886lc           k= 7 |i-30|=13.74 inl=  739 PASS D=103.7 m (3s)
+D:\MyData\downloads\SIH\src\siim\preprocessing\degrade.py:76: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a.reshape(a.shape[0] // k, k, a.shape[1] // k, k), axis=(1, 3))
+  [R] RD03/nac.m1236465772rc           k= 7 |i-30|=14.44 inl=   13 PASS D=238.1 m (2s)
+  [R] RD03/nac.m1212932972lc           k= 8 |i-30|=15.48 inl=  577 PASS D=160.9 m (3s)
+  [R] RD03/nac.m1205872034rc           k= 8 |i-30|=17.11 inl=    3 fail  (2s)
+  [R] RD03/nac.m1175268993rc           k= 7 |i-30|=18.47 inl=    4 fail  (2s)
+  [R] RD03/nac.m1363396554rc           k= 8 |i-30|=22.40 inl=  345 PASS D=44.3 m (3s)
+  [R] RD03/nac.m1199981485rc           k= 8 |i-30|=36.88 inl=   25 PASS D=153.9 m (1s)
+  [R] RD03/nac.m1096350825rc           k= 6 |i-30|=42.29 inl=    3 fail  (2s)
+  [R] RD03/nac.m1142297886lc           k= 7 |i-30|=44.65 inl=    3 fail  (2s)
+  [R] RD04/nac.m1271742202lc           k= 9 |i-30|= 0.05 inl=  268 PASS D=113.3 m (2s)
+  [R] RD04/nac.m1335207975rc           k= 9 |i-30|=39.76 inl=    8 fail  (1s)
+  [R] RD04/nac.m1299958135lc           k= 8 |i-30|=11.78 inl=   91 PASS D=159.8 m (1s)
+  [R] RD04/nac.m1315225542lc           k=10 |i-30|= 8.87 inl=   96 PASS D=121.4 m (1s)
+  [R] RD04/nac.m1341069775rc           k= 9 |i-30|=12.43 inl=    3 fail  (1s)
+  [R] RD04/nac.m1212932972lc           k= 8 |i-30|=15.48 inl=  474 PASS D=153.8 m (2s)
+  [R] RD04/nac.m1363396554rc           k= 8 |i-30|=22.40 inl=  195 PASS D=42.4 m (1s)
+  [R] RD04/nac.m1096350825rc           k= 6 |i-30|=42.29 inl=    3 fail  (2s)
+
+== arm R: Chandrayaan-2 ==
+  [R] C2/TMC-2                         k=2 inl=    9 PASS (1s)
+
+== arm N: the same sources against a disjoint block of the same product ==
+  [N] RD03/nac.m1271742202lc           inl=    3 fail (expected)
+  [N] RD03/nac.m1335207975rc           inl=    0 fail (expected)
+  [N] RD03/nac.m1452560468lc           inl=    3 fail (expected)
+  [N] RD03/nac.m1182331886lc           inl=    3 fail (expected)
+  [N] RD03/nac.m1236465772rc           inl=    3 fail (expected)
+  [N] RD03/nac.m1212932972lc           inl=    3 fail (expected)
+  [N] RD03/nac.m1205872034rc           inl=    3 fail (expected)
+  [N] RD03/nac.m1175268993rc           inl=    4 fail (expected)
+  [N] RD03/nac.m1363396554rc           inl=    3 fail (expected)
+  [N] RD03/nac.m1199981485rc           inl=    3 fail (expected)
+  [N] RD03/nac.m1096350825rc           inl=    3 fail (expected)
+  [N] RD03/nac.m1142297886lc           inl=    3 fail (expected)
+  [N] RD04/nac.m1271742202lc           inl=    3 fail (expected)
+  [N] RD04/nac.m1335207975rc           inl=    3 fail (expected)
+  [N] RD04/nac.m1299958135lc           inl=    3 fail (expected)
+  [N] RD04/nac.m1315225542lc           inl=    3 fail (expected)
+  [N] RD04/nac.m1341069775rc           inl=    3 fail (expected)
+  [N] RD04/nac.m1212932972lc           inl=    3 fail (expected)
+  [N] RD04/nac.m1363396554rc           inl=    0 fail (expected)
+  [N] RD04/nac.m1096350825rc           inl=    3 fail (expected)
+  [N] C2/TMC-2                         inl=    0 fail (expected)
+
+== B4L beside (no criterion) ==
+D:\softwares\Lib\site-packages\kornia\feature\integrated.py:550: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  hw1_ = torch.tensor(hw1, device=dev)
+D:\softwares\Lib\site-packages\kornia\feature\integrated.py:554: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  hw2_ = torch.tensor(hw2, device=dev)
+Loaded LightGlue model
+  [B4L] RD03/nac.m1271742202lc           inl=  477 PASS
+  [B4L] RD03/nac.m1335207975rc           inl=  428 PASS
+  [B4L] RD03/nac.m1452560468lc           inl=  316 PASS
+  [B4L] RD03/nac.m1182331886lc           inl=  663 PASS
+  [B4L] RD03/nac.m1236465772rc           inl=  713 PASS
+  [B4L] RD03/nac.m1212932972lc           inl=  512 PASS
+  [B4L] RD03/nac.m1205872034rc           inl=    3 fail
+  [B4L] RD03/nac.m1175268993rc           inl=  778 PASS
+  [B4L] RD03/nac.m1363396554rc           inl=  502 PASS
+  [B4L] RD03/nac.m1199981485rc           inl=  644 PASS
+  [B4L] RD03/nac.m1096350825rc           inl=    3 fail
+  [B4L] RD03/nac.m1142297886lc           inl=    3 fail
+  [B4L] RD04/nac.m1271742202lc           inl=  414 PASS
+  [B4L] RD04/nac.m1335207975rc           inl=  381 PASS
+  [B4L] RD04/nac.m1299958135lc           inl=  472 PASS
+  [B4L] RD04/nac.m1315225542lc           inl=  370 PASS
+  [B4L] RD04/nac.m1341069775rc           inl=  360 PASS
+  [B4L] RD04/nac.m1212932972lc           inl=  542 PASS
+  [B4L] RD04/nac.m1363396554rc           inl=  481 PASS
+  [B4L] RD04/nac.m1096350825rc           inl=    3 fail
+  [B4L] C2/TMC-2                         inl=   99 PASS
+
+== arm C: chained through one recorded edge ==
+  [C] RD03/nac.m1335207975rc           via nac.m1452560468lc (edge 5392 inliers) D=117.9 m
+  [C] RD03/nac.m1175268993rc           via nac.m1236465772rc (edge 8239 inliers) D=172.7 m
+  [C] RD03/nac.m1096350825rc           via nac.m1212932972lc (edge 5 inliers) D=1635.1 m
+  [C] RD03/nac.m1142297886lc           via nac.m1212932972lc (edge 5 inliers) D=4600.1 m
+  [C] RD04/nac.m1335207975rc           via nac.m1212932972lc (edge 210 inliers) D=88.0 m
+  [C] RD04/nac.m1341069775rc           via nac.m1299958135lc (edge 265 inliers) D=251.0 m
+  [C] RD04/nac.m1096350825rc           via nac.m1299958135lc (edge 4 inliers) D=4337.7 m
+
+== S3: check points through the reference ==
+  [S3] RD03 m1182331886l->m1199981485rc median 0.653 ref px (5.50 m)
+  [S3] RD03 m1182331886l->m1212932972lc median 0.136 ref px (1.14 m)
+  [S3] RD03 m1212932972l->m1199981485rc median 0.839 ref px (7.07 m)
+  [S3] RD03 m1212932972l->m1363396554rc median 0.211 ref px (1.78 m)
+  [S3] RD03 m1212932972l->m1452560468lc median 0.510 ref px (4.29 m)
+  [S3] RD03 m1236465772r->m1199981485rc median 21.047 ref px (177.28 m)
+  [S3] RD03 m1271742202l->m1182331886lc median 0.287 ref px (2.42 m)
+  [S3] RD03 m1271742202l->m1212932972lc median 0.266 ref px (2.24 m)
+  [S3] RD03 m1271742202l->m1452560468lc median 0.433 ref px (3.65 m)
+  [S3] RD04 m1212932972l->m1363396554rc median 0.243 ref px (2.05 m)
+  [S3] RD04 m1271742202l->m1212932972lc median 0.244 ref px (2.05 m)
+  [S3] RD04 m1299958135l->m1212932972lc median 0.413 ref px (3.48 m)
+  [S3] RD04 m1299958135l->m1271742202lc median 0.222 ref px (1.87 m)
+  [S3] RD04 m1299958135l->m1315225542lc median 0.146 ref px (1.23 m)
+  [S3] RD04 m1299958135l->m1363396554rc median 0.393 ref px (3.31 m)
+  [S3] RD04 m1315225542l->m1212932972lc median 0.259 ref px (2.18 m)
+  [S3] RD04 m1315225542l->m1271742202lc median 0.077 ref px (0.65 m)
+
+== S4: EXP-013's per-frame terms against the measured offsets ==
+  arm-R frames 8, pooled 11; r = 0.7509668388193917
+
+== S5: the Chandrayaan-2 triangle ==
+   closure 2.1766597036011257 ref px
+
+S0 MET | S1 MET (12/20 NAC, TMC-2 True) | S2 MET (median 153.8637487885029 m) | S3 MET (median 0.2661223378431488 ref px) | S4 MET (r = 0.7509668388193917) | S5 NOT MET | S6 MET (0 passes)
+wrote D:\MyData\downloads\SIH\experiments\EXP-019\exp019_results.json in 537s
+EXIT=0

@@ -120,6 +120,57 @@ space (ADR-0011 N1), recorded as a known limitation rather than patched.
 ---
 
 
+## UPDATE 2026-09-23 — the reference changed, and two criteria move (EXP-019)
+
+**What ran.** EXP-019 registered 20 REAL-DATA-07 NAC tiles and the
+Chandrayaan-2 TMC-2 block to the **SELENE (Kaguya) TC Ortho Map Seamless V2**
+tile over the same ground — a product from another agency, spacecraft, sensor,
+decade and control network — and against a **null block of the same product**
+25 km away. S0, S1, S2, S3, S4, S6 MET; S5 NOT MET.
+
+**Criterion 2 — still NOT MET, and the reason is now one clause, not three.**
+The three named counts were: no VERIFIED Chandrayaan-2 verdict, one sensor not
+three, no check points.
+
+- **Check points: the clause is now answered in the sense §2.2 defines it.** An
+  A → reference → B composition, built from **no A ↔ B correspondence**, agrees
+  with the recorded direct registration to **0.266 reference px = 2.24 m**,
+  bootstrap CI95 **[0.222, 0.413] reference px**, over 17 pairs — against the
+  requirement *median < 0.5 coarser-px on independent check points, with 95 %
+  CI*. The independence is of the **instrument chain**, not of a human
+  annotator, and both legs share the reference, so the number bounds the sum of
+  two independent registration errors and is **not** absolute accuracy. Stated
+  that way, the clause is **MET**; stated as "human-annotated check points", it
+  is not, and that reading is recorded here so nobody has to discover it.
+- **A VERIFIED Chandrayaan-2 verdict: still not reached.** The new triangle
+  {TMC-2 → NAC recorded, NAC → reference, reference → TMC-2} closes at **2.177
+  reference px = 18.33 m** against the frozen **2.0 reference px** line — an
+  8.9 % miss, on the leg with 9 inliers. The line was not moved. Note what a
+  pass would have meant: 2.0 *reference* px is 16.85 m where EXP-012's 2.0 px
+  is ≈ 2 m.
+- **One sensor, not three: unchanged.** TMC-2 only; OHRC is over the South Pole
+  and no IIRS was delivered.
+
+**Criterion 3 — the blind spot's attribution changes.** EXP-013 could not say
+whether its per-frame terms (25.70–109.43 px) were archive-reference error or a
+real shared per-frame error in the estimates; `siim.verify.gauge`'s docstring
+records that as undecidable by that instrument. Measured against a reference
+EXP-013 never saw, the terms track the archive-vs-controlled offsets at
+**r = 0.751** (Spearman 0.738, permutation **p = 0.026** against a null p95 of
+0.694) on 8 frames, and **r = 0.746 at p = 0.001** pooled over 11. So the
+36-of-36 gauge blind spot is **not evidenced on these real frames** (D-061),
+and D-054's detector has a deployment path — against this reference, in a stage
+of its own. **FA and FR are still unmeasurable**, so criterion 3 stays
+**PARTLY ANSWERED**.
+
+**What the audit gains permanently.** The corroboration floor quoted in every
+earlier row — "~100 px" — is now a measurement: **137.6 m median, CI95
+108.5–160.3 m, +101 ± 74 m east**, on 12 frames, against an independently
+controlled product (D-060). Rows that say *corroborated, not verified* keep
+their wording; the number behind the word is no longer an estimate.
+
+---
+
 ## UPDATE 2026-09-22 — criterion 3 measured out of sample for the first time (EXP-018)
 
 **Criterion 3 stays NOT EVALUABLE for FA and FR, and that is now a measured

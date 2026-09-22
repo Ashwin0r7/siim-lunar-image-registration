@@ -5,8 +5,8 @@
 Frozen in ``docs/stages/EXP-019_controlled_reference.md`` Part 1 section 3.1
 (commit 9cc9c13). One contiguous byte range of
 ``TCO_MAPs02_N21E021N18E024SC.img`` covering latitude 18.30 - 20.24 N is
-fetched by strict chunked byte range, split into the two blocks Part 1 names,
-and written with provenance:
+cut out of the product (see E-050 below on why the whole file is fetched),
+split into the two blocks Part 1 names, and written with provenance:
 
     REF   19.52 - 20.24 N   covers every source footprint with ~2 km margin
     NULL  18.30 - 19.30 N   >= 25 km away, same product, same processing
@@ -16,7 +16,7 @@ SCALING_FACTOR 0.01 and DUMMY 0. The grid is taken from the label's
 LINE/SAMPLE_PROJECTION_OFFSET (authoritative) and the label's own corner
 summaries are recorded beside it, exactly as REAL-DATA-08 did for Mini-RF.
 
-**E-049.** The DARTS server does not honour HTTP ``Range`` on this product: it
+**E-050.** The DARTS server does not honour HTTP ``Range`` on this product: it
 answers ``200`` with the whole 233 MB image. ``fetch_byte_range`` detects that
 (its documented failure mode 1) and slices the full body, which is correct and
 which turns a 151 MB windowed read into **one full download per 8 MB chunk**.
@@ -135,7 +135,7 @@ def main() -> None:
     count = (row1 - row0) * record_bytes
     expected = lines * record_bytes
     print(f"  want rows [{row0}, {row1}) cols [{col0}, {col1}): {count / 1e6:.1f} MB "
-          f"of a {expected / 1e6:.1f} MB product (E-049: the server ignores Range, "
+          f"of a {expected / 1e6:.1f} MB product (E-050: the server ignores Range, "
           f"so the whole file is fetched once)", flush=True)
 
     t0 = time.perf_counter()
@@ -187,7 +187,7 @@ def main() -> None:
             "product_file_sha256": sha_file, "product_file_bytes": expected,
             "product_file_path": str(img_path.relative_to(ROOT)),
             "bytes_note": "product_file_sha256 is of the archive's whole .img (the server "
-                          "ignores HTTP Range, E-049); bytes_sha256 is of the contiguous row "
+                          "ignores HTTP Range, E-050); bytes_sha256 is of the contiguous row "
                           "window [row0_fetch, row1_fetch) covering BOTH blocks, and each "
                           "block is a row slice of that window",
             "row0_fetch": row0, "row1_fetch_exclusive": row1,

@@ -1,0 +1,7643 @@
+{
+ "stage": "EXP-019",
+ "preregistration": "docs/stages/EXP-019_controlled_reference.md Part 1 (commit 9cc9c13)",
+ "quick_mode": false,
+ "reference": {
+  "product": "TCO_MAPS02_N21E021N18E024SC",
+  "gsd_m": 8.42315289562,
+  "manifests": [
+   "exp019_tc_ortho_ref_block.json",
+   "exp019_tc_ortho_null_block.json"
+  ],
+  "credit": "SELENE (Kaguya) Terrain Camera Ortho Map Seamless V2.0, SLN-L-TC-5-ORTHO-MAP-SEAMLESS-V2.0, produced by LISM, distributed by JAXA/ISAS DARTS"
+ },
+ "pipeline": {
+  "function": "siim.pipeline.register_pair",
+  "engine": "B1",
+  "model": "affine",
+  "ransac_threshold_px": 3.0,
+  "seed": 0,
+  "failure_rule": "n_inliers <= 8 (D-023)",
+  "operator": "siim.preprocessing.degrade.degrade_to_gsd, psf_fwhm_coarse_px = 1.0",
+  "orientation": "siim.ingest.orientation.north_up_east_right (NAC); map projection (TMC-2)"
+ },
+ "criteria": {
+  "S0": {
+   "grid_gate_ref": {
+    "met": true,
+    "corner_error_px": {
+     "MAXIMUM_LATITUDE": 4.718003765447065e-12,
+     "MINIMUM_LATITUDE": 0.00080000001071312,
+     "WESTERNMOST_LONGITUDE": 4.718003765447065e-12,
+     "EASTERNMOST_LONGITUDE": 0.00080000001071312
+    },
+    "roundtrip_max_deg": 0.0,
+    "ppd": 3600.0,
+    "lat_top_deg": 21.000138888888888,
+    "lon_left_deg": 20.999861111111112,
+    "map_scale_m": 8.42315289562,
+    "block_shape": [
+     2593,
+     1047
+    ],
+    "row0": 2736,
+    "col0": 3167,
+    "bytes_sha256": "19d964c29e954309b1be5f6d1e258cc3575a5889efc1437c4959eb63debd4449",
+    "byte_start": 59097600,
+    "byte_count": 150876000,
+    "dummy_fraction": 0.0,
+    "label_summary_vs_offsets_px": [
+     0.499999999995282,
+     0.499999999995282
+    ]
+   },
+   "grid_gate_null": {
+    "met": true,
+    "corner_error_px": {
+     "MAXIMUM_LATITUDE": 4.718003765447065e-12,
+     "MINIMUM_LATITUDE": 0.00080000001071312,
+     "WESTERNMOST_LONGITUDE": 4.718003765447065e-12,
+     "EASTERNMOST_LONGITUDE": 0.00080000001071312
+    },
+    "roundtrip_max_deg": 0.0,
+    "ppd": 3600.0,
+    "lat_top_deg": 21.000138888888888,
+    "lon_left_deg": 20.999861111111112,
+    "map_scale_m": 8.42315289562,
+    "block_shape": [
+     3602,
+     1047
+    ],
+    "row0": 6119,
+    "col0": 3167,
+    "bytes_sha256": "19d964c29e954309b1be5f6d1e258cc3575a5889efc1437c4959eb63debd4449",
+    "byte_start": 59097600,
+    "byte_count": 150876000,
+    "dummy_fraction": 0.0,
+    "label_summary_vs_offsets_px": [
+     0.499999999995282,
+     0.499999999995282
+    ]
+   },
+   "self_reference": {
+    "met": true,
+    "n_inliers": 6668,
+    "error_px": 2.5152226149962275e-05,
+    "max_px": 2.5152226153255237e-05,
+    "shift_px": 7
+   },
+   "reproduction": {
+    "met": true,
+    "edges": [
+     {
+      "window": "RD03",
+      "edge": "nac.m1271742202lc -> nac.m1182331886lc",
+      "recorded": 1656,
+      "rerun": 1656,
+      "reproduces": true
+     },
+     {
+      "window": "RD03",
+      "edge": "nac.m1182331886lc -> nac.m1212932972lc",
+      "recorded": 5437,
+      "rerun": 5437,
+      "reproduces": true
+     },
+     {
+      "window": "RD04",
+      "edge": "nac.m1299958135lc -> nac.m1271742202lc",
+      "recorded": 1608,
+      "rerun": 1608,
+      "reproduces": true
+     }
+    ]
+   },
+   "met": true
+  },
+  "S1": {
+   "met": true,
+   "n_nac_pass": 12,
+   "n_nac": 20,
+   "tmc2_pass": true,
+   "bar": ">= 8 of 20 NAC tiles and the TMC-2 block",
+   "passing": [
+    "RD03/nac.m1182331886lc",
+    "RD03/nac.m1199981485rc",
+    "RD03/nac.m1212932972lc",
+    "RD03/nac.m1236465772rc",
+    "RD03/nac.m1271742202lc",
+    "RD03/nac.m1363396554rc",
+    "RD03/nac.m1452560468lc",
+    "RD04/nac.m1212932972lc",
+    "RD04/nac.m1271742202lc",
+    "RD04/nac.m1299958135lc",
+    "RD04/nac.m1315225542lc",
+    "RD04/nac.m1363396554rc"
+   ],
+   "by_delta_to_standard_geometry": [
+    {
+     "source": "RD03/nac.m1271742202lc",
+     "delta_deg": 0.05000000000000071,
+     "pass": true,
+     "n_inliers": 253
+    },
+    {
+     "source": "RD04/nac.m1271742202lc",
+     "delta_deg": 0.05000000000000071,
+     "pass": true,
+     "n_inliers": 268
+    },
+    {
+     "source": "RD04/nac.m1315225542lc",
+     "delta_deg": 8.870000000000001,
+     "pass": true,
+     "n_inliers": 96
+    },
+    {
+     "source": "C2/TMC-2",
+     "delta_deg": 9.255908000000002,
+     "pass": true,
+     "n_inliers": 9
+    },
+    {
+     "source": "RD04/nac.m1299958135lc",
+     "delta_deg": 11.780000000000001,
+     "pass": true,
+     "n_inliers": 91
+    },
+    {
+     "source": "RD04/nac.m1341069775rc",
+     "delta_deg": 12.43,
+     "pass": false,
+     "n_inliers": 3
+    },
+    {
+     "source": "RD03/nac.m1182331886lc",
+     "delta_deg": 13.740000000000002,
+     "pass": true,
+     "n_inliers": 739
+    },
+    {
+     "source": "RD03/nac.m1236465772rc",
+     "delta_deg": 14.439999999999998,
+     "pass": true,
+     "n_inliers": 13
+    },
+    {
+     "source": "RD03/nac.m1212932972lc",
+     "delta_deg": 15.479999999999997,
+     "pass": true,
+     "n_inliers": 577
+    },
+    {
+     "source": "RD04/nac.m1212932972lc",
+     "delta_deg": 15.479999999999997,
+     "pass": true,
+     "n_inliers": 474
+    },
+    {
+     "source": "RD03/nac.m1205872034rc",
+     "delta_deg": 17.11,
+     "pass": false,
+     "n_inliers": 3
+    },
+    {
+     "source": "RD03/nac.m1175268993rc",
+     "delta_deg": 18.47,
+     "pass": false,
+     "n_inliers": 4
+    },
+    {
+     "source": "RD03/nac.m1363396554rc",
+     "delta_deg": 22.4,
+     "pass": true,
+     "n_inliers": 345
+    },
+    {
+     "source": "RD04/nac.m1363396554rc",
+     "delta_deg": 22.4,
+     "pass": true,
+     "n_inliers": 195
+    },
+    {
+     "source": "RD03/nac.m1199981485rc",
+     "delta_deg": 36.879999999999995,
+     "pass": true,
+     "n_inliers": 25
+    },
+    {
+     "source": "RD03/nac.m1452560468lc",
+     "delta_deg": 38.8,
+     "pass": true,
+     "n_inliers": 10
+    },
+    {
+     "source": "RD03/nac.m1335207975rc",
+     "delta_deg": 39.760000000000005,
+     "pass": false,
+     "n_inliers": 6
+    },
+    {
+     "source": "RD04/nac.m1335207975rc",
+     "delta_deg": 39.760000000000005,
+     "pass": false,
+     "n_inliers": 8
+    },
+    {
+     "source": "RD03/nac.m1096350825rc",
+     "delta_deg": 42.290000000000006,
+     "pass": false,
+     "n_inliers": 3
+    },
+    {
+     "source": "RD04/nac.m1096350825rc",
+     "delta_deg": 42.290000000000006,
+     "pass": false,
+     "n_inliers": 3
+    },
+    {
+     "source": "RD03/nac.m1142297886lc",
+     "delta_deg": 44.650000000000006,
+     "pass": false,
+     "n_inliers": 3
+    }
+   ]
+  },
+  "S2": {
+   "met": true,
+   "n_frames": 19,
+   "bar_m": 300.0,
+   "median_m": 153.8637487885029,
+   "median_ci95_m": [
+    113.98268446349293,
+    203.68956410849188
+   ],
+   "dispersion_p95_m": 4210.061871721883,
+   "min_m": 42.39308143985226,
+   "max_m": 4600.052874488601,
+   "per_frame": {
+    "RD03/nac.m1271742202lc": {
+     "rms_m": 113.98268446349293,
+     "rms_ref_px": 13.532068796087437,
+     "rms_native_px": 122.56202630483112,
+     "mean_east_m": 109.99041455776731,
+     "mean_north_m": -8.825498972949605
+    },
+    "RD03/nac.m1335207975rc": {
+     "rms_m": 117.93563311762526,
+     "rms_ref_px": 14.001364403458856,
+     "rms_native_px": 128.89140231434453,
+     "mean_east_m": -87.544633920931,
+     "mean_north_m": 74.90043119936882
+    },
+    "RD03/nac.m1452560468lc": {
+     "rms_m": 203.68956410849188,
+     "rms_ref_px": 24.182104567330068,
+     "rms_native_px": 238.23340831402558,
+     "mean_east_m": 198.66691366862932,
+     "mean_north_m": 10.746234154168208
+    },
+    "RD03/nac.m1182331886lc": {
+     "rms_m": 103.72596469058021,
+     "rms_ref_px": 12.314387020627066,
+     "rms_native_px": 86.79997045236838,
+     "mean_east_m": 58.03815426465475,
+     "mean_north_m": 85.81037326364253
+    },
+    "RD03/nac.m1236465772rc": {
+     "rms_m": 238.09646700724255,
+     "rms_ref_px": 28.2669055112429,
+     "rms_native_px": 210.7048380595067,
+     "mean_east_m": 224.13008553136413,
+     "mean_north_m": 73.71511554590926
+    },
+    "RD03/nac.m1212932972lc": {
+     "rms_m": 160.88110941777268,
+     "rms_ref_px": 19.09986811487538,
+     "rms_native_px": 148.27752020071216,
+     "mean_east_m": 89.73983337564654,
+     "mean_north_m": 133.40931372888065
+    },
+    "RD03/nac.m1175268993rc": {
+     "rms_m": 172.68858488408932,
+     "rms_ref_px": 20.501656211640963,
+     "rms_native_px": 142.71783874718128,
+     "mean_east_m": 170.33524153018985,
+     "mean_north_m": -8.293010889903897
+    },
+    "RD03/nac.m1363396554rc": {
+     "rms_m": 44.26274444739596,
+     "rms_ref_px": 5.2548903000932565,
+     "rms_native_px": 42.973538298442676,
+     "mean_east_m": -9.693402371507576,
+     "mean_north_m": 39.11448432907801
+    },
+    "RD03/nac.m1199981485rc": {
+     "rms_m": 153.8637487885029,
+     "rms_ref_px": 18.266764321529926,
+     "rms_native_px": 143.1290686404678,
+     "mean_east_m": 138.1237972160804,
+     "mean_north_m": 59.782419311802904
+    },
+    "RD03/nac.m1096350825rc": {
+     "rms_m": 1635.1391963184647,
+     "rms_ref_px": 194.12436371287163,
+     "rms_native_px": 1257.7993817834342,
+     "mean_east_m": 256.3598827598584,
+     "mean_north_m": -1305.325870753049
+    },
+    "RD03/nac.m1142297886lc": {
+     "rms_m": 4600.052874488601,
+     "rms_ref_px": 546.1200730287833,
+     "rms_native_px": 3755.145203664164,
+     "mean_east_m": 390.1292041452902,
+     "mean_north_m": 3962.4929503420935
+    },
+    "RD04/nac.m1271742202lc": {
+     "rms_m": 113.31339541652514,
+     "rms_ref_px": 13.452610539154238,
+     "rms_native_px": 121.84236066293026,
+     "mean_east_m": 105.3688752282676,
+     "mean_north_m": 15.160911306040793
+    },
+    "RD04/nac.m1335207975rc": {
+     "rms_m": 88.01061961058738,
+     "rms_ref_px": 10.448655117770983,
+     "rms_native_px": 96.18646951976763,
+     "mean_east_m": -73.25578787239138,
+     "mean_north_m": 40.60923439870851
+    },
+    "RD04/nac.m1299958135lc": {
+     "rms_m": 159.7644340283492,
+     "rms_ref_px": 18.967295976715082,
+     "rms_native_px": 149.31255516668148,
+     "mean_east_m": 135.7249597049523,
+     "mean_north_m": -83.70655013503965
+    },
+    "RD04/nac.m1315225542lc": {
+     "rms_m": 121.44077502117833,
+     "rms_ref_px": 14.417496218586626,
+     "rms_native_px": 150.8581056163706,
+     "mean_east_m": 118.12376143742394,
+     "mean_north_m": -25.174797475270672
+    },
+    "RD04/nac.m1341069775rc": {
+     "rms_m": 251.01749775094953,
+     "rms_ref_px": 29.800895325250178,
+     "rms_native_px": 260.1217593274088,
+     "mean_east_m": 249.1477179403127,
+     "mean_north_m": -2.60682573420626
+    },
+    "RD04/nac.m1212932972lc": {
+     "rms_m": 153.7814130947627,
+     "rms_ref_px": 18.256989395826867,
+     "rms_native_px": 141.7340212854956,
+     "mean_east_m": 79.38817026215052,
+     "mean_north_m": 131.6865758589849
+    },
+    "RD04/nac.m1363396554rc": {
+     "rms_m": 42.39308143985226,
+     "rms_ref_px": 5.032923177958276,
+     "rms_native_px": 41.158331495002194,
+     "mean_east_m": -33.784459212857186,
+     "mean_north_m": 5.1002788913733115
+    },
+    "RD04/nac.m1096350825rc": {
+     "rms_m": 4337.689258957251,
+     "rms_ref_px": 514.9721621713443,
+     "rms_native_px": 3336.684045351731,
+     "mean_east_m": 944.5152261366185,
+     "mean_north_m": -1405.21472034947
+    }
+   }
+  },
+  "S3": {
+   "met": true,
+   "n_pairs": 17,
+   "bar_ref_px": 0.5,
+   "bar_m": 4.21157644781,
+   "median_ref_px": 0.2661223378431488,
+   "median_m": 2.2415891405926827,
+   "median_ci95_ref_px": [
+    0.22214626552775896,
+    0.41258173748684446
+   ],
+   "p99_ref_px": 40.98953250007776,
+   "pairs": [
+    {
+     "window": "RD03",
+     "edge": "nac.m1182331886lc -> nac.m1199981485rc",
+     "n_inliers_recorded": 190,
+     "n_inliers_a_to_ref": 739,
+     "n_inliers_b_to_ref": 25,
+     "n_grid": 19888,
+     "median_k2_px": 2.556410855718939,
+     "p99_k2_px": 13.0430136562447,
+     "median_m": 5.49628333979572,
+     "median_ref_px": 0.6525209037406601,
+     "p99_ref_px": 3.329214096957455,
+     "dst_native_gsd_m": 1.0750000000000002
+    },
+    {
+     "window": "RD03",
+     "edge": "nac.m1182331886lc -> nac.m1212932972lc",
+     "n_inliers_recorded": 5437,
+     "n_inliers_a_to_ref": 739,
+     "n_inliers_b_to_ref": 577,
+     "n_grid": 26754,
+     "median_k2_px": 0.5272865063945018,
+     "p99_k2_px": 0.8795681979684531,
+     "median_m": 1.144211718876069,
+     "median_ref_px": 0.1358412619425505,
+     "p99_ref_px": 0.2265972152285208,
+     "dst_native_gsd_m": 1.085
+    },
+    {
+     "window": "RD03",
+     "edge": "nac.m1212932972lc -> nac.m1199981485rc",
+     "n_inliers_recorded": 293,
+     "n_inliers_a_to_ref": 577,
+     "n_inliers_b_to_ref": 25,
+     "n_grid": 21859,
+     "median_k2_px": 3.286901244482931,
+     "p99_k2_px": 14.22275193844064,
+     "median_m": 7.066837675638303,
+     "median_ref_px": 0.8389777276051852,
+     "p99_ref_px": 3.630340924186272,
+     "dst_native_gsd_m": 1.0750000000000002
+    },
+    {
+     "window": "RD03",
+     "edge": "nac.m1212932972lc -> nac.m1363396554rc",
+     "n_inliers_recorded": 3486,
+     "n_inliers_a_to_ref": 577,
+     "n_inliers_b_to_ref": 345,
+     "n_grid": 20789,
+     "median_k2_px": 0.8641780939582878,
+     "p99_k2_px": 2.3204193377293807,
+     "median_m": 1.780206873554073,
+     "median_ref_px": 0.21134685498582986,
+     "p99_ref_px": 0.5674910446191871,
+     "dst_native_gsd_m": 1.03
+    },
+    {
+     "window": "RD03",
+     "edge": "nac.m1212932972lc -> nac.m1452560468lc",
+     "n_inliers_recorded": 143,
+     "n_inliers_a_to_ref": 577,
+     "n_inliers_b_to_ref": 10,
+     "n_grid": 20686,
+     "median_k2_px": 2.5114671560781314,
+     "p99_k2_px": 7.728303994691116,
+     "median_m": 4.294608836893604,
+     "median_ref_px": 0.5098576376462051,
+     "p99_ref_px": 1.5689374269572804,
+     "dst_native_gsd_m": 0.855
+    },
+    {
+     "window": "RD03",
+     "edge": "nac.m1236465772rc -> nac.m1199981485rc",
+     "n_inliers_recorded": 4,
+     "n_inliers_a_to_ref": 13,
+     "n_inliers_b_to_ref": 25,
+     "n_grid": 27404,
+     "median_k2_px": 82.45618324307617,
+     "p99_k2_px": 188.46537801844767,
+     "median_m": 177.2807939726138,
+     "median_ref_px": 21.046845067338026,
+     "p99_ref_px": 48.10556899072376,
+     "dst_native_gsd_m": 1.0750000000000002
+    },
+    {
+     "window": "RD03",
+     "edge": "nac.m1271742202lc -> nac.m1182331886lc",
+     "n_inliers_recorded": 1656,
+     "n_inliers_a_to_ref": 253,
+     "n_inliers_b_to_ref": 739,
+     "n_grid": 32768,
+     "median_k2_px": 1.010814892751927,
+     "p99_k2_px": 2.5054040552167773,
+     "median_m": 2.415847593677105,
+     "median_ref_px": 0.28681036942037874,
+     "p99_ref_px": 0.7108876885140938,
+     "dst_native_gsd_m": 1.1949999999999998
+    },
+    {
+     "window": "RD03",
+     "edge": "nac.m1271742202lc -> nac.m1212932972lc",
+     "n_inliers_recorded": 1406,
+     "n_inliers_a_to_ref": 253,
+     "n_inliers_b_to_ref": 577,
+     "n_grid": 32768,
+     "median_k2_px": 1.0329903873698998,
+     "p99_k2_px": 1.9104639924593754,
+     "median_m": 2.2415891405926827,
+     "median_ref_px": 0.2661223378431488,
+     "p99_ref_px": 0.4921799372527825,
+     "dst_native_gsd_m": 1.085
+    },
+    {
+     "window": "RD03",
+     "edge": "nac.m1271742202lc -> nac.m1452560468lc",
+     "n_inliers_recorded": 6,
+     "n_inliers_a_to_ref": 253,
+     "n_inliers_b_to_ref": 10,
+     "n_grid": 27335,
+     "median_k2_px": 2.1328329683161735,
+     "p99_k2_px": 6.080412176161971,
+     "median_m": 3.6471443758206568,
+     "median_ref_px": 0.43299040407032796,
+     "p99_ref_px": 1.2343958313571186,
+     "dst_native_gsd_m": 0.855
+    },
+    {
+     "window": "RD04",
+     "edge": "nac.m1212932972lc -> nac.m1363396554rc",
+     "n_inliers_recorded": 2597,
+     "n_inliers_a_to_ref": 474,
+     "n_inliers_b_to_ref": 195,
+     "n_grid": 24192,
+     "median_k2_px": 0.9931992591850922,
+     "p99_k2_px": 2.229621916204198,
+     "median_m": 2.04599047392129,
+     "median_ref_px": 0.2429007877780772,
+     "p99_ref_px": 0.5452852636414801,
+     "dst_native_gsd_m": 1.03
+    },
+    {
+     "window": "RD04",
+     "edge": "nac.m1271742202lc -> nac.m1212932972lc",
+     "n_inliers_recorded": 1679,
+     "n_inliers_a_to_ref": 268,
+     "n_inliers_b_to_ref": 474,
+     "n_grid": 32768,
+     "median_k2_px": 0.9453293489355137,
+     "p99_k2_px": 2.3261065166445873,
+     "median_m": 2.051364687190065,
+     "median_ref_px": 0.24353881647533251,
+     "p99_ref_px": 0.5992591139766096,
+     "dst_native_gsd_m": 1.085
+    },
+    {
+     "window": "RD04",
+     "edge": "nac.m1299958135lc -> nac.m1212932972lc",
+     "n_inliers_recorded": 272,
+     "n_inliers_a_to_ref": 91,
+     "n_inliers_b_to_ref": 474,
+     "n_grid": 29943,
+     "median_k2_px": 1.6014926528996518,
+     "p99_k2_px": 3.807652182890032,
+     "median_m": 3.4752390567922444,
+     "median_ref_px": 0.41258173748684446,
+     "p99_ref_px": 0.9809397192787378,
+     "dst_native_gsd_m": 1.085
+    },
+    {
+     "window": "RD04",
+     "edge": "nac.m1299958135lc -> nac.m1271742202lc",
+     "n_inliers_recorded": 1608,
+     "n_inliers_a_to_ref": 91,
+     "n_inliers_b_to_ref": 268,
+     "n_grid": 24696,
+     "median_k2_px": 1.006006429963071,
+     "p99_k2_px": 1.8418892426773992,
+     "median_m": 1.8711719597313121,
+     "median_ref_px": 0.22214626552775896,
+     "p99_ref_px": 0.4067258464655701,
+     "dst_native_gsd_m": 0.9299999999999999
+    },
+    {
+     "window": "RD04",
+     "edge": "nac.m1299958135lc -> nac.m1315225542lc",
+     "n_inliers_recorded": 2726,
+     "n_inliers_a_to_ref": 91,
+     "n_inliers_b_to_ref": 96,
+     "n_grid": 18466,
+     "median_k2_px": 0.7655423961628006,
+     "p99_k2_px": 2.1180198360066074,
+     "median_m": 1.2325232578221088,
+     "median_ref_px": 0.14632564232129933,
+     "p99_ref_px": 0.4048379482395278,
+     "dst_native_gsd_m": 0.8049999999999999
+    },
+    {
+     "window": "RD04",
+     "edge": "nac.m1299958135lc -> nac.m1363396554rc",
+     "n_inliers_recorded": 28,
+     "n_inliers_a_to_ref": 91,
+     "n_inliers_b_to_ref": 195,
+     "n_grid": 23362,
+     "median_k2_px": 1.6057541047494421,
+     "p99_k2_px": 3.835683966581729,
+     "median_m": 3.307853455783851,
+     "median_ref_px": 0.39270965359110593,
+     "p99_ref_px": 0.9380702296484621,
+     "dst_native_gsd_m": 1.03
+    },
+    {
+     "window": "RD04",
+     "edge": "nac.m1315225542lc -> nac.m1212932972lc",
+     "n_inliers_recorded": 284,
+     "n_inliers_a_to_ref": 96,
+     "n_inliers_b_to_ref": 474,
+     "n_grid": 32768,
+     "median_k2_px": 1.0049878634555167,
+     "p99_k2_px": 2.0485277209305117,
+     "median_m": 2.180823663698471,
+     "median_ref_px": 0.2589082367046298,
+     "p99_ref_px": 0.5277483632917014,
+     "dst_native_gsd_m": 1.085
+    },
+    {
+     "window": "RD04",
+     "edge": "nac.m1315225542lc -> nac.m1271742202lc",
+     "n_inliers_recorded": 2138,
+     "n_inliers_a_to_ref": 96,
+     "n_inliers_b_to_ref": 268,
+     "n_grid": 32556,
+     "median_k2_px": 0.34717610749589367,
+     "p99_k2_px": 0.9844384508692214,
+     "median_m": 0.6457475599423622,
+     "median_ref_px": 0.07666340240340977,
+     "p99_ref_px": 0.2173836259779746,
+     "dst_native_gsd_m": 0.9299999999999999
+    }
+   ]
+  },
+  "S4": {
+   "rows": [
+    {
+     "window": "RD03",
+     "frame": "nac.m1182331886lc",
+     "exp013_px": 0.0,
+     "measured_px": 0.0,
+     "arm": "R",
+     "is_fixed_node": true
+    },
+    {
+     "window": "RD03",
+     "frame": "nac.m1199981485rc",
+     "exp013_px": 47.894806618128634,
+     "measured_px": 73.65301948345345,
+     "arm": "R",
+     "is_fixed_node": false
+    },
+    {
+     "window": "RD03",
+     "frame": "nac.m1212932972lc",
+     "exp013_px": 25.700045759200624,
+     "measured_px": 30.083979309139725,
+     "arm": "R",
+     "is_fixed_node": false
+    },
+    {
+     "window": "RD03",
+     "frame": "nac.m1271742202lc",
+     "exp013_px": 56.93598648864505,
+     "measured_px": 50.62502202705213,
+     "arm": "R",
+     "is_fixed_node": false
+    },
+    {
+     "window": "RD03",
+     "frame": "nac.m1335207975rc",
+     "exp013_px": 71.77031809697993,
+     "measured_px": 69.30757190754086,
+     "arm": "C",
+     "is_fixed_node": false
+    },
+    {
+     "window": "RD03",
+     "frame": "nac.m1452560468lc",
+     "exp013_px": 92.58610379870339,
+     "measured_px": 90.3594569895556,
+     "arm": "R",
+     "is_fixed_node": false
+    },
+    {
+     "window": "RD04",
+     "frame": "nac.m1212932972lc",
+     "exp013_px": 0.0,
+     "measured_px": 0.0,
+     "arm": "R",
+     "is_fixed_node": true
+    },
+    {
+     "window": "RD04",
+     "frame": "nac.m1271742202lc",
+     "exp013_px": 62.91354609490888,
+     "measured_px": 54.68289941998382,
+     "arm": "R",
+     "is_fixed_node": false
+    },
+    {
+     "window": "RD04",
+     "frame": "nac.m1299958135lc",
+     "exp013_px": 100.94942984297894,
+     "measured_px": 99.47175939460341,
+     "arm": "R",
+     "is_fixed_node": false
+    },
+    {
+     "window": "RD04",
+     "frame": "nac.m1315225542lc",
+     "exp013_px": 95.21111563985278,
+     "measured_px": 56.20207423316965,
+     "arm": "R",
+     "is_fixed_node": false
+    },
+    {
+     "window": "RD04",
+     "frame": "nac.m1335207975rc",
+     "exp013_px": 88.84638351255664,
+     "measured_px": 83.06045562312924,
+     "arm": "C",
+     "is_fixed_node": false
+    },
+    {
+     "window": "RD04",
+     "frame": "nac.m1341069775rc",
+     "exp013_px": 109.42595426105301,
+     "measured_px": 163.23408278948216,
+     "arm": "C",
+     "is_fixed_node": false
+    },
+    {
+     "window": "RD04",
+     "frame": "nac.m1363396554rc",
+     "exp013_px": 86.38132063443143,
+     "measured_px": 76.62797823593772,
+     "arm": "R",
+     "is_fixed_node": false
+    }
+   ],
+   "per_window": {
+    "RD03": {
+     "fixed_node": "nac.m1182331886lc",
+     "n_used": 5
+    },
+    "RD04": {
+     "fixed_node": "nac.m1212932972lc",
+     "n_used": 6
+    }
+   },
+   "n_common_frames": 11,
+   "n_common_frames_arm_R_only": 8,
+   "bar": {
+    "r_min": 0.7,
+    "median_diff_fraction": 0.3,
+    "min_frames": 8
+   },
+   "pooled": {
+    "n": 11,
+    "pearson_r": 0.7462762803095838,
+    "spearman_rho": 0.790909090909091,
+    "median_abs_difference_px": 6.310964461592917,
+    "median_exp013_px": 86.38132063443143,
+    "difference_fraction": 0.07305936532622746,
+    "null_abs_r_p95": 0.5900455832697316,
+    "null_abs_r_max": 0.7696934854114437,
+    "p_value_permutation": 0.001
+   },
+   "arm_R_only": {
+    "n": 8,
+    "pearson_r": 0.7509668388193917,
+    "spearman_rho": 0.7380952380952381,
+    "median_abs_difference_px": 7.270805568258989,
+    "median_exp013_px": 74.64743336467015,
+    "difference_fraction": 0.09740194994701835,
+    "null_abs_r_p95": 0.6942312681135608,
+    "null_abs_r_max": 0.8418061115196112,
+    "p_value_permutation": 0.026
+   },
+   "met": true,
+   "not_met_for_want_of_data": false,
+   "criterion_read_on": "arm_R_only"
+  },
+  "S5": {
+   "met": false,
+   "bar_ref_px": 2.0,
+   "closure_median_ref_px": 2.1766597036011257,
+   "closure_p99_ref_px": 4.724340649315839,
+   "closure_median_m": 18.334337485167193,
+   "bar_m": 16.84630579124,
+   "n_grid": 416,
+   "edges": {
+    "tmc2_to_nac_recorded": {
+     "window": "RD03-long",
+     "frame": "nac.m1271742202lc",
+     "engine": "b1",
+     "n_inliers": 57,
+     "degrade_factor": 3
+    },
+    "nac_to_ref": {
+     "source": "RD03/nac.m1271742202lc",
+     "n_inliers": 253
+    },
+    "tmc2_to_ref": {
+     "n_inliers": 9
+    }
+   },
+   "note": "2.0 REFERENCE px is 16.85 m, where EXP-012's 2.0 px is about 2 m; the frozen rule is applied in the working frame and the metres are printed beside it"
+  },
+  "S6": {
+   "met": true,
+   "n_cells": 21,
+   "n_pass": 0,
+   "expected_cells": 21,
+   "false_accept_fraction": 0.0,
+   "passes": []
+  }
+ },
+ "frames": {
+  "RD03/nac.m1271742202lc": {
+   "k": 9,
+   "native_gsd_m": 0.9299999999999999,
+   "coarse_gsd_m": 8.37,
+   "gsd_mismatch_pct": -0.6310332517843705,
+   "incidence_deg": 29.95,
+   "delta_to_standard_geometry_deg": 0.05000000000000071,
+   "shape": [
+    455,
+    227
+   ],
+   "handedness_det": -0.8634534755641305,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": false,
+    "jacobian_determinant": -0.8634534755641305,
+    "orientation_signature_along_cross": [
+     1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     20002.5,
+     2834.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD03/nac.m1335207975rc": {
+   "k": 9,
+   "native_gsd_m": 0.915,
+   "coarse_gsd_m": 8.235,
+   "gsd_mismatch_pct": -2.2337585219168785,
+   "incidence_deg": 69.76,
+   "delta_to_standard_geometry_deg": 39.760000000000005,
+   "shape": [
+    455,
+    227
+   ],
+   "handedness_det": -0.8402003357483855,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": false,
+    "jacobian_determinant": -0.8402003357483855,
+    "orientation_signature_along_cross": [
+     1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     31869.5,
+     2250.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD03/nac.m1452560468lc": {
+   "k": 10,
+   "native_gsd_m": 0.855,
+   "coarse_gsd_m": 8.55,
+   "gsd_mismatch_pct": 1.5059337750589943,
+   "incidence_deg": 68.8,
+   "delta_to_standard_geometry_deg": 38.8,
+   "shape": [
+    409,
+    204
+   ],
+   "handedness_det": -0.7142056131816901,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": false,
+    "jacobian_determinant": -0.7142056131816901,
+    "orientation_signature_along_cross": [
+     1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     11135.5,
+     1740.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD03/nac.m1182331886lc": {
+   "k": 7,
+   "native_gsd_m": 1.1949999999999998,
+   "coarse_gsd_m": 8.364999999999998,
+   "gsd_mismatch_pct": -0.6903934469744728,
+   "incidence_deg": 43.74,
+   "delta_to_standard_geometry_deg": 13.740000000000002,
+   "shape": [
+    585,
+    292
+   ],
+   "handedness_det": -1.4574890875945345,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": false,
+    "jacobian_determinant": -1.4574890875945345,
+    "orientation_signature_along_cross": [
+     1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     4488.5,
+     1540.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD03/nac.m1236465772rc": {
+   "k": 7,
+   "native_gsd_m": 1.13,
+   "coarse_gsd_m": 7.909999999999999,
+   "gsd_mismatch_pct": -6.092171209272923,
+   "incidence_deg": 44.44,
+   "delta_to_standard_geometry_deg": 14.439999999999998,
+   "shape": [
+    585,
+    292
+   ],
+   "handedness_det": 1.2442250175653449,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": true,
+    "jacobian_determinant": 1.2442250175653449,
+    "orientation_signature_along_cross": [
+     1,
+     1
+    ],
+    "evaluated_at_frame_pixel": [
+     4329.5,
+     4039.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD03/nac.m1212932972lc": {
+   "k": 8,
+   "native_gsd_m": 1.085,
+   "coarse_gsd_m": 8.68,
+   "gsd_mismatch_pct": 3.0492988500013998,
+   "incidence_deg": 45.48,
+   "delta_to_standard_geometry_deg": 15.479999999999997,
+   "shape": [
+    512,
+    256
+   ],
+   "handedness_det": -1.1886001645876545,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": false,
+    "jacobian_determinant": -1.1886001645876545,
+    "orientation_signature_along_cross": [
+     1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     20159.5,
+     4020.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD03/nac.m1205872034rc": {
+   "k": 8,
+   "native_gsd_m": 1.0750000000000002,
+   "coarse_gsd_m": 8.600000000000001,
+   "gsd_mismatch_pct": 2.099535726959932,
+   "incidence_deg": 47.11,
+   "delta_to_standard_geometry_deg": 17.11,
+   "shape": [
+    512,
+    256
+   ],
+   "handedness_det": 1.127499855239777,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": true,
+    "jacobian_determinant": 1.127499855239777,
+    "orientation_signature_along_cross": [
+     1,
+     1
+    ],
+    "evaluated_at_frame_pixel": [
+     2047.5,
+     3194.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD03/nac.m1175268993rc": {
+   "k": 7,
+   "native_gsd_m": 1.21,
+   "coarse_gsd_m": 8.469999999999999,
+   "gsd_mismatch_pct": 0.5561706520174847,
+   "incidence_deg": 48.47,
+   "delta_to_standard_geometry_deg": 18.47,
+   "shape": [
+    585,
+    292
+   ],
+   "handedness_det": 1.4630371923702823,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": true,
+    "jacobian_determinant": 1.4630371923702823,
+    "orientation_signature_along_cross": [
+     1,
+     1
+    ],
+    "evaluated_at_frame_pixel": [
+     4296.5,
+     4039.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD03/nac.m1363396554rc": {
+   "k": 8,
+   "native_gsd_m": 1.03,
+   "coarse_gsd_m": 8.24,
+   "gsd_mismatch_pct": -2.174398326726776,
+   "incidence_deg": 52.4,
+   "delta_to_standard_geometry_deg": 22.4,
+   "shape": [
+    512,
+    256
+   ],
+   "handedness_det": -1.0569098710266185,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": false,
+    "jacobian_determinant": -1.0569098710266185,
+    "orientation_signature_along_cross": [
+     1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     34314.5,
+     4039.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD03/nac.m1199981485rc": {
+   "k": 8,
+   "native_gsd_m": 1.0750000000000002,
+   "coarse_gsd_m": 8.600000000000001,
+   "gsd_mismatch_pct": 2.099535726959932,
+   "incidence_deg": 66.88,
+   "delta_to_standard_geometry_deg": 36.879999999999995,
+   "shape": [
+    512,
+    256
+   ],
+   "handedness_det": 1.1322130145033658,
+   "orientation": {
+    "quarter_turns_ccw": 0,
+    "mirrored": true,
+    "jacobian_determinant": 1.1322130145033658,
+    "orientation_signature_along_cross": [
+     -1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     48815.5,
+     1023.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD03/nac.m1096350825rc": {
+   "k": 6,
+   "native_gsd_m": 1.3,
+   "coarse_gsd_m": 7.800000000000001,
+   "gsd_mismatch_pct": -7.398095503454952,
+   "incidence_deg": 72.29,
+   "delta_to_standard_geometry_deg": 42.290000000000006,
+   "shape": [
+    682,
+    341
+   ],
+   "handedness_det": -1.7781401779168116,
+   "orientation": {
+    "quarter_turns_ccw": 0,
+    "mirrored": false,
+    "jacobian_determinant": -1.7781401779168116,
+    "orientation_signature_along_cross": [
+     -1,
+     1
+    ],
+    "evaluated_at_frame_pixel": [
+     3403.5,
+     1713.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD03/nac.m1142297886lc": {
+   "k": 7,
+   "native_gsd_m": 1.225,
+   "coarse_gsd_m": 8.575000000000001,
+   "gsd_mismatch_pct": 1.8027347510094633,
+   "incidence_deg": 74.65,
+   "delta_to_standard_geometry_deg": 44.650000000000006,
+   "shape": [
+    585,
+    292
+   ],
+   "handedness_det": 1.5390969499372564,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": true,
+    "jacobian_determinant": 1.5390969499372564,
+    "orientation_signature_along_cross": [
+     1,
+     1
+    ],
+    "evaluated_at_frame_pixel": [
+     4450.5,
+     3180.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD04/nac.m1271742202lc": {
+   "k": 9,
+   "native_gsd_m": 0.9299999999999999,
+   "coarse_gsd_m": 8.37,
+   "gsd_mismatch_pct": -0.6310332517843705,
+   "incidence_deg": 29.95,
+   "delta_to_standard_geometry_deg": 0.05000000000000071,
+   "shape": [
+    455,
+    227
+   ],
+   "handedness_det": -0.8412822177126623,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": false,
+    "jacobian_determinant": -0.8412822177126623,
+    "orientation_signature_along_cross": [
+     1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     8460.5,
+     2889.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD04/nac.m1335207975rc": {
+   "k": 9,
+   "native_gsd_m": 0.915,
+   "coarse_gsd_m": 8.235,
+   "gsd_mismatch_pct": -2.2337585219168785,
+   "incidence_deg": 69.76,
+   "delta_to_standard_geometry_deg": 39.760000000000005,
+   "shape": [
+    455,
+    227
+   ],
+   "handedness_det": -0.8300828198797717,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": false,
+    "jacobian_determinant": -0.8300828198797717,
+    "orientation_signature_along_cross": [
+     1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     20124.5,
+     2168.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD04/nac.m1299958135lc": {
+   "k": 8,
+   "native_gsd_m": 1.07,
+   "coarse_gsd_m": 8.56,
+   "gsd_mismatch_pct": 1.6246541654391777,
+   "incidence_deg": 18.22,
+   "delta_to_standard_geometry_deg": 11.780000000000001,
+   "shape": [
+    512,
+    256
+   ],
+   "handedness_det": -1.1799053124312073,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": false,
+    "jacobian_determinant": -1.1799053124312073,
+    "orientation_signature_along_cross": [
+     1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     44510.5,
+     2716.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD04/nac.m1315225542lc": {
+   "k": 10,
+   "native_gsd_m": 0.8049999999999999,
+   "coarse_gsd_m": 8.049999999999999,
+   "gsd_mismatch_pct": -4.4300857439503245,
+   "incidence_deg": 21.13,
+   "delta_to_standard_geometry_deg": 8.870000000000001,
+   "shape": [
+    409,
+    204
+   ],
+   "handedness_det": 0.6629664238945774,
+   "orientation": {
+    "quarter_turns_ccw": 0,
+    "mirrored": true,
+    "jacobian_determinant": 0.6629664238945774,
+    "orientation_signature_along_cross": [
+     -1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     10358.5,
+     2109.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD04/nac.m1341069775rc": {
+   "k": 9,
+   "native_gsd_m": 0.9650000000000001,
+   "coarse_gsd_m": 8.685,
+   "gsd_mismatch_pct": 3.108659045191502,
+   "incidence_deg": 42.43,
+   "delta_to_standard_geometry_deg": 12.43,
+   "shape": [
+    455,
+    227
+   ],
+   "handedness_det": -0.910391702576421,
+   "orientation": {
+    "quarter_turns_ccw": 0,
+    "mirrored": false,
+    "jacobian_determinant": -0.910391702576421,
+    "orientation_signature_along_cross": [
+     -1,
+     1
+    ],
+    "evaluated_at_frame_pixel": [
+     8209.5,
+     4039.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD04/nac.m1212932972lc": {
+   "k": 8,
+   "native_gsd_m": 1.085,
+   "coarse_gsd_m": 8.68,
+   "gsd_mismatch_pct": 3.0492988500013998,
+   "incidence_deg": 45.48,
+   "delta_to_standard_geometry_deg": 15.479999999999997,
+   "shape": [
+    512,
+    256
+   ],
+   "handedness_det": -1.1913691113240144,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": false,
+    "jacobian_determinant": -1.1913691113240144,
+    "orientation_signature_along_cross": [
+     1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     10061.5,
+     4039.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD04/nac.m1363396554rc": {
+   "k": 8,
+   "native_gsd_m": 1.03,
+   "coarse_gsd_m": 8.24,
+   "gsd_mismatch_pct": -2.174398326726776,
+   "incidence_deg": 52.4,
+   "delta_to_standard_geometry_deg": 22.4,
+   "shape": [
+    512,
+    256
+   ],
+   "handedness_det": -1.0481607842480134,
+   "orientation": {
+    "quarter_turns_ccw": 2,
+    "mirrored": false,
+    "jacobian_determinant": -1.0481607842480134,
+    "orientation_signature_along_cross": [
+     1,
+     -1
+    ],
+    "evaluated_at_frame_pixel": [
+     23737.5,
+     4039.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "RD04/nac.m1096350825rc": {
+   "k": 6,
+   "native_gsd_m": 1.3,
+   "coarse_gsd_m": 7.800000000000001,
+   "gsd_mismatch_pct": -7.398095503454952,
+   "incidence_deg": 72.29,
+   "delta_to_standard_geometry_deg": 42.290000000000006,
+   "shape": [
+    682,
+    341
+   ],
+   "handedness_det": -1.7689732004192542,
+   "orientation": {
+    "quarter_turns_ccw": 0,
+    "mirrored": false,
+    "jacobian_determinant": -1.7689732004192542,
+    "orientation_signature_along_cross": [
+     -1,
+     1
+    ],
+    "evaluated_at_frame_pixel": [
+     11853.5,
+     1072.5
+    ],
+    "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+   }
+  },
+  "C2/TMC-2": {
+   "product_id": "ch2_tmc_ndn_20241214T1937388207_d_oth_d18",
+   "block": [
+    1637,
+    56766,
+    2135,
+    57597
+   ],
+   "k": 2,
+   "native_gsd_m": 4.899132879705422,
+   "coarse_gsd_m": 9.798265759410844,
+   "gsd_mismatch_pct": 16.325393600606457,
+   "valid_fraction": 0.2955407671600965,
+   "shape": [
+    415,
+    249
+   ],
+   "incidence_deg": 20.744092,
+   "delta_to_standard_geometry_deg": 9.255908000000002,
+   "orientation": "none applied: the product is map-projected; its own geometry carries north, and the predicted affine's determinant is recorded"
+  }
+ },
+ "cells": {
+  "RD03/nac.m1271742202lc": {
+   "source": "RD03/nac.m1271742202lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.565785837176918,
+   "crop_requested": [
+    190,
+    257,
+    922,
+    1218
+   ],
+   "crop_taken": [
+    190,
+    257,
+    922,
+    1218
+   ],
+   "predicted_jacobian_det": 1.0492663306064034,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    961,
+    732
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 258,
+   "n_inliers": 253,
+   "n_refined": 149,
+   "pass": true,
+   "fit_rmse_px": 1.1385593617777314,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0600259515895574,
+     -0.06132847904303805,
+     272.0495253955781
+    ],
+    [
+     0.0617481019083383,
+     1.033089160823184,
+     239.79424747710846
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.36,
+   "coverage_occupancy": 0.9375,
+   "coverage_max_uncovered_disc_ratio": 0.09969902959061909,
+   "measured_to_block_matrix": [
+    [
+     1.0600259515895574,
+     -0.06132847904303805,
+     462.0495253955781
+    ],
+    [
+     0.0617481019083383,
+     1.033089160823184,
+     496.79424747710846
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.04827870242235,
+   "predicted_scale": 1.024337020031202,
+   "arm": "R",
+   "window": "RD03",
+   "frame": "nac.m1271742202lc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 13.532068796087437,
+    "median_ref_px": 13.138875393662154,
+    "p95_ref_px": 18.25253156295892,
+    "rms_m": 113.98268446349293,
+    "median_m": 110.67075631731574,
+    "p95_m": 153.7438640869329,
+    "mean_east_m": 109.99041455776731,
+    "mean_north_m": -8.825498972949605,
+    "median_lonlat_deg": [
+     22.03570379571307,
+     20.033104285954842
+    ],
+    "metres_per_deg": [
+     28488.631617835923,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 57.35267826904058,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9927375227683857,
+       -0.0009666098123088697,
+       59.95096636346682
+      ],
+      [
+       0.0009666098123088692,
+       0.9927375227683859,
+       7.98671894517372
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      59.95096636346682,
+      7.98671894517372
+     ],
+     "scale": 0.9927379933531508,
+     "rotation_deg": 0.05578780282713829,
+     "residual_px_k2": 13.543767415171668
+    }
+   }
+  },
+  "RD03/nac.m1335207975rc": {
+   "source": "RD03/nac.m1335207975rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.28289291858919796,
+   "crop_requested": [
+    188,
+    261,
+    923,
+    1214
+   ],
+   "crop_taken": [
+    188,
+    261,
+    923,
+    1214
+   ],
+   "predicted_jacobian_det": 1.021009764691502,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    953,
+    735
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 9,
+   "n_inliers": 6,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 1.1330040770086967,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 6 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.433 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0428181319750518,
+     -0.07529938081915478,
+     255.65116474675142
+    ],
+    [
+     0.05526172399348292,
+     1.0238735612509804,
+     228.78014760303455
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 0.85,
+   "coverage_occupancy": 0.09375,
+   "coverage_max_uncovered_disc_ratio": 0.43260666434215556,
+   "measured_to_block_matrix": [
+    [
+     1.0428181319750518,
+     -0.07529938081915478,
+     443.6511647467514
+    ],
+    [
+     0.05526172399348292,
+     1.0238735612509804,
+     489.78014760303455
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0353140046005846,
+   "predicted_scale": 1.010450278188641,
+   "arm": "C",
+   "window": "RD03",
+   "frame": "nac.m1335207975rc",
+   "chain": {
+    "via": "nac.m1452560468lc",
+    "edge": "nac.m1452560468lc -> nac.m1335207975rc",
+    "edge_n_inliers": 5392,
+    "direction_forward": false
+   },
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 14.001364403458856,
+    "median_ref_px": 13.726864953157609,
+    "p95_ref_px": 17.323956307621852,
+    "rms_m": 117.93563311762526,
+    "median_m": 115.6234822779742,
+    "p95_m": 145.92233273613937,
+    "mean_east_m": -87.544633920931,
+    "mean_north_m": 74.90043119936882,
+    "median_lonlat_deg": [
+     22.03564431580692,
+     20.033165131332268
+    ],
+    "metres_per_deg": [
+     28488.620586623347,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 61.031861376402624,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9867754565948665,
+       8.927286173314791e-05,
+       -41.15152188453777
+      ],
+      [
+       -8.927286173314664e-05,
+       0.9867754565948663,
+       -23.04566077801053
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      -41.15152188453777,
+      -23.04566077801053
+     ],
+     "scale": 0.986775460633092,
+     "rotation_deg": -0.005183507711126103,
+     "residual_px_k2": 9.478913624125529
+    }
+   }
+  },
+  "RD03/nac.m1452560468lc": {
+   "source": "RD03/nac.m1452560468lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 1.9667822925839573e-11,
+   "crop_requested": [
+    196,
+    269,
+    916,
+    1207
+   ],
+   "crop_taken": [
+    196,
+    269,
+    916,
+    1207
+   ],
+   "predicted_jacobian_det": 1.071483321031454,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    409,
+    204
+   ],
+   "ref_shape": [
+    938,
+    720
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 12,
+   "n_inliers": 10,
+   "n_refined": 5,
+   "pass": true,
+   "fit_rmse_px": 1.133780238127017,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "engine_default",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.345 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0692430228131071,
+     -0.10460073838062,
+     295.2199726412867
+    ],
+    [
+     0.09471558045215196,
+     1.0630156405556228,
+     241.00510335398172
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 0.73,
+   "coverage_occupancy": 0.125,
+   "coverage_max_uncovered_disc_ratio": 0.3446948438735929,
+   "measured_to_block_matrix": [
+    [
+     1.0692430228131071,
+     -0.10460073838062,
+     491.2199726412867
+    ],
+    [
+     0.09471558045215196,
+     1.0630156405556228,
+     510.0051033539817
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0707611201648803,
+   "predicted_scale": 1.0351247852464234,
+   "arm": "R",
+   "window": "RD03",
+   "frame": "nac.m1452560468lc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 24.182104567330068,
+    "median_ref_px": 23.62029576173005,
+    "p95_ref_px": 31.034359214514073,
+    "rms_m": 203.68956410849188,
+    "median_m": 198.95736264081725,
+    "p95_m": 261.40715268144544,
+    "mean_east_m": 198.66691366862932,
+    "mean_north_m": 10.746234154168208,
+    "median_lonlat_deg": [
+     22.035417973523643,
+     20.03314260046524
+    ],
+    "metres_per_deg": [
+     28488.624671453163,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 112.4887721671992,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9860793093285776,
+       -0.009267843033572235,
+       124.63272032138525
+      ],
+      [
+       0.009267843033572235,
+       0.9860793093285777,
+       -6.33042569738177
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      124.63272032138525,
+      -6.33042569738177
+     ],
+     "scale": 0.9861228611083,
+     "rotation_deg": 0.5384887921788711,
+     "residual_px_k2": 21.386999456064558
+    }
+   }
+  },
+  "RD03/nac.m1182331886lc": {
+   "source": "RD03/nac.m1182331886lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 2.2964741219766438e-11,
+   "crop_requested": [
+    153,
+    194,
+    958,
+    1282
+   ],
+   "crop_taken": [
+    153,
+    194,
+    958,
+    1282
+   ],
+   "predicted_jacobian_det": 1.071429403755446,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1088,
+    805
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 741,
+   "n_inliers": 739,
+   "n_refined": 522,
+   "pass": true,
+   "fit_rmse_px": 1.0670166450405283,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.050734183261632,
+     -0.0456171997628734,
+     269.417921982027
+    ],
+    [
+     0.04795980269055725,
+     1.0224454398330716,
+     227.47414502107017
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 3.24,
+   "coverage_occupancy": 0.984375,
+   "coverage_max_uncovered_disc_ratio": 0.05567310803040365,
+   "measured_to_block_matrix": [
+    [
+     1.050734183261632,
+     -0.0456171997628734,
+     422.417921982027
+    ],
+    [
+     0.04795980269055725,
+     1.0224454398330716,
+     421.47414502107017
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.037548151197093,
+   "predicted_scale": 1.0350987410655303,
+   "arm": "R",
+   "window": "RD03",
+   "frame": "nac.m1182331886lc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 12.314387020627066,
+    "median_ref_px": 12.302613350850793,
+    "p95_ref_px": 12.965572632708982,
+    "rms_m": 103.72596469058021,
+    "median_m": 103.62679326991213,
+    "p95_m": 109.21100066457409,
+    "mean_east_m": 58.03815426465475,
+    "mean_north_m": 85.81037326364253,
+    "median_lonlat_deg": [
+     22.036343975678015,
+     20.03257202268857
+    ],
+    "metres_per_deg": [
+     28488.728115320842,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 41.822558519379,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9993255696718726,
+       0.001280217217714595,
+       20.447832544553194
+      ],
+      [
+       -0.0012802172177145952,
+       0.9993255696718726,
+       -34.59328912920785
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      20.447832544553194,
+      -34.59328912920785
+     ],
+     "scale": 0.9993263897026522,
+     "rotation_deg": -0.07340050683582168,
+     "residual_px_k2": 1.8328940766155124
+    }
+   }
+  },
+  "RD03/nac.m1236465772rc": {
+   "source": "RD03/nac.m1236465772rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.2834488383871303,
+   "crop_requested": [
+    44,
+    206,
+    827,
+    1257
+   ],
+   "crop_taken": [
+    44,
+    206,
+    827,
+    1257
+   ],
+   "predicted_jacobian_det": 0.9146643332785168,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1051,
+    783
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 28,
+   "n_inliers": 13,
+   "n_refined": 12,
+   "pass": true,
+   "fit_rmse_px": 1.3373393140354233,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.258 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     0.9946622469628783,
+     -0.05107336451851211,
+     287.8600793664153
+    ],
+    [
+     0.04768420899486094,
+     0.960004875949434,
+     228.82517726955155
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.55,
+   "coverage_occupancy": 0.171875,
+   "coverage_max_uncovered_disc_ratio": 0.2579756190738554,
+   "measured_to_block_matrix": [
+    [
+     0.9946622469628783,
+     -0.05107336451851211,
+     331.8600793664153
+    ],
+    [
+     0.04768420899486094,
+     0.960004875949434,
+     434.82517726955155
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 0.9784252654111886,
+   "predicted_scale": 0.956380851585035,
+   "arm": "R",
+   "window": "RD03",
+   "frame": "nac.m1236465772rc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 28.2669055112429,
+    "median_ref_px": 27.994759729680446,
+    "p95_ref_px": 33.67635966883328,
+    "rms_m": 238.09646700724255,
+    "median_m": 235.804141479244,
+    "p95_m": 283.6611264584736,
+    "mean_east_m": 224.13008553136413,
+    "mean_north_m": 73.71511554590926,
+    "median_lonlat_deg": [
+     21.998035228697546,
+     20.034724422490136
+    ],
+    "metres_per_deg": [
+     28488.33787756771,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 99.63455594252451,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9912921959898152,
+       0.0016477708002210802,
+       -89.21312550179994
+      ],
+      [
+       -0.0016477708002210793,
+       0.9912921959898155,
+       -27.034937675184096
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      -89.21312550179994,
+      -27.034937675184096
+     ],
+     "scale": 0.9912935654885089,
+     "rotation_deg": -0.0952395528642973,
+     "residual_px_k2": 11.982355287212984
+    }
+   }
+  },
+  "RD03/nac.m1212932972lc": {
+   "source": "RD03/nac.m1212932972lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 1.7053025658242404e-11,
+   "crop_requested": [
+    167,
+    223,
+    944,
+    1252
+   ],
+   "crop_taken": [
+    167,
+    223,
+    944,
+    1252
+   ],
+   "predicted_jacobian_det": 1.1412424730209898,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1029,
+    777
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 581,
+   "n_inliers": 577,
+   "n_refined": 363,
+   "pass": true,
+   "fit_rmse_px": 0.5908285311487433,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0892785495707655,
+     -0.0508783513421954,
+     272.62549290203174
+    ],
+    [
+     0.05513628032643933,
+     1.0534011974227915,
+     222.0902734465127
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 2.85,
+   "coverage_occupancy": 1.0,
+   "coverage_max_uncovered_disc_ratio": 0.05173385353482282,
+   "measured_to_block_matrix": [
+    [
+     1.0892785495707655,
+     -0.0508783513421954,
+     439.62549290203174
+    ],
+    [
+     0.05513628032643933,
+     1.0534011974227915,
+     445.0902734465127
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.072498285074133,
+   "predicted_scale": 1.068289508055279,
+   "arm": "R",
+   "window": "RD03",
+   "frame": "nac.m1212932972lc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 19.09986811487538,
+    "median_ref_px": 19.08833390169436,
+    "p95_ref_px": 19.836287454240406,
+    "rms_m": 160.88110941777268,
+    "median_m": 160.78395497661825,
+    "p95_m": 167.08408210853574,
+    "mean_east_m": 89.73983337564654,
+    "mean_north_m": 133.40931372888065,
+    "median_lonlat_deg": [
+     22.036120150754,
+     20.03282436289634
+    ],
+    "metres_per_deg": [
+     28488.682367222482,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 71.88171558004323,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9983603643137249,
+       0.0004987883838305828,
+       36.51748719855874
+      ],
+      [
+       -0.000498788383830582,
+       0.9983603643137248,
+       -60.172106488852364
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      36.51748719855874,
+      -60.172106488852364
+     ],
+     "scale": 0.9983604889129404,
+     "rotation_deg": -0.02862540211668644,
+     "residual_px_k2": 2.1705861178095707
+    }
+   }
+  },
+  "RD03/nac.m1205872034rc": {
+   "source": "RD03/nac.m1205872034rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.2838662888093495,
+   "crop_requested": [
+    186,
+    -22,
+    950,
+    994
+   ],
+   "crop_taken": [
+    186,
+    0,
+    950,
+    994
+   ],
+   "predicted_jacobian_det": 1.0830583928610706,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    994,
+    764
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 12,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 2.7847474288855413e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.440 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     4.968695529068136,
+     3.578699156488602,
+     -1314.991613822952
+    ],
+    [
+     2.106790643849941,
+     3.0474734213030903,
+     -652.7631583739268
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 2.2,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.4401600217268289,
+   "measured_to_block_matrix": [
+    [
+     4.968695529068136,
+     3.578699156488602,
+     -1128.991613822952
+    ],
+    [
+     2.106790643849941,
+     3.0474734213030903,
+     -652.7631583739268
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 2.757244578077683,
+   "predicted_scale": 1.0407009142213102,
+   "arm": "R",
+   "window": "RD03",
+   "frame": "nac.m1205872034rc"
+  },
+  "RD03/nac.m1175268993rc": {
+   "source": "RD03/nac.m1175268993rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.28344883838144597,
+   "crop_requested": [
+    12,
+    198,
+    818,
+    1276
+   ],
+   "crop_taken": [
+    12,
+    198,
+    818,
+    1276
+   ],
+   "predicted_jacobian_det": 1.0755109395584888,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1078,
+    806
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 18,
+   "n_inliers": 4,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 0.578129158301165,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 4 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.310 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0755775316306182,
+     -0.038430581062565604,
+     278.19926073481696
+    ],
+    [
+     0.03620933438180249,
+     1.0313202135492556,
+     233.40859068973998
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 2.34,
+   "coverage_occupancy": 0.0625,
+   "coverage_max_uncovered_disc_ratio": 0.31043474539905647,
+   "measured_to_block_matrix": [
+    [
+     1.0755775316306182,
+     -0.038430581062565604,
+     290.19926073481696
+    ],
+    [
+     0.03620933438180249,
+     1.0313202135492556,
+     431.40859068974
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0538768407030548,
+   "predicted_scale": 1.0370684353303252,
+   "arm": "C",
+   "window": "RD03",
+   "frame": "nac.m1175268993rc",
+   "chain": {
+    "via": "nac.m1236465772rc",
+    "edge": "nac.m1236465772rc -> nac.m1175268993rc",
+    "edge_n_inliers": 8239,
+    "direction_forward": false
+   },
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 20.501656211640963,
+    "median_ref_px": 20.24594190499088,
+    "p95_ref_px": 22.766016813956266,
+    "rms_m": 172.68858488408932,
+    "median_m": 170.53466418157822,
+    "p95_m": 191.76164044820933,
+    "mean_east_m": 170.33524153018985,
+    "mean_north_m": -8.293010889903897,
+    "median_lonlat_deg": [
+     21.99223074450443,
+     20.032841823994445
+    ],
+    "metres_per_deg": [
+     28488.6792015867,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 67.75429305988277,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9947212405559117,
+       -0.005773638676182495,
+       -58.60490344712224
+      ],
+      [
+       0.005773638676182489,
+       0.9947212405559118,
+       3.2711931426168803
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      -58.60490344712224,
+      3.2711931426168803
+     ],
+     "scale": 0.9947379963169474,
+     "rotation_deg": 0.3325569016367375,
+     "residual_px_k2": 9.60284083581815
+    }
+   }
+  },
+  "RD03/nac.m1363396554rc": {
+   "source": "RD03/nac.m1363396554rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.28386628880821263,
+   "crop_requested": [
+    269,
+    241,
+    1038,
+    1250
+   ],
+   "crop_taken": [
+    269,
+    241,
+    1038,
+    1250
+   ],
+   "predicted_jacobian_det": 1.0147856588712068,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1009,
+    769
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 347,
+   "n_inliers": 345,
+   "n_refined": 210,
+   "pass": true,
+   "fit_rmse_px": 0.7267145554080433,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0317763347887867,
+     -0.07489025932397704,
+     270.2435688031711
+    ],
+    [
+     0.06936164617729774,
+     1.0082315478595052,
+     232.54715352157103
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 3.32,
+   "coverage_occupancy": 0.953125,
+   "coverage_max_uncovered_disc_ratio": 0.08778205099314153,
+   "measured_to_block_matrix": [
+    [
+     1.0317763347887867,
+     -0.07489025932397704,
+     539.2435688031711
+    ],
+    [
+     0.06936164617729774,
+     1.0082315478595052,
+     473.54715352157103
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0224793214233046,
+   "predicted_scale": 1.007365702647855,
+   "arm": "R",
+   "window": "RD03",
+   "frame": "nac.m1363396554rc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 5.2548903000932565,
+    "median_ref_px": 5.248110520892064,
+    "p95_ref_px": 6.031331783684836,
+    "rms_m": 44.26274444739596,
+    "median_m": 44.20563733058577,
+    "p95_m": 50.80282977818986,
+    "mean_east_m": -9.693402371507576,
+    "mean_north_m": 39.11448432907801,
+    "median_lonlat_deg": [
+     22.063149895172764,
+     20.030800998007795
+    ],
+    "metres_per_deg": [
+     28489.04917825571,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 20.715336432267925,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9920635286029285,
+       -0.00039821910159415475,
+       -1.5653171415779639
+      ],
+      [
+       0.0003982191015941562,
+       0.9920635286029285,
+       -10.344322998177631
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      -1.5653171415779639,
+      -10.344322998177631
+     ],
+     "scale": 0.9920636085264625,
+     "rotation_deg": 0.022998801951259234,
+     "residual_px_k2": 6.583744739956022
+    }
+   }
+  },
+  "RD03/nac.m1199981485rc": {
+   "source": "RD03/nac.m1199981485rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.28386628881020215,
+   "crop_requested": [
+    83,
+    229,
+    844,
+    1247
+   ],
+   "crop_taken": [
+    83,
+    229,
+    844,
+    1247
+   ],
+   "predicted_jacobian_det": 1.0871012317762487,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1018,
+    761
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 31,
+   "n_inliers": 25,
+   "n_refined": 18,
+   "pass": true,
+   "fit_rmse_px": 1.6879328226710582,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.330 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.083955474930856,
+     0.048468137173359765,
+     247.61633395461774
+    ],
+    [
+     -0.018004649478482015,
+     1.056535763037062,
+     236.4557618424344
+    ],
+    [
+     4.6541892680044834e-05,
+     -3.238421575788952e-06,
+     1.0
+    ]
+   ],
+   "wall_s": 1.25,
+   "coverage_occupancy": 0.3125,
+   "coverage_max_uncovered_disc_ratio": 0.32979948483178756,
+   "measured_to_block_matrix": [
+    [
+     1.0878184520232996,
+     0.04819934818256928,
+     330.61633395461774
+    ],
+    [
+     -0.007346556054751749,
+     1.0557941644962063,
+     465.4557618424344
+    ],
+    [
+     4.6541892680044834e-05,
+     -3.238421575788952e-06,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0718518894374922,
+   "predicted_scale": 1.0426414684714247,
+   "arm": "R",
+   "window": "RD03",
+   "frame": "nac.m1199981485rc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 18.266764321529926,
+    "median_ref_px": 18.02117571017112,
+    "p95_ref_px": 23.49309753782196,
+    "rms_m": 153.8637487885029,
+    "median_m": 151.79511836560468,
+    "p95_m": 197.88595255278813,
+    "mean_east_m": 138.1237972160804,
+    "mean_north_m": 59.782419311802904,
+    "median_lonlat_deg": [
+     22.01041332076643,
+     20.037465958970774
+    ],
+    "metres_per_deg": [
+     28487.840769019367,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 69.25098162754827,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9968325088550344,
+       0.010233761506268584,
+       54.45124780113349
+      ],
+      [
+       -0.010233761506268568,
+       0.9968325088550348,
+       32.58564993572293
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      54.45124780113349,
+      32.58564993572293
+     ],
+     "scale": 0.9968850388007585,
+     "rotation_deg": -0.5881938431514157,
+     "residual_px_k2": 12.822607653524601
+    }
+   }
+  },
+  "RD03/nac.m1096350825rc": {
+   "source": "RD03/nac.m1096350825rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.3145680016780261,
+   "crop_requested": [
+    138,
+    172,
+    973,
+    1303
+   ],
+   "crop_taken": [
+    138,
+    172,
+    973,
+    1303
+   ],
+   "predicted_jacobian_det": 0.960354254757024,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    682,
+    341
+   ],
+   "ref_shape": [
+    1131,
+    835
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 9,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 1.4260033914848145e-12,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.399 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     9.959856658057808,
+     -0.14377306444978805,
+     -1817.9947316160167
+    ],
+    [
+     -13.520166582660616,
+     -0.2868728540138656,
+     3662.553126254016
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.96,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.3988140415358774,
+   "measured_to_block_matrix": [
+    [
+     9.959856658057808,
+     -0.14377306444978805,
+     -1679.9947316160167
+    ],
+    [
+     -13.520166582660616,
+     -0.2868728540138656,
+     3834.553126254016
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 2.1911294545340723,
+   "predicted_scale": 0.9799766603123893,
+   "arm": "C",
+   "window": "RD03",
+   "frame": "nac.m1096350825rc",
+   "chain": {
+    "via": "nac.m1212932972lc",
+    "edge": "nac.m1212932972lc -> nac.m1096350825rc",
+    "edge_n_inliers": 5,
+    "direction_forward": false
+   },
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 194.12436371287163,
+    "median_ref_px": 158.8848247356974,
+    "p95_ref_px": 333.26218365874854,
+    "rms_m": 1635.1391963184647,
+    "median_m": 1338.3111715425657,
+    "p95_m": 2807.118327285832,
+    "mean_east_m": 256.3598827598584,
+    "mean_north_m": -1305.325870753049,
+    "median_lonlat_deg": [
+     22.030849094238945,
+     20.037875872974475
+    ],
+    "metres_per_deg": [
+     28487.766435840298,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 2610.0122435544486,
+    "similarity_fit": {
+     "matrix": [
+      [
+       2.7257970910289617,
+       -0.14024311637828457,
+       -1497.968576052226
+      ],
+      [
+       0.14024311637828457,
+       2.7257970910289613,
+       -3359.731286232862
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      -1497.968576052226,
+      -3359.731286232862
+     ],
+     "scale": 2.729402482807078,
+     "rotation_deg": 2.9452888230009684,
+     "residual_px_k2": 1533.818245573656
+    }
+   }
+  },
+  "RD03/nac.m1142297886lc": {
+   "source": "RD03/nac.m1142297886lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.28344883838838086,
+   "crop_requested": [
+    148,
+    192,
+    962,
+    1283
+   ],
+   "crop_taken": [
+    148,
+    192,
+    962,
+    1283
+   ],
+   "predicted_jacobian_det": 1.13142028489532,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1091,
+    814
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 5,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 3.0960970583025356e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.545 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     16.44900768208073,
+     -2.5890214116031647,
+     -1717.9530474278877
+    ],
+    [
+     -2.6739424242507632,
+     3.103913011840892,
+     -324.9383612947448
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.57,
+   "coverage_occupancy": 0.03125,
+   "coverage_max_uncovered_disc_ratio": 0.5452168834530184,
+   "measured_to_block_matrix": [
+    [
+     16.44900768208073,
+     -2.5890214116031647,
+     -1569.9530474278877
+    ],
+    [
+     -2.6739424242507632,
+     3.103913011840892,
+     -132.93836129474482
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 6.643296981657667,
+   "predicted_scale": 1.0636824173104114,
+   "arm": "C",
+   "window": "RD03",
+   "frame": "nac.m1142297886lc",
+   "chain": {
+    "via": "nac.m1212932972lc",
+    "edge": "nac.m1212932972lc -> nac.m1142297886lc",
+    "edge_n_inliers": 5,
+    "direction_forward": false
+   },
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 546.1200730287833,
+    "median_ref_px": 488.73604364126163,
+    "p95_ref_px": 857.312798300906,
+    "rms_m": 4600.052874488601,
+    "median_m": 4116.698421190756,
+    "p95_m": 7221.2767794603615,
+    "mean_east_m": 390.1292041452902,
+    "mean_north_m": 3962.4929503420935,
+    "median_lonlat_deg": [
+     22.031016557715205,
+     20.032793907577762
+    ],
+    "metres_per_deg": [
+     28488.68788865849,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 1311.847330358468,
+    "similarity_fit": {
+     "matrix": [
+      [
+       -0.16586554521092475,
+       -0.037305032487744354,
+       776.9974793577827
+      ],
+      [
+       0.037305032487744354,
+       -0.16586554521092475,
+       435.907012852875
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      776.9974793577827,
+      435.907012852875
+     ],
+     "scale": 0.17000895428485224,
+     "rotation_deg": 167.32445480702242,
+     "residual_px_k2": 775.2703806705
+    }
+   }
+  },
+  "RD04/nac.m1271742202lc": {
+   "source": "RD04/nac.m1271742202lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.5657858371749853,
+   "crop_requested": [
+    108,
+    1586,
+    834,
+    2546
+   ],
+   "crop_taken": [
+    108,
+    1586,
+    834,
+    2546
+   ],
+   "predicted_jacobian_det": 1.0199497172721896,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    960,
+    726
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 277,
+   "n_inliers": 268,
+   "n_refined": 148,
+   "pass": true,
+   "fit_rmse_px": 0.7995483549182785,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0505737551839753,
+     -0.06189669504353375,
+     269.96294292243596
+    ],
+    [
+     0.06277779067598718,
+     1.0338832599674475,
+     235.98098953919896
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.76,
+   "coverage_occupancy": 0.96875,
+   "coverage_max_uncovered_disc_ratio": 0.07255267545229316,
+   "measured_to_block_matrix": [
+    [
+     1.0505737551839753,
+     -0.06189669504353375,
+     377.96294292243596
+    ],
+    [
+     0.06277779067598718,
+     1.0338832599674475,
+     1821.980989539199
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0440576404637965,
+   "predicted_scale": 1.009925599869708,
+   "arm": "R",
+   "window": "RD04",
+   "frame": "nac.m1271742202lc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 13.452610539154238,
+    "median_ref_px": 12.68007976114416,
+    "p95_ref_px": 19.79769230002667,
+    "rms_m": 113.31339541652514,
+    "median_m": 106.80625055677399,
+    "p95_m": 166.75898922356342,
+    "mean_east_m": 105.3688752282676,
+    "mean_north_m": 15.160911306040793,
+    "median_lonlat_deg": [
+     22.012148170797598,
+     19.664119988797943
+    ],
+    "metres_per_deg": [
+     28554.936822146443,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 57.553268220720994,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9884295430395351,
+       -0.0004998129855306117,
+       58.98128869067011
+      ],
+      [
+       0.0004998129855306117,
+       0.988429543039535,
+       0.1898070530211271
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      58.98128869067011,
+      0.1898070530211271
+     ],
+     "scale": 0.9884296694081803,
+     "rotation_deg": 0.028972396037327156,
+     "residual_px_k2": 18.167215888958975
+    }
+   }
+  },
+  "RD04/nac.m1335207975rc": {
+   "source": "RD04/nac.m1335207975rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.282892918592097,
+   "crop_requested": [
+    105,
+    1590,
+    837,
+    2542
+   ],
+   "crop_taken": [
+    105,
+    1590,
+    837,
+    2542
+   ],
+   "predicted_jacobian_det": 1.0063723429883629,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    952,
+    732
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 14,
+   "n_inliers": 8,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 1.0204957729814004,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 8 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.376 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0298007946488315,
+     -0.06912556303539039,
+     255.78742509333162
+    ],
+    [
+     0.06141950786687359,
+     1.0171470665773752,
+     232.54229039825307
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 0.75,
+   "coverage_occupancy": 0.109375,
+   "coverage_max_uncovered_disc_ratio": 0.3759211453682581,
+   "measured_to_block_matrix": [
+    [
+     1.0298007946488315,
+     -0.06912556303539039,
+     360.78742509333165
+    ],
+    [
+     0.06141950786687359,
+     1.0171470665773752,
+     1822.542290398253
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0255264577273289,
+   "predicted_scale": 1.0031811117581724,
+   "arm": "C",
+   "window": "RD04",
+   "frame": "nac.m1335207975rc",
+   "chain": {
+    "via": "nac.m1212932972lc",
+    "edge": "nac.m1212932972lc -> nac.m1335207975rc",
+    "edge_n_inliers": 210,
+    "direction_forward": false
+   },
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 10.448655117770983,
+    "median_ref_px": 9.968584919091349,
+    "p95_ref_px": 14.682758011796663,
+    "rms_m": 88.01061961058738,
+    "median_m": 83.96691492647815,
+    "p95_m": 123.6751156627528,
+    "mean_east_m": -73.25578787239138,
+    "mean_north_m": 40.60923439870851,
+    "median_lonlat_deg": [
+     22.012119511653122,
+     19.664165686620457
+    ],
+    "metres_per_deg": [
+     28554.92868367458,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 45.629603578362065,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9884987493702944,
+       -0.000984237616142115,
+       -32.683179864337944
+      ],
+      [
+       0.0009842376161421145,
+       0.9884987493702945,
+       -7.837319736685117
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      -32.683179864337944,
+      -7.837319736685117
+     ],
+     "scale": 0.9884992393675986,
+     "rotation_deg": 0.05704877506729668,
+     "residual_px_k2": 11.678333640522899
+    }
+   }
+  },
+  "RD04/nac.m1299958135lc": {
+   "source": "RD04/nac.m1299958135lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 1.3073986337985843e-11,
+   "crop_requested": [
+    78,
+    1554,
+    863,
+    2578
+   ],
+   "crop_taken": [
+    78,
+    1554,
+    863,
+    2578
+   ],
+   "predicted_jacobian_det": 1.130262955001305,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1024,
+    785
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 103,
+   "n_inliers": 91,
+   "n_refined": 65,
+   "pass": true,
+   "fit_rmse_px": 0.9633422338990099,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.154 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0891364013249223,
+     -0.06628554228072314,
+     286.32688184651386
+    ],
+    [
+     0.07026758703357328,
+     1.0417168268034118,
+     246.2454045143653
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.39,
+   "coverage_occupancy": 0.65625,
+   "coverage_max_uncovered_disc_ratio": 0.15367010754575855,
+   "measured_to_block_matrix": [
+    [
+     1.0891364013249223,
+     -0.06628554228072314,
+     364.32688184651386
+    ],
+    [
+     0.07026758703357328,
+     1.0417168268034118,
+     1800.2454045143654
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0673469169185639,
+   "predicted_scale": 1.0631382577074842,
+   "arm": "R",
+   "window": "RD04",
+   "frame": "nac.m1299958135lc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 18.967295976715082,
+    "median_ref_px": 18.931435621899666,
+    "p95_ref_px": 20.57823629603812,
+    "rms_m": 159.7644340283492,
+    "median_m": 159.46237677684778,
+    "p95_m": 173.33363064372608,
+    "mean_east_m": 135.7249597049523,
+    "mean_north_m": -83.70655013503965,
+    "median_lonlat_deg": [
+     22.012554846465886,
+     19.66383822942806
+    ],
+    "metres_per_deg": [
+     28554.987001175545,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 70.20497667974436,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9987608470757007,
+       0.0025563752215012024,
+       59.3081322050333
+      ],
+      [
+       -0.0025563752215012024,
+       0.9987608470757008,
+       36.483646208393
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      59.3081322050333,
+      36.483646208393
+     ],
+     "scale": 0.9987641186514683,
+     "rotation_deg": -0.1466509140998816,
+     "residual_px_k2": 3.985681549829321
+    }
+   }
+  },
+  "RD04/nac.m1315225542lc": {
+   "source": "RD04/nac.m1315225542lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.28192199915622496,
+   "crop_requested": [
+    120,
+    1615,
+    822,
+    2516
+   ],
+   "crop_taken": [
+    120,
+    1615,
+    822,
+    2516
+   ],
+   "predicted_jacobian_det": 0.9923057803123982,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    409,
+    204
+   ],
+   "ref_shape": [
+    901,
+    702
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 103,
+   "n_inliers": 96,
+   "n_refined": 50,
+   "pass": true,
+   "fit_rmse_px": 0.9278006142914342,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.000184560765602,
+     0.06365905137016685,
+     250.02276548179717
+    ],
+    [
+     -0.05608131841789869,
+     1.0023937490556647,
+     254.28316912542772
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 0.88,
+   "coverage_occupancy": 0.640625,
+   "coverage_max_uncovered_disc_ratio": 0.1422156056363958,
+   "measured_to_block_matrix": [
+    [
+     1.000184560765602,
+     0.06365905137016685,
+     370.02276548179714
+    ],
+    [
+     -0.05608131841789869,
+     1.0023937490556647,
+     1869.2831691254278
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0030697060242109,
+   "predicted_scale": 0.9961454614223759,
+   "arm": "R",
+   "window": "RD04",
+   "frame": "nac.m1315225542lc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 14.417496218586626,
+    "median_ref_px": 14.359075865038083,
+    "p95_ref_px": 16.348294068407096,
+    "rms_m": 121.44077502117833,
+    "median_m": 120.94869145102278,
+    "p95_m": 137.7041805207505,
+    "mean_east_m": 118.12376143742394,
+    "mean_north_m": -25.174797475270672,
+    "median_lonlat_deg": [
+     22.01195326270982,
+     19.66812632331768
+    ],
+    "metres_per_deg": [
+     28554.223252164753,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 71.81078680885346,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9997456626267933,
+       -0.003914862957084972,
+       72.9169344547795
+      ],
+      [
+       0.003914862957084968,
+       0.9997456626267934,
+       -20.39036231361763
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      72.9169344547795,
+      -20.39036231361763
+     ],
+     "scale": 0.9997533276228986,
+     "rotation_deg": 0.2243610417270289,
+     "residual_px_k2": 7.016888746191513
+    }
+   }
+  },
+  "RD04/nac.m1341069775rc": {
+   "source": "RD04/nac.m1341069775rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 2.2453150450019166e-11,
+   "crop_requested": [
+    86,
+    1578,
+    827,
+    2556
+   ],
+   "crop_taken": [
+    86,
+    1578,
+    827,
+    2556
+   ],
+   "predicted_jacobian_det": 1.1037356552143573,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    978,
+    741
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 8,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 1.1368683772161603e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.442 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     3.875524256841743,
+     0.9969715063631259,
+     -385.11039506560587
+    ],
+    [
+     0.530668535466229,
+     1.271220905109146,
+     113.40645855331167
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 0.86,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.4418330829108931,
+   "measured_to_block_matrix": [
+    [
+     3.875524256841743,
+     0.9969715063631259,
+     -299.11039506560587
+    ],
+    [
+     0.530668535466229,
+     1.271220905109146,
+     1691.4064585533117
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 2.0970422133022337,
+   "predicted_scale": 1.0505882424691213,
+   "arm": "C",
+   "window": "RD04",
+   "frame": "nac.m1341069775rc",
+   "chain": {
+    "via": "nac.m1299958135lc",
+    "edge": "nac.m1299958135lc -> nac.m1341069775rc",
+    "edge_n_inliers": 265,
+    "direction_forward": false
+   },
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 29.800895325250178,
+    "median_ref_px": 29.58193971842005,
+    "p95_ref_px": 35.10269608102377,
+    "rms_m": 251.01749775094953,
+    "median_m": 249.1732011972661,
+    "p95_m": 295.6753761389442,
+    "mean_east_m": 249.1477179403127,
+    "mean_north_m": -2.60682573420626,
+    "median_lonlat_deg": [
+     22.0043839639386,
+     19.667983579731114
+    ],
+    "metres_per_deg": [
+     28554.248678685504,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 124.08913585471379,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9911989654165781,
+       0.0011215425421173073,
+       -119.69734328811847
+      ],
+      [
+       -0.0011215425421173075,
+       0.9911989654165781,
+       -0.1668545346940391
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      -119.69734328811847,
+      -0.1668545346940391
+     ],
+     "scale": 0.9911995999295846,
+     "rotation_deg": -0.06483019961280151,
+     "residual_px_k2": 13.87891766653695
+    }
+   }
+  },
+  "RD04/nac.m1212932972lc": {
+   "source": "RD04/nac.m1212932972lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 1.830358087318018e-11,
+   "crop_requested": [
+    102,
+    1553,
+    879,
+    2581
+   ],
+   "crop_taken": [
+    102,
+    1553,
+    879,
+    2581
+   ],
+   "predicted_jacobian_det": 1.1412424730210267,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1028,
+    777
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 482,
+   "n_inliers": 474,
+   "n_refined": 289,
+   "pass": true,
+   "fit_rmse_px": 0.5175630204854811,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0829873526635128,
+     -0.05055616347245557,
+     271.94685923986384
+    ],
+    [
+     0.054823101999195004,
+     1.0535146450372352,
+     221.73673842089227
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.9,
+   "coverage_occupancy": 1.0,
+   "coverage_max_uncovered_disc_ratio": 0.06783841670653878,
+   "measured_to_block_matrix": [
+    [
+     1.0829873526635128,
+     -0.05055616347245557,
+     373.94685923986384
+    ],
+    [
+     0.054823101999195004,
+     1.0535146450372352,
+     1774.7367384208924
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0694459697094818,
+   "predicted_scale": 1.068289508055296,
+   "arm": "R",
+   "window": "RD04",
+   "frame": "nac.m1212932972lc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 18.256989395826867,
+    "median_ref_px": 18.255348933683532,
+    "p95_ref_px": 18.63142622160982,
+    "rms_m": 153.7814130947627,
+    "median_m": 153.7675952313099,
+    "p95_m": 156.93535172808316,
+    "mean_east_m": 79.38817026215052,
+    "mean_north_m": 131.6865758589849,
+    "median_lonlat_deg": [
+     22.01800445777418,
+     19.663538411893185
+    ],
+    "metres_per_deg": [
+     28555.040395457127,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 68.89317997399982,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9994367375613625,
+       0.0002635607738309795,
+       31.971363296985373
+      ],
+      [
+       -0.0002635607738309785,
+       0.9994367375613621,
+       -60.336959204971095
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      31.971363296985373,
+      -60.336959204971095
+     ],
+     "scale": 0.9994367723130768,
+     "rotation_deg": -0.015109430210171302,
+     "residual_px_k2": 0.8896358553059618
+    }
+   }
+  },
+  "RD04/nac.m1363396554rc": {
+   "source": "RD04/nac.m1363396554rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.2838662888054273,
+   "crop_requested": [
+    174,
+    1568,
+    940,
+    2580
+   ],
+   "crop_taken": [
+    174,
+    1568,
+    940,
+    2580
+   ],
+   "predicted_jacobian_det": 1.0040481725452959,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1012,
+    766
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 197,
+   "n_inliers": 195,
+   "n_refined": 120,
+   "pass": true,
+   "fit_rmse_px": 1.125385209174963,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0276905215772203,
+     -0.07429353835346193,
+     266.428234962199
+    ],
+    [
+     0.06885302633454327,
+     1.007929534247119,
+     238.30957223525309
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.2,
+   "coverage_occupancy": 0.875,
+   "coverage_max_uncovered_disc_ratio": 0.09154303334020017,
+   "measured_to_block_matrix": [
+    [
+     1.0276905215772203,
+     -0.07429353835346193,
+     440.428234962199
+    ],
+    [
+     0.06885302633454327,
+     1.007929534247119,
+     1806.3095722352532
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0202720047694358,
+   "predicted_scale": 1.0020220419458326,
+   "arm": "R",
+   "window": "RD04",
+   "frame": "nac.m1363396554rc",
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 5.032923177958276,
+    "median_ref_px": 4.087277353970215,
+    "p95_ref_px": 8.21076406868191,
+    "rms_m": 42.39308143985226,
+    "median_m": 34.427762079296265,
+    "p95_m": 69.16052114037068,
+    "mean_east_m": -33.784459212857186,
+    "mean_north_m": 5.1002788913733115,
+    "median_lonlat_deg": [
+     22.03638567579888,
+     19.66175184325811
+    ],
+    "metres_per_deg": [
+     28555.358547923817,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 19.57412439422143,
+    "similarity_fit": {
+     "matrix": [
+      [
+       0.9910463684360563,
+       -0.0033036787057569746,
+       -8.132484634772197
+      ],
+      [
+       0.0033036787057569763,
+       0.9910463684360562,
+       5.966261742543338
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      -8.132484634772197,
+      5.966261742543338
+     ],
+     "scale": 0.9910518748699718,
+     "rotation_deg": 0.19099625567178471,
+     "residual_px_k2": 9.742720599950932
+    }
+   }
+  },
+  "RD04/nac.m1096350825rc": {
+   "source": "RD04/nac.m1096350825rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.31456800167848087,
+   "crop_requested": [
+    55,
+    1500,
+    887,
+    2631
+   ],
+   "crop_taken": [
+    55,
+    1500,
+    887,
+    2593
+   ],
+   "predicted_jacobian_det": 0.9531843180594459,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    682,
+    341
+   ],
+   "ref_shape": [
+    1093,
+    832
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 11,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 2.285548453417584e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.425 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.5758073066109757,
+     -0.9138248464049855,
+     290.56064250096176
+    ],
+    [
+     2.571526673826856,
+     3.521661216441889,
+     -1152.7406616345047
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.8,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.42501967171817545,
+   "measured_to_block_matrix": [
+    [
+     1.5758073066109757,
+     -0.9138248464049855,
+     345.56064250096176
+    ],
+    [
+     2.571526673826856,
+     3.521661216441889,
+     347.2593383654953
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 2.810584359882082,
+   "predicted_scale": 0.9763115886126958,
+   "arm": "C",
+   "window": "RD04",
+   "frame": "nac.m1096350825rc",
+   "chain": {
+    "via": "nac.m1299958135lc",
+    "edge": "nac.m1299958135lc -> nac.m1096350825rc",
+    "edge_n_inliers": 4,
+    "direction_forward": false
+   },
+   "displacement_field": {
+    "n_grid": 512,
+    "rms_ref_px": 514.9721621713443,
+    "median_ref_px": 405.89689095330255,
+    "p95_ref_px": 916.4430001328193,
+    "rms_m": 4337.689258957251,
+    "median_m": 3418.9315723564655,
+    "p95_m": 7719.339510239436,
+    "mean_east_m": 944.5152261366185,
+    "mean_north_m": -1405.21472034947,
+    "median_lonlat_deg": [
+     22.007371807967417,
+     19.6688519328981
+    ],
+    "metres_per_deg": [
+     28554.093998594395,
+     30323.35042414948
+    ],
+    "rms_tile_px_k2": 2837.5650660086803,
+    "similarity_fit": {
+     "matrix": [
+      [
+       -0.6026239430852525,
+       1.6051296152264456,
+       31.235031728713466
+      ],
+      [
+       -1.6051296152264458,
+       -0.6026239430852529,
+       3942.285760231353
+      ],
+      [
+       0.0,
+       0.0,
+       1.0
+      ]
+     ],
+     "translation_px_k2": [
+      31.235031728713466,
+      3942.285760231353
+     ],
+     "scale": 1.7145252107964513,
+     "rotation_deg": -110.57795886492993,
+     "residual_px_k2": 1604.654006216769
+    }
+   }
+  },
+  "C2/TMC-2": {
+   "source": "C2/TMC-2",
+   "kind": "TMC-2",
+   "engine": "B1",
+   "predicted_affine_residual_px": 5.002220859751105e-12,
+   "crop_requested": [
+    182,
+    281,
+    955,
+    1254
+   ],
+   "crop_taken": [
+    182,
+    281,
+    955,
+    1254
+   ],
+   "predicted_jacobian_det": 1.438848230400015,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    415,
+    249
+   ],
+   "ref_shape": [
+    973,
+    773
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 11,
+   "n_inliers": 9,
+   "n_refined": 2,
+   "pass": true,
+   "fit_rmse_px": 0.612522630519256,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "engine_default",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.470 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.1893078145090143,
+     0.0015954116676643083,
+     236.90717925988264
+    ],
+    [
+     -0.010249109798240643,
+     1.1994600643865494,
+     237.33315802534042
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 0.88,
+   "coverage_occupancy": 0.09375,
+   "coverage_max_uncovered_disc_ratio": 0.47019742466718584,
+   "measured_to_block_matrix": [
+    [
+     1.1893078145090143,
+     0.0015954116676643083,
+     418.90717925988264
+    ],
+    [
+     -0.010249109798240643,
+     1.1994600643865494,
+     518.3331580253405
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.1943799978716003,
+   "predicted_scale": 1.1995200000000061,
+   "arm": "R",
+   "window": "RD09-P1",
+   "frame": "ch2_tmc_ndn_20241214T1937388207_d_oth_d18",
+   "acknowledgement": "Chandrayaan-2 data courtesy ISRO/ISSDC (PRADAN); (c) reserved ISRO"
+  }
+ },
+ "null_cells": [
+  {
+   "source": "RD03/nac.m1271742202lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.565785837176918,
+   "crop_requested": [
+    150,
+    1291,
+    896,
+    2311
+   ],
+   "crop_taken": [
+    150,
+    1291,
+    896,
+    2311
+   ],
+   "predicted_jacobian_det": 1.0492663306064034,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    1020,
+    746
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 6,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 1.640928159047308e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.450 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     6.808989540720019,
+     -0.25542448197697437,
+     -589.7251031109876
+    ],
+    [
+     16.079142520875873,
+     -5.003816459869687,
+     -198.46389774645797
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.01,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.45015388522865935,
+   "measured_to_block_matrix": [
+    [
+     6.808989540720019,
+     -0.25542448197697437,
+     -439.72510311098756
+    ],
+    [
+     16.079142520875873,
+     -5.003816459869687,
+     1092.5361022535421
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 5.473931611730888,
+   "predicted_scale": 1.024337020031202,
+   "arm": "N"
+  },
+  {
+   "source": "RD03/nac.m1335207975rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.28289291858919796,
+   "crop_requested": [
+    150,
+    1291,
+    896,
+    2311
+   ],
+   "crop_taken": [
+    150,
+    1291,
+    896,
+    2311
+   ],
+   "predicted_jacobian_det": 1.0210097646915026,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    1020,
+    746
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 2,
+   "n_inliers": 0,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": NaN,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "No geometric model could be estimated from the 2 putative correspondences."
+    ]
+   },
+   "transform_matrix": null,
+   "wall_s": 0.76,
+   "arm": "N"
+  },
+  {
+   "source": "RD03/nac.m1452560468lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 1.9667822925839573e-11,
+   "crop_requested": [
+    164,
+    1319,
+    882,
+    2283
+   ],
+   "crop_taken": [
+    164,
+    1319,
+    882,
+    2283
+   ],
+   "predicted_jacobian_det": 1.0714833210314543,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    409,
+    204
+   ],
+   "ref_shape": [
+    964,
+    718
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 3,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 7.541131686492462e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.787 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -1.9603181099812585,
+     -5.24543786872153,
+     2534.2701304764487
+    ],
+    [
+     1.3078349977294672,
+     -17.92033423104871,
+     6998.127545702435
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 0.74,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.7868043393203986,
+   "measured_to_block_matrix": [
+    [
+     -1.9603181099812585,
+     -5.24543786872153,
+     2698.2701304764487
+    ],
+    [
+     1.3078349977294672,
+     -17.92033423104871,
+     8317.127545702435
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 6.479947758521772,
+   "predicted_scale": 1.0351247852464234,
+   "arm": "N"
+  },
+  {
+   "source": "RD03/nac.m1182331886lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 2.319211489520967e-11,
+   "crop_requested": [
+    111,
+    1213,
+    935,
+    2389
+   ],
+   "crop_taken": [
+    111,
+    1213,
+    935,
+    2389
+   ],
+   "predicted_jacobian_det": 1.0714294037554464,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1176,
+    824
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 7,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 3.712996571847389e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.612 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -7.402052682329324,
+     0.9547184694228076,
+     1520.819614513209
+    ],
+    [
+     -9.920594578837683,
+     -0.9964621198153502,
+     3305.2223163869353
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.66,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.6119456445918627,
+   "measured_to_block_matrix": [
+    [
+     -7.402052682329324,
+     0.9547184694228076,
+     1631.819614513209
+    ],
+    [
+     -9.920594578837683,
+     -0.9964621198153502,
+     4518.222316386935
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 4.104538948394922,
+   "predicted_scale": 1.0350987410655306,
+   "arm": "N"
+  },
+  {
+   "source": "RD03/nac.m1236465772rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.28344883838707347,
+   "crop_requested": [
+    111,
+    1213,
+    935,
+    2389
+   ],
+   "crop_taken": [
+    111,
+    1213,
+    935,
+    2389
+   ],
+   "predicted_jacobian_det": 0.9146643332785171,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1176,
+    824
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 11,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 3.65452053036315e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.330 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -4.444426141803239,
+     -0.4767049134907389,
+     1291.2524582653932
+    ],
+    [
+     -9.686448290246451,
+     0.7765822457991283,
+     1810.9632898548602
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.94,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.3303770684276967,
+   "measured_to_block_matrix": [
+    [
+     -4.444426141803239,
+     -0.4767049134907389,
+     1402.2524582653932
+    ],
+    [
+     -9.686448290246451,
+     0.7765822457991283,
+     3023.9632898548602
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 2.8406055566946224,
+   "predicted_scale": 0.9563808515850352,
+   "arm": "N"
+  },
+  {
+   "source": "RD03/nac.m1212932972lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 1.6825651982799172e-11,
+   "crop_requested": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "crop_taken": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "predicted_jacobian_det": 1.1412424730209902,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1088,
+    781
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 12,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 6.563712636189231e-14,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.333 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -7.199875673529449,
+     0.4528936625160023,
+     1281.0592212724064
+    ],
+    [
+     69.41950463890718,
+     1.4316042139934972,
+     -7696.203618916459
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 2.04,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.333297218909508,
+   "measured_to_block_matrix": [
+    [
+     -7.199875673529449,
+     0.4528936625160023,
+     1414.0592212724064
+    ],
+    [
+     69.41950463890718,
+     1.4316042139934972,
+     -6439.203618916459
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 6.461193857207451,
+   "predicted_scale": 1.068289508055279,
+   "arm": "N"
+  },
+  {
+   "source": "RD03/nac.m1205872034rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.2838662888093495,
+   "crop_requested": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "crop_taken": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "predicted_jacobian_det": 1.0830583928610704,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1088,
+    781
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 5,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 5.51117393276437e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.462 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     2.757497880129912,
+     0.17526307130424348,
+     -194.62542741656858
+    ],
+    [
+     18.12987219584243,
+     -2.224986288894696,
+     -2938.518729514356
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 3.55,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.46216732122955206,
+   "measured_to_block_matrix": [
+    [
+     2.757497880129912,
+     0.17526307130424348,
+     -61.625427416568584
+    ],
+    [
+     18.12987219584243,
+     -2.224986288894696,
+     -1681.518729514356
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 3.051703140599032,
+   "predicted_scale": 1.04070091422131,
+   "arm": "N"
+  },
+  {
+   "source": "RD03/nac.m1175268993rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.2834488383819007,
+   "crop_requested": [
+    111,
+    1213,
+    935,
+    2389
+   ],
+   "crop_taken": [
+    111,
+    1213,
+    935,
+    2389
+   ],
+   "predicted_jacobian_det": 1.0755109395584885,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1176,
+    824
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 23,
+   "n_inliers": 4,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 0.8377510198238555,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 4 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.355 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -2.031822847894567,
+     -0.1811172563267868,
+     882.2016171235125
+    ],
+    [
+     1.1519974961270725,
+     0.9393832557265821,
+     -123.72490575102316
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 5.87,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.3551011290432491,
+   "measured_to_block_matrix": [
+    [
+     -2.031822847894567,
+     -0.1811172563267868,
+     993.2016171235125
+    ],
+    [
+     1.1519974961270725,
+     0.9393832557265821,
+     1089.2750942489768
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.3038457485918304,
+   "predicted_scale": 1.037068435330325,
+   "arm": "N"
+  },
+  {
+   "source": "RD03/nac.m1363396554rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.2838662888075305,
+   "crop_requested": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "crop_taken": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "predicted_jacobian_det": 1.0147856588712063,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1088,
+    781
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 5,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 2.6254850544756925e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.713 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -3.827012089543527,
+     -1.8729512144767977,
+     1887.8291394482749
+    ],
+    [
+     -4.936366996604852,
+     -1.3533383178067675,
+     1938.0440496724527
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.17,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.7129735611003573,
+   "measured_to_block_matrix": [
+    [
+     -3.827012089543527,
+     -1.8729512144767977,
+     2020.8291394482749
+    ],
+    [
+     -4.936366996604852,
+     -1.3533383178067675,
+     3195.0440496724527
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 2.0165149287583364,
+   "predicted_scale": 1.0073657026478549,
+   "arm": "N"
+  },
+  {
+   "source": "RD03/nac.m1199981485rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.28386628881071374,
+   "crop_requested": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "crop_taken": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "predicted_jacobian_det": 1.0871012317762492,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1088,
+    781
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 5,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 3.2818563180946156e-14,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.537 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -1.0046472247205755,
+     1.4431464151438624,
+     -120.02931001267632
+    ],
+    [
+     4.627078828385487,
+     0.9810034945900745,
+     -641.3305379603507
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.26,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.5370347959586161,
+   "measured_to_block_matrix": [
+    [
+     -1.0046472247205755,
+     1.4431464151438624,
+     12.97068998732368
+    ],
+    [
+     4.627078828385487,
+     0.9810034945900745,
+     615.6694620396493
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 2.768233130004351,
+   "predicted_scale": 1.042641468471425,
+   "arm": "N"
+  },
+  {
+   "source": "RD03/nac.m1096350825rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.3145680016780261,
+   "crop_requested": [
+    82,
+    1155,
+    965,
+    2447
+   ],
+   "crop_taken": [
+    82,
+    1155,
+    965,
+    2447
+   ],
+   "predicted_jacobian_det": 0.960354254757024,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    682,
+    341
+   ],
+   "ref_shape": [
+    1292,
+    883
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 11,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 3.346849881354443e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.524 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     15.217409519303217,
+     -1.8374991101491744,
+     -2273.1786763913005
+    ],
+    [
+     -9.22132147473349,
+     3.5107272451575047,
+     1090.2966857430529
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 2.02,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.5236669627065871,
+   "measured_to_block_matrix": [
+    [
+     15.217409519303217,
+     -1.8374991101491744,
+     -2191.1786763913005
+    ],
+    [
+     -9.22132147473349,
+     3.5107272451575047,
+     2245.296685743053
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 6.03986789556814,
+   "predicted_scale": 0.9799766603123893,
+   "arm": "N"
+  },
+  {
+   "source": "RD03/nac.m1142297886lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.28344883838838086,
+   "crop_requested": [
+    111,
+    1213,
+    935,
+    2389
+   ],
+   "crop_taken": [
+    111,
+    1213,
+    935,
+    2389
+   ],
+   "predicted_jacobian_det": 1.13142028489532,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1176,
+    824
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 3,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 0.0,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.669 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     2.9206783177291165,
+     3.507087634278629,
+     -579.7576809723007
+    ],
+    [
+     -6.565340730463472,
+     -0.2029711697841255,
+     1803.927597678909
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.67,
+   "coverage_occupancy": 0.03125,
+   "coverage_max_uncovered_disc_ratio": 0.6690150277461118,
+   "measured_to_block_matrix": [
+    [
+     2.9206783177291165,
+     3.507087634278629,
+     -468.7576809723007
+    ],
+    [
+     -6.565340730463472,
+     -0.2029711697841255,
+     3016.927597678909
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 4.736286709640966,
+   "predicted_scale": 1.0636824173104114,
+   "arm": "N"
+  },
+  {
+   "source": "RD04/nac.m1271742202lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.565785837175099,
+   "crop_requested": [
+    150,
+    1291,
+    896,
+    2311
+   ],
+   "crop_taken": [
+    150,
+    1291,
+    896,
+    2311
+   ],
+   "predicted_jacobian_det": 1.0199497172721896,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    1020,
+    746
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 5,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 2.1650304396167636e-12,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.419 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -25.97189798850473,
+     -6.986350565416687,
+     5601.00460247203
+    ],
+    [
+     -83.29302805714673,
+     -26.9667880930445,
+     18490.414191633656
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.35,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.41892615344505546,
+   "measured_to_block_matrix": [
+    [
+     -25.97189798850473,
+     -6.986350565416687,
+     5751.00460247203
+    ],
+    [
+     -83.29302805714673,
+     -26.9667880930445,
+     19781.414191633656
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 10.88413413036888,
+   "predicted_scale": 1.009925599869708,
+   "arm": "N"
+  },
+  {
+   "source": "RD04/nac.m1335207975rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.282892918592097,
+   "crop_requested": [
+    150,
+    1291,
+    896,
+    2311
+   ],
+   "crop_taken": [
+    150,
+    1291,
+    896,
+    2311
+   ],
+   "predicted_jacobian_det": 1.0063723429883626,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    1020,
+    746
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 8,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 4.151256367437222e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.422 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -22.848907337642657,
+     9.115109460341651,
+     1445.5560685083576
+    ],
+    [
+     4.465474107564147,
+     -1.5807516466478841,
+     335.121981488849
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.05,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.4215812663924416,
+   "measured_to_block_matrix": [
+    [
+     -22.848907337642657,
+     9.115109460341651,
+     1595.5560685083576
+    ],
+    [
+     4.465474107564147,
+     -1.5807516466478841,
+     1626.121981488849
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 2.1412233383477544,
+   "predicted_scale": 1.0031811117581724,
+   "arm": "N"
+  },
+  {
+   "source": "RD04/nac.m1299958135lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 1.3073986337985843e-11,
+   "crop_requested": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "crop_taken": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "predicted_jacobian_det": 1.130262955001305,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1088,
+    781
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 6,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 1.736595131264888e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.460 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     2.9638997972581635,
+     2.9619682162505008,
+     -699.4374363119258
+    ],
+    [
+     -4.720940554747412,
+     0.2673693107283152,
+     1574.4924108257733
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.49,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.4603710767634219,
+   "measured_to_block_matrix": [
+    [
+     2.9638997972581635,
+     2.9619682162505008,
+     -566.4374363119258
+    ],
+    [
+     -4.720940554747412,
+     0.2673693107283152,
+     2831.4924108257733
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 3.843921398758116,
+   "predicted_scale": 1.0631382577074842,
+   "arm": "N"
+  },
+  {
+   "source": "RD04/nac.m1315225542lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.28192199915622496,
+   "crop_requested": [
+    164,
+    1319,
+    882,
+    2283
+   ],
+   "crop_taken": [
+    164,
+    1319,
+    882,
+    2283
+   ],
+   "predicted_jacobian_det": 0.9923057803123985,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    409,
+    204
+   ],
+   "ref_shape": [
+    964,
+    718
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 6,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 2.9353815278586935e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.364 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -19.50843360653287,
+     1.7751693781345532,
+     2013.1045146876581
+    ],
+    [
+     -1.2093064693071878,
+     -2.0738689461730035,
+     928.7046280653221
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 0.93,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.36436136827383125,
+   "measured_to_block_matrix": [
+    [
+     -19.50843360653287,
+     1.7751693781345532,
+     2177.104514687658
+    ],
+    [
+     -1.2093064693071878,
+     -2.0738689461730035,
+     2247.704628065322
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 6.527224406909912,
+   "predicted_scale": 0.996145461422376,
+   "arm": "N"
+  },
+  {
+   "source": "RD04/nac.m1341069775rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 2.2453150450019166e-11,
+   "crop_requested": [
+    150,
+    1291,
+    896,
+    2311
+   ],
+   "crop_taken": [
+    150,
+    1291,
+    896,
+    2311
+   ],
+   "predicted_jacobian_det": 1.1037356552143576,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    1020,
+    746
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 5,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 3.147845997060235e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.414 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -8.207316984961983,
+     0.37576376302927,
+     1596.2143616542921
+    ],
+    [
+     -4.718773238109578,
+     0.5514216566985349,
+     1118.270923049724
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.23,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.4142095790875015,
+   "measured_to_block_matrix": [
+    [
+     -8.207316984961983,
+     0.37576376302927,
+     1746.2143616542921
+    ],
+    [
+     -4.718773238109578,
+     0.5514216566985349,
+     2409.270923049724
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.6590805706968823,
+   "predicted_scale": 1.0505882424691215,
+   "arm": "N"
+  },
+  {
+   "source": "RD04/nac.m1212932972lc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 1.830358087318018e-11,
+   "crop_requested": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "crop_taken": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "predicted_jacobian_det": 1.1412424730210267,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1088,
+    781
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 13,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 1.1368683772161603e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.395 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     2.093568972671595,
+     -0.1634723396572094,
+     363.4710760284717
+    ],
+    [
+     -14.695640116717449,
+     0.7470533986468703,
+     2551.3482127668667
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 1.88,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.3946085939038993,
+   "measured_to_block_matrix": [
+    [
+     2.093568972671595,
+     -0.1634723396572094,
+     496.4710760284717
+    ],
+    [
+     -14.695640116717449,
+     0.7470533986468703,
+     3808.3482127668667
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 0.9155997249367188,
+   "predicted_scale": 1.068289508055296,
+   "arm": "N"
+  },
+  {
+   "source": "RD04/nac.m1363396554rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.2838662888054273,
+   "crop_requested": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "crop_taken": [
+    133,
+    1257,
+    914,
+    2345
+   ],
+   "predicted_jacobian_det": 1.004048172545296,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1088,
+    781
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 1,
+   "n_inliers": 0,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": NaN,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "No geometric model could be estimated from the 1 putative correspondences."
+    ]
+   },
+   "transform_matrix": null,
+   "wall_s": 0.87,
+   "arm": "N"
+  },
+  {
+   "source": "RD04/nac.m1096350825rc",
+   "kind": "NAC",
+   "engine": "B1",
+   "predicted_affine_residual_px": 0.31456800167848087,
+   "crop_requested": [
+    82,
+    1155,
+    965,
+    2447
+   ],
+   "crop_taken": [
+    82,
+    1155,
+    965,
+    2447
+   ],
+   "predicted_jacobian_det": 0.953184318059445,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    682,
+    341
+   ],
+   "ref_shape": [
+    1292,
+    883
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 14,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 9.282491429618472e-14,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.322 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     2.6674306057716355,
+     -0.13058131267970916,
+     -208.27222947734606
+    ],
+    [
+     -0.9937882477464196,
+     -1.146935458498829,
+     1260.5037913291212
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 2.53,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.32249798994376944,
+   "measured_to_block_matrix": [
+    [
+     2.6674306057716355,
+     -0.13058131267970916,
+     -126.27222947734606
+    ],
+    [
+     -0.9937882477464196,
+     -1.146935458498829,
+     2415.503791329121
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.7858165971792554,
+   "predicted_scale": 0.9763115886126954,
+   "arm": "N"
+  },
+  {
+   "source": "C2/TMC-2",
+   "kind": "TMC-2",
+   "engine": "B1",
+   "predicted_affine_residual_px": 4.547473508864641e-12,
+   "crop_requested": [
+    137,
+    1315,
+    909,
+    2287
+   ],
+   "crop_taken": [
+    137,
+    1315,
+    909,
+    2287
+   ],
+   "predicted_jacobian_det": 1.4388482304000147,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    415,
+    249
+   ],
+   "ref_shape": [
+    972,
+    772
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 0,
+   "n_inliers": 0,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": NaN,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "No geometric model could be estimated from the 0 putative correspondences."
+    ]
+   },
+   "transform_matrix": null,
+   "wall_s": 0.69,
+   "arm": "N"
+  }
+ ],
+ "second_engine": {
+  "RD03/nac.m1271742202lc": {
+   "source": "RD03/nac.m1271742202lc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.565785837176918,
+   "crop_requested": [
+    190,
+    257,
+    922,
+    1218
+   ],
+   "crop_taken": [
+    190,
+    257,
+    922,
+    1218
+   ],
+   "predicted_jacobian_det": 1.0492663306064034,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    961,
+    732
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 501,
+   "n_inliers": 477,
+   "n_refined": 302,
+   "pass": true,
+   "fit_rmse_px": 1.0408246002889883,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.226 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0591685779698081,
+     -0.061787530727530175,
+     272.30952579175175
+    ],
+    [
+     0.06193260827520204,
+     1.033003673872653,
+     239.82094944762645
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 18.88,
+   "coverage_occupancy": 0.796875,
+   "coverage_max_uncovered_disc_ratio": 0.2260949251920506,
+   "measured_to_block_matrix": [
+    [
+     1.0591685779698081,
+     -0.061787530727530175,
+     462.30952579175175
+    ],
+    [
+     0.06193260827520204,
+     1.033003673872653,
+     496.82094944762645
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0478319021818936,
+   "predicted_scale": 1.024337020031202
+  },
+  "RD03/nac.m1335207975rc": {
+   "source": "RD03/nac.m1335207975rc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.28289291858919796,
+   "crop_requested": [
+    188,
+    261,
+    923,
+    1214
+   ],
+   "crop_taken": [
+    188,
+    261,
+    923,
+    1214
+   ],
+   "predicted_jacobian_det": 1.021009764691502,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    953,
+    735
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 458,
+   "n_inliers": 428,
+   "n_refined": 272,
+   "pass": true,
+   "fit_rmse_px": 1.3603941293399369,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.207 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0290251514613706,
+     -0.07065661132870243,
+     256.2085975671592
+    ],
+    [
+     0.06820362349351837,
+     1.0214355166862683,
+     227.64163209017732
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 17.4,
+   "coverage_occupancy": 0.703125,
+   "coverage_max_uncovered_disc_ratio": 0.2067309538787784,
+   "measured_to_block_matrix": [
+    [
+     1.0290251514613706,
+     -0.07065661132870243,
+     444.2085975671592
+    ],
+    [
+     0.06820362349351837,
+     1.0214355166862683,
+     488.6416320901773
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0275708609057097,
+   "predicted_scale": 1.010450278188641
+  },
+  "RD03/nac.m1452560468lc": {
+   "source": "RD03/nac.m1452560468lc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 1.9667822925839573e-11,
+   "crop_requested": [
+    196,
+    269,
+    916,
+    1207
+   ],
+   "crop_taken": [
+    196,
+    269,
+    916,
+    1207
+   ],
+   "predicted_jacobian_det": 1.071483321031454,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    409,
+    204
+   ],
+   "ref_shape": [
+    938,
+    720
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 341,
+   "n_inliers": 316,
+   "n_refined": 209,
+   "pass": true,
+   "fit_rmse_px": 1.3627452344107562,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.263 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0612740807301442,
+     -0.10180481802334734,
+     295.32598383977313
+    ],
+    [
+     0.10180481802334738,
+     1.0612740807301442,
+     240.66931367882495
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 10.97,
+   "coverage_occupancy": 0.625,
+   "coverage_max_uncovered_disc_ratio": 0.26302551215486314,
+   "measured_to_block_matrix": [
+    [
+     1.0612740807301442,
+     -0.10180481802334734,
+     491.32598383977313
+    ],
+    [
+     0.10180481802334738,
+     1.0612740807301442,
+     509.66931367882495
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0661458133868835,
+   "predicted_scale": 1.0351247852464234
+  },
+  "RD03/nac.m1182331886lc": {
+   "source": "RD03/nac.m1182331886lc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 2.2964741219766438e-11,
+   "crop_requested": [
+    153,
+    194,
+    958,
+    1282
+   ],
+   "crop_taken": [
+    153,
+    194,
+    958,
+    1282
+   ],
+   "predicted_jacobian_det": 1.071429403755446,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1088,
+    805
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 681,
+   "n_inliers": 663,
+   "n_refined": 447,
+   "pass": true,
+   "fit_rmse_px": 0.9273853825690692,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.159 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.050387991750881,
+     -0.0455403062933501,
+     269.4385622863246
+    ],
+    [
+     0.04791522948991725,
+     1.0224820528628684,
+     227.45910000712882
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 15.67,
+   "coverage_occupancy": 0.78125,
+   "coverage_max_uncovered_disc_ratio": 0.1591591843422203,
+   "measured_to_block_matrix": [
+    [
+     1.050387991750881,
+     -0.0455403062933501,
+     422.4385622863246
+    ],
+    [
+     0.04791522948991725,
+     1.0224820528628684,
+     421.4591000071288
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.037393341185027,
+   "predicted_scale": 1.0350987410655303
+  },
+  "RD03/nac.m1236465772rc": {
+   "source": "RD03/nac.m1236465772rc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.2834488383871303,
+   "crop_requested": [
+    44,
+    206,
+    827,
+    1257
+   ],
+   "crop_taken": [
+    44,
+    206,
+    827,
+    1257
+   ],
+   "predicted_jacobian_det": 0.9146643332785168,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1051,
+    783
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 825,
+   "n_inliers": 713,
+   "n_refined": 452,
+   "pass": true,
+   "fit_rmse_px": 1.5665360548243998,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ]
+   },
+   "transform_matrix": [
+    [
+     0.9870641227433369,
+     -0.0483536115962802,
+     288.5045796694875
+    ],
+    [
+     0.0501824387374341,
+     0.9600574080994136,
+     228.40655422779497
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 25.0,
+   "coverage_occupancy": 0.859375,
+   "coverage_max_uncovered_disc_ratio": 0.1418773164194713,
+   "measured_to_block_matrix": [
+    [
+     0.9870641227433369,
+     -0.0483536115962802,
+     332.5045796694875
+    ],
+    [
+     0.0501824387374341,
+     0.9600574080994136,
+     434.40655422779497
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 0.974712637376039,
+   "predicted_scale": 0.956380851585035
+  },
+  "RD03/nac.m1212932972lc": {
+   "source": "RD03/nac.m1212932972lc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 1.7053025658242404e-11,
+   "crop_requested": [
+    167,
+    223,
+    944,
+    1252
+   ],
+   "crop_taken": [
+    167,
+    223,
+    944,
+    1252
+   ],
+   "predicted_jacobian_det": 1.1412424730209898,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1029,
+    777
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 530,
+   "n_inliers": 512,
+   "n_refined": 312,
+   "pass": true,
+   "fit_rmse_px": 0.9438495002119569,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.158 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0894319554089462,
+     -0.050958039029271866,
+     272.6350134153743
+    ],
+    [
+     0.05532542137365038,
+     1.0534448444985411,
+     222.0383013116222
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 12.16,
+   "coverage_occupancy": 0.828125,
+   "coverage_max_uncovered_disc_ratio": 0.15769836528658912,
+   "measured_to_block_matrix": [
+    [
+     1.0894319554089462,
+     -0.050958039029271866,
+     439.6350134153743
+    ],
+    [
+     0.05532542137365038,
+     1.0534448444985411,
+     445.0383013116222
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0726023269782647,
+   "predicted_scale": 1.068289508055279
+  },
+  "RD03/nac.m1205872034rc": {
+   "source": "RD03/nac.m1205872034rc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.2838662888093495,
+   "crop_requested": [
+    186,
+    -22,
+    950,
+    994
+   ],
+   "crop_taken": [
+    186,
+    0,
+    950,
+    994
+   ],
+   "predicted_jacobian_det": 1.0830583928610706,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    994,
+    764
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 4,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 0.0,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.608 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.981481481481482,
+     4.586419753086418,
+     -1264.0925925925922
+    ],
+    [
+     5.4740740740740765,
+     35.65432098765432,
+     -11299.029629629631
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 13.67,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.6078205333659352,
+   "measured_to_block_matrix": [
+    [
+     1.981481481481482,
+     4.586419753086418,
+     -1078.0925925925922
+    ],
+    [
+     5.4740740740740765,
+     35.65432098765432,
+     -11299.029629629631
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 6.748479481234421,
+   "predicted_scale": 1.0407009142213102
+  },
+  "RD03/nac.m1175268993rc": {
+   "source": "RD03/nac.m1175268993rc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.28344883838144597,
+   "crop_requested": [
+    12,
+    198,
+    818,
+    1276
+   ],
+   "crop_taken": [
+    12,
+    198,
+    818,
+    1276
+   ],
+   "predicted_jacobian_det": 1.0755109395584888,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1078,
+    806
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 958,
+   "n_inliers": 778,
+   "n_refined": 514,
+   "pass": true,
+   "fit_rmse_px": 1.5742703875419537,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.154 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.055968667666095,
+     -0.041228550655199044,
+     281.91950346773444
+    ],
+    [
+     0.04067088629426829,
+     1.0318939465912162,
+     232.59514665520788
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 22.56,
+   "coverage_occupancy": 0.875,
+   "coverage_max_uncovered_disc_ratio": 0.15386833005647865,
+   "measured_to_block_matrix": [
+    [
+     1.055968667666095,
+     -0.041228550655199044,
+     293.91950346773444
+    ],
+    [
+     0.04067088629426829,
+     1.0318939465912162,
+     430.5951466552079
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0446647680717536,
+   "predicted_scale": 1.0370684353303252
+  },
+  "RD03/nac.m1363396554rc": {
+   "source": "RD03/nac.m1363396554rc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.28386628880821263,
+   "crop_requested": [
+    269,
+    241,
+    1038,
+    1250
+   ],
+   "crop_taken": [
+    269,
+    241,
+    1038,
+    1250
+   ],
+   "predicted_jacobian_det": 1.0147856588712068,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1009,
+    769
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 519,
+   "n_inliers": 502,
+   "n_refined": 304,
+   "pass": true,
+   "fit_rmse_px": 0.9475412405021246,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.031859260020392,
+     -0.07473320341631416,
+     270.1512448971161
+    ],
+    [
+     0.06955025225249012,
+     1.0081962233634534,
+     232.54607792492482
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 18.12,
+   "coverage_occupancy": 0.8125,
+   "coverage_max_uncovered_disc_ratio": 0.13567683341307757,
+   "measured_to_block_matrix": [
+    [
+     1.031859260020392,
+     -0.07473320341631416,
+     539.1512448971162
+    ],
+    [
+     0.06955025225249012,
+     1.0081962233634534,
+     473.5460779249248
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0225039472512603,
+   "predicted_scale": 1.007365702647855
+  },
+  "RD03/nac.m1199981485rc": {
+   "source": "RD03/nac.m1199981485rc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.28386628881020215,
+   "crop_requested": [
+    83,
+    229,
+    844,
+    1247
+   ],
+   "crop_taken": [
+    83,
+    229,
+    844,
+    1247
+   ],
+   "predicted_jacobian_det": 1.0871012317762487,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1018,
+    761
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 678,
+   "n_inliers": 644,
+   "n_refined": 467,
+   "pass": true,
+   "fit_rmse_px": 1.2734194400554901,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0650456179544425,
+     0.0483015256398888,
+     248.13191787122994
+    ],
+    [
+     -0.05023809406639412,
+     1.0561424795041061,
+     237.6493605087312
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 16.02,
+   "coverage_occupancy": 0.859375,
+   "coverage_max_uncovered_disc_ratio": 0.14453125,
+   "measured_to_block_matrix": [
+    [
+     1.0650456179544425,
+     0.0483015256398888,
+     331.1319178712299
+    ],
+    [
+     -0.05023809406639412,
+     1.0561424795041061,
+     466.6493605087312
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0617280707978078,
+   "predicted_scale": 1.0426414684714247
+  },
+  "RD03/nac.m1096350825rc": {
+   "source": "RD03/nac.m1096350825rc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.3145680016780261,
+   "crop_requested": [
+    138,
+    172,
+    973,
+    1303
+   ],
+   "crop_taken": [
+    138,
+    172,
+    973,
+    1303
+   ],
+   "predicted_jacobian_det": 0.960354254757024,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    682,
+    341
+   ],
+   "ref_shape": [
+    1131,
+    835
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 22,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 9.094947017729282e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.721 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     -2.1457777777777762,
+     11.022730158730157,
+     -5193.595301587301
+    ],
+    [
+     3.1884444444444413,
+     -10.13739682539682,
+     5728.117968253967
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 21.05,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.7205822233700367,
+   "measured_to_block_matrix": [
+    [
+     -2.1457777777777762,
+     11.022730158730157,
+     -5055.595301587301
+    ],
+    [
+     3.1884444444444413,
+     -10.13739682539682,
+     5900.117968253967
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 3.659612261532893,
+   "predicted_scale": 0.9799766603123893
+  },
+  "RD03/nac.m1142297886lc": {
+   "source": "RD03/nac.m1142297886lc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.28344883838838086,
+   "crop_requested": [
+    148,
+    192,
+    962,
+    1283
+   ],
+   "crop_taken": [
+    148,
+    192,
+    962,
+    1283
+   ],
+   "predicted_jacobian_det": 1.13142028489532,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    585,
+    292
+   ],
+   "ref_shape": [
+    1091,
+    814
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 15,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 9.845568954283847e-14,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.705 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.2169853268119162,
+     -3.8733511190158585,
+     1989.9864384170742
+    ],
+    [
+     -1.7527790128946197,
+     -0.1548836519934795,
+     815.7345486883064
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 17.08,
+   "coverage_occupancy": 0.046875,
+   "coverage_max_uncovered_disc_ratio": 0.7049357588061905,
+   "measured_to_block_matrix": [
+    [
+     1.2169853268119162,
+     -3.8733511190158585,
+     2137.986438417074
+    ],
+    [
+     -1.7527790128946197,
+     -0.1548836519934795,
+     1007.7345486883064
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 2.641518442642791,
+   "predicted_scale": 1.0636824173104114
+  },
+  "RD04/nac.m1271742202lc": {
+   "source": "RD04/nac.m1271742202lc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.5657858371749853,
+   "crop_requested": [
+    108,
+    1586,
+    834,
+    2546
+   ],
+   "crop_taken": [
+    108,
+    1586,
+    834,
+    2546
+   ],
+   "predicted_jacobian_det": 1.0199497172721896,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    960,
+    726
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 430,
+   "n_inliers": 414,
+   "n_refined": 243,
+   "pass": true,
+   "fit_rmse_px": 1.0551603947171495,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.238 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.051626357779995,
+     -0.062215071575228674,
+     269.873265352059
+    ],
+    [
+     0.06294531083828868,
+     1.034098961621373,
+     235.88294313107207
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 11.01,
+   "coverage_occupancy": 0.75,
+   "coverage_max_uncovered_disc_ratio": 0.23783310560406531,
+   "measured_to_block_matrix": [
+    [
+     1.051626357779995,
+     -0.062215071575228674,
+     377.873265352059
+    ],
+    [
+     0.06294531083828868,
+     1.034098961621373,
+     1821.8829431310721
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0447018099022747,
+   "predicted_scale": 1.009925599869708
+  },
+  "RD04/nac.m1335207975rc": {
+   "source": "RD04/nac.m1335207975rc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.282892918592097,
+   "crop_requested": [
+    105,
+    1590,
+    837,
+    2542
+   ],
+   "crop_taken": [
+    105,
+    1590,
+    837,
+    2542
+   ],
+   "predicted_jacobian_det": 1.0063723429883629,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    952,
+    732
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 428,
+   "n_inliers": 381,
+   "n_refined": 235,
+   "pass": true,
+   "fit_rmse_px": 1.3453160901995325,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.196 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.02243821692997,
+     -0.06316702241718755,
+     254.67407750384888
+    ],
+    [
+     0.06316702241718755,
+     1.0224382169299697,
+     231.60415880833702
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 13.61,
+   "coverage_occupancy": 0.6875,
+   "coverage_max_uncovered_disc_ratio": 0.19560879334537967,
+   "measured_to_block_matrix": [
+    [
+     1.02243821692997,
+     -0.06316702241718755,
+     359.6740775038489
+    ],
+    [
+     0.06316702241718755,
+     1.0224382169299697,
+     1821.604158808337
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0243876122640245,
+   "predicted_scale": 1.0031811117581724
+  },
+  "RD04/nac.m1299958135lc": {
+   "source": "RD04/nac.m1299958135lc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 1.3073986337985843e-11,
+   "crop_requested": [
+    78,
+    1554,
+    863,
+    2578
+   ],
+   "crop_taken": [
+    78,
+    1554,
+    863,
+    2578
+   ],
+   "predicted_jacobian_det": 1.130262955001305,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1024,
+    785
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 512,
+   "n_inliers": 472,
+   "n_refined": 247,
+   "pass": true,
+   "fit_rmse_px": 1.2276831669193466,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.265 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0875482622448818,
+     -0.06686698063309633,
+     286.6448709041188
+    ],
+    [
+     0.07051389502025646,
+     1.042124388530499,
+     246.07831992291355
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 14.33,
+   "coverage_occupancy": 0.734375,
+   "coverage_max_uncovered_disc_ratio": 0.2645947391324372,
+   "measured_to_block_matrix": [
+    [
+     1.0875482622448818,
+     -0.06686698063309633,
+     364.6448709041188
+    ],
+    [
+     0.07051389502025646,
+     1.042124388530499,
+     1800.0783199229136
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0668062706236956,
+   "predicted_scale": 1.0631382577074842
+  },
+  "RD04/nac.m1315225542lc": {
+   "source": "RD04/nac.m1315225542lc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.28192199915622496,
+   "crop_requested": [
+    120,
+    1615,
+    822,
+    2516
+   ],
+   "crop_taken": [
+    120,
+    1615,
+    822,
+    2516
+   ],
+   "predicted_jacobian_det": 0.9923057803123982,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    409,
+    204
+   ],
+   "ref_shape": [
+    901,
+    702
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 401,
+   "n_inliers": 370,
+   "n_refined": 214,
+   "pass": true,
+   "fit_rmse_px": 1.2001231690949303,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.187 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0027726458226842,
+     0.06320875179139591,
+     249.90712071474474
+    ],
+    [
+     -0.05482852111258889,
+     1.0024382679674857,
+     254.09329080491153
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 16.34,
+   "coverage_occupancy": 0.78125,
+   "coverage_max_uncovered_disc_ratio": 0.1869370257230718,
+   "measured_to_block_matrix": [
+    [
+     1.0027726458226842,
+     0.06320875179139591,
+     369.90712071474474
+    ],
+    [
+     -0.05482852111258889,
+     1.0024382679674857,
+     1869.0932908049115
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0043322740138143,
+   "predicted_scale": 0.9961454614223759
+  },
+  "RD04/nac.m1341069775rc": {
+   "source": "RD04/nac.m1341069775rc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 2.2453150450019166e-11,
+   "crop_requested": [
+    86,
+    1578,
+    827,
+    2556
+   ],
+   "crop_taken": [
+    86,
+    1578,
+    827,
+    2556
+   ],
+   "predicted_jacobian_det": 1.1037356552143573,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    455,
+    227
+   ],
+   "ref_shape": [
+    978,
+    741
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 473,
+   "n_inliers": 360,
+   "n_refined": 200,
+   "pass": true,
+   "fit_rmse_px": 1.5707875669688647,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.170 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0716893178643556,
+     0.06827580492561816,
+     264.69511077897073
+    ],
+    [
+     -0.06827580492561824,
+     1.0716893178643558,
+     253.15338071271577
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 16.15,
+   "coverage_occupancy": 0.8125,
+   "coverage_max_uncovered_disc_ratio": 0.1701908803611428,
+   "measured_to_block_matrix": [
+    [
+     1.0716893178643556,
+     0.06827580492561816,
+     350.69511077897073
+    ],
+    [
+     -0.06827580492561824,
+     1.0716893178643558,
+     1831.1533807127157
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0738619927918154,
+   "predicted_scale": 1.0505882424691213
+  },
+  "RD04/nac.m1212932972lc": {
+   "source": "RD04/nac.m1212932972lc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 1.830358087318018e-11,
+   "crop_requested": [
+    102,
+    1553,
+    879,
+    2581
+   ],
+   "crop_taken": [
+    102,
+    1553,
+    879,
+    2581
+   ],
+   "predicted_jacobian_det": 1.1412424730210267,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1028,
+    777
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 554,
+   "n_inliers": 542,
+   "n_refined": 324,
+   "pass": true,
+   "fit_rmse_px": 0.9552526771814804,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.211 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.0824295203383592,
+     -0.050421272940169425,
+     271.9939532626481
+    ],
+    [
+     0.05471913974987765,
+     1.0535002833181817,
+     221.74230648440547
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 12.81,
+   "coverage_occupancy": 0.78125,
+   "coverage_max_uncovered_disc_ratio": 0.2105175217247367,
+   "measured_to_block_matrix": [
+    [
+     1.0824295203383592,
+     -0.050421272940169425,
+     373.9939532626481
+    ],
+    [
+     0.05471913974987765,
+     1.0535002833181817,
+     1774.7423064844054
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0691579934830981,
+   "predicted_scale": 1.068289508055296
+  },
+  "RD04/nac.m1363396554rc": {
+   "source": "RD04/nac.m1363396554rc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.2838662888054273,
+   "crop_requested": [
+    174,
+    1568,
+    940,
+    2580
+   ],
+   "crop_taken": [
+    174,
+    1568,
+    940,
+    2580
+   ],
+   "predicted_jacobian_det": 1.0040481725452959,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    512,
+    256
+   ],
+   "ref_shape": [
+    1012,
+    766
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 492,
+   "n_inliers": 481,
+   "n_refined": 267,
+   "pass": true,
+   "fit_rmse_px": 1.0442970569361787,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.219 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.028039928408018,
+     -0.07442679649071807,
+     266.396911626368
+    ],
+    [
+     0.06920647280506681,
+     1.007895613516657,
+     238.2699738480365
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 12.85,
+   "coverage_occupancy": 0.796875,
+   "coverage_max_uncovered_disc_ratio": 0.21909849472468998,
+   "measured_to_block_matrix": [
+    [
+     1.028039928408018,
+     -0.07442679649071807,
+     440.396911626368
+    ],
+    [
+     0.06920647280506681,
+     1.007895613516657,
+     1806.2699738480364
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.0204448786826863,
+   "predicted_scale": 1.0020220419458326
+  },
+  "RD04/nac.m1096350825rc": {
+   "source": "RD04/nac.m1096350825rc",
+   "kind": "NAC",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 0.31456800167848087,
+   "crop_requested": [
+    55,
+    1500,
+    887,
+    2631
+   ],
+   "crop_taken": [
+    55,
+    1500,
+    887,
+    2593
+   ],
+   "predicted_jacobian_det": 0.9531843180594459,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    682,
+    341
+   ],
+   "ref_shape": [
+    1093,
+    832
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 21,
+   "n_inliers": 3,
+   "n_refined": 0,
+   "pass": false,
+   "fit_rmse_px": 5.250970108951385e-13,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "none",
+   "verdict": {
+    "status": "REJECTED",
+    "confidence": "none",
+    "reasons": [
+     "Too few verified correspondences: 3 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.541 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ]
+   },
+   "transform_matrix": [
+    [
+     0.33231707317073056,
+     -2.5518292682926833,
+     955.4146341463418
+    ],
+    [
+     15.560975609756092,
+     13.609756097560965,
+     -5734.878048780483
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 16.42,
+   "coverage_occupancy": 0.03125,
+   "coverage_max_uncovered_disc_ratio": 0.5405209987549313,
+   "measured_to_block_matrix": [
+    [
+     0.33231707317073056,
+     -2.5518292682926833,
+     1010.4146341463418
+    ],
+    [
+     15.560975609756092,
+     13.609756097560965,
+     -4234.878048780483
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 6.6506922434490345,
+   "predicted_scale": 0.9763115886126958
+  },
+  "C2/TMC-2": {
+   "source": "C2/TMC-2",
+   "kind": "TMC-2",
+   "engine": "B4L",
+   "predicted_affine_residual_px": 5.002220859751105e-12,
+   "crop_requested": [
+    182,
+    281,
+    955,
+    1254
+   ],
+   "crop_taken": [
+    182,
+    281,
+    955,
+    1254
+   ],
+   "predicted_jacobian_det": 1.438848230400015,
+   "predicted_mirrored": false,
+   "source_flipped_lr": false,
+   "src_shape": [
+    415,
+    249
+   ],
+   "ref_shape": [
+    973,
+    773
+   ],
+   "ref_valid_fraction": 1.0,
+   "n_putative": 136,
+   "n_inliers": 99,
+   "n_refined": 26,
+   "pass": true,
+   "fit_rmse_px": 1.280229788214499,
+   "fit_rmse_is_not_accuracy": true,
+   "model_selected_by": "held_out_on_refined_points",
+   "verdict": {
+    "status": "INCONCLUSIVE",
+    "confidence": "low",
+    "reasons": [
+     "Correspondences are clustered: 0.570 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Evidence is mixed and the decisive check was not run."
+    ]
+   },
+   "transform_matrix": [
+    [
+     1.2043919213901284,
+     -0.009344889297009705,
+     236.28091321522578
+    ],
+    [
+     0.009344889297009707,
+     1.2043919213901286,
+     232.22915909301844
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "wall_s": 13.23,
+   "coverage_occupancy": 0.1875,
+   "coverage_max_uncovered_disc_ratio": 0.5697189477759059,
+   "measured_to_block_matrix": [
+    [
+     1.2043919213901284,
+     -0.009344889297009705,
+     418.2809132152258
+    ],
+    [
+     0.009344889297009707,
+     1.2043919213901286,
+     513.2291590930184
+    ],
+    [
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "recovered_scale": 1.2044281743905607,
+   "predicted_scale": 1.1995200000000061
+  }
+ },
+ "chained": [
+  "RD03/nac.m1335207975rc",
+  "RD03/nac.m1175268993rc",
+  "RD03/nac.m1096350825rc",
+  "RD03/nac.m1142297886lc",
+  "RD04/nac.m1335207975rc",
+  "RD04/nac.m1341069775rc",
+  "RD04/nac.m1096350825rc"
+ ],
+ "exp013_terms": {
+  "RD03": {
+   "per_node_px": {
+    "nac.m1182331886lc": 0.0,
+    "nac.m1199981485rc": 47.894806618128634,
+    "nac.m1212932972lc": 25.700045759200624,
+    "nac.m1271742202lc": 56.93598648864505,
+    "nac.m1335207975rc": 71.77031809697993,
+    "nac.m1452560468lc": 92.58610379870339
+   },
+   "fixed_node": "nac.m1182331886lc",
+   "residual_before_px": 80.3347449014289,
+   "explained_fraction": 0.8459791670000752
+  },
+  "RD04": {
+   "per_node_px": {
+    "nac.m1212932972lc": 0.0,
+    "nac.m1271742202lc": 62.91354609490888,
+    "nac.m1299958135lc": 100.94942984297894,
+    "nac.m1315225542lc": 95.21111563985278,
+    "nac.m1335207975rc": 88.84638351255664,
+    "nac.m1341069775rc": 109.42595426105301,
+    "nac.m1363396554rc": 86.38132063443143
+   },
+   "fixed_node": "nac.m1212932972lc",
+   "residual_before_px": 75.54017693082312,
+   "explained_fraction": 0.8513555526738323
+  }
+ },
+ "environment": {
+  "python": "3.13.7",
+  "numpy": "2.3.3",
+  "opencv": "5.0.0",
+  "platform": "Windows-11-10.0.26200-SP0"
+ },
+ "total_runtime_s": 537.4037035999936,
+ "claims_not_supported": [
+  "Not ground truth: a second product is a second opinion with its own control network and its own errors.",
+  "Not manual check points: every correspondence is machine-made; the independence claimed is of the instrument chain, not of a human annotator.",
+  "Not absolute selenographic accuracy: every number is a disagreement, which bounds the sum of two errors and attributes it to neither.",
+  "Not multi-modal: TC is a panchromatic optical imager, like NAC and TMC-2.",
+  "Not viewpoint or terrain transfer: one region, mare, near-nadir sources.",
+  "Not a verdict change: assess(), select_model and siim.verify.gauge are untouched.",
+  "One engine in every criterion; B4L is beside."
+ ]
+}

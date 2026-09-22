@@ -1008,6 +1008,85 @@ A second, sharper test uses `SCALED_PIXEL_WIDTH`/`HEIGHT`, which the archive der
 **Status:** closed — **D-059**, **D-051-N1**. **Open:** a stage that calibrates the agreement floor **conditioned on the evidence behind each transform** (inlier count and coverage), on a set deliberately containing marginal double-passes, which would replace both D-051 and its note. **C5 — highlands on real data — remains open and is now known to be hard to satisfy**: two highland windows could not supply an anti-vacuous set at all.
 
 
+### RL-054 — A reference from another mission: the ~100 px floor is measured at 137.6 m, the first accuracy number is 2.24 m, and EXP-013's unresolved alternative resolves (EXP-019)
+
+**Question.** Every real result in this repository is corroborated against one
+reference: the archive's own corner geometry, quantised at 0.01 deg and measured to
+discriminate only at 84-116 px. Three findings are limited by that single fact
+-- no accuracy claim exists (0.003 px is a self-warp), EXP-013's detector
+calibrates at 66.00 px of reference noise and cannot be deployed (D-054), and
+`siim.verify.gauge`'s own docstring says a per-frame archive bias and a
+per-frame estimate gauge are indistinguishable by it (H3). What happens when a
+product from **another agency, spacecraft, sensor, decade and control network**
+is asked where the same ground is?
+
+**The reference.** SELENE (Kaguya) TC Ortho Map Seamless V2,
+`TCO_MAPS02_N21E021N18E024SC`, 8.42 m/px, planetocentric simple cylindrical,
+photometrically normalised to (i = 30 deg, e = 0, alpha = 30 deg), produced by LISM
+and distributed by JAXA/ISAS DARTS. Fetched once (233 MB, 47 s), sliced into a
+reference block and a **null block 25 km away in the same product**, both with
+`DUMMY` fraction 0.0000. `[MEASURED]` `data/manifests/exp019_tc_ortho_*.json`.
+
+**Result.** `[MEASURED]` `experiments/EXP-019/exp019_results.json`, 537 s, 63
+registrations. **S0, S1, S2, S3, S4, S6 MET; S5 NOT MET.** RootSIFT registers
+**12 of 20** NAC tiles and the Chandrayaan-2 TMC-2 block across a 6.5-10.5 : 1
+cross-sensor scale ratio; the archive and the SELENE frame disagree by a median
+of **137.6 m** (CI95 108.5-160.3, +101 +- 74 m **east**, i.e. a systematic term
+a quantisation cannot explain); and the null block returns **0 passes in 21**.
+
+**The first accuracy-class number that is not a self-warp.** `[MEASURED]`
+Composing A -> reference -> B, with **no A <-> B correspondence anywhere in it**,
+agrees with the recorded direct A -> B registration to a median of **0.266
+reference px = 2.24 m**, CI95 [0.222, 0.413] reference px, over 17 pairs.
+Section 2.2's sub-pixel acceptance -- *median < 0.5 coarser px on independent
+check points, with 95 % CI* -- is **MET**, and Part 1 predicted it **NOT MET at
+65 %**. The prediction is graded wrong in Part 2 section 12. Two pairs in the set
+have a *recorded* edge that failed the frozen rule: the 4-inlier one comes back
+**21.05 reference px (177 m)** wrong and the 6-inlier one comes back **0.43**
+-- the reference flags one and clears the other, which the 100 px archive floor
+could not do.
+
+**EXP-013's H3, decided.** `[MEASURED]` The per-frame gauge terms EXP-013 fitted
+against archive corners (25.70-109.43 px, three engines agreeing to 1.50 px)
+track the archive-vs-controlled offsets measured here at **r = 0.751**
+(Spearman 0.738, permutation p = 0.026 against a null p95 of 0.694, median
+difference **9.7 %** of the terms' size) on 8 arm-R frames; **r = 0.746 at
+p = 0.001** pooled over 11. So the terms are **substantially reference error**,
+the 36-of-36 blind spot (E-039) is **not evidenced on real frames**, and D-054's
+detector has a deployment path -- against this reference, in a stage of its own
+(D-061). The honest caveat: n = 8 clears the null's p95 by 0.057, and two frames
+disagree materially.
+
+**What did not happen.** `[MEASURED]` **S5 NOT MET.** The triangle
+{TMC-2 -> NAC recorded, NAC -> reference, reference -> TMC-2} closes at **2.177
+reference px = 18.33 m** against the frozen 2.0 reference px (16.85 m) -- missed
+by 8.9 %, on the one edge with 9 inliers, and the line was not moved. Note
+recorded in Part 2: 2.0 *reference* px is 16.85 m where EXP-012's 2.0 px is
+about 2 m, so a pass here would have been the weaker statement.
+
+**Beside the criteria.** B4L passes **16 of 21** cells to B1's 13, rescuing every
+frame in the 36-40 deg band; where both pass the two engines' maps agree to
+**0.03-1.62 reference px**, where either fails they disagree by 206-4405. The
+Chandrayaan-2 cell recovers a scale of **1.1944** against the geometry's
+predicted **1.1995** (0.4 %) and is INCONCLUSIVE / low on coverage 0.094.
+
+**Failures found.** **E-050** -- the DARTS server answers HTTP Range with 200 and
+the whole product, so a strict chunked fetcher downloads 233 MB per chunk; the
+acquisition now fetches once and records the archive file's own digest.
+**E-051** -- arm C entered criterion S2 against Part 1 section 6, and the chain does
+not require the recorded edge it composes through to have succeeded; two
+72-75 deg frames chained through 4-5-inlier *failures* and landed 1.6-4.6 km out,
+moving S2's median from 137.61 m to 153.86 m. The artefact is not rewritten;
+Part 2 reads the criterion on arm R as frozen.
+
+**Status:** closed -- **D-060** (the controlled reference is adopted for later
+stages), **D-061** (H3 resolved toward the archive). **Open:** the deployment of
+`siim.verify.gauge` against this reference, which needs its own pre-registration;
+**RL-037b** is *advanced but not closed* -- 2.24 m is machine-made and shares its
+reference, so manual check points remain the only route to an accuracy number
+with no shared instrument in it.
+
+
 ## Open threads summary
 
 | ID | Thread | Experiment | Critical path? |
@@ -1021,7 +1100,7 @@ A second, sharper test uses `SCALED_PIXEL_WIDTH`/`HEIGHT`, which the archive der
 | ~~RL-031b~~ | ~~Why does a confirmed-overlap real pair fail?~~ | **CLOSED by REAL-DATA-03 (RL-033).** Seven candidates eliminated by measurement against a succeeding edge on the same ground; illumination is the only survivor | — |
 | ~~RL-033b~~ | ~~Is the driver illumination, or frame identity?~~ | **CLOSED — ANSWERED by REAL-DATA-04 (RL-035).** Frame D at 18.22° registers against frame A (**1656** inliers, ratio 0.9414, occupancy 1.000) and fails against frame B (**3**), on edges overlap-matched to 0.95 pp. Across six real edges every frame appears on both sides and Δincidence separates all six. **Illumination supported (D-040); frame identity substantially weakened, NOT conclusively refuted** — see the D-040-N1 superseding note | — |
 | **RL-036** | **Does the illumination result replicate on a second low-incidence frame?** REAL-DATA-04's conclusion rests on **one** succeeding edge; A and D each have n = 1 in the successful regime | **REAL-DATA-05 — UNRESOLVED, BY DATA AVAILABILITY.** Of 906 archive products, 8 can centre a full tile on ground shared with A, B and D; only 2 are in the required incidence band and **both are orientation-incompatible** with the incumbents. The screen returned zero admissible frames at every tier and rung; no image byte was fetched, no registration was run, and the decision table was never reached. **Open — a successor must change the design, pre-registered, not the criteria** | **yes — it is what would discharge D-040-N1** |
-| **RL-037b** | **Sub-pixel accuracy on a real cross-illumination pair.** EXP-010's 0.003 px is a self-warp upper bound; its bias curve is synthetic | manual check points (R7), two annotators | **yes — the PS's headline accuracy claim rests on it** |
+| **RL-037b** | **Sub-pixel accuracy on a real cross-illumination pair.** EXP-010's 0.003 px is a self-warp upper bound; its bias curve is synthetic. **ADVANCED, NOT CLOSED, by EXP-019 (RL-054): 0.266 reference px = 2.24 m against a composition through another mission's product** -- machine-made throughout, and both legs share that reference, so a number with no shared instrument in it still needs annotators | manual check points (R7), two annotators | **yes — the PS's headline accuracy claim rests on it** |
 | RL-038b | A real pair where rule B's simplicity tie-break and the held-out evidence disagree | REAL-DATA-07 re-estimates every pass with rule B beside the recorded transform | no |
 | **RL-039b** | **H0 at a fine-DEM site.** The SLDEM render carries nothing on this mare at 1.8–30 m; whether a 5 m NAC DTM restores it is untested | **SERENRIDGE1** (23.75 N, 24.65 E; NAC DTM) — EXP-007's render arm re-run there | **yes — the only remaining test of the physics-conditioning claim** |
 | ~~RL-040b~~ | ~~The learned engine's envelope and wrong-pass rate on 42 pairs~~ | **CLOSED by REAL-DATA-07 (RL-042): same envelope as B1 at native scale, 5–25× yield inside it, 0 wrong passes in 17.** D-047 amended to D-047-N1 | — |
