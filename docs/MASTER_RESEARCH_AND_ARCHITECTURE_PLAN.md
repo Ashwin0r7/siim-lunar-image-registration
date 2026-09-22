@@ -725,6 +725,8 @@ Three beats, all from recorded artefacts: (1) a Chandrayaan-2 ↔ NAC pair at th
 
 **The live card is the deliverable's operator interface (ADR-0013).** Two images by drag, click or paste; what was accepted is shown before anything is sent (name, pixel size, file size, and the decimation the run will apply); non-images and under-64 px images are refused in the browser with the pipeline's own reason; Register stays disabled until both slots are filled; elapsed seconds tick during the run; the result is a verdict, a **swipe comparison** of the registered source against the reference, the **correspondence overlay** (inliers blue, rejected red), and downloads of the registered PNG and the raw JSON. **Two recorded example pairs** are offered — one that registers and one that does not — so the system can be exercised, including its refusal, with no imagery to hand.
 
+**The card takes an optional third image** (ADR-0013 N1), and with it the run goes to the triplet endpoint: three edges, each estimated from its own pair, composed into a loop whose residual the unmodified verdict reads. That is the only path on this page to **VERIFIED** — measured in the browser at **loop 2.727e-4 px against the frozen 2 px line, in 8.6 s** — and the view carries, beside it, what loop closure is exactly invariant to.
+
 **The rule that governs the card:** when the verdict refuses, **no registered image is drawn**. The page does not render an alignment it would not certify, and `tests/test_demo_live_upload.py` executes the page's own renderer against a REJECTED payload to keep it that way.
 
 ## 53. Final success criteria

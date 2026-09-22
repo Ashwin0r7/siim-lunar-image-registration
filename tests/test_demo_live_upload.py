@@ -307,3 +307,79 @@ def test_the_page_offers_two_ways_into_the_live_card(page):
         "both entry points must go through the one handler that renders and wires the card")
     hero = page[page.index('<p class="lede">'):page.index('<div class="hfigs"')]
     assert "herocta" in hero, "the call to action belongs with the lede, not below the figures"
+
+
+# ---------------------------------------------------------------------------
+# the third image: the only path on this page to VERIFIED
+# ---------------------------------------------------------------------------
+
+def test_the_card_offers_a_third_slot_and_says_what_it_buys(script, page):
+    card = _fn(script, "liveCard")
+    assert '"thr", "Third image' in card, "there is no third slot"
+    assert "loop closure" in card and "VERIFIED" in card, (
+        "the third slot must say what it changes, or it is just another box")
+    ready = _fn(script, "liveReady")
+    assert 'LIVE.thr ? "Register triplet" : "Register"' in ready
+    assert "only way past INCONCLUSIVE" in ready
+
+
+def test_three_images_go_to_the_triplet_endpoint(script):
+    run = _fn(script, "runLive")
+    assert "const triplet = !!LIVE.thr;" in run
+    assert "/api/register-triplet" in run
+    assert "a_png: LIVE.src.b64" in run and "c_png: LIVE.thr.b64" in run
+    assert "renderLiveTriplet(d) : renderLive(d)" in run
+
+
+def test_the_triplet_view_leads_with_the_loop_and_keeps_its_caveat(script):
+    body = _fn(script, "renderLiveTriplet")
+    assert "loop closure" in body
+    assert "loop_reject_threshold_px" in body, "the frozen line must be shown beside the residual"
+    assert "exactly</b> invariant" in body, (
+        "a VERIFIED live result must carry what loop closure cannot see")
+    assert "estimated_from" in body, "the independence of each edge must be visible"
+
+
+def test_the_triplet_endpoint_registers_three_edges_and_closes_the_loop():
+    """A real triplet, built from three overlapping crops of a recorded tile."""
+    import base64
+    import io
+
+    import numpy as np
+    from PIL import Image
+
+    tile = ASSETS / "tile_nac.m1271742202lc.png"
+    if not tile.exists():
+        pytest.skip("the recorded tile asset is absent")
+    a = np.asarray(Image.open(tile).convert("L"))
+    if min(a.shape) < 460:
+        pytest.skip("the tile is too small for three overlapping crops")
+
+    def b64(arr):
+        buf = io.BytesIO()
+        Image.fromarray(arr.astype(np.uint8)).save(buf, "PNG")
+        return base64.b64encode(buf.getvalue()).decode()
+
+    c = TestClient(api.app)
+    r = c.post("/api/register-triplet", json={
+        "a_png": b64(a[0:400, 0:400]), "b_png": b64(a[20:420, 25:425]),
+        "c_png": b64(a[40:440, 10:410]), "engine": "B1"})
+    assert r.status_code == 200, r.text[:300]
+    d = r.json()
+    assert [e["edge"] for e in d["edges"]] == ["A -> B", "B -> C", "C -> A"]
+    assert all(e["estimated_from"] == "its own image pair" for e in d["edges"]), (
+        "E-021: no edge may be derived from the other two")
+    assert d["loop_error_px"] is not None and d["loop_error_px"] < d["loop_reject_threshold_px"]
+    assert d["verdict"]["status"] == "VERIFIED", (
+        "three overlapping crops of one tile must close the loop; if this fails the "
+        "live path can never reach the verdict the page advertises")
+    assert d["computation"] == "live" and d["data_source"] == "user_supplied"
+    assert any("does NOT mean the alignment is correct" in c for c in d["caveats"])
+
+
+def test_the_triplet_endpoint_refuses_the_two_engine_mode():
+    c = TestClient(api.app)
+    r = c.post("/api/register-triplet", json={"a_png": "AAAA", "b_png": "AAAA",
+                                              "c_png": "AAAA", "engine": "both"})
+    assert r.status_code == 400
+    assert "one engine" in r.json()["detail"]

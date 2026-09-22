@@ -68,6 +68,7 @@ from siim.demo.exp017 import exp017_evidence, exp017_status  # noqa: E402
 from siim.demo.exp019 import exp019_evidence, exp019_status  # noqa: E402
 from siim.demo.exp020 import exp020_evidence, exp020_status  # noqa: E402
 from siim.demo.evidence import (  # noqa: E402
+    INLIER_FAILURE_RULE,
     REAL_SCENARIOS,
     DemoDataMissing,
     build_real_scenario,
@@ -76,7 +77,11 @@ from siim.demo.evidence import (  # noqa: E402
     illumination_evidence,
     real_data_status,
 )
-from siim.demo.verdict import EXCLUDED_FROM_VERDICT, assess  # noqa: E402
+from siim.demo.verdict import (  # noqa: E402
+    EXCLUDED_FROM_VERDICT,
+    LOOP_ERROR_REJECT_PX,
+    assess,
+)
 from siim.evaluation import correspondence_metrics  # noqa: E402
 from siim.evaluation.gtfree import loop_closure  # noqa: E402
 from siim.geometry import Transform, affine, anchor_at, image_centre, translation  # noqa: E402
@@ -414,6 +419,21 @@ class RegisterRequest(BaseModel):
     seed: int = 0
 
 
+class TripletRequest(BaseModel):
+    """Three overlapping images of one piece of ground.
+
+    The pair endpoint cannot reach VERIFIED: loop closure is the only check
+    this project measured to catch a coherent wrong answer, and it needs a
+    cycle. This request is what the pair verdict's own reason text asks for.
+    """
+
+    a_png: str
+    b_png: str
+    c_png: str
+    engine: str = "B1"
+    seed: int = 0
+
+
 def _decode_upload(b64: str, what: str) -> tuple[np.ndarray, int]:
     from PIL import Image
 
@@ -491,6 +511,111 @@ def register_live(req: RegisterRequest) -> dict:
             "No ground truth: VERIFIED means corroborated by the named evidence, never correct.",
             "Loop closure is not evaluated (one pair), so the verdict cannot exceed INCONCLUSIVE "
             "unless a second engine agrees -- and agreement is evidence, not accuracy.",
+        ],
+    }
+
+
+@app.post("/api/register-triplet")
+def register_triplet_live(req: TripletRequest) -> dict:
+    """Register A->B, B->C and C->A on three images the viewer supplies, close
+    the loop, and run the **unmodified** verdict with that residual.
+
+    This is the only path on this page that can return VERIFIED, and it returns
+    it for the same reason every recorded triplet did: three independently
+    estimated edges whose composition returns to the identity. Nothing here is
+    a recorded number, and the composition is checked for independence the way
+    EXP-012 checks it -- each edge is estimated from its own image pair, and no
+    edge is derived from the other two (E-021's defect).
+    """
+    from siim.evaluation.gtfree import loop_closure
+    from siim.pipeline import register_pair
+
+    engine = req.engine if req.engine in LIVE_ENGINES else req.engine.upper()
+    if engine == "both":
+        raise HTTPException(400, "the triplet path runs one engine; choose B1, B4L or B4X")
+    if engine not in LIVE_ENGINES:
+        raise HTTPException(400, f"engine must be one of {LIVE_ENGINES}")
+    imgs = {}
+    for name, b64 in (("A", req.a_png), ("B", req.b_png), ("C", req.c_png)):
+        imgs[name], _ = _decode_upload(b64, f"image {name}")
+    t0 = time.perf_counter()
+    edges = []
+    results = {}
+    for src_name, dst_name in (("A", "B"), ("B", "C"), ("C", "A")):
+        try:
+            res = register_pair(imgs[src_name], imgs[dst_name], engine=engine, seed=req.seed)
+        except ImportError as exc:
+            raise HTTPException(503, f"{engine} needs the `learned` extra: {exc}") from exc
+        results[(src_name, dst_name)] = res
+        inl = int(np.asarray(res.inlier_mask, bool).sum())
+        edges.append({
+            "edge": f"{src_name} -> {dst_name}",
+            "n_putative": int(res.src_points.shape[0]),
+            "n_inliers": inl,
+            "n_refined": int(np.asarray(res.refined_mask, bool).sum()),
+            "pass": bool(inl > INLIER_FAILURE_RULE),
+            "model": res.summary().get("model"),
+            "transform": (np.asarray(res.transform.matrix).tolist()
+                          if res.transform is not None else None),
+            "verdict": res.verdict.status,
+            "estimated_from": "its own image pair",
+        })
+    wall = time.perf_counter() - t0
+
+    # The cycle is A -> B -> C -> A, evaluated on A's grid. A missing edge makes
+    # the loop unevaluable, which is reported rather than filled in.
+    chain = [results[("A", "B")].transform, results[("B", "C")].transform,
+             results[("C", "A")].transform]
+    loop_px = None
+    loop_note = ("every edge estimated from its own pair; no edge derived from the other two")
+    if all(t is not None for t in chain):
+        try:
+            loop_px = float(loop_closure(chain, imgs["A"].shape))
+        except LOOP_CLOSURE_ERRORS as exc:          # a degenerate cycle is a result
+            loop_note = f"loop not evaluable: {type(exc).__name__}"
+    else:
+        loop_note = "loop not evaluable: at least one edge produced no transform"
+
+    # The verdict is re-run for the A -> B edge WITH the loop residual, which is
+    # the only difference from the pair path.
+    ab = results[("A", "B")]
+    verdict = assess(
+        transform=ab.transform, src_points=ab.src_points,
+        dst_points=ab.dst_points_refined,
+        inlier_mask=np.asarray(ab.inlier_mask, bool), shape=imgs["A"].shape,
+        fit_rmse=(float(ab.baseline.ransac.inlier_rmse)
+                  if ab.baseline.ransac is not None else None),
+        loop_error_px=loop_px,
+        annotations={"computation": "live", "data_source": "user_supplied",
+                     "triplet": "A -> B -> C -> A"})
+    reg_png = None
+    if ab.transform is not None and verdict.status != "REJECTED":
+        from siim.geometry import warp
+        reg, valid = warp(imgs["A"], ab.transform, out_shape=imgs["B"].shape,
+                          order=1, cval=np.nan)
+        reg_png = _png_b64(np.where(valid, reg, np.nan))
+    return {
+        "computation": "live",
+        "data_source": "user_supplied",
+        "engine": engine,
+        "edges": edges,
+        "loop_error_px": loop_px,
+        "loop_note": loop_note,
+        "loop_reject_threshold_px": LOOP_ERROR_REJECT_PX,
+        "verdict": verdict.as_dict(),
+        "verdict_edge": "A -> B",
+        "images": {"a_png": _png_b64(imgs["A"]), "b_png": _png_b64(imgs["B"]),
+                   "c_png": _png_b64(imgs["C"])},
+        "registered_png": reg_png,
+        "timing": {"wall_s": wall},
+        "caveats": [
+            "Live run on images you supplied; no recorded artefact backs these numbers.",
+            "VERIFIED here means the three edges compose back to the identity within the "
+            "frozen line -- it does NOT mean the alignment is correct. Loop closure is "
+            "exactly invariant to a per-image coordinate error (module 03), so a set that "
+            "closes can still be wrong in the one way this project measured and published.",
+            "No ground truth: nothing on this page verifies against an independent frame "
+            "except the recorded controlled-reference stage (module 07).",
         ],
     }
 

@@ -356,3 +356,32 @@ failing example as prominently as the succeeding one is the same rule the rest
 of the page follows: **a demo that shows only its good case is a brochure.**
 
 **Status:** `ACCEPTED` (2026-09-23, demo).
+
+### N1 — the optional third image (2026-09-23, same day)
+
+**Decision.** The live card takes an **optional third image**, and when it is
+present the run goes to `POST /api/register-triplet`: three edges (A→B, B→C,
+C→A), each estimated from its own image pair, composed into a loop whose
+residual is passed to the **unmodified** verdict.
+
+**Why it is not a nice-to-have.** The pair verdict's own reason text says
+*"supply a third overlapping image to settle it"* — and until now the page had
+nowhere to put one, so **the live card could never return anything but
+INCONCLUSIVE**. A demo whose strongest verdict is unreachable on the reader's
+own data is advertising a capability it does not let them exercise.
+
+**Measured, in the browser, on three overlapping crops of a recorded tile:**
+`Done in 8.6 s · three edges · loop 2.727e-4 px against 2 px · verdict
+VERIFIED`, with per-edge inlier counts of 1248 / 1315 / 1317 in the endpoint
+test. The threshold is the frozen 2.0 px line; nothing was tuned for the live
+path.
+
+**What the view must carry, and does.** The loop residual first, with the
+frozen line beside it; each edge's `estimated_from: "its own image pair"`,
+because E-021 was exactly an algebraically derived edge manufacturing a zero
+residual; and — when it passes — the sentence that says loop closure is
+**exactly** invariant to a per-image coordinate error, which module 03
+measures. A VERIFIED that arrives without that sentence is the failure this
+project spent EXP-013 documenting.
+
+**Status:** `ACCEPTED` (2026-09-23, demo).

@@ -416,6 +416,10 @@ ul.caveats li{margin-bottom:6px;line-height:1.5}
 .drop .clear:hover{color:var(--fail)}
 .drop input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .swapcol{display:flex;align-items:center;justify-content:center}
+.thirdrow{display:grid;grid-template-columns:314px 1fr;gap:0 14px;margin-top:14px;align-items:stretch}
+.thirdrow .drop{min-height:150px}
+.thirdwhy{align-self:center;margin:0}
+@media (max-width:760px){.thirdrow{grid-template-columns:1fr;gap:12px}}
 .swapbtn{background:none;border:1px solid var(--rule-2);color:var(--ink-2);cursor:pointer;
   font:500 12px/1 var(--mono);padding:10px 8px}
 .swapbtn:hover:not(:disabled){border-color:var(--ink-2);color:var(--ink)}
@@ -1578,7 +1582,7 @@ const LIVE_EXAMPLES = {
 };
 
 //: Slot state. `b64` is what the API gets; the rest is what the reader sees.
-const LIVE = {src: null, ref: null, running: false, abort: null, last: null};
+const LIVE = {src: null, ref: null, thr: null, running: false, abort: null, last: null};
 
 function liveCard() {
   const slot = (id, role, hint) => `
@@ -1605,6 +1609,17 @@ function liveCard() {
       <div class="swapcol"><button class="swapbtn" id="live-swap" disabled
         title="swap source and reference" aria-label="swap source and reference">⇄</button></div>
       ${slot("ref", "Reference", "")}
+    </div>
+    <div class="thirdrow">
+      ${slot("thr", "Third image · optional", "")}
+      <div class="thirdwhy note">
+        <b>Why a third image changes the answer.</b> On a pair, the strongest check this project
+        has — <b>loop closure</b> — cannot run, so the verdict can never exceed INCONCLUSIVE and
+        says so in its own reason text. Add a third overlapping image and the three edges must
+        compose back to where they started: <span class="code">C→A ∘ B→C ∘ A→B = I</span>. That is
+        the only path on this page to <b>VERIFIED</b> — and module 03 measures exactly what it
+        still cannot see.
+      </div>
     </div>
 
     <div class="examples">
@@ -1644,10 +1659,18 @@ function liveStatus(text, isErr, busy) {
 function liveReady(keep) {
   const run = $("#live-run"), swap = $("#live-swap");
   const ready = !!(LIVE.src && LIVE.ref) && !LIVE.running;
-  if (run) run.disabled = !ready;
+  if (run) {
+    run.disabled = !ready;
+    if (!LIVE.running) run.textContent = LIVE.thr ? "Register triplet" : "Register";
+  }
   if (swap) swap.disabled = !(LIVE.src || LIVE.ref) || LIVE.running;
   if (!LIVE.running && !keep) {
-    if (LIVE.src && LIVE.ref) liveStatus("Ready — press <b>Register</b>.", false, false);
+    if (LIVE.src && LIVE.ref && LIVE.thr)
+      liveStatus("Ready — three images, so <b>loop closure runs</b> and the verdict can reach " +
+        "VERIFIED. Press <b>Register triplet</b>.", false, false);
+    else if (LIVE.src && LIVE.ref)
+      liveStatus("Ready — press <b>Register</b>. A third overlapping image would let loop closure " +
+        "run, which is the only way past INCONCLUSIVE.", false, false);
     else if (LIVE.src || LIVE.ref) liveStatus("One more image: add the " +
       (LIVE.src ? "<b>reference</b>" : "<b>source</b>") + ".", false, false);
     else liveStatus("Add two images to begin.", false, false);
@@ -1733,7 +1756,7 @@ async function loadExample(which) {
 }
 
 function wireLive() {
-  ["src", "ref"].forEach(id => {
+  ["src", "ref", "thr"].forEach(id => {
     const drop = document.getElementById("drop-" + id);
     const input = document.getElementById("live-" + id);
     if (!drop || !input) return;
@@ -1772,7 +1795,7 @@ function wireLive() {
     for (const it of items) {
       if (it.kind === "file" && /^image\//.test(it.type)) {
         const f = it.getAsFile();
-        setSlot(LIVE.src ? (LIVE.ref ? "src" : "ref") : "src", f);
+        setSlot(LIVE.src ? (LIVE.ref ? (LIVE.thr ? "src" : "thr") : "ref") : "src", f);
         liveStatus("Pasted image added.", false, false);
         ev.preventDefault();
         return;
@@ -1790,7 +1813,7 @@ function wireLive() {
       ev.preventDefault();
       const f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0];
       if (!f) return;
-      setSlot(LIVE.src ? (LIVE.ref ? "src" : "ref") : "src", f);
+      setSlot(LIVE.src ? (LIVE.ref ? (LIVE.thr ? "src" : "thr") : "ref") : "src", f);
     });
   }
   const run = $("#live-run");
@@ -1798,7 +1821,7 @@ function wireLive() {
   const cancel2 = $("#live-cancel");
   const cancel = cancel2;
   if (cancel) cancel.onclick = () => { if (LIVE.abort) LIVE.abort.abort(); };
-  paintSlot("src"); paintSlot("ref");
+  paintSlot("src"); paintSlot("ref"); paintSlot("thr");
 }
 
 /* -------------------------------------------------------------- the run */
@@ -1818,11 +1841,19 @@ async function runLive() {
   if (cancel) cancel.hidden = false;
   LIVE.abort = new AbortController();
   try {
-    const resp = await fetch("/api/register", {
-      method: "POST", headers: {"Content-Type": "application/json"},
-      signal: LIVE.abort.signal,
-      body: JSON.stringify({source_png: LIVE.src.b64, reference_png: LIVE.ref.b64,
-                            engine: $("#live-eng").value})});
+    const triplet = !!LIVE.thr;
+    const engine = $("#live-eng").value;
+    const resp = triplet
+      ? await fetch("/api/register-triplet", {
+          method: "POST", headers: {"Content-Type": "application/json"},
+          signal: LIVE.abort.signal,
+          body: JSON.stringify({a_png: LIVE.src.b64, b_png: LIVE.ref.b64, c_png: LIVE.thr.b64,
+                                engine: engine === "both" ? "B1" : engine})})
+      : await fetch("/api/register", {
+          method: "POST", headers: {"Content-Type": "application/json"},
+          signal: LIVE.abort.signal,
+          body: JSON.stringify({source_png: LIVE.src.b64, reference_png: LIVE.ref.b64,
+                                engine: engine})});
     const d = await resp.json().catch(() => ({}));
     if (!resp.ok) {
       const why = String(d.detail || ("HTTP " + resp.status));
@@ -1833,15 +1864,19 @@ async function runLive() {
       return;
     }
     LIVE.last = d;
-    out.innerHTML = renderLive(d);
-    wireLiveResult(d);
+    out.innerHTML = triplet ? renderLiveTriplet(d) : renderLive(d);
+    wireLiveResult(d, triplet);
     // On a long page the result lands below the fold; a reader who pressed a
     // button should not have to hunt for what it did.
     const v = out.querySelector(".verdict");
     if (v && v.scrollIntoView) v.scrollIntoView({behavior: "smooth", block: "center"});
-    liveStatus(`Done in <b>${(+d.timing.wall_s).toFixed(1)} s</b> · ` +
-      `${d.summary.n_inliers} inliers of ${d.summary.n_putative} putative · ` +
-      `verdict <b>${esc(d.verdict.status)}</b>`, false, false);
+    liveStatus(triplet
+      ? `Done in <b>${(+d.timing.wall_s).toFixed(1)} s</b> · three edges · loop ` +
+        `<b>${d.loop_error_px === null ? "not evaluable" : sci(d.loop_error_px) + " px"}</b> ` +
+        `against ${d.loop_reject_threshold_px} px · verdict <b>${esc(d.verdict.status)}</b>`
+      : `Done in <b>${(+d.timing.wall_s).toFixed(1)} s</b> · ` +
+        `${d.summary.n_inliers} inliers of ${d.summary.n_putative} putative · ` +
+        `verdict <b>${esc(d.verdict.status)}</b>`, false, false);
   } catch (e) {
     if (e.name === "AbortError") liveStatus("Cancelled.", false, false);
     else liveStatus("The request failed: " + esc(e.message), true, false);
@@ -1914,7 +1949,87 @@ function renderLive(d) {
     ${notClaimed(d.caveats)}`;
 }
 
-function wireLiveResult(d) {
+// The triplet result. Its whole reason for existing is the loop residual, so
+// that is the first thing after the verdict, with the frozen line beside it —
+// and, when it passes, the sentence that says what VERIFIED still does not mean.
+function renderLiveTriplet(d) {
+  const v = d.verdict;
+  const loop = d.loop_error_px;
+  const ok = loop !== null && loop < d.loop_reject_threshold_px;
+  const reg = d.registered_png;
+  return `
+    <div class="verdict ${esc(v.status)}" style="margin-top:14px">
+      <div class="vhead"><span class="vstat">${esc(v.status)}</span>
+      <span class="conf">confidence ${esc(v.confidence)} · LIVE · your images · verdict read on
+        edge ${esc(d.verdict_edge)} · not a recorded number</span></div>
+      <ul class="reasons">${v.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul></div>
+
+    <div class="tiles">
+      <div class="tile ${ok ? "good" : "bad"}"><div class="lab">loop closure</div>
+        <div class="val">${loop === null ? "—" : sci(loop)} <small>px</small></div>
+        <div class="note">A → B → C → A, composed on A's grid · reject at
+          ≥ ${d.loop_reject_threshold_px} px · ${esc(d.loop_note)}</div></div>
+      ${(d.edges || []).map(e => `<div class="tile ${e.pass ? "good" : "bad"}">
+        <div class="lab">${esc(e.edge)}</div>
+        <div class="val">${e.n_inliers}</div>
+        <div class="note">${e.n_putative} putative · ${esc(e.model || "—")} ·
+          ${esc(e.estimated_from)}</div></div>`).join("")}
+    </div>
+
+    ${ok ? `<div class="note call ink"><b>What VERIFIED means here, and what it does not.</b>
+      Three edges, each estimated from its own image pair, compose back to the identity inside the
+      frozen line. That is the strongest evidence this system can produce without ground truth — and
+      module 03 measures what it still cannot see: loop closure is <b>exactly</b> invariant to a
+      per-image coordinate error, so a set that closes can be wrong in that one way and say VERIFIED
+      anyway. Both are on this page.</div>` : ""}
+
+    ${reg ? `
+    <div class="note" style="margin-top:14px"><b>Drag the slider.</b> Left of it is image A warped
+      into B's grid; right of it is B itself.</div>
+    <div class="swipe" id="live-swipe">
+      <img src="${esc(d.images.b_png)}" alt="image B">
+      <img class="top" id="live-swipe-top" src="${esc(reg)}" alt="image A warped into B's grid"
+           style="clip-path:inset(0 50% 0 0)">
+      <div class="divider" id="live-swipe-div" style="left:50%"></div>
+      <span class="tag l">A registered into B</span><span class="tag r">B</span>
+    </div>
+    <input class="swiperange" id="live-swipe-range" type="range" min="0" max="100" value="50"
+           aria-label="compare the registered image A against image B">` : ""}
+
+    <div class="tscroll"><table>
+      <thead><tr><th>edge</th><th class="n">putative</th><th class="n">inliers</th>
+        <th class="n">refined</th><th>model</th><th>pair verdict</th><th>estimated from</th></tr></thead>
+      <tbody>${(d.edges || []).map(e => `<tr>
+        <td class="code">${esc(e.edge)}</td><td class="n">${e.n_putative}</td>
+        <td class="n ${e.pass ? "" : "failc"}" style="font-weight:600">${e.n_inliers}</td>
+        <td class="n">${e.n_refined}</td><td>${esc(e.model || "—")}</td>
+        <td class="note">${esc(e.verdict)}</td>
+        <td class="note">${esc(e.estimated_from)}</td></tr>`).join("")}</tbody>
+    </table></div>
+
+    <div class="tscroll"><table>
+      <thead><tr><th>evidence</th><th class="n">value</th><th>says</th><th>weight</th></tr></thead>
+      <tbody>${(v.evidence || []).map(e => `<tr><td class="code">${esc(e.name)}</td>
+        <td class="n">${e.value == null ? "—" : (+e.value).toFixed(4)}</td>
+        <td>${esc(e.verdict)}</td><td>${esc(e.weight)}</td></tr>`).join("")}</tbody>
+    </table></div>
+
+    <div class="dlrow">
+      ${reg ? `<a class="dlbtn" id="live-dl-img" href="${esc(reg)}"
+        download="registered.png">Download the registered image</a>` : ""}
+      <button class="dlbtn" id="live-dl-json">Download this result as JSON</button>
+      <button class="dlbtn" id="live-again">Run another set</button>
+    </div>
+
+    <div class="liveimgs">
+      <figure><img src="${esc(d.images.a_png)}" alt="image A"><figcaption>A, as the pipeline saw it</figcaption></figure>
+      <figure><img src="${esc(d.images.b_png)}" alt="image B"><figcaption>B</figcaption></figure>
+      <figure><img src="${esc(d.images.c_png)}" alt="image C"><figcaption>C</figcaption></figure>
+    </div>
+    ${notClaimed(d.caveats)}`;
+}
+
+function wireLiveResult(d, triplet) {
   const range = document.getElementById("live-swipe-range");
   const top = document.getElementById("live-swipe-top");
   const div = document.getElementById("live-swipe-div");
@@ -1937,8 +2052,8 @@ function wireLiveResult(d) {
   };
   const again = document.getElementById("live-again");
   if (again) again.onclick = () => {
-    LIVE.src = null; LIVE.ref = null; LIVE.last = null;
-    ["src", "ref"].forEach(id => {
+    LIVE.src = null; LIVE.ref = null; LIVE.thr = null; LIVE.last = null;
+    ["src", "ref", "thr"].forEach(id => {
       const input = document.getElementById("live-" + id);
       if (input) input.value = "";
       paintSlot(id);
@@ -1946,7 +2061,7 @@ function wireLiveResult(d) {
     $("#live-out").innerHTML = "";
     document.getElementById("drop-src").scrollIntoView({behavior: "smooth", block: "center"});
   };
-  drawLiveCorrespondences(d);
+  if (!triplet) drawLiveCorrespondences(d);
 }
 
 function drawLiveCorrespondences(d) {
