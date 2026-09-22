@@ -1,4 +1,225 @@
+# Project gap analysis — rewritten 2026-09-23, after five stages in two days
+
+**This document was written on 2026-09-21 and its §4 gave a corrected path of
+five numbered items. Four of the five have since run, and so has the one item
+it ranked as already done.** The 2026-09-21 text is kept in full below under
+integrity rule 3, including the parts this rewrite makes wrong, because a gap
+analysis that quietly re-scores itself is worth nothing.
+
+**What is different about this version.** The 2026-09-21 document's central
+claim was *"the engineering is ~95 % done; the science the problem statement
+asks for is ~30 % done."* **That gap is now roughly half closed, and the
+closing is measurable rather than asserted** — but the five stages also
+produced **three results that argue against the project's own architecture and
+one against its own pre-registration discipline**, and those are the parts a
+reviewer should be handed first.
+
+---
+
+## 1. Completion, four ways — 2026-09-23
+
+### (a) Against §53's five criteria — **40 %, unchanged**
+
+| # | criterion | verdict | moved this week? |
+|---|---|---|---|
+| 1 | Illumination separation, ≥ 2 rungs, p ≤ 0.05 | **MET** | re-measured out of sample (EXP-018) |
+| 2 | ≥ 1 VERIFIED Chandrayaan-2 pair + check-point error/CI | **NOT MET** | its **check-point clause is now MET** (EXP-019); the triangle misses 2.0 px by **8.9 %** |
+| 3 | FA ≤ 5 %, FR ≤ 20 %, zero VERIFIED adversarial | **PARTLY** | a stronger bound: **0 wrong passes in 41 out-of-sample passes** (EXP-018) |
+| 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET + mis-specified** | worse, not better: occupancy **0.484** at the scale envelope's rung (EXP-016) |
+| 5 | Fresh clone, CPU-only, tests pass, licences | **MET** | suite larger and green; the demo now registers user-supplied images live |
+
+**2 of 5 = 40 %.** Five stages moved this scorecard by **zero**, and that is a
+property of §53 rather than of the stages: **§53 contains no criterion about
+scale, viewpoint or modality**, the three variations the problem statement
+names. The 2026-09-21 document's structural fix — *score §2.2 beside §53* — is
+what makes the week's work visible at all.
+
+### (b) Against §2.2, the problem statement's own decomposition — **≈ 30 % → ≈ 55 %**
+
+| PS requirement | 2026-09-21 | **2026-09-23** |
+|---|---|---|
+| Sun-angle correspondence | NOT MET | **NOT MET as an envelope**; the 40° hard edge is **refuted in the permissive direction** out of sample (44.19° under three engines, 57.43° under two, no wrong pass) |
+| **Scale 2:1 → 320:1** | NOT MET / **UNTESTED** | **NOT MET and MEASURED** — envelope **32 : 1**, mechanism **starvation**, floor **N\* = 2048 coarse px**, zero wrong passes at any rung |
+| **Viewpoint** | **NEVER TESTED** | **literal form NOT MET and mis-specified; bound form MET to 20°** with the DEM the deliverable has |
+| **Multi-modality** | NOT MET | **MET for reflectance** (7/9 bands within 1.334× of pan), **thermal envelope stated** (starvation at 28 : 1) — **not IIRS** |
+| **Sub-pixel accuracy on check points** | NOT MET — none exist | **MET** — 0.266 reference px = **2.24 m**, CI95 0.222–0.413, 17 pairs, against another mission's control network |
+| Uniform match-point distribution | NOT MET + mis-specified | unchanged |
+| Registered product | MET | MET, **and now for images the reader supplies** |
+| Metrics incl. RMSE / inliers | MET | MET |
+| All named formats load | PARTIAL | **PARTIAL, wider** — PDS3 map-projected products added (Kaguya TC, MI, Diviner); **IIRS still absent** |
+
+**4 MET, 3 PARTIAL, 2 NOT MET ≈ 55 %.** Every MET row carries its scope in the
+same sentence, because three of the four are met in a narrower sense than the
+words suggest and saying so first is the only way the number survives contact
+with a reviewer.
+
+### (c) Against the §51 roadmap, effort-weighted — **≈ 88 % of 65 pd**
+
+Phases 3, 6 and 10 moved. **Phase 2 (baselines) and phase 5 (verification) are
+where the remaining unspent effort sits**, and phase 5's gap — the
+calibration/validation site split — is the one that blocks a §53 criterion.
+
+### (d) As a software deliverable — **≈ 97 %**
+
+Installable from a fresh clone, CPU-only, licence-clean, fully offline,
+**1 050+ tests passing**, 25 stages with frozen pre-registrations, two ledgers
+with 67 decisions and 56 error entries, every advertised number traceable to an
+artefact the demo serves byte for byte — and the demo now has a **live path**
+that registers images a reader drops onto the page, refuses what it cannot
+defend, and reaches VERIFIED only on a three-image loop.
+
+### The number that matters, restated
+
+> **The engineering is ~97 % done. The science the problem statement asks for
+> is ~55 % done, and every remaining hole has a named blocker rather than an
+> absence of evidence.**
+
+---
+
+## 2. What the five stages actually cost the project's own claims
+
+This section is the reason the rewrite exists. **Four of this week's results
+weaken something the project had previously asserted**, and each is in a
+ledger:
+
+1. **The architecture's scale stage lost its own ablation (D-005-N1).** D-005
+   called scale normalisation *"a required first-class pipeline stage"*. Run
+   against the counterfactual, it **ties 10/10 at every rung to a 16 : 1 GSD
+   gap** — the detector's own scale space bridges the gap unaided. The step is
+   still in the pipeline and is now justified by **nothing measured**.
+2. **The illumination envelope's hard edge is refuted (D-059).** "Nothing
+   passes above 40° Δinc" was an advertised number and it was wrong out of
+   sample, in the permissive direction.
+3. **The engine-agreement floor reversed by its own condition (D-051-N1)** at
+   5.24 px, on two marginal passes.
+4. **§2.2's viewpoint acceptance is unattainable as literally written
+   (D-064)**, and the project reports its own acceptance mis-specified for the
+   second time (after D-057 on coverage). **Two mis-specified acceptances in
+   nine is a finding about the acceptances**, and it is the kind a reviewer is
+   entitled to be suspicious of — which is why both are reported with the
+   measurement that shows it, not as an opinion.
+
+And two results argue against the *method*, not the architecture:
+
+5. **E-055** — an exactness criterion that cannot hold, because "bit for bit"
+   was written across two implementations differing only in accumulation dtype.
+6. **E-056** — a McNemar test whose power was assumed rather than designed: with
+   both arms perfect there are no discordant pairs, so the criterion could not
+   have been MET by any tie however strong. **Pre-registration protects against
+   moving the goalposts; it does not protect against a criterion that cannot be
+   satisfied**, and this project has now hit that failure four times (E-041,
+   E-046, E-053, E-056).
+
+---
+
+## 3. Pending work — 2026-09-23
+
+### Tier A — named in the problem statement
+
+| # | item | status |
+|---|---|---|
+| ~~A1~~ | ~~Scale ladder to 320:1~~ | **DONE — EXP-016.** Envelope 32 : 1, N\* = 2048, starvation confirmed and separated from ratio |
+| ~~A2~~ | ~~Viewpoint variation~~ | **DONE — EXP-017**, synthetic viewpoint on real terrain. The real fore/aft version is still blocked: PRADAN delivered only TMC-2's nadir band |
+| ~~A3~~ | ~~Sub-pixel accuracy on check points~~ | **DONE — EXP-019.** 2.24 m against Kaguya's control network. **Manual check points remain open** — the only number with no shared instrument in it |
+| A4 | **IIRS ingestion + EXP-009** | **still data-blocked, and now answered by proxy.** EXP-020 ran §2.2's question on nine Kaguya MI bands; no IIRS product exists to ingest |
+
+### Tier B — closes a §53 criterion
+
+| # | item | status |
+|---|---|---|
+| ~~B1~~ | ~~Blind validation~~ | **DONE — EXP-018** |
+| B2 | **VERIFIED Chandrayaan-2 verdict** | **open, and now quantified: 2.177 reference px against 2.0 — 8.9 %.** Needs a NAC frame centred on the TMC-2 swath (fresh ODE census) |
+| B3 | **Calibration/validation site split** | **open — the largest remaining hole.** FA and FR are unmeasurable without it |
+| B4 | **Coverage calibration at real inlier counts** | **open**, and EXP-016 gives it a second reason: occupancy is 0.484 at the scale envelope's rung |
+
+### Tier C — debts and loose ends
+
+| # | item | status |
+|---|---|---|
+| ~~C1~~ | ~~Demo never browser-verified~~ | **DONE.** Verified in a real browser end to end: example pair → INCONCLUSIVE with a swipe comparison; a 39.81° pair → REJECTED **with no registered image emitted**; a three-image loop → **VERIFIED at 2.7e-4 px in 8.6 s**; no horizontal overflow |
+| ~~C2~~ | ~~D-005 is a permanent `PROPOSED`~~ | **RETIRED — by a stage that ran.** D-005 deferred to EXP-004, which never existed; EXP-016's ablation decided it instead (D-005-N1) |
+| C3 | Engines never built: ALIKED, RoMa, RIFT2 | open — phase 2 delivered 2 of 5 |
+| C4 | EXP-004, EXP-005 | open; EXP-004's purpose is now partly discharged by EXP-016 |
+| C5 | **Second region (highlands) on real data** | **open and now the top scope risk** — EXP-018's highland candidates could not supply an anti-vacuous set, so terrain transfer is untested |
+| C6 | Incidence-ceiling sweep 70–75° | open |
+| C7 | MatchAnything-ELoFTR on RD-08 radar rows | open; EXP-020 partly supersedes the motivation |
+| C8 | The deck is hand-laid-out and fragile | open — `SIH_PPT` is not under git and boxes overflow silently |
+
+---
+
+## 4. Weak and vulnerable parts — re-ranked 2026-09-23
+
+1. **"FA and FR?"** — still unmeasurable. **Now the single most exposed point**,
+   inherited from the old list's #5 and promoted because the two axes that used
+   to outrank it (viewpoint, scale) have answers.
+2. **"Everything is one region."** Mare Serenitatis, one instrument family,
+   near-nadir, one illumination axis. Every envelope, p-value and engine
+   ranking inherits that scope — and EXP-018 measured that the **pooled** rate
+   transfers while **every component range moves**, which is exactly the way
+   this bites.
+3. **"Your verdict can be fooled."** 36 of 36 constructed cases reach VERIFIED
+   with edges wrong by up to 115 px (E-039); the detector built for it is
+   undeployable with the reference on hand (D-054). **EXP-019 moved this**: the
+   gauge terms track the measured archive offsets at r = 0.751, so the blind
+   spot's cause is now partly attributed — but not closed.
+4. **"Your own architecture's scale stage does nothing."** New this week, and
+   the project says it first (D-005-N1).
+5. **"Two of your nine acceptances are mis-specified."** D-057 and D-064. True,
+   measured, and uncomfortable — the defence is that both are reported with the
+   measurement that shows it and neither was rewritten to pass.
+6. **"Sub-pixel against what?"** Much stronger than three days ago (2.24 m
+   against another mission's control) — but it is a **two-leg bound** whose
+   shared reference cancels, and manual check points still do not exist.
+7. **"The 320 : 1 rung fails."** It does. The answer is the floor plus the
+   arithmetic, and the arithmetic puts the real OHRC-in-IIRS case **above** the
+   floor — but that is arithmetic, and it is labelled as such everywhere.
+8. **"Your success criterion 4 fails."** Unchanged, and now with a second
+   number against it.
+9. **The 42-pair census is exhausted** — blocks the cheap route to criterion 2.
+10. ~~"Nothing was held out."~~ **Answered (EXP-018).** ~~"Demo never seen in a
+    browser."~~ **Answered.**
+
+---
+
+## 5. Is the path right? — **yes, for the first time, and here is the next one**
+
+The 2026-09-21 correction said: *stop refining the verification layer; run the
+PS axes.* That is what happened — **five stages, four of them on PS axes, and
+the §2.2 scorecard moved from ≈ 30 % to ≈ 55 % while §53 stayed still.** The
+correction worked, and the fact that it is visible at all is due to the
+structural fix (score both scorecards), not to anyone trying harder.
+
+**The corrected path from here, in order:**
+
+1. **B3 — the calibration/validation site split.** The largest hole, the one
+   §53 criterion that is *unmeasurable* rather than failing, and the answer to
+   the first question a hostile reviewer now asks. ~1 day.
+2. **C5 — a second terrain class on real data.** Every number in the project
+   inherits Mare Serenitatis. EXP-018 showed pooled figures transfer while
+   component ranges do not; a highland window is the only way to price that.
+   Needs a census that can supply an anti-vacuous set.
+3. **B4 — coverage calibration at real inlier counts.** Cheap, closes D-057's
+   open direction, and EXP-016 gave it a second motivation.
+4. **Manual check points** on one window — the only accuracy number with no
+   shared instrument in it, and the thing that converts EXP-019's bound into an
+   accuracy.
+5. **B2 — a NAC frame centred on the TMC-2 swath.** Now worth doing *because*
+   the miss is quantified at 8.9 %; before EXP-019 it was an unbounded gamble.
+
+**What to stop:** adding evidence modules to the demo. It has ten, every one
+tied to a recorded artefact, and a live path. The marginal reader learns more
+from the eleventh *number* than from the eleventh *panel*.
+
+---
+
+*(Everything below is the 2026-09-21 document, retained under integrity rule 3.
+Its §4 corrected path is the one that was executed; its scores and its "what to
+do next" are superseded by the sections above and are **not** edited.)*
+
+---
+
 # Project gap analysis — how complete is this, really, and is the path right?
+*(2026-09-21 version, retained under integrity rule 3)*
 
 **Written 2026-09-21, after EXP-015.** This document measures the project
 against **three different definitions of "done"** and reports all three,

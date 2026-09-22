@@ -18,6 +18,73 @@ is reported as a gap in the evidence, not rewritten into one that can be.
 
 ---
 
+## FINAL RESCORE — 2026-09-23, after EXP-016, EXP-017, EXP-018, EXP-019 and EXP-020
+
+**Both scorecards, in one place, as `CLAUDE.md` requires.** Five stages ran
+since the last rescore. **§53 did not move. §2.2 moved by more than any other
+week in this project.** That sentence is the finding, and it is the same lesson
+the section *"A second scorecard this audit never kept"* recorded two days
+earlier: the project's own bar and the problem statement's bar measure
+different things, and only tracking both makes the difference visible.
+
+### (a) §53 — the project's own five criteria: **2 of 5 MET, unchanged**
+
+| # | criterion | verdict 2026-09-21 | verdict 2026-09-23 | what changed |
+|---|---|---|---|---|
+| 1 | Illumination separation, ≥ 2 rungs, p ≤ 0.05 | **MET** | **MET** | EXP-018 re-measured it out of sample: the pooled rate transferred (0.600 against 0.595) **while every component range moved**, and Δincidence did **not** order outcomes on the held-out window (p = 0.575) |
+| 2 | ≥ 1 VERIFIED Chandrayaan-2 pair per sensor + check-point error and CI | **NOT MET** | **NOT MET — and now missed by 8.9 %, not by a missing capability** | EXP-019 supplied the **check-point clause** (0.266 reference px = 2.24 m, CI95 0.222–0.413, 17 pairs) but the Chandrayaan-2 triangle closes at **2.177 reference px against the frozen 2.0**. The line was **not moved** |
+| 3 | FA ≤ 5 %, FR ≤ 20 %; zero VERIFIED adversarial | **PARTLY** | **PARTLY, with a stronger bound** | EXP-018: **0 wrong passes in 41 out-of-sample passes** across three engines, and **7/7 triangles VERIFIED at 0.40–1.11 px** on ground no stage had opened. FA and FR remain **unmeasurable** without a calibration/validation site split |
+| 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET + mis-specified** | **NOT MET + mis-specified** | EXP-016 adds a number that makes it worse rather than better: at the scale envelope's own rung the median `grid_occupancy` is **0.484**, so the coarse registrations that pass every other check are the least uniformly covered |
+| 5 | Fresh clone, CPU-only, tests pass, licences | **MET** | **MET** | the suite is larger and still green; the demo now also runs a **live** registration on user-supplied images, on CPU, offline |
+
+**2 of 5 = 40 %.** Five stages, zero movement. **That is not a failure of the
+stages** — each answered a question the project could not answer before — it is
+a property of §53, which contains no criterion about scale, viewpoint or
+modality. A judge reading only §53 would learn almost nothing about the week's
+work.
+
+### (b) §2.2 — the problem statement's nine requirements: **≈ 30 % → ≈ 55 %**
+
+| PS requirement | acceptance (§2.2, as written) | 2026-09-21 | **2026-09-23** |
+|---|---|---|---|
+| Correspondence under Sun-angle change | envelope **≥ 40° Δinc** at TMC/IIRS rungs; boundary stated | NOT MET | **NOT MET as an envelope — but the hard edge is refuted in the permissive direction.** Out of sample, **44.19° passes under all three engines and 57.43° under two**, every one geometry-CONSISTENT with **no wrong pass** (D-059). In-sample the TMC-2 rung still fails from 24.7°, so what exists is *passes above 40°*, not *an envelope to 40°*, and the row says so |
+| Scale invariance **2:1 to 320:1** | every rung ≤ 320:1 registers at ≥ 50 % overlap | NOT MET / **UNTESTED** | **NOT MET — and now MEASURED**, which is the whole change. Envelope **32 : 1** (11/11 to 32, 8/11 at 64, 0/11 at 128 and 320), zero wrong passes at any rung, mechanism **STARVATION** (β_N = +2.038 p = 0.0025 against β_r = +0.00018 p = 0.9998), and a transferable floor **N\* = 2048 coarse px** that turns every sensor pairing into arithmetic (D-066) |
+| Viewpoint invariance | local model residuals **white**; no systematic relief signature | **NEVER TESTED** | **Literal form NOT MET and measured MIS-SPECIFIED (D-064); bound form MET to 20°.** *Residuals white* holds at e = 0 and nowhere else on both local arms, because a smooth residual fires a whiteness test at any amplitude — including **0.032 px**. The bound reading holds to **5°** (96-parameter piecewise affine) and **20°** (six parameters + the 59 m SLDEM the deliverable actually has), and a global model's dense median stays under 0.5 px to **30°** |
+| Multi-modality (reflectance bands ↔ pan; thermal envelope stated) | reflectance: same envelope as pan; thermal: envelope stated | NOT MET | **MET, with its scope named in the same breath.** **7 of 9** Kaguya MI bands register and every succeeding band lands within **1.334×** of a pan comparator built from the same instrument's band mean (six of seven *better* than pan). **Thermal: Diviner at 28 : 1 gives 49 keypoints and 0 inliers — starvation**, which is an envelope stated with a bound. **It is NOT IIRS**, and the word appears in no claim sentence (D-062) |
+| **Sub-pixel accuracy** "of the source image" | median **< 0.5 coarser-px on independent check points, with 95 % CI** | NOT MET — *no check points exist* | **MET.** A product from another mission (SELENE/Kaguya TC ortho, LISM control) gives an **A → reference → B** composition containing **no A ↔ B correspondence** that agrees with the recorded direct registration to **0.266 reference px = 2.24 m, CI95 0.222–0.413, 17 pairs**. **What it is not:** absolute accuracy in the SELENE frame — both legs share the reference, so its own error cancels; it is an upper bound on the **sum of two independent registration errors**. Manual check points remain the only route to a number with no shared instrument in it |
+| Uniform distribution of match points | gap ≤ 0.15 of image diagonal | NOT MET + mis-specified | **NOT MET + mis-specified**, unchanged (D-057), and EXP-016 adds that occupancy falls to **0.484** at the scale envelope's rung |
+| Registered product | emitted only for accepted pairs | MET | **MET, and now also for images the reader supplies** — the live card emits the registered product, the match points and the transform, and **withholds the registered image when the verdict is REJECTED** |
+| Metrics incl. RMSE, inlier count, ratio | verdict never rests on a signal with AUC < 0.9 | MET | **MET** — fit RMSE measured at AUC 0.4947 and structurally excluded; unchanged |
+| Generic software, all named formats | every named format loads with geometry | PARTIAL | **PARTIAL, wider than before.** PDS4 (NAC, OHRC) ✓, GeoTIFF (TMC-2 ortho and DTM) ✓, **PDS3 map-projected (Kaguya TC ortho, MI MAP V3, Diviner GDR) ✓ added this week**, LROC WAC ✓, Mini-RF ✓ — **IIRS cube ✗**, no reader and no data |
+
+**4 MET, 3 PARTIAL, 2 NOT MET ≈ 55 %**, against ≈ 30 % on 2026-09-21. **Read
+the MET column with its scope attached**, which is why every row carries it:
+the accuracy row is a two-leg bound, not absolute accuracy; the multimodality
+row is not IIRS; the viewpoint row is met in a reading the stage itself
+records as a *re-reading* of the acceptance, with the literal form reported
+NOT MET beside it. **No row was re-scoped to make it pass**, and the two rows
+that fail — scale and coverage uniformity — fail with numbers rather than with
+silence, which is the difference between this scorecard and the one three days
+ago.
+
+### (c) What is still, honestly, missing
+
+1. **FA and FR** (§53 criterion 3) — needs a calibration/validation site split;
+   unchanged and still the largest single hole in the verification story.
+2. **A VERIFIED Chandrayaan-2 triangle** (§53 criterion 2) — 2.177 against 2.0.
+   The nearest route is a NAC frame centred on the TMC-2 swath, which needs a
+   fresh ODE census.
+3. **Coverage calibration at real inlier counts** (§53 criterion 4) —
+   answerable in neither direction until occupancy above 0.938 is sampled.
+4. **IIRS** — no product exists to ingest. Data-refused, not untested, and the
+   README says so.
+5. **Manual check points** — the only accuracy number with no shared instrument
+   in it.
+6. **Terrain transfer** — every real result is Mare Serenitatis; the two
+   highland candidates could not supply an anti-vacuous set (EXP-018 arm H).
+
+---
+
 ## 1. Illumination separation — **MET**
 
 REAL-DATA-07's amended run (E-037 corrected) on 42 confirmed-overlap pairs
@@ -119,6 +186,72 @@ space (ADR-0011 N1), recorded as a known limitation rather than patched.
 
 ---
 
+
+## UPDATE 2026-09-23 (last) — the third PS variation is measured, and the architecture lost its own ablation (EXP-016)
+
+**What ran.** EXP-016 took 11 real NAC edges that register at the native rung
+inside the measured illumination envelope, degraded both images through a
+stated PSF to a common coarser GSD, and climbed
+**2 : 4 : 8 : 16 : 32 : 64 : 128 : 320**. 488 cells, 3 h 15 m.
+**S4 MET; S0, S1, S3, S5 NOT MET; S2 returns STARVATION.**
+
+**§53 does not move — and for the third stage running, that is the point.**
+No §53 criterion is about scale. The scorecard this stage moves is §2.2's, and
+it moves the row that was the single largest untested requirement in the
+project.
+
+**§2.2's scale row: NOT MET / UNTESTED → NOT MET, with an envelope, a
+mechanism and a floor.** The acceptance is *"every rung ≤ 320:1 registers when
+overlap ≥ 50 % of the coarser tile"*. Measured: **11/11 at r = 4, 8, 16, 32;
+8/11 at 64; 0/11 at 128 and 320**, so the acceptance is **NOT MET** and the
+**envelope is 32 : 1**. Three things make that a defensible deliverable rather
+than a bare failure:
+
+1. **Every failure is the frozen inlier rule, never the geometry check.**
+   55 CONSISTENT, 5 INCONCLUSIVE, **INCONSISTENT never**, and **zero wrong
+   passes at any rung in either engine** — at rungs where the archive
+   geometry's discrimination floor has tightened from ~250 native px to
+   **~1.6 coarse px**, i.e. where a wrong pass would have been easy to catch.
+2. **The mechanism is measured, not asserted.** §2.2's own question is
+   *descriptor failure or sampling starvation?* A control that holds the coarse
+   pixel count fixed while halving the ratio agrees with the full cell on
+   **55 of 60**; the pooled logistic over 143 cells gives **β_N = +2.038
+   (p = 0.0025)** against **β_r = +0.00018 (p = 0.9998)**. Verdict:
+   **STARVATION**.
+3. **The answer transfers as arithmetic.** **N\* = 2048 coarse pixels of
+   overlap.** TMC-2 ↔ NAC clears it by 40–160×; OHRC-in-IIRS (≈ 5 550 px)
+   clears it by 2.7×; one IIRS grid against a single 4096-line NAC tile
+   (325–5 000 px) straddles it. **The 320 : 1 rung failed here on 570 pixels** —
+   ten times fewer than the real OHRC-in-IIRS case — so the deliverable carries
+   the floor and the arithmetic, and says which is which.
+
+**What this stage takes away from the architecture.** D-005 called scale
+normalisation *"a required first-class pipeline stage"* and deferred its
+validation to EXP-004, which never ran — `PROJECT_GAP_ANALYSIS.md` C2 named
+that as E-042's pattern by a second route. EXP-016 ran the ablation instead:
+the **un-normalised** arm succeeds **10/10 at every rung run**, across GSD gaps
+to **16 : 1**, exactly as the normalised arm does. **Zero discordant pairs**,
+so the pre-registered McNemar cannot run and S3 is **NOT MET as a null by
+construction** — a *tie*, not a loss, and the distinction is in the ledger
+(D-005-N1, E-056). C2 is retired: the decision was settled by a stage that ran.
+
+**Two harness clauses failed, and the stage is reported beside them.** S0's
+chapeau says *nothing is reported from a cell unless every clause holds*.
+(i) the *bit for bit* clause fails on 4 of 30 cells at k = 32 because one
+implementation accumulates in float32 and the other in float64 — measured
+afterwards at **3–5 × 10⁻⁸ relative** (E-055); (iv) the self-scale control
+misses a known integer shift by more than 0.05 coarse px on **15 of 112**
+cells, worst **0.591**. The consequence is carried to S4 rather than hidden:
+on those pairs the reported 0.09–0.26 coarse px agreement is **inside the
+harness's own floor** and is a bound, not a measurement.
+
+**One thing to carry into any accuracy claim.** S4 is MET at 0.977, and its
+agreement with the native-rung solution *improves* in coarse pixels
+(0.258 → 0.094 from r = 4 to 32) while **worsening on the ground
+(1.16 m → 2.93 m)**. Every quotation of a coarse-pixel figure in this project
+must carry its metres.
+
+---
 
 ## UPDATE 2026-09-23 (later still) — viewpoint has evidence for the first time, and one more §2.2 acceptance is measured mis-specified (EXP-017)
 

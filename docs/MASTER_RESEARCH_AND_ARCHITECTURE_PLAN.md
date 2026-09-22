@@ -935,3 +935,88 @@ remains frame-level is two frames at 72–75° incidence — the ceiling, not
 identity. Demonstrated score **7 / 10**: the illumination claim is now
 replicated and per-window significant; the ceiling is still Chandrayaan-2
 data (download 2026-09-06).
+
+---
+
+## A6. 2026-09-23 — the delivered architecture, and the three places this plan is now wrong
+
+*This addendum is written after EXP-016, EXP-017, EXP-018, EXP-019 and
+EXP-020. It does not edit anything above it. Its job is to say, in one place,
+**what the system actually is** as built, and **which of this plan's own
+architectural claims the measurements have taken away** — because a plan that
+only accumulates confirmations is not a record of anything.*
+
+### A6.1 The pipeline as delivered
+
+```
+ingest ──► orient ──► [scale-normalise] ──► estimate ──► refine ──► re-estimate ──► verify ──► emit
+```
+
+| stage | module | what it does | status of its justification |
+|---|---|---|---|
+| ingest | `siim.ingest` — PDS4 (NAC, OHRC), GeoTIFF (TMC-2 ortho + DTM), **PDS3 map-projected** (`mapgrid.MapBlock`: Kaguya TC ortho, MI MAP V3, Diviner GDR, Mini-RF, WAC) | decode + carry the archive's own corner geometry | **measured**; the archive's corners are a *corroboration* floor of ~100 px, and EXP-019 measured the disagreement at **137.6 m** |
+| orient | `ingest.orientation.north_up_east_right` | reflection-aware (E-037: a quarter-turn cannot undo a mirror) | **measured** — the defect it fixes changed the illumination result |
+| scale | `preprocessing.degrade.degrade_to_gsd` (Gaussian PSF + integer block mean) | degrade the finer image toward the coarser, never upsample | **its ablation ties** (ADR-0005 N1, D-005-N1). It buys the *recovered scale*, not the success rate, up to a 16 : 1 gap |
+| estimate | `pipeline.register_pair`, engines B1 / B4L / B4X | detect, match, LO-RANSAC | **measured**; B4L wins on real cross-illumination edges and **does not** win on scale (EXP-016) |
+| refine | ECC | sub-pixel refinement of the dense alignment | measured (EXP-010) |
+| re-estimate | rule B | re-fit on refined correspondences | measured (EXP-011) |
+| verify | `demo.verdict.assess`, `evaluation.gtfree.loop_closure`, `verify.gauge` | frozen rule `n_inliers <= 8`; loop closure ≥ 2.0 px rejects; engine agreement floor 3 px | **the strongest and the weakest part at once** — it catches coherent wrong answers only through a *cycle*, and is exactly invariant to a per-image gauge error (E-039) |
+| emit | registered product, match points, transform, metrics | only for accepted pairs | measured; the live path withholds the registered image on REJECTED |
+
+**The operator interface** (ADR-0013) is now part of the architecture, not a
+presentation layer: ten evidence modules served from recorded artefacts, a
+provenance endpoint that serves every advertised file byte for byte, and a
+**live** path that registers images the reader supplies — two images can reach
+INCONCLUSIVE or REJECTED, and **only a three-image loop can reach VERIFIED**,
+which is the verdict's own logic exposed rather than described.
+
+### A6.2 Where this plan is now wrong
+
+1. **§19's envelope claim — *"every PS rung ≤ 320:1 is reachable by
+   degradation"* — is refuted on NAC-derived data.** Measured envelope
+   **32 : 1**; **0 / 11** at 128 and 320. What survives, and is stronger than
+   the claim it replaces, is §19's *mechanism*: the limit is **sampling
+   starvation**, separated from the ratio by a control at fixed pixel count
+   (concordance 55/60; `β_N = +2.038, p = 0.0025` against `β_r = +0.00018,
+   p = 0.9998`), with a transferable floor **N\* = 2048 coarse px**. §345's
+   reading of 320 : 1 as *patch-in-image localisation* also fails as frozen —
+   both peaks land inside tolerance and neither reaches PSR 5.
+2. **§20's `Δh·tan(e)` is early by ≥ 6× as written.** Read as peak-to-peak it
+   predicts a 0.5 px crossing at 2–5°; **no window crosses inside a 0–30°
+   sweep**, because a global affine absorbs the plane and 47–123 m of
+   peak-to-peak relief becomes **2.85–8.93 m RMS**. The rule is now read as
+   residual-relief RMS (D-065).
+3. **§2.2's own acceptances are mis-specified in two of nine rows** — coverage
+   (D-057) and viewpoint (D-064). Both are reported NOT MET in their literal
+   form **with the measurement that shows the wording, not the system, is what
+   fails**, and neither was rewritten to pass.
+
+### A6.3 What the architecture earned, measured
+
+* **The protocol is what carries the result, in the bounded EXP-006 form only**
+  — the universal "protocol beats matcher" thesis remains unsupported (§553).
+* **Refusal is a feature and it is measured:** zero wrong passes in 77 arm-D
+  scale cells at rungs where the geometry floor had tightened to ~1.6 coarse
+  px, and **0 wrong passes in 41 out-of-sample passes** on held-out ground.
+* **The reference problem has an answer:** another mission's control network
+  turns *"corroborated at ~100 px"* into **137.6 m measured**, and produces the
+  project's first accuracy-class number — **2.24 m, CI95 0.222–0.413 reference
+  px** — which is a bound on the sum of two registration errors, not absolute
+  accuracy.
+* **Multi-modality is answered by the closest public instrument to IIRS**: 7 of
+  9 reflectance bands within **1.334×** of pan, and a thermal bound
+  (starvation at 28 : 1). It is **not** IIRS and no claim sentence says it is.
+
+### A6.4 The architectural work this plan still owes
+
+1. A **calibration/validation site split** — without it FA and FR are
+   unmeasurable, which is the one §53 criterion that is not failing but
+   *unanswerable*.
+2. A **second terrain class on real data** — every envelope, p-value and engine
+   ranking in this document inherits Mare Serenitatis.
+3. A **gauge-aware verification path** — loop closure is exactly invariant to
+   the error class the project has measured itself vulnerable to, and the
+   detector built for it is undeployable with the reference on hand (D-054),
+   though EXP-019 attributed most of the gauge term to the archive (D-061).
+4. **Manual check points** — the only accuracy number with no shared instrument
+   in it.

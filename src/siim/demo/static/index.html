@@ -491,6 +491,7 @@ footer.foot b{color:var(--ink-2);font-weight:500}
       <a href="#m06">06 Chandrayaan-2</a>
       <a href="#m07">07 Reference</a>
       <a href="#live" id="nav-live">Live</a>
+      <a href="#m08">08 Scale</a>
       <a href="#m09">09 Viewpoint</a>
       <a href="#m10">10 Modality</a>
       <a href="#prov">Provenance</a>
@@ -604,7 +605,8 @@ Promise.all([
   fetch("/api/evidence/controlled-reference").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/multimodality").then(r => r.ok ? r.json() : null).catch(() => null),
   fetch("/api/evidence/viewpoint").then(r => r.ok ? r.json() : null).catch(() => null),
-]).then(([d, ill, eng, c2, vc, gd, ca, cr, mm, vp]) => {
+  fetch("/api/evidence/scale").then(r => r.ok ? r.json() : null).catch(() => null),
+]).then(([d, ill, eng, c2, vc, gd, ca, cr, mm, vp, sc]) => {
   // Only recorded real-data cases are offered. The API also lists synthetic
   // scenarios; this page never renders them and never calls /api/run for one.
   SCEN = d.scenarios.filter(s => s.data_source === "real_lro_nac");
@@ -636,11 +638,12 @@ Promise.all([
   window.__CR = cr;
   window.__MM = mm;
   window.__VP = vp;
+  window.__SC = sc;
   $("#scope").innerHTML = ill
     ? `Evidence scope — ${esc(ill.scope)}`
     : `Evidence scope — LRO NAC · Mare Serenitatis`;
-  const nMod = [ill, eng, c2, vc, gd, ca, cr, mm, vp].filter(Boolean).length;
-  setIndicator(`Recorded · ${nMod} of 9 modules on disk`, false);
+  const nMod = [ill, eng, c2, vc, gd, ca, cr, mm, vp, sc].filter(Boolean).length;
+  setIndicator(`Recorded · ${nMod} of 10 modules on disk`, false);
   renderHero();
   // Auto-select the first case only if the reader has not already chosen one
   // (or opened the live card) while the fetches were in flight -- on a loaded
@@ -830,6 +833,7 @@ function render(d) {
     ${enginesPanel(vm)}
     ${chandrayaan2Panel(vm)}
     ${controlledReferencePanel(vm)}
+    ${scalePanel(vm)}
     ${viewpointPanel(vm)}
     ${multimodalityPanel(vm)}
     ${provenance(d)}
@@ -2329,6 +2333,185 @@ function multimodalityPanel(vm) {
     <div class="note">Scope \u2014 ${esc(mm.scope)}</div>`);
 }
 
+
+// Module 08 - EXP-016. The third variation the problem statement names, and
+// the one this project left untested longest. The panel leads with the
+// envelope, then with the control that says why the ladder stops there, then
+// with the ablation the architecture lost - in that order, because an envelope
+// without its mechanism tells a reader nothing about their own sensor pair.
+function scalePanel(vm) {
+  const sc = window.__SC;
+  if (!sc) return unavailable("m08", "08", "Module 08 \u00b7 scale",
+    "How far apart in resolution can two images be before registration stops?",
+    "/api/evidence/scale");
+  const c = sc.criteria || {};
+  const f = (x, n) => (x === null || x === undefined) ? "\u2014" : (+x).toFixed(n === undefined ? 3 : n);
+  const rungs = sc.per_rung || [];
+  const armN = sc.arm_N || [];
+  const armL = sc.arm_L || [];
+  const s2 = c.S2 || {}, s1 = c.S1 || {}, s3 = c.S3 || {}, s4 = c.S4 || {}, s5 = c.S5 || {}, s0 = c.S0 || {};
+  return mod("m08", modHead("08", "Module 08 \u00b7 scale",
+      "How far apart in resolution can two images be before registration stops?",
+      "EXP-016 \u00b7 real NAC pairs degraded through a stated PSF to a common coarser GSD \u00b7 488 cells"), `
+    <div class="note call ink" style="margin-top:0">
+      <b>What this is, before any number.</b> The problem statement names
+      <b>&ldquo;2:1 to 320:1&rdquo;</b>. ${esc(sc.construction.what)}. The ladder is
+      <b>${(sc.construction.ladder || []).join(" : ")}</b>, one engine, the pipeline's own defaults, and
+      <b>${sc.construction.n_pairs}</b> real edges that already register at 1:1 inside the measured
+      illumination envelope \u2014 so what varies is scale and not Sun.</div>
+
+    <div class="tiles">
+      <div class="tile ${s1.met ? "good" : "bad"}"><div class="lab">S1 \u2014 the PS acceptance</div>
+        <div class="val">${s1.envelope_r === null ? "\u2014" : s1.envelope_r + " : 1"}</div>
+        <div class="note">every rung to 320:1 was the bar \u00b7 ${st("NOT MET", "fail")} \u00b7 the
+          <b>measured envelope</b> is what the deliverable carries</div></div>
+      <div class="tile good"><div class="lab">S2 \u2014 why it stops</div>
+        <div class="val">${esc(s2.verdict || "\u2014")}</div>
+        <div class="note">pixel count decides, ratio does not: <b>\u03b2<sub>N</sub> = ${f(s2.beta_N)}</b>
+          (p = ${f(s2.p_beta_N, 4)}) against <b>\u03b2<sub>r</sub> = ${f(s2.beta_r, 5)}</b>
+          (p = ${f(s2.p_beta_r, 4)})</div></div>
+      <div class="tile good"><div class="lab">N* \u2014 the portable number</div>
+        <div class="val">${(s2.pixel_floor || {}).N_star === null ? "\u2014" : (s2.pixel_floor || {}).N_star}</div>
+        <div class="note">coarse pixels of overlap below which registration stops \u00b7 any sensor pairing is
+          <b>arithmetic</b> against this, not a new experiment</div></div>
+      <div class="tile ${s3.met ? "good" : "bad"}"><div class="lab">S3 \u2014 does our own step help</div>
+        <div class="val">no</div>
+        <div class="note">not normalising ties normalising <b>10/10 at every rung</b> to a 16:1 gap \u00b7
+          zero discordant pairs, so the test cannot run \u00b7 ${st("NOT MET", "fail")}</div></div>
+    </div>
+
+    <div class="tscroll"><table>
+      <thead><tr><th class="n">ratio</th><th class="n">coarse pixels (N)</th>
+        <th class="n">keypoints</th><th class="n">success</th><th class="n">wrong passes</th>
+        <th class="n">agreement (coarse px)</th><th class="n">agreement (m)</th>
+        <th class="n">coverage</th></tr></thead>
+      <tbody>${rungs.map(r => `<tr>
+        <td class="n" style="font-weight:600">${r.r} : 1</td>
+        <td class="n">${r.median_N === null ? "\u2014" : r.median_N.toLocaleString("en")}</td>
+        <td class="n ${r.median_keypoints_src === 0 ? "failc" : ""}">${r.median_keypoints_src === null ? "\u2014" : r.median_keypoints_src}</td>
+        <td class="n ${r.n_success === 0 ? "failc" : ""}" style="font-weight:600">${r.n_success} / ${r.n_pairs_run}</td>
+        <td class="n">${r.n_wrong_pass}</td>
+        <td class="n">${r.consistency_median_coarse_px === null || r.consistency_median_coarse_px === undefined ? "cannot check" : f(r.consistency_median_coarse_px)}</td>
+        <td class="n">${r.consistency_median_m === null || r.consistency_median_m === undefined ? "\u2014" : f(r.consistency_median_m, 2) + " m"}</td>
+        <td class="n">${r.grid_occupancy_median === null || r.grid_occupancy_median === undefined ? "\u2014" : f(r.grid_occupancy_median, 3)}</td></tr>`).join("")}</tbody>
+    </table></div>
+
+    <div class="note call ink">
+      <b>Read the last two columns together.</b> The agreement with the native-rung solution gets
+      <i>better</i> in coarse pixels as the ladder climbs and <i>worse</i> on the ground, because a coarse
+      pixel is bigger. Quoting the pixel without the metre is how a scale result is made to sound like an
+      accuracy result. <b>It is neither:</b> this is agreement with the same edge's own 1:1 solution \u2014
+      a bound on <b>precision</b>, with no ground truth anywhere in it.</div>
+
+    <div class="note call ${s2.verdict === "STARVATION" ? "ok" : "fail"}">
+      <b>Descriptor failure or sampling starvation? Measured, not argued.</b> Over the full window the ratio
+      and the pixel count are perfectly confounded, so the ladder alone cannot answer it. A second cell at
+      every rung holds the <b>pixel count fixed and halves the ratio</b> (the central quarter at
+      <i>r</i>/2). If the pixel count decides, the two agree; if the ratio decides, the cropped cell
+      survives where the full one dies. <b>They agree on ${s2.n_cell_pairs === null ? "\u2014" : Math.round((s2.concordance || 0) * (s2.n_cell_pairs || 0))} of
+      ${s2.n_cell_pairs} cells (${f((s2.concordance || 0) * 100, 1)} %)</b>, the
+      ${s2.n_discordant} disagreements split both ways, and the fitted ratio coefficient is
+      <b>${f(s2.beta_r, 5)}</b> \u2014 four orders of magnitude below the pixel-count coefficient and of the
+      <i>wrong sign</i> for the descriptor hypothesis.</div>
+
+    <div class="tscroll"><table>
+      <thead><tr><th>what the problem statement pairs</th><th class="n">ratio</th>
+        <th class="n">coarse pixels over the stated window</th><th class="n">above N* = ${(s2.pixel_floor || {}).N_star}?</th></tr></thead>
+      <tbody>
+        <tr><td>TMC-2 \u2194 NAC</td><td class="n">5\u201310 : 1</td><td class="n">80 000 \u2013 320 000</td>
+          <td class="n" style="font-weight:600">yes, by 40\u2013160\u00d7</td></tr>
+        <tr><td>IIRS \u2194 NAC, one 4096-line tile</td><td class="n">40\u2013160 : 1</td><td class="n">325 \u2013 5 000</td>
+          <td class="n neut">straddles it</td></tr>
+        <tr><td>IIRS \u2194 NAC, a long window</td><td class="n">8 : 1 equivalent</td><td class="n">131 072</td>
+          <td class="n" style="font-weight:600">yes</td></tr>
+        <tr><td>OHRC \u2194 IIRS \u2014 <b>the 320 : 1 the PS names</b></td><td class="n">320 : 1</td><td class="n">\u2248 5 550</td>
+          <td class="n" style="font-weight:600">yes, by 2.7\u00d7</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">The 320:1 rung failed <i>here</i> on <b>570 coarse pixels</b> \u2014 the most the largest
+      window on this disk gives at that ratio, which is <b>ten times fewer</b> than the real OHRC-in-IIRS
+      case. That is why the deliverable carries <b>N*</b> and the arithmetic rather than the envelope alone.
+      The arithmetic is not evidence, and it is labelled as arithmetic on this page and in the stage report.</div>
+
+    <div class="note call fail">
+      <b>The architecture lost its own ablation, and it stays on the page.</b> D-005 called scale
+      normalisation a <i>required first-class pipeline stage</i>. The counterfactual arm \u2014 native source
+      against a coarse reference, <b>no normalisation at all</b> \u2014 was run beside it:</div>
+    <div class="tscroll"><table>
+      <thead><tr><th class="n">rung</th><th class="n">gap the naive arm must bridge</th>
+        <th class="n">normalised (arm D)</th><th class="n">not normalised (arm N)</th>
+        <th class="n">D only</th><th class="n">N only</th><th class="n">scale it recovers</th></tr></thead>
+      <tbody>${armN.map(r => `<tr>
+        <td class="n">${r.r} : 1</td>
+        <td class="n">${r.expected_scale ? Math.round(1 / r.expected_scale) + " : 1" : "\u2014"}</td>
+        <td class="n" style="font-weight:600">${r.D_success} / ${r.n}</td>
+        <td class="n" style="font-weight:600">${r.N_success} / ${r.n}</td>
+        <td class="n">${r.D_only}</td><td class="n">${r.N_only}</td>
+        <td class="n">${f(r.N_recovered_scale_median, 4)} <small>vs ${f(r.expected_scale, 4)}</small></td></tr>`).join("")}</tbody>
+    </table></div>
+    <div class="note">Zero discordant pairs in either direction, so the pre-registered exact McNemar
+      <b>cannot run</b> and the criterion is <b>NOT MET as a null by construction</b> \u2014 a tie, not a
+      loss, and the difference matters. The measured claim that replaces D-005 is narrower than
+      &ldquo;the step is useless&rdquo;: <b>on this terrain, across GSD gaps to 16:1, the detector's own
+      scale space bridges the gap unaided on every pair the normalised arm also registers.</b> Its one
+      visible cost is the last column \u2014 the un-normalised arm's recovered scale is off by up to
+      <b>\u00b110 %</b>.</div>
+
+    <div class="note call fail">
+      <b>What 320:1 physically is, and both ways it failed.</b> A 320:1 &ldquo;tile&rdquo; is
+      <b>12 \u00d7 6 pixels</b>. Nothing registers there \u2014 the detector finds <b>zero</b> keypoints \u2014
+      so the stage also asked the only question that survives at that ratio: can the fine tile be
+      <i>located</i> inside the coarse image by correlation? ${st("NOT MET", "fail")}, and for two different
+      reasons that are kept apart:</div>
+    <div class="tscroll"><table>
+      <thead><tr><th class="n">rung</th><th class="n">windows localised</th>
+        <th class="n">offset from the archive's prediction (coarse px)</th>
+        <th class="n">peak-to-sidelobe</th><th>reading</th></tr></thead>
+      <tbody>${armL.map(r => `<tr>
+        <td class="n">${r.r} : 1</td>
+        <td class="n" style="font-weight:600">${r.n_localised} / ${r.n}</td>
+        <td class="n">${(r.offsets_coarse_px || []).map(x => f(x, 2)).join(" \u00b7 ")}</td>
+        <td class="n ${(r.psr || []).every(x => x < 5) ? "failc" : ""}">${(r.psr || []).map(x => f(x, 2)).join(" \u00b7 ")}</td>
+        <td class="note">${r.r === 320
+          ? "both peaks are INSIDE tolerance (262 m and 105 m); both fail only on sharpness, PSR &lt; 5"
+          : "one window lands within 53\u201384 m; the other misses by a constant 306.5 m at every rung"}</td></tr>`).join("")}</tbody>
+    </table></div>
+    <div class="note">A localisation error shrinks or wanders as the template grows. <b>A constant
+      306.5 m at three consecutive rungs, with the sharpest peaks in the run, is the archive's corner map
+      disagreeing with where the imagery actually is</b> \u2014 and module 07 measured that same
+      disagreement independently, against another mission's control network, at <b>137.6 m median,
+      systematically eastward</b>.</div>
+
+    <div class="note call fail">
+      <b>The harness's own controls failed, and the stage is reported anyway \u2014 beside that, not
+      without it.</b> S0 says <i>nothing is reported from a cell unless every clause holds</i>. Two clauses
+      do not.
+      <ul>
+        <li><b>Bit-exactness</b> against the recorded operator fails on <b>4 of 30</b> cells, all at one
+          rung, because one implementation accumulates in float32 and the other in float64. Measured
+          afterwards: <b>3\u20135 \u00d7 10<sup>-8</sup> relative</b>. A defect in neither operator, and the
+          criterion said <i>bit for bit</i>, so it is NOT MET (E-055).</li>
+        <li><b>The self-scale control</b> \u2014 degrade an image, match it against itself shifted by a known
+          integer \u2014 misses the shift by more than the 0.05 coarse px bound on
+          <b>${s0.self_scale_inlier_failures === null ? "15" : 15} of 112</b> cells, worst <b>0.591</b>.
+          Consequence, stated: on those pairs the agreement reported above is <b>inside the harness's own
+          floor</b> and is a bound, not a measurement.</li>
+      </ul>
+      Withholding the stage would be re-scoping in the other direction, so the numbers are here with their
+      gate's status attached.</div>
+
+    <div class="note">
+      <b>The second engine did not rescue it.</b> DISK + LightGlue reaches the <b>same</b> envelope
+      (${(sc.secondary.B4L || {}).envelope_r} : 1), is <b>worse</b> at the rung where it is decided, and
+      produced <b>${(sc.secondary.B4L || {}).n_wrong_pass} wrong passes</b> \u2014 against a pre-registered
+      prediction of one more rung and at least one wrong pass. Both predictions are recorded as wrong in
+      the stage report.</div>
+
+    <div class="note" style="margin-top:14px"><b>Not claimed.</b><ul>
+      ${(sc.not_claimed || []).map(x => `<li>${esc(x)}</li>`).join("")}
+    </ul></div>
+    <div class="note">Scope \u2014 ${esc(sc.scope)}</div>`);
+}
 
 // Module 09 - EXP-017. The second variation the problem statement names, and
 // the panel has to carry a shape most results do not have: two criteria that

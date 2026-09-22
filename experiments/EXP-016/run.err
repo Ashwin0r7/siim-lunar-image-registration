@@ -1,0 +1,8 @@
+D:\MyData\downloads\SIH\src\siim\preprocessing\degrade.py:76: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a.reshape(a.shape[0] // k, k, a.shape[1] // k, k), axis=(1, 3))
+D:\MyData\downloads\SIH\scripts\run_exp007.py:117: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a.reshape(a.shape[0] // k, k, a.shape[1] // k, k), axis=(1, 3))
+D:\softwares\Lib\site-packages\kornia\feature\integrated.py:550: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  hw1_ = torch.tensor(hw1, device=dev)
+D:\softwares\Lib\site-packages\kornia\feature\integrated.py:554: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  hw2_ = torch.tensor(hw2, device=dev)

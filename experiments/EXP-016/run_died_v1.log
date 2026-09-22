@@ -1,0 +1,44 @@
+EXP-016 | windows 32 | recorded NU rows 42 | B4L yes
+
+== S0 (i)/(ii): operator gate ==
+  [S0 ii] RD03-target m1335207975r->m1452560468lc k= 4 inliers= 9460 recorded= 9460 REPRODUCES
+  [S0 ii] RD03-target m1335207975r->m1452560468lc k= 8 inliers= 3054 recorded= 3054 REPRODUCES
+  [S0 ii] RD03-target m1335207975r->m1452560468lc k=16 inliers= 1373 recorded= 1373 REPRODUCES
+  [S0 ii] RD03-target m1335207975r->m1452560468lc k=32 inliers=  566 recorded=  566 REPRODUCES
+  [S0 ii] REAL-DATA-03 m1335207975r->m1452560468lc k= 2 inliers= 5365 recorded= 5365 REPRODUCES
+  [S0 ii] RD04-target m1299958135l->m1271742202lc k= 4 inliers= 3693 recorded= 3693 REPRODUCES
+  [S0 ii] RD04-target m1299958135l->m1271742202lc k= 8 inliers= 1665 recorded= 1665 REPRODUCES
+  [S0 ii] RD04-target m1299958135l->m1271742202lc k=16 inliers=  693 recorded=  693 REPRODUCES
+  [S0 ii] RD04-target m1299958135l->m1271742202lc k=32 inliers=  243 recorded=  243 REPRODUCES
+  [S0 ii] REAL-DATA-04 m1299958135l->m1271742202lc k= 2 inliers= 1656 recorded= 1656 REPRODUCES
+
+== S0 (iii): native gate ==
+  [S0 iii] RD03 m1271742202l->m1182331886lc inliers= 1656 recorded= 1656 REPRODUCES
+  [S0 iii] RD03 m1182331886l->m1212932972lc inliers= 5437 recorded= 5437 REPRODUCES
+  [S0 iii] RD03 m1236465772r->m1175268993rc inliers= 8239 recorded= 8239 REPRODUCES
+  [S0 iii] RD03 m1212932972l->m1363396554rc inliers= 3486 recorded= 3486 REPRODUCES
+  [S0 iii] RD03 m1452560468l->m1335207975rc inliers= 5392 recorded= 5392 REPRODUCES
+  [S0 iii] RD03 m1096350825r->m1142297886lc inliers= 7554 recorded= 7554 REPRODUCES
+  [S0 iii] RD03 m1199981485r->m1142297886lc inliers=    4 recorded=    4 REPRODUCES
+  [S0 iii] RD03 m1335207975r->m1142297886lc inliers=    5 recorded=    5 REPRODUCES
+  [S0 iii] RD04 m1299958135l->m1315225542lc inliers= 2726 recorded= 2726 REPRODUCES
+  [S0 iii] RD04 m1299958135l->m1271742202lc inliers= 1608 recorded= 1608 REPRODUCES
+  [S0 iii] RD04 m1315225542l->m1271742202lc inliers= 2138 recorded= 2138 REPRODUCES
+  [S0 iii] RD04 m1271742202l->m1341069775rc inliers=   47 recorded=   47 REPRODUCES
+  [S0 iii] RD04 m1212932972l->m1363396554rc inliers= 2597 recorded= 2597 REPRODUCES
+  [S0 iii] RD04 m1341069775r->m1212932972lc inliers=    8 recorded=    8 REPRODUCES
+
+== ladder ==
+  [A RD03        m1271742202l->m1182331886lc] D r=  4(run   4) B1  N=  524288 kp= 3443 put=  956 inl=  933 SUCCESS    geom=CONSISTENT W cons=0.480px (3s)
+  [A RD03        m1271742202l->m1182331886lc] D r=  8(run   8) B1  N=  131072 kp= 1175 put=  393 inl=  388 SUCCESS    geom=CONSISTENT W cons=0.210px (1s)
+Loaded LightGlue model
+  [A RD03        m1271742202l->m1182331886lc] D r=  8(run   8) B4L N=  131072 kp= 1859 put= 1168 inl= 1165 SUCCESS    geom=CONSISTENT W cons=0.218px (6s)
+  [A RD03        m1271742202l->m1182331886lc] D r= 16(run  16) B1  N=   32768 kp=  413 put=  133 inl=  133 SUCCESS    geom=CONSISTENT W cons=0.281px (0s)
+  [A RD03        m1271742202l->m1182331886lc] D r= 16(run  16) B4L N=   32768 kp=  428 put=  246 inl=  245 SUCCESS    geom=CONSISTENT W cons=0.202px (1s)
+  [A RD03        m1271742202l->m1182331886lc] D r= 32(run  32) B1  N=    8192 kp=  137 put=   43 inl=   43 SUCCESS    geom=CONSISTENT W cons=0.108px (0s)
+  [A RD03        m1271742202l->m1182331886lc] D r= 32(run  32) B4L N=    8192 kp=   98 put=   44 inl=   43 SUCCESS    geom=CONSISTENT W cons=0.252px (0s)
+  [A RD03        m1271742202l->m1182331886lc] D r= 64(run  64) B1  N=    2048 kp=   23 put=    9 inl=    9 SUCCESS    geom=CONSISTENT W cons=nanpx (0s)
+  [A RD03        m1271742202l->m1182331886lc] D r= 64(run  64) B4L N=    2048 kp=   17 put=    9 inl=    8 fail       geom=INCONCLUSIVE cons=nanpx (0s)
+  [A RD03        m1271742202l->m1182331886lc] D r=128(run 128) B1  N=     512 kp=    6 put=    3 inl=    3 fail       geom=CONSISTENT W cons=nanpx (0s)
+  [A RD03        m1271742202l->m1182331886lc] D r=128(run 128) B4L N=     512 kp=    3 put=    2 inl=    0 fail       geom=no transform cons=nanpx (0s)
+  [A RD03        m1271742202l->m1182331886lc] D r=320(run 320) B1  N=      72 kp=    0 put=    0 inl=    0 fail       geom=no transform cons=nanpx (0s)

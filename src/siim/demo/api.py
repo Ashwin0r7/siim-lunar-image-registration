@@ -64,6 +64,7 @@ from siim.demo.chandrayaan2 import (  # noqa: E402
 from siim.demo.exp006 import exp006_evidence, exp006_status  # noqa: E402
 from siim.demo.exp012 import exp012_evidence, exp012_status  # noqa: E402
 from siim.demo.exp013 import exp013_evidence, exp013_status  # noqa: E402
+from siim.demo.exp016 import exp016_evidence, exp016_status  # noqa: E402
 from siim.demo.exp017 import exp017_evidence, exp017_status  # noqa: E402
 from siim.demo.exp019 import exp019_evidence, exp019_status  # noqa: E402
 from siim.demo.exp020 import exp020_evidence, exp020_status  # noqa: E402
@@ -358,6 +359,19 @@ def evidence_controlled_reference() -> dict:
     artefacts; never recomputed."""
     try:
         return exp019_evidence()
+    except DemoDataMissing as exc:
+        raise HTTPException(503, str(exc)) from exc
+
+
+@app.get("/api/evidence/scale")
+def evidence_scale() -> dict:
+    """EXP-016: the scale ladder to 320:1 on real lunar texture.
+
+    The problem statement names "2:1 to 320:1" in so many words, and this is
+    the axis the project left untested longest. Read from the recorded
+    artefact; never recomputed."""
+    try:
+        return exp016_evidence()
     except DemoDataMissing as exc:
         raise HTTPException(503, str(exc)) from exc
 
@@ -686,6 +700,10 @@ def advertised_artefacts() -> frozenset[str]:
         pass
     try:
         paths.update(exp017_evidence()["sources"])
+    except DemoDataMissing:
+        pass
+    try:
+        paths.update(exp016_evidence()["sources"])
     except DemoDataMissing:
         pass
     return frozenset(paths)

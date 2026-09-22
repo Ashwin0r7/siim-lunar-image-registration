@@ -1303,3 +1303,98 @@ does.
 | Cycle consistency untested against a *real* independent reverse pass | Its 1.000 false-alarm rate came from an adversarial construction | EXP-003+ |
 | Loop closure needs real overlapping triplets | Only validated on constructed transforms so far | when data arrives |
 | Terrain matches LOLA *medians* but distribution shape is unverified | Percentiles reported, but shape not fitted | low priority |
+
+---
+
+### RL-057 - The scale ladder: the ceiling is pixels, not ratio, and the architecture's own scale stage does not beat leaving it out (EXP-016)
+
+**Question.** The problem statement names scale variation **"2:1 to 320:1"** in
+so many words, and it is the axis this project left untested longest: the best
+real number was a ~65:1 proxy (REAL-DATA-08, B1 **1 of 4**) and the synthetic
+probe stopped at 32:1 while measuring the *unmodified* baseline instead of the
+architecture's answer. `PROJECT_GAP_ANALYSIS.md` §4 ranked this stage **first**
+of the corrected path. Take 11 real NAC edges the pipeline already registers at
+its native rung, inside the measured illumination envelope, degrade both images
+through a stated PSF to a common coarser GSD, and climb
+2 : 4 : 8 : 16 : 32 : 64 : 128 : 320.
+
+**Result.** `[MEASURED]` `experiments/EXP-016/exp016_results.json`, 11 685 s,
+488 cells. **S4 MET; S0, S1, S3, S5 NOT MET; S2 returns STARVATION.** Third
+launch; the two earlier deaths wrote nothing and are kept as
+`run_died_v1/v2` logs.
+
+* **The envelope is 32 : 1.** 11 / 11 at r = 4, 8, 16, 32; **8 / 11 at 64**;
+  **0 / 11 at 128 and 320**. Every failure is the frozen `n_inliers <= 8` rule,
+  never the geometry check: across 77 arm-D cells the archive geometry returned
+  CONSISTENT 55 times, INCONCLUSIVE 5 and **INCONSISTENT never**, with **zero
+  wrong passes** in either engine at any rung — and at r = 64 the geometry floor
+  is only ~1.6 coarse px, so a wrong pass needed a ~2 px error to be caught.
+* **The ceiling is the pixel count, and the ratio's coefficient is zero.** The
+  cropped control (same coarse pixel count, half the ratio) agrees with the full
+  cell on **55 of 60**; the pooled logistic over 143 cells gives
+  `beta_N = +2.038 (p = 0.0025)` against `beta_r = +0.00018 (p = 0.9998)`.
+  **N\* = 2048 coarse pixels** — 0 % success below 2^10, 72.7 % in the
+  2^11-2^12 bin, 100 % above. That floor is the number every sensor pairing can
+  be checked against, and the check is arithmetic: TMC-2/NAC clears it by
+  40-160x, OHRC-in-IIRS (~5 550 px) by 2.7x, one IIRS grid against a single
+  4096-line NAC tile (325-5 000 px) straddles it. **So the 320 : 1 rung's
+  failure here is about the 570 pixels the largest window on this disk gives at
+  that ratio, not about 320 : 1.** (D-066)
+* **The architecture lost its own ablation.** Arm N — native source against a
+  coarse reference, **no normalisation at all** — succeeds **10 / 10 at every
+  rung it was run at**, i.e. across GSD gaps to 16 : 1, exactly as the
+  normalised arm does. **Zero discordant pairs**, so the pre-registered McNemar
+  cannot run and S3 is NOT MET **as a null by construction**. D-005's
+  "required first-class pipeline stage" is superseded by note (D-005-N1) with
+  the narrower measured statement: RootSIFT's own scale space bridges a 16 : 1
+  gap unaided on this terrain. The one place the un-normalised arm is visibly
+  worse is the **recovered scale, off by up to +/-10 %** where Part 1 predicted
+  2 %. The criterion's inability to express a tie is **E-056**.
+* **S4 MET at 0.977, and twice not reassuring.** Rung consistency against the
+  recorded native solution is 0.258 -> 0.094 coarse px from r = 4 to 32 — and
+  **1.16 -> 2.93 m on the ground**, i.e. better in pixels and worse in metres,
+  the trivial direction Part 1 pre-committed to printing. All **eight**
+  successes at r = 64 are CANNOT CHECK (too few grid points on a 64 x 32 tile),
+  so S4 is silent exactly where the envelope is decided.
+* **S0 NOT MET on two clauses, and the second is the interesting one.** (i) the
+  *bit for bit* clause fails on 4 of 30 cells, all at k = 32, because
+  `decimate` accumulates in float32 and `degrade_to_gsd` upcasts to float64 —
+  measured afterwards at **4.07e-5 / 8.14e-5 DN, relative 3-5e-8** (E-055).
+  (iv) the self-scale control — degrade a window, match it against itself
+  shifted by a known integer — **fails on 15 of 112 cells**, worst **0.591
+  coarse px** against a 0.05 bound, with 8 of those at r = 64. The clause Part 1
+  predicted would fail (inliers) failed **zero** times. Consequence, stated
+  beside S4: on the pairs where the control failed, S4's reported 0.09-0.26 px
+  is **inside the harness's own floor** and is a bound, not a measurement.
+* **S5 NOT MET, localisation envelope `none`** — and two different things
+  failed. At r = 320 **both** windows' peaks are *inside* tolerance (0.82 and
+  0.33 coarse px = 262 m and 105 m) and fail only on **PSR 4.50 and 4.23
+  against the frozen 5** — a 12 x 6 template of 72 mare samples gives a peak
+  that is right and not sharp, exactly as predicted. At r <= 128 the RD03 window
+  misses by **306.5 m at r = 32, 64 and 128 — the same distance three times** —
+  with the sharpest peaks in the run, which is the **archive corner map**
+  disagreeing with the imagery, not the correlator. EXP-019 measured that same
+  disagreement independently at 137.6 m median, eastward. (D-067)
+* **B4L did not help.** Same envelope (32), **worse at r = 64 (5 vs 8)**, zero
+  wrong passes. Part 1 predicted it would extend the envelope by a rung and
+  produce at least one wrong pass; both wrong.
+* **The thing nobody asked for.** The three edges that **fail at the native
+  rung** were carried through every rung as their own stratum, and **11 of their
+  69 cells succeed after degradation** — including one at r = 8 with **994
+  inliers** where 1 : 1 gives 8. Degrading suppresses the high-frequency shadow
+  texture an illumination difference writes into the pair, and on these three it
+  rescues the edge. n = 3, geometry CONSISTENT, no wrong passes, **not a
+  criterion and not claimed** — written down so a later stage can test it.
+
+**Predictions.** Nine wrong, eleven right, one vacuous, one unobservable. The
+envelope (32), the STARVATION verdict, the concordance bar, the zero-keypoint
+cell at 320 : 1 and the PSR failure at 320 were all called correctly. Wrong:
+S0 (twice, including which clause would fail), r = 64's success count, N\*
+(2048 against a predicted 4 000-16 000), **S3 entirely**, the localisation
+envelope, and both B4L predictions.
+
+**Consequence.** §2.2's scale row moves from *NOT MET / UNTESTED* to **NOT MET
+with a measured envelope, a mechanism and a portable floor** — which is the
+form a deliverable can defend. D-005 is superseded by its own ablation, which
+also retires `PROJECT_GAP_ANALYSIS.md` C2 ("D-005 is a permanent PROPOSED
+deferring to a stage that will never run"): it was decided by a stage that did.

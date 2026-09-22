@@ -97,7 +97,7 @@ def test_the_panel_is_wired_into_the_boot_and_the_stage(page):
     assert "/api/evidence/viewpoint" in page
     assert "window.__VP = vp;" in page
     assert "${viewpointPanel(vm)}" in page
-    assert "of 9 modules on disk" in page
+    assert re.search(r"of \d+ modules on disk", page), "the module count must be shown"
 
 
 def test_the_panel_renders_against_the_live_payload(ev):

@@ -116,6 +116,72 @@ Independent support arrived from the negative control in EXP-002 objective 3: `f
 
 ---
 
+### N1 — the ablation ran, and the stage did not earn its place (2026-09-23, EXP-016)
+
+*(A superseding note. The decision above is left exactly as written, including
+its `PROPOSED` status and its pointer to EXP-004.)*
+
+**What was measured.** EXP-016 ran this decision's own counterfactual as a
+pre-registered ablation — the first time the stage was tested rather than
+argued. **Arm D** degrades both images through a stated PSF to a common coarse
+GSD (this ADR's answer). **Arm N** does nothing at all: the native source is
+matched against a coarse reference across a GSD gap of `r / 2`, relying on the
+detector's own scale space, which is alternative **(a)** above — the one this
+ADR records as *"refuted by the numbers"*.
+
+| rung | gap arm N bridges | arm D | arm N | discordant |
+|---|---|---|---|---|
+| 4 : 1 | 2 : 1 | 10 / 10 | **10 / 10** | 0 |
+| 8 : 1 | 4 : 1 | 10 / 10 | **10 / 10** | 0 |
+| 16 : 1 | 8 : 1 | 10 / 10 | **10 / 10** | 0 |
+| 32 : 1 | **16 : 1** | 10 / 10 | **10 / 10** | 0 |
+
+**Alternative (a) is not refuted on this terrain up to a 16 : 1 gap.** The
+"reliable to roughly 2–4×" figure in the Evidence paragraph above is a
+literature number; measured here, RootSIFT's own scale space bridges **16 : 1**
+on every pair the normalised arm also registers. With **zero discordant pairs**
+the pre-registered exact McNemar cannot run, so the criterion (S3) is **NOT
+MET as a null by construction — a tie, not a defeat** (E-056 records why the
+criterion could not express that).
+
+**What survives of the decision.**
+
+* **The trade-off paragraph is vindicated and is now the stage's only measured
+  justification**: arm N's **recovered scale is off by up to ±10 %** against the
+  known ratio, where arm D's is exact by construction. If a downstream
+  consumer needs the similarity's scale rather than only the correspondences,
+  normalisation is what supplies it.
+* **The direction rule is confirmed by the ladder itself** — degrade the finer
+  image toward the coarser, never upsample — and the ladder measured what that
+  costs: at 320 : 1 a tile is 12 × 6 px and the detector finds **zero**
+  keypoints. The information discarded above the coarse Nyquist is gone by
+  design, so *sub-pixel* at a coarse rung means sub-pixel **in coarse pixels**,
+  and the metres must be quoted beside them (1.16 m at 4 : 1 rising to 2.93 m
+  at 32 : 1 for the *same* registrations).
+* **The stage stays in the pipeline**, because removing a component on a tie is
+  as unjustified as keeping it on a citation — and because above 16 : 1 the
+  ablation was not run (Part 1 fixed the rung set, and it was not extended
+  after the result was seen).
+
+**What the architecture may no longer say.** That scale normalisation is
+*required*. The measured statement is: *on real mare NAC texture inside the
+measured illumination envelope, across GSD gaps to 16 : 1, the normalisation
+step has no measured benefit to the success rate, and its measured benefit is
+the recovered scale.*
+
+**What replaces the missing envelope.** The ladder's own deliverable is not a
+ratio but a **pixel floor: `N* = 2048` coarse pixels of overlap**, below which
+registration stops regardless of ratio (concordance 55/60 between full-ratio
+and half-ratio cells at equal pixel count; `β_N = +2.038, p = 0.0025` against
+`β_r = +0.00018, p = 0.9998`). Any sensor pairing is checked against that floor
+by arithmetic — which is what this ADR wanted from EXP-004 and never got.
+
+**Status:** ADR-0005 `PROPOSED` → **SUPERSEDED by this note.** Reverses if a
+rung above 16 : 1 is found where normalisation succeeds and no-normalisation
+fails; the ladder has the cells to run it.
+
+---
+
 ## ADR-0006 — `max_uncovered_disc_radius` as the primary coverage metric
 
 **Decision.** Primary coverage metric is the radius of the largest disc within the overlap region containing no selected correspondence. Grid occupancy, spatial entropy, convex-hull ratio and NN-distance distribution are reported as secondary.
