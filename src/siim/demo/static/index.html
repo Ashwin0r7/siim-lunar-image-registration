@@ -385,6 +385,12 @@ ul.caveats li{margin-bottom:6px;line-height:1.5}
 .liveimgs figure{margin:0}
 .liveimgs img{max-width:260px;border:1px solid var(--rule);display:block}
 
+.herocta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;margin-top:22px}
+.ctabtn{background:none;border:1px solid var(--accent);color:var(--ink);cursor:pointer;
+  font:500 11px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;padding:13px 18px}
+.ctabtn:hover{background:var(--accent-soft)}
+.ctanote{color:var(--ink-3);font-size:10.5px}
+
 /* ------------------------------------------------ live upload (two slots)
    The judge's first interaction with the system is dropping two files into
    it, so this has to work the way a file drop works everywhere else: drag
@@ -480,6 +486,7 @@ footer.foot b{color:var(--ink-2);font-weight:500}
       <a href="#m05">05 Engines</a>
       <a href="#m06">06 Chandrayaan-2</a>
       <a href="#m07">07 Reference</a>
+      <a href="#live" id="nav-live">Live</a>
       <a href="#m09">09 Viewpoint</a>
       <a href="#m10">10 Modality</a>
       <a href="#prov">Provenance</a>
@@ -499,6 +506,11 @@ footer.foot b{color:var(--ink-2);font-weight:500}
     <p class="lede">A registration protocol for Chandrayaan-2 and LRO NAC optical imagery that
       reports <b>what it can verify</b>, what it can only corroborate, and what it cannot see —
       and refuses to certify an alignment on a fit residual alone.</p>
+    <div class="herocta">
+      <button class="ctabtn" id="hero-live">Register two images of your own</button>
+      <span class="ctanote lab">drag, click or paste · or start from a recorded pair ·
+        runs on this machine, in the request</span>
+    </div>
     <div class="hmeta lab" id="provline">Every number on this page is read from a recorded
       artefact on real LRO NAC / Chandrayaan-2 data. No synthetic data appears on this page.
       The one live panel registers a pair you supply, in the request, and labels every number
@@ -633,6 +645,19 @@ Promise.all([
   const first = document.querySelector("#cases-real button.case")
              || document.querySelector("button.case");
   if (first && current === null && !document.getElementById("live-src")) first.click();
+});
+
+// The hero button and the nav entry are the two places a reader looks for
+// "let me try it"; both go through the sidebar card's handler so there is one
+// code path that renders and wires the live card.
+["hero-live", "nav-live"].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener("click", ev => {
+    ev.preventDefault();
+    const open = document.getElementById("live-open");
+    if (open && open.onclick) open.onclick();
+  });
 });
 
 function setIndicator(text, live) {
@@ -1770,7 +1795,8 @@ function wireLive() {
   }
   const run = $("#live-run");
   if (run) run.onclick = runLive;
-  const cancel = $("#live-cancel");
+  const cancel2 = $("#live-cancel");
+  const cancel = cancel2;
   if (cancel) cancel.onclick = () => { if (LIVE.abort) LIVE.abort.abort(); };
   paintSlot("src"); paintSlot("ref");
 }

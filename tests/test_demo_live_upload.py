@@ -296,3 +296,14 @@ def test_a_refusal_suggests_the_engine_that_needs_nothing_extra(script):
     assert "learned|extra" in run
     assert "choose <b>RootSIFT</b>" in run
     assert "Check that both files are images of the same ground." in run
+
+
+def test_the_page_offers_two_ways_into_the_live_card(page):
+    """The sidebar card is the only route a reader knows about if nothing else
+    points at it; a judge reading the hero should not have to hunt."""
+    assert 'id="hero-live"' in page, "the hero has no call to action"
+    assert 'id="nav-live"' in page, "the sticky nav has no live entry"
+    assert '["hero-live", "nav-live"].forEach' in page, (
+        "both entry points must go through the one handler that renders and wires the card")
+    hero = page[page.index('<p class="lede">'):page.index('<div class="hfigs"')]
+    assert "herocta" in hero, "the call to action belongs with the lede, not below the figures"
