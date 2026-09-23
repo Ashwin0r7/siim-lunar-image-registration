@@ -176,6 +176,40 @@ the gap analysis.
 
 ---
 
+## Amendment A1 — written after run v1, before run v2 (2026-09-23)
+
+**Run v1 was executed as frozen** (`experiments/EXP-022/exp022_results.json`,
+`run.log`). It is kept, not rewritten, and Part 2 reports it. It could not do
+what the stage exists to do: **S1 NOT MET with 0 rows at occupancy ≥ 0.99, 0
+rows at ≥ 1000 points, and 27 of 39 edges without a sampled cell.** The cause
+is two defects in the runner's image preparation, not in any frozen line:
+
+1. **No-data pixels.** Five of the ten tiles carry 0.2–2 % NaN (frame edges).
+   §2.1 said only "decimate, then scale to [0, 1]". The min-max scaling
+   propagated NaN into the matcher, which returned **no putative matches**, so
+   those tiles were skipped.
+2. **Contrast.** Min-max scaling over a full tile is set by a few bright
+   pixels. It left pools of **229–989** true matches, where the recorded
+   REAL-DATA-07 pipeline found **thousands** on these same frames (5437 on one
+   edge). The population therefore never reached real match counts.
+
+**The amendment adopts the recorded pipeline's own preparation**,
+`stretch(decimate(raw, 2))` from `scripts/run_exp007.py`: a NaN-aware block
+mean, then a 1–99 % percentile stretch with no-data set to the median. This
+is what produced the 39 edges' inlier counts in the first place. **Nothing
+else changes:** tiles, truth, pool rule, sizes, shapes, draws, arms, σ_N,
+every criterion, every line, and the adoption rule. Run v2 writes
+`exp022_results_A1.json`.
+
+**Disclosed:** v1's statistics were read before this amendment was written
+(`T″` 0.328 on arm N, S3/S5 NOT MET, S6 MET). The amendment changes only how
+an image is prepared, fixed by the recorded pipeline rather than chosen. Part
+2 reports v1 and v2 side by side. If they disagree on a criterion, both are
+stated, and the verdict is v2's **only** because v1 could not sample the
+regime (S1).
+
+---
+
 ## Part 2
 
 *(Empty until Part 1 is committed.)*

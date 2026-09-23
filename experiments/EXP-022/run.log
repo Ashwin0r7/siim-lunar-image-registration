@@ -1,0 +1,16 @@
+S0(i) crossing_from_above on EXP-014 rows: 0.078125 (EXP-015 recorded 0.078125)
+39 VERIFIED edges read; sigma_N = median(fit_rmse)/sqrt(2) = 0.7202 px
+  [1/10] nac.m1096350825rc.geo.l1356s690.n4096.tile.npy   OK        pool=811 rows=444 (48s)
+  [2/10] nac.m1096350825rc.geo.l9806s49.n4096.tile.npy    OK        pool=855 rows=888 (52s)
+  [3/10] nac.m1142297886lc.geo.l2403s2157.n4096.tile.npy  OK        pool=989 rows=1332 (47s)
+  [4/10] nac.m1175268993rc.geo.l2249s3016.n4096.tile.npy  SKIPPED   pool=- rows=1332 (1s)
+  [5/10] nac.m1182331886lc.geo.l2441s517.n4096.tile.npy   SKIPPED   pool=- rows=1332 (1s)
+  [6/10] nac.m1199981485rc.geo.l46768s0.n4096.tile.npy    SKIPPED   pool=- rows=1332 (1s)
+  [7/10] nac.m1205872034rc.geo.l0s2171.n4096.tile.npy     OK        pool=628 rows=1740 (41s)
+  [8/10] nac.m1212932972lc.geo.l18112s2997.n4096.tile.npy SKIPPED   pool=- rows=1740 (1s)
+  [9/10] nac.m1212932972lc.geo.l8014s3016.n4096.tile.npy  SKIPPED   pool=- rows=1740 (1s)
+  [10/10] nac.m1225876972lc.tile.npy                       OK        pool=459 rows=2112 (40s)
+
+S0 MET | S1 NOT MET (occ>=0.99: 0, n>=1000: 0, uncovered edges: 27) | S2 T''=0.328125 CI 0.3125..0.4375 (arm 0: 0.046875) | S3 False | S4 True | S5 False (16/39) | S6 True (1.00) | adopted False
+-> D:\MyData\downloads\SIH\experiments\EXP-022\exp022_results.json (237.2 s)
+EXIT 0
