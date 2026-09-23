@@ -20,6 +20,24 @@ path beside it. That is the whole pitch, and it is the only part that cannot
 be faked. Every number in this script has been checked against the live page
 — the beat that quotes it also puts it on screen.
 
+**Note added 2026-09-23 (later): two things on the page changed, and two beats
+get easier.** *(The sheet below is kept as written; read it with these in mind.)*
+
+- **Beat 9c's live run no longer needs files ready on disk.** The live card now
+  lists the **real lunar sample sets** (`sample_images/`). One click loads a set,
+  and a three-image set fills the third slot. On camera, click **"Three
+  overlapping frames"** then **Register triplet**: it returns **VERIFIED, loop
+  0.0669 px**, measured in the browser. For the refusal, click **"39.8 deg of Sun
+  change"**: it returns **REJECTED, 4 inliers**, with no registered image drawn.
+  On the recording machine the **Chandrayaan-2 TMC-2 → LRO NAC** card leads the
+  list (**INCONCLUSIVE / low, 36 inliers**). Say *"local only — ISRO's products
+  are not redistributed"* while it is on screen.
+- **Module 02 now answers "how often is VERIFIED wrong?"** (EXP-021) under the 13
+  triplets: **0 / 12** against another mission's reference, **1.51 m** median
+  error on the ground, and **NOT EVALUABLE** on the held-out site in red beside
+  it. If you show the zeros, show the red tile in the same shot. The panel's own
+  "why the zeros are not reassurance" block is the line to read aloud.
+
 ---
 
 ## 0. Pre-flight — 10 minutes before recording
