@@ -25,7 +25,7 @@ reviewer should be handed first.
 | 1 | Illumination separation, ≥ 2 rungs, p ≤ 0.05 | **MET** | re-measured out of sample (EXP-018) |
 | 2 | ≥ 1 VERIFIED Chandrayaan-2 pair + check-point error/CI | **NOT MET** | its **check-point clause is now MET** (EXP-019); the triangle misses 2.0 px by **8.9 %** |
 | 3 | FA ≤ 5 %, FR ≤ 20 %, zero VERIFIED adversarial | **PARTLY** | a stronger bound: **0 wrong passes in 41 out-of-sample passes** (EXP-018) |
-| 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET + mis-specified** | worse, not better: occupancy **0.484** at the scale envelope's rung (EXP-016) |
+| 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET + mis-specified** | worse, not better: occupancy **0.484** at the scale envelope's rung (EXP-016). *(Later, EXP-022: **answered NOT MET** — at real counts and recorded noise the floor is 0.359; the 9-, 28- and 68-inlier edges exceed the 1 px bound, the last one **above** the floor, so no occupancy floor can be the criterion; D-069)* |
 | 5 | Fresh clone, CPU-only, tests pass, licences | **MET** | suite larger and green; the demo now registers user-supplied images live |
 
 **2 of 5 = 40 %.** Five stages moved this scorecard by **zero**, and that is a
@@ -43,7 +43,7 @@ what makes the week's work visible at all.
 | **Viewpoint** | **NEVER TESTED** | **literal form NOT MET and mis-specified; bound form MET to 20°** with the DEM the deliverable has |
 | **Multi-modality** | NOT MET | **MET for reflectance** (7/9 bands within 1.334× of pan), **thermal envelope stated** (starvation at 28 : 1) — **not IIRS** |
 | **Sub-pixel accuracy on check points** | NOT MET — none exist | **MET** — 0.266 reference px = **2.24 m**, CI95 0.222–0.413, 17 pairs, against another mission's control network |
-| Uniform match-point distribution | NOT MET + mis-specified | unchanged |
+| Uniform match-point distribution | NOT MET + mis-specified | unchanged *(later, EXP-022: NOT MET with named edges and a measured floor, no longer by extrapolation)* |
 | Registered product | MET | MET, **and now for images the reader supplies** |
 | Metrics incl. RMSE / inliers | MET | MET |
 | All named formats load | PARTIAL | **PARTIAL, wider** — PDS3 map-projected products added (Kaguya TC, MI, Diviner); **IIRS still absent** |
@@ -132,6 +132,7 @@ And two results argue against the *method*, not the architecture:
 | B3 | **Calibration/validation site split** | **open — the largest remaining hole.** FA and FR are unmeasurable without it |
 | B3 *(note 2026-09-23, EXP-021)* | *(row above retained under integrity rule 3)* | **RAN — measured, not closed.** B1 VERIFIED FDR 0 / 12 and FRR 0 / 12 on the pooled reading; **NOT EVALUABLE on the held-out site** (ground truth reached 2 of 7 frames); **no wrong transform in the labelled population** (E-058), so FA was never exercised. Successor item **B3′: tier-A ground truth on the hard frames** (an illumination-matched or second independent reference) - the only route to a population that contains its own negatives |
 | B4 | **Coverage calibration at real inlier counts** | **open**, and EXP-016 gives it a second reason: occupancy is 0.484 at the scale envelope's rung |
+| B4 *(note 2026-09-23, EXP-022)* | *(row above retained under integrity rule 3)* | **RAN — answered, not closed.** Floor at recorded noise **T″ = 0.359**; 25 of 28 evaluable edge-rows within 1 px; **three over** (9, 28 and 68 inliers: 3.93, 1.66, 1.04 px), the 68-inlier edge *above* the floor; 7 of 22 distinct edges unsampled. Criterion 4 stays NOT MET, and 4″ is not adopted (D-069). Successor **B4′**: the direct bound from each edge's own inlier positions (needs a re-run of REAL-DATA-07 that records them) and a seventh layout family for the unsampled cells |
 
 ### Tier C — debts and loose ends
 
@@ -175,7 +176,9 @@ And two results argue against the *method*, not the architecture:
    arithmetic, and the arithmetic puts the real OHRC-in-IIRS case **above** the
    floor — but that is arithmetic, and it is labelled as such everywhere.
 8. **"Your success criterion 4 fails."** Unchanged, and now with a second
-   number against it.
+   number against it. *(Later, EXP-022: it fails on **three named edges**,
+   and the stage shows why no occupancy floor could fix it. That answer is
+   stronger than the question, and it should be given first.)*
 9. **The 42-pair census is exhausted** — blocks the cheap route to criterion 2.
 10. ~~"Nothing was held out."~~ **Answered (EXP-018).** ~~"Demo never seen in a
     browser."~~ **Answered.**

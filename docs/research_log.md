@@ -1439,3 +1439,50 @@ reason (S4).
 triggered. The next useful measurement is ground truth on the hard frames at
 tier-A quality: an illumination-matched or second independent reference, or
 manual check points on the three AMBIGUOUS-carrying frames.
+
+### RL-059 - Criterion 4 at the match counts real registrations actually have (EXP-022)
+
+**Question.** §53 criterion 4 (coverage) was *answerable in neither
+direction*: EXP-015's restated floor `grid_occupancy >= 5/64` passed 39/39 on
+an exact tie, and 14 of the 39 VERIFIED edges sat at occupancy 1.0, above
+everything EXP-014 had sampled. Does each VERIFIED edge's point layout bound
+worst-case local error at 1 px, at its own inlier count?
+
+**What ran.** EXP-014's instrument (10 NAC tiles, known similarity, six
+layout shapes, 3 draws) at the 22 distinct real inlier counts (9-5 437),
+with destination noise at sigma_N = median(recorded fit RMSE) / sqrt(2) =
+0.720 px (arm N) beside the noiseless arm 0. Floor T'' by EXP-015's own
+`crossing_from_above`; each edge's matched cell = rows within +/-25 % of its
+count and +/-1/64 of its occupancy. Run v1 as frozen could not reach real
+counts (0 rows at >= 1 000 points: NaN into the matcher, min-max contrast;
+E-059). Amendment A1, written before v2, adopted the recorded pipeline's
+`stretch(decimate(raw, 2))`; v2 reached pools of 3 600-9 182.
+
+**Result.**
+* **Floor at recorded noise: T'' = 0.359** (CI95 0.297-0.453); arm 0: 0.0625.
+  EXP-015's floor was optimistic by 19 lattice steps.
+* **Below T'' + 1/64 (S3):** RD04 `m1271742202lc -> m1335207975rc` (9
+  inliers, 0.078) and RD04 `m1299958135lc -> m1363396554rc` (28, 0.281).
+* **Direct bound (S5, cells >= 5 rows):** 25 of 28 evaluable edge-rows within
+  1 px (max 0.81); over: the two above (**3.93**, **1.66 px**) and RD03
+  `m1182331886lc -> m1335207975rc`, **68 inliers at 0.4375 - above the
+  floor** - at **1.04 px**. A 47-inlier edge at 0.453 stays at 0.81 px.
+* **High counts are clear:** all 14 edge-rows at occupancy 1.0 at 0.09-0.15 px.
+* **Unsampled:** 7 of 22 distinct edges (108-5 392 inliers, occupancy
+  0.67-0.94). `uniform` saturates at 0.92-1.0 above 100 points and every other
+  shape stays under 0.69: nothing models *nearly uniform with holes*.
+* v1 and v2 agree on every criterion's outcome.
+
+**Predictions.** Seven right (S0, sigma_N, T'' range, S3 on exactly the two
+named edges, S4, S6, the overall NOT MET), three wrong (S1 MET; S1's riskiest
+cell - the 9-inlier cell had 15 rows; arm 0 near 0.08-0.15), one half right
+(S5 NOT MET, but on three edges, one of them above the floor).
+
+**Consequence.** D-069: criterion 4 stays NOT MET and is now *answered*: three
+named low-count edges do not bound local error at 1 px at recorded noise, 25
+evaluable edge-rows do, seven are unsampled. **A one-dimensional occupancy
+floor is shown insufficient as the criterion** - occupancy counts filled cells
+and cannot see that the empty ones sit on one side. The next measurement is the
+direct bound from each edge's own inlier positions (not recorded by
+REAL-DATA-07; needs a re-run that records them) and a seventh layout family for
+the unsampled cells.

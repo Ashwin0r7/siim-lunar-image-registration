@@ -1,3 +1,22 @@
+# NEXT SESSION PLAN — note added 2026-09-23 (latest), after EXP-022
+
+*(Everything below is kept under integrity rule 3.)*
+
+**B4 ran as EXP-022 and answered criterion 4: NOT MET, on three named edges.**
+At real counts and recorded noise the coverage floor is 0.359. The 9-, 28- and
+68-inlier edges exceed the 1 px bound, and the 68-inlier edge sits *above* the
+floor, so no occupancy floor can be the criterion (D-069). Successor **B4′**:
+the direct bound from each edge's own inlier positions, which needs a
+REAL-DATA-07 re-run that records them.
+
+**The next stage is EXP-023: OHRC ↔ LRO NAC at the Chandrayaan-3 site.**
+REAL-DATA-09 excluded OHRC because no NAC tile of that ground was on disk, not
+for want of NAC coverage. A closed OHRC–NAC–NAC triangle would be the project's
+first VERIFIED Chandrayaan-2 result, and it bears on §53 criterion 2 and §2.2's
+OHRC rung.
+
+---
+
 # NEXT SESSION PLAN — note added 2026-09-23 (later), after EXP-021
 
 *(The plan below is kept under integrity rule 3. Its item 1 has now run.)*

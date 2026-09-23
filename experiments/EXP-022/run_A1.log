@@ -1,0 +1,18 @@
+S0(i) crossing_from_above on EXP-014 rows: 0.078125 (EXP-015 recorded 0.078125)
+39 VERIFIED edges read; sigma_N = median(fit_rmse)/sqrt(2) = 0.7202 px
+  [1/10] nac.m1096350825rc.geo.l1356s690.n4096.tile.npy   OK        pool=4800 rows=648 (78s)
+  [2/10] nac.m1096350825rc.geo.l9806s49.n4096.tile.npy    OK        pool=5896 rows=1366 (82s)
+  [3/10] nac.m1142297886lc.geo.l2403s2157.n4096.tile.npy  OK        pool=5552 rows=2070 (90s)
+D:\MyData\downloads\SIH\scripts\run_exp007.py:117: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a.reshape(a.shape[0] // k, k, a.shape[1] // k, k), axis=(1, 3))
+  [4/10] nac.m1175268993rc.geo.l2249s3016.n4096.tile.npy  OK        pool=6911 rows=2808 (110s)
+  [5/10] nac.m1182331886lc.geo.l2441s517.n4096.tile.npy   OK        pool=4103 rows=3450 (89s)
+  [6/10] nac.m1199981485rc.geo.l46768s0.n4096.tile.npy    OK        pool=4632 rows=4104 (92s)
+  [7/10] nac.m1205872034rc.geo.l0s2171.n4096.tile.npy     OK        pool=9182 rows=4848 (114s)
+  [8/10] nac.m1212932972lc.geo.l18112s2997.n4096.tile.npy OK        pool=3600 rows=5466 (91s)
+  [9/10] nac.m1212932972lc.geo.l8014s3016.n4096.tile.npy  OK        pool=4466 rows=6116 (86s)
+  [10/10] nac.m1225876972lc.tile.npy                       OK        pool=4085 rows=6752 (83s)
+
+S0 MET | S1 NOT MET (occ>=0.99: 97, n>=1000: 1026, uncovered edges: 11) | S2 T''=0.359375 CI 0.296875..0.453125 (arm 0: 0.0625) | S3 False | S4 True | S5 False (34/39) | S6 True (1.00) | adopted False
+-> D:\MyData\downloads\SIH\experiments\EXP-022\exp022_results_A1.json (917.6 s)
+EXIT 0

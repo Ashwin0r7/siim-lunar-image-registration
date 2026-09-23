@@ -18,6 +18,8 @@ the negated metric (EXP-015's procedure).
 
 from __future__ import annotations
 
+import argparse
+import importlib.util
 import json
 import platform
 import sys
@@ -37,6 +39,15 @@ from siim.baselines.engines import run_baseline  # noqa: E402
 from siim.evaluation.coverage import coverage_metrics  # noqa: E402
 from siim.geometry import estimate, pixel_grid, similarity, warp  # noqa: E402
 from siim.preprocessing.degrade import block_mean  # noqa: E402
+
+_spec = importlib.util.spec_from_file_location("_exp007", ROOT / "scripts" / "run_exp007.py")
+_e7 = importlib.util.module_from_spec(_spec)
+sys.modules["_exp007"] = _e7
+_spec.loader.exec_module(_e7)
+
+#: Amendment A1: image preparation. "v1" is Part 1 as frozen (min-max after a
+#: block mean); "A1" is the recorded pipeline's own stretch(decimate(raw, 2)).
+PREP = "v1"
 
 STAGE = "EXP-022"
 PREREG = "docs/stages/EXP-022_coverage_at_real_counts.md Part 1"
@@ -95,9 +106,12 @@ def verified_edges() -> list[dict]:
 
 def score_tile(path: Path, idx: int, sigma_n: float, rows: list, controls: list) -> None:
     raw = np.load(path, mmap_mode="r")
-    img = block_mean(np.asarray(raw, dtype=np.float64), K)
-    lo_, hi_ = np.nanmin(img), np.nanmax(img)
-    img = (img - lo_) / (hi_ - lo_) if hi_ > lo_ else img * 0
+    if PREP == "A1":
+        img = _e7.stretch(_e7.decimate(np.asarray(raw, dtype=np.float64), K))
+    else:
+        img = block_mean(np.asarray(raw, dtype=np.float64), K)
+        lo_, hi_ = np.nanmin(img), np.nanmax(img)
+        img = (img - lo_) / (hi_ - lo_) if hi_ > lo_ else img * 0
     h, w = img.shape
     truth = similarity(TRUTH["scale"], np.deg2rad(TRUTH["theta_deg"]), TRUTH["tx"], TRUTH["ty"])
     ref, valid = warp(img, truth, out_shape=(h, w))
@@ -168,7 +182,13 @@ def matched(rows: list, edge: dict) -> list:
 
 
 def main() -> None:
-    out_path = OUT / "exp022_results.json"
+    global PREP
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--amendment", choices=["A1"], default=None)
+    args = ap.parse_args()
+    if args.amendment == "A1":
+        PREP = "A1"
+    out_path = OUT / ("exp022_results_A1.json" if PREP == "A1" else "exp022_results.json")
     if out_path.exists():
         raise SystemExit(f"{out_path} exists (integrity rule 4)")
     OUT.mkdir(parents=True, exist_ok=True)
@@ -272,7 +292,9 @@ def main() -> None:
     s6 = {"met": bool(frac >= S6_MIN_FRACTION), "fraction": frac, "per_size": per_size}
 
     adopted = bool(s0["met"] and s1["met"] and s3.get("met") and s4.get("met") and s5["met"] and s6["met"])
-    doc = {"stage": STAGE, "preregistration": PREREG,
+    doc = {"stage": STAGE, "preregistration": PREREG, "image_preparation": PREP,
+           "image_preparation_note": ("stretch(decimate(raw, 2)) from scripts/run_exp007.py -- Amendment A1"
+                                      if PREP == "A1" else "block_mean then min-max, as Part 1 froze it"),
            "constants": {"k": K, "sizes": list(SIZES), "shapes": list(SHAPES), "draws": DRAWS,
                          "truth": TRUTH, "error_bound_px": ERROR_BOUND_PX, "percentile": PCT,
                          "lattice": LATTICE, "cell": {"count_frac": CELL_COUNT_FRAC, "occupancy": CELL_OCC,

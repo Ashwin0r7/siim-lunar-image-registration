@@ -12,11 +12,47 @@ is reported as a gap in the evidence, not rewritten into one that can be.
 |---|---|---|
 | 1 | H1 MET on real data at ≥ 2 rungs with the frozen rule; p ≤ 0.05 on the illumination separation with ≥ 8 edges | **MET** |
 | 2 | ≥ 1 VERIFIED Chandrayaan-2 pair per sensor against NAC, with check-point error and CI reported in coarse pixels | **NOT MET** — but no longer blocked on data (see the 2026-09-20 REAL-DATA-09 update) |
-| 3 | Verdict FA ≤ 5 %, FR ≤ 20 % on validation sites; zero VERIFIED on the adversarial set | **PARTLY ANSWERED** — the adversarial clause is MET (0 of 36), but for the wrong reason (E-039); FA and FR remain unmeasurable. **EXP-013 built the instrument for the blind spot E-039 exposed and measured that it cannot be deployed with the reference on hand (D-054); the blind spot is open** |
-| 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET — and now measured to be MIS-SPECIFIED (D-057).** 14 of 39 VERIFIED edges exceed 0.15. **EXP-014** then measured both components defective: the metric placed **last of four** (D-055 reversed ADR-0006) and the threshold is **4× too tight**. **EXP-015** restated it under the metric that won, and the restatement passes 39/39 **on an exact tie at the floor, a 0.58 pp anti-vacuity margin, and 36 % of edges extrapolated** — so the restatement is **not adopted** and the original verdict stands. Answerable in neither direction until a calibration samples real inlier counts (RL-050c) |
+| 3 | Verdict FA ≤ 5 %, FR ≤ 20 % on validation sites; zero VERIFIED on the adversarial set | **PARTLY ANSWERED** — the adversarial clause is MET (0 of 36), but for the wrong reason (E-039); FA and FR remain unmeasurable *(2026-09-23: measured by EXP-021 — see below)*. **EXP-013 built the instrument for the blind spot E-039 exposed and measured that it cannot be deployed with the reference on hand (D-054); the blind spot is open** |
+| 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET — and now measured to be MIS-SPECIFIED (D-057).** 14 of 39 VERIFIED edges exceed 0.15. **EXP-014** then measured both components defective: the metric placed **last of four** (D-055 reversed ADR-0006) and the threshold is **4× too tight**. **EXP-015** restated it under the metric that won, and the restatement passes 39/39 **on an exact tie at the floor, a 0.58 pp anti-vacuity margin, and 36 % of edges extrapolated** — so the restatement is **not adopted** and the original verdict stands. Answerable in neither direction until a calibration samples real inlier counts (RL-050c). *(2026-09-23: **answered by EXP-022, NOT MET on three named edges** — see the update below.)* |
 | 5 | Fresh-clone install, CPU-only, all tests pass, no non-commercial weights | **MET (measured today)** |
 
 ---
+
+## UPDATE 2026-09-23 (latest) — EXP-022: criterion 4 answered, NOT MET, and the floor itself is inadequate
+
+`docs/stages/EXP-022_coverage_at_real_counts.md`, artefacts `experiments/EXP-022/`
+(v1 as frozen; v2 under Amendment A1, the recorded pipeline's own image
+preparation). **The two runs agree on every criterion's outcome.**
+
+**Criterion 4 stays NOT MET, and it is no longer answerable in neither
+direction.** EXP-014's instrument was re-run at the 39 VERIFIED edges' own
+inlier counts (9–5 437), with destination noise at the recorded fit RMSE
+(σ_N = 0.720 px). It reached the regime EXP-015 could only extrapolate to:
+1 026 rows at ≥ 1 000 points, and 97 at occupancy ≥ 0.99.
+
+| reading | number | verdict |
+|---|---|---|
+| floor at recorded noise, T″ | **0.359** (CI95 0.297–0.453); noiseless arm 0.0625 — EXP-015's 5/64 was optimistic by 19 lattice steps | measured |
+| every edge ≥ T″ + 1/64 (4″) | **37 / 39**; below: the **9-inlier** (0.078) and **28-inlier** (0.281) edges | NOT MET |
+| direct bound: p95 of p99 < 1 px in the edge's matched cell | **25 of 28** evaluable edge-rows within (max 0.81 px); over: 9-inlier **3.93 px**, 28-inlier **1.66 px**, and a **68-inlier edge above the floor, 1.04 px** | NOT MET |
+| every edge has ≥ 5 comparable rows | 7 of 22 distinct edges do not (108–5 392 inliers, occupancy 0.67–0.94) | NOT MET |
+| high-count edges | all 14 edge-rows at occupancy 1.0 at **0.09–0.15 px** | extrapolation objection retired |
+
+**What it means.** The 68-inlier edge sits above the floor and still breaks
+the bound. A 47-inlier edge at nearly the same occupancy stays within it. So
+**a one-dimensional occupancy floor cannot be criterion 4**: occupancy counts
+filled cells, and it cannot see that the empty ones sit on one side. The
+restatement 4″ is **not adopted** (D-069). A future criterion should be the
+direct per-edge bound. Across the 13 VERIFIED triplets: **3 are clear on every
+edge, 3 carry an edge over the bound, and 7 are undecided.** None of this says
+any edge is wrong: EXP-021 labelled none of the 39 WRONG, and `assess()` is
+untouched.
+
+**Scorecards after EXP-022: §53 2 of 5, unchanged** (row 4 stays NOT MET, now
+*answered* rather than *mis-specified and unanswerable*). **§2.2 ≈ 55 %,
+unchanged**: the uniform-distribution row stays NOT MET, now with named edges
+and a measured floor in place of an extrapolation.
+
 
 ## UPDATE 2026-09-23 (later) — EXP-021: criterion 3 measured, and it could not be tested where it matters
 
@@ -108,6 +144,9 @@ ago.
    fresh ODE census.
 3. **Coverage calibration at real inlier counts** (§53 criterion 4) —
    answerable in neither direction until occupancy above 0.938 is sampled.
+   *(Historical note, retained under integrity rule 3: EXP-022 sampled it on
+   2026-09-23. Criterion 4 is answered NOT MET on three named low-count edges,
+   and seven edges remain unsampled — D-069.)*
 4. **IIRS** — no product exists to ingest. Data-refused, not untested, and the
    README says so.
 5. **Manual check points** — the only accuracy number with no shared instrument
