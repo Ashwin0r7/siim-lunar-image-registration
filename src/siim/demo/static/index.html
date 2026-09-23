@@ -37,40 +37,123 @@
    Zero external requests: no webfont, no CDN. The demo may run offline at
    the venue, so the type is the system stack and nothing else.
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   Design tokens (2026-09-23 refactor). Semantic names first; the original
+   names below them are aliases, so every panel written against them keeps
+   resolving to the same role.
+
+   Status semantics are unchanged and CVD-validated: success is BLUE, danger is
+   RED, and anything that is neither (INCONCLUSIVE, VACUOUS, CANNOT CHECK) is
+   neutral text. Warning (amber) is used only for cautions about the page
+   itself -- local-only data, missing prerequisites -- never for a verdict.
+   Every state also carries a glyph and a word, so colour never works alone.
+   -------------------------------------------------------------------------- */
 :root{
-  --bg:#0b0d10; --bg-2:#111418; --bg-3:#171b21;
-  --rule:#22272e; --rule-2:#333a44;
-  --ink:#eceff2; --ink-2:#b6bec8; --ink-3:#8b97a7;
+  /* surfaces */
+  --background:#0b0d10; --surface:#111418; --surface-elevated:#161a20;
+  --surface-hover:#1c2129; --surface-sunk:#08090b;
+  /* lines */
+  --border:#22272e; --border-strong:#333a44; --border-focus:#4f95ee;
+  /* text -- all >= 4.5:1 on --background and --surface */
+  --text-primary:#eceff2; --text-secondary:#b9c1cb; --text-muted:#949faf;
+  /* semantic */
+  --accent:#4f95ee; --accent-strong:#3987e5; --accent-soft:rgba(79,149,238,.12);
+  --success:#4f95ee; --success-soft:rgba(79,149,238,.12);
+  --danger:#e07070;  --danger-strong:#d03b3b; --danger-soft:rgba(208,59,59,.12);
+  --warning:#d9a441; --warning-soft:rgba(217,164,65,.12);
+  --info:#9fb3c8;
+  --on-accent:#06101c;
 
-  --accent:#4f95ee;      --accent-mark:#3987e5;  --accent-soft:rgba(79,149,238,.12);
-  --fail:#e07070;        --fail-mark:#d03b3b;    --fail-soft:rgba(208,59,59,.10);
-  /* kept as aliases so that state classes named for their meaning keep
-     resolving; both point at the validated blue/red pair, never green */
-  --succeed:var(--accent-mark); --good:var(--accent); --bad:var(--fail);
+  /* spacing scale: 4 8 12 16 24 32 48 64 96 */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+  /* radii and elevation: one small radius for controls, one for surfaces */
+  --r-sm:4px; --r-md:6px;
+  --shadow-1:0 1px 0 rgba(255,255,255,.03) inset, 0 8px 24px rgba(0,0,0,.28);
+  /* type scale */
+  --fs-micro:11px; --fs-label:12px; --fs-small:13.5px; --fs-body:15.5px;
+  --fs-lead:clamp(16.5px,1.25vw,18.5px); --fs-h3:clamp(18px,1.5vw,21px);
+  --fs-h2:clamp(24px,2.4vw,32px); --fs-display:clamp(40px,5.4vw,76px);
+  --ease:cubic-bezier(.2,.7,.2,1); --dur:.16s;
 
-  --sans:Inter,"Helvetica Neue",Helvetica,Arial,"Segoe UI",system-ui,sans-serif;
+  /* original names, kept as aliases */
+  --bg:var(--background); --bg-2:var(--surface); --bg-3:var(--surface-elevated);
+  --rule:var(--border); --rule-2:var(--border-strong);
+  --ink:var(--text-primary); --ink-2:var(--text-secondary); --ink-3:var(--text-muted);
+  --accent-mark:var(--accent-strong);
+  --fail:var(--danger); --fail-mark:var(--danger-strong); --fail-soft:var(--danger-soft);
+  --succeed:var(--accent-strong); --good:var(--success); --bad:var(--danger);
+
+  --sans:Inter,"Segoe UI Variable Text","Segoe UI","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --display:Inter,"Segoe UI Variable Display","Segoe UI","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
   --mono:"SF Mono",ui-monospace,Menlo,Consolas,"Cascadia Mono","Liberation Mono",monospace;
-  --track:.14em;
+  --track:.1em;
   --gutter:clamp(16px,3vw,48px);
-  --topbar:52px;
+  --topbar:56px;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);
-  font:15px/1.55 var(--sans);font-variant-numeric:tabular-nums;
+  font:var(--fs-body)/1.6 var(--sans);font-variant-numeric:tabular-nums;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
   animation:fade .45s ease-out both}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-@media (prefers-reduced-motion:reduce){body{animation:none}}
-h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+@media (prefers-reduced-motion:reduce){
+  body{animation:none}
+  *,*::before,*::after{transition-duration:0s!important;animation-duration:0s!important}
+}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.12;
+  text-wrap:balance}
+p{margin:0}
 a{color:inherit}
 img,svg,canvas{max-width:100%}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+:focus-visible{outline:2px solid var(--border-focus);outline-offset:3px;border-radius:2px}
 button{font:inherit;color:inherit}
+/* the hidden attribute always wins over a component's display rule */
+[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .skip{position:absolute;left:-9999px;top:8px;z-index:100;background:var(--ink);
-  color:var(--bg);padding:13px 14px;font:600 12px/1 var(--mono);letter-spacing:.1em;
-  text-transform:uppercase;text-decoration:none}
+  color:var(--bg);padding:13px 16px;font:600 13px/1 var(--sans);text-decoration:none;
+  border-radius:var(--r-sm)}
 .skip:focus{left:16px}
+
+/* ---------------------------------------------------------------- buttons
+   One system. Every button-like class on the page resolves to these, so a
+   hover, focus, disabled or loading state means the same thing everywhere.
+   primary   the one action a view exists for (Register, the hero CTA)
+   secondary a real action that is not the main one (downloads, examples)
+   tertiary  a quiet action (reload, clear)             danger   cancel/stop */
+.btn,.ctabtn,.runbtn,.dlbtn,.exbtn,.multibtn,.swapbtn,.menubtn,.navgrp>button{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);
+  min-height:40px;padding:0 var(--s4);border-radius:var(--r-sm);cursor:pointer;
+  font:500 var(--fs-small)/1.2 var(--sans);letter-spacing:0;text-transform:none;
+  text-decoration:none;border:1px solid var(--border-strong);background:var(--surface);
+  color:var(--text-primary);transition:background var(--dur) var(--ease),
+  border-color var(--dur) var(--ease),color var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.btn:hover:not(:disabled),.ctabtn:hover,.runbtn:hover:not(:disabled),.dlbtn:hover,.exbtn:hover,
+.multibtn:hover,.swapbtn:hover:not(:disabled),.menubtn:hover,.navgrp>button:hover{
+  background:var(--surface-hover);border-color:var(--text-muted)}
+.btn:active:not(:disabled),.ctabtn:active,.runbtn:active:not(:disabled),.dlbtn:active,.exbtn:active,
+.swapbtn:active:not(:disabled){transform:translateY(1px)}
+.btn-primary,.ctabtn,#live-run{background:var(--accent);border-color:var(--accent);color:var(--on-accent);
+  font-weight:600}
+.btn-primary:hover:not(:disabled),.ctabtn:hover,#live-run:hover:not(:disabled){
+  background:#6aa6f2;border-color:#6aa6f2;color:var(--on-accent)}
+.btn-lg,.ctabtn,#live-run{min-height:48px;padding:0 var(--s5);font-size:15px}
+.btn-tertiary,#run{background:transparent;border-color:transparent;color:var(--text-secondary);
+  padding:0 var(--s2);min-height:36px}
+.btn-tertiary:hover:not(:disabled),#run:hover:not(:disabled){background:var(--surface-hover);
+  border-color:transparent;color:var(--text-primary)}
+.btn-danger,#live-cancel{background:transparent;border-color:var(--danger);color:var(--danger)}
+.btn-danger:hover,#live-cancel:hover:not(:disabled){background:var(--danger-soft);
+  border-color:var(--danger);color:var(--text-primary)}
+.btn:disabled,.runbtn:disabled,.swapbtn:disabled,#live-run:disabled{cursor:not-allowed;
+  background:var(--surface);border-color:var(--border);color:var(--text-muted);opacity:1;
+  transform:none}
+.btn[aria-busy="true"],#live-run[aria-busy="true"]{cursor:progress;background:var(--surface-elevated);
+  border-color:var(--accent);color:var(--text-primary)}
+.ico{width:16px;height:16px;flex:0 0 16px}
+.btn,.ctabtn,.runbtn,.dlbtn,.swapbtn,.menubtn{white-space:nowrap}
 
 /* --------------------------------------------------------------------- grid */
 .wrap{width:100%;max-width:1440px;margin:0 auto;padding-left:var(--gutter);
@@ -79,86 +162,161 @@ button{font:inherit;color:inherit}
   column-gap:clamp(12px,2vw,32px)}
 
 /* ------------------------------------------------------------------- labels */
-.lab{font:500 10.5px/1.4 var(--mono);letter-spacing:var(--track);
+.lab{font:500 var(--fs-micro)/1.4 var(--mono);letter-spacing:var(--track);
   text-transform:uppercase;color:var(--ink-3)}
-.code{font-family:var(--mono);font-size:.92em;color:var(--ink-2)}
-.st{font:500 11px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;
+.code{font-family:var(--mono);font-size:.9em;color:var(--ink-2)}
+/* Status words. The glyph is part of the state, not decoration: a reader who
+   cannot tell blue from red still reads ✓ / × / ? and the word beside it. */
+.st{font:600 var(--fs-micro)/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;
   white-space:nowrap}
-.st-pass{color:var(--accent)} .st-fail{color:var(--fail)}
-.st-neutral{color:var(--ink-3)} .st-ink{color:var(--ink)}
+.st-pass{color:var(--success)} .st-fail{color:var(--danger)}
+.st-neutral{color:var(--text-secondary)} .st-ink{color:var(--ink)}
+.st-pass::before{content:"✓\00a0"} .st-fail::before{content:"×\00a0"}
+.st-neutral::before{content:"?\00a0"}
+/* evidence-class chips: what KIND of statement a number is */
+.kind{display:inline-flex;align-items:center;gap:6px;font:600 var(--fs-micro)/1 var(--mono);
+  letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:var(--r-sm);
+  border:1px solid var(--border-strong);color:var(--text-secondary);white-space:nowrap}
+.kind::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.kind.recorded{color:var(--accent);border-color:rgba(79,149,238,.45)}
+.kind.live{color:var(--text-primary);border-color:var(--text-muted)}
+.kind.warn{color:var(--warning);border-color:rgba(217,164,65,.5)}
 
 /* ------------------------------------------------------------------ top bar */
-.top{position:sticky;top:0;z-index:20;background:var(--bg);
+/* Thirteen flat links did not fit any laptop and made every section look
+   equally important. Five entries now: the case, two groups (the protocol's
+   own evidence, and the evidence about the data), the live tool, and
+   provenance. Group menus are disclosure buttons; below 960 px the whole nav
+   becomes a drawer. Every section keeps its anchor and its number. */
+.top{position:sticky;top:0;z-index:30;background:rgba(11,13,16,.92);
+  backdrop-filter:saturate(1.2) blur(8px);-webkit-backdrop-filter:saturate(1.2) blur(8px);
   border-bottom:1px solid var(--rule)}
-.top .wrap{display:flex;align-items:center;gap:28px;height:var(--topbar)}
-.brand{font:600 15px/1 var(--sans);letter-spacing:.24em;text-decoration:none;
-  color:var(--ink);flex:0 0 auto;padding:12px 0;min-height:40px;display:inline-flex;align-items:center}
-.top nav{display:flex;gap:14px;flex:1;min-width:0;overflow-x:auto;
-  scrollbar-width:none;-ms-overflow-style:none}
-.top nav::-webkit-scrollbar{display:none}
-.top nav a{font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink-3);text-decoration:none;white-space:nowrap;padding:8px 4px}
-.top nav a:hover{color:var(--ink)}
-/* the nav is a horizontal scroller, which clips an outline drawn outside a
-   link; draw the focus ring inside it so a keyboard user sees all four sides */
-.top nav a:focus-visible{outline-offset:-1px;color:var(--ink)}
-.ind{margin-left:auto;flex:0 0 auto;font:500 10.5px/1 var(--mono);
-  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
-.ind::before{content:"";display:inline-block;width:6px;height:6px;
-  background:var(--accent);margin-right:9px;vertical-align:1px}
-.ind.live::before{background:var(--ink)}
+.top .wrap{display:flex;align-items:center;gap:var(--s5);height:var(--topbar)}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);
+  flex:0 0 auto;min-height:44px}
+.brand b{font:700 15px/1 var(--display);letter-spacing:.2em}
+.brand span{font:400 var(--fs-label)/1.2 var(--sans);color:var(--text-muted);max-width:22ch}
+.brand svg{flex:0 0 22px}
+.top nav{display:flex;align-items:center;gap:var(--s1);flex:1;min-width:0}
+.top nav>a,.navgrp>button{min-height:40px;padding:0 var(--s3);border-radius:var(--r-sm);
+  font:500 var(--fs-small)/1 var(--sans);color:var(--text-secondary);text-decoration:none;
+  white-space:nowrap;display:inline-flex;align-items:center;gap:6px;position:relative;
+  background:transparent;border:1px solid transparent}
+.top nav>a:hover,.navgrp>button:hover{color:var(--text-primary);background:var(--surface-hover);
+  border-color:transparent}
+.top nav>a[aria-current="true"],.navgrp.current>button{color:var(--text-primary)}
+.top nav>a[aria-current="true"]::after,.navgrp.current>button::after{content:"";position:absolute;
+  left:var(--s3);right:var(--s3);bottom:-9px;height:2px;background:var(--accent);border-radius:2px}
+.navgrp{position:relative}
+.navgrp>button .chev{width:10px;height:10px;transition:transform var(--dur) var(--ease)}
+.navgrp>button[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.navmenu{position:absolute;top:calc(100% + 10px);left:0;min-width:260px;padding:var(--s2);
+  background:var(--surface-elevated);border:1px solid var(--border-strong);border-radius:var(--r-md);
+  box-shadow:var(--shadow-1);display:none;z-index:40}
+.navgrp>button[aria-expanded="true"]+.navmenu{display:block}
+.navmenu a{display:flex;align-items:baseline;gap:var(--s3);padding:10px var(--s3);min-height:40px;
+  border-radius:var(--r-sm);text-decoration:none;color:var(--text-secondary);font-size:var(--fs-small)}
+.navmenu a:hover,.navmenu a:focus-visible{background:var(--surface-hover);color:var(--text-primary)}
+.navmenu a[aria-current="true"]{color:var(--text-primary);background:var(--accent-soft)}
+.navmenu a .num{font:500 var(--fs-micro)/1 var(--mono);color:var(--text-muted);width:18px;flex:0 0 18px}
+.navmenu a small{display:block;color:var(--text-muted);font-size:var(--fs-label);margin-top:2px}
+.ind{margin-left:auto;flex:0 0 auto;font:600 var(--fs-micro)/1 var(--mono);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--text-secondary);white-space:nowrap;padding:7px 10px;
+  border:1px solid var(--border-strong);border-radius:var(--r-sm);max-width:260px;overflow:hidden;
+  text-overflow:ellipsis}
+.ind::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--accent);margin-right:8px;vertical-align:0}
+.ind.live{color:var(--text-primary);border-color:var(--text-muted)}
+.ind.live::before{background:var(--text-primary)}
+.menubtn{display:none;margin-left:auto;min-height:44px}
 /* Anything scrolled into view -- a nav anchor, the live result the card scrolls
    to after a run -- clears the sticky bar. Measured in Chrome on 2026-09-23:
    the live verdict's own headline landed at y = 0, under the 53 px bar. */
 html{scroll-padding-top:calc(var(--topbar) + 14px)}
-/* On laptop widths the thirteen links do not fit: the bar scrolls, so say so
-   with a fade at its edge, and let the indicator truncate with an ellipsis
-   instead of being cut mid-word. */
-@media (max-width:1680px){
-  .top .wrap{gap:20px}
-  .top nav{gap:8px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);
-    mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);padding-right:30px}
-  .top nav a{letter-spacing:.07em}
-  .ind{max-width:230px;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:1180px){.brand span{display:none}}
+@media (max-width:960px){
+  /* backdrop-filter makes the header the containing block of a fixed child,
+     which would pin the drawer to the 56 px bar instead of the viewport */
+  .top{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--background)}
+  .menubtn{display:inline-flex}
+  .ind{display:none}
+  .top nav{display:none;position:fixed;top:var(--topbar);left:0;right:0;bottom:0;z-index:35;
+    background:var(--background);flex-direction:column;align-items:stretch;gap:0;
+    padding:var(--s4) var(--gutter) var(--s7);overflow-y:auto}
+  .top.open nav{display:flex}
+  .top nav>a,.navgrp>button{min-height:52px;font-size:16px;justify-content:space-between;
+    border-bottom:1px solid var(--border);border-radius:0;padding:0 var(--s1)}
+  .top nav>a[aria-current="true"]::after,.navgrp.current>button::after{left:0;right:auto;top:14px;
+    bottom:14px;width:3px;height:auto}
+  .navmenu{position:static;display:block;min-width:0;background:transparent;border:0;
+    box-shadow:none;padding:var(--s1) 0 var(--s3)}
+  .navgrp>button .chev{display:none}
+  .navgrp>button{pointer-events:none;color:var(--text-muted);font:600 var(--fs-micro)/1 var(--mono);
+    letter-spacing:.1em;text-transform:uppercase;min-height:40px;border-bottom:0;padding-top:var(--s3)}
+  .navmenu a{min-height:48px;font-size:15px}
+  body.navopen{overflow:hidden}
 }
 
 /* --------------------------------------------------------------------- hero */
-.mast{position:relative;min-height:min(80vh,780px);display:flex;align-items:flex-end;
-  border-bottom:1px solid var(--rule);overflow:hidden;background:#000}
+/* The lunar tile stays -- it is a real frame the experiments ran on -- but it
+   sits behind a strong veil: dark on the left where the text is, lighter to
+   the right where only the image is. Nothing bright crosses the headline. */
+.mast{position:relative;border-bottom:1px solid var(--rule);overflow:hidden;background:#000}
 .mast img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  object-position:center 40%;filter:grayscale(1) brightness(.62) contrast(1.05)}
+  object-position:70% 40%;filter:grayscale(1) brightness(.5) contrast(1.02)}
 .mast .veil{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(to top,rgba(11,13,16,.97) 0%,rgba(11,13,16,.72) 38%,
-    rgba(11,13,16,.28) 75%,rgba(11,13,16,.45) 100%)}
-.mast .vig{position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(120% 90% at 50% 45%,transparent 45%,rgba(11,13,16,.7) 100%)}
-.mast .wrap{position:relative;padding-top:96px;padding-bottom:44px}
-.mast .cap{position:absolute;top:22px;right:var(--gutter);text-align:right;
-  max-width:min(60vw,420px);line-height:1.6}
-.mast .eyebrow{margin-bottom:20px}
-.mast h1{font-size:clamp(36px,5.6vw,72px);letter-spacing:-.03em;line-height:.98;
-  max-width:13ch}
-.mast .lede{max-width:62ch;color:var(--ink-2);font-size:clamp(15px,1.25vw,18px);
-  line-height:1.5;margin-top:22px}
+  background:linear-gradient(90deg,rgba(11,13,16,.97) 0%,rgba(11,13,16,.9) 38%,
+    rgba(11,13,16,.55) 68%,rgba(11,13,16,.35) 100%),
+    linear-gradient(to top,rgba(11,13,16,1) 0%,rgba(11,13,16,0) 40%)}
+.mast .vig{display:none}
+.mast .wrap{position:relative;padding-top:clamp(56px,9vh,112px);padding-bottom:var(--s7)}
+.mast .cap{position:absolute;top:var(--s4);right:var(--gutter);text-align:right;
+  max-width:min(46vw,380px);line-height:1.6;font-size:var(--fs-micro);color:var(--text-muted);
+  text-transform:none;letter-spacing:0;font-family:var(--sans)}
+.mast .eyebrow{margin-bottom:var(--s4);display:flex;flex-wrap:wrap;gap:var(--s2)}
+.mast h1{font-size:var(--fs-display);letter-spacing:-.035em;line-height:1.02;max-width:17ch}
+.mast h1 .l2{display:block;color:var(--text-secondary)}
+.mast .lede{max-width:54ch;color:var(--text-secondary);font-size:var(--fs-lead);
+  line-height:1.55;margin-top:var(--s5)}
 .mast .lede b{color:var(--ink);font-weight:500}
-.hmeta{margin-top:18px;line-height:1.7;max-width:84ch}
-.hmeta#provline{color:var(--ink-2)}
-.hfigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:20px clamp(16px,2.5vw,40px);margin-top:44px;border-top:1px solid var(--rule-2);
-  padding-top:22px}
-.hfig .hval{font-size:clamp(34px,4.2vw,58px);font-weight:600;letter-spacing:-.035em;
-  line-height:1;margin:10px 0 10px}
-.hfig .hval.st-neutral{font:500 clamp(16px,1.6vw,20px)/1.2 var(--mono);letter-spacing:.1em}
-.hfig .hnote{font-size:13px;color:var(--ink-2);line-height:1.45;max-width:40ch}
+.herocta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);margin-top:var(--s6)}
+.ctanote{flex-basis:100%;color:var(--text-muted);font:400 var(--fs-small)/1.5 var(--sans);
+  text-transform:none;letter-spacing:0;margin-top:var(--s1)}
+/* Where the numbers come from, stated once, in a sentence rather than a log line */
+.trust{display:grid;grid-template-columns:auto auto 1fr;gap:var(--s2) var(--s5);margin-top:var(--s6);
+  padding-top:var(--s4);border-top:1px solid var(--border);align-items:center;max-width:1100px}
+.trust .kinds{display:flex;gap:var(--s2);align-items:center;white-space:nowrap}
+.trust #provline,.trust #scope{grid-column:1/-1}
+@media (max-width:760px){.trust{grid-template-columns:1fr}.trust .kinds{white-space:normal}}
+.hmeta{font:400 var(--fs-small)/1.6 var(--sans);color:var(--text-secondary);max-width:70ch;
+  text-transform:none;letter-spacing:0}
+/* three metric cards: label, value, one line of meaning, source last */
+.hfigs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4);
+  margin-top:var(--s6)}
+.hfig{background:rgba(17,20,24,.82);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:var(--s4) var(--s5) var(--s4);display:flex;flex-direction:column;min-width:0}
+.hfig .lab{color:var(--text-muted)}
+.hfig .hval{font:600 clamp(34px,3.6vw,50px)/1 var(--display);letter-spacing:-.03em;
+  margin:var(--s3) 0 var(--s2)}
+.hfig .hval small{font-size:.5em;color:var(--text-muted);font-weight:500;letter-spacing:0}
+.hfig .hval.st-neutral{font:600 clamp(16px,1.6vw,20px)/1.2 var(--mono);letter-spacing:.08em}
+.hfig .hval.st-fail{color:var(--danger)} .hfig .hval.st-fail::before{content:none}
+.hfig .hint1{font-size:var(--fs-small);color:var(--text-primary);line-height:1.45}
+.hfig details{margin-top:var(--s3)}
+.hfig summary{cursor:pointer;font-size:var(--fs-label);color:var(--text-secondary);
+  list-style:none;display:inline-flex;align-items:center;gap:6px;min-height:28px}
+.hfig summary::-webkit-details-marker{display:none}
+.hfig summary::before{content:"+";font:600 13px/1 var(--mono);color:var(--accent)}
+.hfig details[open] summary::before{content:"−"}
+.hfig .hnote{font-size:var(--fs-label);color:var(--text-secondary);line-height:1.5;margin-top:var(--s2)}
 .hfig .hnote b{color:var(--ink);font-weight:500}
-.hfig .hsrc{font:400 10.5px/1.5 var(--mono);color:var(--ink-3);margin-top:8px;
-  word-break:break-all}
+.hfig .hsrc{font:400 var(--fs-micro)/1.5 var(--mono);color:var(--text-muted);margin-top:auto;
+  padding-top:var(--s3);word-break:break-all}
+@media (max-width:900px){.hfig{padding:var(--s3) var(--s4)}.hfig .hval{font-size:clamp(28px,4.6vw,40px)}}
+@media (max-width:640px){.hfigs{grid-template-columns:1fr}}
 @media (max-width:760px){
-  .hfigs{grid-template-columns:1fr;gap:18px}
-  .hfig{border-top:1px solid var(--rule);padding-top:14px}
-  .hfig:first-child{border-top:0;padding-top:0}
-  .mast .wrap{padding-top:120px}
-  .mast .cap{max-width:70vw}
+  .mast .cap{display:none}
+  .mast h1 .l2{display:inline}
 }
 
 /* ------------------------------------------------------------------- layout */
@@ -176,46 +334,53 @@ section#stage{grid-column:4/span 9;min-width:0;padding:28px 0 96px}
 }
 
 /* ------------------------------------------------------------- case chooser */
-.grp{display:flex;align-items:center;gap:10px;margin:22px 0 6px}
-.grp::after{content:"";flex:1;height:1px;background:var(--rule)}
+/* Two groups that do different things: recorded datasets (read an artefact)
+   and the live tool (compute in your request). Cards are compact -- a code, a
+   name, one fact -- and the explanation lives in the main column. */
+.grp{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
+  margin:var(--s6) 0 var(--s3)}
 .grp:first-child{margin-top:0}
-.cases .list{display:block}
-button.case{display:block;width:100%;text-align:left;background:none;border:0;
-  border-top:1px solid var(--rule);padding:11px 0 12px 14px;color:var(--ink-2);
-  cursor:pointer;position:relative}
-button.case:hover{color:var(--ink)}
-button.case::before{content:"";position:absolute;left:0;top:-1px;bottom:0;width:2px;
-  background:transparent}
-button.case.active{color:var(--ink)}
+.grp .lab{color:var(--text-muted)}
+.cases .list{display:grid;gap:var(--s2)}
+button.case{display:grid;grid-template-columns:auto 1fr;column-gap:var(--s3);row-gap:2px;
+  width:100%;text-align:left;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-md);padding:var(--s3) var(--s3) var(--s3) var(--s4);color:var(--ink-2);
+  cursor:pointer;position:relative;transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+button.case:hover{background:var(--surface-hover);border-color:var(--border-strong);color:var(--ink)}
+button.case::before{content:"";position:absolute;left:-1px;top:10px;bottom:10px;width:3px;
+  border-radius:0 3px 3px 0;background:transparent}
+button.case.active{background:var(--surface-elevated);border-color:var(--border-strong);color:var(--ink)}
 button.case.active::before{background:var(--accent)}
-button.case .badge{display:block;font:500 10.5px/1 var(--mono);letter-spacing:.12em;
-  text-transform:uppercase;margin-bottom:6px;color:var(--ink-3)}
-.badge.real{color:var(--accent)}
-button.case .t{font-size:14px;font-weight:500;line-height:1.3;letter-spacing:-.005em}
-button.case .s{font-size:12px;color:var(--ink-3);margin-top:3px;line-height:1.4}
-.runbtn{width:100%;background:none;color:var(--ink);border:1px solid var(--rule-2);
-  padding:10px 14px;cursor:pointer;margin-top:10px;font:500 10.5px/1 var(--mono);
-  letter-spacing:var(--track);text-transform:uppercase}
-.runbtn:hover:not(:disabled){border-color:var(--ink-2)}
-.runbtn:disabled{opacity:.45;cursor:wait}
-.sidenote{font:400 11px/1.6 var(--mono);color:var(--ink-3);margin-top:18px;
-  border-top:1px solid var(--rule);padding-top:12px}
+button.case .code{grid-row:1/span 3;font:600 15px/1.2 var(--mono);color:var(--text-primary);
+  min-width:3.4em;padding-top:1px}
+button.case .badge{display:none}
+button.case .t{font:500 14px/1.3 var(--sans);color:var(--text-primary)}
+button.case .s{font-size:var(--fs-label);color:var(--text-muted);line-height:1.4}
+button.case .o{font-size:var(--fs-label);line-height:1.4}
+button.case#live-open{grid-template-columns:auto 1fr;border-style:dashed}
+button.case#live-open .code{color:var(--accent)}
+.caseactions{display:flex;justify-content:flex-end;margin-top:var(--s2)}
+.sidenote{margin-top:var(--s6);border-top:1px solid var(--rule);padding-top:var(--s3);
+  font-size:var(--fs-label);color:var(--text-muted);line-height:1.55}
+.sidenote summary{cursor:pointer;min-height:36px;display:flex;align-items:center;
+  color:var(--text-secondary);font-size:var(--fs-small)}
 .sidenote b{color:var(--ink-2);font-weight:500}
+.sidenote .dsrow{margin-top:var(--s3)}
 @media (max-width:1023px){
-  #cases-real{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
-    column-gap:24px}
+  #cases-real{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+  .sidegrid{display:grid;grid-template-columns:1fr;gap:0}
 }
 
 /* --------------------------------------------------------------- case head */
-.pills{display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:16px}
-.pill{font:500 10.5px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink-3)}
-.pill.real{color:var(--accent)}
-.pill.outcome-SUCCEED{color:var(--accent)}
-.pill.outcome-FAIL{color:var(--fail)}
-.casehead{padding-bottom:28px}
-.casehead .h{font-size:clamp(26px,3.2vw,42px);font-weight:600;letter-spacing:-.028em;
-  line-height:1.04;max-width:24ch}
+.pills{display:flex;flex-wrap:wrap;gap:var(--s2);margin-bottom:var(--s4)}
+.pill{font:600 var(--fs-micro)/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-secondary);border:1px solid var(--border-strong);border-radius:var(--r-sm);padding:6px 8px}
+.pill.real{color:var(--accent);border-color:rgba(79,149,238,.45)}
+.pill.outcome-SUCCEED{color:var(--success);border-color:currentColor}
+.pill.outcome-FAIL{color:var(--danger);border-color:currentColor}
+.casehead{padding-bottom:var(--s6)}
+.casehead .h{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.028em;
+  line-height:1.06;max-width:24ch}
 .casehead .sub{font-size:15px;color:var(--ink-2);margin-top:10px;max-width:62ch;line-height:1.5}
 .casehead .headline{font-size:17px;color:var(--ink);margin-top:14px;max-width:62ch;
   font-weight:500;line-height:1.4}
@@ -226,20 +391,22 @@ a.filelink:hover{color:var(--accent);text-decoration-color:var(--accent)}
 /* ------------------------------------------------------------------ modules */
 /* A step or an evidence module: a numbered side column with the one-line
    question, and a body column with the result, its control, and the bound. */
-.mod{border-top:1px solid var(--rule);padding:34px 0 42px;scroll-margin-top:calc(var(--topbar) + 8px)}
+.mod{border-top:1px solid var(--rule);padding:var(--s7) 0 var(--s7);scroll-margin-top:calc(var(--topbar) + 8px)}
 .modgrid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);
   column-gap:clamp(16px,2.5vw,40px)}
 .modside{min-width:0}
 .modbody{min-width:0}
-.modnum{font:300 clamp(30px,3vw,42px)/1 var(--mono);color:var(--ink-3);
-  letter-spacing:-.03em;margin-bottom:14px}
-.modq{font-size:clamp(20px,1.9vw,26px);font-weight:600;letter-spacing:-.022em;
-  line-height:1.15;margin-top:10px;max-width:24ch}
-.modsub{font-size:12.5px;color:var(--ink-3);margin-top:10px;line-height:1.5;max-width:36ch}
+.modnum{font:500 var(--fs-label)/1 var(--mono);color:var(--text-muted);letter-spacing:.04em;
+  margin-bottom:var(--s2);display:inline-block;padding:4px 7px;border:1px solid var(--border-strong);
+  border-radius:var(--r-sm)}
+.modq{font-size:var(--fs-h2);font-weight:600;letter-spacing:-.022em;
+  line-height:1.15;margin-top:var(--s3);max-width:22ch}
+.modsub{font-size:var(--fs-small);color:var(--text-muted);margin-top:var(--s3);line-height:1.55;max-width:38ch}
+.modside{position:sticky;top:calc(var(--topbar) + 24px);align-self:start}
 @media (max-width:860px){
   .modgrid{grid-template-columns:1fr;row-gap:18px}
   .modq{max-width:none}.modsub{max-width:none}
-  .modnum{font-size:26px;margin-bottom:10px}
+  .modside{position:static}
 }
 
 /* result beside control */
@@ -264,7 +431,7 @@ a.filelink:hover{color:var(--accent);text-decoration-color:var(--accent)}
    four-across tile at 'STARVATION' and the browser clips it silently. */
 .tile .val.word{font-size:21px;letter-spacing:-.01em;overflow-wrap:anywhere}
 .tile.hero .val{font-size:44px}
-.tile .note{font-size:12px;color:var(--ink-3);margin-top:6px;line-height:1.45}
+.tile .note{font-size:var(--fs-label);color:var(--text-muted);margin-top:6px;line-height:1.5}
 .tile.good .val{color:var(--accent)} .tile.bad .val{color:var(--fail)}
 .tile.mute .val{color:var(--ink-3)}
 .tile.struck .val{text-decoration:line-through;text-decoration-thickness:2px;
@@ -304,7 +471,7 @@ svg.geo{width:100%;height:auto;background:var(--bg-2);border:1px solid var(--rul
 .imgs figure{margin:0;min-width:0}
 .imgs img{display:block;margin:0 auto;width:auto;max-width:100%;max-height:420px;
   border:1px solid var(--rule);background:#000}
-figcaption{font:400 11px/1.55 var(--mono);color:var(--ink-3);margin-top:8px}
+figcaption{font:400 var(--fs-label)/1.55 var(--mono);color:var(--text-muted);margin-top:8px}
 figcaption b{color:var(--ink-2);font-weight:500}
 canvas#corr{display:block;max-width:100%;max-height:440px;height:auto;margin:0 auto;
   border:1px solid var(--rule);background:#000}
@@ -329,12 +496,14 @@ canvas#corr{display:block;max-width:100%;max-height:440px;height:auto;margin:0 a
 /* ---------------------------------------------------------------- verdict */
 .verdict{border-top:1px solid var(--rule-2);padding:20px 0 6px;margin-top:4px}
 .vhead{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
-.vstat{font:600 clamp(28px,3vw,40px)/1 var(--mono);letter-spacing:.06em}
+.vstat{font:600 clamp(26px,2.8vw,38px)/1 var(--mono);letter-spacing:.04em}
+.VERIFIED .vstat::before{content:"\2713\00a0"} .REJECTED .vstat::before{content:"\00d7\00a0"}
+.INCONCLUSIVE .vstat::before{content:"?\00a0"}
 .VERIFIED .vstat{color:var(--accent)} .REJECTED .vstat{color:var(--fail)}
 .INCONCLUSIVE .vstat{color:var(--ink)}
-.conf{font:500 10.5px/1.4 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
-  color:var(--ink-3)}
-.reasons{margin:16px 0 0;padding-left:18px;color:var(--ink);max-width:74ch}
+.conf{font:500 var(--fs-micro)/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-muted)}
+.reasons{margin:var(--s4) 0 0;padding-left:20px;color:var(--ink);max-width:74ch;font-size:var(--fs-body)}
 .reasons li{margin-bottom:8px;line-height:1.55}
 .outcome-line{font-size:13.5px;margin-top:16px;padding-top:14px;border-top:1px solid var(--rule);
   color:var(--ink-2);max-width:78ch;line-height:1.55}
@@ -342,16 +511,17 @@ canvas#corr{display:block;max-width:100%;max-height:440px;height:auto;margin:0 a
 
 /* ------------------------------------------------------------------ tables */
 .tscroll{overflow-x:auto;margin:14px 0 6px;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;font-size:13px}
-thead th{text-align:left;padding:0 14px 9px 0;border-bottom:1px solid var(--rule-2);
-  font:500 10.5px/1.4 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
-  color:var(--ink-3);white-space:nowrap;vertical-align:bottom}
-td{padding:9px 14px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top;
-  line-height:1.45}
+table{width:100%;border-collapse:collapse;font-size:var(--fs-small)}
+thead th{text-align:left;padding:0 14px 10px 0;border-bottom:1px solid var(--rule-2);
+  font:500 var(--fs-micro)/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-muted);white-space:nowrap;vertical-align:bottom}
+td{padding:10px 14px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top;
+  line-height:1.5}
+tbody tr:hover td{background:rgba(255,255,255,.015)}
 th:last-child,td:last-child{padding-right:0}
 th.n,td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;
   font-family:var(--mono);font-size:12.5px}
-td.note{font-size:12.5px}
+td.note{font-size:var(--fs-label)}
 .w-decisive{color:var(--accent);font-weight:600}
 .w-excluded{color:var(--ink-3)}
 .w-excluded .sig{text-decoration:line-through;text-decoration-color:var(--fail)}
@@ -373,189 +543,322 @@ b.pass,b.failc{font-weight:600}
 .strip .rule{stroke:var(--ink-3);stroke-width:1;stroke-dasharray:5 4}
 
 /* ---------------------------------------------------------------- prose */
-.note{font-size:13px;color:var(--ink-2);line-height:1.6;max-width:78ch}
-.note b{color:var(--ink);font-weight:600}
-.note+.note{margin-top:10px}
-.lead{font-size:15px;color:var(--ink);line-height:1.5;max-width:70ch}
-.call{border-left:1px solid var(--rule-2);padding-left:14px;margin-top:14px}
-.call.fail{border-left-color:var(--fail)}
-.call.pass{border-left-color:var(--accent)}
-.call.ink{border-left-color:var(--ink)}
+.note{font-size:14.5px;color:var(--text-secondary);line-height:1.65;max-width:74ch}
+.note b{color:var(--text-primary);font-weight:600}
+.note+.note{margin-top:var(--s3)}
+.lead{font-size:var(--fs-body);color:var(--ink);line-height:1.55;max-width:68ch}
+/* callouts: a tinted panel with a coloured edge, not a bare rule */
+.call{border-left:3px solid var(--border-strong);padding:var(--s3) var(--s4);margin-top:var(--s4);
+  background:var(--surface);border-radius:0 var(--r-sm) var(--r-sm) 0}
+.call.fail{border-left-color:var(--danger);background:linear-gradient(90deg,var(--danger-soft),transparent 60%)}
+.call.pass{border-left-color:var(--success);background:linear-gradient(90deg,var(--success-soft),transparent 60%)}
+.call.ink{border-left-color:var(--text-secondary)}
 .h3{margin:22px 0 4px}
-.srcline{font:400 11px/1.65 var(--mono);color:var(--ink-3);margin-top:18px;
-  padding-top:10px;border-top:1px solid var(--rule);word-break:break-all}
+.srcline{font:400 var(--fs-micro)/1.7 var(--mono);color:var(--text-muted);margin-top:var(--s5);
+  padding-top:var(--s3);border-top:1px solid var(--rule);word-break:break-all}
 .srcline b{color:var(--ink-2);font-weight:500}
-ul.caveats{margin:16px 0 0;padding-left:18px;font-size:12.5px;color:var(--ink-3);max-width:78ch}
+ul.caveats{margin:16px 0 0;padding-left:18px;font-size:var(--fs-small);color:var(--text-muted);max-width:78ch}
 ul.caveats li{margin-bottom:6px;line-height:1.5}
-.notclaimed{margin-top:22px;background:var(--bg-2);border-left:1px solid var(--rule-2);
-  padding:14px 18px 10px}
+.notclaimed{margin-top:var(--s5);background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-md);padding:var(--s4) var(--s5) var(--s2)}
 .notclaimed .lab{margin-bottom:6px}
-.notclaimed span{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.5;
-  padding:7px 0;border-top:1px solid var(--rule)}
+.notclaimed span{display:block;font-size:var(--fs-small);color:var(--text-secondary);line-height:1.55;
+  padding:var(--s2) 0;border-top:1px solid var(--rule)}
 .notclaimed span:first-of-type{border-top:0}
 .cannot{padding:8px 0}
 .err{border-top:1px solid var(--fail);border-bottom:1px solid var(--fail);padding:16px 0;
   color:var(--ink);font-size:13.5px;line-height:1.6;max-width:78ch}
 .err b{color:var(--fail)}
-.loading{color:var(--ink-3);font:500 11px/1 var(--mono);letter-spacing:var(--track);
-  padding:64px 0;text-transform:uppercase}
+.loading{color:var(--text-muted);font:500 var(--fs-small)/1 var(--sans);padding:var(--s8) 0;
+  display:flex;align-items:center;gap:var(--s2)}
 
 /* ------------------------------------------------------------------ live */
-.liveform{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px 24px;
-  margin:18px 0;align-items:end}
-.liveform label{display:block;font:500 10.5px/1.4 var(--mono);letter-spacing:var(--track);
-  text-transform:uppercase;color:var(--ink-3)}
-.liveform input,.liveform select{display:block;width:100%;margin-top:8px;font:13px/1.3 var(--sans);
-  color:var(--ink);background:var(--bg-2);border:1px solid var(--rule-2);padding:9px 10px}
-.liveform .runbtn{margin-top:0;width:100%}
-.liveimgs{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap}
+/* The live tool, laid out as the work it does:
+     1 mode      pair registration, or loop-closure verification with a third image
+     2 inputs    source and reference (and C), each a drop zone with its own states
+     3 engine    a radio group of four, each with its method and trade-off
+     4 run       requirements, the primary Register action, the stage strip
+     5 result    status first, then the key measurement, then detail on request */
+.liveimgs{display:flex;gap:var(--s4);margin-top:var(--s4);flex-wrap:wrap}
 .liveimgs figure{margin:0}
-.liveimgs img{max-width:260px;border:1px solid var(--rule);display:block}
+.liveimgs img{max-width:260px;border:1px solid var(--rule);display:block;border-radius:var(--r-sm)}
+.lsec{margin-top:var(--s6)}
+.lsec:first-of-type{margin-top:var(--s4)}
+.lsech{display:flex;align-items:baseline;gap:var(--s3);margin-bottom:var(--s3)}
+.lsech .n{font:600 var(--fs-micro)/1 var(--mono);color:var(--text-muted);border:1px solid var(--border-strong);
+  border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 22px}
+.lsech h3{font-size:var(--fs-h3);letter-spacing:-.015em}
+.lsech p{font-size:var(--fs-small);color:var(--text-muted)}
 
-.herocta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;margin-top:22px}
-.ctabtn{background:none;border:1px solid var(--accent);color:var(--ink);cursor:pointer;
-  font:500 11px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;padding:13px 18px}
-.ctabtn:hover{background:var(--accent-soft)}
-.ctanote{color:var(--ink-3);font-size:10.5px}
+/* mode: two states, never "optional" -- a pair registers, a triplet verifies */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
+.modecard{border:1px solid var(--border);border-radius:var(--r-md);padding:var(--s4);background:var(--surface);
+  transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease)}
+.modecard.on{border-color:var(--accent);background:var(--accent-soft)}
+.modecard .mt{display:flex;align-items:center;justify-content:space-between;gap:var(--s2)}
+.modecard .mt b{font:600 15px/1.3 var(--sans)}
+.modecard .mc{font:500 var(--fs-micro)/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+.modecard.on .mc{color:var(--accent)}
+.modecard p{font-size:var(--fs-small);color:var(--text-secondary);margin-top:var(--s2);line-height:1.5}
+.modecard .ceil{font-size:var(--fs-label);color:var(--text-muted);margin-top:var(--s2)}
+.eq{display:block;font:500 15px/1.4 var(--mono);color:var(--text-primary);background:var(--surface-sunk);
+  border:1px solid var(--border);border-radius:var(--r-sm);padding:var(--s3) var(--s4);margin-top:var(--s3);
+  text-align:center;overflow-x:auto;white-space:nowrap}
 
-/* ------------------------------------------------ live upload (two slots)
-   The judge's first interaction with the system is dropping two files into
-   it, so this has to work the way a file drop works everywhere else: drag
-   anywhere onto the slot, click it, or paste. Same visual language as the
-   rest of the page -- hairline rules, monospace micro-labels, no icons. */
-.drops{display:grid;grid-template-columns:1fr 44px 1fr;gap:0 14px;align-items:stretch;margin:18px 0 6px}
-.drop{position:relative;border:1px dashed var(--rule-2);background:var(--bg-2);
-  min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:16px;cursor:pointer;transition:border-color .15s,background .15s}
-.drop:hover,.drop:focus-visible{border-color:var(--ink-3);background:var(--bg-3)}
+/* drop zones */
+.drops{display:grid;grid-template-columns:1fr auto 1fr;gap:0 var(--s3);align-items:stretch;margin:0}
+.drop{position:relative;border:1.5px dashed var(--border-strong);border-radius:var(--r-md);background:var(--surface);
+  min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:var(--s7) var(--s4) var(--s4);cursor:pointer;
+  transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease)}
+.drop:hover,.drop:focus-visible{border-color:var(--text-muted);background:var(--surface-hover)}
 .drop:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .drop.over{border-color:var(--accent);background:var(--accent-soft);border-style:solid}
-.drop.filled{border-style:solid;border-color:var(--rule-2);justify-content:flex-start;cursor:default}
-.drop .role{font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
-  color:var(--ink-3);position:absolute;top:10px;left:12px}
-.drop .hint{font:400 12.5px/1.5 var(--sans);color:var(--ink-3);max-width:24ch}
-.drop .hint b{color:var(--ink-2);font-weight:500}
-.drop img.thumb{max-width:100%;max-height:150px;margin-top:22px;border:1px solid var(--rule);
-  display:block;image-rendering:auto}
-.drop .meta{margin-top:8px;font:400 10.5px/1.5 var(--mono);color:var(--ink-3);word-break:break-all}
-.drop .meta b{color:var(--ink-2);font-weight:500}
-.drop .clear{position:absolute;top:6px;right:8px;background:none;border:none;color:var(--ink-3);
-  font:500 14px/1 var(--mono);cursor:pointer;padding:4px 6px}
-.drop .clear:hover{color:var(--fail)}
+.drop.filled{border-style:solid;border-color:var(--border-strong);justify-content:flex-start;cursor:default;
+  background:var(--surface-elevated)}
+.drop.bad{border-color:var(--danger);border-style:solid}
+.drop .role{position:absolute;top:var(--s3);left:var(--s4);right:var(--s7);text-align:left}
+.drop .role b{display:block;font:600 14px/1.3 var(--sans);color:var(--text-primary)}
+.drop .role>span{display:block;font-size:var(--fs-label);color:var(--text-muted);margin-top:2px}
+.drop .role .req{font:600 var(--fs-micro)/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-muted);margin-left:6px}
+.drop .hint{font:400 var(--fs-small)/1.5 var(--sans);color:var(--text-muted);max-width:34ch;margin-top:var(--s5)}
+.drop .hint b{color:var(--text-primary);font-weight:500}
+.drop .hint svg{display:block;margin:0 auto var(--s2);width:28px;height:28px;color:var(--text-muted)}
+.drop .hint small{display:block;margin-top:var(--s2);font:400 var(--fs-micro)/1.4 var(--mono);color:var(--text-muted)}
+.drop img.thumb{max-width:100%;max-height:160px;margin-top:var(--s5);border:1px solid var(--rule);
+  border-radius:var(--r-sm);display:block;background:#000}
+.drop .meta{margin-top:var(--s2);font:400 var(--fs-label)/1.5 var(--sans);color:var(--text-muted);word-break:break-all}
+.drop .meta b{color:var(--text-primary);font-weight:500}
+.drop .meta .okline{color:var(--success);font-weight:600}
+.drop .meta .okline::before{content:"✓\00a0"}
+.drop .slotacts{display:flex;gap:var(--s2);justify-content:center;margin-top:var(--s3)}
+.drop .slotacts button{min-height:32px;padding:0 var(--s3);font-size:var(--fs-label)}
+.drop .clear{position:absolute;top:var(--s2);right:var(--s2);min-height:32px;min-width:32px;padding:0;
+  background:transparent;border:1px solid transparent;border-radius:var(--r-sm);color:var(--text-muted);
+  font:500 18px/1 var(--sans);cursor:pointer}
+.drop .clear:hover{color:var(--danger);background:var(--danger-soft)}
+.drop .slotmsg{margin-top:var(--s2);font-size:var(--fs-label);color:var(--danger);min-height:0}
+.drop .slotmsg:empty{display:none}
 .drop input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .swapcol{display:flex;align-items:center;justify-content:center}
-.thirdrow{display:grid;grid-template-columns:314px 1fr;gap:0 14px;margin-top:14px;align-items:stretch}
-.thirdrow .drop{min-height:150px}
-.thirdwhy{align-self:center;margin:0}
-@media (max-width:760px){.thirdrow{grid-template-columns:1fr;gap:12px}}
-.swapbtn{background:none;border:1px solid var(--rule-2);color:var(--ink-2);cursor:pointer;
-  font:500 12px/1 var(--mono);padding:10px 8px}
-.swapbtn:hover:not(:disabled){border-color:var(--ink-2);color:var(--ink)}
-.swapbtn:disabled{opacity:.35;cursor:default}
-.examples{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0 0}
-.examples .lab{font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
-  color:var(--ink-3)}
-.exbtn{background:none;border:1px solid var(--rule-2);color:var(--ink-2);cursor:pointer;
-  font:400 12px/1.3 var(--sans);padding:8px 11px;text-align:left}
-.exbtn:hover{border-color:var(--ink-2);color:var(--ink)}
-.exbtn small{display:block;font:400 10.5px/1.4 var(--mono);color:var(--ink-3);margin-top:2px}
-.multibtn{border:1px dashed var(--rule-2);color:var(--ink-2);cursor:pointer;
-  font:400 12px/1.3 var(--sans);padding:8px 11px}
-.multibtn:hover{border-color:var(--ink-2);color:var(--ink)}
-.multibtn small{display:block;font:400 10.5px/1.4 var(--mono);color:var(--ink-3);margin-top:2px}
-.samples{margin-top:22px;border-top:1px solid var(--rule);padding-top:16px}
-.samphead{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;margin-bottom:12px}
-.samphead .lab{font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
-  color:var(--ink-3)}
-.sampnote{font-size:12px;color:var(--ink-3);line-height:1.45;max-width:70ch}
-.sampgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
-.sampbtn{display:flex;flex-direction:column;gap:6px;text-align:left;cursor:pointer;
-  background:var(--bg-2);border:1px solid var(--rule-2);color:var(--ink);padding:12px 13px;
-  min-height:128px;transition:border-color .12s}
-.sampbtn:hover{border-color:var(--ink-2)}
+.swapbtn{flex-direction:column;min-height:64px;padding:var(--s2) var(--s3);gap:4px;font-size:var(--fs-label)}
+.swapbtn svg{width:18px;height:18px}
+.thirdrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s3);margin-top:var(--s3);align-items:stretch}
+.thirdrow .drop{min-height:180px}
+.thirdwhy{margin:0;align-self:stretch;border:1px solid var(--border);border-radius:var(--r-md);padding:var(--s4);
+  background:var(--surface)}
+.thirdwhy b{color:var(--text-primary);font-weight:600}
+
+/* sources of images when the reader brought none */
+.examples{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center;margin:var(--s4) 0 0}
+.examples .lab{flex-basis:100%;margin-bottom:2px}
+.exbtn,.multibtn{flex-direction:column;align-items:flex-start;text-align:left;min-height:52px;padding:var(--s2) var(--s4)}
+.exbtn small,.multibtn small{display:block;font:400 var(--fs-label)/1.4 var(--sans);color:var(--text-muted);margin-top:2px}
+.multibtn{border-style:dashed}
+.samples{margin-top:var(--s5)}
+.samphead{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:center;justify-content:space-between;margin-bottom:var(--s3)}
+.samphead .lab{color:var(--text-muted)}
+.sampnote{font-size:var(--fs-label);color:var(--text-muted);line-height:1.5;max-width:70ch;flex-basis:100%}
+.filters{display:flex;flex-wrap:wrap;gap:var(--s1)}
+.filters button{min-height:32px;padding:0 var(--s3);border-radius:var(--r-sm);border:1px solid var(--border-strong);
+  background:transparent;color:var(--text-secondary);font:500 var(--fs-label)/1 var(--sans);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--surface-elevated);color:var(--text-primary);border-color:var(--text-muted)}
+.filters button:hover{color:var(--text-primary)}
+.sampgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--s3)}
+.sampbtn{display:flex;flex-direction:column;gap:var(--s2);text-align:left;cursor:pointer;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--r-md);color:var(--ink);padding:var(--s3);min-height:128px;
+  transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease)}
+.sampbtn:hover{border-color:var(--border-strong);background:var(--surface-hover)}
 .sampbtn.on{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
-.sampbtn .sk{font:500 10px/1.3 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
-  color:var(--ink-3)}
-.sampbtn .sk .loc{color:var(--ink-2);font-weight:500}
-.sampbtn .stt{font:500 13.5px/1.3 var(--sans);color:var(--ink)}
-.sthumbs{display:flex;gap:4px;height:58px}
-.sthumbs img{flex:1 1 0;min-width:0;height:58px;object-fit:cover;border:1px solid var(--rule);
+.sampbtn[hidden]{display:none}
+.sampbtn .sk{font:500 var(--fs-micro)/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+.sampbtn .sk .loc{color:var(--warning);font-weight:600}
+.sampbtn .stt{font:500 14px/1.35 var(--sans);color:var(--ink)}
+.sthumbs{display:flex;gap:4px;height:60px}
+.sthumbs img{flex:1 1 0;min-width:0;height:60px;object-fit:cover;border:1px solid var(--rule);border-radius:3px;
   filter:grayscale(1);background:#000}
-.sampbtn .si{font:400 11px/1.35 var(--mono);color:var(--ink-3)}
-.sampbtn .sm{margin-top:auto;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
-.sampbtn .sd{font:400 11px/1.3 var(--mono);color:var(--ink-3)}
-.vb{font:600 10.5px/1 var(--mono);letter-spacing:.08em;padding:3px 6px;border:1px solid currentColor}
-.vb.v-VERIFIED{color:var(--accent)} .vb.v-REJECTED{color:var(--fail)}
-.vb.v-INCONCLUSIVE{color:var(--ink-2)}
-.subhead{margin:30px 0 10px;padding-top:18px;border-top:1px solid var(--rule)}
-.subhead .lab{font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
-  color:var(--ink-3)}
+.sampbtn .si{font:400 var(--fs-label)/1.35 var(--sans);color:var(--text-muted)}
+.sampbtn .sm{margin-top:auto;display:flex;gap:var(--s2);align-items:center;flex-wrap:wrap}
+.sampbtn .sd{font:400 var(--fs-label)/1.3 var(--mono);color:var(--text-muted)}
+/* verdict badge: glyph + word + colour, never colour alone */
+.vb{display:inline-flex;align-items:center;gap:5px;font:600 var(--fs-micro)/1 var(--mono);letter-spacing:.06em;
+  padding:5px 7px;border:1px solid currentColor;border-radius:var(--r-sm)}
+.vb.v-VERIFIED{color:var(--success)} .vb.v-REJECTED{color:var(--danger)}
+.vb.v-INCONCLUSIVE{color:var(--text-secondary)}
+.vb.v-VERIFIED::before{content:"✓"} .vb.v-REJECTED::before{content:"×"} .vb.v-INCONCLUSIVE::before{content:"?"}
+.subhead{margin:var(--s6) 0 var(--s3);padding-top:var(--s5);border-top:1px solid var(--rule)}
+.subhead .lab{color:var(--text-muted)}
 .tscroll{scrollbar-width:thin;scrollbar-color:var(--rule-2) transparent}
 @media (max-width:760px){.tscroll>table{width:max-content;min-width:100%}.tscroll>table td,.tscroll>table th{max-width:300px}}
-.runrow{display:grid;grid-template-columns:minmax(220px,1fr) minmax(150px,200px) auto;gap:16px 16px;
-  align-items:end;margin-top:18px}
-.runrow #live-cancel{border-color:var(--fail);color:var(--fail)}
-.runrow #live-cancel:hover{border-color:var(--fail);color:var(--ink)}
-.runrow label{display:block;font:500 10.5px/1.4 var(--mono);letter-spacing:var(--track);
-  text-transform:uppercase;color:var(--ink-3)}
-.runrow select{display:block;width:100%;margin-top:8px;font:13px/1.3 var(--sans);color:var(--ink);
-  background:var(--bg-2);border:1px solid var(--rule-2);padding:9px 10px}
-.runrow .runbtn{margin-top:0}
-.livestatus{margin-top:12px;font:400 11.5px/1.6 var(--mono);color:var(--ink-3);min-height:1.6em}
-.livestatus.err{color:var(--fail)}
-.livestatus b{color:var(--ink-2);font-weight:500}
-.spin{display:inline-block;width:9px;height:9px;border:1px solid var(--accent);
-  border-top-color:transparent;border-radius:50%;margin-right:8px;vertical-align:-1px;
-  animation:spin .8s linear infinite}
+
+/* engine selection: a radio group, each option with method and trade-off */
+.engines{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s2);border:0;margin:0;padding:0;min-width:0}
+.engines legend{padding:0}
+.engopt{position:relative;display:flex;flex-direction:column;gap:4px;border:1px solid var(--border);
+  border-radius:var(--r-md);padding:var(--s3) var(--s3) var(--s3) var(--s3);background:var(--surface);cursor:pointer;
+  transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease);min-width:0}
+.engopt:hover{border-color:var(--border-strong);background:var(--surface-hover)}
+.engopt input{position:absolute;opacity:0;width:1px;height:1px}
+.engopt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.engopt:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.engopt .en{display:flex;align-items:center;gap:var(--s2);font:600 14px/1.3 var(--sans);color:var(--text-primary)}
+.engopt .en::before{content:"";width:14px;height:14px;border-radius:50%;border:1.5px solid var(--text-muted);flex:0 0 14px}
+.engopt:has(input:checked) .en::before{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 0 3.5px,transparent 4px)}
+.engopt .et{font:500 var(--fs-micro)/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)}
+.engopt .ed{font-size:var(--fs-label);color:var(--text-secondary);line-height:1.45}
+.engopt .eo{font-size:var(--fs-label);color:var(--text-muted);line-height:1.45;margin-top:auto;padding-top:4px}
+
+/* run: requirements, the primary action, cancel */
+.runrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:var(--s3);align-items:center;margin-top:var(--s5)}
+.reqs{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);font-size:var(--fs-small)}
+.reqs li{display:inline-flex;align-items:center;gap:6px;color:var(--text-muted)}
+.reqs li::before{content:"○";font:600 13px/1 var(--mono)}
+.reqs li.ok{color:var(--text-primary)} .reqs li.ok::before{content:"✓";color:var(--success)}
+.reqs li.opt::before{content:"+";color:var(--text-muted)}
+.reqs li.opt.ok::before{content:"✓";color:var(--success)}
+#live-run{min-width:200px}
+#live-cancel{min-height:48px}
+.spin{display:inline-block;width:12px;height:12px;border:1.5px solid currentColor;border-top-color:transparent;
+  border-radius:50%;animation:spin .8s linear infinite;flex:0 0 12px}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.spin{animation:none}}
-.swipe{position:relative;margin-top:14px;border:1px solid var(--rule);background:#000;
-  overflow:hidden;line-height:0}
-.swipe img{display:block;width:100%}
+@media (prefers-reduced-motion:reduce){.spin{animation:none;border-top-color:currentColor;opacity:.6}}
+
+/* the stage strip: what the pipeline is doing, and what it has done */
+.stages{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;list-style:none;margin:var(--s4) 0 0;padding:0;
+  border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;background:var(--surface)}
+.stages li{padding:var(--s3) var(--s3) var(--s3);border-left:1px solid var(--border);min-width:0;position:relative}
+.stages li:first-child{border-left:0}
+.stages .sn{font:500 var(--fs-micro)/1 var(--mono);letter-spacing:.06em;color:var(--text-muted);display:flex;align-items:center;gap:6px}
+.stages .sn::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid var(--text-muted);flex:0 0 8px}
+.stages .sl{font:500 var(--fs-small)/1.3 var(--sans);color:var(--text-secondary);margin-top:6px}
+.stages .sx{font-size:var(--fs-micro);color:var(--text-muted);margin-top:2px;line-height:1.35}
+.stages li.active{background:var(--accent-soft)}
+.stages li.active .sn::before{border-color:var(--accent);background:var(--accent);animation:pulse 1.2s ease-in-out infinite}
+.stages li.active .sl{color:var(--text-primary)}
+.stages li.done .sn::before{border-color:var(--success);background:var(--success)}
+.stages li.done .sl{color:var(--text-primary)}
+.stages li.failed .sn::before{border-color:var(--danger);background:var(--danger)}
+.stages li.failed .sl{color:var(--danger)}
+@keyframes pulse{50%{opacity:.35}}
+.stagenote{font-size:var(--fs-label);color:var(--text-muted);margin-top:var(--s2)}
+
+/* status line: an alert with a level, announced politely */
+.livestatus{margin-top:var(--s3);font:400 var(--fs-small)/1.55 var(--sans);color:var(--text-secondary);min-height:1.55em;
+  display:flex;gap:var(--s2);align-items:flex-start}
+.livestatus.err{color:var(--text-primary);background:var(--danger-soft);border:1px solid rgba(224,112,112,.45);
+  border-radius:var(--r-md);padding:var(--s3) var(--s4)}
+.livestatus.err::before{content:"×";font:700 15px/1.4 var(--mono);color:var(--danger)}
+.livestatus b{color:var(--text-primary);font-weight:600}
+.livestatus .what{display:block;font-weight:600;color:var(--text-primary)}
+.livestatus .next{display:block;color:var(--text-secondary);margin-top:2px}
+
+/* result: the summary a reader needs first, then evidence, then detail */
+.rsum{margin-top:var(--s5);border:1px solid var(--border-strong);border-radius:var(--r-md);background:var(--surface);
+  padding:var(--s5);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s3) var(--s5);align-items:start}
+.rsum.VERIFIED{border-color:rgba(79,149,238,.6)} .rsum.REJECTED{border-color:rgba(224,112,112,.6)}
+.rsum .rt{font:500 var(--fs-micro)/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+.rsum .rkey{text-align:right}
+.rsum .rkey .kv{font:600 clamp(26px,2.6vw,34px)/1 var(--display);letter-spacing:-.02em}
+.rsum .rkey .kl{font-size:var(--fs-label);color:var(--text-muted);margin-top:4px}
+.rsum .rint{grid-column:1/-1;font-size:var(--fs-body);color:var(--text-primary);line-height:1.55}
+.rsum .rprov{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
+.rsum .verdict{border-top:0;padding:0;margin:var(--s2) 0 0}
+.rdetails{margin-top:var(--s4);border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface)}
+.rdetails>summary{cursor:pointer;list-style:none;min-height:48px;display:flex;align-items:center;gap:var(--s2);
+  padding:0 var(--s4);font:500 var(--fs-small)/1 var(--sans);color:var(--text-primary)}
+.rdetails>summary::-webkit-details-marker{display:none}
+.rdetails>summary::before{content:"+";font:600 14px/1 var(--mono);color:var(--accent);width:12px}
+.rdetails[open]>summary::before{content:"−"}
+.rdetails>summary small{color:var(--text-muted);font-weight:400}
+.rdetails>.rdbody{padding:0 var(--s4) var(--s4)}
+/* The base image sets the box (capped at 560 px tall, aspect kept); the warped
+   image is laid exactly over that box, so the comparison stays pixel-aligned. */
+.swipe{position:relative;margin:var(--s3) auto 0;border:1px solid var(--rule);border-radius:var(--r-sm);background:#000;
+  overflow:hidden;line-height:0;width:fit-content;max-width:100%}
+.swipe img{display:block;width:auto;max-width:100%;max-height:560px}
 .swipe img.top{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
-.swipe .divider{position:absolute;top:0;bottom:0;width:1px;background:var(--accent);pointer-events:none}
-.swipe .tag{position:absolute;bottom:8px;font:500 10px/1 var(--mono);letter-spacing:var(--track);
-  text-transform:uppercase;color:var(--ink-2);background:rgba(11,13,16,.72);padding:5px 7px}
+.swipe .divider{position:absolute;top:0;bottom:0;width:2px;background:var(--accent);pointer-events:none}
+.swipe .tag{position:absolute;bottom:8px;font:500 var(--fs-micro)/1 var(--sans);color:var(--text-primary);
+  background:rgba(11,13,16,.8);padding:5px 8px;border-radius:3px}
 .swipe .tag.l{left:8px} .swipe .tag.r{right:8px}
-.swiperange{width:100%;margin-top:8px;accent-color:var(--accent)}
-.dlrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-.dlbtn{background:none;border:1px solid var(--rule-2);color:var(--ink-2);cursor:pointer;
-  font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
-  padding:9px 12px;text-decoration:none;display:inline-block}
-.dlbtn:hover{border-color:var(--ink-2);color:var(--ink)}
+.swiperange{display:block;width:min(100%,560px);margin:var(--s2) auto 0;accent-color:var(--accent);min-height:28px}
+.dlrow{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s4)}
+.dlbtn{min-height:40px}
+#live-corr{display:block;max-width:100%;height:auto;margin-top:var(--s3);border:1px solid var(--rule);border-radius:var(--r-sm);background:#000}
+
+@media (max-width:1100px){.engines{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){
-  .drops{grid-template-columns:1fr;gap:12px}
+  .drops{grid-template-columns:1fr;gap:var(--s3)}
   .swapcol{order:1}
-  .swapbtn{width:100%;padding:8px}
+  .swapbtn{width:100%;flex-direction:row;min-height:44px}
   .runrow{grid-template-columns:1fr}
+  .modes,.thirdrow{grid-template-columns:1fr}
+  .engines{grid-template-columns:1fr}
+  .stages{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .stages li:nth-child(4){border-left:0}
+  .stages li:nth-child(n+4){border-top:1px solid var(--border)}
+  #live-run{width:100%}
+  .rsum{grid-template-columns:1fr}
+  .rsum .rkey{text-align:left}
 }
 
 /* ---------------------------------------------------------------- footer */
-footer.foot{border-top:1px solid var(--rule);padding:22px 0 40px;font:400 11px/1.7 var(--mono);
-  color:var(--ink-3)}
-footer.foot b{color:var(--ink-2);font-weight:500}
+footer.foot{border-top:1px solid var(--rule);background:var(--surface-sunk);padding:var(--s7) 0 var(--s6);
+  font-size:var(--fs-small);color:var(--text-secondary);line-height:1.6}
+footer.foot b{color:var(--text-primary);font-weight:600}
+.footgrid{display:grid;grid-template-columns:1fr 1.4fr 1.2fr 1.3fr;gap:var(--s6)}
+.footgrid h2{margin-bottom:var(--s3)}
+.footgrid p+p{margin-top:var(--s2)}
+.gloss{margin:0;display:grid;gap:var(--s2)}
+.gloss dt{font:600 var(--fs-label)/1.3 var(--mono);color:var(--text-primary)}
+.gloss dd{margin:0;font-size:var(--fs-label);color:var(--text-muted)}
+.technote{grid-column:1/-1;border-top:1px solid var(--border);padding-top:var(--s4);
+  font-size:var(--fs-label);color:var(--text-muted)}
+@media (max-width:1023px){.footgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.footgrid{grid-template-columns:1fr;gap:var(--s5)}}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the evidence</a>
 
-<header class="top">
+<header class="top" id="topbar">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="SIIM, top of page">SIIM</a>
-    <nav aria-label="Sections">
-      <a href="#case">Case</a>
-      <a href="#m01">01 Envelope</a>
-      <a href="#m02">02 Calibration</a>
-      <a href="#m03">03 Gauge</a>
-      <a href="#m04">04 Ablation</a>
-      <a href="#m05">05 Engines</a>
-      <a href="#m06">06 Chandrayaan-2</a>
-      <a href="#m07">07 Reference</a>
-      <a href="#live" id="nav-live">Live</a>
-      <a href="#m08">08 Scale</a>
-      <a href="#m09">09 Viewpoint</a>
-      <a href="#m10">10 Modality</a>
-      <a href="#prov">Provenance</a>
+    <a class="brand" href="#top" aria-label="SIIM, top of page">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="10" fill="none"
+        stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="3" fill="#4f95ee"/></svg>
+      <b>SIIM</b><span>Lunar image registration with a verdict</span></a>
+    <button class="menubtn" id="menubtn" aria-expanded="false" aria-controls="sitenav">
+      <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12"
+        stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Menu</button>
+    <nav aria-label="Sections" id="sitenav">
+      <a href="#case" data-sec="case">Case</a>
+      <div class="navgrp" data-grp="protocol">
+        <button type="button" aria-expanded="false" aria-controls="menu-protocol">Protocol
+          <svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5"
+            fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <div class="navmenu" id="menu-protocol">
+          <a href="#m01" data-sec="m01"><span class="num">01</span><span>Envelope<small>Why one edge works and another does not</small></span></a>
+          <a href="#m02" data-sec="m02"><span class="num">02</span><span>Calibration<small>Does VERIFIED happen, and how often is it wrong</small></span></a>
+          <a href="#m03" data-sec="m03"><span class="num">03</span><span>Gauge<small>What the verdict cannot see</small></span></a>
+          <a href="#m04" data-sec="m04"><span class="num">04</span><span>Ablation<small>Protocol step vs matcher swap</small></span></a>
+          <a href="#m05" data-sec="m05"><span class="num">05</span><span>Engines<small>Classical and learned matchers</small></span></a>
+        </div>
+      </div>
+      <div class="navgrp" data-grp="data">
+        <button type="button" aria-expanded="false" aria-controls="menu-data">Evidence
+          <svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5"
+            fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <div class="navmenu" id="menu-data">
+          <a href="#m06" data-sec="m06"><span class="num">06</span><span>Chandrayaan-2<small>TMC-2 against LRO NAC</small></span></a>
+          <a href="#m07" data-sec="m07"><span class="num">07</span><span>Reference<small>Another mission's control network</small></span></a>
+          <a href="#m08" data-sec="m08"><span class="num">08</span><span>Scale<small>How far apart in resolution</small></span></a>
+          <a href="#m09" data-sec="m09"><span class="num">09</span><span>Viewpoint<small>Where a 2-D model stops holding</small></span></a>
+          <a href="#m10" data-sec="m10"><span class="num">10</span><span>Modality<small>Reflectance bands and thermal</small></span></a>
+        </div>
+      </div>
+      <a href="#live" id="nav-live" data-sec="live">Live tool</a>
+      <a href="#prov" data-sec="prov">Provenance</a>
     </nav>
     <span class="ind" id="ind" aria-live="polite">Booting</span>
   </div>
@@ -565,41 +868,47 @@ footer.foot b{color:var(--ink-2);font-weight:500}
   <img src="/assets/tile_nac.m1299958135lc.png"
        alt="An LRO Narrow Angle Camera tile of Mare Serenitatis, one of the real frames the recorded experiments on this page were run on">
   <div class="veil"></div><div class="vig"></div>
-  <div class="cap lab" id="hero-cap"></div>
+  <div class="cap" id="hero-cap"></div>
   <div class="wrap">
-    <div class="eyebrow lab">Satellite / Lunar Image Integrity &amp; Matching · SIH 2026 · ISRO PS 26166</div>
-    <h1 id="hero-h">Register only when the evidence agrees.</h1>
-    <p class="lede">A registration protocol for Chandrayaan-2 and LRO NAC optical imagery that
-      reports <b>what it can verify</b>, what it can only corroborate, and what it cannot see —
-      and refuses to certify an alignment on a fit residual alone.</p>
+    <div class="eyebrow"><span class="lab">SIH 2026 · ISRO PS 26166</span>
+      <span class="lab" style="color:var(--text-secondary)">Satellite / Lunar Image Integrity &amp; Matching</span></div>
+    <h1 id="hero-h">Register only when <span class="l2">the evidence agrees.</span></h1>
+    <p class="lede">Registers Chandrayaan-2 and LRO NAC images, then reports <b>what it can
+      verify</b>, what it can only corroborate, and what it cannot see.</p>
     <div class="herocta">
-      <button class="ctabtn" id="hero-live">Register two images of your own</button>
-      <span class="ctanote lab">drag, click or paste · or load one of the real lunar sample
-        sets · runs on this machine, in the request</span>
+      <button class="ctabtn" id="hero-live">
+        <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11V3M4.5 6.5 8 3l3.5 3.5M3 13h10"
+          fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Register two images</button>
+      <a class="btn btn-lg" href="#main">View the recorded evidence</a>
+      <p class="ctanote">Use your own images or a real lunar sample set. Runs on this machine; nothing is uploaded elsewhere.</p>
     </div>
-    <div class="hmeta lab" id="provline">Every number on this page is read from a recorded
-      artefact on real LRO NAC / Chandrayaan-2 data. No synthetic data appears on this page.
-      The one live panel registers a pair you supply, in the request, and labels every number
-      it shows live — never recorded.</div>
-    <div class="hmeta lab" id="scope"></div>
+    <div class="trust">
+      <div class="kinds"><span class="kind recorded">Recorded</span><span class="hmeta">read from an experiment artefact</span></div>
+      <div class="kinds"><span class="kind live">Live</span><span class="hmeta">computed in your request</span></div>
+      <p class="hmeta" id="provline">Every recorded number is read from an artefact
+        on real LRO NAC / Chandrayaan-2 data, and its file is linked beside it. No synthetic data appears on this page.</p>
+      <p class="hmeta" id="scope"></p>
+    </div>
     <div class="hfigs" id="hfigs" aria-label="Three recorded figures"></div>
   </div>
 </section>
 
 <main id="main">
 <div class="wrap">
-<aside class="cases" aria-label="Cases">
-  <div class="grp lab">Real LRO NAC · recorded</div>
-  <div id="cases-real" class="list"></div>
-  <button class="runbtn" id="run">Reload case</button>
-  <div class="grp lab">Your own pair · live</div>
+<aside class="cases" aria-label="Datasets and tools">
+  <h2 class="grp"><span class="lab">Recorded data</span><span class="kind recorded">LRO NAC</span></h2>
+  <div id="cases-real" class="list" role="group" aria-label="Recorded real-data cases"></div>
+  <div class="caseactions"><button class="runbtn" id="run">Reload case</button></div>
+  <h2 class="grp"><span class="lab">Live analysis</span><span class="kind live">Your images</span></h2>
   <button class="case" id="live-open" data-id="__live__">
+    <span class="code" aria-hidden="true">+</span>
+    <span class="t">Register your own images</span>
+    <span class="s">Two images, or three for loop-closure verification</span>
     <span class="badge">Live · not recorded</span>
-    <div class="t">Register two images now</div>
-    <div class="s">Upload any two overlapping lunar images. Computed in the request,
-      labelled live, never a recorded number.</div>
   </button>
-  <div class="sidenote" id="datastatus"></div>
+  <details class="sidenote"><summary>Data availability</summary>
+    <div id="datastatus"></div></details>
 </aside>
 
 <section id="stage" aria-live="polite">
@@ -609,10 +918,36 @@ footer.foot b{color:var(--ink-2);font-weight:500}
 </main>
 
 <footer class="foot">
-  <div class="wrap"><b>SIIM</b> · Smart India Hackathon 2026 · ISRO problem statement 26166 ·
-    every number on this page is read from a recorded artefact on real LRO NAC / Chandrayaan-2
-    data; the live panel alone computes in the request and says so · no synthetic data ·
-    no webfont, no CDN, no external request.</div>
+  <div class="wrap footgrid">
+    <section aria-labelledby="f-proj">
+      <h2 id="f-proj" class="lab">Project</h2>
+      <p><b>SIIM</b> — Satellite / Lunar Image Integrity &amp; Matching.</p>
+      <p>Smart India Hackathon 2026 · ISRO problem statement 26166.</p>
+    </section>
+    <section aria-labelledby="f-data">
+      <h2 id="f-data" class="lab">Data provenance</h2>
+      <p>Every recorded number is read from an artefact on real LRO NAC / Chandrayaan-2 data;
+        the live tool alone computes in your request and says so. No synthetic data.</p>
+      <p>LRO NAC: NASA/GSFC/Arizona State University. SELENE (Kaguya) TC: © JAXA/SELENE.
+        Chandrayaan-2: courtesy ISRO/ISSDC (PRADAN), © reserved ISRO.</p>
+    </section>
+    <section aria-labelledby="f-method">
+      <h2 id="f-method" class="lab">Methodology</h2>
+      <p>Each experiment is pre-registered before it runs; its criteria are reported exactly as
+        frozen, including the ones not met. The verdict rule is unchanged since it was fixed.</p>
+      <p><a class="filelink" href="#prov">Provenance: files, byte ranges and hashes</a></p>
+    </section>
+    <section aria-labelledby="f-gloss">
+      <h2 id="f-gloss" class="lab">Glossary</h2>
+      <dl class="gloss">
+        <dt>D → A</dt><dd>An edge: source frame D registered to reference frame A.</dd>
+        <dt>NAC · TMC-2</dt><dd>LRO's Narrow Angle Camera · Chandrayaan-2's Terrain Mapping Camera.</dd>
+        <dt>Loop residual</dt><dd>How far three composed transforms miss returning to the start.</dd>
+        <dt>VERIFIED</dt><dd>Corroborated by loop closure — not proven correct.</dd>
+      </dl>
+    </section>
+    <p class="technote">Technical note: no webfont, no CDN, no external request — the page runs offline.</p>
+  </div>
 </footer>
 
 <script>
@@ -693,12 +1028,26 @@ Promise.all([
   // Only recorded real-data cases are offered. The API also lists synthetic
   // scenarios; this page never renders them and never calls /api/run for one.
   SCEN = d.scenarios.filter(s => s.data_source === "real_lro_nac");
-  const card = s => `
-    <button class="case" data-id="${esc(s.id)}">
+  // Compact dataset cards: the edge code ("D → A"), its name, one fact, and the
+  // recorded outcome as a glyph + word. Every part is read from the payload:
+  // code and name from the title, Δ incidence from the subtitle, outcome from
+  // the recorded headline. The full sentences stay in the case header.
+  const card = s => {
+    const [code, name] = String(s.title || "").split(" — ");
+    const inc = /([\d.]+)°/.exec(s.subtitle || "");
+    const head = String(s.headline || "");
+    const out = /SUCCEEDS/.test(head) ? st("registers", "pass")
+      : (/FAILS|fails/.test(head) ? st("fails", "fail") : "");
+    return `
+    <button class="case" data-id="${esc(s.id)}" aria-describedby="casehint-${esc(s.id)}">
+      <span class="code" title="Edge: source frame → reference frame">${esc(code || s.title)}</span>
+      <span class="t">${esc(name ? name.charAt(0).toUpperCase() + name.slice(1) : "")}</span>
+      <span class="s">${inc ? `Δ incidence ${esc(inc[1])}°` : esc(s.subtitle || "")}</span>
+      <span class="o">${out}</span>
+      <span class="sr-only" id="casehint-${esc(s.id)}">${esc(s.subtitle || "")}. ${esc(head)}</span>
       <span class="badge real">Real data · recorded</span>
-      <div class="t">${esc(s.title)}</div>
-      <div class="s">${esc(s.subtitle || s.headline || "")}</div>
     </button>`;
+  };
   $("#cases-real").innerHTML = SCEN.map(card).join("");
   // The live card shares the .case styling but is not a scenario; it is wired
   // separately below and must be skipped here (a bug found in-browser on
@@ -710,8 +1059,8 @@ Promise.all([
     run();
   });
   $("#datastatus").innerHTML =
-    `<b>Real data</b><br>${esc(d.data_status.real_lro_nac)}<br><br>
-     <b>Chandrayaan-2</b><br>${esc(d.data_status.chandrayaan2_ohrc_tmc2_iirs)}`;
+    `<div class="dsrow"><b>Real data</b><br>${esc(d.data_status.real_lro_nac)}</div>
+     <div class="dsrow"><b>Chandrayaan-2</b><br>${esc(d.data_status.chandrayaan2_ohrc_tmc2_iirs)}</div>`;
   window.__ILL = ill;
   window.__ENG = eng;
   window.__C2 = c2;
@@ -750,6 +1099,65 @@ Promise.all([
   });
 });
 
+/* ------------------------------------------------------------ navigation
+   Group menus are disclosure buttons (aria-expanded), closed by Escape, by a
+   click elsewhere, or by choosing a link. Below 960 px the nav is a drawer
+   opened by the Menu button. The link for the section in view carries
+   aria-current, and its group is marked, so "where am I" is always visible. */
+(function initNav() {
+  const bar = document.getElementById("topbar");
+  const menubtn = document.getElementById("menubtn");
+  const groups = [...document.querySelectorAll(".navgrp")];
+  const closeGroups = except => groups.forEach(g => {
+    if (g !== except) g.querySelector("button").setAttribute("aria-expanded", "false"); });
+  const setDrawer = open => {
+    bar.classList.toggle("open", open);
+    document.body.classList.toggle("navopen", open);
+    menubtn.setAttribute("aria-expanded", String(open));
+    menubtn.innerHTML = open
+      ? '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Close'
+      : '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Menu';
+  };
+  groups.forEach(g => {
+    const b = g.querySelector("button");
+    b.addEventListener("click", () => {
+      const open = b.getAttribute("aria-expanded") !== "true";
+      closeGroups(g);
+      b.setAttribute("aria-expanded", String(open));
+      if (open) { const first = g.querySelector(".navmenu a"); if (first) first.focus(); }
+    });
+  });
+  menubtn.addEventListener("click", () => setDrawer(!bar.classList.contains("open")));
+  document.addEventListener("click", ev => { if (!ev.target.closest(".navgrp")) closeGroups(null); });
+  document.addEventListener("keydown", ev => {
+    if (ev.key !== "Escape") return;
+    const openGrp = groups.find(g => g.querySelector("button").getAttribute("aria-expanded") === "true");
+    if (openGrp) { closeGroups(null); openGrp.querySelector("button").focus(); }
+    if (bar.classList.contains("open")) { setDrawer(false); menubtn.focus(); }
+  });
+  document.querySelectorAll("#sitenav a").forEach(a => a.addEventListener("click", () => {
+    closeGroups(null); setDrawer(false); }));
+  // Active section: the last section whose top has passed the bar.
+  const links = [...document.querySelectorAll("#sitenav a[data-sec]")];
+  let raf = 0;
+  const mark = () => {
+    raf = 0;
+    const y = (document.getElementById("topbar").offsetHeight || 56) + 24;
+    let cur = null;
+    for (const a of links) {
+      const el = document.getElementById(a.dataset.sec);
+      if (el && el.getBoundingClientRect().top <= y) cur = a.dataset.sec;
+    }
+    links.forEach(a => a.toggleAttribute("aria-current", a.dataset.sec === cur));
+    links.forEach(a => { if (a.hasAttribute("aria-current")) a.setAttribute("aria-current", "true"); });
+    groups.forEach(g => g.classList.toggle("current",
+      !!g.querySelector(`a[data-sec="${cur}"]`)));
+  };
+  window.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(mark); }, {passive: true});
+  window.addEventListener("resize", () => { if (window.innerWidth > 960) setDrawer(false); });
+  window.__markNav = mark;
+})();
+
 function setIndicator(text, live) {
   const el = $("#ind");
   if (!el) return;
@@ -762,36 +1170,43 @@ function setIndicator(text, live) {
    came from; a missing payload shows CANNOT CHECK rather than a typed number. */
 function renderHero() {
   const ill = window.__ILL, vc = window.__VC, gd = window.__GD, c2 = window.__C2;
-  const fig = (lab, val, note, src, kind) => `<div class="hfig">
+  // label · value · one line of meaning · the detail on request · the file
+  const fig = (lab, val, meaning, detail, src, kind) => `<div class="hfig">
       <div class="lab">${lab}</div>
       <div class="hval ${kind || ""}">${val}</div>
-      <div class="hnote">${note}</div>
+      <div class="hint1">${meaning}</div>
+      ${detail ? `<details><summary>What this counts</summary><div class="hnote">${detail}</div></details>` : ""}
       <div class="hsrc">${src}</div></div>`;
   const none = (lab, ep) => fig(lab, "CANNOT CHECK",
-    `The endpoint <span class="code">${esc(ep)}</span> returned no payload at boot.`,
+    `The endpoint <span class="code">${esc(ep)}</span> returned no payload at boot.`, "",
     "no artefact read", "st-neutral");
   const L = c2 && c2.loop;
   const parts = [
-    c2 ? fig("Chandrayaan-2 TMC-2 ↔ LRO NAC",
-             `${c2.n_successes} <small>/ ${c2.n_engine_rows}</small>`,
-             `engine rows that pass the rule and agree with archive geometry, two engines ·
-              <b>${c2.n_wrong_passes} wrong passes</b> · no pair VERIFIED; the one loop is
-              ${esc(L.verdict)} at ${(+L.residual_px).toFixed(2)} px against ${L.reject_threshold_px} px`,
+    c2 ? fig("Chandrayaan-2 TMC-2 → LRO NAC",
+             `${c2.n_successes} <small>/ ${c2.n_engine_rows} rows</small>`,
+             `Engine rows that pass the rule and agree with archive geometry.`,
+             `Two engines. <b>${c2.n_wrong_passes} wrong passes.</b> No pair is VERIFIED: the one
+              three-image loop is ${esc(L.verdict)} at ${(+L.residual_px).toFixed(2)} px against a
+              ${L.reject_threshold_px} px line. TMC-2 is Chandrayaan-2's terrain camera; NAC is LRO's
+              narrow-angle camera.`,
              esc((c2.sources || [])[0] || ""))
-       : none("Chandrayaan-2 TMC-2 ↔ LRO NAC", "/api/evidence/chandrayaan2"),
-    vc ? fig("Verdict reachability · real NAC triplets",
-             `${vc.n_all_verified} <small>/ ${vc.n_triplets}</small>`,
-             `triplets VERIFIED, ${vc.n_edge_verdicts} edge verdicts, <b>no threshold changed</b> ·
-              loop residuals ${(+vc.residual_px.min).toFixed(2)}–${(+vc.residual_px.max).toFixed(2)} px
-              against a ${vc.residual_px.reject_threshold_px} px reject line`,
+       : none("Chandrayaan-2 TMC-2 → LRO NAC", "/api/evidence/chandrayaan2"),
+    vc ? fig("Real NAC triplets verified",
+             `${vc.n_all_verified} <small>/ ${vc.n_triplets} triplets</small>`,
+             `Three-image loops that close under the frozen line, with no threshold changed.`,
+             `${vc.n_edge_verdicts} edge verdicts. Loop residuals
+              ${(+vc.residual_px.min).toFixed(2)}–${(+vc.residual_px.max).toFixed(2)} px against a
+              ${vc.residual_px.reject_threshold_px} px reject line. A loop residual is how far the three
+              composed transforms miss returning to where they started.`,
              esc((vc.sources || [])[0] || ""))
-       : none("Verdict reachability · real NAC triplets", "/api/evidence/verdict-calibration"),
-    gd ? fig("What the same verdict cannot see",
-             `${gd.blind_spot.n_verified} <small>/ ${gd.blind_spot.n_cases}</small>`,
-             `constructed per-image coordinate errors returned VERIFIED with high confidence —
-              the loop closes by algebra · <b>the measured blind spot, reported not fixed</b>`,
+       : none("Real NAC triplets verified", "/api/evidence/verdict-calibration"),
+    gd ? fig("Known blind spot",
+             `${gd.blind_spot.n_verified} <small>/ ${gd.blind_spot.n_cases} cases</small>`,
+             `Constructed per-image errors that still return VERIFIED.`,
+             `The loop closes by algebra when each image carries its own coordinate error, so the
+              verdict cannot see it. <b>Measured and reported, not fixed</b> — module 03.`,
              esc(gd.blind_spot.source || (gd.sources || [])[0] || ""), "st-fail")
-       : none("What the same verdict cannot see", "/api/evidence/gauge-detection"),
+       : none("Known blind spot", "/api/evidence/gauge-detection"),
   ];
   $("#hfigs").innerHTML = parts.join("");
   const fr = ill && (ill.frames || []).find(f => f.pdsid === "nac.m1299958135lc");
@@ -812,6 +1227,7 @@ $("#live-open").onclick = () => {
   $("#stage").innerHTML = liveCard();
   setIndicator("Live · computed in this request", true);
   $("#main").scrollIntoView();
+  if (window.__markNav) window.__markNav();
   // One call wires the drop zones, the paste handler, the example pairs, the
   // swap, the clear buttons and the run button, and repaints whatever the
   // reader had already loaded if they navigate back to this card.
@@ -937,6 +1353,7 @@ function render(d) {
   if (vm.overlap) drawGeometry(vm.overlap);
   drawStrip();
   drawEngineBins();
+  if (window.__markNav) window.__markNav();
 }
 
 /* ---------------------------------------------- STEP 1 — the overlap gate */
@@ -1161,7 +1578,7 @@ function stepVerdict(vm, v, d) {
       <ul class="reasons">${v.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
       <div class="outcome-line">
         <b>Registration outcome (pre-registered criterion):</b>
-        ${vm.outcome === "SUCCEED" ? st("✓ SUCCEED", "pass") : st("✕ FAIL", "fail")} —
+        ${vm.outcome === "SUCCEED" ? st("SUCCEED", "pass") : st("FAIL", "fail")} —
         ${esc(vm.d.outcome_rule)}</div>
     </div>
     ${vm.d.verdict_note
@@ -1205,7 +1622,7 @@ function illuminationPanel(vm) {
         <td class="n">${pct(r.overlap_min_fraction)}</td>
         <td class="n">${r.n_putative}</td>
         <td class="n ${r.outcome === "SUCCEED" ? "pass" : "failc"}" style="font-weight:600">${r.n_inliers}</td>
-        <td>${r.outcome === "SUCCEED" ? st("✓ SUCCEED", "pass") : st("✕ FAIL", "fail")}</td>
+        <td>${r.outcome === "SUCCEED" ? st("SUCCEED", "pass") : st("FAIL", "fail")}</td>
       </tr>`).join("")}</tbody>
     </table></div>
     <div class="rc">
@@ -1713,79 +2130,150 @@ const LIVE_EXAMPLES = {
           label: "Large illumination difference", sub: "LRO NAC · Δ incidence 39.81° · expected to fail"},
 };
 
+//: The four engine choices. Each trade-off is a measured property of this
+//: repository, not an adjective: REAL-DATA-07 measured the learned engine's
+//: yield at 5-25x RootSIFT's inside the same illumination envelope, and the
+//: agreement floor (3 px) is D-051's.
+const LIVE_ENGINES = [
+  {value: "B1", name: "RootSIFT", type: "Classical",
+   desc: "Local gradient descriptors, mutual nearest neighbour, LO-RANSAC.",
+   trade: "No extra dependencies. The engine every recorded stage used."},
+  {value: "B4L", name: "DISK + LightGlue", type: "Learned",
+   desc: "Learned keypoints with an attention matcher.",
+   trade: "5–25× RootSIFT's inliers inside the same envelope (REAL-DATA-07). Needs the learned extra."},
+  {value: "B4X", name: "XFeat", type: "Learned · lightweight",
+   desc: "A compact learned detector and descriptor.",
+   trade: "Lower compute than DISK + LightGlue. Needs the learned extra."},
+  {value: "both", name: "Agreement check", type: "Two engines",
+   desc: "Runs RootSIFT and DISK + LightGlue independently and compares them.",
+   trade: "Caps the verdict at INCONCLUSIVE when they disagree by ≥ 3 px. Pairs only."},
+];
+
 //: Slot state. `b64` is what the API gets; the rest is what the reader sees.
 const LIVE = {src: null, ref: null, thr: null, running: false, abort: null, last: null};
 
 function liveCard() {
-  const slot = (id, role, hint) => `
+  const icon = `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V5M7.5 9.5 12 5l4.5 4.5"/>
+      <path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>`;
+  const slot = (id, role, what, need) => `
     <div class="drop" id="drop-${id}" data-slot="${id}" role="button" tabindex="0"
-         aria-label="${esc(role)} image: drop a file here, click to browse, or paste">
-      <span class="role">${esc(role)}</span>
-      <button class="clear" data-clear="${id}" title="remove" aria-label="remove the ${esc(role)} image"
+         aria-label="${esc(role)} image: drop a file here, press Enter to browse, or paste"
+         aria-describedby="role-${id}">
+      <div class="role" id="role-${id}"><b>${esc(role)}<span class="req">${esc(need)}</span></b>
+        <span>${esc(what)}</span></div>
+      <button class="clear" data-clear="${id}" title="Remove" aria-label="Remove the ${esc(role)} image"
               hidden>&times;</button>
-      <input type="file" id="live-${id}" accept="image/*">
-      <div class="hint" id="hint-${id}"><b>Drop an image</b><br>click to browse, or paste</div>
+      <input type="file" id="live-${id}" accept="image/*" tabindex="-1" aria-hidden="true">
+      <div class="hint" id="hint-${id}">${icon}<b>Drop an image here</b><br>or click to browse · paste works too
+        <small>PNG, JPEG or TIFF · at least 64 px per side</small></div>
       <img class="thumb" id="thumb-${id}" alt="" hidden>
       <div class="meta" id="meta-${id}"></div>
+      <div class="slotmsg" id="msg-${id}" role="alert"></div>
     </div>`;
-  return mod("live", modHead("L", "Live · your own pair",
-      "Register two images of your own — now",
-      "estimate → refine → re-estimate → verify · computed in this request · labelled live"), `
-    <div class="note">Two <b>overlapping</b> images of the same ground (PNG, JPEG or TIFF, any size).
-      The long side is down-sampled to 1024 px for the live run, so a full tile is fine.
-      The rule, the verdict engine and the pipeline order are the ones every recorded stage used;
-      only the images are new, and <b>nothing produced here is a recorded number</b>.</div>
-
-    <div class="drops">
-      ${slot("src", "Source", "")}
-      <div class="swapcol"><button class="swapbtn" id="live-swap" disabled
-        title="swap source and reference" aria-label="swap source and reference">⇄</button></div>
-      ${slot("ref", "Reference", "")}
-    </div>
-    <div class="thirdrow">
-      ${slot("thr", "Third image · optional", "")}
-      <div class="thirdwhy note">
-        <b>Why a third image changes the answer.</b> On a pair, the strongest check this project
-        has — <b>loop closure</b> — cannot run, so the verdict can never exceed INCONCLUSIVE and
-        says so in its own reason text. Add a third overlapping image and the three edges must
-        compose back to where they started: <span class="code">C→A ∘ B→C ∘ A→B = I</span>. That is
-        the only path on this page to <b>VERIFIED</b> — and module 03 measures exactly what it
-        still cannot see.
+  const engine = (e, i) => `
+      <label class="engopt">
+        <input type="radio" name="live-eng" value="${esc(e.value)}"${i === 0 ? " checked" : ""}>
+        <span class="en">${esc(e.name)}</span>
+        <span class="et">${esc(e.type)}</span>
+        <span class="ed">${esc(e.desc)}</span>
+        <span class="eo">${esc(e.trade)}</span>
+      </label>`;
+  return mod("live", modHead("L", "Live · computed in your request",
+      "Register your own images",
+      "The same rule, verdict and pipeline order every recorded stage used. Only the images are new: every number here is live, never a recorded number."), `
+    <section class="lsec" aria-labelledby="lh-mode">
+      <div class="lsech"><span class="n">1</span><h3 id="lh-mode">What the run can conclude</h3></div>
+      <div class="modes">
+        <div class="modecard" id="mode-pair">
+          <div class="mt"><b>Pair registration</b><span class="mc">2 images</span></div>
+          <p>Estimates the transform from source to reference and checks the evidence behind it.</p>
+          <p class="ceil">Highest possible verdict: <span class="st st-neutral">INCONCLUSIVE</span> — a pair cannot rule out a self-consistent wrong answer.</p>
+        </div>
+        <div class="modecard" id="mode-loop">
+          <div class="mt"><b>Loop-closure verification</b><span class="mc">3 images</span></div>
+          <p>Registers A→B, B→C and C→A independently; the three must compose back to the start:</p>
+          <span class="eq">C→A ∘ B→C ∘ A→B = I</span>
+          <p class="ceil">The only path to <span class="st st-pass">VERIFIED</span>. Module 03 measures what loop closure still cannot see.</p>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="examples">
-      <span class="lab">No images? Start from a recorded pair</span>
-      <button class="exbtn" data-example="match">${esc(LIVE_EXAMPLES.match.label)}
-        <small>${esc(LIVE_EXAMPLES.match.sub)}</small></button>
-      <button class="exbtn" data-example="cross">${esc(LIVE_EXAMPLES.cross.label)}
-        <small>${esc(LIVE_EXAMPLES.cross.sub)}</small></button>
-      <label class="multibtn" title="pick two or three files at once; they fill the slots in filename order">
-        Load several files<small>A, B (and C) fill in name order</small>
-        <input type="file" id="live-multi" accept="image/*" multiple hidden></label>
-    </div>
-
-    <div class="samples" id="live-samples" hidden>
-      <div class="samphead">
-        <span class="lab">Real lunar sample sets · <span class="code">sample_images/</span></span>
-        <span class="sampnote">Real archive images, north-up, 16-bit. The outcome on each card
-          was measured by posting these exact files to this server when the folder was built —
-          a live result, not a recorded stage number.</span>
+    <section class="lsec" aria-labelledby="lh-in">
+      <div class="lsech"><span class="n">2</span><h3 id="lh-in">Images</h3>
+        <p>Overlapping views of the same ground. Long side is down-sampled to 1024 px for the run.</p></div>
+      <div class="drops">
+        ${slot("src", "Source", "The image being registered", "required")}
+        <div class="swapcol"><button class="swapbtn" id="live-swap" disabled
+          title="Swap source and reference" aria-label="Swap source and reference">
+          <svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11l-3-3M16 13H5l3 3"/></svg>Swap</button></div>
+        ${slot("ref", "Reference", "The alignment target", "required")}
       </div>
-      <div class="sampgrid" id="live-samples-grid"></div>
-    </div>
+      <div class="thirdrow">
+        ${slot("thr", "Third image (C)", "Enables loop-closure verification", "for verification")}
+        <div class="thirdwhy note" id="thr-state" aria-live="polite">
+          <b>No third image yet.</b> The run will be a pair registration, so loop closure will not
+          run and the verdict can reach INCONCLUSIVE at most. Add a third image that overlaps both
+          to evaluate loop closure — the only path to VERIFIED.
+        </div>
+      </div>
+      <div class="examples">
+        <span class="lab">No images? Start from real data</span>
+        <button class="exbtn" data-example="match">${esc(LIVE_EXAMPLES.match.label)}
+          <small>${esc(LIVE_EXAMPLES.match.sub)}</small></button>
+        <button class="exbtn" data-example="cross">${esc(LIVE_EXAMPLES.cross.label)}
+          <small>${esc(LIVE_EXAMPLES.cross.sub)}</small></button>
+        <label class="multibtn" title="Pick two or three files at once; they fill the slots in filename order">
+          Load several files<small>A, B (and C) fill in name order</small>
+          <input type="file" id="live-multi" accept="image/*" multiple hidden></label>
+      </div>
+      <div class="samples" id="live-samples" hidden>
+        <div class="samphead">
+          <span class="lab">Real lunar sample sets · <span class="code">sample_images/</span></span>
+          <div class="filters" role="group" aria-label="Filter sample sets by recorded outcome">
+            <button type="button" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-filter="VERIFIED" aria-pressed="false">Verified</button>
+            <button type="button" data-filter="REJECTED" aria-pressed="false">Rejected</button>
+            <button type="button" data-filter="INCONCLUSIVE" aria-pressed="false">Inconclusive</button>
+          </div>
+          <span class="sampnote">Real archive images, north-up, 16-bit. Each outcome was measured by
+            posting these exact files to this server when the folder was built — a live result,
+            not a recorded stage number.</span>
+        </div>
+        <div class="sampgrid" id="live-samples-grid"></div>
+      </div>
+    </section>
 
-    <div class="runrow">
-      <label>engine<select id="live-eng">
-        <option value="B1">RootSIFT — classical, fastest</option>
-        <option value="B4L">DISK + LightGlue — learned, best across illumination</option>
-        <option value="B4X">XFeat — learned, lightest</option>
-        <option value="both">Both — RootSIFT and DISK, with an agreement check</option>
-      </select></label>
-      <button class="runbtn" id="live-run" disabled>Register</button>
-      <button class="runbtn" id="live-cancel" hidden>Cancel</button>
-    </div>
-    <div class="livestatus" id="live-status" role="status" aria-live="polite">Add two images to begin.</div>
+    <section class="lsec" aria-labelledby="lh-eng">
+      <div class="lsech"><span class="n">3</span><h3 id="lh-eng">Matching engine</h3></div>
+      <fieldset class="engines"><legend class="sr-only">Matching engine</legend>
+        ${LIVE_ENGINES.map(engine).join("")}
+      </fieldset>
+    </section>
+
+    <section class="lsec" aria-labelledby="lh-run">
+      <div class="lsech"><span class="n">4</span><h3 id="lh-run">Run</h3></div>
+      <div class="runrow">
+        <ul class="reqs" id="live-reqs" aria-label="Requirements">
+          <li id="req-src">Source image</li><li id="req-ref">Reference image</li>
+          <li id="req-thr" class="opt">Third image — for verification</li>
+          <li id="req-eng" class="ok">Engine: RootSIFT</li>
+        </ul>
+        <button class="runbtn" id="live-cancel" hidden>Cancel</button>
+        <button class="btn btn-primary btn-lg" id="live-run" disabled>Register</button>
+      </div>
+      <ol class="stages" id="live-stages" aria-label="Pipeline stages">
+        <li data-stage="upload"><div class="sn">1</div><div class="sl">Upload</div><div class="sx">images in the browser</div></li>
+        <li data-stage="estimate"><div class="sn">2</div><div class="sl">Estimate</div><div class="sx">match and fit</div></li>
+        <li data-stage="refine"><div class="sn">3</div><div class="sl">Refine</div><div class="sx">sub-pixel</div></li>
+        <li data-stage="reestimate"><div class="sn">4</div><div class="sl">Re-estimate</div><div class="sx">model selection</div></li>
+        <li data-stage="verify"><div class="sn">5</div><div class="sl">Verify</div><div class="sx">evidence and verdict</div></li>
+        <li data-stage="report"><div class="sn">6</div><div class="sl">Report</div><div class="sx">result and downloads</div></li>
+      </ol>
+      <div class="stagenote" id="live-stagenote">The server runs stages 2–5 in one request; progress inside a request is not streamed.</div>
+      <div class="livestatus" id="live-status" role="status" aria-live="polite">Add two images to begin.</div>
+    </section>
     <div id="live-out"></div>`);
 }
 
@@ -1794,7 +2282,42 @@ function liveStatus(text, isErr, busy) {
   const el = $("#live-status");
   if (!el) return;
   el.classList.toggle("err", !!isErr);
-  el.innerHTML = (busy ? '<span class="spin"></span>' : "") + text;
+  el.innerHTML = (busy ? '<span class="spin" aria-hidden="true"></span>' : "") + `<span>${text}</span>`;
+}
+
+// An error the reader can act on: what happened, why it matters, what to do.
+function liveError(what, why, next) {
+  liveStatus(`<span class="what">${what}</span>${why ? esc(why) : ""}` +
+    (next ? `<span class="next">${next}</span>` : ""), true, false);
+}
+
+// The engine is a radio group; the value sent to the API is unchanged.
+function liveEngine() {
+  const r = document.querySelector('input[name="live-eng"]:checked');
+  return r ? r.value : "B1";
+}
+
+function liveEngineName() {
+  const e = LIVE_ENGINES.find(x => x.value === liveEngine());
+  return e ? e.name : liveEngine();
+}
+
+// The stage strip. It only ever claims what the page knows: Upload is done
+// when the images are in the browser; stages 2-5 are "running" together while
+// the single request is in flight (the server does not stream progress); on a
+// result they are marked from the pipeline order the API returned.
+function setStages(state) {
+  const box = document.getElementById("live-stages");
+  if (!box) return;
+  const li = k => box.querySelector(`[data-stage="${k}"]`);
+  const all = ["upload", "estimate", "refine", "reestimate", "verify", "report"];
+  all.forEach(k => { const e = li(k); if (e) e.classList.remove("active", "done", "failed"); });
+  if (state.uploaded) li("upload").classList.add("done");
+  (state.active || []).forEach(k => li(k) && li(k).classList.add("active"));
+  (state.done || []).forEach(k => li(k) && li(k).classList.add("done"));
+  (state.failed || []).forEach(k => li(k) && li(k).classList.add("failed"));
+  const vsx = li("verify") && li("verify").querySelector(".sx");
+  if (vsx && !(state.done || []).includes("verify")) vsx.textContent = "evidence and verdict";
 }
 
 // `keep` leaves an explicit message (an example loaded, a run finished, an
@@ -1809,6 +2332,25 @@ function liveReady(keep) {
     if (!LIVE.running) run.textContent = LIVE.thr ? "Register triplet" : "Register";
   }
   if (swap) swap.disabled = !(LIVE.src || LIVE.ref) || LIVE.running;
+  // requirements, stated before the reader presses anything
+  const req = (id, ok, text) => { const e = document.getElementById(id);
+    if (e) { e.classList.toggle("ok", !!ok); if (text) e.textContent = text; } };
+  req("req-src", LIVE.src, LIVE.src ? "Source image" : "Add a source image");
+  req("req-ref", LIVE.ref, LIVE.ref ? "Reference image" : "Add a reference image");
+  req("req-thr", LIVE.thr, LIVE.thr ? "Third image — loop closure will run" : "Third image — for verification");
+  req("req-eng", true, "Engine: " + liveEngineName());
+  const ts = document.getElementById("thr-state");
+  if (ts) ts.innerHTML = LIVE.thr
+    ? "<b>Loop closure will run.</b> A→B, B→C and C→A are each estimated from their own pair, " +
+      "and the verdict can reach VERIFIED if the three return to the start within 2 px."
+    : "<b>No third image yet.</b> The run will be a pair registration, so loop closure will not " +
+      "run and the verdict can reach INCONCLUSIVE at most. Add a third image that overlaps both " +
+      "to evaluate loop closure — the only path to VERIFIED.";
+  const mp = document.getElementById("mode-pair"), ml = document.getElementById("mode-loop");
+  if (mp) mp.classList.toggle("on", !LIVE.thr);
+  if (ml) ml.classList.toggle("on", !!LIVE.thr);
+  if (!LIVE.running && !document.querySelector("#live-out .rsum"))
+    setStages({uploaded: !!(LIVE.src && LIVE.ref)});
   if (!LIVE.running && !keep) {
     if (LIVE.src && LIVE.ref && LIVE.thr)
       liveStatus("Ready — three images, so <b>loop closure runs</b> and the verdict can reach " +
@@ -1831,13 +2373,31 @@ function paintSlot(id) {
   const clear = drop && drop.querySelector("[data-clear]");
   if (!drop) return;
   drop.classList.toggle("filled", !!s);
+  if (s) drop.classList.remove("bad");
   if (hint) hint.hidden = !!s;
   if (clear) clear.hidden = !s;
-  if (img) { img.hidden = !s; if (s) img.src = s.url; else img.removeAttribute("src"); }
-  if (meta) meta.innerHTML = s ? `<b>${esc(s.name)}</b><br>${s.w} × ${s.h} px · ${s.kb} KB` +
-    (s.k > 1 ? `<br>run at ${Math.round(s.w / s.k)} × ${Math.round(s.h / s.k)} (÷${s.k})` : "") : "";
+  if (img) { img.hidden = !s; if (s) { img.src = s.url; img.alt = "Preview of " + s.name; }
+             else { img.removeAttribute("src"); img.alt = ""; } }
+  if (meta) meta.innerHTML = s ? `<span class="okline">Ready</span> · <b>${esc(s.name)}</b><br>` +
+    `${s.w} × ${s.h} px · ${s.kb} KB` +
+    (s.k > 1 ? ` · runs at ${Math.round(s.w / s.k)} × ${Math.round(s.h / s.k)} (÷${s.k})` : "") +
+    `<span class="slotacts"><button type="button" class="btn" data-replace="${id}">Replace</button></span>` : "";
+  const msg = document.getElementById("msg-" + id);
+  if (msg && s) msg.textContent = "";
   liveReady();
 }
+
+// A problem with one slot is shown on that slot, and in the status line.
+function slotError(id, what, next) {
+  const drop = document.getElementById("drop-" + id);
+  const msg = document.getElementById("msg-" + id);
+  if (drop) drop.classList.add("bad");
+  if (msg) msg.textContent = what;
+  liveError(esc(what), "", next);
+}
+
+//: The largest file the browser will send (the server enforces its own limit).
+const LIVE_MAX_BYTES = 40 * 1024 * 1024;
 
 // Resolves once the slot is painted, so a caller that loads two files can say
 // something after both are on screen rather than before.
@@ -1845,13 +2405,18 @@ function setSlot(id, file) {
   return new Promise(resolve => {
     if (!file) return resolve(false);
     if (!/^image\//.test(file.type || "") && !/\.(png|jpe?g|tiff?|bmp)$/i.test(file.name || "")) {
-      liveStatus(`That file is <b>${esc(file.type || "an unknown type")}</b>. ` +
-        "Use a PNG, JPEG or TIFF image.", true, false);
+      slotError(id, `That file is ${file.type || "an unknown type"}. Use a PNG, JPEG or TIFF image.`,
+        "Export the image as PNG or TIFF and add it again.");
+      return resolve(false);
+    }
+    if (file.size && file.size > LIVE_MAX_BYTES) {
+      slotError(id, `That file is ${Math.round(file.size / 1048576)} MB; the limit is ${LIVE_MAX_BYTES / 1048576} MB.`,
+        "The run down-samples to 1024 px anyway — crop or reduce the image and add it again.");
       return resolve(false);
     }
     const r = new FileReader();
     r.onerror = () => {
-      liveStatus("That file could not be read. Try another.", true, false);
+      slotError(id, "That file could not be read.", "Try another copy of the image.");
       resolve(false);
     };
     r.onload = () => {
@@ -1861,8 +2426,9 @@ function setSlot(id, file) {
         if (probe.width < 64 || probe.height < 64) {
           LIVE[id] = null;
           paintSlot(id);
-          liveStatus(`That image is ${probe.width} × ${probe.height} px. ` +
-            "The pipeline needs at least 64 px on each side.", true, false);
+          slotError(id, `That image is ${probe.width} × ${probe.height} px. ` +
+            "The pipeline needs at least 64 px on each side.",
+            "Use a larger crop — a few hundred pixels per side is enough.");
           return resolve(false);
         }
         const k = Math.max(1, Math.ceil(Math.max(probe.width, probe.height) / 1024));
@@ -1873,7 +2439,8 @@ function setSlot(id, file) {
         resolve(true);
       };
       probe.onerror = () => {
-        liveStatus("That file is not a readable image.", true, false);
+        slotError(id, "That file is not a readable image — it may be corrupted, or a TIFF this browser cannot preview.",
+          "Re-export it as PNG and add it again.");
         resolve(false);
       };
       probe.src = url;
@@ -1927,7 +2494,7 @@ function sampleCard(s) {
   const drawn = m.status === "REJECTED" && m.registered_image_emitted === false
     ? " · nothing drawn" : "";
   return `
-    <button class="sampbtn" data-sample="${esc(s.id)}" title="${esc(s.why)}">
+    <button class="sampbtn" data-sample="${esc(s.id)}" data-status="${esc(m.status || "")}" title="${esc(s.why)}">
       <span class="sk">${s.kind === "triplet" ? "3 images · loop closure" : "2 images"}${
         s.local_only ? ' · <b class="loc">local only · © ISRO</b>' : ""}</span>
       <span class="sthumbs">${s.files.map(f => `<img src="${esc(f.url)}?thumb=1" alt="" decoding="async">`).join("")}</span>
@@ -1946,6 +2513,14 @@ async function paintSamples() {
   grid.innerHTML = d.scenarios.map(sampleCard).join("");
   box.hidden = false;
   grid.querySelectorAll("[data-sample]").forEach(b => { b.onclick = () => loadSample(b.dataset.sample); });
+  // Filter by the outcome measured when the folder was built.
+  box.querySelectorAll("[data-filter]").forEach(f => {
+    f.onclick = () => {
+      box.querySelectorAll("[data-filter]").forEach(x => x.setAttribute("aria-pressed", String(x === f)));
+      grid.querySelectorAll("[data-sample]").forEach(c => {
+        c.hidden = f.dataset.filter !== "all" && c.dataset.status !== f.dataset.filter; });
+    };
+  });
 }
 
 async function fetchAsFile(url) {
@@ -1990,6 +2565,8 @@ function byName(fileList) {
 
 function wireLive() {
   paintSamples();
+  document.querySelectorAll('input[name="live-eng"]').forEach(r => { r.onchange = () => liveReady(true); });
+
   const multi = $("#live-multi");
   if (multi) multi.onchange = async () => {
     const fs = byName(multi.files || []);
@@ -2006,7 +2583,13 @@ function wireLive() {
     const drop = document.getElementById("drop-" + id);
     const input = document.getElementById("live-" + id);
     if (!drop || !input) return;
-    drop.onclick = ev => { if (!ev.target.closest("[data-clear]")) input.click(); };
+    // An empty slot is one big button. A filled slot ignores stray clicks (so
+    // inspecting the preview does not reopen the picker) and offers Replace.
+    drop.onclick = ev => {
+      if (ev.target.closest("[data-clear]")) return;
+      if (LIVE[id] && !ev.target.closest("[data-replace]")) return;
+      input.click();
+    };
     drop.onkeydown = ev => {
       if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); input.click(); }
     };
@@ -2086,17 +2669,20 @@ async function runLive() {
   LIVE.running = true; liveReady();
   const run = $("#live-run");
   const t0 = Date.now();
+  const RUNNING = ["estimate", "refine", "reestimate", "verify"];
+  setStages({uploaded: true, active: RUNNING});
   const tick = setInterval(() => liveStatus(
-    `Registering… <b>${((Date.now() - t0) / 1000).toFixed(0)} s</b> · ` +
+    `Registering on the server… <b>${((Date.now() - t0) / 1000).toFixed(0)} s</b> · ` +
     "estimate → refine → re-estimate → verify, on CPU", false, true), 250);
-  liveStatus("Registering…", false, true);
-  if (run) run.textContent = "Registering…";
+  liveStatus("Registering on the server…", false, true);
+  if (run) { run.innerHTML = '<span class="spin" aria-hidden="true"></span>Registering…';
+             run.setAttribute("aria-busy", "true"); }
   const cancel = $("#live-cancel");
   if (cancel) cancel.hidden = false;
   LIVE.abort = new AbortController();
+  const engine = liveEngine();
   try {
     const triplet = !!LIVE.thr;
-    const engine = $("#live-eng").value;
     const resp = triplet
       ? await fetch("/api/register-triplet", {
           method: "POST", headers: {"Content-Type": "application/json"},
@@ -2111,21 +2697,34 @@ async function runLive() {
     const d = await resp.json().catch(() => ({}));
     if (!resp.ok) {
       const why = String(d.detail || ("HTTP " + resp.status));
-      const fix = /learned|extra/i.test(why)
-        ? " That engine is not installed here — choose <b>RootSIFT</b>, which needs nothing extra."
-        : (resp.status === 400 ? " Check that both files are images of the same ground." : "");
-      liveStatus("Refused: " + esc(why) + ". Nothing was estimated." + fix, true, false);
+      setStages({uploaded: true, failed: ["estimate"]});
+      if (/learned|extra/i.test(why))
+        liveError("That engine is not installed on this machine.", why + ".",
+          "Nothing was estimated. To run anyway, choose <b>RootSIFT</b>, which needs nothing extra.");
+      else if (resp.status === 413)
+        liveError("An image is larger than the server accepts.", why + ".",
+          "Nothing was estimated. Crop or reduce the image; the run down-samples to 1024 px anyway.");
+      else if (resp.status === 400)
+        liveError("The server refused the images.", why + ".",
+          "Nothing was estimated. Check that both files are images of the same ground.");
+      else
+        liveError("The registration did not complete.", why + ".",
+          "Nothing was estimated. Try again; if it repeats, restart the demo server.");
       return;
     }
     LIVE.last = d;
     out.innerHTML = triplet ? renderLiveTriplet(d) : renderLive(d);
     wireLiveResult(d, triplet);
+    const ran = (d.pipeline_order && d.pipeline_order.length) ? d.pipeline_order : RUNNING;
+    setStages({uploaded: true, done: ran.concat(["report"])});
+    const vsx = document.querySelector('#live-stages [data-stage="verify"] .sx');
+    if (vsx) vsx.textContent = String(d.verdict.status).toLowerCase();
     // On a long page the result lands below the fold; a reader who pressed a
     // button should not have to hunt for what it did.
-    const v = out.querySelector(".verdict");
+    const v = out.querySelector(".rsum") || out.querySelector(".verdict");
     // Instant when the tab is hidden: Chrome defers a smooth scroll there
     // (measured 2026-09-23), so the reader returned to a result off screen.
-    if (v && v.scrollIntoView) v.scrollIntoView({behavior: smoothOrInstant(), block: "center"});
+    if (v && v.scrollIntoView) v.scrollIntoView({behavior: smoothOrInstant(), block: "start"});
     liveStatus(triplet
       ? `Done in <b>${(+d.timing.wall_s).toFixed(1)} s</b> · three edges · loop ` +
         `<b>${d.loop_error_px === null ? "not evaluable" : sci(d.loop_error_px) + " px"}</b> ` +
@@ -2136,30 +2735,46 @@ async function runLive() {
         `${d.summary.n_inliers} inliers of ${d.summary.n_putative} putative · ` +
         `verdict <b>${esc(d.verdict.status)}</b>`, false, false);
   } catch (e) {
-    if (e.name === "AbortError") liveStatus("Cancelled.", false, false);
-    else liveStatus("The request failed: " + esc(e.message), true, false);
+    setStages({uploaded: true});
+    if (e.name === "AbortError") liveStatus("Cancelled. Nothing was estimated.", false, false);
+    else liveError("The request did not reach the server.", e.message + ".",
+      "Check that the demo server is still running, then press Register again.");
   } finally {
     clearInterval(tick);
     LIVE.running = false; LIVE.abort = null;
-    if (run) run.textContent = "Register";
+    if (run) { run.removeAttribute("aria-busy"); run.textContent = "Register"; }
     if (cancel) cancel.hidden = true;
     liveReady(true);          // keep the completion (or error) line on screen
   }
 }
 
 /* ------------------------------------------------------- the result view */
+// Result order, for both views: the status and the one measurement that
+// decided it, the verdict's own reasons, where the numbers come from; then the
+// visual check; then the evidence; then everything technical, collapsed.
 function renderLive(d) {
   const v = d.verdict, s = d.summary;
   const agr = d.engine_agreement;
   const reg = d.registered_png;
+  const says = e => e.verdict === "decisive_against" ? "fail"
+    : (e.verdict === "supports" ? "pass" : "neutral");
   return `
-    <div class="verdict ${esc(v.status)}" style="margin-top:14px">
-      <div class="vhead"><span class="vstat">${esc(v.status)}</span>
-      <span class="conf">confidence ${esc(v.confidence)} · LIVE · your images · not a recorded number</span></div>
-      <ul class="reasons">${v.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul></div>
+    <div class="rsum ${esc(v.status)}" id="live-result">
+      <div>
+        <div class="rt">Pair registration · result</div>
+        <div class="verdict ${esc(v.status)}"><div class="vhead"><span class="vstat">${esc(v.status)}</span>
+          <span class="conf">confidence ${esc(v.confidence)}</span></div></div>
+      </div>
+      <div class="rkey"><div class="kv">${s.n_inliers} <small>/ ${s.n_putative}</small></div>
+        <div class="kl">inliers of putative matches</div></div>
+      <ul class="reasons rint">${v.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
+      <div class="rprov"><span class="kind live">Live</span>
+        <span class="conf">your images · engine ${esc(s.engine)} · ${(+d.timing.wall_s).toFixed(1)} s · not a recorded number</span></div>
+    </div>
 
+    <div class="subhead"><span class="lab">Visual check</span></div>
     ${reg ? `
-    <div class="note" style="margin-top:14px"><b>Drag the slider.</b> Left of it is your source
+    <div class="note"><b>Drag the slider.</b> Left of it is your source
       <i>warped into the reference's grid</i>; right of it is the reference itself. If the alignment is
       right, features run straight across the divider.</div>
     <div class="swipe" id="live-swipe">
@@ -2171,77 +2786,84 @@ function renderLive(d) {
     </div>
     <input class="swiperange" id="live-swipe-range" type="range" min="0" max="100" value="50"
            aria-label="compare the registered source against the reference">` : `
-    <div class="note call fail" style="margin-top:14px"><b>No registered image.</b> The verdict is
+    <div class="note call fail"><b>No registered image.</b> The verdict is
       ${esc(v.status)}, so no warped product is offered — the page does not draw an alignment it
       would not certify.</div>`}
 
-    <div class="note" style="margin-top:14px"><b>Correspondences.</b> Blue survived geometric
-      verification; red was rejected. Straight, parallel blue lines are what a correct alignment looks
-      like; a fan of crossing lines is what a wrong one looks like, whatever the count says.</div>
-    <canvas id="live-corr"></canvas>
-
-    <div class="tscroll"><table>
-      <thead><tr><th>engine</th><th class="n">putative</th><th class="n">inliers</th><th class="n">refined</th><th>model</th><th>selected by</th><th class="n">wall</th></tr></thead>
-      <tbody><tr><td>${esc(s.engine)}</td><td class="n">${s.n_putative}</td><td class="n">${s.n_inliers}</td>
-          <td class="n">${s.n_refined}</td><td>${esc(s.model)}</td><td>${esc(s.model_selected_by)}</td>
-          <td class="n">${(+d.timing.wall_s).toFixed(1)} s</td></tr></tbody>
-    </table></div>
-    ${agr ? `<div class="note" style="margin-top:8px"><b>engine agreement (B1 vs B4L):</b> ${esc(agr.statement)}</div>` : ""}
+    <div class="subhead"><span class="lab">Evidence the verdict weighed</span></div>
     <div class="tscroll"><table>
       <thead><tr><th>evidence</th><th class="n">value</th><th>says</th><th>weight</th></tr></thead>
       <tbody>${v.evidence.map(e => `<tr><td class="code">${esc(e.name)}</td><td class="n">${e.value == null ? "—" : (+e.value).toFixed(3)}</td>
-        <td>${esc(e.verdict)}</td><td>${esc(e.weight)}</td></tr>`).join("")}</tbody>
+        <td>${st(e.verdict, says(e))}</td><td>${esc(e.weight)}</td></tr>`).join("")}</tbody>
     </table></div>
+    ${agr ? `<div class="note" style="margin-top:8px"><b>Engine agreement (B1 vs B4L):</b> ${esc(agr.statement)}</div>` : ""}
 
-    ${s.transform_matrix || d.summary.transform_matrix ? `
-    <details class="note" style="margin-top:12px"><summary><b>The transform, as estimated</b>
-      — ${esc(s.model)}, selected by ${esc(s.model_selected_by)}</summary>
+    <details class="rdetails"><summary>Technical details <small>· correspondences, engine counts, transform, inputs</small></summary>
+      <div class="rdbody">
+      <div class="note"><b>Correspondences.</b> Blue survived geometric
+        verification; red was rejected. Straight, parallel blue lines are what a correct alignment looks
+        like; a fan of crossing lines is what a wrong one looks like, whatever the count says.</div>
+      <canvas id="live-corr"></canvas>
+      <div class="tscroll"><table>
+        <thead><tr><th>engine</th><th class="n">putative</th><th class="n">inliers</th><th class="n">refined</th><th>model</th><th>selected by</th><th class="n">wall</th></tr></thead>
+        <tbody><tr><td>${esc(s.engine)}</td><td class="n">${s.n_putative}</td><td class="n">${s.n_inliers}</td>
+            <td class="n">${s.n_refined}</td><td>${esc(s.model)}</td><td>${esc(s.model_selected_by)}</td>
+            <td class="n">${(+d.timing.wall_s).toFixed(1)} s</td></tr></tbody>
+      </table></div>
+      ${s.transform_matrix ? `
+      <div class="note" style="margin-top:12px"><b>The transform, as estimated</b>
+        — ${esc(s.model)}, selected by ${esc(s.model_selected_by)}</div>
       <pre class="code" style="white-space:pre-wrap;margin:8px 0 0">${esc(
-        JSON.stringify(s.transform_matrix || d.summary.transform_matrix, null, 1))}</pre>
-      <div>Source pixel → reference pixel, on the images as the pipeline saw them
-        (long side down-sampled to 1024 px).</div></details>` : ""}
+        JSON.stringify(s.transform_matrix, null, 1))}</pre>
+      <div class="note">Source pixel → reference pixel, on the images as the pipeline saw them
+        (long side down-sampled to 1024 px).</div>` : ""}
+      <div class="liveimgs">
+        <figure><img src="${esc(d.source_png)}" alt="source as the pipeline saw it"><figcaption>source, as the pipeline saw it</figcaption></figure>
+        <figure><img src="${esc(d.reference_png)}" alt="reference as the pipeline saw it"><figcaption>reference, as the pipeline saw it</figcaption></figure>
+      </div>
+      </div>
+    </details>
 
     <div class="dlrow">
       ${reg ? `<a class="dlbtn" id="live-dl-img" href="${esc(reg)}"
         download="registered.png">Download the registered image</a>` : ""}
       <button class="dlbtn" id="live-dl-points">Download the match points (CSV)</button>
       <button class="dlbtn" id="live-dl-json">Download this result as JSON</button>
-      <button class="dlbtn" id="live-again">Run another pair</button>
-    </div>
-
-    <div class="liveimgs">
-      <figure><img src="${esc(d.source_png)}" alt="source as the pipeline saw it"><figcaption>source, as the pipeline saw it</figcaption></figure>
-      <figure><img src="${esc(d.reference_png)}" alt="reference as the pipeline saw it"><figcaption>reference, as the pipeline saw it</figcaption></figure>
+      <button class="btn btn-tertiary" id="live-again">Run another pair</button>
     </div>
     ${notClaimed(d.caveats)}`;
 }
 
 // The triplet result. Its whole reason for existing is the loop residual, so
-// that is the first thing after the verdict, with the frozen line beside it —
-// and, when it passes, the sentence that says what VERIFIED still does not mean.
+// that is the key measurement, with the frozen line beside it — and, when it
+// passes, the sentence that says what VERIFIED still does not mean.
 function renderLiveTriplet(d) {
   const v = d.verdict;
   const loop = d.loop_error_px;
   const ok = loop !== null && loop < d.loop_reject_threshold_px;
   const reg = d.registered_png;
   return `
-    <div class="verdict ${esc(v.status)}" style="margin-top:14px">
-      <div class="vhead"><span class="vstat">${esc(v.status)}</span>
-      <span class="conf">confidence ${esc(v.confidence)} · LIVE · your images · verdict read on
-        edge ${esc(d.verdict_edge)} · not a recorded number</span></div>
-      <ul class="reasons">${v.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul></div>
+    <div class="rsum ${esc(v.status)}" id="live-result">
+      <div>
+        <div class="rt">Loop-closure verification · result</div>
+        <div class="verdict ${esc(v.status)}"><div class="vhead"><span class="vstat">${esc(v.status)}</span>
+          <span class="conf">confidence ${esc(v.confidence)} · verdict read on edge ${esc(d.verdict_edge)}</span></div></div>
+      </div>
+      <div class="rkey"><div class="kv">${loop === null ? "—" : sci(loop)} <small>px</small></div>
+        <div class="kl">loop closure · reject at ≥ ${d.loop_reject_threshold_px} px</div></div>
+      <ul class="reasons rint">${v.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
+      <div class="rprov"><span class="kind live">Live</span>
+        <span class="conf">your images · engine ${esc(d.engine)} · ${(+d.timing.wall_s).toFixed(1)} s · not a recorded number</span></div>
+    </div>
 
     <div class="tiles">
-      <div class="tile ${ok ? "good" : "bad"}"><div class="lab">loop closure</div>
-        <div class="val">${loop === null ? "—" : sci(loop)} <small>px</small></div>
-        <div class="note">A → B → C → A, composed on A's grid · reject at
-          ≥ ${d.loop_reject_threshold_px} px · ${esc(d.loop_note)}</div></div>
       ${(d.edges || []).map(e => `<div class="tile ${e.pass ? "good" : "bad"}">
         <div class="lab">${esc(e.edge)}</div>
         <div class="val">${e.n_inliers}</div>
         <div class="note">${e.n_putative} putative · ${esc(e.model || "—")} ·
           ${esc(e.estimated_from)}</div></div>`).join("")}
     </div>
+    <div class="note">A → B → C → A, composed on A's grid · ${esc(d.loop_note)}.</div>
 
     ${ok ? `<div class="note call ink"><b>What VERIFIED means here, and what it does not.</b>
       Three edges, each estimated from its own image pair, compose back to the identity inside the
@@ -2251,7 +2873,8 @@ function renderLiveTriplet(d) {
       anyway. Both are on this page.</div>` : ""}
 
     ${reg ? `
-    <div class="note" style="margin-top:14px"><b>Drag the slider.</b> Left of it is image A warped
+    <div class="subhead"><span class="lab">Visual check</span></div>
+    <div class="note"><b>Drag the slider.</b> Left of it is image A warped
       into B's grid; right of it is B itself.</div>
     <div class="swipe" id="live-swipe">
       <img src="${esc(d.images.b_png)}" alt="image B">
@@ -2263,35 +2886,37 @@ function renderLiveTriplet(d) {
     <input class="swiperange" id="live-swipe-range" type="range" min="0" max="100" value="50"
            aria-label="compare the registered image A against image B">` : ""}
 
-    <div class="tscroll"><table>
-      <thead><tr><th>edge</th><th class="n">putative</th><th class="n">inliers</th>
-        <th class="n">refined</th><th>model</th><th>pair verdict</th><th>estimated from</th></tr></thead>
-      <tbody>${(d.edges || []).map(e => `<tr>
-        <td class="code">${esc(e.edge)}</td><td class="n">${e.n_putative}</td>
-        <td class="n ${e.pass ? "" : "failc"}" style="font-weight:600">${e.n_inliers}</td>
-        <td class="n">${e.n_refined}</td><td>${esc(e.model || "—")}</td>
-        <td class="note">${esc(e.verdict)}</td>
-        <td class="note">${esc(e.estimated_from)}</td></tr>`).join("")}</tbody>
-    </table></div>
-
-    <div class="tscroll"><table>
-      <thead><tr><th>evidence</th><th class="n">value</th><th>says</th><th>weight</th></tr></thead>
-      <tbody>${(v.evidence || []).map(e => `<tr><td class="code">${esc(e.name)}</td>
-        <td class="n">${e.value == null ? "—" : (+e.value).toFixed(4)}</td>
-        <td>${esc(e.verdict)}</td><td>${esc(e.weight)}</td></tr>`).join("")}</tbody>
-    </table></div>
+    <details class="rdetails"><summary>Technical details <small>· edges, evidence, inputs</small></summary>
+      <div class="rdbody">
+      <div class="tscroll"><table>
+        <thead><tr><th>edge</th><th class="n">putative</th><th class="n">inliers</th>
+          <th class="n">refined</th><th>model</th><th>pair verdict</th><th>estimated from</th></tr></thead>
+        <tbody>${(d.edges || []).map(e => `<tr>
+          <td class="code">${esc(e.edge)}</td><td class="n">${e.n_putative}</td>
+          <td class="n ${e.pass ? "" : "failc"}" style="font-weight:600">${e.n_inliers}</td>
+          <td class="n">${e.n_refined}</td><td>${esc(e.model || "—")}</td>
+          <td class="note">${esc(e.verdict)}</td>
+          <td class="note">${esc(e.estimated_from)}</td></tr>`).join("")}</tbody>
+      </table></div>
+      <div class="tscroll"><table>
+        <thead><tr><th>evidence</th><th class="n">value</th><th>says</th><th>weight</th></tr></thead>
+        <tbody>${(v.evidence || []).map(e => `<tr><td class="code">${esc(e.name)}</td>
+          <td class="n">${e.value == null ? "—" : (+e.value).toFixed(4)}</td>
+          <td>${esc(e.verdict)}</td><td>${esc(e.weight)}</td></tr>`).join("")}</tbody>
+      </table></div>
+      <div class="liveimgs">
+        <figure><img src="${esc(d.images.a_png)}" alt="image A"><figcaption>A, as the pipeline saw it</figcaption></figure>
+        <figure><img src="${esc(d.images.b_png)}" alt="image B"><figcaption>B</figcaption></figure>
+        <figure><img src="${esc(d.images.c_png)}" alt="image C"><figcaption>C</figcaption></figure>
+      </div>
+      </div>
+    </details>
 
     <div class="dlrow">
       ${reg ? `<a class="dlbtn" id="live-dl-img" href="${esc(reg)}"
         download="registered.png">Download the registered image</a>` : ""}
       <button class="dlbtn" id="live-dl-json">Download this result as JSON</button>
-      <button class="dlbtn" id="live-again">Run another set</button>
-    </div>
-
-    <div class="liveimgs">
-      <figure><img src="${esc(d.images.a_png)}" alt="image A"><figcaption>A, as the pipeline saw it</figcaption></figure>
-      <figure><img src="${esc(d.images.b_png)}" alt="image B"><figcaption>B</figcaption></figure>
-      <figure><img src="${esc(d.images.c_png)}" alt="image C"><figcaption>C</figcaption></figure>
+      <button class="btn btn-tertiary" id="live-again">Run another set</button>
     </div>
     ${notClaimed(d.caveats)}`;
 }

@@ -452,16 +452,32 @@ class TripletRequest(BaseModel):
     seed: int = 0
 
 
+#: Upload limits, enforced here whatever the browser did. 40 MB of image
+#: (about 54 MB of base64) and 60 megapixels: the live run down-samples to
+#: 1024 px anyway, and the pixel cap is checked from the header BEFORE the
+#: pixels are decoded, so a small file that expands to a huge image is refused
+#: without allocating it.
+LIVE_MAX_UPLOAD_BYTES = 40 * 1024 * 1024
+LIVE_MAX_PIXELS = 60_000_000
+
+
 def _decode_upload(b64: str, what: str) -> tuple[np.ndarray, int]:
     from PIL import Image
 
     from siim.cli import preprocess
+    if len(b64) > LIVE_MAX_UPLOAD_BYTES * 4 // 3 + 4:
+        raise HTTPException(413, f"{what}: larger than {LIVE_MAX_UPLOAD_BYTES // 2**20} MB")
     try:
         raw = base64.b64decode(b64, validate=True)
         with Image.open(io.BytesIO(raw)) as im:
+            if im.size[0] * im.size[1] > LIVE_MAX_PIXELS:
+                raise HTTPException(413, f"{what}: {im.size[0]} x {im.size[1]} px is more than "
+                                         f"{LIVE_MAX_PIXELS // 10**6} megapixels")
             if im.mode not in ("F", "I", "I;16", "L"):
                 im = im.convert("L")
             a = np.asarray(im, dtype=np.float64)
+    except HTTPException:
+        raise
     except Exception as exc:  # noqa: BLE001 -- a bad upload is a 400, not a crash
         raise HTTPException(400, f"{what}: not a readable image ({type(exc).__name__})") from exc
     if a.ndim == 3:
