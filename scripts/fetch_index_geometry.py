@@ -55,7 +55,7 @@ from siim.ingest.index_table import (  # noqa: E402
     find_row_by_product_id,
     parse_index_label,
 )
-from siim.ingest.lro_nac import ODE_ENDPOINT, _parse_product  # noqa: E402
+from siim.ingest.lro_nac import ODE_ENDPOINT, _parse_product, polite_get  # noqa: E402
 
 DATA = ROOT / "data"
 OUT = DATA / "manifests" / "real_pair_index_geometry.json"
@@ -63,6 +63,13 @@ OUT = DATA / "manifests" / "real_pair_index_geometry.json"
 _UA = {"User-Agent": "SIIM/0.1 (SIH 26166 research; contact via repository)"}
 _TIMEOUT = 120
 _ARCHIVE = "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0"
+#: The NASA PDS mirror. Every ``_ARCHIVE`` URL redirects here with the same
+#: volume layout (checked 2026-09-23 for LROLRC_1056A and LROLRC_1067A:
+#: ``<root>/<volume>/INDEX/INDEX.LBL`` resolves to ``<mirror>/<volume>/INDEX/INDEX.LBL``).
+#: ODE returns mirror URLs for the newest volumes (LROLRC_1067*), so both roots
+#: are recognised; the volume is still read from the URL, never guessed.
+_MIRROR = "https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr"
+_ROOTS = (_ARCHIVE, _MIRROR)
 
 #: The four products acquired in REAL-DATA-01, with the volume each was
 #: fetched from. The volume is read straight out of the existing manifests'
@@ -95,7 +102,7 @@ FIELDS = [
 
 
 def _get(url: str, *, byte_range: tuple[int, int] | None = None,
-         tries: int = 5) -> requests.Response:
+         tries: int = 7) -> requests.Response:
     """GET with retries. The archive drops keep-alive connections between
     range requests often enough that a bare ``requests.get`` fails a
     16-probe binary search roughly every other run; that is a transport
@@ -117,7 +124,13 @@ def _get(url: str, *, byte_range: tuple[int, int] | None = None,
             return r
         except Exception as exc:  # noqa: BLE001 - retried, then re-raised
             last = exc
-            time.sleep(1.5 * (attempt + 1))
+            status = getattr(getattr(exc, "response", None), "status_code", None)
+            if status in (429, 500, 502, 503, 504):
+                # Rate limiting needs minutes, not seconds (EXP-023 census attempt 1).
+                ra = exc.response.headers.get("Retry-After", "")
+                time.sleep(min(300.0, float(ra)) if ra.strip().isdigit() else min(300.0, 15.0 * 2 ** attempt))
+            else:
+                time.sleep(1.5 * (attempt + 1))
     raise RuntimeError(f"GET {url} failed after {tries} attempts: {last}")
 
 
@@ -165,24 +178,25 @@ def volumes_from_ode(pdsids: list[str]) -> dict[str, dict[str, str]]:
     """
     found: dict[str, dict[str, str]] = {}
     for pdsid in pdsids:
-        r = requests.get(ODE_ENDPOINT, timeout=_TIMEOUT, headers=_UA, params={
+        r = polite_get(ODE_ENDPOINT, timeout=_TIMEOUT, headers=_UA, params={
             "query": "product", "results": "fmp", "output": "JSON",
             "target": "moon", "ihid": "LRO", "iid": "LROC",
             "pt": "CDRNAC4", "pdsid": pdsid,
         })
-        r.raise_for_status()
         prods = r.json().get("ODEResults", {}).get("Products")
         if isinstance(prods, str) or not prods:
             raise SystemExit(f"ODE returned no product for pdsid={pdsid!r}")
         rec = prods["Product"]
         rec = rec[0] if isinstance(rec, list) else rec
         prod = _parse_product(rec)
-        if not prod.image_url or not prod.image_url.startswith(_ARCHIVE + "/"):
+        root = next((r for r in _ROOTS if prod.image_url and prod.image_url.startswith(r + "/")), None)
+        if root is None:
             raise SystemExit(
                 f"{pdsid}: unexpected archive root in {prod.image_url!r}; "
                 "refusing to guess the volume layout")
         found[pdsid] = {
-            "volume": prod.image_url[len(_ARCHIVE) + 1:].split("/", 1)[0],
+            "volume": prod.image_url[len(root) + 1:].split("/", 1)[0],
+            "archive_root_in_ode": root,
             "img_url": prod.image_url,
             "product_id": Path(prod.image_url).stem,
             "source_manifest": "(none -- resolved live from ODE)",

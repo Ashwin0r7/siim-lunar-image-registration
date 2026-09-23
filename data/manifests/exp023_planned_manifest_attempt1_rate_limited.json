@@ -1,0 +1,9 @@
+{
+  "stage": "EXP-023",
+  "status": "PLANNED -- no pixel fetched",
+  "target_ground_point_lon_lat": [
+    32.319,
+    -69.373
+  ],
+  "tiles": []
+}

@@ -47,7 +47,7 @@ import numpy as np
 from numpy.typing import ArrayLike, NDArray
 from scipy import ndimage
 
-__all__ = ["degrade_to_gsd", "block_mean", "psf_sigma_fine_px"]
+__all__ = ["degrade_to_gsd", "degrade_to_gsd_strips", "block_mean", "psf_sigma_fine_px"]
 
 _FWHM_TO_SIGMA = 1.0 / (2.0 * np.sqrt(2.0 * np.log(2.0)))
 
@@ -101,3 +101,33 @@ def degrade_to_gsd(image: ArrayLike, k: int, *, psf_fwhm_coarse_px: float = 1.0,
             a = np.where(den > 1e-6, num / den, np.nan)
         a = np.where(valid, a, np.nan)
     return block_mean(a, k)
+
+
+def degrade_to_gsd_strips(image: ArrayLike, k: int, *, psf_fwhm_coarse_px: float = 1.0,
+                          truncate: float = 4.0, strip_coarse_rows: int = 256) -> NDArray[np.float64]:
+    """:func:`degrade_to_gsd`, computed in horizontal strips to bound memory.
+
+    The Gaussian is local (radius ``int(truncate * sigma + 0.5)`` fine pixels)
+    and the block mean acts within ``k``-aligned rows, so each strip is
+    degraded with a halo of at least that radius and cropped back. Every
+    output pixel then sees exactly the input pixels it sees in the whole-image
+    call, and the result is identical, which ``tests/test_degrade_strips.py``
+    checks bit for bit. ``image`` may be a read-only memmap; only one strip
+    plus its halo is ever converted to float64.
+    """
+    a = np.asarray(image)
+    if a.ndim != 2:
+        raise ValueError("expected a 2-D image")
+    rows = a.shape[0] // k * k
+    sigma = psf_sigma_fine_px(k, psf_fwhm_coarse_px)
+    halo = int(truncate * sigma + 0.5) + 1 if sigma > 0 else 0
+    halo = -(-halo // k) * k
+    step = strip_coarse_rows * k
+    out = []
+    for r0 in range(0, rows, step):
+        r1 = min(r0 + step, rows)
+        h0, h1 = max(0, r0 - halo), min(a.shape[0], r1 + halo)
+        d = degrade_to_gsd(a[h0:h1], k, psf_fwhm_coarse_px=psf_fwhm_coarse_px, truncate=truncate)
+        c0 = (r0 - h0) // k
+        out.append(d[c0:c0 + (r1 - r0) // k])
+    return np.vstack(out)

@@ -1,0 +1,23 @@
+== EXP-023 census: target (32.319, -69.373); OHRC obs1 Sun i=78.476392 az=303.534993 ==
+
+Traceback (most recent call last):
+  File "D:\MyData\downloads\SIH\scripts\census_exp023.py", line 560, in <module>
+    main()
+    ~~~~^^
+  File "D:\MyData\downloads\SIH\scripts\census_exp023.py", line 556, in main
+    (census if args.mode == "census" else fetch)()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\MyData\downloads\SIH\scripts\census_exp023.py", line 241, in census
+    prods = query_nac(min_lat=lat - BOX_HALF_DEG, max_lat=lat + BOX_HALF_DEG,
+                      min_lon=lon - BOX_HALF_DEG, max_lon=lon + BOX_HALF_DEG, limit=2000)
+  File "D:\MyData\downloads\SIH\src\siim\ingest\lro_nac.py", line 276, in query_nac
+    res = _get({
+        "query": "product", "results": "fmp", "output": "JSON", "target": "moon",
+    ...<3 lines>...
+        "limit": limit,
+    })
+  File "D:\MyData\downloads\SIH\src\siim\ingest\lro_nac.py", line 159, in _get
+    r = polite_get(ODE_ENDPOINT, params=params)
+  File "D:\MyData\downloads\SIH\src\siim\ingest\lro_nac.py", line 155, in polite_get
+    raise requests.HTTPError(f"GET {url} still refused after {tries} attempts: {last}")
+requests.exceptions.HTTPError: GET https://oderest.rsl.wustl.edu/live2/ still refused after 7 attempts: HTTPSConnectionPool(host='oderest.rsl.wustl.edu', port=443): Max retries exceeded with url: /live2/?query=product&results=fmp&output=JSON&target=moon&ihid=LRO&iid=LROC&pt=CDRNAC4&minlat=-69.393&maxlat=-69.35300000000001&westernlon=32.299&easternlon=32.339000000000006&limit=2000 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000001E932DF8A50>, 'Connection to oderest.rsl.wustl.edu timed out. (connect timeout=90)'))

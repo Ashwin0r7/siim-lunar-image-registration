@@ -1,0 +1,105 @@
+== EXP-023 census: target (32.319, -69.373); OHRC obs1 Sun i=78.476392 az=303.534993 ==
+
+ODE returned 116 CDRNAC4 products intersecting the 0.04 deg box
+
+fetching labels + index rows for 95 candidates ...
+   nac.m1410178753lc: inc 87.524 az 279.26 em 1.71 theta 25.70 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1410178753rc: inc 87.63 az - em 1.15 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m111376754rc: inc 70.53 az - em 1.15 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1409173715rc: inc 80.889 az 62.799 em 1.16 theta 116.1 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1399787691rc: inc 76.424 az 304.15 em 1.16 theta 2.139 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1386717080lc: inc 71.325 az 346.70 em 1.72 theta 42.18 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1371614436lc: inc 72.491 az 319.89 em 1.71 theta 16.91 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1371614436rc: inc 72.71 az - em 1.15 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1350474679lc: inc 81.382 az 63.337 em 1.7 theta 116.8 -> (3) sun-vector separation 116.84 > 10.0
+   nac.m1351501927rc: inc 88.660 az 277.03 em 1.14 theta 28.19 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1273954657rc: inc 79.685 az 62.689 em 1.14 theta 115.7 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1312876876rc: inc 71.190 az 327.30 em 1.15 theta 24.04 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1299815827lc: inc 71.38 az - em 1.69 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1299815827rc: inc 70.545 az 10.729 em 1.14 theta 64.87 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1118637352rc: inc 71.385 az 17.065 em 1.13 theta 70.91 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m180936077lc: inc 82.576 az 293.14 em 1.68 theta 11.03 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m180936077rc: inc 82.69 az - em 1.13 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m165647365rc: inc 81.961 az 289.24 em 1.15 theta 14.50 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m155015381rc: inc 71.052 az 352.58 em 1.13 theta 47.76 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m150299440lc: inc 81.59 az - em 1.68 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m150299440rc: inc 81.428 az 296.04 em 1.13 theta 7.947 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1439675403rc: inc 86.584 az 78.535 em 1.16 theta 132.8 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1421908349lc: inc 80.629 az 63.548 em 1.71 theta 116.8 -> (3) sun-vector separation 116.81 > 10.0
+   nac.m1442997156lc: inc 73.84 az - em 15.27 theta - -> RuntimeError: GET https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1
+   nac.m1442997156rc: inc 73.94 az - em 12.38 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1443011203lc: inc 74.24 az - em 0.11 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1443011203rc: inc 74.34 az - em 2.77 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1443025251lc: inc 74.65 az - em 14.6 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1443025251rc: inc 74.76 az - em 17.5 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1445349174lc: inc 70.19 az - em 3.56 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1445356198rc: inc 70.18 az - em 1.97 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1447694547lc: inc 72.66 az - em 0.99 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1447694547rc: inc 72.69 az - em 3.89 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1450025248rc: inc 78.96 az - em 16.8 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1450039289rc: inc 78.37 az - em 1.16 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1450053330rc: inc 77.85 az - em 11.69 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1452369234lc: inc 87.81 az - em 13.93 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1452369234rc: inc 87.95 az - em 16.84 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1452376254lc: inc 87.46 az - em 6.89 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1452376254rc: inc 87.6 az - em 9.78 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1452383275lc: inc 87.11 az - em 0.35 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1452383275rc: inc 87.24 az - em 2.54 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1460775380lc: inc 69.08 az - em 2.37 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1460775380rc: inc 69.09 az - em 0.54 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1467788002lc: inc 83.84 az - em 18.06 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1467788002rc: inc 84.0 az - em 20.98 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1467795061rc: inc 83.87 az - em 14.21 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1467809053lc: inc 82.98 az - em 1.73 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1467816069rc: inc 82.74 az - em 7.44 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1467823121lc: inc 82.43 az - em 16.92 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1468784668lc: inc 83.03 az - em 0.13 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1468784668rc: inc 83.16 az - em 3.01 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1468798657lc: inc 83.8 az - em 15.09 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1468798657rc: inc 83.94 az - em 17.99 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1471126841rc: inc 75.33 az - em 1.16 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1475797169lc: inc 72.07 az - em 13.36 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1475797169rc: inc 72.08 az - em 16.25 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1475811207lc: inc 71.56 az - em 1.72 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1475825241lc: inc 71.31 az - em 17.67 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1478153786lc: inc 77.12 az - em 1.72 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1480510398lc: inc 85.02 az - em 18.78 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1484212936lc: inc 88.94 az - em 1.92 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1486555640lc: inc 78.3 az - em 1.45 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1486569653lc: inc 78.89 az - em 15.79 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1486569653rc: inc 78.99 az - em 18.69 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1488898366rc: inc 70.48 az - em 1.16 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1491239581lc: inc 68.01 az - em 1.73 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1493566861lc: inc 71.59 az - em 13.81 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1493566861rc: inc 71.71 az - em 16.71 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1493580891rc: inc 71.7 az - em 1.16 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1499224662lc: inc 75.83 az - em 1.73 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1501551872lc: inc 71.02 az - em 16.48 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1501551872rc: inc 71.1 az - em 13.57 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1501565896lc: inc 71.29 az - em 1.73 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1501579923lc: inc 71.37 az - em 11.4 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1501579923rc: inc 71.45 az - em 14.31 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1503893242lc: inc 71.94 az - em 15.79 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1503893242rc: inc 71.94 az - em 12.88 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1503907266lc: inc 71.64 az - em 1.74 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1503907266rc: inc 71.64 az - em 1.17 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1503921287rc: inc 71.81 az - em 14.2 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1506248767lc: inc 75.74 az - em 1.73 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1508589889lc: inc 84.74 az - em 1.73 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1514638346lc: inc 80.28 az - em 16.7 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1514652338lc: inc 80.16 az - em 1.73 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1516993627lc: inc 71.79 az - em 1.74 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1524018718lc: inc 78.08 az - em 1.74 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1524966200lc: inc 84.55 az - em 1.74 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1526360760lc: inc 89.1 az - em 1.74 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1527308253rc: inc 75.77 az - em 1.18 theta - -> HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mc
+   nac.m1529643232lc: inc 71.38 az - em 1.74 theta - -> ValueError: nac.m1529643232lc: unexpected archive root in 'https://pds
+   nac.m1531985241lc: inc 71.25 az - em 1.73 theta - -> ValueError: nac.m1531985241lc: unexpected archive root in 'https://pds
+   nac.m1531985241rc: inc 71.26 az - em 1.18 theta - -> ValueError: nac.m1531985241rc: unexpected archive root in 'https://pds
+   nac.m1534313284lc: inc 77.58 az - em 9.7 theta - -> ValueError: nac.m1534313284lc: unexpected archive root in 'https://pds
+   nac.m1534327335lc: inc 76.59 az - em 1.73 theta - -> ValueError: nac.m1534327335lc: unexpected archive root in 'https://pds
+
+chosen: []
+primary triangle: None
+nulls: {}
+written: experiments\EXP-023\census.json

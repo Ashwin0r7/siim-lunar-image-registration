@@ -119,9 +119,44 @@ class NacProduct:
         return None
 
 
+#: HTTP statuses that mean "slow down or try again", not "this does not exist".
+RETRY_STATUSES = (429, 500, 502, 503, 504)
+
+
+def polite_get(url: str, *, tries: int = 7, base_wait_s: float = 15.0, max_wait_s: float = 300.0,
+               sleep=time.sleep, **kwargs) -> requests.Response:
+    """GET that backs off when the archive says it is busy.
+
+    EXP-023's first census lost 67 of 95 candidates to ``429 Too Many
+    Requests`` from the NASA PDS mirror the LROC archive redirects to, because
+    no caller waited long enough to be let back in. A 429 or 5xx is retried,
+    honouring ``Retry-After`` when the server sends it and otherwise doubling
+    from ``base_wait_s``; any other HTTP error is raised at once, since a 404
+    is an answer, not congestion. Connection errors are retried the same way.
+    """
+    kwargs.setdefault("timeout", _TIMEOUT)
+    kwargs.setdefault("headers", _UA)
+    last: Exception | None = None
+    for attempt in range(tries):
+        try:
+            r = requests.get(url, **kwargs)
+        except (requests.ConnectionError, requests.Timeout) as exc:
+            last = exc
+        else:
+            if r.status_code not in RETRY_STATUSES:
+                r.raise_for_status()
+                return r
+            last = requests.HTTPError(f"{r.status_code} for url: {r.url}", response=r)
+            ra = r.headers.get("Retry-After")
+            if ra and ra.strip().isdigit():
+                sleep(min(max_wait_s, float(ra)))
+                continue
+        sleep(min(max_wait_s, base_wait_s * (2 ** attempt)))
+    raise requests.HTTPError(f"GET {url} still refused after {tries} attempts: {last}")
+
+
 def _get(params: dict[str, Any]) -> dict:
-    r = requests.get(ODE_ENDPOINT, params=params, timeout=_TIMEOUT, headers=_UA)
-    r.raise_for_status()
+    r = polite_get(ODE_ENDPOINT, params=params)
     return r.json().get("ODEResults", {})
 
 
@@ -481,8 +516,7 @@ def fetch_label(
     if not url:
         raise ValueError(f"{product.pdsid}: no label URL in the ODE record")
 
-    r = requests.get(url, timeout=_TIMEOUT, headers=_UA, allow_redirects=True)
-    r.raise_for_status()
+    r = polite_get(url, allow_redirects=True)
     text = r.content.decode("utf-8", errors="replace")
 
     kind = detect_product_type(text)

@@ -1,0 +1,1687 @@
+{
+  "stage": "EXP-023",
+  "preregistration": "docs/stages/EXP-023_ohrc_nac_chandrayaan3_site.md Part 1 (d273b8e)",
+  "target_lon_lat": [
+    32.319,
+    -69.373
+  ],
+  "ohrc_sun": {
+    "incidence_deg": 78.476392,
+    "azimuth_deg": 303.534993,
+    "source": "obs1 label, azimuth read clockwise from north"
+  },
+  "ode_query": {
+    "pt": "CDRNAC4",
+    "minlat": -69.393,
+    "maxlat": -69.35300000000001,
+    "westernlon": 32.299,
+    "easternlon": 32.339000000000006,
+    "limit": 2000
+  },
+  "filters": {
+    "emission_max": 20.0,
+    "tiers_deg": [
+      3.0,
+      6.0,
+      10.0
+    ],
+    "incidence_guard_deg": 0.5,
+    "overlap_min": 0.5,
+    "null_km": 8.0,
+    "implied_prefilter": "|ODE incidence - 78.476392| > 11.0; ODE emission > 21.0"
+  },
+  "funnel": {
+    "ode_returned": 116,
+    "after_implied_prefilter": 95,
+    "after_containment_emission_theta": 0,
+    "after_lr_dedupe": 0
+  },
+  "ranking_log": [],
+  "roles": {},
+  "primary_triangle": null,
+  "nulls": {},
+  "candidates": [
+    {
+      "pdsid": "nac.m1410178753lc",
+      "ode_incidence_deg": 87.52,
+      "ode_emission_deg": 1.71,
+      "map_resolution_m": 1.247,
+      "utc_start": "2022-06-18T08:04:46.535000Z",
+      "admissible": false,
+      "index_incidence_deg": 87.52,
+      "index_emission_deg": 1.71,
+      "index_resolution_m": 1.247,
+      "scaled_pixel_m": 1.245,
+      "incidence_at_target_deg": 87.52439619855352,
+      "azimuth_at_target_deg": 279.263501386541,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 87.51673594615505,
+        "difference_deg": -0.0032640538449442147
+      },
+      "sun_separation_deg": 25.706549198869304,
+      "slew_angle_deg": "0.009",
+      "start_time": "2022-06-18 08:04:46.535",
+      "orbit_number": "58422",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 15284,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 17331.58793447313,
+        "target_pixel_sample": 2247.8675720068322,
+        "unclamped_line0": 15284,
+        "unclamped_sample0": 1224,
+        "clamped_lines": 0,
+        "clamped_samples": -740,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1410178753lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1410178753rc",
+      "ode_incidence_deg": 87.63,
+      "ode_emission_deg": 1.15,
+      "map_resolution_m": 1.245,
+      "utc_start": "2022-06-18T08:04:46.535000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.3287, sample -0.0660), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m111376754rc",
+      "ode_incidence_deg": 70.53,
+      "ode_emission_deg": 1.15,
+      "map_resolution_m": 1.28,
+      "utc_start": "2009-10-28T13:44:47.568000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.2896, sample 1.0256), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m176226805rc",
+      "ode_incidence_deg": 100.62,
+      "ode_emission_deg": 1.13,
+      "map_resolution_m": 0.745,
+      "utc_start": "2011-11-18T03:38:58.107000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1409173715rc",
+      "ode_incidence_deg": 81.08,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 1.678,
+      "utc_start": "2022-06-06T16:54:08.899000Z",
+      "admissible": false,
+      "index_incidence_deg": 81.08,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 1.678,
+      "scaled_pixel_m": 1.68,
+      "incidence_at_target_deg": 80.88999496101205,
+      "azimuth_at_target_deg": 62.79911085302107,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 81.083690111875,
+        "difference_deg": 0.0036901118750023443
+      },
+      "sun_separation_deg": 116.18754106942293,
+      "slew_angle_deg": "-0.007",
+      "start_time": "2022-06-06 16:54:08.899",
+      "orbit_number": "58279",
+      "lines_samples": [
+        46080,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 6127,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 8174.027588735117,
+        "target_pixel_sample": 1891.9506038144254,
+        "unclamped_line0": 6127,
+        "unclamped_sample0": 868,
+        "clamped_lines": 0,
+        "clamped_samples": -384,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1409173715rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1399787691rc",
+      "ode_incidence_deg": 77.19,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 1.612,
+      "utc_start": "2022-02-18T01:40:24.248000Z",
+      "admissible": false,
+      "index_incidence_deg": 77.19,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 1.612,
+      "scaled_pixel_m": 1.615,
+      "incidence_at_target_deg": 76.4249729614848,
+      "azimuth_at_target_deg": 304.1580932421286,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 77.18984504387383,
+        "difference_deg": -0.00015495612616689414
+      },
+      "sun_separation_deg": 2.1396725771570964,
+      "slew_angle_deg": "0.011",
+      "start_time": "2022-02-18 01:40:24.248",
+      "orbit_number": "56942",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 3651,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 5698.9137326866,
+        "target_pixel_sample": 518.0536687825679,
+        "unclamped_line0": 3651,
+        "unclamped_sample0": -505,
+        "clamped_lines": 0,
+        "clamped_samples": 505,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1399787691rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1386717080lc",
+      "ode_incidence_deg": 70.18,
+      "ode_emission_deg": 1.72,
+      "map_resolution_m": 1.619,
+      "utc_start": "2021-09-19T18:56:53.881000Z",
+      "admissible": false,
+      "index_incidence_deg": 70.18,
+      "index_emission_deg": 1.72,
+      "index_resolution_m": 1.619,
+      "scaled_pixel_m": 1.615,
+      "incidence_at_target_deg": 71.32584562617313,
+      "azimuth_at_target_deg": 346.70321186279244,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 70.18220716422887,
+        "difference_deg": 0.0022071642288636895
+      },
+      "sun_separation_deg": 42.18437907717603,
+      "slew_angle_deg": "-0.004",
+      "start_time": "2021-09-19 18:56:53.881",
+      "orbit_number": "55084",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 756,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 2803.368508676238,
+        "target_pixel_sample": 1875.6748191258018,
+        "unclamped_line0": 756,
+        "unclamped_sample0": 852,
+        "clamped_lines": 0,
+        "clamped_samples": -368,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1386717080lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1371614436lc",
+      "ode_incidence_deg": 72.66,
+      "ode_emission_deg": 1.71,
+      "map_resolution_m": 1.369,
+      "utc_start": "2021-03-28T23:46:09.368000Z",
+      "admissible": false,
+      "index_incidence_deg": 72.66,
+      "index_emission_deg": 1.71,
+      "index_resolution_m": 1.369,
+      "scaled_pixel_m": 1.37,
+      "incidence_at_target_deg": 72.49109791608988,
+      "azimuth_at_target_deg": 319.89377632568994,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 72.65827398681483,
+        "difference_deg": -0.0017260131851628557
+      },
+      "sun_separation_deg": 16.918566125154328,
+      "slew_angle_deg": "0.012",
+      "start_time": "2021-03-28 23:46:09.368",
+      "orbit_number": "52937",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19341,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 21388.031722034317,
+        "target_pixel_sample": 2232.1056380064115,
+        "unclamped_line0": 19341,
+        "unclamped_sample0": 1209,
+        "clamped_lines": 0,
+        "clamped_samples": -725,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1371614436lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1371614436rc",
+      "ode_incidence_deg": 72.71,
+      "ode_emission_deg": 1.15,
+      "map_resolution_m": 1.367,
+      "utc_start": "2021-03-28T23:46:09.368000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4097, sample -0.0844), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1350474679lc",
+      "ode_incidence_deg": 81.66,
+      "ode_emission_deg": 1.7,
+      "map_resolution_m": 1.343,
+      "utc_start": "2020-07-27T07:36:52.143000Z",
+      "admissible": false,
+      "index_incidence_deg": 81.66,
+      "index_emission_deg": 1.7,
+      "index_resolution_m": 1.343,
+      "scaled_pixel_m": 1.345,
+      "incidence_at_target_deg": 81.38210177960363,
+      "azimuth_at_target_deg": 63.337854307561535,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 81.65970334522103,
+        "difference_deg": -0.0002966547789640117
+      },
+      "sun_separation_deg": 116.84417747357612,
+      "slew_angle_deg": "-0.006",
+      "start_time": "2020-07-27 07:36:52.143",
+      "orbit_number": "49932",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 2009,
+        "sample0": 300
+      },
+      "window_detail": {
+        "target_pixel_line": 4056.606790992482,
+        "target_pixel_sample": 1323.132534701631,
+        "unclamped_line0": 2009,
+        "unclamped_sample0": 300,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1350474679lc.xml",
+      "rejected_by": "(3) sun-vector separation 116.84 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1351501927rc",
+      "ode_incidence_deg": 88.67,
+      "ode_emission_deg": 1.14,
+      "map_resolution_m": 0.819,
+      "utc_start": "2020-08-08T04:57:40.123000Z",
+      "admissible": false,
+      "index_incidence_deg": 88.67,
+      "index_emission_deg": 1.14,
+      "index_resolution_m": 0.819,
+      "scaled_pixel_m": 0.8200000000000001,
+      "incidence_at_target_deg": 88.6609678867036,
+      "azimuth_at_target_deg": 277.03950299681253,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 88.66784309754054,
+        "difference_deg": -0.0021569024594612074
+      },
+      "sun_separation_deg": 28.193387462871364,
+      "slew_angle_deg": "0.008",
+      "start_time": "2020-08-08 04:57:40.123",
+      "orbit_number": "50078",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 14345,
+        "sample0": 3016
+      },
+      "window_detail": {
+        "target_pixel_line": 16392.77340750711,
+        "target_pixel_sample": 4266.353038613735,
+        "unclamped_line0": 14345,
+        "unclamped_sample0": 3243,
+        "clamped_lines": 0,
+        "clamped_samples": -227,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1351501927rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1273954657rc",
+      "ode_incidence_deg": 79.57,
+      "ode_emission_deg": 1.14,
+      "map_resolution_m": 0.946,
+      "utc_start": "2018-02-22T16:03:10.491000Z",
+      "admissible": false,
+      "index_incidence_deg": 79.57,
+      "index_emission_deg": 1.14,
+      "index_resolution_m": 0.946,
+      "scaled_pixel_m": 0.95,
+      "incidence_at_target_deg": 79.68551155901294,
+      "azimuth_at_target_deg": 62.68931191992861,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 79.57529608772415,
+        "difference_deg": 0.00529608772416168
+      },
+      "sun_separation_deg": 115.71279093400916,
+      "slew_angle_deg": "-0.003",
+      "start_time": "2018-02-22 16:03:10.491",
+      "orbit_number": "39045",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19964,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 22011.672081110202,
+        "target_pixel_sample": 2333.42839695268,
+        "unclamped_line0": 19964,
+        "unclamped_sample0": 1310,
+        "clamped_lines": 0,
+        "clamped_samples": -826,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1273954657rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1312876876rc",
+      "ode_incidence_deg": 71.52,
+      "ode_emission_deg": 1.15,
+      "map_resolution_m": 1.223,
+      "utc_start": "2019-05-19T03:46:49.438000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.52,
+      "index_emission_deg": 1.15,
+      "index_resolution_m": 1.223,
+      "scaled_pixel_m": 1.225,
+      "incidence_at_target_deg": 71.19057510305082,
+      "azimuth_at_target_deg": 327.30542469593104,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.52030125508989,
+        "difference_deg": 0.0003012550898944255
+      },
+      "sun_separation_deg": 24.042611232500647,
+      "slew_angle_deg": "0.010",
+      "start_time": "2019-05-19 03:46:49.438",
+      "orbit_number": "44585",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 15243,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 17290.380072122378,
+        "target_pixel_sample": 1680.5086722156914,
+        "unclamped_line0": 15243,
+        "unclamped_sample0": 657,
+        "clamped_lines": 0,
+        "clamped_samples": -173,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1312876876rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1299815827lc",
+      "ode_incidence_deg": 71.38,
+      "ode_emission_deg": 1.69,
+      "map_resolution_m": 0.955,
+      "utc_start": "2018-12-18T23:42:40.414000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.9921, sample 1.0146), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1299815827rc",
+      "ode_incidence_deg": 71.38,
+      "ode_emission_deg": 1.14,
+      "map_resolution_m": 0.953,
+      "utc_start": "2018-12-18T23:42:40.414000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.38,
+      "index_emission_deg": 1.14,
+      "index_resolution_m": 0.953,
+      "scaled_pixel_m": 0.95,
+      "incidence_at_target_deg": 70.54576053316758,
+      "azimuth_at_target_deg": 10.729089114332151,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.38526429727062,
+        "difference_deg": 0.005264297270628049
+      },
+      "sun_separation_deg": 64.87157860904145,
+      "slew_angle_deg": "0.006",
+      "start_time": "2018-12-18 23:42:40.414",
+      "orbit_number": "42726",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 48128,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 51780.62817871792,
+        "target_pixel_sample": 145.06115508650495,
+        "unclamped_line0": 49733,
+        "unclamped_sample0": -878,
+        "clamped_lines": -1605,
+        "clamped_samples": 878,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1299815827rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1118637352rc",
+      "ode_incidence_deg": 71.15,
+      "ode_emission_deg": 1.13,
+      "map_resolution_m": 0.698,
+      "utc_start": "2013-03-23T00:21:25.019000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.15,
+      "index_emission_deg": 1.13,
+      "index_resolution_m": 0.698,
+      "scaled_pixel_m": 0.6950000000000001,
+      "incidence_at_target_deg": 71.38555153946719,
+      "azimuth_at_target_deg": 17.06542072941256,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.14917053257,
+        "difference_deg": -0.00082946743000889
+      },
+      "sun_separation_deg": 70.91161844554642,
+      "slew_angle_deg": "0.010",
+      "start_time": "2013-03-23 00:21:25.019",
+      "orbit_number": "17063",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 14433,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 16480.30243378102,
+        "target_pixel_sample": 2299.799435682184,
+        "unclamped_line0": 14433,
+        "unclamped_sample0": 1276,
+        "clamped_lines": 0,
+        "clamped_samples": -792,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1118637352rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m180936077lc",
+      "ode_incidence_deg": 82.64,
+      "ode_emission_deg": 1.68,
+      "map_resolution_m": 0.754,
+      "utc_start": "2012-01-11T15:46:50.414000Z",
+      "admissible": false,
+      "index_incidence_deg": 82.64,
+      "index_emission_deg": 1.68,
+      "index_resolution_m": 0.754,
+      "scaled_pixel_m": 0.755,
+      "incidence_at_target_deg": 82.57608504808019,
+      "azimuth_at_target_deg": 293.14935291435444,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 82.63291533299142,
+        "difference_deg": -0.007084667008584233
+      },
+      "sun_separation_deg": 11.031340842202408,
+      "slew_angle_deg": "0.014",
+      "start_time": "2012-01-11 15:46:50.414",
+      "orbit_number": "11780",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 32353,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 34400.49725901097,
+        "target_pixel_sample": 2094.3004523432664,
+        "unclamped_line0": 32353,
+        "unclamped_sample0": 1071,
+        "clamped_lines": 0,
+        "clamped_samples": -587,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m180936077lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m180936077rc",
+      "ode_incidence_deg": 82.69,
+      "ode_emission_deg": 1.13,
+      "map_resolution_m": 0.753,
+      "utc_start": "2012-01-11T15:46:50.414000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.6596, sample -0.1125), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m165647365rc",
+      "ode_incidence_deg": 81.78,
+      "ode_emission_deg": 1.15,
+      "map_resolution_m": 1.206,
+      "utc_start": "2011-07-18T16:54:58.391000Z",
+      "admissible": false,
+      "index_incidence_deg": 81.78,
+      "index_emission_deg": 1.15,
+      "index_resolution_m": 1.206,
+      "scaled_pixel_m": 1.21,
+      "incidence_at_target_deg": 81.9615991122078,
+      "azimuth_at_target_deg": 289.2478016687777,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 81.77644260954312,
+        "difference_deg": -0.003557390456876419
+      },
+      "sun_separation_deg": 14.501137119198797,
+      "slew_angle_deg": "0.006",
+      "start_time": "2011-07-18 16:54:58.391",
+      "orbit_number": "9545",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 37263,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 39310.61328819587,
+        "target_pixel_sample": 985.0574454191491,
+        "unclamped_line0": 37263,
+        "unclamped_sample0": -38,
+        "clamped_lines": 0,
+        "clamped_samples": 38,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m165647365rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m155015381rc",
+      "ode_incidence_deg": 71.77,
+      "ode_emission_deg": 1.13,
+      "map_resolution_m": 0.855,
+      "utc_start": "2011-03-17T15:35:14.355000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.77,
+      "index_emission_deg": 1.13,
+      "index_resolution_m": 0.855,
+      "scaled_pixel_m": 0.855,
+      "incidence_at_target_deg": 71.05249885932234,
+      "azimuth_at_target_deg": 352.5899013516602,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.76915590681301,
+        "difference_deg": -0.0008440931869841961
+      },
+      "sun_separation_deg": 47.76297937308831,
+      "slew_angle_deg": "-0.007",
+      "start_time": "2011-03-17 15:35:14.355",
+      "orbit_number": "7978",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 48128,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 50774.23290322583,
+        "target_pixel_sample": 2040.9107367201063,
+        "unclamped_line0": 48727,
+        "unclamped_sample0": 1017,
+        "clamped_lines": -599,
+        "clamped_samples": -533,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m155015381rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m150299440lc",
+      "ode_incidence_deg": 81.59,
+      "ode_emission_deg": 1.68,
+      "map_resolution_m": 0.848,
+      "utc_start": "2011-01-22T01:36:12.622000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.7954, sample 1.0180), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m150299440rc",
+      "ode_incidence_deg": 81.65,
+      "ode_emission_deg": 1.13,
+      "map_resolution_m": 0.847,
+      "utc_start": "2011-01-22T01:36:12.622000Z",
+      "admissible": false,
+      "index_incidence_deg": 81.65,
+      "index_emission_deg": 1.13,
+      "index_resolution_m": 0.847,
+      "scaled_pixel_m": 0.845,
+      "incidence_at_target_deg": 81.42854724309814,
+      "azimuth_at_target_deg": 296.040453806983,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 81.65138372002737,
+        "difference_deg": 0.001383720027362756
+      },
+      "sun_separation_deg": 7.947209219886908,
+      "slew_angle_deg": "0.002",
+      "start_time": "2011-01-22 01:36:12.622",
+      "orbit_number": "7283",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 39492,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 41539.47124182999,
+        "target_pixel_sample": 43.758227546614016,
+        "unclamped_line0": 39492,
+        "unclamped_sample0": -980,
+        "clamped_lines": 0,
+        "clamped_samples": 980,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m150299440rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1439675403rc",
+      "ode_incidence_deg": 86.57,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 1.648,
+      "utc_start": "2023-05-25T17:35:36.810000Z",
+      "admissible": false,
+      "index_incidence_deg": 86.57,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 1.648,
+      "scaled_pixel_m": 1.65,
+      "incidence_at_target_deg": 86.58435683691175,
+      "azimuth_at_target_deg": 78.53539482679061,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 86.57290309238182,
+        "difference_deg": 0.002903092381828287
+      },
+      "sun_separation_deg": 132.82216847318688,
+      "slew_angle_deg": "0.014",
+      "start_time": "2023-05-25 17:35:36.810",
+      "orbit_number": "62622",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 1188,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 3235.3249190985434,
+        "target_pixel_sample": 685.6667544692742,
+        "unclamped_line0": 1188,
+        "unclamped_sample0": -338,
+        "clamped_lines": 0,
+        "clamped_samples": 338,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1439675403rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1421908349lc",
+      "ode_incidence_deg": 80.45,
+      "ode_emission_deg": 1.71,
+      "map_resolution_m": 1.432,
+      "utc_start": "2022-11-01T02:18:02.303000Z",
+      "admissible": false,
+      "index_incidence_deg": 80.45,
+      "index_emission_deg": 1.71,
+      "index_resolution_m": 1.432,
+      "scaled_pixel_m": 1.435,
+      "incidence_at_target_deg": 80.62923918873888,
+      "azimuth_at_target_deg": 63.548284103748344,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 80.44555308535776,
+        "difference_deg": -0.004446914642244337
+      },
+      "sun_separation_deg": 116.81109082359741,
+      "slew_angle_deg": "-0.007",
+      "start_time": "2022-11-01 02:18:02.303",
+      "orbit_number": "60091",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19048,
+        "sample0": 457
+      },
+      "window_detail": {
+        "target_pixel_line": 21095.771655764354,
+        "target_pixel_sample": 1480.9596665112824,
+        "unclamped_line0": 19048,
+        "unclamped_sample0": 457,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1421908349lc.xml",
+      "rejected_by": "(3) sun-vector separation 116.81 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1425602645rc",
+      "ode_incidence_deg": 91.89,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 1.546,
+      "utc_start": "2022-12-13T20:29:39.007000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1442997156lc",
+      "ode_incidence_deg": 73.84,
+      "ode_emission_deg": 15.27,
+      "map_resolution_m": 0.893,
+      "utc_start": "2023-07-03T04:18:08.914000Z",
+      "admissible": false,
+      "rejected_by": "RuntimeError: GET https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1056A/INDEX/INDEX.LBL failed after 5 attempts: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1056A/INDEX/INDEX.LBL"
+    },
+    {
+      "pdsid": "nac.m1442997156rc",
+      "ode_incidence_deg": 73.94,
+      "ode_emission_deg": 12.38,
+      "map_resolution_m": 0.886,
+      "utc_start": "2023-07-03T04:18:08.914000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1056A/DATA/ESM5/2023184/NAC/M1442997156RC.xml"
+    },
+    {
+      "pdsid": "nac.m1443011203lc",
+      "ode_incidence_deg": 74.24,
+      "ode_emission_deg": 0.11,
+      "map_resolution_m": 0.867,
+      "utc_start": "2023-07-03T08:12:16.570000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1056A/DATA/ESM5/2023184/NAC/M1443011203LC.xml"
+    },
+    {
+      "pdsid": "nac.m1443011203rc",
+      "ode_incidence_deg": 74.34,
+      "ode_emission_deg": 2.77,
+      "map_resolution_m": 0.867,
+      "utc_start": "2023-07-03T08:12:16.570000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1056A/DATA/ESM5/2023184/NAC/M1443011203RC.xml"
+    },
+    {
+      "pdsid": "nac.m1443025251lc",
+      "ode_incidence_deg": 74.65,
+      "ode_emission_deg": 14.6,
+      "map_resolution_m": 0.898,
+      "utc_start": "2023-07-03T12:06:23.690000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1056A/DATA/ESM5/2023184/NAC/M1443025251LC.xml"
+    },
+    {
+      "pdsid": "nac.m1443025251rc",
+      "ode_incidence_deg": 74.76,
+      "ode_emission_deg": 17.5,
+      "map_resolution_m": 0.903,
+      "utc_start": "2023-07-03T12:06:23.690000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1056A/DATA/ESM5/2023184/NAC/M1443025251RC.xml"
+    },
+    {
+      "pdsid": "nac.m1443123533lc",
+      "ode_incidence_deg": 77.89,
+      "ode_emission_deg": 66.33,
+      "map_resolution_m": 2.848,
+      "utc_start": "2023-07-04T15:24:26.768000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1443123533rc",
+      "ode_incidence_deg": 78.52,
+      "ode_emission_deg": 69.92,
+      "map_resolution_m": 3.097,
+      "utc_start": "2023-07-04T15:24:26.768000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1445349174lc",
+      "ode_incidence_deg": 70.19,
+      "ode_emission_deg": 3.56,
+      "map_resolution_m": 1.782,
+      "utc_start": "2023-07-30T09:38:27.811000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1056B/DATA/ESM5/2023211/NAC/M1445349174LC.xml"
+    },
+    {
+      "pdsid": "nac.m1445356198rc",
+      "ode_incidence_deg": 70.18,
+      "ode_emission_deg": 1.97,
+      "map_resolution_m": 1.777,
+      "utc_start": "2023-07-30T11:35:31.609000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1056B/DATA/ESM5/2023211/NAC/M1445356198RC.xml"
+    },
+    {
+      "pdsid": "nac.m1447694547lc",
+      "ode_incidence_deg": 72.66,
+      "ode_emission_deg": 0.99,
+      "map_resolution_m": 1.819,
+      "utc_start": "2023-08-26T13:08:01.211000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1056C/DATA/ESM5/2023238/NAC/M1447694547LC.xml"
+    },
+    {
+      "pdsid": "nac.m1447694547rc",
+      "ode_incidence_deg": 72.69,
+      "ode_emission_deg": 3.89,
+      "map_resolution_m": 1.818,
+      "utc_start": "2023-08-26T13:08:01.211000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1056C/DATA/ESM5/2023238/NAC/M1447694547RC.xml"
+    },
+    {
+      "pdsid": "nac.m1447729683rc",
+      "ode_incidence_deg": 71.81,
+      "ode_emission_deg": 29.12,
+      "map_resolution_m": 1.312,
+      "utc_start": "2023-08-26T22:53:36.904000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1447750764rc",
+      "ode_incidence_deg": 71.47,
+      "ode_emission_deg": 43.4,
+      "map_resolution_m": 1.297,
+      "utc_start": "2023-08-27T04:44:56.722000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1449856698rc",
+      "ode_incidence_deg": 86.75,
+      "ode_emission_deg": 75.66,
+      "map_resolution_m": 4.407,
+      "utc_start": "2023-09-20T13:43:51.963000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1450011206rc",
+      "ode_incidence_deg": 79.56,
+      "ode_emission_deg": 29.46,
+      "map_resolution_m": 0.824,
+      "utc_start": "2023-09-22T08:38:58.429000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1450025248rc",
+      "ode_incidence_deg": 78.96,
+      "ode_emission_deg": 16.8,
+      "map_resolution_m": 0.739,
+      "utc_start": "2023-09-22T12:33:00.824000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1057A/DATA/ESM5/2023265/NAC/M1450025248RC.xml"
+    },
+    {
+      "pdsid": "nac.m1450039289rc",
+      "ode_incidence_deg": 78.37,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 0.706,
+      "utc_start": "2023-09-22T16:27:01.968000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1057A/DATA/ESM5/2023265/NAC/M1450039289RC.xml"
+    },
+    {
+      "pdsid": "nac.m1450053330rc",
+      "ode_incidence_deg": 77.85,
+      "ode_emission_deg": 11.69,
+      "map_resolution_m": 0.724,
+      "utc_start": "2023-09-22T20:21:03.236000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1057A/DATA/ESM5/2023265/NAC/M1450053330RC.xml"
+    },
+    {
+      "pdsid": "nac.m1450095440rc",
+      "ode_incidence_deg": 76.19,
+      "ode_emission_deg": 44.2,
+      "map_resolution_m": 1.327,
+      "utc_start": "2023-09-23T08:02:53.484000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1452369234lc",
+      "ode_incidence_deg": 87.81,
+      "ode_emission_deg": 13.93,
+      "map_resolution_m": 1.885,
+      "utc_start": "2023-10-19T15:39:27.466000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1057B/DATA/ESM5/2023292/NAC/M1452369234LC.xml"
+    },
+    {
+      "pdsid": "nac.m1452369234rc",
+      "ode_incidence_deg": 87.95,
+      "ode_emission_deg": 16.84,
+      "map_resolution_m": 1.895,
+      "utc_start": "2023-10-19T15:39:27.466000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1057B/DATA/ESM5/2023292/NAC/M1452369234RC.xml"
+    },
+    {
+      "pdsid": "nac.m1452376254lc",
+      "ode_incidence_deg": 87.46,
+      "ode_emission_deg": 6.89,
+      "map_resolution_m": 1.851,
+      "utc_start": "2023-10-19T17:36:28.156000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1057B/DATA/ESM5/2023292/NAC/M1452376254LC.xml"
+    },
+    {
+      "pdsid": "nac.m1452376254rc",
+      "ode_incidence_deg": 87.6,
+      "ode_emission_deg": 9.78,
+      "map_resolution_m": 1.855,
+      "utc_start": "2023-10-19T17:36:28.156000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1057B/DATA/ESM5/2023292/NAC/M1452376254RC.xml"
+    },
+    {
+      "pdsid": "nac.m1452383275lc",
+      "ode_incidence_deg": 87.11,
+      "ode_emission_deg": 0.35,
+      "map_resolution_m": 1.838,
+      "utc_start": "2023-10-19T19:33:28.988000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1057B/DATA/ESM5/2023292/NAC/M1452383275LC.xml"
+    },
+    {
+      "pdsid": "nac.m1452383275rc",
+      "ode_incidence_deg": 87.24,
+      "ode_emission_deg": 2.54,
+      "map_resolution_m": 1.837,
+      "utc_start": "2023-10-19T19:33:28.988000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1057B/DATA/ESM5/2023292/NAC/M1452383275RC.xml"
+    },
+    {
+      "pdsid": "nac.m1460775380lc",
+      "ode_incidence_deg": 69.08,
+      "ode_emission_deg": 2.37,
+      "map_resolution_m": 1.214,
+      "utc_start": "2024-01-24T22:41:52.403000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1058B/DATA/ESM5/2024024/NAC/M1460775380LC.xml"
+    },
+    {
+      "pdsid": "nac.m1460775380rc",
+      "ode_incidence_deg": 69.09,
+      "ode_emission_deg": 0.54,
+      "map_resolution_m": 1.21,
+      "utc_start": "2024-01-24T22:41:52.403000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1058B/DATA/ESM5/2024024/NAC/M1460775380RC.xml"
+    },
+    {
+      "pdsid": "nac.m1466428415lc",
+      "ode_incidence_deg": 92.09,
+      "ode_emission_deg": 12.71,
+      "map_resolution_m": 1.414,
+      "utc_start": "2024-03-30T08:59:07.907000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1467773990lc",
+      "ode_incidence_deg": 84.54,
+      "ode_emission_deg": 29.96,
+      "map_resolution_m": 2.26,
+      "utc_start": "2024-04-14T22:45:23.684000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1467773990rc",
+      "ode_incidence_deg": 84.75,
+      "ode_emission_deg": 32.92,
+      "map_resolution_m": 2.294,
+      "utc_start": "2024-04-14T22:45:23.684000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1467788002lc",
+      "ode_incidence_deg": 83.84,
+      "ode_emission_deg": 18.06,
+      "map_resolution_m": 2.029,
+      "utc_start": "2024-04-15T02:38:55.679000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1059A/DATA/ESM5/2024106/NAC/M1467788002LC.xml"
+    },
+    {
+      "pdsid": "nac.m1467788002rc",
+      "ode_incidence_deg": 84.0,
+      "ode_emission_deg": 20.98,
+      "map_resolution_m": 2.044,
+      "utc_start": "2024-04-15T02:38:55.679000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1059A/DATA/ESM5/2024106/NAC/M1467788002RC.xml"
+    },
+    {
+      "pdsid": "nac.m1467795061rc",
+      "ode_incidence_deg": 83.87,
+      "ode_emission_deg": 14.21,
+      "map_resolution_m": 1.972,
+      "utc_start": "2024-04-15T04:36:35.287000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1059A/DATA/ESM5/2024106/NAC/M1467795061RC.xml"
+    },
+    {
+      "pdsid": "nac.m1467809053lc",
+      "ode_incidence_deg": 82.98,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 1.884,
+      "utc_start": "2024-04-15T08:29:46.938000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1059A/DATA/ESM5/2024106/NAC/M1467809053LC.xml"
+    },
+    {
+      "pdsid": "nac.m1467816069rc",
+      "ode_incidence_deg": 82.74,
+      "ode_emission_deg": 7.44,
+      "map_resolution_m": 1.907,
+      "utc_start": "2024-04-15T10:26:42.840000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1059A/DATA/ESM5/2024106/NAC/M1467816069RC.xml"
+    },
+    {
+      "pdsid": "nac.m1467823121lc",
+      "ode_incidence_deg": 82.43,
+      "ode_emission_deg": 16.92,
+      "map_resolution_m": 1.93,
+      "utc_start": "2024-04-15T12:24:15.284000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1059A/DATA/ESM5/2024106/NAC/M1467823121LC.xml"
+    },
+    {
+      "pdsid": "nac.m1467830133lc",
+      "ode_incidence_deg": 82.08,
+      "ode_emission_deg": 23.58,
+      "map_resolution_m": 2.008,
+      "utc_start": "2024-04-15T14:21:07.182000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1468784668lc",
+      "ode_incidence_deg": 83.03,
+      "ode_emission_deg": 0.13,
+      "map_resolution_m": 0.859,
+      "utc_start": "2024-04-26T15:30:00.935000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1059B/DATA/ESM5/2024117/NAC/M1468784668LC.xml"
+    },
+    {
+      "pdsid": "nac.m1468784668rc",
+      "ode_incidence_deg": 83.16,
+      "ode_emission_deg": 3.01,
+      "map_resolution_m": 0.858,
+      "utc_start": "2024-04-26T15:30:00.935000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1059B/DATA/ESM5/2024117/NAC/M1468784668RC.xml"
+    },
+    {
+      "pdsid": "nac.m1468798657lc",
+      "ode_incidence_deg": 83.8,
+      "ode_emission_deg": 15.09,
+      "map_resolution_m": 1.794,
+      "utc_start": "2024-04-26T19:23:10.296000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1059B/DATA/ESM5/2024117/NAC/M1468798657LC.xml"
+    },
+    {
+      "pdsid": "nac.m1468798657rc",
+      "ode_incidence_deg": 83.94,
+      "ode_emission_deg": 17.99,
+      "map_resolution_m": 1.805,
+      "utc_start": "2024-04-26T19:23:10.296000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1059B/DATA/ESM5/2024117/NAC/M1468798657RC.xml"
+    },
+    {
+      "pdsid": "nac.m1471126841rc",
+      "ode_incidence_deg": 75.33,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 0.853,
+      "utc_start": "2024-05-23T18:06:13.905000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1059C/DATA/ESM5/2024144/NAC/M1471126841RC.xml"
+    },
+    {
+      "pdsid": "nac.m1475797169lc",
+      "ode_incidence_deg": 72.07,
+      "ode_emission_deg": 13.36,
+      "map_resolution_m": 1.708,
+      "utc_start": "2024-07-16T19:25:02.541000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1060B/DATA/ESM5/2024198/NAC/M1475797169LC.xml"
+    },
+    {
+      "pdsid": "nac.m1475797169rc",
+      "ode_incidence_deg": 72.08,
+      "ode_emission_deg": 16.25,
+      "map_resolution_m": 1.716,
+      "utc_start": "2024-07-16T19:25:02.541000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1060B/DATA/ESM5/2024198/NAC/M1475797169RC.xml"
+    },
+    {
+      "pdsid": "nac.m1475811207lc",
+      "ode_incidence_deg": 71.56,
+      "ode_emission_deg": 1.72,
+      "map_resolution_m": 1.686,
+      "utc_start": "2024-07-16T23:19:00.632000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1060B/DATA/ESM5/2024198/NAC/M1475811207LC.xml"
+    },
+    {
+      "pdsid": "nac.m1475825241lc",
+      "ode_incidence_deg": 71.31,
+      "ode_emission_deg": 17.67,
+      "map_resolution_m": 1.743,
+      "utc_start": "2024-07-17T03:12:54.667000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1060B/DATA/ESM5/2024199/NAC/M1475825241LC.xml"
+    },
+    {
+      "pdsid": "nac.m1478153786lc",
+      "ode_incidence_deg": 77.12,
+      "ode_emission_deg": 1.72,
+      "map_resolution_m": 1.672,
+      "utc_start": "2024-08-13T02:01:59.603000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1060B/DATA/ESM5/2024226/NAC/M1478153786LC.xml"
+    },
+    {
+      "pdsid": "nac.m1480510398lc",
+      "ode_incidence_deg": 85.02,
+      "ode_emission_deg": 18.78,
+      "map_resolution_m": 1.758,
+      "utc_start": "2024-09-09T08:38:51.263000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1060C/DATA/ESM5/2024253/NAC/M1480510398LC.xml"
+    },
+    {
+      "pdsid": "nac.m1482839015lc",
+      "ode_incidence_deg": 95.04,
+      "ode_emission_deg": 1.72,
+      "map_resolution_m": 0.842,
+      "utc_start": "2024-10-06T07:29:08.284000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1484212936lc",
+      "ode_incidence_deg": 88.94,
+      "ode_emission_deg": 1.92,
+      "map_resolution_m": 0.894,
+      "utc_start": "2024-10-22T05:07:48.971000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1061B/DATA/ESM5/2024296/NAC/M1484212936LC.xml"
+    },
+    {
+      "pdsid": "nac.m1485160650lc",
+      "ode_incidence_deg": 104.39,
+      "ode_emission_deg": 17.89,
+      "map_resolution_m": 0.985,
+      "utc_start": "2024-11-02T04:23:03.165000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1485160650rc",
+      "ode_incidence_deg": 104.52,
+      "ode_emission_deg": 20.79,
+      "map_resolution_m": 0.991,
+      "utc_start": "2024-11-02T04:23:03.165000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1486555640lc",
+      "ode_incidence_deg": 78.3,
+      "ode_emission_deg": 1.45,
+      "map_resolution_m": 0.894,
+      "utc_start": "2024-11-18T07:52:52.866000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1061C/DATA/ESM5/2024323/NAC/M1486555640LC.xml"
+    },
+    {
+      "pdsid": "nac.m1486569653lc",
+      "ode_incidence_deg": 78.89,
+      "ode_emission_deg": 15.79,
+      "map_resolution_m": 1.85,
+      "utc_start": "2024-11-18T11:46:27.068000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1061C/DATA/ESM5/2024323/NAC/M1486569653LC.xml"
+    },
+    {
+      "pdsid": "nac.m1486569653rc",
+      "ode_incidence_deg": 78.99,
+      "ode_emission_deg": 18.69,
+      "map_resolution_m": 1.861,
+      "utc_start": "2024-11-18T11:46:27.068000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1061C/DATA/ESM5/2024323/NAC/M1486569653RC.xml"
+    },
+    {
+      "pdsid": "nac.m1486583695rc",
+      "ode_incidence_deg": 79.95,
+      "ode_emission_deg": 31.32,
+      "map_resolution_m": 1.984,
+      "utc_start": "2024-11-18T15:40:28.744000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1488898366rc",
+      "ode_incidence_deg": 70.48,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 0.881,
+      "utc_start": "2024-12-15T10:38:19.061000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1061C/DATA/ESM5/2024350/NAC/M1488898366RC.xml"
+    },
+    {
+      "pdsid": "nac.m1488919410lc",
+      "ode_incidence_deg": 71.16,
+      "ode_emission_deg": 22.53,
+      "map_resolution_m": 1.917,
+      "utc_start": "2024-12-15T16:29:03.840000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1488919410rc",
+      "ode_incidence_deg": 71.19,
+      "ode_emission_deg": 25.45,
+      "map_resolution_m": 1.935,
+      "utc_start": "2024-12-15T16:29:03.840000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1491239581lc",
+      "ode_incidence_deg": 68.01,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 0.882,
+      "utc_start": "2025-01-11T12:58:34.148000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1062A/DATA/ESM5/2025011/NAC/M1491239581LC.xml"
+    },
+    {
+      "pdsid": "nac.m1493566861lc",
+      "ode_incidence_deg": 71.59,
+      "ode_emission_deg": 13.81,
+      "map_resolution_m": 1.759,
+      "utc_start": "2025-02-07T11:26:34.654000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1062B/DATA/ESM5/2025038/NAC/M1493566861LC.xml"
+    },
+    {
+      "pdsid": "nac.m1493566861rc",
+      "ode_incidence_deg": 71.71,
+      "ode_emission_deg": 16.71,
+      "map_resolution_m": 1.768,
+      "utc_start": "2025-02-07T11:26:34.654000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1062B/DATA/ESM5/2025038/NAC/M1493566861RC.xml"
+    },
+    {
+      "pdsid": "nac.m1493580891rc",
+      "ode_incidence_deg": 71.7,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 1.779,
+      "utc_start": "2025-02-07T15:20:24.633000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1062B/DATA/ESM5/2025038/NAC/M1493580891RC.xml"
+    },
+    {
+      "pdsid": "nac.m1498263508rc",
+      "ode_incidence_deg": 91.15,
+      "ode_emission_deg": 1.17,
+      "map_resolution_m": 1.816,
+      "utc_start": "2025-04-02T20:04:01.919000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1499224662lc",
+      "ode_incidence_deg": 75.83,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 1.784,
+      "utc_start": "2025-04-13T23:03:15.655000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1063A/DATA/ESM5/2025103/NAC/M1499224662LC.xml"
+    },
+    {
+      "pdsid": "nac.m1501551872lc",
+      "ode_incidence_deg": 71.02,
+      "ode_emission_deg": 16.48,
+      "map_resolution_m": 0.973,
+      "utc_start": "2025-05-10T21:30:04.806000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1063B/DATA/ESM5/2025130/NAC/M1501551872LC.xml"
+    },
+    {
+      "pdsid": "nac.m1501551872rc",
+      "ode_incidence_deg": 71.1,
+      "ode_emission_deg": 13.57,
+      "map_resolution_m": 0.966,
+      "utc_start": "2025-05-10T21:30:04.806000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1063B/DATA/ESM5/2025130/NAC/M1501551872RC.xml"
+    },
+    {
+      "pdsid": "nac.m1501565896lc",
+      "ode_incidence_deg": 71.29,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 0.945,
+      "utc_start": "2025-05-11T01:23:48.675000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1063B/DATA/ESM5/2025131/NAC/M1501565896LC.xml"
+    },
+    {
+      "pdsid": "nac.m1501579923lc",
+      "ode_incidence_deg": 71.37,
+      "ode_emission_deg": 11.4,
+      "map_resolution_m": 0.962,
+      "utc_start": "2025-05-11T05:17:36.353000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1063B/DATA/ESM5/2025131/NAC/M1501579923LC.xml"
+    },
+    {
+      "pdsid": "nac.m1501579923rc",
+      "ode_incidence_deg": 71.45,
+      "ode_emission_deg": 14.31,
+      "map_resolution_m": 0.966,
+      "utc_start": "2025-05-11T05:17:36.353000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1063B/DATA/ESM5/2025131/NAC/M1501579923RC.xml"
+    },
+    {
+      "pdsid": "nac.m1503893242lc",
+      "ode_incidence_deg": 71.94,
+      "ode_emission_deg": 15.79,
+      "map_resolution_m": 1.844,
+      "utc_start": "2025-06-06T23:52:55.548000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1063C/DATA/ESM5/2025157/NAC/M1503893242LC.xml"
+    },
+    {
+      "pdsid": "nac.m1503893242rc",
+      "ode_incidence_deg": 71.94,
+      "ode_emission_deg": 12.88,
+      "map_resolution_m": 1.83,
+      "utc_start": "2025-06-06T23:52:55.548000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1063C/DATA/ESM5/2025157/NAC/M1503893242RC.xml"
+    },
+    {
+      "pdsid": "nac.m1503907266lc",
+      "ode_incidence_deg": 71.64,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 1.931,
+      "utc_start": "2025-06-07T03:46:40.251000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1063C/DATA/ESM5/2025158/NAC/M1503907266LC.xml"
+    },
+    {
+      "pdsid": "nac.m1503907266rc",
+      "ode_incidence_deg": 71.64,
+      "ode_emission_deg": 1.17,
+      "map_resolution_m": 1.928,
+      "utc_start": "2025-06-07T03:46:40.251000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1063C/DATA/ESM5/2025158/NAC/M1503907266RC.xml"
+    },
+    {
+      "pdsid": "nac.m1503921287rc",
+      "ode_incidence_deg": 71.81,
+      "ode_emission_deg": 14.2,
+      "map_resolution_m": 1.991,
+      "utc_start": "2025-06-07T07:40:20.460000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1063C/DATA/ESM5/2025158/NAC/M1503921287RC.xml"
+    },
+    {
+      "pdsid": "nac.m1506248767lc",
+      "ode_incidence_deg": 75.74,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 1.972,
+      "utc_start": "2025-07-04T06:11:40.784000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1064A/DATA/ESM5/2025185/NAC/M1506248767LC.xml"
+    },
+    {
+      "pdsid": "nac.m1508589889lc",
+      "ode_incidence_deg": 84.74,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 2.017,
+      "utc_start": "2025-07-31T08:30:21.012000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1064B/DATA/ESM5/2025212/NAC/M1508589889LC.xml"
+    },
+    {
+      "pdsid": "nac.m1514617310rc",
+      "ode_incidence_deg": 78.86,
+      "ode_emission_deg": 30.7,
+      "map_resolution_m": 1.208,
+      "utc_start": "2025-10-09T02:47:23.524000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1514638346lc",
+      "ode_incidence_deg": 80.28,
+      "ode_emission_deg": 16.7,
+      "map_resolution_m": 2.051,
+      "utc_start": "2025-10-09T08:37:59.625000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1065A/DATA/ESM6/2025282/NAC/M1514638346LC.xml"
+    },
+    {
+      "pdsid": "nac.m1514652338lc",
+      "ode_incidence_deg": 80.16,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 1.984,
+      "utc_start": "2025-10-09T12:31:11.995000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1065A/DATA/ESM6/2025282/NAC/M1514652338LC.xml"
+    },
+    {
+      "pdsid": "nac.m1516993627lc",
+      "ode_incidence_deg": 71.79,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 1.052,
+      "utc_start": "2025-11-05T14:52:40.473000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1065B/DATA/ESM6/2025309/NAC/M1516993627LC.xml"
+    },
+    {
+      "pdsid": "nac.m1524018718lc",
+      "ode_incidence_deg": 78.08,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 1.079,
+      "utc_start": "2026-01-25T22:17:31.456000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1066B/DATA/ESM6/2026025/NAC/M1524018718LC.xml"
+    },
+    {
+      "pdsid": "nac.m1524966200lc",
+      "ode_incidence_deg": 84.55,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 1.026,
+      "utc_start": "2026-02-05T21:28:53.112000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1066B/DATA/ESM6/2026036/NAC/M1524966200LC.xml"
+    },
+    {
+      "pdsid": "nac.m1526360760lc",
+      "ode_incidence_deg": 89.1,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 2.153,
+      "utc_start": "2026-02-22T00:51:33.587000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1066C/DATA/ESM6/2026053/NAC/M1526360760LC.xml"
+    },
+    {
+      "pdsid": "nac.m1527308253rc",
+      "ode_incidence_deg": 75.77,
+      "ode_emission_deg": 1.18,
+      "map_resolution_m": 1.893,
+      "utc_start": "2026-03-05T00:03:07.192000Z",
+      "admissible": false,
+      "rejected_by": "HTTPError: 429 Client Error: Too Many Requests for url: https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1066C/DATA/ESM6/2026064/NAC/M1527308253RC.xml"
+    },
+    {
+      "pdsid": "nac.m1529643232lc",
+      "ode_incidence_deg": 71.38,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 1.701,
+      "utc_start": "2026-04-01T00:39:25.808000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: nac.m1529643232lc: unexpected archive root in 'https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1067A/DATA/ESM6/2026091/NAC/M1529643232LC.IMG'; refusing to guess the volume layout"
+    },
+    {
+      "pdsid": "nac.m1531985241lc",
+      "ode_incidence_deg": 71.25,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 1.0,
+      "utc_start": "2026-04-28T03:12:53.804000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: nac.m1531985241lc: unexpected archive root in 'https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1067B/DATA/ESM6/2026118/NAC/M1531985241LC.IMG'; refusing to guess the volume layout"
+    },
+    {
+      "pdsid": "nac.m1531985241rc",
+      "ode_incidence_deg": 71.26,
+      "ode_emission_deg": 1.18,
+      "map_resolution_m": 0.999,
+      "utc_start": "2026-04-28T03:12:53.804000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: nac.m1531985241rc: unexpected archive root in 'https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1067B/DATA/ESM6/2026118/NAC/M1531985241RC.IMG'; refusing to guess the volume layout"
+    },
+    {
+      "pdsid": "nac.m1534313284lc",
+      "ode_incidence_deg": 77.58,
+      "ode_emission_deg": 9.7,
+      "map_resolution_m": 1.745,
+      "utc_start": "2026-05-25T01:53:37.917000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: nac.m1534313284lc: unexpected archive root in 'https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1067C/DATA/ESM6/2026145/NAC/M1534313284LC.IMG'; refusing to guess the volume layout"
+    },
+    {
+      "pdsid": "nac.m1534327335lc",
+      "ode_incidence_deg": 76.59,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 0.99,
+      "utc_start": "2026-05-25T05:47:48.530000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: nac.m1534327335lc: unexpected archive root in 'https://pds.mcp.nasa.gov/data/store/img/lunar_reconnaissance_orbiter/pds4/lroc/lro-l-lroc-3-cdr/LROLRC_1067C/DATA/ESM6/2026145/NAC/M1534327335LC.IMG'; refusing to guess the volume layout"
+    }
+  ],
+  "data_read": "ODE metadata, PDS4 labels and index rows only; NO image byte",
+  "generated_utc": "2026-09-23T17:35:37Z",
+  "runtime_s": 1610.8
+}
