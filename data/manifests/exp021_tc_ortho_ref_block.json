@@ -1,0 +1,193 @@
+{
+  "stage": "EXP-021",
+  "product": "TCO_MAPS02_N03E021N00E024SC",
+  "block": "ref",
+  "role": "validation reference block: every EXP-018 Tranquillitatis tile footprint + 2 km",
+  "modality": "panchromatic ortho mosaic, photometrically normalised to i = 30 deg, e = 0 deg, alpha = 30 deg (USGS), reflectance",
+  "source_url": "https://data.darts.isas.jaxa.jp/pub/pds3/sln-l-tc-5-ortho-map-seamless-v2.0/lon021/data/TCO_MAPs02_N03E021N00E024SC.img",
+  "label_url": "https://data.darts.isas.jaxa.jp/pub/pds3/sln-l-tc-5-ortho-map-seamless-v2.0/lon021/data/TCO_MAPs02_N03E021N00E024SC.lbl",
+  "label_path": "data\\metadata\\kaguya_tc\\TCO_MAPS02_N03E021N00E024SC.lbl",
+  "label_sha256": "b6786eeaa4f2a7f42bf069728b5cfd5e289445b6b680ce1ae1f04e5ddba568e7",
+  "credit": "SELENE (Kaguya) Terrain Camera Ortho Map Seamless V2.0, SLN-L-TC-5-ORTHO-MAP-SEAMLESS-V2.0, produced by LISM, distributed by JAXA/ISAS DARTS",
+  "block_npy": "data\\raw\\reference\\TCO_MAPS02_N03E021N00E024SC.ref.rows7895_8882.npy",
+  "window_lat": [
+    0.5331485267433635,
+    0.8066819155262921
+  ],
+  "window_lon": [
+    23.367895935370164,
+    23.572266341145212
+  ],
+  "row0": 7895,
+  "row1_exclusive": 8882,
+  "col0": 8524,
+  "col1_exclusive": 9262,
+  "byte_start": 170532000,
+  "byte_count": 21319200,
+  "bytes_sha256": "23176b111537f1adbc037b582ba9653312b846ff69925fed840cfcdc988e0b1c",
+  "product_file_sha256": "08b073eda662d971a0189073cbebfba8eb999dfc4f04d8b16e955ec601a9a54f",
+  "product_file_bytes": 233280000,
+  "product_file_path": "data\\raw\\reference\\TCO_MAPs02_N03E021N00E024SC.img",
+  "bytes_note": "product_file_sha256 is of the archive's whole .img (the server ignores HTTP Range, E-050); bytes_sha256 is of this block's full rows [row0, row1_exclusive) before the column cut",
+  "grid": {
+    "ppd_lat": 3600.0,
+    "ppd_lon": 3600.0,
+    "lat_top_deg": 3.000138888888889,
+    "lon_left_deg": 20.999861111111112,
+    "map_scale_m": 8.42315289562,
+    "projection": "SIMPLE, planetocentric, pixel-registered",
+    "source": "LINE/SAMPLE_PROJECTION_OFFSET (authoritative)"
+  },
+  "label_summary_vs_offsets": {
+    "MAXIMUM_LATITUDE": 3.0,
+    "MINIMUM_LATITUDE": 0.000278,
+    "WESTERNMOST_LONGITUDE": 21.0,
+    "EASTERNMOST_LONGITUDE": 23.999722,
+    "top_edge_from_LPO": 3.000138888888889,
+    "left_edge_from_SPO": 20.999861111111112,
+    "summary_vs_offsets_px": [
+      0.5000000000000782,
+      0.499999999995282
+    ]
+  },
+  "dn": {
+    "sample_type": "MSB_UNSIGNED_INTEGER",
+    "bits": 16,
+    "scaling_factor": 0.01,
+    "offset": 0.0,
+    "dummy": 0.0,
+    "dummy_fraction": 0.0
+  },
+  "unit": "reflectance (I/F), photometrically normalised",
+  "retrieved_utc": "2026-09-23T11:56:35Z",
+  "footprints_lon_lat": {
+    "nac.m1177606647lc": [
+      [
+        23.43498749500877,
+        0.6033647928416159
+      ],
+      [
+        23.49967641462165,
+        0.5993217353658111
+      ],
+      [
+        23.50500861944602,
+        0.7366260095934876
+      ],
+      [
+        23.440319699833147,
+        0.7406690670692925
+      ]
+    ],
+    "nac.m1282310415lc": [
+      [
+        23.437175817735614,
+        0.7291428645146635
+      ],
+      [
+        23.496028111664387,
+        0.7331859219904684
+      ],
+      [
+        23.50267539017381,
+        0.6108605098157561
+      ],
+      [
+        23.444140127445145,
+        0.6068174523399512
+      ]
+    ],
+    "nac.m1121081627rc": [
+      [
+        23.49987871479716,
+        0.6162972253604734
+      ],
+      [
+        23.437355052474814,
+        0.6162972253604734
+      ],
+      [
+        23.43997834239542,
+        0.7237240296421118
+      ],
+      [
+        23.502819035917884,
+        0.7237240296421118
+      ]
+    ],
+    "nac.m1190561570lc": [
+      [
+        23.439356145880556,
+        0.7274653854662209
+      ],
+      [
+        23.495958950541826,
+        0.7298131195671683
+      ],
+      [
+        23.50066377408701,
+        0.6123560800081392
+      ],
+      [
+        23.44406096942574,
+        0.6103253771073033
+      ]
+    ],
+    "nac.m1157600009rc": [
+      [
+        23.435697568127754,
+        0.7386788725051919
+      ],
+      [
+        23.500386487740634,
+        0.7407261430926759
+      ],
+      [
+        23.50430717402828,
+        0.6014686009645753
+      ],
+      [
+        23.439618254415407,
+        0.5991042991769797
+      ]
+    ],
+    "nac.m188085530rc": [
+      [
+        23.504855490259565,
+        0.6347086532753767
+      ],
+      [
+        23.433856217511188,
+        0.6347086532753768
+      ],
+      [
+        23.434989755055696,
+        0.7052810064530954
+      ],
+      [
+        23.50630605900419,
+        0.7052810064530954
+      ]
+    ],
+    "nac.m1447850428rc": [
+      [
+        23.49345921072507,
+        0.6061674490891258
+      ],
+      [
+        23.436856406063804,
+        0.6102105065649307
+      ],
+      [
+        23.446551295235476,
+        0.7338203435037606
+      ],
+      [
+        23.503154099896744,
+        0.7297772860279557
+      ]
+    ]
+  },
+  "null_rule": null,
+  "preregistration": "docs/stages/EXP-021_verdict_fa_fr.md Part 1 section 3.1"
+}

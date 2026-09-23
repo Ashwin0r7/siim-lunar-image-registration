@@ -1,5 +1,7 @@
 # EXP-021 — How often the verdict is wrong: false acceptance and false rejection against a reference that is not the archive, on a site split fixed in advance
 
+**Status: COMPLETE — S0, S5 MET; S1, S4, S6 NOT MET; S2 and S3 MET on V ∪ C and NOT EVALUABLE on the held-out site alone (NOT MET as frozen).** Part 2 below.
+
 **Part 1 — pre-registration. FROZEN 2026-09-23, before the validation site's
 reference product has been fetched, before any registration against it has
 been attempted, before any correctness class, rate or threshold has been
@@ -425,4 +427,204 @@ defect S0 exposes. Superseding notes, never edits.
 
 ## Part 2
 
-*(Empty until Part 1 is committed.)*
+**Written 2026-09-23 after the run, against Part 1 as committed (`EXP-021 Part 1`,
+the commit before this one).** Artefact `experiments/EXP-021/exp021_results.json`
+(213 s, CPU), log `run.log`. The validation reference was fetched by
+`scripts/acquire_exp021_reference.py` (log `acquire.log`; the first attempt broke
+at 124 of 233 MB and is kept as `acquire_attempt1_broken.log`). Product SHA-256
+`08b073eda662d971…`, REF block rows 7895–8882 (987 × 738 px), NULL block rows
+1325–4927 (north band, 1.63–2.63° N), DUMMY fraction 0.0000 in both.
+
+### 10. The answer, in one paragraph
+
+**The verdict was never wrong where it could be checked, and it could be checked
+almost nowhere that matters.** At the frozen tier-A ground truth, every labelled
+edge on both sites is **CORRECT**: 39 of 39 engine-edges, including 13 of 13 for
+B1. The primary B1 VERIFIED population scores **FDR 0 / 12** and **FRR 0 / 12** on
+the pooled reading, with a Clopper–Pearson upper bound of **26.5 %** on each, and
+no wrong transform anywhere in the population to compute an FAR from. On the
+held-out site alone the ground truth **did not reach**: B1 registers only **3 of
+7** Tranquillitatis frames to the Kaguya reference, **one of them at i = 29.45°,
+the reference's own standard geometry, fails**, and tier A admits **2** frames
+and **1** B1 edge. So §53's FA and FR clauses are **MET on V ∪ C and NOT
+EVALUABLE on the held-out site alone**, and the reason is not the verdict but
+the construction Part 1 chose for ground truth: an admission rule that requires
+B1 to register the frame to an i = 30° reference selects exactly the frames that
+also register to each other. **That population contained no negatives at all**
+(E-058). The one reading that admits the hard frames (tier A ∪ B, S5) finds
+**20 wrong transforms, and all but one have 3–8 inliers**. The inlier rule
+stopped them, and **0 of 84 VERIFIED engine-edges is wrong by more than 25 m**.
+But **15 of those 84 are AMBIGUOUS** (8.8–19.8 m), clustered on three frames
+whose own two legs disagree by 0.5–1.6 reference px. A frozen rule cannot say
+whether that is leg noise or a per-image error the loop cannot see, and this
+part does not pretend to.
+
+### 11. Criteria, answered exactly as frozen
+
+| ID | verdict | the number |
+|---|---|---|
+| **S0** | **MET** | (i) 17/17 EXP-019 S3 medians rebuilt from the recorded matrices, max \|diff\| **0.0 px**; (ii) 186 rows, **0** violations of `pass == (n_inliers > 8)`; (iii) EXP-012's 13 and EXP-018's 7 loop residuals rebuilt from recorded rows, max \|diff\| **0.0 px**, statuses identical; (iv) V grid: corners **0.0008 px**, round trip **6.7e-16°**; (v) drift gate **253 = 253**; (vi) V null **0 of 7** B1 passes (B4L beside: 0 of 7, max 5 inliers); (vii) signs from `siim.ingest.orientation.handedness` |
+| **S1** | **NOT MET** | **2 of 7** V frames at tier A (bar 4), **1** B1 edge classified (bar 6). The strict reading of S2–S4 is **NOT EVALUABLE for want of ground truth** |
+| **S2** | **NOT MET as frozen** — *MET on V ∪ C; NOT EVALUABLE on the held-out site alone* | B1 L2 pooled: **FDR 0 / 12** (CI95 0–26.5 %), FDR_cons 0 / 12, **FAR undefined (0 WRONG edges reachable)**. Strict: 0 / 1. **Not demonstrated**: the upper bound is 26.5 % against 5 %. §0.2's withdrawal line (FDR > 10 %) is **not triggered** on either reading |
+| **S3** | **NOT MET as frozen** — *MET on V ∪ C; NOT EVALUABLE on the held-out site alone* | B1 L2 pooled: **FRR 0 / 12** (CI95 0–26.5 %). Strict: 0 / 1. **Not demonstrated** against 20 % |
+| **S4** | **NOT MET for want of data** | **0 WRONG rows on C** at tier A (bar 5), so `c*` cannot be fitted; V has 0 WRONG and 3 CORRECT rows. At the frozen cutoff 8: FRR_C **0 / 36**, FRR_V **0 / 3**, both FARs undefined |
+| **S5** | **MET, and here is why that is not reassurance** | S2 and S3 read *MET on V ∪ C / NOT EVALUABLE on V* under all four re-scorings (§12). Their outcome strings are stable because they count WRONG. Under tier A ∪ B the **AMBIGUOUS** count, which the frozen FDR excludes, rises from 0 to **7 of 29** B1 VERIFIED edges |
+| **S6** | **NOT MET** | **0** hard negatives on V (bar 3), **0** on C. **No WRONG edge exists in either L2 population** at tier A. Predicted, and the most important line in the table |
+
+**§53 criterion 3, restated (D-068).** FA and FR move from **unmeasurable** to
+**measured on the pooled reading, not evaluable on the held-out site alone, not
+demonstrated, and never exercised against a wrong transform at tier A**. The
+criterion stays **NOT MET**. Nothing was re-scoped to change that: the pooled
+reading was frozen as insufficient on its own, and it is reported that way.
+
+### 12. S5 in full — where the wrong transforms were hiding
+
+| re-scoring | B1 L2 pooled FDR | FAR | FRR | S2 / S3 outcome |
+|---|---|---|---|---|
+| **primary** (tier A, 1.0 / 3.0) | 0 / 12 | 0 / 0 | 0 / 12 | MET on V ∪ C; NE on V |
+| CORRECT ≤ 0.5, WRONG > 1.5 | 0 / 12 | 0 / 0 | 0 / 12 | same |
+| CORRECT ≤ 2.0, WRONG > 6.0 | 0 / 12 | 0 / 0 | 0 / 12 | same |
+| **tier A ∪ B** | **0 / 29** | **0 / 9** | **2 / 24** | same |
+| B1 legs alone (EXP-019's rule) | 0 / 17 | 0 / 1 | 1 / 18 | same |
+
+**The tolerance does not matter at tier A: every tier-A edge sits below 0.414
+reference px, so moving the line from 0.5 to 2.0 changes nothing.** What matters
+is which frames have ground truth. Read at tier A ∪ B, pooled over engines and
+both sites (`exp021_s5_tier_ab_reading.json`: the recorded legs re-read, with no re-match), the
+population finally contains negatives:
+
+- **20 WRONG engine-edges.** Every one involves a tier-B frame (66.9–69.8°,
+  42–48° frames that fail against most partners, and three Tranquillitatis
+  frames). **19 have 3–8 inliers and were REJECTED at L1. The twentieth is the
+  only hard negative in the stage:** Tranquillitatis `m188085530rc → m1282310415lc`
+  under **B4X, 13 inliers, 3.25 reference px (27 m)**, archive-CONSISTENT, passed
+  at L1, **not VERIFIED**. It sits 0.25 px over the WRONG line, while B1 (5
+  inliers) rejected the same pair and B4L (9 inliers, 2.99 px) landed on the
+  AMBIGUOUS side of it.
+- **0 of 84 VERIFIED engine-edges is WRONG** (CI95 upper 4.3 %; not independent
+  across engines, and not the frozen criterion).
+- **15 of 84 VERIFIED engine-edges are AMBIGUOUS** (FDR_cons **17.9 %**; B1 alone
+  **7 / 29 = 24.1 %**). All 15 end on one of three tier-B frames: RD04
+  `m1341069775rc` (B1 leg failed, B4L's disagrees with it by 237 px), RD04
+  `m1335207975rc` (legs disagree by **1.32** ref px) and Tranquillitatis
+  `m1282310415lc` (B1 leg failed). **The three engines agree with each other on
+  each of those edges** to 0.04–0.18 ref px (e.g. 2.17 / 2.30 / 2.35 on
+  `m1447850428rc → m1282310415lc`), **and the loops close**. So the direct edges
+  are mutually consistent, and the disagreement is between them and a chain
+  through a single-engine leg. On the six frames where both legs exist and tier A
+  still refused them, the legs disagree by **0.51–1.57** ref px, the same size as
+  the ambiguity. **Leg noise on hard frames fully accounts for it. A per-image
+  gauge — loop closure's exact blind spot — would look identical.** This stage
+  cannot tell the two apart. That is why tier A was frozen as primary, and why
+  the 17.9 % is printed here and not folded away.
+- **The two false rejections at tier A ∪ B are instructive and different.**
+  RD03 B1 `m1271742202lc → m1452560468lc`: **6 inliers, correct to 0.53 ref px**,
+  refused by the inlier rule, the one EXP-019 had already seen. RD03 B1
+  `m1236465772rc → m1175268993rc`: **8239 inliers, correct to 0.36 ref px, never
+  VERIFIED**, because both frames fail against every third frame in the window,
+  so no all-pass triangle exists. The second is not a verdict error; it is a
+  system that correctly refuses to call anything VERIFIED without a third image.
+
+### 13. What VERIFIED is worth, on the ground, for the first time
+
+The 36 VERIFIED engine-edges with a tier-A label (both sites, three engines)
+agree with the Kaguya chain to **0.077–0.414 reference px — median 0.180 =
+1.51 m, p95 0.375, max 3.48 m**. Every one is also archive-CONSISTENT (36/36;
+the 3 labelled non-VERIFIED edges are archive-INCONCLUSIVE). This is the first
+per-edge accuracy distribution of VERIFIED on real data at a resolution finer
+than the archive floor. **What it does not claim:** it covers only the frames
+tier A admits, it is a two-leg disagreement and not an absolute error, and it
+says nothing about the frames where VERIFIED is hardest to earn.
+
+### 14. The predictions, graded — including the ones that were wrong
+
+| Part 1 prediction | outcome |
+|---|---|
+| S0 MET, (iii) at 80 % | **right** — both rebuilds exact to 0.0 px |
+| V: B1 passes 5–6 of 7 | **wrong — 3 of 7.** The frame at i = 29.45° (Δ to the reference's standard geometry **0.55°**) fails with 3 inliers; 10.88° passes with 96 |
+| V: tier A admits 4–6 | **wrong — 2** |
+| S1 MET at 65 % | **wrong** |
+| S2: FDR = 0 on both readings at 85 % | **right** (0 / 12, 0 / 1) |
+| S2: FAR undefined at L2 on V at 75 % | **right, and more so than predicted** — undefined on C too |
+| S2: strict NOT EVALUABLE at 60 %; overall *"MET on V ∪ C, NE on V"* | **right** |
+| S3: FRR at L2 10–35 %, point ≈ 20 % | **wrong — 0 / 12.** Tier A left no hard frame in which a correct edge could fail to find a closing triangle |
+| S3: L1 FRR ≤ 10 % | **right** (0 / 13) |
+| *"EXP-019's 6-inlier correct edge will be counted"* | **wrong** — its frame is tier B, so it is counted only in S5 (§12) |
+| S4: `c*` in 4–8 | **unobservable** — no WRONG row on C |
+| S4 NOT MET for want of data on V at 55 % | **right outcome, wrong reason** — it failed for want of data on **C** |
+| S5 MET at 65 % | **right** |
+| S6 NOT MET at 85 % | **right** |
+
+**Nine right, five wrong, one unobservable, one right for the wrong reason.**
+Every wrong prediction is the same mistake: Part 1 treated *"B1 registers the
+frame to a photometrically normalised reference"* as a property of illumination
+geometry alone. At i = 29.45° it should be the easiest case in the stage, and it
+fails.
+
+### 15. Defects found, and what is NOT rewritten
+
+- **E-057 — two runner defects before the artefact existed.** (a) The first run
+  died building a Transform from a failed 4-inlier leg whose recorded matrix is
+  projective (bottom row `[4.7e-05, -3.2e-06, 1]`). The helper now reads the
+  model from the matrix (`run_died_v1.log`). (b) The S0(i) summary printed
+  `max |diff| inf px -> MET`. An exact 0.0 difference is falsy, so
+  `x or np.inf` turned perfect agreement into infinity. The gate's own logic
+  used `is not None` and was right. The run was stopped **before any artefact
+  was written**, the summary fixed and the run repeated (`run_killed_v2.log`).
+  Nothing frozen changed, and no statistic was read from either dead run beyond
+  the gate lines printed in their logs.
+- **E-058 — the ground-truth admission rule was correlated with the thing being
+  measured.** Tier A admits a frame only if B1 registers it to the reference, and
+  B1 registering a frame is strongly associated with that frame's edges being
+  correct. The admitted population therefore contained **no negatives**. That
+  made S4 unfittable, S6 unreachable and every FAR undefined, a consequence
+  Part 1 predicted for S6 and failed to see for S4 and for the FAR on C. It is
+  **the fifth member of E-041's family** (E-041, E-046, E-053, E-056): a
+  pre-registration that checked its parameter count but not whether its
+  population *could contain* the event its criteria count. **Not fixed, by
+  choice.** The criteria are reported as they read, and S5's tier A ∪ B reading
+  shows where the negatives were.
+
+The artefact is not rewritten. Its summary line is accurate. §12's tier A ∪ B
+enumeration is a re-reading of the recorded legs through the runner's own
+functions, with no re-match, committed as `scripts/exp021_tier_ab_reading.py`.
+That script asserts every frame's tier reproduces the artefact before it counts
+anything, and its output is `experiments/EXP-021/exp021_s5_tier_ab_reading.json`
+(a second artefact beside the first, never a rewrite of it).
+
+### 16. What this stage does NOT claim (Part 1 §7, restated against the results)
+
+- **Not an FA rate.** No wrong transform existed where the frozen ground truth
+  could see it. *"0 / 12"* is a count of VERIFIED edges that were right, not a
+  probability that VERIFIED is right.
+- **Not a validation-site result.** One edge on the held-out site had frozen
+  ground truth.
+- **Not evidence against the verdict either.** No VERIFIED edge was WRONG in any
+  reading, and the only hard negative was stopped.
+- **Not a resolution of the 15 AMBIGUOUS VERIFIED edges.** Leg noise and a
+  per-image gauge both fit them.
+- **Not a change to anything shipped.** `assess()`, `MEASURED_WRONG_PASS`, the
+  demo and the CLI are untouched; §0.2 was not triggered.
+
+### 17. What would make criterion 3 evaluable, in the order the data suggests
+
+1. **Ground truth on the hard frames at tier-A quality**: a reference whose
+   illumination matches the hard frames (Kaguya TC has morning/evening
+   mosaics; the seamless product is normalised to i = 30°), or a second
+   independent reference, so the 66–75° and 42–48° frames get two agreeing legs.
+   This is the only route to a population that contains its own negatives
+   (E-058).
+2. **Manual check points on the three AMBIGUOUS-carrying frames**, which decide
+   leg noise versus a per-image gauge directly. The same work is gap-analysis
+   item 4.
+3. **A larger held-out site.** Seven frames give at most 21 pairs; a site with
+   ≥ 12 frames spread across 10–75° would clear every sample minimum even at
+   tier A's admission rate.
+
+### 18. Ledger and index
+
+`STAGE-INDEX.md` row; `STAGE_HISTORY.md` standing-table row; `research_log.md`
+**RL-058**; `DECISION_LEDGER.md` **D-068** (criterion 3's reading);
+`ERROR_LEDGER.md` **E-057**, **E-058**; the audit's FINAL RESCORE gains a
+2026-09-23 (EXP-021) line for both scorecards; `PROJECT_GAP_ANALYSIS.md` B3
+status. §0.2 was not triggered, so no withdrawal decision exists.

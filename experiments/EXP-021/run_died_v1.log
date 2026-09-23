@@ -1,0 +1,31 @@
+EXP-021 | calibration site: rebuilding EXP-019 legs
+  [S0 v] drift gate RD03/nac.m1271742202lc: 253 vs recorded 253 -> MET
+  [C] RD03/nac.m1271742202lc         B1   253 B4L   477 agree 0.088 tier A
+  [C] RD03/nac.m1335207975rc         B1     6 B4L   428 agree 1.27 tier B
+  [C] RD03/nac.m1452560468lc         B1    10 B4L   316 agree 0.683 tier B
+  [C] RD03/nac.m1182331886lc         B1   739 B4L   663 agree 0.03 tier A
+D:\MyData\downloads\SIH\src\siim\preprocessing\degrade.py:76: RuntimeWarning: Mean of empty slice
+  return np.nanmean(a.reshape(a.shape[0] // k, k, a.shape[1] // k, k), axis=(1, 3))
+  [C] RD03/nac.m1236465772rc         B1    13 B4L   713 agree 0.741 tier B
+  [C] RD03/nac.m1212932972lc         B1   577 B4L   512 agree 0.031 tier A
+  [C] RD03/nac.m1205872034rc         B1     3 B4L     3 agree 4179.633 tier -
+  [C] RD03/nac.m1175268993rc         B1     4 B4L   778 agree 1.565 tier B
+  [C] RD03/nac.m1363396554rc         B1   345 B4L   502 agree 0.054 tier A
+Traceback (most recent call last):
+  File "D:\MyData\downloads\SIH\scripts\run_exp021.py", line 775, in <module>
+    main()
+    ~~~~^^
+  File "D:\MyData\downloads\SIH\scripts\run_exp021.py", line 563, in main
+    fr = frame_record(s, e19["cells"].get(s.key), e19["second_engine"].get(s.key))
+  File "D:\MyData\downloads\SIH\scripts\run_exp021.py", line 162, in frame_record
+    m1 = _tf(b1["measured_to_block_matrix"]) if b1 and b1.get("measured_to_block_matrix") else None
+         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\MyData\downloads\SIH\scripts\run_exp021.py", line 129, in _tf
+    return Transform(np.asarray(m, float), "affine")
+  File "<string>", line 5, in __init__
+  File "D:\MyData\downloads\SIH\src\siim\geometry\transforms.py", line 108, in __post_init__
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: model 'affine' requires bottom row [0, 0, 1]; got [ 4.65418927e-05 -3.23842158e-06  1.00000000e+00]. Use model='projective' if a perspective component is intended.
+EXIT 1

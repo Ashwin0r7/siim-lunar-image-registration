@@ -1,0 +1,8 @@
+footprints: lon 23.4339-23.5063, lat 0.5991-0.7407; REF lon 23.3679-23.5723 lat 0.5331-0.8067
+TCO_MAPS02_N03E021N00E024SC: 10800 x 10800, 3600.0 px/deg, 8.423153 m/px; top 3.000139 left 20.999861
+NULL band: (1.631681915526292, 2.631681915526292) (north)
+   attempt 1: 233 MB in 147s
+   product sha256=08b073eda662d971... (148s)
+ref: rows [7895, 8882) (987, 738) dummy 0.0000 -> exp021_tc_ortho_ref_block.json
+null: rows [1325, 4927) (3602, 738) dummy 0.0000 -> exp021_tc_ortho_null_block.json
+EXIT 0

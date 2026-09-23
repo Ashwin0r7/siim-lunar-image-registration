@@ -18,6 +18,38 @@ is reported as a gap in the evidence, not rewritten into one that can be.
 
 ---
 
+## UPDATE 2026-09-23 (later) — EXP-021: criterion 3 measured, and it could not be tested where it matters
+
+`docs/stages/EXP-021_verdict_fa_fr.md`, artefacts `experiments/EXP-021/`.
+
+**Criterion 3 stays NOT MET, and it is no longer unmeasurable.** Every recorded
+edge was labelled against A -> Kaguya reference -> B, which uses no A<->B
+correspondence, at 8.42 m / 25.3 m lines. That is 20-60x finer than the ~250 px
+archive floor behind every earlier wrong-pass count.
+
+| clause | reading | number | verdict |
+|---|---|---|---|
+| FA <= 5 % | B1 VERIFIED, pooled V u C | FDR **0 / 12** (CI95 upper 26.5 %); FAR **undefined** - 0 WRONG edges in the population | MET on the pooled reading, **not demonstrated**, never exercised |
+| FA <= 5 % | held-out site alone | 1 labelled B1 edge | **NOT EVALUABLE** - ground truth reached 2 of 7 frames |
+| FR <= 20 % | B1 VERIFIED, pooled | FRR **0 / 12** (CI95 upper 26.5 %) | MET on the pooled reading, **not demonstrated** |
+| FR <= 20 % | held-out site alone | 1 edge | **NOT EVALUABLE** |
+| zero VERIFIED adversarial | EXP-012, unchanged | 0 / 36 | MET for the wrong reason (E-039), unchanged |
+
+**Why it is not reassurance (E-058).** All 39 labelled engine-edges were
+CORRECT. The admission rule - B1 must register the frame to the reference -
+kept only frames whose edges succeed. Re-read with single-engine legs admitted
+(S5), the population finally holds **20 WRONG edges: 19 were stopped by the
+inlier rule and the twentieth never reached VERIFIED. 0 of 84 VERIFIED
+engine-edges are wrong, and 15 of 84 are AMBIGUOUS** (8.8-19.8 m) on three
+frames whose own legs disagree by 0.5-1.6 ref px. **§54 is not triggered**, and
+VERIFIED stays in the deliverable (D-068).
+
+**Scorecards after EXP-021: §53 2 of 5, unchanged** (row 3 stays PARTLY: its FA
+and FR now carry numbers and CIs, but not on the held-out site). **§2.2 ≈ 55 %,
+unchanged** - no §2.2 row turns on FA/FR. Neither scorecard moved, and that is
+recorded rather than softened.
+
+
 ## FINAL RESCORE — 2026-09-23, after EXP-016, EXP-017, EXP-018, EXP-019 and EXP-020
 
 **Both scorecards, in one place, as `CLAUDE.md` requires.** Five stages ran

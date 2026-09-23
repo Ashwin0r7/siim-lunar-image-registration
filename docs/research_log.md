@@ -1398,3 +1398,44 @@ with a measured envelope, a mechanism and a portable floor** — which is the
 form a deliverable can defend. D-005 is superseded by its own ablation, which
 also retires `PROJECT_GAP_ANALYSIS.md` C2 ("D-005 is a permanent PROPOSED
 deferring to a stage that will never run"): it was decided by a stage that did.
+
+### RL-058 - The verdict's false acceptance and false rejection, against a reference that is not the archive (EXP-021)
+
+**Question.** §53 criterion 3 asks for FA <= 5 % and FR <= 20 % on validation
+sites and had been *unmeasurable* for want of ground truth. EXP-019 made it
+measurable without anyone rescoring it: A -> Kaguya reference -> B uses no A<->B
+correspondence and agrees with recorded edges to 2.24 m.
+
+**What ran.** Every recorded REAL-DATA-07 and EXP-018 edge (186 rows, three
+engines) labelled CORRECT (<= 1.0 ref px = 8.42 m), AMBIGUOUS, WRONG (> 3.0 =
+25.3 m) against the composed reference chain, with legs admitted only when B1 and
+B4L agree to 0.5 ref px (tier A). Calibration site Serenitatis (EXP-019's legs
+rebuilt to 0.0 px); held-out site Tranquillitatis (a new Kaguya tile, 233 MB,
+fetched after Part 1). Verdict scored at the edge (L1) and at VERIFIED (L2).
+
+**Result.**
+* **Everything tier A could see was correct: 39 of 39 engine-edges.** B1 VERIFIED
+  **FDR 0 / 12, FRR 0 / 12** pooled (CI95 upper 26.5 %); **FAR undefined** - no wrong
+  transform in the population.
+* **Held-out site: NOT EVALUABLE.** B1 reaches 3 of 7 frames, failing at i = 29.45 deg
+  (0.55 deg from the reference's own standard geometry); tier A admits 2 frames, 1 edge.
+* **Why (E-058):** admitting a frame only when a registration to the reference
+  succeeds selects exactly the frames whose edges succeed. The negatives live on
+  the frames it excluded.
+* **Where they are (tier A u B, S5):** 20 WRONG edges, **19 with 3-8 inliers**; one
+  hard negative (B4X, 13 inliers, 27 m), stopped short of VERIFIED. **0 of 84
+  VERIFIED engine-edges WRONG; 15 of 84 AMBIGUOUS** (8.8-19.8 m) on three single-leg
+  frames whose own two legs disagree by 0.5-1.6 ref px. Leg noise fits it, and so
+  does a per-image gauge. This stage cannot separate the two.
+* **What VERIFIED is worth on the ground:** 36 tier-A-labelled VERIFIED edges agree
+  with the Kaguya chain to **median 1.51 m, max 3.48 m**.
+
+**Predictions.** Nine right (S0, the FDR, the undefined FAR, the strict reading,
+S5, S6 among them), five wrong (V leg count, tier-A count, S1, FRR ~ 20 %, the
+6-inlier edge being counted), one unobservable (`c*`), one right for the wrong
+reason (S4).
+
+**Consequence.** D-068: criterion 3 is measured and still NOT MET; §54 not
+triggered. The next useful measurement is ground truth on the hard frames at
+tier-A quality: an illumination-matched or second independent reference, or
+manual check points on the three AMBIGUOUS-carrying frames.

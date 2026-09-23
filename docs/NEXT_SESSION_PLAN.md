@@ -1,3 +1,21 @@
+# NEXT SESSION PLAN — note added 2026-09-23 (later), after EXP-021
+
+*(The plan below is kept under integrity rule 3. Its item 1 has now run.)*
+
+**Item 1 (B3) ran as EXP-021 and did not close.** FA and FR are now measured on
+the pooled reading (B1 VERIFIED FDR 0 / 12, FRR 0 / 12) but NOT EVALUABLE on the
+held-out site, and the labelled population contained no wrong transform at all
+(E-058). **The new item 1 is B3′: ground truth at tier-A quality on the hard
+frames** (66–75° and 42–48° incidence) — an illumination-matched Kaguya mosaic or
+a second independent reference, so that two engines agree on the legs of the
+frames where real failures live. Items 2–5 below are unchanged, and **item 4
+(manual check points) now has three named frames** where it would decide leg
+noise versus a per-image gauge: RD04 `m1341069775rc`, RD04 `m1335207975rc`,
+Tranquillitatis `m1282310415lc`.
+
+---
+
+
 # NEXT SESSION PLAN — rewritten 2026-09-23, end of day
 
 *(The 2026-09-05 plan is kept below under integrity rule 3. It is eighteen days

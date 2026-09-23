@@ -130,6 +130,7 @@ And two results argue against the *method*, not the architecture:
 | ~~B1~~ | ~~Blind validation~~ | **DONE — EXP-018** |
 | B2 | **VERIFIED Chandrayaan-2 verdict** | **open, and now quantified: 2.177 reference px against 2.0 — 8.9 %.** Needs a NAC frame centred on the TMC-2 swath (fresh ODE census) |
 | B3 | **Calibration/validation site split** | **open — the largest remaining hole.** FA and FR are unmeasurable without it |
+| B3 *(note 2026-09-23, EXP-021)* | *(row above retained under integrity rule 3)* | **RAN — measured, not closed.** B1 VERIFIED FDR 0 / 12 and FRR 0 / 12 on the pooled reading; **NOT EVALUABLE on the held-out site** (ground truth reached 2 of 7 frames); **no wrong transform in the labelled population** (E-058), so FA was never exercised. Successor item **B3′: tier-A ground truth on the hard frames** (an illumination-matched or second independent reference) - the only route to a population that contains its own negatives |
 | B4 | **Coverage calibration at real inlier counts** | **open**, and EXP-016 gives it a second reason: occupancy is 0.484 at the scale envelope's rung |
 
 ### Tier C — debts and loose ends

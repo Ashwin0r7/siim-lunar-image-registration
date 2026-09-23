@@ -1,0 +1,44 @@
+footprints: lon 23.4339-23.5063, lat 0.5991-0.7407; REF lon 23.3679-23.5723 lat 0.5331-0.8067
+TCO_MAPS02_N03E021N00E024SC: 10800 x 10800, 3600.0 px/deg, 8.423153 m/px; top 3.000139 left 20.999861
+NULL band: (1.631681915526292, 2.631681915526292) (north)
+   34/233 MB (0.65 MB/s)
+   67/233 MB (0.65 MB/s)
+   101/233 MB (0.78 MB/s)
+Traceback (most recent call last):
+  File "D:\softwares\Lib\site-packages\urllib3\response.py", line 779, in _error_catcher
+    yield
+  File "D:\softwares\Lib\site-packages\urllib3\response.py", line 925, in _raw_read
+    raise IncompleteRead(self._fp_bytes_read, self.length_remaining)
+urllib3.exceptions.IncompleteRead: IncompleteRead(124138468 bytes read, 109141532 more expected)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\softwares\Lib\site-packages\requests\models.py", line 820, in generate
+    yield from self.raw.stream(chunk_size, decode_content=True)
+  File "D:\softwares\Lib\site-packages\urllib3\response.py", line 1091, in stream
+    data = self.read(amt=amt, decode_content=decode_content)
+  File "D:\softwares\Lib\site-packages\urllib3\response.py", line 1008, in read
+    data = self._raw_read(amt)
+  File "D:\softwares\Lib\site-packages\urllib3\response.py", line 903, in _raw_read
+    with self._error_catcher():
+         ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\softwares\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "D:\softwares\Lib\site-packages\urllib3\response.py", line 803, in _error_catcher
+    raise ProtocolError(arg, e) from e
+urllib3.exceptions.ProtocolError: ('Connection broken: IncompleteRead(124138468 bytes read, 109141532 more expected)', IncompleteRead(124138468 bytes read, 109141532 more expected))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\MyData\downloads\SIH\scripts\acquire_exp021_reference.py", line 247, in <module>
+    main()
+    ~~~~^^
+  File "D:\MyData\downloads\SIH\scripts\acquire_exp021_reference.py", line 185, in main
+    for chunk in r.iter_content(chunk_size=1 << 20):
+                 ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\softwares\Lib\site-packages\requests\models.py", line 822, in generate
+    raise ChunkedEncodingError(e)
+requests.exceptions.ChunkedEncodingError: ('Connection broken: IncompleteRead(124138468 bytes read, 109141532 more expected)', IncompleteRead(124138468 bytes read, 109141532 more expected))
