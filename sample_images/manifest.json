@@ -1,0 +1,771 @@
+{
+ "built_by": "scripts/build_sample_images.py",
+ "built_utc": "2026-09-23T12:20:54Z",
+ "note": "expected results are measured by posting these exact files to the demo's own endpoints; they are live runs, not recorded stage numbers",
+ "scenarios": [
+  {
+   "id": "01_pair_registers_small_sun_change",
+   "kind": "pair",
+   "title": "Same ground, small Sun change: the pair registers",
+   "why": "Two LRO NAC frames of Mare Serenitatis 11.7 deg apart in incidence. The pair path cannot exceed INCONCLUSIVE on its own, and says why: loop closure needs a third image.",
+   "recorded": "REAL-DATA-07 rows_rd04_nue.json, B1: 1608 inliers on this edge",
+   "files": [
+    {
+     "product": "nac.m1299958135lc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 42463,
+      "sample0": 1693,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 4.28,
+     "incidence_deg": 18.22,
+     "orientation": {
+      "quarter_turns_ccw": 2,
+      "mirrored": false,
+      "jacobian_determinant": -1.1799053124312073,
+      "orientation_signature_along_cross": [
+       1,
+       -1
+      ],
+      "evaluated_at_frame_pixel": [
+       44510.5,
+       2716.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "RD04",
+     "file": "A_source_nac_i18.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 924440,
+     "sha256": "dcea390fd39eb433bde45e0837ec7284d139f686301878e66eb5f218ed49897e",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 4.1410799397069316e-07,
+      "offset": 0.04887458037049472,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    },
+    {
+     "product": "nac.m1271742202lc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 6413,
+      "sample0": 1866,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 3.72,
+     "incidence_deg": 29.95,
+     "orientation": {
+      "quarter_turns_ccw": 2,
+      "mirrored": false,
+      "jacobian_determinant": -0.8412822177126623,
+      "orientation_signature_along_cross": [
+       1,
+       -1
+      ],
+      "evaluated_at_frame_pixel": [
+       8460.5,
+       2889.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "RD04",
+     "file": "B_reference_nac_i30.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 923690,
+     "sha256": "864847e7d2777060c8101ef165cdb97eb292ea0feb2269db37aee63649fdf367",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 3.807117115256439e-07,
+      "offset": 0.03946424756614888,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    }
+   ],
+   "live_check": {
+    "endpoint": "/api/register",
+    "engine": "B1",
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "n_inliers": 926,
+    "registered_image_emitted": true,
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ],
+    "wall_s": 2.86
+   }
+  },
+  {
+   "id": "02_triplet_reaches_VERIFIED",
+   "kind": "triplet",
+   "title": "Three overlapping frames: the only path on the page to VERIFIED",
+   "why": "Upload all three (image A, B and the optional third). The three edges are estimated independently and composed around the loop; VERIFIED is returned only when the loop closes under the frozen 2.0 px line.",
+   "recorded": "EXP-012 primary triplet R4-6 (VERIFIED on all three edges)",
+   "files": [
+    {
+     "product": "nac.m1299958135lc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 42463,
+      "sample0": 1693,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 4.28,
+     "incidence_deg": 18.22,
+     "orientation": {
+      "quarter_turns_ccw": 2,
+      "mirrored": false,
+      "jacobian_determinant": -1.1799053124312073,
+      "orientation_signature_along_cross": [
+       1,
+       -1
+      ],
+      "evaluated_at_frame_pixel": [
+       44510.5,
+       2716.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "RD04",
+     "file": "A_nac_i18.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 924440,
+     "sha256": "dcea390fd39eb433bde45e0837ec7284d139f686301878e66eb5f218ed49897e",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 4.1410799397069316e-07,
+      "offset": 0.04887458037049472,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    },
+    {
+     "product": "nac.m1315225542lc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 8311,
+      "sample0": 1086,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 3.22,
+     "incidence_deg": 21.13,
+     "orientation": {
+      "quarter_turns_ccw": 0,
+      "mirrored": true,
+      "jacobian_determinant": 0.6629664238945774,
+      "orientation_signature_along_cross": [
+       -1,
+       -1
+      ],
+      "evaluated_at_frame_pixel": [
+       10358.5,
+       2109.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "RD04",
+     "file": "B_nac_i21.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 922677,
+     "sha256": "6ac7eb8107d602ce50d7990eb3b0fc3e66ca0161c2c1c9f2e66c12e9273958e8",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 4.3876437440249415e-07,
+      "offset": 0.047669911801507626,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    },
+    {
+     "product": "nac.m1271742202lc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 6413,
+      "sample0": 1866,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 3.72,
+     "incidence_deg": 29.95,
+     "orientation": {
+      "quarter_turns_ccw": 2,
+      "mirrored": false,
+      "jacobian_determinant": -0.8412822177126623,
+      "orientation_signature_along_cross": [
+       1,
+       -1
+      ],
+      "evaluated_at_frame_pixel": [
+       8460.5,
+       2889.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "RD04",
+     "file": "C_nac_i30.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 923690,
+     "sha256": "864847e7d2777060c8101ef165cdb97eb292ea0feb2269db37aee63649fdf367",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 3.807117115256439e-07,
+      "offset": 0.03946424756614888,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    }
+   ],
+   "live_check": {
+    "endpoint": "/api/register-triplet",
+    "engine": "B1",
+    "status": "VERIFIED",
+    "confidence": "moderate",
+    "loop_error_px": 0.06693814945133039,
+    "edges": [
+     {
+      "edge": "A -> B",
+      "n_inliers": 1200,
+      "pass": true
+     },
+     {
+      "edge": "B -> C",
+      "n_inliers": 1047,
+      "pass": true
+     },
+     {
+      "edge": "C -> A",
+      "n_inliers": 928,
+      "pass": true
+     }
+    ],
+    "reasons": [
+     "Correspondences are clustered: 0.174 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Loop closure agrees, but coverage is weak: trust the alignment near the correspondences more than far from them."
+    ],
+    "wall_s": 8.78
+   }
+  },
+  {
+   "id": "03_illumination_refusal",
+   "kind": "pair",
+   "title": "39.8 deg of Sun change: the verdict refuses, and draws nothing",
+   "why": "The same ground at incidence 29.95 deg and 69.76 deg. Long shadows change what the surface looks like; the system must say REJECTED and withhold the registered image rather than draw a plausible-looking wrong alignment.",
+   "recorded": "REAL-DATA-07: 0 of 3 engines register this pair; EXP-021 labels B1's estimate WRONG by 145-356 m on the related RD04 edges into this frame",
+   "files": [
+    {
+     "product": "nac.m1271742202lc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 6413,
+      "sample0": 1866,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 3.72,
+     "incidence_deg": 29.95,
+     "orientation": {
+      "quarter_turns_ccw": 2,
+      "mirrored": false,
+      "jacobian_determinant": -0.8412822177126623,
+      "orientation_signature_along_cross": [
+       1,
+       -1
+      ],
+      "evaluated_at_frame_pixel": [
+       8460.5,
+       2889.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "RD04",
+     "file": "A_source_nac_i30.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 923690,
+     "sha256": "864847e7d2777060c8101ef165cdb97eb292ea0feb2269db37aee63649fdf367",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 3.807117115256439e-07,
+      "offset": 0.03946424756614888,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    },
+    {
+     "product": "nac.m1335207975rc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 18077,
+      "sample0": 1145,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 3.66,
+     "incidence_deg": 69.76,
+     "orientation": {
+      "quarter_turns_ccw": 2,
+      "mirrored": false,
+      "jacobian_determinant": -0.8300828198797717,
+      "orientation_signature_along_cross": [
+       1,
+       -1
+      ],
+      "evaluated_at_frame_pixel": [
+       20124.5,
+       2168.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "RD04",
+     "file": "B_reference_nac_i70.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 886962,
+     "sha256": "c6ab7e720b71880289a295fee4b57032f8505b04bda284df009ef9d540660b52",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 3.799800368387183e-07,
+      "offset": 0.0034548612170781584,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    }
+   ],
+   "live_check": {
+    "endpoint": "/api/register",
+    "engine": "B1",
+    "status": "REJECTED",
+    "confidence": "none",
+    "n_inliers": 4,
+    "registered_image_emitted": false,
+    "reasons": [
+     "Too few verified correspondences: 4 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.557 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ],
+    "wall_s": 1.94
+   }
+  },
+  {
+   "id": "04_held_out_site_triplet",
+   "kind": "triplet",
+   "title": "Held-out ground (Mare Tranquillitatis): VERIFIED on a site no threshold was tuned on",
+   "why": "Frames from EXP-018's blind-validation window, ~800 km from the development site. Upload as A, B and the third image.",
+   "recorded": "EXP-018 triangle, loop 1.112 px, VERIFIED on all three edges",
+   "files": [
+    {
+     "product": "nac.m1121081627rc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 24255,
+      "sample0": 1267,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 3.42,
+     "incidence_deg": 40.06,
+     "orientation": {
+      "quarter_turns_ccw": 2,
+      "mirrored": false,
+      "jacobian_determinant": -0.738600607060027,
+      "orientation_signature_along_cross": [
+       1,
+       -1
+      ],
+      "evaluated_at_frame_pixel": [
+       26302.5,
+       2290.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "TRANQ",
+     "file": "A_nac_i40.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 934943,
+     "sha256": "b6515f82ead84af2dd827ca5a3d2aa50c6c14f5bc7f70d6934869e47ca71d3c9",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 3.0937926513604743e-07,
+      "offset": 0.02817158650471512,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    },
+    {
+     "product": "nac.m1177606647lc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 13535,
+      "sample0": 233,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 3.96,
+     "incidence_deg": 16.21,
+     "orientation": {
+      "quarter_turns_ccw": 2,
+      "mirrored": true,
+      "jacobian_determinant": 0.9766067408904504,
+      "orientation_signature_along_cross": [
+       1,
+       1
+      ],
+      "evaluated_at_frame_pixel": [
+       15582.5,
+       1256.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "TRANQ",
+     "file": "B_nac_i16.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 936339,
+     "sha256": "13aaea6ebb07b3fa9943d79b81cbf369c3d15dbdebf66188799fadf41f08e0ba",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 3.44055912796606e-07,
+      "offset": 0.04750015259254739,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    },
+    {
+     "product": "nac.m1447850428rc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 23625,
+      "sample0": 1536,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 3.54,
+     "incidence_deg": 10.88,
+     "orientation": {
+      "quarter_turns_ccw": 2,
+      "mirrored": false,
+      "jacobian_determinant": -0.7717384603300979,
+      "orientation_signature_along_cross": [
+       1,
+       -1
+      ],
+      "evaluated_at_frame_pixel": [
+       25672.5,
+       2559.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "TRANQ",
+     "file": "C_nac_i11.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 944911,
+     "sha256": "f3b47c1ff80bb126c86dacdab547673ed5021e51a39aaef7e5a2bb7b2652df17",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 3.421850911439521e-07,
+      "offset": 0.06179235206152533,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    }
+   ],
+   "live_check": {
+    "endpoint": "/api/register-triplet",
+    "engine": "B1",
+    "status": "VERIFIED",
+    "confidence": "moderate",
+    "loop_error_px": 0.5559039972954909,
+    "edges": [
+     {
+      "edge": "A -> B",
+      "n_inliers": 30,
+      "pass": true
+     },
+     {
+      "edge": "B -> C",
+      "n_inliers": 878,
+      "pass": true
+     },
+     {
+      "edge": "C -> A",
+      "n_inliers": 369,
+      "pass": true
+     }
+    ],
+    "reasons": [
+     "Correspondences are clustered: 0.237 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+     "Loop closure agrees, but coverage is weak: trust the alignment near the correspondences more than far from them."
+    ],
+    "wall_s": 6.42
+   }
+  },
+  {
+   "id": "05_cross_mission_nasa_to_jaxa",
+   "kind": "pair_kaguya",
+   "title": "Cross-mission: an LRO NAC frame onto a Kaguya (JAXA) ortho map",
+   "why": "Different agency, spacecraft, camera and decade; the Kaguya map is controlled by its own network and photometrically normalised. The pixel-size ratio between the two uploads is about 2:1 after the card's own down-sampling.",
+   "recorded": "EXP-019 arm R: this tile registers to the reference with 474 inliers (B1)",
+   "files": [
+    {
+     "product": "nac.m1212932972lc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 8014,
+      "sample0": 3016,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 4.34,
+     "incidence_deg": 45.48,
+     "orientation": {
+      "quarter_turns_ccw": 2,
+      "mirrored": false,
+      "jacobian_determinant": -1.1913691113240144,
+      "orientation_signature_along_cross": [
+       1,
+       -1
+      ],
+      "evaluated_at_frame_pixel": [
+       10061.5,
+       4039.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "RD04",
+     "file": "A_source_nac_i45.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 921826,
+     "sha256": "6e88aabdad034d2a3ad30aab0b132c186655f79c54d104162f50678e70d86ebd",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 3.1256444683432107e-07,
+      "offset": 0.026534482100894197,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    },
+    {
+     "product": "TCO_MAPS02_N21E021N18E024SC",
+     "instrument": "SELENE (Kaguya) TC Ortho Map Seamless V2.0",
+     "block_manifest": "data/manifests/exp019_tc_ortho_ref_block.json",
+     "block_crop_rows_cols": [
+      1749,
+      2384,
+      298,
+      681
+     ],
+     "gsd_m": 8.423,
+     "photometry": "normalised to i = 30 deg, e = 0 deg, alpha = 30 deg",
+     "orientation": "map projection (simple cylindrical): north up, east right",
+     "credit": "SELENE (Kaguya) Terrain Camera Ortho Map Seamless V2.0, (c) JAXA/SELENE, produced by LISM, distributed by JAXA/ISAS DARTS.",
+     "file": "B_reference_kaguya_tc_8m.png",
+     "shape": [
+      635,
+      383
+     ],
+     "bytes": 354155,
+     "sha256": "866e008e70a6434878533a45f3d64963fd5db8b10f831a1497a9189815377b55",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 6.286716483009847e-05,
+      "offset": 3.990000009536743,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    }
+   ],
+   "live_check": {
+    "endpoint": "/api/register",
+    "engine": "B1",
+    "status": "INCONCLUSIVE",
+    "confidence": "moderate",
+    "n_inliers": 455,
+    "registered_image_emitted": true,
+    "reasons": [
+     "No evidence against, but the decisive check (loop closure) was not run. A self-consistent wrong answer cannot be excluded from a single image pair -- supply a third overlapping image to settle it."
+    ],
+    "wall_s": 1.1
+   }
+  },
+  {
+   "id": "06_unrelated_ground_must_refuse",
+   "kind": "pair_kaguya",
+   "title": "Wrong ground on purpose: the system must refuse",
+   "why": "The same NAC frame against a Kaguya crop at least 25 km away. There is no correct answer, so any pass would be a false acceptance.",
+   "recorded": "EXP-019 arm N: 0 of 21 null cells pass; EXP-021 validation null: 0 of 7",
+   "files": [
+    {
+     "product": "nac.m1212932972lc",
+     "instrument": "LRO NAC",
+     "tile_window": {
+      "line0": 8014,
+      "sample0": 3016,
+      "n_lines": 4096,
+      "n_samples": 2048
+     },
+     "decimation": 4,
+     "gsd_m": 4.34,
+     "incidence_deg": 45.48,
+     "orientation": {
+      "quarter_turns_ccw": 2,
+      "mirrored": false,
+      "jacobian_determinant": -1.1913691113240144,
+      "orientation_signature_along_cross": [
+       1,
+       -1
+      ],
+      "evaluated_at_frame_pixel": [
+       10061.5,
+       4039.5
+      ],
+      "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+     },
+     "credit": "LRO NAC (LROC CDR), NASA/GSFC/Arizona State University. Tile window cut by SIIM from the archive product named in `product`.",
+     "window": "RD04",
+     "file": "A_source_nac.png",
+     "shape": [
+      1024,
+      512
+     ],
+     "bytes": 921826,
+     "sha256": "6e88aabdad034d2a3ad30aab0b132c186655f79c54d104162f50678e70d86ebd",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 3.1256444683432107e-07,
+      "offset": 0.026534482100894197,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    },
+    {
+     "product": "TCO_MAPS02_N21E021N18E024SC",
+     "instrument": "SELENE (Kaguya) TC Ortho Map Seamless V2.0",
+     "block_manifest": "data/manifests/exp019_tc_ortho_null_block.json",
+     "block_crop_rows_cols": [
+      1483,
+      2118,
+      332,
+      715
+     ],
+     "gsd_m": 8.423,
+     "photometry": "normalised to i = 30 deg, e = 0 deg, alpha = 30 deg",
+     "orientation": "map projection (simple cylindrical): north up, east right",
+     "credit": "SELENE (Kaguya) Terrain Camera Ortho Map Seamless V2.0, (c) JAXA/SELENE, produced by LISM, distributed by JAXA/ISAS DARTS.",
+     "file": "B_unrelated_kaguya_25km_away.png",
+     "shape": [
+      635,
+      383
+     ],
+     "bytes": 344598,
+     "sha256": "f89d1c888b9faaa474da90ee35ae34b8b1a1ab28e1448d4951dda9130bcc85ea",
+     "stored_value_to_reflectance": {
+      "reflectance = value * scale + offset": true,
+      "scale": 4.898146450851532e-05,
+      "offset": 3.859999895095825,
+      "clipped_at_percentiles": [
+       0.1,
+       99.9
+      ]
+     }
+    }
+   ],
+   "live_check": {
+    "endpoint": "/api/register",
+    "engine": "B1",
+    "status": "REJECTED",
+    "confidence": "none",
+    "n_inliers": 4,
+    "registered_image_emitted": false,
+    "reasons": [
+     "Too few verified correspondences: 4 (threshold 8). Near the model's degrees of freedom, a fit can match its own points exactly while being catastrophically wrong.",
+     "Correspondences are clustered: 0.628 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are."
+    ],
+    "wall_s": 0.82
+   }
+  }
+ ]
+}

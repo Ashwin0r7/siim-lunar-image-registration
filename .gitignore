@@ -21,3 +21,7 @@ experiments/**/*.raw
 src/*.egg-info/
 
 realdata/
+
+# Chandrayaan-2 sample pixels are generated locally from a PRADAN download and never
+# committed: "(c) reserved ISRO" (scripts/build_sample_images.py).
+sample_images/_local_chandrayaan2/

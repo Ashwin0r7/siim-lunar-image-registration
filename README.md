@@ -36,6 +36,18 @@ Three real cases are loaded (one that succeeds, one that fails, one control) plu
 and reports a near-zero fit residual. Comparing that case against the real failing edge is the
 fastest way to see what this project is actually about.
 
+**Try it on your own hands: [`sample_images/`](sample_images/README.md).** Six folders
+of real lunar images (LRO NAC, and Kaguya TC from JAXA), 16-bit PNG, north-up, ready to
+drop into the live card. They include a pair that registers, two three-image loops that
+reach **VERIFIED** (one on held-out ground), a NASA → JAXA cross-mission pair, and two
+pairs the system **must refuse**: a 39.8° Sun change, and deliberately unrelated ground.
+The result each one returns was measured by posting the exact files to the demo's own
+endpoint, and is recorded in `sample_images/manifest.json` with every file's provenance
+and SHA-256. On a machine with the PRADAN download, `python scripts/build_sample_images.py
+--force` also writes a **Chandrayaan-2 TMC-2 → LRO NAC** pair into
+`sample_images/_local_chandrayaan2/`. ISRO products are not redistributed, so that
+folder is git-ignored.
+
 ## How to verify the demo evidence
 
 The demonstrator's real-data figures are **read from recorded experiment
