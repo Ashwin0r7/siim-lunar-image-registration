@@ -41,6 +41,8 @@ unknown, and a knob when it is known.
 
 from __future__ import annotations
 
+import warnings
+
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 from scipy import ndimage
@@ -72,7 +74,12 @@ def block_mean(image: ArrayLike, k: int) -> NDArray[np.float64]:
     a = a[: a.shape[0] // k * k, : a.shape[1] // k * k]
     if a.size == 0:
         raise ValueError(f"image {np.asarray(image).shape} is smaller than one {k}x{k} block")
-    with np.errstate(invalid="ignore"):
+    # An all-NaN block is meant to come out NaN (a fully invalid block stays
+    # invalid). numpy reports that through warnings.warn, which np.errstate
+    # does not reach, so the one expected message is filtered here; the values
+    # are unchanged.
+    with warnings.catch_warnings(), np.errstate(invalid="ignore"):
+        warnings.filterwarnings("ignore", message="Mean of empty slice", category=RuntimeWarning)
         return np.nanmean(a.reshape(a.shape[0] // k, k, a.shape[1] // k, k), axis=(1, 3))
 
 

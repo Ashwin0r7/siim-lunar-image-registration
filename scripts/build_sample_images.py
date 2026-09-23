@@ -35,7 +35,6 @@ import argparse
 import base64
 import hashlib
 import importlib.util
-import io
 import json
 import shutil
 import sys
@@ -117,9 +116,10 @@ def nac_image(ctx) -> tuple[np.ndarray, dict]:
     return nu.image, meta
 
 
-def kaguya_crop(ctx, manifest: str, *, null_offset_rows: int | None = None) -> tuple[np.ndarray, dict]:
+def kaguya_crop(ctx, manifest: str, *, centred: bool = False) -> tuple[np.ndarray, dict]:
     """The Kaguya TC block under a NAC tile's footprint (plus margin), or, with
-    ``null_offset_rows``, a same-sized crop from the product's null block."""
+    ``centred``, a crop of the same size from the centre of the block -- used on
+    the null block, which shares no ground with the tile."""
     blk = load_map_block(manifest)
     t = ctx.tile
     l0, s0 = t["line0"], t["sample0"]
@@ -132,7 +132,7 @@ def kaguya_crop(ctx, manifest: str, *, null_offset_rows: int | None = None) -> t
     x1 = int(np.ceil(xy[:, 0].max())) + KAGUYA_MARGIN_PX
     y1 = int(np.ceil(xy[:, 1].max())) + KAGUYA_MARGIN_PX
     H, W = blk.data.shape
-    if null_offset_rows is not None:
+    if centred:
         h, w = y1 - y0, x1 - x0
         y0 = max(0, (H - h) // 2)
         x0 = max(0, (W - w) // 2)
@@ -255,14 +255,14 @@ SCENARIOS = [
             "its own network and photometrically normalised. The pixel-size ratio between the "
             "two uploads is about 2:1 after the card's own down-sampling.",
      "images": [("RD04", "nac.m1212932972lc", "A_source_nac_i45.png")],
-     "kaguya": ("exp019_tc_ortho_ref_block.json", "B_reference_kaguya_tc_8m.png", None),
+     "kaguya": ("exp019_tc_ortho_ref_block.json", "B_reference_kaguya_tc_8m.png", False),
      "recorded": "EXP-019 arm R: this tile registers to the reference with 474 inliers (B1)"},
     {"id": "06_unrelated_ground_must_refuse", "kind": "pair_kaguya",
      "title": "Wrong ground on purpose: the system must refuse",
      "why": "The same NAC frame against a Kaguya crop at least 25 km away. There is no correct "
             "answer, so any pass would be a false acceptance.",
      "images": [("RD04", "nac.m1212932972lc", "A_source_nac.png")],
-     "kaguya": ("exp019_tc_ortho_null_block.json", "B_unrelated_kaguya_25km_away.png", 1),
+     "kaguya": ("exp019_tc_ortho_null_block.json", "B_unrelated_kaguya_25km_away.png", True),
      "recorded": "EXP-019 arm N: 0 of 21 null cells pass; EXP-021 validation null: 0 of 7"},
 ]
 
@@ -289,10 +289,10 @@ def build(force: bool) -> None:
             img, meta = nac_image(ctxs[window][pdsid])
             files.append(write_png16(d / fname, img, dict(meta, window=window)))
         if "kaguya" in sc:
-            man, fname, null = sc["kaguya"]
+            man, fname, centred = sc["kaguya"]
             window, pdsid, _ = sc["images"][0]
             ctx = _contexts()[window][pdsid]           # fresh context: corners only
-            img, meta = kaguya_crop(ctx, man, null_offset_rows=null)
+            img, meta = kaguya_crop(ctx, man, centred=centred)
             files.append(write_png16(d / fname, img, meta))
         paths = [d / f["file"] for f in files]
         if sc["kind"] == "triplet":

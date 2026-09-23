@@ -4,6 +4,13 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>SIIM — Register only when the evidence agrees</title>
+<meta name="description" content="Lunar image registration for Chandrayaan-2 and LRO NAC that reports what it can verify, what it can only corroborate, and what it cannot see. Every number is read from a recorded artefact."/>
+<meta name="theme-color" content="#0b0d10"/>
+<meta name="color-scheme" content="dark"/>
+<meta property="og:title" content="SIIM — Register only when the evidence agrees"/>
+<meta property="og:description" content="Chandrayaan-2 and LRO NAC registration with a verdict that refuses what it cannot verify. SIH 2026, ISRO PS 26166."/>
+<meta property="og:type" content="website"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0d10'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23eceff2' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%234f95ee'/%3E%3C/svg%3E"/>
 <style>
 /* --------------------------------------------------------------------------
    Colour roles.
@@ -61,7 +68,7 @@ img,svg,canvas{max-width:100%}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 button{font:inherit;color:inherit}
 .skip{position:absolute;left:-9999px;top:8px;z-index:100;background:var(--ink);
-  color:var(--bg);padding:8px 12px;font:600 12px/1 var(--mono);letter-spacing:.1em;
+  color:var(--bg);padding:13px 14px;font:600 12px/1 var(--mono);letter-spacing:.1em;
   text-transform:uppercase;text-decoration:none}
 .skip:focus{left:16px}
 
@@ -85,13 +92,16 @@ button{font:inherit;color:inherit}
   border-bottom:1px solid var(--rule)}
 .top .wrap{display:flex;align-items:center;gap:28px;height:var(--topbar)}
 .brand{font:600 15px/1 var(--sans);letter-spacing:.24em;text-decoration:none;
-  color:var(--ink);flex:0 0 auto}
-.top nav{display:flex;gap:22px;flex:1;min-width:0;overflow-x:auto;
+  color:var(--ink);flex:0 0 auto;padding:12px 0;min-height:40px;display:inline-flex;align-items:center}
+.top nav{display:flex;gap:14px;flex:1;min-width:0;overflow-x:auto;
   scrollbar-width:none;-ms-overflow-style:none}
 .top nav::-webkit-scrollbar{display:none}
 .top nav a{font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink-3);text-decoration:none;white-space:nowrap;padding:8px 0}
+  color:var(--ink-3);text-decoration:none;white-space:nowrap;padding:8px 4px}
 .top nav a:hover{color:var(--ink)}
+/* the nav is a horizontal scroller, which clips an outline drawn outside a
+   link; draw the focus ring inside it so a keyboard user sees all four sides */
+.top nav a:focus-visible{outline-offset:-1px;color:var(--ink)}
 .ind{margin-left:auto;flex:0 0 auto;font:500 10.5px/1 var(--mono);
   letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
 .ind::before{content:"";display:inline-block;width:6px;height:6px;
@@ -106,7 +116,7 @@ html{scroll-padding-top:calc(var(--topbar) + 14px)}
    instead of being cut mid-word. */
 @media (max-width:1680px){
   .top .wrap{gap:20px}
-  .top nav{gap:16px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);
+  .top nav{gap:8px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);
     mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);padding-right:30px}
   .top nav a{letter-spacing:.07em}
   .ind{max-width:230px;overflow:hidden;text-overflow:ellipsis}
@@ -178,7 +188,7 @@ button.case::before{content:"";position:absolute;left:0;top:-1px;bottom:0;width:
   background:transparent}
 button.case.active{color:var(--ink)}
 button.case.active::before{background:var(--accent)}
-button.case .badge{display:block;font:500 9.5px/1 var(--mono);letter-spacing:.14em;
+button.case .badge{display:block;font:500 10.5px/1 var(--mono);letter-spacing:.12em;
   text-transform:uppercase;margin-bottom:6px;color:var(--ink-3)}
 .badge.real{color:var(--accent)}
 button.case .t{font-size:14px;font-weight:500;line-height:1.3;letter-spacing:-.005em}
@@ -417,7 +427,8 @@ ul.caveats li{margin-bottom:6px;line-height:1.5}
 .drop{position:relative;border:1px dashed var(--rule-2);background:var(--bg-2);
   min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;padding:16px;cursor:pointer;transition:border-color .15s,background .15s}
-.drop:hover,.drop:focus-visible{border-color:var(--ink-3);background:var(--bg-3);outline:none}
+.drop:hover,.drop:focus-visible{border-color:var(--ink-3);background:var(--bg-3)}
+.drop:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .drop.over{border-color:var(--accent);background:var(--accent-soft);border-style:solid}
 .drop.filled{border-style:solid;border-color:var(--rule-2);justify-content:flex-start;cursor:default}
 .drop .role{font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
@@ -480,6 +491,7 @@ ul.caveats li{margin-bottom:6px;line-height:1.5}
 .subhead .lab{font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
   color:var(--ink-3)}
 .tscroll{scrollbar-width:thin;scrollbar-color:var(--rule-2) transparent}
+@media (max-width:760px){.tscroll>table{width:max-content;min-width:100%}.tscroll>table td,.tscroll>table th{max-width:300px}}
 .runrow{display:grid;grid-template-columns:minmax(220px,1fr) minmax(150px,200px) auto;gap:16px 16px;
   align-items:end;margin-top:18px}
 .runrow #live-cancel{border-color:var(--fail);color:var(--fail)}
@@ -562,8 +574,8 @@ footer.foot b{color:var(--ink-2);font-weight:500}
       and refuses to certify an alignment on a fit residual alone.</p>
     <div class="herocta">
       <button class="ctabtn" id="hero-live">Register two images of your own</button>
-      <span class="ctanote lab">drag, click or paste · or start from a recorded pair ·
-        runs on this machine, in the request</span>
+      <span class="ctanote lab">drag, click or paste · or load one of the real lunar sample
+        sets · runs on this machine, in the request</span>
     </div>
     <div class="hmeta lab" id="provline">Every number on this page is read from a recorded
       artefact on real LRO NAC / Chandrayaan-2 data. No synthetic data appears on this page.
@@ -606,6 +618,10 @@ footer.foot b{color:var(--ink-2);font-weight:500}
 <script>
 "use strict";
 const $ = s => document.querySelector(s);
+// Smooth only when the reader has not asked for reduced motion and the tab is
+// visible -- Chrome defers a smooth scroll in a hidden tab (measured 2026-09-23).
+const smoothOrInstant = () =>
+  (document.hidden || matchMedia("(prefers-reduced-motion: reduce)").matches) ? "auto" : "smooth";
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g,
   c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fx = (v, n = 2) => (v == null || !isFinite(v)) ? "—" : (+v).toFixed(n);
@@ -2109,12 +2125,13 @@ async function runLive() {
     const v = out.querySelector(".verdict");
     // Instant when the tab is hidden: Chrome defers a smooth scroll there
     // (measured 2026-09-23), so the reader returned to a result off screen.
-    if (v && v.scrollIntoView) v.scrollIntoView({behavior: document.hidden ? "auto" : "smooth",
-                                                 block: "center"});
+    if (v && v.scrollIntoView) v.scrollIntoView({behavior: smoothOrInstant(), block: "center"});
     liveStatus(triplet
       ? `Done in <b>${(+d.timing.wall_s).toFixed(1)} s</b> · three edges · loop ` +
         `<b>${d.loop_error_px === null ? "not evaluable" : sci(d.loop_error_px) + " px"}</b> ` +
-        `against ${d.loop_reject_threshold_px} px · verdict <b>${esc(d.verdict.status)}</b>`
+        `against ${d.loop_reject_threshold_px} px · verdict <b>${esc(d.verdict.status)}</b>` +
+        (engine === "both" ? " · ran on <b>RootSIFT</b>: the three-image path uses one engine, " +
+          "and “Both” applies to pairs" : "")
       : `Done in <b>${(+d.timing.wall_s).toFixed(1)} s</b> · ` +
         `${d.summary.n_inliers} inliers of ${d.summary.n_putative} putative · ` +
         `verdict <b>${esc(d.verdict.status)}</b>`, false, false);
@@ -2336,7 +2353,7 @@ function wireLiveResult(d, triplet) {
       paintSlot(id);
     });
     $("#live-out").innerHTML = "";
-    document.getElementById("drop-src").scrollIntoView({behavior: "smooth", block: "center"});
+    document.getElementById("drop-src").scrollIntoView({behavior: smoothOrInstant(), block: "center"});
   };
   if (!triplet) drawLiveCorrespondences(d);
 }

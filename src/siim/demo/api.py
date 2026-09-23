@@ -63,12 +63,12 @@ from siim.demo.chandrayaan2 import (  # noqa: E402
     chandrayaan2_status,
 )
 from siim.demo.exp006 import exp006_evidence, exp006_status  # noqa: E402
-from siim.demo.exp012 import exp012_evidence, exp012_status  # noqa: E402
+from siim.demo.exp012 import exp012_evidence  # noqa: E402
 from siim.demo.exp013 import exp013_evidence, exp013_status  # noqa: E402
-from siim.demo.exp016 import exp016_evidence, exp016_status  # noqa: E402
-from siim.demo.exp017 import exp017_evidence, exp017_status  # noqa: E402
-from siim.demo.exp019 import exp019_evidence, exp019_status  # noqa: E402
-from siim.demo.exp020 import exp020_evidence, exp020_status  # noqa: E402
+from siim.demo.exp016 import exp016_evidence  # noqa: E402
+from siim.demo.exp017 import exp017_evidence  # noqa: E402
+from siim.demo.exp019 import exp019_evidence  # noqa: E402
+from siim.demo.exp020 import exp020_evidence  # noqa: E402
 from siim.demo.evidence import (  # noqa: E402
     INLIER_FAILURE_RULE,
     REAL_SCENARIOS,
@@ -86,10 +86,13 @@ from siim.demo.verdict import (  # noqa: E402
 )
 from siim.evaluation import correspondence_metrics  # noqa: E402
 from siim.evaluation.gtfree import loop_closure  # noqa: E402
-from siim.geometry import Transform, affine, anchor_at, image_centre, translation  # noqa: E402
+from siim.geometry import affine, anchor_at, image_centre, translation  # noqa: E402
 
-app = FastAPI(title="SIIM — Sun-angle Invariant Image Matching",
-              version="0.1.0-demo")
+# The interactive /docs and /redoc pages load Swagger UI and ReDoc from a CDN,
+# which would break the page's promise of no external request, and they are a
+# debug surface a deployment does not need. The schema stays at /openapi.json.
+app = FastAPI(title="SIIM — Satellite / Lunar Image Integrity & Matching",
+              version="0.1.0-demo", docs_url=None, redoc_url=None)
 
 STATIC = Path(__file__).resolve().parent / "static"
 ASSETS = Path(__file__).resolve().parent / "assets"
@@ -963,6 +966,29 @@ def sample_file(scenario: str, name: str, thumb: bool = False):
                                 headers={"Cache-Control": "max-age=3600"})
             return FileResponse(path, media_type="image/png")
     raise HTTPException(404, "not a sample file")
+
+
+#: The page's icon, also referenced inline by index.html. Served here too so a
+#: client that ignores <link rel=icon> gets an icon instead of a logged 404.
+FAVICON_SVG = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">'
+               '<rect width="32" height="32" fill="#0b0d10"/>'
+               '<circle cx="16" cy="16" r="9" fill="none" stroke="#eceff2" stroke-width="2"/>'
+               '<circle cx="16" cy="16" r="2.5" fill="#4f95ee"/></svg>')
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    from fastapi.responses import Response
+    return Response(FAVICON_SVG, media_type="image/svg+xml",
+                    headers={"Cache-Control": "max-age=86400"})
+
+
+@app.get("/robots.txt", include_in_schema=False)
+def robots():
+    """The page may be indexed; the API and the raw artefacts it serves may not."""
+    from fastapi.responses import PlainTextResponse
+    return PlainTextResponse("User-agent: *\nDisallow: /api/\nDisallow: /artefact/\n"
+                             "Disallow: /samples/\n")
 
 
 @app.get("/")
