@@ -37,6 +37,7 @@ from __future__ import annotations
 
 import base64
 import io
+import json
 import sys
 import time
 from functools import lru_cache
@@ -874,6 +875,69 @@ def run(req: RunRequest) -> dict:
                    "match_s": res.runtime["match_s"],
                    "ransac_s": res.runtime["ransac_s"]},
     }
+
+
+# ---------------------------------------------------------------------------
+# real lunar sample sets for the live card (sample_images/)
+# ---------------------------------------------------------------------------
+
+SAMPLES = ROOT / "sample_images"
+SAMPLES_LOCAL = SAMPLES / "_local_chandrayaan2"
+
+
+def _sample_scenarios() -> list[dict]:
+    """The scenarios ``scripts/build_sample_images.py`` recorded: the local-only
+    Chandrayaan-2 pair first when this machine built one, then the committed sets."""
+    out: list[dict] = []
+    loc = SAMPLES_LOCAL / "manifest.json"
+    if loc.exists():                  # the Chandrayaan-2 pair leads when this machine has one
+        rec = json.loads(loc.read_text(encoding="utf-8"))
+        out.append(dict(rec, kind="pair", local_only=True))
+    man = SAMPLES / "manifest.json"
+    if man.exists():
+        out.extend(json.loads(man.read_text(encoding="utf-8"))["scenarios"])
+    return out
+
+
+@app.get("/api/samples")
+def samples() -> dict:
+    """Real lunar sample sets a reader can load into the live card in one click.
+
+    Every expected outcome is the ``live_check`` the build script measured by
+    posting these exact files to this server's own endpoints -- a live result,
+    labelled as one, not a recorded stage number.
+    """
+    scen = _sample_scenarios()
+    if not scen:
+        return {"available": False,
+                "reason": "sample_images/ not built -- python scripts/build_sample_images.py"}
+    items = []
+    for s in scen:
+        files = [{"file": f["file"], "url": f"/samples/{s['id']}/{f['file']}",
+                  "instrument": f.get("instrument"), "product": f.get("product"),
+                  "gsd_m": f.get("gsd_m"), "incidence_deg": f.get("incidence_deg"),
+                  "shape": f.get("shape"), "credit": f.get("credit")} for f in s["files"]]
+        live = s["live_check"]
+        items.append({"id": s["id"], "title": s["title"], "why": s["why"],
+                      "kind": "triplet" if live["endpoint"].endswith("triplet") else "pair",
+                      "local_only": bool(s.get("local_only")), "files": files,
+                      "measured": {k: live.get(k) for k in
+                                   ("status", "confidence", "n_inliers", "loop_error_px",
+                                    "registered_image_emitted")},
+                      "recorded": s.get("recorded")})
+    return {"available": True, "computation": "live, measured when the folder was built",
+            "folder": "sample_images/", "scenarios": items}
+
+
+@app.get("/samples/{scenario}/{name}")
+def sample_file(scenario: str, name: str) -> FileResponse:
+    """One sample image, and only one the manifest names -- an allow-list, not
+    a directory mount, for the same reason ``/artefact`` is one."""
+    for s in _sample_scenarios():
+        if s["id"] == scenario and any(f["file"] == name for f in s["files"]):
+            base = SAMPLES_LOCAL if s.get("local_only") else SAMPLES / scenario
+            return FileResponse(base / name, media_type="image/png")
+    raise HTTPException(404, "not a sample file")
 
 
 @app.get("/")

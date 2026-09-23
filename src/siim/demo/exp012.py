@@ -25,6 +25,23 @@ EXP012_ARTEFACT = EXPERIMENTS / "EXP-012" / "exp012_results.json"
 
 EXP012_SOURCES = ["experiments/EXP-012/exp012_results.json"]
 
+#: EXP-021 -- the same verdict scored against another mission's reference. Its
+#: two artefacts join this panel's sources only when both are on disk, so the
+#: allow-list and the page cannot disagree about what is advertised.
+EXP021_ARTEFACT = EXPERIMENTS / "EXP-021" / "exp021_results.json"
+EXP021_TIER_AB = EXPERIMENTS / "EXP-021" / "exp021_s5_tier_ab_reading.json"
+EXP021_SOURCES = ["experiments/EXP-021/exp021_results.json",
+                  "experiments/EXP-021/exp021_s5_tier_ab_reading.json"]
+
+EXP021_NOT_CLAIMED = [
+    "NOT a false-acceptance rate: at the frozen ground truth no wrong transform existed "
+    "to be accepted (FAR undefined, E-058). 0 of 12 counts VERIFIED edges that were right.",
+    "NOT a held-out result: the independent reference reached 2 of 7 frames on the "
+    "held-out site, so that reading is NOT EVALUABLE.",
+    "NOT surveyed ground truth: correct means agreeing with the Kaguya TC ortho mosaic "
+    "(JAXA) to 8.42 m, through a chain that uses no correspondence between the two images.",
+]
+
 EXP012_SUMMARY = (
     "Thirteen real triplets, thirteen VERIFIED -- and not one threshold was "
     "changed to get there. The strictest verdict this system ships is "
@@ -41,7 +58,8 @@ EXP012_SCOPE = (
 EXP012_NOT_CLAIMED = [
     "NOT an accuracy claim: loop closure is exactly invariant to per-image "
     "gauge error (ADR-0011 N1), so a closing loop verifies the transform set "
-    "only up to that gauge. No ground truth exists for these pairs.",
+    "only up to that gauge. No surveyed ground truth exists for these pairs; "
+    "the independent check above is another mission's product, not survey.",
     "NOT evidence that every contributing edge is strong: S2 was refuted. A "
     "9-inlier edge at 39.8 deg sits in a triplet closing at 1.15 px.",
     "NOT a verdict false-acceptance rate: triplet admissibility required "
@@ -135,5 +153,44 @@ def exp012_evidence() -> dict[str, Any]:
         "summary": EXP012_SUMMARY,
         "scope": EXP012_SCOPE,
         "not_claimed": EXP012_NOT_CLAIMED,
-        "sources": list(EXP012_SOURCES),
+        "independent_check": _exp021_block(),
+        "sources": list(EXP012_SOURCES) + (EXP021_SOURCES if _exp021_present() else []),
+    }
+
+
+def _exp021_present() -> bool:
+    return EXP021_ARTEFACT.exists() and EXP021_TIER_AB.exists()
+
+
+def _exp021_block() -> dict[str, Any] | None:
+    """EXP-021's scoring of this same verdict, read from its artefacts, or None.
+
+    Every figure below is a field of ``exp021_results.json`` or
+    ``exp021_s5_tier_ab_reading.json``; nothing is computed here except the
+    median and maximum of the recorded per-edge errors.
+    """
+    if not _exp021_present():
+        return None
+    doc = _read(EXP021_ARTEFACT, "EXP-021 results", require=("criteria", "reported_beside"))
+    ab = _read(EXP021_TIER_AB, "EXP-021 tier A u B reading", require=("summary",))
+    crit = doc["criteria"]
+    pooled = crit["primary_rates_b1_L2"]["pooled"]
+    errs = sorted(float(e["e_m"]) for e in doc["reported_beside"]["verified_edge_errors"])
+    n = len(errs)
+    med = (errs[n // 2] if n % 2 else 0.5 * (errs[n // 2 - 1] + errs[n // 2])) if n else None
+    abp = ab["summary"]["V+C|pooled"]
+    return {
+        "stage": "EXP-021",
+        "reference": "SELENE (Kaguya) TC Ortho Map Seamless V2, 8.42 m, JAXA",
+        "correct_line_m": 8.42, "wrong_line_m": 25.3,
+        "fdr": pooled["FDR"], "frr": pooled["FRR"], "far_n": pooled["FAR"]["n"],
+        "s2_reads": crit["S2"]["reads"], "s3_reads": crit["S3"]["reads"],
+        "heldout_frames_tier_a": crit["S1"]["v_frames_tier_A"], "heldout_frames": 7,
+        "withdraw_verified": bool(crit["S2"]["withdraw_verified_under_SS54"]),
+        "verified_error_m": {"n": n, "median": med, "max": errs[-1] if errs else None},
+        "tier_ab": {"verified": abp["verified"], "verified_wrong": abp["verified_wrong"],
+                    "verified_ambiguous": abp["verified_ambiguous"],
+                    "wrong_total": abp["wrong_total"], "hard_negatives": abp["hard_negatives"],
+                    "max_inliers_on_a_wrong_edge": abp["max_inliers_on_a_wrong_edge"]},
+        "not_claimed": EXP021_NOT_CLAIMED,
     }

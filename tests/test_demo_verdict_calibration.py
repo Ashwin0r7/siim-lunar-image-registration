@@ -103,3 +103,59 @@ def test_the_endpoint_serves_the_same_structure(ev):
     got = r.json()
     assert got["n_all_verified"] == ev["n_all_verified"]
     assert got["s2"]["met"] is False
+
+
+# ---------------------------------------------------------------------------
+# EXP-021 inside module 02: the same verdict against another mission's reference
+# ---------------------------------------------------------------------------
+
+def test_the_independent_check_is_read_from_exp021_and_carries_its_vacuity(ev):
+    ic = ev["independent_check"]
+    if ic is None:
+        pytest.skip("EXP-021 artefacts absent")
+    doc = json.loads((api.ROOT / "experiments/EXP-021/exp021_results.json").read_text(encoding="utf-8"))
+    pooled = doc["criteria"]["primary_rates_b1_L2"]["pooled"]
+    assert ic["fdr"] == pooled["FDR"] and ic["frr"] == pooled["FRR"]
+    assert ic["far_n"] == 0                                   # the vacuity must travel with the zeros
+    assert "NOT EVALUABLE" in ic["s2_reads"]
+    assert "experiments/EXP-021/exp021_results.json" in ev["sources"]
+    assert all(line.startswith("NOT ") for line in ic["not_claimed"])
+
+
+def test_the_independent_check_renders_under_node_with_its_negatives(ev, page):
+    import os
+    import re
+    import subprocess
+    import tempfile
+    from pathlib import Path
+
+    ic = ev["independent_check"]
+    if ic is None:
+        pytest.skip("EXP-021 artefacts absent")
+    node = next((n for n in (r"C:\Program Files\nodejs\node.exe", "/usr/bin/node")
+                 if Path(n).exists()), None)
+    if node is None:
+        pytest.skip("node is not available on this machine")
+    script = max(re.findall(r"<script>(.*?)</script>", page, re.S), key=len)
+    start = script.index("function independentCheck")
+    fn = script[start:script.index("\nfunction ", start + 10)]
+    harness = (
+        "const esc = s => String(s === undefined || s === null ? '' : s);\n"
+        "const st = (w, k) => `<span class=\"st st-${k}\">${esc(w)}</span>`;\n"
+        "const notClaimed = l => l.map(x => `<li>${esc(x)}</li>`).join('');\n"
+        f"{fn}\nconst out = independentCheck({json.dumps(ic)});\n"
+        # the panel's own prose says "undefined" (the FAR is), so look for a RENDERED
+        # undefined -- beside a tag or a unit, the way a missing field would appear
+        "if (/>undefined|undefined<|undefined (m|px|%)|NaN|\\[object/.test(out)) {"
+        " console.error(out.slice(0, 500)); process.exit(2); }\n"
+        "console.log(out);\n")
+    with tempfile.TemporaryDirectory() as t:
+        f = Path(t) / "ic.js"
+        f.write_text(harness, encoding="utf-8")
+        r = subprocess.run([node, str(f)], capture_output=True, text=True, env={**os.environ},
+                           encoding="utf-8")
+    assert r.returncode == 0, r.stderr[-600:]
+    out = r.stdout
+    for frag in ("NOT EVALUABLE", "NOT MET", "E-058", f"{ic['fdr']['k']} <small>/ {ic['fdr']['n']}</small>",
+                 "not demonstrated", f"{ic['tier_ab']['verified_ambiguous']}"):
+        assert frag in out, frag

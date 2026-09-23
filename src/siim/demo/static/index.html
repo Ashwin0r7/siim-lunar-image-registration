@@ -434,6 +434,38 @@ ul.caveats li{margin-bottom:6px;line-height:1.5}
   font:400 12px/1.3 var(--sans);padding:8px 11px;text-align:left}
 .exbtn:hover{border-color:var(--ink-2);color:var(--ink)}
 .exbtn small{display:block;font:400 10.5px/1.4 var(--mono);color:var(--ink-3);margin-top:2px}
+.multibtn{border:1px dashed var(--rule-2);color:var(--ink-2);cursor:pointer;
+  font:400 12px/1.3 var(--sans);padding:8px 11px}
+.multibtn:hover{border-color:var(--ink-2);color:var(--ink)}
+.multibtn small{display:block;font:400 10.5px/1.4 var(--mono);color:var(--ink-3);margin-top:2px}
+.samples{margin-top:22px;border-top:1px solid var(--rule);padding-top:16px}
+.samphead{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;margin-bottom:12px}
+.samphead .lab{font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
+  color:var(--ink-3)}
+.sampnote{font-size:12px;color:var(--ink-3);line-height:1.45;max-width:70ch}
+.sampgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.sampbtn{display:flex;flex-direction:column;gap:6px;text-align:left;cursor:pointer;
+  background:var(--bg-2);border:1px solid var(--rule-2);color:var(--ink);padding:12px 13px;
+  min-height:128px;transition:border-color .12s}
+.sampbtn:hover{border-color:var(--ink-2)}
+.sampbtn.on{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.sampbtn .sk{font:500 10px/1.3 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
+  color:var(--ink-3)}
+.sampbtn .sk .loc{color:var(--ink-2);font-weight:500}
+.sampbtn .stt{font:500 13.5px/1.3 var(--sans);color:var(--ink)}
+.sthumbs{display:flex;gap:4px;height:58px}
+.sthumbs img{flex:1 1 0;min-width:0;height:58px;object-fit:cover;border:1px solid var(--rule);
+  filter:grayscale(1);background:#000}
+.sampbtn .si{font:400 11px/1.35 var(--mono);color:var(--ink-3)}
+.sampbtn .sm{margin-top:auto;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.sampbtn .sd{font:400 11px/1.3 var(--mono);color:var(--ink-3)}
+.vb{font:600 10.5px/1 var(--mono);letter-spacing:.08em;padding:3px 6px;border:1px solid currentColor}
+.vb.v-VERIFIED{color:var(--accent)} .vb.v-REJECTED{color:var(--fail)}
+.vb.v-INCONCLUSIVE{color:var(--ink-2)}
+.subhead{margin:30px 0 10px;padding-top:18px;border-top:1px solid var(--rule)}
+.subhead .lab{font:500 10.5px/1 var(--mono);letter-spacing:var(--track);text-transform:uppercase;
+  color:var(--ink-3)}
+.tscroll{scrollbar-width:thin;scrollbar-color:var(--rule-2) transparent}
 .runrow{display:grid;grid-template-columns:minmax(220px,1fr) minmax(150px,200px) auto;gap:16px 16px;
   align-items:end;margin-top:18px}
 .runrow #live-cancel{border-color:var(--fail);color:var(--fail)}
@@ -597,6 +629,24 @@ const unavailable = (id, num, lab, q, ep) => mod(id, modHead(num, lab, q, ""),
 let SCEN = [], current = null, firstRender = true;
 
 /* ------------------------------------------------------------------ boot */
+// Every table sits in a horizontal scroller. Panels build their tables as
+// strings and several are wider than the 9-column body at 1440 px; measured
+// in a real browser on 2026-09-23, tables in modules 03 and 05-11 ran up to
+// 170 px past the column and were clipped by the page's overflow-x:hidden,
+// silently hiding their right-most columns. Wrapping in one place covers
+// every present and future panel, and case switches, without touching them.
+function wrapTables(root) {
+  root.querySelectorAll("table").forEach(t => {
+    const p = t.parentElement;
+    if (!p || p.classList.contains("tscroll")) return;
+    const w = document.createElement("div");
+    w.className = "tscroll";
+    p.insertBefore(w, t);
+    w.appendChild(t);
+  });
+}
+new MutationObserver(() => wrapTables(document)).observe(document.body, {childList: true, subtree: true});
+
 Promise.all([
   fetch("/api/scenarios").then(r => r.json()),
   fetch("/api/evidence/illumination").then(r => r.ok ? r.json() : null).catch(() => null),
@@ -1208,9 +1258,54 @@ function verdictCalibrationPanel(vm) {
       The project's own success criterion asks for ≤ ${vc.coverage.warn} on every VERIFIED pair, so producing VERIFIED pairs
       immediately showed that criterion failing. It is reported, not retuned. ${st("NOT MET", "fail")}</div>
 
+    ${independentCheck(vc.independent_check)}
+
     <div class="note" style="margin-top:14px"><b>Scope of this evidence:</b> ${esc(vc.scope)}</div>
     ${notClaimed(vc.not_claimed)}
     <div class="srcline"><b>sources:</b> ${srcLinks(vc.sources)}</div>`);
+}
+
+/* EXP-021, inside module 02 rather than as an eleventh module: it scores this
+   same verdict against another mission's reference. The first question a
+   scientist asks of VERIFIED is "how often is it wrong?", and the honest answer
+   has three parts that must stay together -- never caught wrong at 25 m, not
+   evaluable on the held-out site, and never tested against a wrong transform
+   where the frozen ground truth could see one. */
+function independentCheck(ic) {
+  if (!ic) return "";
+  const pct = x => (100 * +x).toFixed(1) + " %";
+  const ab = ic.tier_ab;
+  const e = ic.verified_error_m;
+  return `
+    <div class="subhead"><span class="lab">Scored against another mission's reference · ${esc(ic.stage)}</span></div>
+    <div class="note">Every recorded edge was labelled by composing <span class="code">A → Kaguya → B</span>,
+      a chain that uses <b>no correspondence between A and B</b>: correct ≤ ${ic.correct_line_m} m,
+      wrong > ${ic.wrong_line_m} m. Reference: ${esc(ic.reference)}.</div>
+    <div class="tiles">
+      <div class="tile good"><div class="lab">VERIFIED and wrong</div>
+        <div class="val">${ic.fdr.k} <small>/ ${ic.fdr.n}</small></div>
+        <div class="note">B1 · CI95 up to ${pct(ic.fdr.ci95[1])} — not demonstrated below 5 %</div></div>
+      <div class="tile good"><div class="lab">correct but not VERIFIED</div>
+        <div class="val">${ic.frr.k} <small>/ ${ic.frr.n}</small></div>
+        <div class="note">CI95 up to ${pct(ic.frr.ci95[1])} against a 20 % line</div></div>
+      <div class="tile good"><div class="lab">VERIFIED error on the ground</div>
+        <div class="val">${(+e.median).toFixed(2)}<small> m</small></div>
+        <div class="note">median of ${e.n} edges · max ${(+e.max).toFixed(2)} m</div></div>
+      <div class="tile bad"><div class="lab">held-out site</div>
+        <div class="val word">NOT EVALUABLE</div>
+        <div class="note">reference reached ${ic.heldout_frames_tier_a} of ${ic.heldout_frames} frames</div></div>
+    </div>
+    <div class="note call fail">
+      <b>Why the zeros are not reassurance.</b> At the frozen ground truth every labelled edge was correct and
+      <b>${ic.far_n} wrong transforms</b> were in the population, so a false-acceptance rate is undefined: the
+      frames the reference could place are the frames whose edges succeed (E-058). Admitting single-engine
+      reference legs finds the negatives: <b>${ab.wrong_total} wrong edges</b>, all but ${ab.hard_negatives} stopped by
+      the inlier rule (the most inliers on any wrong edge: ${ab.max_inliers_on_a_wrong_edge}), and
+      <b>${ab.verified_wrong} of ${ab.verified}</b> VERIFIED engine-edges wrong — but <b>${ab.verified_ambiguous}</b> of them sit
+      between 8.4 and 25 m, where leg noise and a per-image error look the same. §53 criterion 3 reads
+      <i>${esc(ic.s2_reads)}</i> and stays ${st("NOT MET", "fail")}.
+      ${ic.withdraw_verified ? "" : "The pre-registered withdrawal line (FDR above 10 %) was not crossed, so VERIFIED stays."}</div>
+    ${notClaimed(ic.not_claimed)}`;
 }
 
 /* The panel that shows the project's own worst finding beside its best one.
@@ -1635,6 +1730,19 @@ function liveCard() {
         <small>${esc(LIVE_EXAMPLES.match.sub)}</small></button>
       <button class="exbtn" data-example="cross">${esc(LIVE_EXAMPLES.cross.label)}
         <small>${esc(LIVE_EXAMPLES.cross.sub)}</small></button>
+      <label class="multibtn" title="pick two or three files at once; they fill the slots in filename order">
+        Load several files<small>A, B (and C) fill in name order</small>
+        <input type="file" id="live-multi" accept="image/*" multiple hidden></label>
+    </div>
+
+    <div class="samples" id="live-samples" hidden>
+      <div class="samphead">
+        <span class="lab">Real lunar sample sets · <span class="code">sample_images/</span></span>
+        <span class="sampnote">Real archive images, north-up, 16-bit. The outcome on each card
+          was measured by posting these exact files to this server when the folder was built —
+          a live result, not a recorded stage number.</span>
+      </div>
+      <div class="sampgrid" id="live-samples-grid"></div>
     </div>
 
     <div class="runrow">
@@ -1762,7 +1870,108 @@ async function loadExample(which) {
   }
 }
 
+/* ------------------------------------------------- real lunar sample sets
+   sample_images/ holds real archive images cut for this card. Each set is
+   loaded straight into the slots (a three-image set fills the third slot, so
+   loop closure runs), and each card states in advance what the live pipeline
+   returned on those exact files when the folder was built -- including the two
+   sets built to be REFUSED. */
+let SAMPLES = null;
+
+async function loadSamplesIndex() {
+  if (SAMPLES) return SAMPLES;
+  try {
+    const r = await fetch("/api/samples");
+    SAMPLES = r.ok ? await r.json() : {available: false};
+  } catch (e) {
+    SAMPLES = {available: false};
+  }
+  return SAMPLES;
+}
+
+function sampleCard(s) {
+  const m = s.measured || {};
+  const inst = [...new Set(s.files.map(f => (f.instrument || "").split(" (")[0]))].join(" → ");
+  const detail = m.loop_error_px != null ? `loop ${sci(m.loop_error_px)} px`
+    : (m.n_inliers != null ? `${m.n_inliers} inliers` : "");
+  const drawn = m.status === "REJECTED" && m.registered_image_emitted === false
+    ? " · nothing drawn" : "";
+  return `
+    <button class="sampbtn" data-sample="${esc(s.id)}" title="${esc(s.why)}">
+      <span class="sk">${s.kind === "triplet" ? "3 images · loop closure" : "2 images"}${
+        s.local_only ? ' · <b class="loc">local only · © ISRO</b>' : ""}</span>
+      <span class="sthumbs">${s.files.map(f => `<img src="${esc(f.url)}" alt="" loading="lazy">`).join("")}</span>
+      <span class="stt">${esc(s.title)}</span>
+      <span class="si">${esc(inst)}</span>
+      <span class="sm"><span class="vb v-${esc(m.status || "")}">${esc(m.status || "?")}</span>
+        <span class="sd">${esc(detail + drawn)}</span></span>
+    </button>`;
+}
+
+async function paintSamples() {
+  const box = $("#live-samples"), grid = $("#live-samples-grid");
+  if (!box || !grid) return;
+  const d = await loadSamplesIndex();
+  if (!d || !d.available || !(d.scenarios || []).length) return;
+  grid.innerHTML = d.scenarios.map(sampleCard).join("");
+  box.hidden = false;
+  grid.querySelectorAll("[data-sample]").forEach(b => { b.onclick = () => loadSample(b.dataset.sample); });
+}
+
+async function fetchAsFile(url) {
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(url + " -> " + resp.status);
+  const blob = await resp.blob();
+  return new File([blob], url.split("/").pop(), {type: blob.type || "image/png"});
+}
+
+// Two files fill source and reference and clear the third slot; three fill all
+// three. Order is the order given, which callers make the filename order.
+async function fillSlots(files) {
+  const ids = ["src", "ref", "thr"];
+  const ok = [];
+  for (let i = 0; i < Math.min(3, files.length); i++) ok.push(await setSlot(ids[i], files[i]));
+  if (files.length === 2) { LIVE.thr = null; paintSlot("thr"); }
+  return ok.every(Boolean);
+}
+
+async function loadSample(id) {
+  const d = await loadSamplesIndex();
+  const s = (d.scenarios || []).find(x => x.id === id);
+  if (!s) return;
+  document.querySelectorAll(".sampbtn").forEach(b => b.classList.toggle("on", b.dataset.sample === id));
+  liveStatus(`Loading <b>${esc(s.title)}</b>…`, false, true);
+  try {
+    const files = await Promise.all(s.files.map(f => fetchAsFile(f.url)));
+    if (!(await fillSlots(files))) return;
+    const m = s.measured || {};
+    liveStatus(`Loaded <b>${esc(s.title)}</b> — ${s.files.length} real images. ` +
+      `When this folder was built the live pipeline returned <b>${esc(m.status)}</b> on these ` +
+      `exact files. Press <b>${s.kind === "triplet" ? "Register triplet" : "Register"}</b> ` +
+      "to run it again here.", false, false);
+  } catch (e) {
+    liveStatus("The sample set could not be loaded: " + esc(e.message), true, false);
+  }
+}
+
+function byName(fileList) {
+  return [...fileList].filter(Boolean).sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+}
+
 function wireLive() {
+  paintSamples();
+  const multi = $("#live-multi");
+  if (multi) multi.onchange = async () => {
+    const fs = byName(multi.files || []);
+    if (fs.length < 2) {
+      liveStatus("Pick <b>two or three</b> files at once — they fill the slots in filename order.",
+        true, false);
+      return;
+    }
+    if (await fillSlots(fs)) liveStatus(`Loaded ${Math.min(3, fs.length)} files in name order: ` +
+      fs.slice(0, 3).map(f => `<b>${esc(f.name)}</b>`).join(", ") + ".", false, false);
+    multi.value = "";
+  };
   ["src", "ref", "thr"].forEach(id => {
     const drop = document.getElementById("drop-" + id);
     const input = document.getElementById("live-" + id);
@@ -1776,8 +1985,9 @@ function wireLive() {
     drop.ondragleave = () => drop.classList.remove("over");
     drop.ondrop = ev => {
       ev.preventDefault(); drop.classList.remove("over");
-      const f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0];
-      setSlot(id, f);
+      const all = (ev.dataTransfer && ev.dataTransfer.files) || [];
+      if (all.length > 1) { fillSlots(byName(all)); return; }
+      setSlot(id, all[0]);
     };
     const clear = drop.querySelector("[data-clear]");
     if (clear) clear.onclick = ev => {
@@ -1818,7 +2028,14 @@ function wireLive() {
     card.addEventListener("drop", ev => {
       if (ev.target.closest(".drop")) return;      // the slot handles its own
       ev.preventDefault();
-      const f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0];
+      const all = (ev.dataTransfer && ev.dataTransfer.files) || [];
+      if (all.length > 1) {                       // a whole sample folder's files at once
+        const fs = byName(all);
+        fillSlots(fs).then(ok => ok && liveStatus(`Dropped ${Math.min(3, fs.length)} files, placed ` +
+          "in filename order.", false, false));
+        return;
+      }
+      const f = all[0];
       if (!f) return;
       setSlot(LIVE.src ? (LIVE.ref ? (LIVE.thr ? "src" : "thr") : "ref") : "src", f);
     });
