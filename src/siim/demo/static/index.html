@@ -803,6 +803,153 @@ ul.caveats li{margin-bottom:6px;line-height:1.5}
   .rsum .rkey{text-align:left}
 }
 
+/* -------------------------------------------------------- guidance layer
+   The live tool teaches itself: a guide panel that always says which step
+   the reader is on, what state the tool is in, and the next action (with the
+   button that performs it); an instruction block per step; "What is this?"
+   answers beside the control they explain. Expert mode hides the teaching,
+   never the science. */
+.gpanel{position:sticky;top:calc(var(--topbar) + 10px);z-index:12;margin-top:var(--s2);
+  background:var(--surface-elevated);border:1px solid var(--border-strong);border-radius:var(--r-md);
+  box-shadow:var(--shadow-1);overflow:hidden}
+.gtrack{border-bottom:1px solid var(--border);background:var(--surface)}
+.gtrack ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.gtrack li{font:500 var(--fs-micro)/1.2 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);
+  padding:10px 6px;text-align:center;border-left:1px solid var(--border);position:relative;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.gtrack li:first-child{border-left:0}
+.gtrack li::before{content:"○\00a0"}
+.gtrack li.done{color:var(--text-secondary)} .gtrack li.done::before{content:"✓\00a0";color:var(--success)}
+.gtrack li.current{color:var(--text-primary);background:var(--accent-soft)}
+.gtrack li.current::before{content:"●\00a0";color:var(--accent)}
+.gtrack li.current::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent)}
+.gbody{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s2) var(--s5);padding:var(--s4) var(--s5);align-items:center}
+.gnow{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s3)}
+.gstep{font:600 var(--fs-micro)/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);
+  border:1px solid rgba(79,149,238,.45);border-radius:var(--r-sm);padding:5px 8px}
+.gstate{font:600 15px/1.3 var(--sans);color:var(--text-primary);display:inline-flex;align-items:center;gap:8px}
+.gstate::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);flex:0 0 8px}
+.gnext{display:flex;flex-direction:column;gap:3px;min-width:0}
+.glab{font:600 var(--fs-micro)/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+.gtext{font-size:var(--fs-body);color:var(--text-primary);line-height:1.5}
+.gacts{display:flex;flex-wrap:wrap;gap:var(--s2);justify-content:flex-end}
+.gdock{display:none}
+.lab .code{font-size:inherit}
+@media (max-width:1180px){.gtrack li{text-transform:none;letter-spacing:0;padding:10px 2px;font-size:var(--fs-label)}}
+
+/* instruction block: what to do, why, what happens, next */
+.guide{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:var(--s3) var(--s5);margin:0 0 var(--s4);
+  padding:var(--s3) var(--s4);background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md)}
+.guide div{min-width:0}
+.guide dt{font:600 var(--fs-micro)/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.guide dd{margin:4px 0 0;font-size:var(--fs-small);color:var(--text-secondary);line-height:1.5}
+.guide dd b{color:var(--text-primary);font-weight:600}
+.stepstate{margin-left:auto;font:600 var(--fs-micro)/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);
+  border:1px solid var(--border-strong);border-radius:var(--r-sm);padding:5px 8px;white-space:nowrap}
+.stepstate:empty{display:none}
+.stepstate::before{content:"○\00a0"}
+.stepstate.done{color:var(--success);border-color:rgba(79,149,238,.45)} .stepstate.done::before{content:"✓\00a0"}
+.stepstate.active{color:var(--text-primary);border-color:var(--accent)} .stepstate.active::before{content:"●\00a0"}
+.lsech{flex-wrap:wrap}
+
+/* "What is this?" -- tap or keyboard, never hover */
+.help{margin:var(--s1) 0;font-size:var(--fs-small)}
+.help summary{cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:32px;color:var(--text-secondary);list-style:none}
+.help summary::-webkit-details-marker{display:none}
+.help summary>span{width:18px;height:18px;border-radius:50%;border:1px solid var(--text-muted);display:inline-flex;
+  align-items:center;justify-content:center;font:600 11px/1 var(--mono);color:var(--text-muted);flex:0 0 18px}
+.help summary:hover,.help[open] summary{color:var(--text-primary)}
+.help p{margin:2px 0 var(--s2) 26px;color:var(--text-secondary);max-width:70ch;line-height:1.55}
+.help p b{color:var(--text-primary)}
+.helprow{display:flex;flex-wrap:wrap;gap:0 var(--s5);margin-top:var(--s3)}
+
+/* empty drop zones say what goes there and show the action */
+.drop .hint .empty{display:block;color:var(--text-secondary);margin-bottom:var(--s3)}
+.drop .fakebtn{display:inline-flex;align-items:center;min-height:40px;padding:0 var(--s4);border-radius:var(--r-sm);
+  background:var(--accent);color:var(--on-accent);font:600 14px/1 var(--sans)}
+.drop:hover .fakebtn,.drop:focus-visible .fakebtn{background:#6aa6f2}
+#drop-thr .fakebtn{background:var(--surface-hover);color:var(--text-primary);border:1px solid var(--border-strong)}
+
+/* step 2's automatic checks */
+.checks .empty,#live-out>.empty{color:var(--text-muted);font-size:var(--fs-small);padding:var(--s4);
+  border:1px dashed var(--border-strong);border-radius:var(--r-md);margin:0}
+.checklist{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.checklist li{display:grid;grid-template-columns:22px minmax(0,1fr);column-gap:var(--s2);font-size:var(--fs-small);color:var(--text-secondary)}
+.checklist li::before{grid-row:1/span 2;font:700 14px/1.45 var(--mono)}
+.checklist li b{color:var(--text-primary);font-weight:600}
+.checklist li span{grid-column:2;line-height:1.5}
+.checklist li.ok::before{content:"✓";color:var(--success)}
+.checklist li.warn::before{content:"!";color:var(--warning)}
+.checklist li.todo::before{content:"○";color:var(--text-muted)}
+
+/* two images vs three, drawn */
+.loopviz{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin:0 0 var(--s4)}
+.loopviz figure{margin:0;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface);
+  padding:var(--s4);display:grid;gap:var(--s3);align-content:start}
+.loopviz svg{width:100%;max-width:210px;height:auto;margin:0 auto;display:block;color:var(--text-primary)}
+.loopviz .nd{fill:var(--surface-elevated);stroke:var(--text-muted)}
+.loopviz .ar{fill:none;stroke:var(--accent);stroke-width:1.6}
+.loopviz figcaption{font:400 var(--fs-small)/1.5 var(--sans);color:var(--text-secondary);margin:0}
+.loopviz figcaption b{color:var(--text-primary)}
+.verifyrow{display:flex;justify-content:flex-end;margin-top:var(--s4)}
+.engopt .eu{font-size:var(--fs-label);color:var(--text-primary);line-height:1.45}
+
+/* the result, read aloud */
+.rread{grid-column:1/-1;margin:0;display:grid;gap:var(--s3);padding-top:var(--s2);border-top:1px solid var(--border)}
+.rread div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:var(--s3)}
+.rread dt{font:600 var(--fs-micro)/1.6 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+.rread dd{margin:0;font-size:var(--fs-body);color:var(--text-primary);line-height:1.55}
+.rwhy{grid-column:1/-1}
+.rwhy summary{cursor:pointer;color:var(--text-secondary);font-size:var(--fs-small);min-height:32px;display:inline-flex;align-items:center}
+.rwhy .reasons{margin-top:var(--s2)}
+.rsum.stale{opacity:.62}
+.stalenote{grid-column:1/-1;color:var(--warning);font-size:var(--fs-small);margin:0}
+.stalenote::before{content:"!\00a0";font-weight:700}
+.livestatus.err>span{display:block}
+.erracts{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s3)}
+
+/* how it works, and the guidance switch */
+.how{border-bottom:1px solid var(--border);background:var(--surface-sunk)}
+.how .wrap{padding-top:var(--s6);padding-bottom:var(--s6)}
+.howh{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s3) var(--s4);margin-bottom:var(--s5)}
+.howh h2{font-size:var(--fs-h3)}
+.how ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:var(--s4);counter-reset:how}
+.how li{counter-increment:how;border-top:2px solid var(--border-strong);padding-top:var(--s3);font-size:var(--fs-small);
+  color:var(--text-secondary);line-height:1.5}
+.how li::before{content:counter(how);display:block;font:600 var(--fs-micro)/1 var(--mono);color:var(--accent);margin-bottom:8px}
+.how li b{color:var(--text-primary);font-weight:600;display:block;margin-bottom:2px}
+.hownote{margin-top:var(--s4);font-size:var(--fs-small);color:var(--text-muted)}
+.modesw{display:inline-flex;border:1px solid var(--border-strong);border-radius:var(--r-sm);overflow:hidden;flex:0 0 auto}
+.modesw button{min-height:34px;padding:0 var(--s3);background:transparent;border:0;color:var(--text-muted);
+  font:500 var(--fs-label)/1 var(--sans);cursor:pointer}
+.modesw button+button{border-left:1px solid var(--border-strong)}
+.modesw button[aria-pressed="true"]{background:var(--surface-elevated);color:var(--text-primary)}
+.modesw button:focus-visible{outline-offset:-2px}
+.modesw.navmode{display:none}
+.caseguide{font-size:var(--fs-small);color:var(--text-secondary);margin-top:var(--s4);padding:var(--s2) var(--s3);
+  border-left:3px solid var(--accent);background:var(--surface);border-radius:0 var(--r-sm) var(--r-sm) 0;max-width:72ch}
+body.expert .guide,body.expert .how,body.expert .helprow,body.expert .gtrack,body.expert .caseguide,
+body.expert .loopviz{display:none}
+
+@media (max-width:1100px){.how ol{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:960px){.modesw.hdr{display:none}.modesw.navmode{display:inline-flex;margin-top:var(--s4);align-self:flex-start}}
+@media (max-width:760px){
+  .gpanel{position:static}
+  .gtrack{display:none}
+  .gbody{grid-template-columns:1fr;padding:var(--s4)}
+  .gacts{justify-content:flex-start}
+  .gacts .btn{flex:1 1 auto}
+  .gdock{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:25;gap:var(--s3);align-items:center;
+    justify-content:space-between;padding:10px var(--gutter);background:var(--surface-elevated);
+    border-top:1px solid var(--border-strong);box-shadow:0 -8px 24px rgba(0,0,0,.35)}
+  .gdock .dtext{font-size:var(--fs-label);color:var(--text-secondary);min-width:0;line-height:1.35}
+  .gdock .btn{white-space:nowrap}
+  .loopviz{grid-template-columns:1fr}
+  .verifyrow .btn{width:100%}
+  .rread div{grid-template-columns:1fr;gap:2px}
+  .how ol{grid-template-columns:1fr 1fr}
+}
+
 /* ---------------------------------------------------------------- footer */
 footer.foot{border-top:1px solid var(--rule);background:var(--surface-sunk);padding:var(--s7) 0 var(--s6);
   font-size:var(--fs-small);color:var(--text-secondary);line-height:1.6}
@@ -859,7 +1006,13 @@ footer.foot b{color:var(--text-primary);font-weight:600}
       </div>
       <a href="#live" id="nav-live" data-sec="live">Live tool</a>
       <a href="#prov" data-sec="prov">Provenance</a>
+      <div class="modesw navmode" role="group" aria-label="Guidance level">
+        <button type="button" data-mode="guided" aria-pressed="true">Guided</button>
+        <button type="button" data-mode="expert" aria-pressed="false">Expert</button></div>
     </nav>
+    <div class="modesw hdr" role="group" aria-label="Guidance level" title="Guided shows step-by-step instructions; Expert hides them. The science is the same.">
+      <button type="button" data-mode="guided" aria-pressed="true">Guided</button>
+      <button type="button" data-mode="expert" aria-pressed="false">Expert</button></div>
     <span class="ind" id="ind" aria-live="polite">Booting</span>
   </div>
 </header>
@@ -891,6 +1044,23 @@ footer.foot b{color:var(--text-primary);font-weight:600}
       <p class="hmeta" id="scope"></p>
     </div>
     <div class="hfigs" id="hfigs" aria-label="Three recorded figures"></div>
+  </div>
+</section>
+
+<section class="how" aria-labelledby="how-h">
+  <div class="wrap">
+    <div class="howh"><h2 id="how-h">How it works</h2>
+      <button class="btn btn-primary" data-open-live>Start: add two images</button></div>
+    <ol>
+      <li><b>Add two images</b>of the same, or overlapping, lunar ground.</li>
+      <li><b>Check the previews</b>The tool shows what it can check automatically.</li>
+      <li><b>Choose a method</b>for finding matching points in both images.</li>
+      <li><b>Register</b>The tool aligns the source onto the reference.</li>
+      <li><b>Read the result</b>The verdict, what it means, and the evidence.</li>
+      <li><b>Add a third image</b>to run loop-closure verification, if you need it.</li>
+      <li><b>Inspect the details</b>Measurements, inputs and provenance.</li>
+    </ol>
+    <p class="hownote">Below the tool, recorded cases show the same steps on real archive data, with every number linked to its file.</p>
   </div>
 </section>
 
@@ -1158,6 +1328,33 @@ Promise.all([
   window.__markNav = mark;
 })();
 
+/* Guided / Expert. Presentation only: Expert hides the teaching (instruction
+   blocks, the how-it-works strip, the step track), never a number, a control
+   or a result. The choice is remembered in this browser when storage allows. */
+(function initGuidanceMode() {
+  let mode = "guided";
+  try { mode = localStorage.getItem("siim-mode") || "guided"; } catch (e) { /* storage blocked */ }
+  const apply = m => {
+    document.body.classList.toggle("expert", m === "expert");
+    document.querySelectorAll("[data-mode]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
+  };
+  document.addEventListener("click", ev => {
+    const b = ev.target.closest("[data-mode]");
+    if (!b) return;
+    apply(b.dataset.mode);
+    try { localStorage.setItem("siim-mode", b.dataset.mode); } catch (e) { /* storage blocked */ }
+  });
+  apply(mode);
+})();
+
+// Other "open the live tool" controls (the how-it-works strip) use the same
+// handler as the sidebar card, so there is one code path that renders it.
+document.querySelectorAll("[data-open-live]").forEach(el => el.addEventListener("click", ev => {
+  ev.preventDefault();
+  const open = document.getElementById("live-open");
+  if (open && open.onclick) open.onclick();
+}));
+
 function setIndicator(text, live) {
   const el = $("#ind");
   if (!el) return;
@@ -1317,6 +1514,9 @@ function render(d) {
           esc(outcomeMark(vm).text)}</span>
       </div>
       <h2 class="h">${esc(vm.title)}</h2>
+      <p class="caseguide">Recorded case — read the four steps below from top to bottom: do the images
+        share ground, what the matcher found, the evidence, and the verdict. Nothing here is computed
+        now; every number comes from a file you can open.</p>
       ${vm.subtitle ? `<div class="sub">${esc(vm.subtitle)}</div>` : ""}
       ${vm.headline ? `<div class="headline">${esc(vm.headline)}</div>` : ""}
     </div>
@@ -2135,38 +2335,52 @@ const LIVE_EXAMPLES = {
 //: yield at 5-25x RootSIFT's inside the same illumination envelope, and the
 //: agreement floor (3 px) is D-051's.
 const LIVE_ENGINES = [
-  {value: "B1", name: "RootSIFT", type: "Classical",
-   desc: "Local gradient descriptors, mutual nearest neighbour, LO-RANSAC.",
-   trade: "No extra dependencies. The engine every recorded stage used."},
-  {value: "B4L", name: "DISK + LightGlue", type: "Learned",
-   desc: "Learned keypoints with an attention matcher.",
-   trade: "5–25× RootSIFT's inliers inside the same envelope (REAL-DATA-07). Needs the learned extra."},
-  {value: "B4X", name: "XFeat", type: "Learned · lightweight",
-   desc: "A compact learned detector and descriptor.",
-   trade: "Lower compute than DISK + LightGlue. Needs the learned extra."},
-  {value: "both", name: "Agreement check", type: "Two engines",
-   desc: "Runs RootSIFT and DISK + LightGlue independently and compares them.",
-   trade: "Caps the verdict at INCONCLUSIVE when they disagree by ≥ 3 px. Pairs only."},
+  {value: "B1", name: "RootSIFT", type: "Classical feature matching",
+   use: "Use when: you want the traditional method every recorded result on this page used.",
+   desc: "Finds distinctive local patterns in each image and pairs them up.",
+   trade: "No extra software needed."},
+  {value: "B4L", name: "DISK + LightGlue", type: "Learned feature matching",
+   use: "Use when: lighting differs between the images and you want more matches.",
+   desc: "A neural network finds and matches the patterns.",
+   trade: "5–25× RootSIFT's matches inside the same lighting range (REAL-DATA-07). Needs the learned extra."},
+  {value: "B4X", name: "XFeat", type: "Lightweight learned matching",
+   use: "Use when: you want a learned method with lower compute.",
+   desc: "A compact neural network for finding and matching patterns.",
+   trade: "Lighter than DISK + LightGlue. Needs the learned extra."},
+  {value: "both", name: "Agreement check", type: "Two methods, compared",
+   use: "Use when: you want a second, independent opinion on a pair.",
+   desc: "Runs RootSIFT and DISK + LightGlue separately and compares their answers.",
+   trade: "If they disagree by 3 px or more, the result is held at INCONCLUSIVE. Two images only."},
 ];
 
+//: "What is this?" help. A <details> element, so it works by tap or keyboard
+//: and never depends on hover; the answer is plain language.
+const liveHelp = (q, a) => `<details class="help"><summary><span aria-hidden="true">i</span>${esc(q)}</summary><p>${a}</p></details>`;
+
+//: A step's instruction block: what to do, why, what happens, what next.
+const liveGuide = rows => `<dl class="guide">${rows.map(([k, v]) =>
+  `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join("")}</dl>`;
+
 //: Slot state. `b64` is what the API gets; the rest is what the reader sees.
-const LIVE = {src: null, ref: null, thr: null, running: false, abort: null, last: null};
+const LIVE = {src: null, ref: null, thr: null, running: false, abort: null, last: null,
+              phase: "input", lastKind: null, error: null};
 
 function liveCard() {
   const icon = `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor"
       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V5M7.5 9.5 12 5l4.5 4.5"/>
       <path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>`;
-  const slot = (id, role, what, need) => `
+  const slot = (id, role, what, action, need) => `
     <div class="drop" id="drop-${id}" data-slot="${id}" role="button" tabindex="0"
-         aria-label="${esc(role)} image: drop a file here, press Enter to browse, or paste"
+         aria-label="${esc(action)}: press Enter to choose a file, drop a file here, or paste"
          aria-describedby="role-${id}">
       <div class="role" id="role-${id}"><b>${esc(role)}<span class="req">${esc(need)}</span></b>
         <span>${esc(what)}</span></div>
       <button class="clear" data-clear="${id}" title="Remove" aria-label="Remove the ${esc(role)} image"
               hidden>&times;</button>
       <input type="file" id="live-${id}" accept="image/*" tabindex="-1" aria-hidden="true">
-      <div class="hint" id="hint-${id}">${icon}<b>Drop an image here</b><br>or click to browse · paste works too
-        <small>PNG, JPEG or TIFF · at least 64 px per side</small></div>
+      <div class="hint" id="hint-${id}">${icon}<span class="empty">No ${esc(role.toLowerCase())} yet.</span>
+        <span class="fakebtn">${esc(action)}</span>
+        <small>Opens your file picker · or drop / paste an image here<br>PNG, JPEG or TIFF · at least 64 px per side</small></div>
       <img class="thumb" id="thumb-${id}" alt="" hidden>
       <div class="meta" id="meta-${id}"></div>
       <div class="slotmsg" id="msg-${id}" role="alert"></div>
@@ -2177,49 +2391,52 @@ function liveCard() {
         <span class="en">${esc(e.name)}</span>
         <span class="et">${esc(e.type)}</span>
         <span class="ed">${esc(e.desc)}</span>
+        <span class="eu">${esc(e.use)}</span>
         <span class="eo">${esc(e.trade)}</span>
       </label>`;
+  const step = (n, id, title, body) => `
+    <section class="lsec" id="lstep-${id}" data-step="${n}" aria-labelledby="lh-${id}">
+      <div class="lsech"><span class="n">${n}</span><h3 id="lh-${id}">${title}</h3>
+        <span class="stepstate" id="ss-${id}"></span></div>
+      ${body}
+    </section>`;
   return mod("live", modHead("L", "Live · computed in your request",
       "Register your own images",
-      "The same rule, verdict and pipeline order every recorded stage used. Only the images are new: every number here is live, never a recorded number."), `
-    <section class="lsec" aria-labelledby="lh-mode">
-      <div class="lsech"><span class="n">1</span><h3 id="lh-mode">What the run can conclude</h3></div>
-      <div class="modes">
-        <div class="modecard" id="mode-pair">
-          <div class="mt"><b>Pair registration</b><span class="mc">2 images</span></div>
-          <p>Estimates the transform from source to reference and checks the evidence behind it.</p>
-          <p class="ceil">Highest possible verdict: <span class="st st-neutral">INCONCLUSIVE</span> — a pair cannot rule out a self-consistent wrong answer.</p>
-        </div>
-        <div class="modecard" id="mode-loop">
-          <div class="mt"><b>Loop-closure verification</b><span class="mc">3 images</span></div>
-          <p>Registers A→B, B→C and C→A independently; the three must compose back to the start:</p>
-          <span class="eq">C→A ∘ B→C ∘ A→B = I</span>
-          <p class="ceil">The only path to <span class="st st-pass">VERIFIED</span>. Module 03 measures what loop closure still cannot see.</p>
-        </div>
+      "Follow the steps. Every number here is computed on your images now — live, never a recorded number."), `
+    <div class="gpanel" id="live-guide" aria-live="polite">
+      <div class="gtrack" aria-label="Your progress"><ol id="live-track">
+        <li data-t="1">Images</li><li data-t="2">Check</li><li data-t="3">Engine</li><li data-t="4">Register</li>
+        <li data-t="5">Result</li><li data-t="6">Verify</li><li data-t="7">Report</li></ol></div>
+      <div class="gbody">
+        <div class="gnow"><span class="gstep" id="live-gstep">Step 1 of 7</span>
+          <span class="gstate" id="live-gstate">Waiting for source image</span></div>
+        <div class="gnext"><span class="glab">Next step</span>
+          <span class="gtext" id="live-gtext">Add the source image — the image you want to align.</span></div>
+        <div class="gacts" id="live-gacts"><button class="btn btn-primary" data-act="add-src">Add source image</button></div>
       </div>
-    </section>
+    </div>
 
-    <section class="lsec" aria-labelledby="lh-in">
-      <div class="lsech"><span class="n">2</span><h3 id="lh-in">Images</h3>
-        <p>Overlapping views of the same ground. Long side is down-sampled to 1024 px for the run.</p></div>
+    ${step(1, "images", "Add your two images", `
+      ${liveGuide([
+        ["What to do", "Add a <b>source</b> image and a <b>reference</b> image of the same area of the Moon."],
+        ["Why", "The system works out how to move the source so that it lines up with the reference."],
+        ["What happens", "Clicking a box opens your file picker. The image is checked in your browser and a preview appears."],
+        ["Next", "Check that the two previews show the same ground."]])}
       <div class="drops">
-        ${slot("src", "Source", "The image being registered", "required")}
+        ${slot("src", "Source", "The image you want to align", "Add source image", "required")}
         <div class="swapcol"><button class="swapbtn" id="live-swap" disabled
           title="Swap source and reference" aria-label="Swap source and reference">
           <svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"
             stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11l-3-3M16 13H5l3 3"/></svg>Swap</button></div>
-        ${slot("ref", "Reference", "The alignment target", "required")}
+        ${slot("ref", "Reference", "The image you align to", "Add reference image", "required")}
       </div>
-      <div class="thirdrow">
-        ${slot("thr", "Third image (C)", "Enables loop-closure verification", "for verification")}
-        <div class="thirdwhy note" id="thr-state" aria-live="polite">
-          <b>No third image yet.</b> The run will be a pair registration, so loop closure will not
-          run and the verdict can reach INCONCLUSIVE at most. Add a third image that overlaps both
-          to evaluate loop closure — the only path to VERIFIED.
-        </div>
+      <div class="helprow">
+        ${liveHelp("What is a source image?", "The image that will be moved. The result shows it warped on top of the reference.")}
+        ${liveHelp("What is a reference image?", "The fixed image. The source is aligned onto its pixel grid.")}
+        ${liveHelp("What images work?", "Two views of the same or overlapping lunar ground — for example two LRO NAC frames, or a Chandrayaan-2 TMC-2 image and a NAC frame. North should be up in both; the tool does not rotate uploads.")}
       </div>
       <div class="examples">
-        <span class="lab">No images? Start from real data</span>
+        <span class="lab">No images of your own? Use real data</span>
         <button class="exbtn" data-example="match">${esc(LIVE_EXAMPLES.match.label)}
           <small>${esc(LIVE_EXAMPLES.match.sub)}</small></button>
         <button class="exbtn" data-example="cross">${esc(LIVE_EXAMPLES.cross.label)}
@@ -2237,44 +2454,102 @@ function liveCard() {
             <button type="button" data-filter="REJECTED" aria-pressed="false">Rejected</button>
             <button type="button" data-filter="INCONCLUSIVE" aria-pressed="false">Inconclusive</button>
           </div>
-          <span class="sampnote">Real archive images, north-up, 16-bit. Each outcome was measured by
-            posting these exact files to this server when the folder was built — a live result,
-            not a recorded stage number.</span>
+          <span class="sampnote">Click a set to load its images into the boxes above. Each card shows what the
+            live pipeline returned on those exact files when the folder was built — a live result, not a
+            recorded stage number.</span>
         </div>
         <div class="sampgrid" id="live-samples-grid"></div>
-      </div>
-    </section>
+      </div>`)}
 
-    <section class="lsec" aria-labelledby="lh-eng">
-      <div class="lsech"><span class="n">3</span><h3 id="lh-eng">Matching engine</h3></div>
+    ${step(2, "check", "Check the previews", `
+      ${liveGuide([
+        ["What to do", "Look at both previews. They should show the same, or overlapping, lunar ground."],
+        ["Why", "The system cannot check overlap for images you supply. Images of different places cannot be aligned — the system should refuse them, but it is better not to ask."],
+        ["Next", "Choose how the images should be matched."]])}
+      <div class="checks" id="live-checks"><p class="empty">Add both images to see the checks.</p></div>`)}
+
+    ${step(3, "engine", "Choose how to match the images", `
+      ${liveGuide([
+        ["What to do", "Pick one matching method. RootSIFT is selected by default."],
+        ["Why", "The method finds the same surface features — craters, ridges, boulders — in both images."],
+        ["Next", "Click <b>Register images</b>."]])}
+      ${liveHelp("What is a matching engine?", "The algorithm that finds corresponding points between the two images. Different engines trade speed against how well they cope with lighting changes. None is best for every pair.")}
       <fieldset class="engines"><legend class="sr-only">Matching engine</legend>
         ${LIVE_ENGINES.map(engine).join("")}
-      </fieldset>
-    </section>
+      </fieldset>`)}
 
-    <section class="lsec" aria-labelledby="lh-run">
-      <div class="lsech"><span class="n">4</span><h3 id="lh-run">Run</h3></div>
+    ${step(4, "run", "Register the images", `
+      ${liveGuide([
+        ["What happens", "Clicking <b>Register images</b> sends the images to this computer's server. It finds matching points, estimates the transformation, refines it to sub-pixel precision, and checks the evidence."],
+        ["How long", "Usually a few seconds on CPU; the learned engines take longer."],
+        ["Next", "Read the result report that appears below."]])}
       <div class="runrow">
-        <ul class="reqs" id="live-reqs" aria-label="Requirements">
+        <ul class="reqs" id="live-reqs" aria-label="Before you register">
           <li id="req-src">Source image</li><li id="req-ref">Reference image</li>
-          <li id="req-thr" class="opt">Third image — for verification</li>
+          <li id="req-thr" class="opt">Third image — optional, for verification</li>
           <li id="req-eng" class="ok">Engine: RootSIFT</li>
         </ul>
-        <button class="runbtn" id="live-cancel" hidden>Cancel</button>
-        <button class="btn btn-primary btn-lg" id="live-run" disabled>Register</button>
+        <button class="runbtn" id="live-cancel" hidden>Cancel registration</button>
+        <button class="btn btn-primary btn-lg" id="live-run" disabled>Register images</button>
       </div>
-      <ol class="stages" id="live-stages" aria-label="Pipeline stages">
+      <ol class="stages" id="live-stages" aria-label="Processing stages">
         <li data-stage="upload"><div class="sn">1</div><div class="sl">Upload</div><div class="sx">images in the browser</div></li>
-        <li data-stage="estimate"><div class="sn">2</div><div class="sl">Estimate</div><div class="sx">match and fit</div></li>
-        <li data-stage="refine"><div class="sn">3</div><div class="sl">Refine</div><div class="sx">sub-pixel</div></li>
-        <li data-stage="reestimate"><div class="sn">4</div><div class="sl">Re-estimate</div><div class="sx">model selection</div></li>
-        <li data-stage="verify"><div class="sn">5</div><div class="sl">Verify</div><div class="sx">evidence and verdict</div></li>
+        <li data-stage="estimate"><div class="sn">2</div><div class="sl">Estimate</div><div class="sx">find and match points</div></li>
+        <li data-stage="refine"><div class="sn">3</div><div class="sl">Refine</div><div class="sx">sub-pixel alignment</div></li>
+        <li data-stage="reestimate"><div class="sn">4</div><div class="sl">Re-estimate</div><div class="sx">choose the model</div></li>
+        <li data-stage="verify"><div class="sn">5</div><div class="sl">Verify</div><div class="sx">weigh the evidence</div></li>
         <li data-stage="report"><div class="sn">6</div><div class="sl">Report</div><div class="sx">result and downloads</div></li>
       </ol>
-      <div class="stagenote" id="live-stagenote">The server runs stages 2–5 in one request; progress inside a request is not streamed.</div>
-      <div class="livestatus" id="live-status" role="status" aria-live="polite">Add two images to begin.</div>
-    </section>
-    <div id="live-out"></div>`);
+      <div class="stagenote" id="live-stagenote">Stages 2–5 run together in one request; the server does not report progress inside it, so they are shown as running until the result arrives.</div>
+      <div class="livestatus" id="live-status" role="status" aria-live="polite">Add two images to begin.</div>`)}
+
+    ${step(5, "result", "Read the result", `
+      ${liveGuide([
+        ["What you get", "A verdict — <span class=\"st st-pass\">VERIFIED</span>, <span class=\"st st-fail\">REJECTED</span> or <span class=\"st st-neutral\">INCONCLUSIVE</span> — with what it means, the evidence behind it, and what to do next."]])}
+      ${liveHelp("What do the verdicts mean?", "<b>VERIFIED</b>: three images' alignments agree around a loop, and no check counted against them. <b>REJECTED</b>: a decisive check failed, so no aligned image is produced. <b>INCONCLUSIVE</b>: nothing counted against the alignment, but the decisive check could not run or the evidence was mixed. VERIFIED means corroborated, not proven correct.")}
+      <div id="live-out"><p class="empty">No result yet. Register the images in step 4.</p></div>`)}
+
+    ${step(6, "verify", "Verify with a third image (optional)", `
+      ${liveGuide([
+        ["Why", "With two images the system can align them but cannot fully check the answer, so the verdict stops at INCONCLUSIVE. A third image allows the only check that can reach VERIFIED: <b>loop closure</b>."],
+        ["What to do", "Add an image that overlaps both, then click <b>Run loop-closure verification</b>."],
+        ["What happens", "The system aligns A→B, B→C and C→A separately and checks that the three return to where they started."]])}
+      <div class="loopviz">
+        <figure><svg viewBox="0 0 150 90" role="img" aria-label="Two images: source to reference, one alignment">
+          <g font-family="ui-monospace,monospace" font-size="11" fill="currentColor">
+          <rect x="6" y="30" width="34" height="30" rx="4" class="nd"/><text x="23" y="49" text-anchor="middle">S</text>
+          <rect x="110" y="30" width="34" height="30" rx="4" class="nd"/><text x="127" y="49" text-anchor="middle">R</text>
+          <path d="M44 45h58" class="ar" marker-end="url(#ah1)"/></g>
+          <defs><marker id="ah1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0 0l8 4-8 4z" fill="#4f95ee"/></marker></defs></svg>
+          <figcaption><b>Two images</b> — one alignment, source → reference. Can reach INCONCLUSIVE at most.</figcaption></figure>
+        <figure><svg viewBox="0 0 150 110" role="img" aria-label="Three images: A to B, B to C, C back to A">
+          <g font-family="ui-monospace,monospace" font-size="11" fill="currentColor">
+          <rect x="58" y="4" width="34" height="26" rx="4" class="nd"/><text x="75" y="21" text-anchor="middle">A</text>
+          <rect x="112" y="78" width="34" height="26" rx="4" class="nd"/><text x="129" y="95" text-anchor="middle">B</text>
+          <rect x="4" y="78" width="34" height="26" rx="4" class="nd"/><text x="21" y="95" text-anchor="middle">C</text>
+          <path d="M90 32l26 40" class="ar" marker-end="url(#ah2)"/><path d="M110 91H44" class="ar" marker-end="url(#ah2)"/>
+          <path d="M26 75l30-41" class="ar" marker-end="url(#ah2)"/></g>
+          <defs><marker id="ah2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0 0l8 4-8 4z" fill="#4f95ee"/></marker></defs></svg>
+          <figcaption><b>Three images</b> — A→B, B→C, C→A. If the three agree, the loop closes:
+            <span class="eq">C→A ∘ B→C ∘ A→B = I</span></figcaption></figure>
+      </div>
+      <div class="thirdrow">
+        ${slot("thr", "Third image (C)", "An image that overlaps both A and B", "Add third image", "for verification")}
+        <div class="thirdwhy note" id="thr-state" aria-live="polite">
+          <b>No third image yet.</b> Loop closure will not run and the verdict can reach INCONCLUSIVE at most.
+        </div>
+      </div>
+      ${liveHelp("What is loop closure?", "A consistency check with three overlapping images. Each pair is aligned on its own; composing the three alignments should bring you back exactly to the start. The distance by which it misses is the loop residual, in pixels; 2 px or more is refused. It cannot see an error that affects one whole image the same way in every pair — module 03 measures that limit.")}
+      <div class="verifyrow"><button class="btn btn-primary btn-lg" id="live-verify" disabled>Run loop-closure verification</button></div>`)}
+
+    ${step(7, "report", "Review the report and start again", `
+      ${liveGuide([
+        ["What to do", "Open <b>Technical details</b> in the result for engine counts, the transform and the inputs; download the result if you need it."],
+        ["Next", "Click <b>Start a new analysis</b> to clear these images. Recorded datasets on the page are not affected."]])}
+      <div class="verifyrow"><button class="btn" data-act="new">Start a new analysis</button></div>`)}
+    <div class="gdock" id="live-dock" hidden><span class="dtext"></span><span class="dacts"></span></div>`);
 }
 
 /* ------------------------------------------------------------ slot state */
@@ -2285,10 +2560,14 @@ function liveStatus(text, isErr, busy) {
   el.innerHTML = (busy ? '<span class="spin" aria-hidden="true"></span>' : "") + `<span>${text}</span>`;
 }
 
-// An error the reader can act on: what happened, why it matters, what to do.
-function liveError(what, why, next) {
+// An error the reader can recover from: what happened, why, what to try, and
+// buttons that do it. `actions` are [label, data-act] pairs.
+function liveError(what, why, next, actions) {
+  const acts = (actions || []).map(([label, act], i) =>
+    `<button type="button" class="btn${i === 0 ? " btn-primary" : ""}" data-act="${esc(act)}">${esc(label)}</button>`).join("");
   liveStatus(`<span class="what">${what}</span>${why ? esc(why) : ""}` +
-    (next ? `<span class="next">${next}</span>` : ""), true, false);
+    (next ? `<span class="next"><b>Try this:</b> ${next}</span>` : "") +
+    (acts ? `<span class="erracts">${acts}</span>` : ""), true, false);
 }
 
 // The engine is a radio group; the value sent to the API is unchanged.
@@ -2302,10 +2581,10 @@ function liveEngineName() {
   return e ? e.name : liveEngine();
 }
 
-// The stage strip. It only ever claims what the page knows: Upload is done
-// when the images are in the browser; stages 2-5 are "running" together while
-// the single request is in flight (the server does not stream progress); on a
-// result they are marked from the pipeline order the API returned.
+// The processing-stage strip. It only ever claims what the page knows: Upload
+// is done when the images are in the browser; stages 2-5 are "running"
+// together while the single request is in flight (the server does not stream
+// progress); on a result they are marked from the pipeline order it returned.
 function setStages(state) {
   const box = document.getElementById("live-stages");
   if (!box) return;
@@ -2317,7 +2596,125 @@ function setStages(state) {
   (state.done || []).forEach(k => li(k) && li(k).classList.add("done"));
   (state.failed || []).forEach(k => li(k) && li(k).classList.add("failed"));
   const vsx = li("verify") && li("verify").querySelector(".sx");
-  if (vsx && !(state.done || []).includes("verify")) vsx.textContent = "evidence and verdict";
+  if (vsx && !(state.done || []).includes("verify")) vsx.textContent = "weigh the evidence";
+}
+
+/* ------------------------------------------------------------- guidance
+   One function reads the real state -- which images are present, the
+   engine, whether a request is running, the last result or error -- and
+   derives the step the reader is on, the status line, the next step, and
+   the buttons that perform it. Every panel on the card reads from it, so
+   the guide can never disagree with what the tool is actually doing. */
+function liveModel() {
+  const S = LIVE, st = S.last && S.last.verdict ? S.last.verdict.status : null;
+  const eng = liveEngineName();
+  const glyph = {VERIFIED: "✓", REJECTED: "×", INCONCLUSIVE: "?"};
+  const regLabel = S.thr ? "Register and verify (3 images)" : "Register images";
+  if (S.running) return {step: 4, state: S.thr ? "Registration and verification running" : "Registration running",
+    next: "Wait for the result — usually a few seconds on CPU. The learned engines take longer.",
+    acts: [["Cancel registration", "cancel", "danger"]]};
+  if (S.phase === "error" && S.error) return {step: 4, state: "Registration could not be completed",
+    next: S.error.next, acts: S.error.actions || []};
+  if (!S.src && !S.ref) return {step: 1, state: "Waiting for source image",
+    next: "Add the source image — the image you want to align. Or load a real sample set.",
+    acts: [["Add source image", "add-src"], ["Use a real sample set", "samples"]]};
+  if (!S.ref) return {step: 1, state: "Source image added",
+    next: "Add the reference image — the image you align to.",
+    acts: [["Add reference image", "add-ref"]]};
+  if (!S.src) return {step: 1, state: "Reference image added",
+    next: "Add the source image — the image you want to align.",
+    acts: [["Add source image", "add-src"]]};
+  if (S.phase === "result" && S.last) {
+    const word = `${glyph[st] || ""} ${st}`;
+    if (S.lastKind === "triplet") {
+      if (st === "VERIFIED") return {step: 7, state: `Verification complete · ${word}`,
+        next: "Read the report, open Technical details for the measurements, then start a new analysis when you are done.",
+        acts: [["Read the report", "result"], ["View technical details", "details"], ["Start a new analysis", "new"]]};
+      return {step: 7, state: `Verification complete · ${word}`,
+        next: "Read why the loop was not verified. Check that all three images overlap, or try another engine.",
+        acts: [["Read the report", "result"], ["Change engine", "engine"], ["Start a new analysis", "new"]]};
+    }
+    if (S.thr) return {step: 6, state: "Third image added",
+      next: "Click Run loop-closure verification to check the alignment around a loop of three images.",
+      acts: [["Run loop-closure verification", "verify"], ["Read the pair result", "result"]]};
+    if (st === "REJECTED") return {step: 5, state: `Registration complete · ${word}`,
+      next: "Read why it was refused. Then check that both images show the same ground, or try another engine.",
+      acts: [["Read the result", "result"], ["Change engine", "engine"], ["Choose another source image", "add-src"]]};
+    return {step: 5, state: `Registration complete · ${word}`,
+      next: "Read the result. To go further than INCONCLUSIVE, add a third image that overlaps both and run loop-closure verification.",
+      acts: [["Read the result", "result"], ["Add third image", "add-thr"], ["Start a new analysis", "new"]]};
+  }
+  if (!S.engineTouched) return {step: 3, state: "Both images are ready" + (S.thr ? " · third image added" : ""),
+    next: `Check the previews show the same ground, then choose how to match them — ${eng} is selected by default.`,
+    acts: [[regLabel + " with " + eng, "register"], ["Compare matching engines", "engine"]]};
+  return {step: 4, state: `Engine selected: ${eng}` + (S.thr ? " · three images" : ""),
+    next: `Click ${regLabel} to begin.` + (S.thr ? " With three images, loop closure runs and the verdict can reach VERIFIED." : ""),
+    acts: [[regLabel, "register"]]};
+}
+
+function paintGuide() {
+  const m = liveModel();
+  const g = id => document.getElementById(id);
+  if (!g("live-guide")) return;
+  g("live-gstep").textContent = `Step ${m.step} of 7`;
+  g("live-gstate").textContent = m.state;
+  g("live-gtext").textContent = m.next;
+  const btns = m.acts.map(([label, act, kind], i) =>
+    `<button type="button" class="btn${kind === "danger" ? " btn-danger" : (i === 0 ? " btn-primary" : "")}" data-act="${esc(act)}">${esc(label)}</button>`).join("");
+  g("live-gacts").innerHTML = btns;
+  const dock = g("live-dock");
+  if (dock) dock.querySelector(".dtext").textContent = `Step ${m.step} of 7 · ${m.state}`;
+  if (dock) dock.querySelector(".dacts").innerHTML = m.acts.length ?
+    `<button type="button" class="btn${m.acts[0][2] === "danger" ? " btn-danger" : " btn-primary"}" data-act="${esc(m.acts[0][1])}">${esc(m.acts[0][0])}</button>` : "";
+  document.querySelectorAll("#live-track li").forEach(li => {
+    const t = +li.dataset.t;
+    li.classList.toggle("done", t < m.step);
+    li.classList.toggle("current", t === m.step);
+    li.toggleAttribute("aria-current", t === m.step);
+    if (t === m.step) li.setAttribute("aria-current", "step");
+  });
+  // per-step state badges: glyph + word, never colour alone
+  const both = !!(LIVE.src && LIVE.ref), res = LIVE.phase === "result" && LIVE.last;
+  const badge = (id, text, kind) => { const e = g("ss-" + id);
+    if (e) { e.textContent = text; e.className = "stepstate " + (kind || ""); } };
+  badge("images", both ? "Done" : (LIVE.src || LIVE.ref ? "1 of 2 added" : "To do"), both ? "done" : "");
+  badge("check", both ? "Automatic checks done" : "Waiting for images", both ? "done" : "");
+  badge("engine", both ? (LIVE.engineTouched ? "Selected: " + liveEngineName() : liveEngineName() + " (default)") : "Waiting for images",
+    both ? "done" : "");
+  badge("run", LIVE.running ? "Running" : (res ? "Done" : (both ? "Ready" : "Waiting for images")),
+    LIVE.running ? "active" : (res ? "done" : ""));
+  badge("result", res ? LIVE.last.verdict.status : "No result yet", res ? "done" : "");
+  badge("verify", res && LIVE.lastKind === "triplet" ? "Done" : (LIVE.thr ? "Ready" : "Optional"),
+    res && LIVE.lastKind === "triplet" ? "done" : "");
+  badge("report", res ? "Available" : "After a result", res ? "done" : "");
+  const vb = g("live-verify");
+  if (vb) vb.disabled = !(LIVE.src && LIVE.ref && LIVE.thr) || LIVE.running;
+}
+
+// Step 2's automatic checks. Only facts the browser knows: that each image
+// decoded, its size, how it will be down-sampled. Overlap and ground
+// resolution are NOT knowable here, and the panel says so.
+function paintChecks() {
+  const box = document.getElementById("live-checks");
+  if (!box) return;
+  const S = LIVE;
+  if (!S.src || !S.ref) {
+    box.innerHTML = `<p class="empty">Add both images to see the checks. ${S.src || S.ref ? "One image is in." : ""}</p>`;
+    return;
+  }
+  const row = (kind, title, text) => `<li class="${kind}"><b>${title}</b><span>${text}</span></li>`;
+  const size = s => `${s.w} × ${s.h} px` + (s.k > 1 ? `, runs at ${Math.round(s.w / s.k)} × ${Math.round(s.h / s.k)}` : "");
+  const la = Math.max(S.src.w, S.src.h), lb = Math.max(S.ref.w, S.ref.h);
+  const ratio = Math.max(la, lb) / Math.min(la, lb);
+  box.innerHTML = `<ul class="checklist">
+    ${row("ok", "Source image readable", esc(S.src.name) + " · " + size(S.src))}
+    ${row("ok", "Reference image readable", esc(S.ref.name) + " · " + size(S.ref))}
+    ${row(ratio > 8 ? "warn" : "ok", "Pixel sizes " + (ratio > 8 ? "differ a lot" : "compatible"),
+      `The larger image is ${ratio.toFixed(1)}× the smaller in pixels. Registration was measured to hold up to a 32:1 difference in ground resolution (module 08); pixel size is not ground resolution, so this is a hint, not a check.`)}
+    ${row("todo", "Same ground — check by eye", "The system cannot know where your images were taken. Confirm the previews show the same craters or ridges.")}
+    ${row("todo", "North up in both", "Uploads are not rotated. If one image is mirrored or turned, alignment is likely to fail.")}
+    ${S.thr ? row("ok", "Third image readable", esc(S.thr.name) + " · " + size(S.thr) + " — loop closure will run") : ""}
+  </ul>`;
 }
 
 // `keep` leaves an explicit message (an example loaded, a run finished, an
@@ -2329,15 +2726,15 @@ function liveReady(keep) {
   const ready = !!(LIVE.src && LIVE.ref) && !LIVE.running;
   if (run) {
     run.disabled = !ready;
-    if (!LIVE.running) run.textContent = LIVE.thr ? "Register triplet" : "Register";
+    if (!LIVE.running) run.textContent = LIVE.thr ? "Register and verify (3 images)" : "Register images";
   }
   if (swap) swap.disabled = !(LIVE.src || LIVE.ref) || LIVE.running;
   // requirements, stated before the reader presses anything
   const req = (id, ok, text) => { const e = document.getElementById(id);
     if (e) { e.classList.toggle("ok", !!ok); if (text) e.textContent = text; } };
-  req("req-src", LIVE.src, LIVE.src ? "Source image" : "Add a source image");
-  req("req-ref", LIVE.ref, LIVE.ref ? "Reference image" : "Add a reference image");
-  req("req-thr", LIVE.thr, LIVE.thr ? "Third image — loop closure will run" : "Third image — for verification");
+  req("req-src", LIVE.src, LIVE.src ? "Source image added" : "Add a source image");
+  req("req-ref", LIVE.ref, LIVE.ref ? "Reference image added" : "Add a reference image");
+  req("req-thr", LIVE.thr, LIVE.thr ? "Third image added — loop closure will run" : "Third image — optional, for verification");
   req("req-eng", true, "Engine: " + liveEngineName());
   const ts = document.getElementById("thr-state");
   if (ts) ts.innerHTML = LIVE.thr
@@ -2346,22 +2743,23 @@ function liveReady(keep) {
     : "<b>No third image yet.</b> The run will be a pair registration, so loop closure will not " +
       "run and the verdict can reach INCONCLUSIVE at most. Add a third image that overlaps both " +
       "to evaluate loop closure — the only path to VERIFIED.";
-  const mp = document.getElementById("mode-pair"), ml = document.getElementById("mode-loop");
-  if (mp) mp.classList.toggle("on", !LIVE.thr);
-  if (ml) ml.classList.toggle("on", !!LIVE.thr);
-  if (!LIVE.running && !document.querySelector("#live-out .rsum"))
+  if (!LIVE.running && LIVE.phase !== "result")
     setStages({uploaded: !!(LIVE.src && LIVE.ref)});
   if (!LIVE.running && !keep) {
-    if (LIVE.src && LIVE.ref && LIVE.thr)
-      liveStatus("Ready — three images, so <b>loop closure runs</b> and the verdict can reach " +
-        "VERIFIED. Press <b>Register triplet</b>.", false, false);
+    if (LIVE.phase === "result" && LIVE.lastKind === "pair" && LIVE.src && LIVE.ref && LIVE.thr)
+      liveStatus("Third image added. Click <b>Run loop-closure verification</b> in step 6.", false, false);
+    else if (LIVE.src && LIVE.ref && LIVE.thr)
+      liveStatus("Three images are ready, so <b>loop closure runs</b> and the verdict can reach " +
+        "VERIFIED. Click <b>Register and verify (3 images)</b>.", false, false);
     else if (LIVE.src && LIVE.ref)
-      liveStatus("Ready — press <b>Register</b>. A third overlapping image would let loop closure " +
-        "run, which is the only way past INCONCLUSIVE.", false, false);
+      liveStatus("Both images are ready. Click <b>Register images</b> to begin. A third overlapping " +
+        "image would let loop closure run, which is the only way past INCONCLUSIVE.", false, false);
     else if (LIVE.src || LIVE.ref) liveStatus("One more image: add the " +
       (LIVE.src ? "<b>reference</b>" : "<b>source</b>") + ".", false, false);
     else liveStatus("Add two images to begin.", false, false);
   }
+  paintChecks();
+  paintGuide();
 }
 
 function paintSlot(id) {
@@ -2378,22 +2776,40 @@ function paintSlot(id) {
   if (clear) clear.hidden = !s;
   if (img) { img.hidden = !s; if (s) { img.src = s.url; img.alt = "Preview of " + s.name; }
              else { img.removeAttribute("src"); img.alt = ""; } }
-  if (meta) meta.innerHTML = s ? `<span class="okline">Ready</span> · <b>${esc(s.name)}</b><br>` +
+  if (meta) meta.innerHTML = s ? `<span class="okline">Added</span> · <b>${esc(s.name)}</b><br>` +
     `${s.w} × ${s.h} px · ${s.kb} KB` +
     (s.k > 1 ? ` · runs at ${Math.round(s.w / s.k)} × ${Math.round(s.h / s.k)} (÷${s.k})` : "") +
-    `<span class="slotacts"><button type="button" class="btn" data-replace="${id}">Replace</button></span>` : "";
+    `<span class="slotacts"><button type="button" class="btn" data-replace="${id}">Replace image</button></span>` : "";
   const msg = document.getElementById("msg-" + id);
   if (msg && s) msg.textContent = "";
   liveReady();
 }
 
-// A problem with one slot is shown on that slot, and in the status line.
+// A changed source or reference makes an earlier result describe images that
+// are no longer loaded; it is kept on screen but marked, and the guide goes
+// back to "register". A third image added after a pair result is the
+// verification path and leaves the pair result in place.
+function liveInputsChanged(id) {
+  if (LIVE.phase === "error") { LIVE.phase = "input"; LIVE.error = null; }
+  if (LIVE.phase === "result" && (id !== "thr" || LIVE.lastKind === "triplet")) {
+    LIVE.phase = "input";
+    const r = document.querySelector("#live-out .rsum");
+    if (r && !r.classList.contains("stale")) {
+      r.classList.add("stale");
+      r.insertAdjacentHTML("afterbegin", '<p class="stalenote">This result is for the previous images. Register again to update it.</p>');
+    }
+  }
+}
+
+// A problem with one slot is shown on that slot, and in the status line with
+// the button that fixes it.
 function slotError(id, what, next) {
   const drop = document.getElementById("drop-" + id);
   const msg = document.getElementById("msg-" + id);
+  const role = {src: "source", ref: "reference", thr: "third"}[id] || id;
   if (drop) drop.classList.add("bad");
   if (msg) msg.textContent = what;
-  liveError(esc(what), "", next);
+  liveError(`The ${role} image could not be added.`, what, next, [[`Choose another ${role} image`, "add-" + id]]);
 }
 
 //: The largest file the browser will send (the server enforces its own limit).
@@ -2406,17 +2822,17 @@ function setSlot(id, file) {
     if (!file) return resolve(false);
     if (!/^image\//.test(file.type || "") && !/\.(png|jpe?g|tiff?|bmp)$/i.test(file.name || "")) {
       slotError(id, `That file is ${file.type || "an unknown type"}. Use a PNG, JPEG or TIFF image.`,
-        "Export the image as PNG or TIFF and add it again.");
+        "export the image as PNG or TIFF and add it again.");
       return resolve(false);
     }
     if (file.size && file.size > LIVE_MAX_BYTES) {
       slotError(id, `That file is ${Math.round(file.size / 1048576)} MB; the limit is ${LIVE_MAX_BYTES / 1048576} MB.`,
-        "The run down-samples to 1024 px anyway — crop or reduce the image and add it again.");
+        "the run down-samples to 1024 px anyway — crop or reduce the image and add it again.");
       return resolve(false);
     }
     const r = new FileReader();
     r.onerror = () => {
-      slotError(id, "That file could not be read.", "Try another copy of the image.");
+      slotError(id, "The file could not be read.", "choose another copy of the image.");
       resolve(false);
     };
     r.onload = () => {
@@ -2428,25 +2844,51 @@ function setSlot(id, file) {
           paintSlot(id);
           slotError(id, `That image is ${probe.width} × ${probe.height} px. ` +
             "The pipeline needs at least 64 px on each side.",
-            "Use a larger crop — a few hundred pixels per side is enough.");
+            "use a larger crop — a few hundred pixels per side is enough.");
           return resolve(false);
         }
         const k = Math.max(1, Math.ceil(Math.max(probe.width, probe.height) / 1024));
         LIVE[id] = {b64: url.split(",")[1], url, name: file.name || (id + " image"),
                     w: probe.width, h: probe.height, k,
                     kb: Math.max(1, Math.round((file.size || url.length * 0.75) / 1024))};
+        liveInputsChanged(id);
         paintSlot(id);
         resolve(true);
       };
       probe.onerror = () => {
-        slotError(id, "That file is not a readable image — it may be corrupted, or a TIFF this browser cannot preview.",
-          "Re-export it as PNG and add it again.");
+        slotError(id, "The file is not a readable image — it may be damaged, or a TIFF this browser cannot preview.",
+          "re-export it as PNG and add it again.");
         resolve(false);
       };
       probe.src = url;
     };
     r.readAsDataURL(file);
   });
+}
+
+// Start a new analysis: clear every live input and result, go back to step 1.
+// Recorded datasets on the page are not touched.
+function startNewAnalysis() {
+  if (LIVE.abort) LIVE.abort.abort();
+  LIVE.src = null; LIVE.ref = null; LIVE.thr = null; LIVE.last = null;
+  LIVE.phase = "input"; LIVE.lastKind = null; LIVE.error = null;
+  ["src", "ref", "thr"].forEach(id => {
+    const input = document.getElementById("live-" + id);
+    if (input) input.value = "";
+    const drop = document.getElementById("drop-" + id);
+    if (drop) drop.classList.remove("bad");
+    const msg = document.getElementById("msg-" + id);
+    if (msg) msg.textContent = "";
+    paintSlot(id);
+  });
+  const out = $("#live-out");
+  if (out) out.innerHTML = '<p class="empty">No result yet. Register the images in step 4.</p>';
+  document.querySelectorAll(".sampbtn").forEach(b => b.classList.remove("on"));
+  setStages({uploaded: false});
+  liveStatus("New analysis started. Add two images to begin.", false, false);
+  paintGuide();
+  const g = document.getElementById("live-guide");
+  if (g) g.scrollIntoView({behavior: smoothOrInstant(), block: "start"});
 }
 
 async function loadExample(which) {
@@ -2565,7 +3007,13 @@ function byName(fileList) {
 
 function wireLive() {
   paintSamples();
-  document.querySelectorAll('input[name="live-eng"]').forEach(r => { r.onchange = () => liveReady(true); });
+  document.querySelectorAll('input[name="live-eng"]').forEach(r => {
+    r.onchange = () => {
+      LIVE.engineTouched = true;
+      liveReady(true);
+      liveStatus(`Engine selected: <b>${esc(liveEngineName())}</b>. Click <b>${LIVE.thr ? "Register and verify (3 images)" : "Register images"}</b> to begin.`, false, false);
+    };
+  });
 
   const multi = $("#live-multi");
   if (multi) multi.onchange = async () => {
@@ -2604,12 +3052,13 @@ function wireLive() {
     };
     const clear = drop.querySelector("[data-clear]");
     if (clear) clear.onclick = ev => {
-      ev.stopPropagation(); LIVE[id] = null; input.value = ""; paintSlot(id);
+      ev.stopPropagation(); LIVE[id] = null; input.value = ""; liveInputsChanged(id); paintSlot(id);
     };
   });
   const swap = $("#live-swap");
   if (swap) swap.onclick = () => {
     const a = LIVE.src; LIVE.src = LIVE.ref; LIVE.ref = a;
+    liveInputsChanged("src");
     paintSlot("src"); paintSlot("ref");
     liveStatus("Swapped — matching is <b>not</b> symmetric, so the two directions can differ.",
       false, false);
@@ -2658,7 +3107,58 @@ function wireLive() {
   const cancel2 = $("#live-cancel");
   const cancel = cancel2;
   if (cancel) cancel.onclick = () => { if (LIVE.abort) LIVE.abort.abort(); };
+  const verify = $("#live-verify");
+  if (verify) verify.onclick = runLive;
+  // Every guide, recovery and next-step button carries a data-act; one
+  // handler performs it, so a label always does what it says.
+  if (card) card.addEventListener("click", ev => {
+    const b = ev.target.closest("[data-act]");
+    if (b && card.contains(b)) liveAct(b.dataset.act);
+  });
+  // Phones: when the guide panel has scrolled away, a compact dock at the
+  // bottom keeps the current step and its next action in reach.
+  const dock = document.getElementById("live-dock"), gp = document.getElementById("live-guide");
+  if (dock && gp && card && "IntersectionObserver" in window) {
+    let guideVisible = true, cardVisible = true;
+    const upd = () => { dock.hidden = guideVisible || !cardVisible; };
+    new IntersectionObserver(es => { guideVisible = es[0].isIntersecting; upd(); }).observe(gp);
+    new IntersectionObserver(es => { cardVisible = es[0].isIntersecting; upd(); }).observe(card);
+  }
   paintSlot("src"); paintSlot("ref"); paintSlot("thr");
+}
+
+// What each guide button does. The file-picker actions run inside the click,
+// so the browser treats them as the reader's own gesture.
+function liveAct(act) {
+  const click = id => { const i = document.getElementById(id); if (i) i.click(); };
+  const go = (id, focusSel) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({behavior: smoothOrInstant(), block: "start"});
+    if (focusSel) { const f = document.querySelector(focusSel); if (f) f.focus({preventScroll: true}); }
+  };
+  switch (act) {
+    case "add-src": click("live-src"); break;
+    case "add-ref": click("live-ref"); break;
+    case "add-thr": go("lstep-verify"); click("live-thr"); break;
+    case "samples": go("live-samples"); break;
+    case "engine": go("lstep-engine", 'input[name="live-eng"]:checked'); break;
+    case "register": case "verify": runLive(); break;
+    case "use-b1": {
+      const r = document.querySelector('input[name="live-eng"][value="B1"]');
+      if (r) { r.checked = true; LIVE.engineTouched = true; }
+      runLive(); break;
+    }
+    case "cancel": if (LIVE.abort) LIVE.abort.abort(); break;
+    case "result": go("lstep-result"); break;
+    case "details": {
+      const d = document.getElementById("live-details");
+      if (d) { d.open = true; d.scrollIntoView({behavior: smoothOrInstant(), block: "start"}); }
+      else go("lstep-result");
+      break;
+    }
+    case "new": startNewAnalysis(); break;
+    default: break;
+  }
 }
 
 /* -------------------------------------------------------------- the run */
@@ -2666,23 +3166,27 @@ async function runLive() {
   if (!LIVE.src || !LIVE.ref || LIVE.running) return;
   const out = $("#live-out");
   out.innerHTML = "";
-  LIVE.running = true; liveReady();
-  const run = $("#live-run");
+  LIVE.running = true; LIVE.phase = "running"; LIVE.error = null; liveReady();
+  const run = $("#live-run"), verify = $("#live-verify");
   const t0 = Date.now();
   const RUNNING = ["estimate", "refine", "reestimate", "verify"];
   setStages({uploaded: true, active: RUNNING});
+  const triplet = !!LIVE.thr;
+  const what = triplet ? "Registering and verifying three images" : "Registering the images";
   const tick = setInterval(() => liveStatus(
-    `Registering on the server… <b>${((Date.now() - t0) / 1000).toFixed(0)} s</b> · ` +
-    "estimate → refine → re-estimate → verify, on CPU", false, true), 250);
-  liveStatus("Registering on the server…", false, true);
-  if (run) { run.innerHTML = '<span class="spin" aria-hidden="true"></span>Registering…';
-             run.setAttribute("aria-busy", "true"); }
+    `${what}… <b>${((Date.now() - t0) / 1000).toFixed(0)} s</b> · ` +
+    "finding matching points, estimating and refining the transformation, weighing the evidence", false, true), 250);
+  liveStatus(what + "…", false, true);
+  const busy = b => { if (b) { b.innerHTML = '<span class="spin" aria-hidden="true"></span>Working…';
+                               b.setAttribute("aria-busy", "true"); } };
+  busy(triplet && document.activeElement === verify ? verify : run);
   const cancel = $("#live-cancel");
   if (cancel) cancel.hidden = false;
   LIVE.abort = new AbortController();
   const engine = liveEngine();
+  const out1 = document.getElementById("lstep-run");
+  if (out1) out1.scrollIntoView({behavior: smoothOrInstant(), block: "start"});
   try {
-    const triplet = !!LIVE.thr;
     const resp = triplet
       ? await fetch("/api/register-triplet", {
           method: "POST", headers: {"Content-Type": "application/json"},
@@ -2698,21 +3202,29 @@ async function runLive() {
     if (!resp.ok) {
       const why = String(d.detail || ("HTTP " + resp.status));
       setStages({uploaded: true, failed: ["estimate"]});
+      out.innerHTML = '<p class="empty">No result — the registration did not complete. See step 4.</p>';
+      let E;
       if (/learned|extra/i.test(why))
-        liveError("That engine is not installed on this machine.", why + ".",
-          "Nothing was estimated. To run anyway, choose <b>RootSIFT</b>, which needs nothing extra.");
+        E = {what: "That engine is not installed on this machine.", why: why + ".",
+             next: "nothing was estimated. To run anyway, choose <b>RootSIFT</b>, which needs nothing extra.",
+             actions: [["Use RootSIFT and register", "use-b1"], ["Change engine", "engine"]]};
       else if (resp.status === 413)
-        liveError("An image is larger than the server accepts.", why + ".",
-          "Nothing was estimated. Crop or reduce the image; the run down-samples to 1024 px anyway.");
+        E = {what: "An image is larger than the server accepts.", why: why + ".",
+             next: "nothing was estimated. Crop or reduce the image; the run down-samples to 1024 px anyway.",
+             actions: [["Choose another source image", "add-src"], ["Choose another reference image", "add-ref"]]};
       else if (resp.status === 400)
-        liveError("The server refused the images.", why + ".",
-          "Nothing was estimated. Check that both files are images of the same ground.");
+        E = {what: "The server refused the images.", why: why + ".",
+             next: "nothing was estimated. Check that both files are images of the same ground.",
+             actions: [["Choose another source image", "add-src"], ["Choose another reference image", "add-ref"]]};
       else
-        liveError("The registration did not complete.", why + ".",
-          "Nothing was estimated. Try again; if it repeats, restart the demo server.");
+        E = {what: "The registration did not complete.", why: why + ".",
+             next: "nothing was estimated. Try again; if it repeats, restart the demo server.",
+             actions: [["Try again", "register"]]};
+      LIVE.phase = "error"; LIVE.error = E;
+      liveError(E.what, E.why, E.next, E.actions);
       return;
     }
-    LIVE.last = d;
+    LIVE.last = d; LIVE.phase = "result"; LIVE.lastKind = triplet ? "triplet" : "pair";
     out.innerHTML = triplet ? renderLiveTriplet(d) : renderLive(d);
     wireLiveResult(d, triplet);
     const ran = (d.pipeline_order && d.pipeline_order.length) ? d.pipeline_order : RUNNING;
@@ -2730,19 +3242,28 @@ async function runLive() {
         `<b>${d.loop_error_px === null ? "not evaluable" : sci(d.loop_error_px) + " px"}</b> ` +
         `against ${d.loop_reject_threshold_px} px · verdict <b>${esc(d.verdict.status)}</b>` +
         (engine === "both" ? " · ran on <b>RootSIFT</b>: the three-image path uses one engine, " +
-          "and “Both” applies to pairs" : "")
+          "and “Both” applies to pairs" : "") + " · the report is in step 5"
       : `Done in <b>${(+d.timing.wall_s).toFixed(1)} s</b> · ` +
         `${d.summary.n_inliers} inliers of ${d.summary.n_putative} putative · ` +
-        `verdict <b>${esc(d.verdict.status)}</b>`, false, false);
+        `verdict <b>${esc(d.verdict.status)}</b> · the report is in step 5`, false, false);
   } catch (e) {
     setStages({uploaded: true});
-    if (e.name === "AbortError") liveStatus("Cancelled. Nothing was estimated.", false, false);
-    else liveError("The request did not reach the server.", e.message + ".",
-      "Check that the demo server is still running, then press Register again.");
+    if (e.name === "AbortError") {
+      LIVE.phase = "input";
+      out.innerHTML = '<p class="empty">No result — the registration was cancelled.</p>';
+      liveStatus("Cancelled. Nothing was estimated. Click <b>Register images</b> to try again.", false, false);
+    } else {
+      LIVE.phase = "error";
+      LIVE.error = {what: "The request did not reach the server.", why: e.message + ".",
+        next: "check that the demo server is still running, then try again.",
+        actions: [["Try again", "register"]]};
+      liveError(LIVE.error.what, LIVE.error.why, LIVE.error.next, LIVE.error.actions);
+    }
   } finally {
     clearInterval(tick);
     LIVE.running = false; LIVE.abort = null;
-    if (run) { run.removeAttribute("aria-busy"); run.textContent = "Register"; }
+    [run, verify].forEach(b => { if (b) b.removeAttribute("aria-busy"); });
+    if (verify) verify.textContent = "Run loop-closure verification";
     if (cancel) cancel.hidden = true;
     liveReady(true);          // keep the completion (or error) line on screen
   }
@@ -2758,6 +3279,25 @@ function renderLive(d) {
   const reg = d.registered_png;
   const says = e => e.verdict === "decisive_against" ? "fail"
     : (e.verdict === "supports" ? "pass" : "neutral");
+  // Plain-language reading, derived only from the verdict's own fields.
+  const ev = v.evidence || [];
+  const loopEv = ev.find(e => e.name === "loop_error_px");
+  const loopRan = !!loopEv && loopEv.value != null;
+  const disagree = ev.some(e => e.name === "engine_agreement_px" && e.verdict === "against");
+  const counted = ev.filter(e => e.weight !== "excluded");
+  const nFor = counted.filter(e => e.verdict === "supports").length;
+  const nAgainst = counted.filter(e => e.verdict === "against" || e.verdict === "decisive_against").length;
+  const meaning = v.status === "REJECTED"
+    ? "A decisive check failed, so the alignment is refused and no aligned image is produced. The reasons under Why, below, name the check."
+    : (v.status === "VERIFIED"
+      ? "Loop closure agreed and no decisive check failed. This is corroboration by the named evidence, not proof that the alignment is correct."
+      : (disagree ? "The two engines reached different alignments, so neither is trusted."
+        : (!loopRan ? "Nothing counted against the alignment, but the decisive check — loop closure — needs a third image, so the system does not certify it."
+          : "The evidence is mixed, so the alignment is not certified.")));
+  const nextStep = v.status === "REJECTED"
+    ? "Check that both images show the same ground and have north up, or try another engine (step 3)."
+    : (v.status === "VERIFIED" ? "Review the evidence and the technical details below."
+      : "To go further, add a third image that overlaps both (step 6) and run loop-closure verification.");
   return `
     <div class="rsum ${esc(v.status)}" id="live-result">
       <div>
@@ -2767,7 +3307,14 @@ function renderLive(d) {
       </div>
       <div class="rkey"><div class="kv">${s.n_inliers} <small>/ ${s.n_putative}</small></div>
         <div class="kl">inliers of putative matches</div></div>
-      <ul class="reasons rint">${v.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
+      <dl class="rread">
+        <div><dt>What this means</dt><dd>${esc(meaning)}</dd></div>
+        <div><dt>Evidence</dt><dd>${nFor} of ${counted.length} counted signals support the alignment; ${nAgainst} ${nAgainst === 1 ? "counts" : "count"} against it.
+          Fit error is shown but never counted.</dd></div>
+        <div><dt>Next</dt><dd>${esc(nextStep)}</dd></div>
+      </dl>
+      <details class="rwhy"><summary>Why — the verdict's own reasons</summary>
+        <ul class="reasons rint">${v.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul></details>
       <div class="rprov"><span class="kind live">Live</span>
         <span class="conf">your images · engine ${esc(s.engine)} · ${(+d.timing.wall_s).toFixed(1)} s · not a recorded number</span></div>
     </div>
@@ -2798,7 +3345,7 @@ function renderLive(d) {
     </table></div>
     ${agr ? `<div class="note" style="margin-top:8px"><b>Engine agreement (B1 vs B4L):</b> ${esc(agr.statement)}</div>` : ""}
 
-    <details class="rdetails"><summary>Technical details <small>· correspondences, engine counts, transform, inputs</small></summary>
+    <details class="rdetails" id="live-details"><summary>View technical details <small>· correspondences, engine counts, transform, inputs</small></summary>
       <div class="rdbody">
       <div class="note"><b>Correspondences.</b> Blue survived geometric
         verification; red was rejected. Straight, parallel blue lines are what a correct alignment looks
@@ -2829,7 +3376,7 @@ function renderLive(d) {
         download="registered.png">Download the registered image</a>` : ""}
       <button class="dlbtn" id="live-dl-points">Download the match points (CSV)</button>
       <button class="dlbtn" id="live-dl-json">Download this result as JSON</button>
-      <button class="btn btn-tertiary" id="live-again">Run another pair</button>
+      <button class="btn btn-tertiary" id="live-again">Start a new analysis</button>
     </div>
     ${notClaimed(d.caveats)}`;
 }
@@ -2842,6 +3389,18 @@ function renderLiveTriplet(d) {
   const loop = d.loop_error_px;
   const ok = loop !== null && loop < d.loop_reject_threshold_px;
   const reg = d.registered_png;
+  const failedEdge = (d.edges || []).find(e => !e.pass);
+  const meaning = v.status === "VERIFIED"
+    ? "The three alignments, each estimated from its own pair of images, return to the start within the " +
+      `${d.loop_reject_threshold_px} px line and no decisive check failed. Corroborated — not proven correct.`
+    : (loop !== null && !ok
+      ? `The three alignments do not return to the start: the loop misses by ${sci(loop)} px, at or above the ${d.loop_reject_threshold_px} px line.`
+      : (failedEdge ? `The edge ${failedEdge.edge} found too few verified matches, so a decisive check failed.`
+        : (loop === null ? "The loop could not be evaluated, so the decisive check did not run."
+          : "The evidence is mixed, so the alignment is not certified.")));
+  const nextStep = v.status === "VERIFIED"
+    ? "Open Technical details for the measurements, download the result if you need it, then start a new analysis (step 7)."
+    : "Check that all three images overlap one another and have north up, or try another engine (step 3).";
   return `
     <div class="rsum ${esc(v.status)}" id="live-result">
       <div>
@@ -2851,7 +3410,14 @@ function renderLiveTriplet(d) {
       </div>
       <div class="rkey"><div class="kv">${loop === null ? "—" : sci(loop)} <small>px</small></div>
         <div class="kl">loop closure · reject at ≥ ${d.loop_reject_threshold_px} px</div></div>
-      <ul class="reasons rint">${v.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
+      <dl class="rread">
+        <div><dt>What this means</dt><dd>${esc(meaning)}</dd></div>
+        <div><dt>Evidence</dt><dd>${(d.edges || []).filter(e => e.pass).length} of ${(d.edges || []).length} edges passed the
+          match-count rule; loop closure ${loop === null ? "not evaluable" : sci(loop) + " px"} against ${d.loop_reject_threshold_px} px.</dd></div>
+        <div><dt>Next</dt><dd>${esc(nextStep)}</dd></div>
+      </dl>
+      <details class="rwhy"><summary>Why — the verdict's own reasons</summary>
+        <ul class="reasons rint">${v.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul></details>
       <div class="rprov"><span class="kind live">Live</span>
         <span class="conf">your images · engine ${esc(d.engine)} · ${(+d.timing.wall_s).toFixed(1)} s · not a recorded number</span></div>
     </div>
@@ -2886,7 +3452,7 @@ function renderLiveTriplet(d) {
     <input class="swiperange" id="live-swipe-range" type="range" min="0" max="100" value="50"
            aria-label="compare the registered image A against image B">` : ""}
 
-    <details class="rdetails"><summary>Technical details <small>· edges, evidence, inputs</small></summary>
+    <details class="rdetails" id="live-details"><summary>View technical details <small>· edges, evidence, inputs</small></summary>
       <div class="rdbody">
       <div class="tscroll"><table>
         <thead><tr><th>edge</th><th class="n">putative</th><th class="n">inliers</th>
@@ -2916,7 +3482,7 @@ function renderLiveTriplet(d) {
       ${reg ? `<a class="dlbtn" id="live-dl-img" href="${esc(reg)}"
         download="registered.png">Download the registered image</a>` : ""}
       <button class="dlbtn" id="live-dl-json">Download this result as JSON</button>
-      <button class="btn btn-tertiary" id="live-again">Run another set</button>
+      <button class="btn btn-tertiary" id="live-again">Start a new analysis</button>
     </div>
     ${notClaimed(d.caveats)}`;
 }
@@ -2970,16 +3536,7 @@ function wireLiveResult(d, triplet) {
     setTimeout(() => URL.revokeObjectURL(a.href), 4000);
   };
   const again = document.getElementById("live-again");
-  if (again) again.onclick = () => {
-    LIVE.src = null; LIVE.ref = null; LIVE.thr = null; LIVE.last = null;
-    ["src", "ref", "thr"].forEach(id => {
-      const input = document.getElementById("live-" + id);
-      if (input) input.value = "";
-      paintSlot(id);
-    });
-    $("#live-out").innerHTML = "";
-    document.getElementById("drop-src").scrollIntoView({behavior: smoothOrInstant(), block: "center"});
-  };
+  if (again) again.onclick = () => startNewAnalysis();
   if (!triplet) drawLiveCorrespondences(d);
 }
 

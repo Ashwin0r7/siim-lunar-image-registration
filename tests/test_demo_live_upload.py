@@ -133,7 +133,7 @@ def test_the_result_offers_the_evidence_and_a_way_to_keep_it(script):
     assert "live-corr" in body, "the correspondence overlay must be drawn"
     assert "Download the registered image" in body
     assert "Download this result as JSON" in body
-    assert "Run another pair" in body
+    assert "Start a new analysis" in body
     assert "not a recorded number" in body
 
 
@@ -319,7 +319,7 @@ def test_the_card_offers_a_third_slot_and_says_what_it_buys(script, page):
     assert "loop closure" in card and "VERIFIED" in card, (
         "the third slot must say what it changes, or it is just another box")
     ready = _fn(script, "liveReady")
-    assert 'LIVE.thr ? "Register triplet" : "Register"' in ready
+    assert 'LIVE.thr ? "Register and verify (3 images)" : "Register images"' in ready
     assert "only way past INCONCLUSIVE" in ready
 
 
