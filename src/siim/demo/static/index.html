@@ -97,6 +97,20 @@ button{font:inherit;color:inherit}
 .ind::before{content:"";display:inline-block;width:6px;height:6px;
   background:var(--accent);margin-right:9px;vertical-align:1px}
 .ind.live::before{background:var(--ink)}
+/* Anything scrolled into view -- a nav anchor, the live result the card scrolls
+   to after a run -- clears the sticky bar. Measured in Chrome on 2026-09-23:
+   the live verdict's own headline landed at y = 0, under the 53 px bar. */
+html{scroll-padding-top:calc(var(--topbar) + 14px)}
+/* On laptop widths the thirteen links do not fit: the bar scrolls, so say so
+   with a fade at its edge, and let the indicator truncate with an ellipsis
+   instead of being cut mid-word. */
+@media (max-width:1680px){
+  .top .wrap{gap:20px}
+  .top nav{gap:16px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);
+    mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent);padding-right:30px}
+  .top nav a{letter-spacing:.07em}
+  .ind{max-width:230px;overflow:hidden;text-overflow:ellipsis}
+}
 
 /* --------------------------------------------------------------------- hero */
 .mast{position:relative;min-height:min(80vh,780px);display:flex;align-items:flex-end;
@@ -1900,7 +1914,7 @@ function sampleCard(s) {
     <button class="sampbtn" data-sample="${esc(s.id)}" title="${esc(s.why)}">
       <span class="sk">${s.kind === "triplet" ? "3 images · loop closure" : "2 images"}${
         s.local_only ? ' · <b class="loc">local only · © ISRO</b>' : ""}</span>
-      <span class="sthumbs">${s.files.map(f => `<img src="${esc(f.url)}" alt="" loading="lazy">`).join("")}</span>
+      <span class="sthumbs">${s.files.map(f => `<img src="${esc(f.url)}?thumb=1" alt="" decoding="async">`).join("")}</span>
       <span class="stt">${esc(s.title)}</span>
       <span class="si">${esc(inst)}</span>
       <span class="sm"><span class="vb v-${esc(m.status || "")}">${esc(m.status || "?")}</span>
@@ -2093,7 +2107,10 @@ async function runLive() {
     // On a long page the result lands below the fold; a reader who pressed a
     // button should not have to hunt for what it did.
     const v = out.querySelector(".verdict");
-    if (v && v.scrollIntoView) v.scrollIntoView({behavior: "smooth", block: "center"});
+    // Instant when the tab is hidden: Chrome defers a smooth scroll there
+    // (measured 2026-09-23), so the reader returned to a result off screen.
+    if (v && v.scrollIntoView) v.scrollIntoView({behavior: document.hidden ? "auto" : "smooth",
+                                                 block: "center"});
     liveStatus(triplet
       ? `Done in <b>${(+d.timing.wall_s).toFixed(1)} s</b> · three edges · loop ` +
         `<b>${d.loop_error_px === null ? "not evaluable" : sci(d.loop_error_px) + " px"}</b> ` +

@@ -929,14 +929,39 @@ def samples() -> dict:
             "folder": "sample_images/", "scenarios": items}
 
 
+@lru_cache(maxsize=64)
+def _sample_thumb(path: str, mtime: float) -> bytes:
+    """A 192 px, 8-bit preview of a 16-bit sample. The gallery shows 17 of them
+    at once; decoding the full 16-bit files painted black cards for a second in
+    Chrome (measured 2026-09-23), and a preview carries no measurement."""
+    from PIL import Image
+    with Image.open(path) as im:
+        a = np.asarray(im, dtype=np.float64)
+    k = max(1, int(np.ceil(max(a.shape) / 192)))
+    a = a[: a.shape[0] // k * k, : a.shape[1] // k * k]
+    a = a.reshape(a.shape[0] // k, k, a.shape[1] // k, k).mean(axis=(1, 3))
+    lo, hi = np.percentile(a, [1.0, 99.0])
+    q = np.clip((a - lo) / (hi - lo) if hi > lo else a * 0, 0, 1)
+    buf = io.BytesIO()
+    Image.fromarray((q * 255).astype(np.uint8)).save(buf, format="PNG", optimize=True)
+    return buf.getvalue()
+
+
 @app.get("/samples/{scenario}/{name}")
-def sample_file(scenario: str, name: str) -> FileResponse:
+def sample_file(scenario: str, name: str, thumb: bool = False):
     """One sample image, and only one the manifest names -- an allow-list, not
-    a directory mount, for the same reason ``/artefact`` is one."""
+    a directory mount, for the same reason ``/artefact`` is one. ``thumb=1``
+    returns a small 8-bit preview instead of the 16-bit file."""
+    from fastapi.responses import Response
     for s in _sample_scenarios():
         if s["id"] == scenario and any(f["file"] == name for f in s["files"]):
             base = SAMPLES_LOCAL if s.get("local_only") else SAMPLES / scenario
-            return FileResponse(base / name, media_type="image/png")
+            path = base / name
+            if thumb:
+                return Response(_sample_thumb(str(path), path.stat().st_mtime),
+                                media_type="image/png",
+                                headers={"Cache-Control": "max-age=3600"})
+            return FileResponse(path, media_type="image/png")
     raise HTTPException(404, "not a sample file")
 
 

@@ -111,3 +111,18 @@ def test_the_card_offers_multi_file_loading_and_every_table_is_wrapped():
     assert 'id="live-multi"' in card and "multiple" in card
     assert 'id="live-samples"' in card
     assert "function wrapTables" in script and "MutationObserver" in script
+
+
+def test_thumbnails_are_small_previews_and_still_allow_listed():
+    c = _client()
+    s = c.get("/api/samples").json()["scenarios"][-1]
+    url = s["files"][0]["url"]
+    full, thumb = c.get(url), c.get(url + "?thumb=1")
+    assert thumb.status_code == 200 and thumb.headers["content-type"] == "image/png"
+    assert len(thumb.content) * 20 < len(full.content)
+    assert c.get(f"/samples/{s['id']}/README.md?thumb=1").status_code == 404
+
+
+def test_scroll_targets_clear_the_sticky_bar():
+    page = PAGE.read_text(encoding="utf-8")
+    assert "scroll-padding-top" in page
