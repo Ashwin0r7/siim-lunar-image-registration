@@ -10,8 +10,12 @@ from .register import (
     with_agreement,
 )
 from .select import MODELS, ModelSelection, reestimate, select_model
+from .tiled import TiledResult, TileOutcome, register_large
 
 __all__ = [
+    "TiledResult",
+    "TileOutcome",
+    "register_large",
     "AGREEMENT_FLOOR_PX",
     "EngineAgreement",
     "engine_agreement",

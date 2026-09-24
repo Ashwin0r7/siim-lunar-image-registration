@@ -328,6 +328,92 @@ def register_command(args: argparse.Namespace) -> int:
     return 3 if res.verdict.status == "REJECTED" else 0
 
 
+def register_large_command(args: argparse.Namespace) -> int:
+    """``siim register-large``: the tile driver for images too big to match whole."""
+    from .pipeline import register_large
+
+    t_start = time.perf_counter()
+    src_path, ref_path, out = Path(args.source), Path(args.reference), Path(args.out)
+    try:
+        src_raw, ref_raw = load_image(src_path), load_image(ref_path)
+    except (OSError, ValueError) as exc:
+        print(f"cannot read input: {exc}", file=sys.stderr)
+        return 2
+    out.mkdir(parents=True, exist_ok=True)
+    names = ["tiles.json", "metrics.json", "verdict.json",
+             "registered_preview.png", "difference_preview.png"]
+    clash = [n for n in names if (out / n).exists()]
+    if clash and not args.overwrite:
+        print(f"{clash} already exist in {out}; pass --overwrite to replace them", file=sys.stderr)
+        return 2
+    src = preprocess(src_raw, args.decimate)
+    ref = preprocess(ref_raw, args.decimate)
+
+    res = register_large(src, ref, engine=args.engine.upper(), model=args.model,
+                         tile=args.tile, coarse_max=args.coarse_max, seed=args.seed,
+                         refine=not args.no_refine)
+
+    # Preview products at the coarse scale: warping a full frame at native
+    # resolution can cost gigabytes, so the full-resolution product is left to
+    # the caller, who has the transform. The preview is honest about being one.
+    product: dict[str, Any] | None = None
+    if res.verdict.status != "REJECTED" and res.transform is not None:
+        from .pipeline.tiled import _block_decimate, decimation_transform
+        k = res.coarse_k
+        s = decimation_transform(k)
+        t_coarse = s.inverse() @ res.transform @ s
+        src_c, ref_c = _block_decimate(src, k), _block_decimate(ref, k)
+        reg, valid = warp(src_c, t_coarse, out_shape=ref_c.shape, order=3, cval=np.nan)
+        _png(out / "registered_preview.png", reg, valid)
+        diff = np.where(valid & np.isfinite(ref_c), np.abs(reg - ref_c), np.nan)
+        _png(out / "difference_preview.png", diff, valid)
+        product = {"preview_decimation": k,
+                   "note": "preview at the coarse scale; the full-resolution transform "
+                           "is in metrics.json (transform_matrix, full-frame pixels)"}
+
+    prov = {
+        "tool": f"siim {__version__} register-large",
+        "time_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "git_commit": _git_commit(), "versions": _versions(args.engine.upper()),
+        "inputs": {
+            "source": {"path": str(src_path), "sha256": _sha256(src_path), "shape_raw": list(src_raw.shape)},
+            "reference": {"path": str(ref_path), "sha256": _sha256(ref_path), "shape_raw": list(ref_raw.shape)},
+        },
+        "preprocessing": {"decimation": args.decimate,
+                          "stretch": "per-image 1-99 percentile, clipped to [0, 1]",
+                          "shape_used": list(src.shape)},
+        "engine": args.engine.upper(), "seed": args.seed,
+        "tile_px": args.tile, "coarse_max_px": args.coarse_max,
+        "pre_registered_rule": RULE,
+    }
+    (out / "tiles.json").write_text(json.dumps(
+        {"coarse": res.coarse.summary(), "tiles": [t.as_dict() for t in res.tiles]},
+        indent=2, default=_json_default), encoding="utf-8")
+    metrics = {"primary": res.summary(), "verdict_metrics": res.verdict.metrics,
+               "coverage": {k: res.verdict.metrics.get(k)
+                            for k in ("coverage_max_gap", "coverage_occupancy")},
+               "product": product, "wall_s": time.perf_counter() - t_start}
+    (out / "metrics.json").write_text(json.dumps(metrics, indent=2, default=_json_default),
+                                      encoding="utf-8")
+    verdict = res.verdict.as_dict()
+    verdict["rule_stated_separately"] = RULE
+    verdict["what_verified_means"] = ("corroborated by the named evidence; no ground truth exists "
+                                      "for a real pair and none is claimed")
+    verdict["provenance"] = prov
+    verdict["files"] = {n: str(out / n) for n in names if (out / n).exists()}
+    (out / "verdict.json").write_text(json.dumps(verdict, indent=2, default=_json_default),
+                                      encoding="utf-8")
+
+    s = res.summary()
+    print(f"{res.verdict.status} / {res.verdict.confidence}  "
+          f"tiles={s['n_tiles']} passed={s['tile_status_counts']}  "
+          f"pooled={s['n_pooled']} inliers={res.n_inliers} "
+          f"model={s['model']} ({res.model_selected_by})  -> {out}")
+    for r in res.verdict.reasons:
+        print(f"  - {r}")
+    return 3 if res.verdict.status == "REJECTED" else 0
+
+
 def _json_default(o: Any):
     if isinstance(o, np.ndarray):
         return o.tolist()
@@ -353,6 +439,22 @@ def build_parser() -> argparse.ArgumentParser:
     r.add_argument("--no-refine", action="store_true", help="skip sub-pixel refinement (diagnostic)")
     r.add_argument("--overwrite", action="store_true")
     r.set_defaults(func=register_command)
+    g = sub.add_parser("register-large",
+                       help="register a large source to a large reference by tiles "
+                            "(coarse pass, per-tile pipeline, pooled re-fit, one verdict)")
+    g.add_argument("source")
+    g.add_argument("reference")
+    g.add_argument("--out", required=True, help="output directory")
+    g.add_argument("--engine", default="B1", help="B1 (RootSIFT) or B4L (DISK+LightGlue)")
+    g.add_argument("--model", default="affine", help="RANSAC model for the estimates")
+    g.add_argument("--tile", type=int, default=1024, help="tile side in pixels")
+    g.add_argument("--coarse-max", type=int, default=2048,
+                   help="longest side of the coarse alignment pass")
+    g.add_argument("--decimate", type=int, default=1, help="block-mean decimation before anything")
+    g.add_argument("--seed", type=int, default=0)
+    g.add_argument("--no-refine", action="store_true", help="skip sub-pixel refinement (diagnostic)")
+    g.add_argument("--overwrite", action="store_true")
+    g.set_defaults(func=register_large_command)
     return ap
 
 
