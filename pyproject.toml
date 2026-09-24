@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "siim"
 version = "0.1.0.dev0"
 description = "Multi-modal, Sun-angle and scale invariant lunar image correspondence (SIH 2026, PS 26166)"
+license = {file = "LICENSE"}
 requires-python = ">=3.11"
 # Everything imported at module scope anywhere under src/siim/, so that
 # `pip install -e .` yields a repository that runs the test suite and the
