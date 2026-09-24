@@ -133,6 +133,7 @@ And two results argue against the *method*, not the architecture:
 | B3 *(note 2026-09-23, EXP-021)* | *(row above retained under integrity rule 3)* | **RAN — measured, not closed.** B1 VERIFIED FDR 0 / 12 and FRR 0 / 12 on the pooled reading; **NOT EVALUABLE on the held-out site** (ground truth reached 2 of 7 frames); **no wrong transform in the labelled population** (E-058), so FA was never exercised. Successor item **B3′: tier-A ground truth on the hard frames** (an illumination-matched or second independent reference) - the only route to a population that contains its own negatives |
 | B4 | **Coverage calibration at real inlier counts** | **open**, and EXP-016 gives it a second reason: occupancy is 0.484 at the scale envelope's rung |
 | B4 *(note 2026-09-23, EXP-022)* | *(row above retained under integrity rule 3)* | **RAN — answered, not closed.** Floor at recorded noise **T″ = 0.359**; 25 of 28 evaluable edge-rows within 1 px; **three over** (9, 28 and 68 inliers: 3.93, 1.66, 1.04 px), the 68-inlier edge *above* the floor; 7 of 22 distinct edges unsampled. Criterion 4 stays NOT MET, and 4″ is not adopted (D-069). Successor **B4′**: the direct bound from each edge's own inlier positions (needs a re-run of REAL-DATA-07 that records them) and a seventh layout family for the unsampled cells |
+| B4′ *(note 2026-09-24, EXP-024)* | *(row above retained under integrity rule 3)* | **RAN — the direct bound exists for every edge.** All 22 distinct edges re-matched with positions kept (counts and occupancies reproduced exactly); **20 of 22 within 1 px from their own layouts**, over: the 9-inlier (5.42 px) and 28-inlier (1.59 px) edges. The 7 unsampled cells are decided directly (all within, 0.07–0.51 px), so the seventh layout family is no longer needed for the criterion. The 68-inlier edge's proxy call **falls** (own layout 0.83 px against the proxy's 1.04) — and that pair, same count and occupancy on opposite sides of the bound, is the sharpest demonstration that no occupancy floor can be the criterion. **Triplets: 11 of 13 clear on all edges** (was 3/3/7). Criterion 4 stays NOT MET as frozen (D-070, D-069-N1) |
 
 ### Tier C — debts and loose ends
 
@@ -178,7 +179,11 @@ And two results argue against the *method*, not the architecture:
 8. **"Your success criterion 4 fails."** Unchanged, and now with a second
    number against it. *(Later, EXP-022: it fails on **three named edges**,
    and the stage shows why no occupancy floor could fix it. That answer is
-   stronger than the question, and it should be given first.)*
+   stronger than the question, and it should be given first.)* *(Later still,
+   EXP-024: the answer is **complete** — every edge measured from its own
+   layout, **two** named edges fail (9 and 28 inliers), nothing is decided
+   by proxy, and 11 of 13 VERIFIED triplets are demonstrably clear. The
+   criterion still fails, and the failing set is now exactly known.)*
 9. **The 42-pair census is exhausted** — blocks the cheap route to criterion 2.
 10. ~~"Nothing was held out."~~ **Answered (EXP-018).** ~~"Demo never seen in a
     browser."~~ **Answered.**

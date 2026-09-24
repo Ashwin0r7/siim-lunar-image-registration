@@ -18,7 +18,31 @@ is reported as a gap in the evidence, not rewritten into one that can be.
 
 ---
 
-## UPDATE 2026-09-23 (latest) — EXP-022: criterion 4 answered, NOT MET, and the floor itself is inadequate
+## UPDATE 2026-09-24 (latest) — EXP-024: criterion 4's answer is complete, from each edge's own layout
+
+`docs/stages/EXP-024_coverage_direct_bound.md`, artefacts `experiments/EXP-024/`.
+EXP-022's proxy cells are replaced by the measurement they stood in for: all 22
+distinct edges re-matched with the inlier positions kept (every recorded count
+and occupancy reproduced **exactly**; the positions are now an artefact), and
+the 1 px worst-case bound read from each edge's own layout at σ_N = 0.7202 px.
+
+| reading | number | verdict |
+|---|---|---|
+| direct bound from the edge's own layout, every edge | **20 of 22** distinct edges (37 of 39 edge-rows) within 1 px (0.074–0.874); over: **9-inlier 5.42 px**, **28-inlier 1.59 px** | NOT MET |
+| the 7 edges EXP-022 could not sample | 0.074–0.507 px, **all within** — nothing is unsampled any more | decided |
+| the 68-inlier edge (EXP-022's "above the floor and over the bound") | its **own layout is within at 0.83 px** against the proxy's 1.04: same count, same occupancy, opposite sides — the sharpest floor-insufficiency example yet | proxy call falls (D-069-N1) |
+| shrunk-layout null | exceeds every edge's own bound, **22 of 22** (5.4–8.2×) | property present |
+| VERIFIED triplets | **11 of 13 clear on all three edges** (was 3 clear, 3 carrying, 7 undecided); the 2 carrying a failing edge are named in D-070 | complete |
+
+**Scorecards after EXP-024: §53 2 of 5, unchanged** (row 4 stays NOT MET as
+frozen; its answer is now complete and rests on two named edges, not three,
+with nothing decided by proxy). **§2.2 ≈ 55 %, unchanged**: the
+uniform-distribution row stays NOT MET with the smaller named set. Scope
+beside every number: synthetic truth, iid noise at the recorded level, mare
+only; no edge is shown wrong and no edge is shown accurate.
+
+
+## UPDATE 2026-09-23 — EXP-022: criterion 4 answered, NOT MET, and the floor itself is inadequate
 
 `docs/stages/EXP-022_coverage_at_real_counts.md`, artefacts `experiments/EXP-022/`
 (v1 as frozen; v2 under Amendment A1, the recorded pipeline's own image

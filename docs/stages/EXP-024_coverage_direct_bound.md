@@ -182,3 +182,104 @@ A `STAGE-INDEX.md` row, a `STAGE_HISTORY.md` row, an `RL-nnn` entry, a D-nnn
 recording criterion 4's completed answer (which edges and triplets are clear,
 which are not, from their own layouts), and an E-nnn for any defect found.
 Both scorecards are re-scored in the audit and the gap analysis.
+
+---
+
+## Part 2
+
+**Written 2026-09-24 after the run, against Part 1 as committed (`8ebd78e`).**
+Artefacts: `experiments/EXP-024/exp024_results.json`,
+`exp024_inlier_positions.npz` (SHA-256 `e27d49e5…` in the results file — the
+positions REAL-DATA-07 never recorded now exist on the record), `run.log`
+(82 s). Nothing is rewritten.
+
+### 7. The answer, in one paragraph
+
+**Measured from their own layouts, 20 of the 22 distinct edges (37 of 39
+edge-rows) bound worst-case local error under 1 px at recorded noise, and two
+do not: the 9-inlier edge at 5.42 px and the 28-inlier edge at 1.59 px.
+Criterion 4's answer is now complete — no edge is judged by proxy or left
+unsampled — and it stays NOT MET, on two named edges instead of three.** The
+seven edges EXP-022 could not sample sit at 0.07–0.51 px. The 68-inlier edge,
+EXP-022's "most useful line", comes out **within** the bound at 0.83 px where
+its proxy cell said 1.04 px: a cell holding only `half` and `ring` layouts
+overestimated a real layout that is neither. That contradiction does not
+weaken D-069's floor-insufficiency finding — it sharpens it. At occupancy
+≈ 0.44 and 68 points there now exist, on the record, one layout at 0.83 px
+(the edge's own) and one at 1.04 px (EXP-022's synthetic counterexample):
+**identical count, identical occupancy, opposite sides of the bound**, which
+is the cleanest demonstration yet that occupancy alone cannot decide the
+criterion. Of the 13 VERIFIED triplets, **11 are now demonstrably clear on
+all three edges** (previously 3), and 2 carry a failing edge — the triplets
+containing the 9- and 28-inlier edges. The shrunk-layout null exceeded the
+edge's own bound on 22 of 22 edges (5.4× to 8.2×), so the measurement sees
+spatial concentration everywhere, including at 5 437 points.
+
+### 8. Criteria, answered exactly as frozen
+
+| ID | verdict | the number |
+|---|---|---|
+| **S0** | **MET** | (i) all 22 re-matched edges reproduce their recorded `n_inliers` **exactly** (9 to 5 437); (ii) recomputed `grid_occupancy` equals the recorded `coverage_occupancy` on **39 of 39** edge-rows exactly; (iii) σ_N = **0.7202 px** by the frozen formula, within 1e-4 of EXP-022's recorded value; (iv) truth is EXP-014's constant; (v) overwrite refused by construction |
+| **S1** | **NOT MET** | 20 of 22 distinct edges < 1.0 px (0.074–0.874). Over: RD04 `m1271742202lc → m1335207975rc` (**9** inliers, occupancy 0.078) at **5.4245 px**; RD04 `m1299958135lc → m1363396554rc` (**28**, 0.281) at **1.5899 px** |
+| **S2** | **MET** | all seven previously-unsampled edges decided, all within: 108 → 0.498, 190 → 0.507, 265 → 0.381, 293 → 0.399, 2 597 → 0.124, 2 726 → 0.128, 5 392 → 0.074 px |
+| **S3** | **MET** (recorded) | 9-inlier: direct 5.42 vs proxy 3.93 — call **stands** (direct is worse). 28-inlier: 1.59 vs 1.66 — **stands**. 68-inlier: **0.830 vs 1.042 — the proxy call falls**; the real layout bounds where the cell's `half`/`ring` stand-ins did not |
+| **S4** | **MET** | shrunk-layout null exceeds the edge's own p95 on **22 of 22** edges (bar 20), including both largest (5 437: 0.074 → 0.523; 5 392: 0.074 → 0.561) |
+
+**Consequence rule, applied as frozen:** §53 criterion 4's written form stays
+**NOT MET**. The completed answer replaces EXP-022's partial one everywhere
+the three edges were named: the failing set is now **two** edges, and every
+VERIFIED claim citing the two affected triplets carries them.
+
+### 9. Predictions against outcomes
+
+| prediction (§3.2) | outcome | |
+|---|---|---|
+| S0 MET — HIGH (85 %) | MET, identities exact on all 61 checks | right |
+| S1 NOT MET — 85 % | NOT MET | right |
+| 9-inlier over — 90 % | 5.42 px, over | right |
+| 28-inlier over — 70 % | 1.59 px, over | right |
+| 68-inlier over — 50 % | **0.83 px, within** | wrong at the stated coin-flip |
+| S2 MET — 75 %, direct numbers 0.1–0.8 px | MET, 0.074–0.507 px | right |
+| S3: the 68 proxy call falls — 50 % | it fell | right |
+| S4 MET — 85 %, likeliest misses the two largest edges | MET **22 of 22**; the largest edges held with 7× margin | right, wrong about the risk |
+| 9–10 triplets clear, 3–4 carrying | **11 clear, 2 carrying** | wrong in both counts, in the favourable direction |
+
+Seven right, one wrong, one right-with-wrong-detail, one wrong-favourably.
+The favourable misses are stated as misses; a prediction wrong in the
+project's favour is still wrong (integrity of §3.2).
+
+### 10. Defects
+
+- **E-061** — the first runner rebuilt the 22-edge inventory by *pair
+  membership* in each window's recorded rows instead of by run_exp012's own
+  enumeration. The pair `m1271742202lc / m1212932972lc` exists in **both**
+  windows with different tiles and different recorded counts (1406 in RD03,
+  1679 in RD04), so the rebuilt inventory matched it four times and keyed
+  positions by edge string alone, colliding across windows. Caught reading
+  the live log during S0, before any artefact existed; the run was stopped
+  and the runner corrected to reproduce the source's enumeration with a
+  per-index assertion against EXP-012's `edges` list. No artefact was
+  written by the flawed run. *(A prior start also died on a broken log pipe;
+  likewise before any artefact.)*
+
+### 11. What this changes
+
+- **§53 criterion 4:** stays NOT MET; its answer is **complete**. From
+  *"3 named edges over by proxy, 25 evaluable within, 7 unsampled"* to
+  **"2 named edges over from their own layouts, 20 within, none unsampled;
+  11 of 13 triplets clear"**. D-070, with D-069-N1 recording that D-069's
+  reversal condition fired partially (the 68-inlier edge left the failing
+  set) without reversing the verdict.
+- **The floor-insufficiency finding (D-069) stands, with a sharper
+  example:** two recorded layouts at the same (count, occupancy) on opposite
+  sides of the bound.
+- **The two failing edges' triplets** (`{2932972lc, 1742202lc, 5207975rc}`
+  and `{2932972lc, 9958135lc, 3396554rc}`) are the ones any VERIFIED claim
+  must flag; the other 11 are clear on all edges.
+- `assess()`, D-055, D-057 and every EXP-022 artefact: untouched.
+
+### 12. What this stage does NOT claim (§5 unchanged, plus)
+
+- Not that the 9- and 28-inlier edges are wrong, and not that the 68-inlier
+  edge is accurate: the truth is synthetic, the noise iid. The claims are
+  about what each layout can bound under that model, in both directions.

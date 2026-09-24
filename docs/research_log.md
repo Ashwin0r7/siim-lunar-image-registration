@@ -1486,3 +1486,56 @@ and cannot see that the empty ones sit on one side. The next measurement is the
 direct bound from each edge's own inlier positions (not recorded by
 REAL-DATA-07; needs a re-run that records them) and a seventh layout family for
 the unsampled cells.
+
+### RL-060 - Criterion 4 from each edge's own inlier layout (EXP-024)
+
+**Question.** EXP-022 answered criterion 4 through proxy cells - synthetic
+subsets sharing an edge's inlier count and occupancy but not its layout -
+and seven of the 22 distinct edges had no comparable proxy at all. Under
+noise at the recorded level, does each VERIFIED edge's OWN layout bound
+worst-case local error at 1 px?
+
+**What ran.** All 22 distinct EXP-012 edges re-matched through
+run_exp012's own machinery with the RANSAC inlier positions kept (the thing
+REAL-DATA-07 never recorded; now `exp024_inlier_positions.npz`). Harness
+identity: every recorded inlier count (9-5 437) and every recorded
+occupancy reproduced EXACTLY, 22/22 and 39/39. Per edge: EXP-014's truth,
+destinations = truth(positions) + iid N(0, sigma_N^2) at sigma_N =
+0.7202 px, 200 seeded draws, affine fit, dense p99 on a 16-px grid over the
+tile's finite region; the edge's number is the p95 of p99. Null from the
+property: the same positions shrunk 8x toward their centroid.
+
+**Result.**
+* **20 of 22 distinct edges (37 of 39 edge-rows) bound under 1 px**
+  (0.074-0.874). Over: the **9-inlier** edge at **5.42 px** and the
+  **28-inlier** edge at **1.59 px**. Criterion 4 stays NOT MET, on two
+  named edges instead of three - and now with nothing unsampled.
+* The seven edges EXP-022 could not sample: 0.074-0.507 px, all within.
+* The **68-inlier edge passes at 0.830 px where its proxy cell said
+  1.042**: at (68 points, occupancy 0.4375) the record now holds one layout
+  within the bound and one over it, so no occupancy value can decide
+  between them. D-069's floor-insufficiency finding stands with that
+  sharper example; its named-edge set shrinks (D-069-N1).
+* Shrunk-layout null exceeds every edge's own bound, **22 of 22** (5.4x to
+  8.2x), including at 5 437 points.
+* **VERIFIED triplets: 11 of 13 demonstrably clear on all three edges**
+  (was 3 clear, 3 carrying, 7 undecided); the two carrying a failing edge
+  are named in D-070.
+
+**Predictions.** Seven right (S0; S1 NOT MET; the 9- and 28-inlier calls;
+S2; the 68 proxy call falling; S4). Wrong: the 68-inlier edge over
+(stated at 50 %); S4's risk location (the largest edges held with 7x
+margin); the triplet count (predicted 9-10 clear, got 11 - wrong in the
+favourable direction, and recorded as wrong).
+
+**Defect.** E-061: the first runner rebuilt the inventory by pair
+membership; a pair existing in both windows with different recorded counts
+was matched four times. Caught in the live S0 log before any artefact;
+corrected to the source's own enumeration with a per-index assertion.
+
+**Consequence.** D-070: criterion 4's answer is complete - every edge-row
+decided from its own layout, NOT MET on two named edges, 11 of 13 triplets
+clear. The written criterion ("gap <= 0.15") stays NOT MET as frozen.
+Scope, always beside the numbers: synthetic truth, iid noise at the
+recorded level without its spatial structure, mare tiles only; a failing
+edge is not shown wrong and a passing edge is not shown accurate.
