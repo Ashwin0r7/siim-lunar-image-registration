@@ -1,0 +1,184 @@
+# EXP-024 — Criterion 4 from each edge's own inlier layout
+
+**Part 1 — pre-registration. FROZEN 2026-09-24, before the runner exists and
+before any statistic of this stage has been computed. No edge has been
+re-matched and no inlier position has been read for this stage.** Part 2 is
+empty until Part 1 is committed.
+
+**Classification: DELIVERABLE-CRITICAL.** This is the successor measurement
+EXP-022 Part 2 §12 named (D-069): *"the direct bound from each edge's own
+inlier positions (not recorded by REAL-DATA-07; needs a re-run that records
+them)"*. EXP-022 answered §53 criterion 4 NOT MET on three named edges, but
+through **proxy cells**: synthetic subsets sharing an edge's inlier count and
+occupancy, not the edge's actual point layout. Seven of the 22 distinct edges
+had no comparable proxy rows at all, leaving 7 of 13 VERIFIED triplets
+undecided. This stage replaces the proxy with the measurement it stood in
+for.
+
+---
+
+## 0. What was known before this was written (disclosed)
+
+- EXP-022's full Part 2, including the three named edges (9 inliers at
+  3.93 px, 28 at 1.66 px, 68 at 1.04 px, all p95-of-p99 in proxy cells), the
+  seven unsampled distinct edges (108–5 392 inliers, occupancy 0.67–0.94),
+  σ_N = 0.7202 px, and T″ = 0.359. **Every prediction in §3.2 is conditioned
+  on this knowledge and says so.** No number of THIS stage's form — a
+  per-edge bound from the edge's own layout — exists anywhere yet.
+- EXP-012's artefact (`experiments/EXP-012/exp012_results.json`): 22 distinct
+  edges behind the 39 VERIFIED edge-rows, each with `n_inliers` reproduced
+  exactly by its S5 control, and each edge-row's `coverage_occupancy` in its
+  verdict metrics. The inlier **positions** were not written to any artefact;
+  that absence is the reason this stage exists.
+- The 32 mare tiles in `data/processed/mare_serenitatis/` are on disk;
+  EXP-012's matching ran on them on this machine.
+
+## 1. The question
+
+**Under noise at the recorded level, does each VERIFIED edge's own inlier
+layout — its actual recorded point positions, not a proxy with the same count
+and occupancy — bound worst-case local error at 1 px?**
+
+## 2. What is measured
+
+### 2.1 The edges, re-matched with their positions kept
+
+- **Edges:** the 22 distinct edges of EXP-012 (which carry all 39 VERIFIED
+  edge-rows across the 13 triplets). The list is read from
+  `exp012_results.json` `edges`; nothing may enter or leave it.
+- **Matching:** exactly EXP-012's S5 control, by importing the matching
+  machinery of `scripts/run_exp012.py` (itself `run_exp007.py`'s preparation:
+  `stretch(decimate(raw, 2))`, `north_up_east_right`, B1 at the frozen
+  settings, seed 0). The only change is that the RANSAC **inlier source
+  positions** are written to the artefact, per edge, in the oriented k2
+  source frame.
+- **Harness identity (S0):** each edge's re-matched `n_inliers` must equal
+  the recorded count **exactly** (EXP-012 S5's own bar), and
+  `coverage_metrics(inlier_src_positions, shape, roi=None).grid_occupancy`
+  must equal the edge-row's recorded `coverage_occupancy` **exactly** (same
+  implementation, same inputs; occupancy is an exact multiple of 1/64). A
+  single mismatch on either stops the stage.
+
+### 2.2 The direct bound, per edge (S5's form from EXP-022, on real layouts)
+
+- **Truth:** EXP-014's transform, unchanged:
+  `similarity(1.03, deg2rad(4.0), 11.0, -7.0)`.
+- **Noise:** destinations = `truth(positions) + N(0, σ_N²)` iid per axis,
+  σ_N = `median(fit_rmse of the 39 VERIFIED edge-rows) / sqrt(2)` read from
+  `exp012_results.json` — EXP-022's frozen formula, re-read and recorded by
+  the runner, not copied from EXP-022's output.
+- **Draws:** 200 per edge per arm. RNG: `default_rng(20260924 + edge_index)`
+  where `edge_index` is the edge's position in the artefact's `edges` list;
+  the same generator serves that edge's draws in order.
+- **Response per draw:** fit an **affine** to the noisy correspondences (all
+  of the edge's inliers), then the dense endpoint error against the truth on
+  a 16-px grid over the valid (finite) region of the edge's prepared source
+  tile, and its **p99** — EXP-022 §2.1's response, with the subset replaced
+  by the edge's own layout. Where `scripts/run_exp022.py` has the function,
+  it is imported; anything restated must be numerically identical on a shared
+  test row.
+- **The edge's number:** the **95th percentile of p99 over the 200 draws**,
+  in k2 pixels. The bound is **1.0 px**. Both constants are EXP-022's,
+  unchanged.
+
+### 2.3 Null from the property (E-039)
+
+The property a pass claims is that the edge's **spatial arrangement** bounds
+extrapolation error. The null removes exactly that and keeps everything else
+(count, tile, truth, noise, draws): the edge's own positions **shrunk toward
+their centroid by a factor of 8** (`c + (p − c)/8`). A measurement that
+cannot tell an edge's layout from its shrunk copy cannot support any claim
+about layouts.
+
+### 2.4 What is deliberately not run
+
+The **seventh layout family** D-069 also named (uniform over a random k-cell
+subset) exists to fill proxy cells. Once every edge is measured from its own
+layout, no proxy cell is needed to answer criterion 4 for these edges; the
+family remains open only for a future re-calibration of a floor, which this
+stage does not attempt. T″ is neither recomputed nor used.
+
+## 3. Success criteria — FROZEN
+
+| ID | Criterion | MET if |
+|---|---|---|
+| **S0** | Harness | (i) all 22 edges re-match with `n_inliers` equal to the recorded counts exactly; (ii) recomputed `grid_occupancy` from the kept positions equals each edge-row's recorded `coverage_occupancy` exactly; (iii) σ_N is recorded with its formula and source, and equals EXP-022's recorded 0.7202 px to 1e-4 (same formula, same artefact); (iv) the truth transform is EXP-014's constant; (v) the runner refuses to overwrite an existing artefact |
+| **S1** | The direct bound, every edge | for **every** one of the 22 distinct edges, p95 of p99 **< 1.0 px**. The 39 edge-rows inherit their distinct edge's number |
+| **S2** | The seven undecided edges are decided | each of the seven distinct edges EXP-022 left unsampled (its §8 S1 list) has its direct number recorded, and **all seven are < 1.0 px** |
+| **S3** | The proxy is graded | for the three edges EXP-022 named (9, 28, 68 inliers), the direct number and the proxy p95 are reported side by side, and Part 2 states for each whether the proxy's NOT-MET call **stands or falls** under the direct measurement. This criterion is MET when the comparison is recorded — the *direction* is S1's business, not S3's |
+| **S4** | The property is present | the shrunk-layout null exceeds the edge's own p95 on **≥ 20 of 22** edges |
+
+**Consequence rule (frozen).** §53 criterion 4's written form ("gap ≤ 0.15")
+stays **NOT MET** whatever happens here; this stage cannot flip it and does
+not try. What this stage changes is the **completeness of the answer**: from
+*"25 of 39 edge-rows evaluable by proxy, 3 over, 11 not evaluable"* to a
+direct number for **all 39**, and from *"3 of 13 triplets clear, 3 carrying a
+failing edge, 7 undecided"* to a decided count for all 13. If S1 is NOT MET,
+the failing edges are named beside every VERIFIED claim that cites their
+triplets, exactly as EXP-022's three are now.
+
+### 3.1 Parameter count against constraint count (E-041)
+
+| statistic | fitted | constraints | null |
+|---|---|---|---|
+| affine per draw | 6 | ≥ 9 correspondences (the smallest edge) | — |
+| per-edge p95 | 0 | 200 draws | shrunk-layout arm (§2.3) |
+| σ_N | 0 fitted, read | 39 recorded values | — |
+| S0 occupancy identity | 0 | 39 recorded values | — |
+
+**Can the population contain the events its criteria count? (E-058)** Yes.
+S1 can fail: the 9-inlier edge's proxy cell sat at 3.93 px, and its own
+layout occupies 5 of 64 cells. S1 can also pass per edge: 14 edge-rows at
+occupancy 1.0 sat at 0.09–0.15 px by proxy. S4 can fail: at the largest
+counts the shrunk fit is still over-determined, and if the shrunk arm's p95
+does not rise above the own-layout p95 there, the null catches it.
+
+### 3.2 Predicted outcome, with confidence (conditioned on §0)
+
+- **S0 MET** — HIGH (85 %). EXP-012 reproduced all 22 counts exactly on this
+  machine; the environment is pinned. The riskiest clause is (ii): if
+  EXP-012's `assess` received a roi this document did not find, the identity
+  fails and the stage stops — which would be the right outcome.
+- **S1 NOT MET** — HIGH (85 %): the 9-inlier edge (proxy 3.93 px) is expected
+  over the bound from its own layout (90 %), the 28-inlier edge (proxy
+  1.66 px) over at 70 %, and the 68-inlier edge (proxy 1.04 px, marginal) over
+  at **50 %** — its own `half`/`ring`-like layout may bound better than the
+  proxy cell that contained only `half` and `ring` rows.
+- **S2 MET** — MEDIUM-HIGH (75 %): the seven unsampled edges have 108–5 392
+  inliers on nearly-uniform-with-holes layouts; predicted direct numbers
+  0.1–0.8 px.
+- **S3 MET** — HIGH (90 %) by construction; the interesting line is whether
+  the 68-inlier edge's proxy call **falls**, predicted 50 % as above.
+- **S4 MET** — HIGH (85 %); the two largest edges (5 392, 5 437) are the
+  likeliest of the ≤ 2 permitted misses.
+- **Triplet outcome:** 13 of 13 decided; predicted **9–10 clear on all three
+  edges, 3–4 carrying at least one edge over the bound**.
+
+## 4. What may not happen in Part 2
+
+- No line moves: 1.0 px, the 95th percentile, 200 draws, the 16-px grid, the
+  shrink factor 8, the ≥ 20 of 22 bar, σ_N's formula, the truth constant.
+- The edge list is EXP-012's, closed. A failed S0 identity stops the stage;
+  it is never patched around by re-deriving positions another way.
+- `assess()`, D-055, D-057, D-069 and EXP-022's artefacts are untouched.
+- Arm results may not be mixed: the shrunk arm decides only S4.
+
+## 5. What this stage does NOT claim
+
+- **Not real cross-illumination error.** The truth is synthetic and the noise
+  is iid at the recorded level, without its spatial structure — EXP-022's
+  limitation, inherited and unchanged.
+- **Not accuracy of any real edge.** A pass says the layout can support a
+  1 px worst-case bound under that noise model, nothing more; a failure says
+  the layout cannot, not that the edge is wrong (EXP-021 labelled none of the
+  39 WRONG).
+- **Not a new verdict rule and not a floor.** Nothing is adopted into
+  `assess()`; T″ is not touched; criterion 4's written form stays NOT MET.
+- **Not other terrain.** Mare Serenitatis tiles only.
+
+## 6. Ledger — what Part 2 will create
+
+A `STAGE-INDEX.md` row, a `STAGE_HISTORY.md` row, an `RL-nnn` entry, a D-nnn
+recording criterion 4's completed answer (which edges and triplets are clear,
+which are not, from their own layouts), and an E-nnn for any defect found.
+Both scorecards are re-scored in the audit and the gap analysis.
