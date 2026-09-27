@@ -61,11 +61,83 @@ def test_the_loop_is_reported_as_rejected_and_the_threshold_is_not_moved(ev):
     assert len(loop["edges"]) == 3
 
 
-def test_the_panel_claims_no_verified_chandrayaan2_pair(ev):
-    """S1 is MET but no pair is VERIFIED; the not-claimed list must say so."""
+def test_the_panel_scopes_the_verified_and_keeps_tmc2_rejected(ev):
+    """OHRC's VERIFIED is loop closure only; TMC-2's loop stays REJECTED.
+
+    The not-claimed list must keep the TMC-2 refusal, keep the accuracy
+    disclaimer over OHRC's failed geometry clause, and keep IIRS at zero.
+    """
     joined = " ".join(ev["not_claimed"]).upper()
-    assert "NOT A VERIFIED" in joined
-    assert "OHRC" in joined and "IIRS" in joined
+    assert "NOT A VERIFIED TMC-2" in joined
+    assert "2.2131" in joined            # the refused TMC-2 loop, unrounded
+    assert "FAILED AS FROZEN" in joined  # OHRC's geometry clause
+    assert "NO IIRS RESULT" in joined
+
+
+def test_the_ohrc_block_reads_the_artefact_exactly(ev):
+    """Every OHRC figure equals the recorded EXP-023 artefact, unrounded."""
+    doc = json.loads(c2.EXP023_RESULTS.read_text(encoding="utf-8"))
+    oh = ev["ohrc"]
+    tri = doc["criteria"]["S3"]["primary_triangle"]
+    assert oh["loop"]["residual_px"] == tri["loop_residual_px"]
+    assert oh["loop"]["status"] == "VERIFIED"
+    assert oh["loop"]["reject_threshold_px"] == 2.0
+    assert oh["loop"]["residual_px"] < 2.0
+    by_edge = {e["edge"]: e for e in oh["edges"]}
+    for name in ("O1->Na", "O2->Na"):
+        rec = doc["criteria"]["S2"]["edges"][name]
+        assert by_edge[name]["n_inliers"] == rec["n_inliers"]
+        assert by_edge[name]["geometry_median_px"] == \
+            rec["geometry"]["refined_grid"]["median_px"]
+        # S2's failure must be carried, never softened into a pass
+        assert by_edge[name]["geometry_verdict"] == "INCONCLUSIVE"
+        assert by_edge[name]["geometry_median_px"] > by_edge[name]["floor_px"]
+    assert ev["ohrc"]["criteria_met"]["S2"] is False
+    assert ev["ohrc"]["criteria_met"]["S3"] is True
+    assert all(not n["pass"] for n in oh["nulls"]) and len(oh["nulls"]) == 2
+
+
+def test_the_ohrc_panel_renders_under_node(page):
+    """Execute chandrayaan2Panel against the live payload, as the demo rules
+    require: the pass and the failed clause must both be in the rendered HTML,
+    and no field may render as undefined."""
+    import os
+    import subprocess
+    import tempfile
+    from pathlib import Path
+
+    node = "C:/Program Files/nodejs/node.exe"
+    if not Path(node).exists():
+        pytest.skip("node is not installed")
+    script = page[page.index("<script>") + 8:page.index("</script>",
+                                                        page.index("<script>"))]
+    start = script.index("function chandrayaan2Panel")
+    fn = script[start:script.index("\nfunction ", start + 10)]
+    harness = (
+        "const esc = s => String(s === undefined || s === null ? '' : s);\n"
+        "const fx = v => v === undefined || v === null ? '-' : (+v).toFixed(2);\n"
+        "const st = (w, k) => `<span class=\"st st-${k}\">${esc(w)}</span>`;\n"
+        "const mod = (id, head, body) => `<section id=\"${id}\">${head}${body}</section>`;\n"
+        "const modHead = (n, t, q, s) => `<h2>${esc(t)}</h2><p>${esc(q)} ${esc(s)}</p>`;\n"
+        "const notClaimed = l => `<ul>${l.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;\n"
+        "const srcLinks = l => l.map(esc).join(' ');\n"
+        "const unavailable = () => 'UNAVAILABLE';\n"
+        f"window = {{}}; window.__C2 = {json.dumps(c2.chandrayaan2_evidence())};\n"
+        f"{fn}\nconst out = chandrayaan2Panel({{}});\n"
+        "if (/>undefined|undefined<|undefined (m|px|%)|NaN /.test(out)) {"
+        " console.error(out.slice(0, 800)); process.exit(2); }\n"
+        "console.log(out);\n")
+    with tempfile.TemporaryDirectory() as t:
+        f = Path(t) / "c2.js"
+        f.write_text(harness, encoding="utf-8")
+        r = subprocess.run([node, str(f)], capture_output=True, text=True,
+                           env={**os.environ}, encoding="utf-8")
+    assert r.returncode == 0, r.stderr[-600:]
+    out = r.stdout
+    for frag in ("VERIFIED", "S2 NOT MET", "18017", "17919", "30148",
+                 "1.9158", "98.01", "first VERIFIED Chandrayaan-2 result",
+                 "116 NAC products"):
+        assert frag in out, frag
 
 
 def test_the_dem_render_arm_is_reported_as_failing_its_own_control(ev):

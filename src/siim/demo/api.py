@@ -266,10 +266,11 @@ def scenarios() -> dict:
                 if real["available"] else
                 ("UNAVAILABLE — missing " + ", ".join(real["missing"]))),
             "chandrayaan2_ohrc_tmc2_iirs": (
-                ("AVAILABLE for TMC-2 — read from the REAL-DATA-09 artefacts. "
-                 "OHRC was delivered over the South Pole, where this project "
-                 "has no NAC coverage, and no IIRS product was delivered, so "
-                 "no OHRC, IIRS or multi-modal claim is supported.")
+                ("AVAILABLE for TMC-2 (REAL-DATA-09) and OHRC (EXP-023, the "
+                 "first VERIFIED Chandrayaan-2 result — loop closure, not "
+                 "accuracy, with its failed geometry clause reported beside "
+                 "it). No IIRS product was delivered, so no IIRS claim is "
+                 "supported.")
                 if chandrayaan2_status()["available"] else
                 ("NOT AVAILABLE — missing "
                  + ", ".join(chandrayaan2_status()["missing"]))),

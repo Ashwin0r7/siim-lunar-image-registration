@@ -2213,9 +2213,10 @@ function chandrayaan2Panel(vm) {
   const inl = (n, ok) => n === undefined ? "—"
     : `<span class="${ok ? "pass" : "neut"}" style="font-weight:600">${n}</span>`;
   const p = c2.product, L = c2.loop, best = c2.best_b4l || c2.best_b1;
+  const oh = c2.ohrc;
   return mod("m06", modHead("06", "Module 06 · Chandrayaan-2",
       "Does this work on Chandrayaan-2, the sensor the problem statement names?",
-      "TMC-2 ortho ↔ LRO NAC at 5 m · REAL-DATA-09 · read from artefacts"), `
+      "TMC-2 ↔ NAC (REAL-DATA-09) and OHRC ↔ NAC (EXP-023) · read from artefacts"), `
     <div class="tiles">
       <div class="tile hero good"><div class="lab">TMC-2 ↔ NAC successes</div>
         <div class="val">${c2.n_successes}</div>
@@ -2270,8 +2271,47 @@ function chandrayaan2Panel(vm) {
           tags ${(p.geometry_tags_found || []).join(", ")}; σ_C2 ${p.sigma_c2_m} m from the ${esc(p.sigma_c2_source || "")}.</div></div>
     </div>
 
+    <div class="lab" style="margin-top:18px">OHRC ↔ LRO NAC at the Chandrayaan-3 landing site · EXP-023 · criteria frozen before any pixel from the site was read</div>
+    <div class="tiles">
+      <div class="tile hero good"><div class="lab">OHRC → NAC edges</div>
+        <div class="val">${oh.edges.map(e => e.n_inliers).join(" · ")}</div>
+        <div class="note">inliers at ${fx(oh.sun_incidence_deg)}° Sun incidence · ${oh.census.admissible} admissible NAC frame of ${oh.census.ode_returned} over the site (θ ${fx(oh.census.theta_deg)}°)</div></div>
+      <div class="tile ${oh.loop.residual_px > oh.loop.reject_threshold_px ? "bad" : "good"}">
+        <div class="lab">three-image loop</div>
+        <div class="val">${(+oh.loop.residual_px).toFixed(2)} px</div>
+        <div class="note">${(+oh.loop.residual_m).toFixed(1)} m vs the frozen ${oh.loop.reject_threshold_px} px → ${st(oh.loop.status, oh.loop.status === "VERIFIED" ? "pass" : oh.loop.status === "REJECTED" ? "fail" : "neutral")} · ${esc(oh.loop.confidence || "")}</div></div>
+      <div class="tile good"><div class="lab">displaced-ground nulls</div>
+        <div class="val">${oh.nulls.map(n => n.n_inliers).join(" / ")}</div>
+        <div class="note">inliers on two 8 km displacements — both refused, as required</div></div>
+      <div class="tile bad"><div class="lab">corner-geometry clause</div>
+        <div class="val">${oh.edges.map(e => (+e.geometry_median_px).toFixed(0)).join(" · ")} px</div>
+        <div class="note">vs a ${(+oh.edges[0].floor_px).toFixed(0)} px floor → ${st("S2 NOT MET", "fail")} as frozen</div></div>
+    </div>
+    <div class="rc">
+      <div><div class="lab">The first VERIFIED Chandrayaan-2 result — and what it is not</div>
+        <div class="note"><b>The loop {O1, O2, Na} closes at ${(+oh.loop.residual_px).toFixed(4)} px = ${(+oh.loop.residual_m).toFixed(2)} m</b>
+          (legs ${oh.loop.legs_n_inliers.join(" · ")} inliers; the 32°-apart OHRC stereo edge carries ${oh.stereo.n_inliers} inliers —
+          the first real viewpoint evidence on this record). VERIFIED means the three transforms are mutually consistent within
+          the frozen 2 px, and the confidence is <b>${esc(oh.loop.confidence || "moderate")}</b> because
+          ${esc((oh.loop.reasons[0] || "").toLowerCase())} It is <b>not accuracy</b>: no check point independent of LRO exists at
+          this site — ISRO refined OHRC's own corners against LRO.</div></div>
+      <div><div class="lab">The clause that failed, reported beside the pass</div>
+        <div class="note call fail"><b>Agreement with the refined corner geometry reads
+          ${oh.edges.map(e => (+e.geometry_median_px).toFixed(2)).join(" and ")} px against a
+          ${(+oh.edges[0].floor_px).toFixed(2)} px floor (${oh.edges.map(e => (+e.geometry_median_m).toFixed(0)).join(" / ")} m) — INCONCLUSIVE on both edges, so S2 is NOT MET as frozen.</b>
+          The disagreement is dominated by an eastward term of
+          ${oh.edges.map(e => "+" + (+e.offset_east_m).toFixed(0)).join(" / ")} m — the signature module 07 measured
+          for archive geometry on another mare (137.6 m, +101 m east). At this site that reading is a hypothesis, not a measurement.
+          The system-level (SPICE) corners disagree by ${oh.edges.map(e => ((+e.system_level_m) / 1000).toFixed(2)).join(" / ")} km.</div>
+        <div class="note">A second engine (DISK + LightGlue) passes both edges — ${oh.b4l.map(r => r.n_inliers).join(" / ")} inliers —
+          and agrees with RootSIFT to ${oh.b4l.map(r => (+r.agreement_median_px).toFixed(2)).join(" / ")} px median.
+          Cross-sensor scale: OHRC ${oh.scale.ohrc_nominal_m} m against NAC ${oh.scale.nac_native_m} m native
+          (${(+oh.scale.ohrc_to_nac_native_ratio).toFixed(1)}:1), bridged by the recorded ×${oh.scale.degrade_factor} degrade.</div></div>
+    </div>
+
     <div class="note" style="color:var(--ink-3)">
-      ${Object.entries(c2.pairs_without_data).map(([k, v]) => `<b>${esc(k)}</b>: ${esc(v)}`).join("<br>")}</div>
+      ${Object.entries(c2.pairs_without_data).map(([k, v]) => `<b>${esc(k)}</b>: ${esc(v)}`).join("<br>")}
+      <br><b>P2, since measured:</b> that row recorded the on-disk state at REAL-DATA-09; EXP-023's census then found 116 NAC products over the site and the OHRC block above is the result (E-062).</div>
 
     <div class="lead" style="margin-top:16px"><b>${esc(c2.summary)}</b></div>
     <div class="note" style="margin-top:10px"><b>Scope of this evidence:</b> ${esc(c2.scope)}</div>
