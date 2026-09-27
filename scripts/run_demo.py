@@ -123,7 +123,13 @@ def main() -> None:
     print("LIVE REGISTER: available - POST /api/register (computed in the request, "
           "labelled live; needs the `learned` extra for B4L/B4X)")
     print("SYNTHETIC    : available - generated live in each request")
-    print("CHANDRAYAAN-2: NOT AVAILABLE. No multi-modal claim is supported.")
+    from siim.demo.chandrayaan2 import chandrayaan2_status
+    cs = chandrayaan2_status()
+    if cs["available"]:
+        print("CHANDRAYAAN-2: available - recorded TMC-2 -> LRO NAC evidence "
+              "(REAL-DATA-09 artefacts on disk; module 06 on the page)")
+    else:
+        print("CHANDRAYAAN-2: UNAVAILABLE - missing " + ", ".join(cs["missing"]))
     print("NETWORK      : not used. Every real number is read from "
           "experiments/; every image is a local PNG.\n")
 

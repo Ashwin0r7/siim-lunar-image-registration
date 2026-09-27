@@ -82,7 +82,13 @@ and a measured floor in place of an extrapolation.
 
 `docs/stages/EXP-021_verdict_fa_fr.md`, artefacts `experiments/EXP-021/`.
 
-**Criterion 3 stays NOT MET, and it is no longer unmeasurable.** Every recorded
+**Criterion 3 stays NOT MET, and it is no longer unmeasurable.** *(Correction
+2026-09-28, integrity rule 3: the standing scorecard word for row 3 is
+**PARTLY** — the FINAL RESCORE table and this update's own closing line both
+say so, and "stays NOT MET" contradicted them as a drafting slip. The substance
+is unchanged: the adversarial clause is MET for the wrong reason (E-039), and
+FA/FR now carry pooled numbers — FDR 0/12, FRR 0/12 — that are not demonstrated
+on the held-out site.)* Every recorded
 edge was labelled against A -> Kaguya reference -> B, which uses no A<->B
 correspondence, at 8.42 m / 25.3 m lines. That is 20-60x finer than the ~250 px
 archive floor behind every earlier wrong-pass count.

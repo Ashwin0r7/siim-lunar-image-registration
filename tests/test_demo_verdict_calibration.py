@@ -156,6 +156,6 @@ def test_the_independent_check_renders_under_node_with_its_negatives(ev, page):
                            encoding="utf-8")
     assert r.returncode == 0, r.stderr[-600:]
     out = r.stdout
-    for frag in ("NOT EVALUABLE", "NOT MET", "E-058", f"{ic['fdr']['k']} <small>/ {ic['fdr']['n']}</small>",
+    for frag in ("NOT EVALUABLE", "PARTLY", "E-058", f"{ic['fdr']['k']} <small>/ {ic['fdr']['n']}</small>",
                  "not demonstrated", f"{ic['tier_ab']['verified_ambiguous']}"):
         assert frag in out, frag

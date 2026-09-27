@@ -1950,7 +1950,8 @@ function independentCheck(ic) {
       the inlier rule (the most inliers on any wrong edge: ${ab.max_inliers_on_a_wrong_edge}), and
       <b>${ab.verified_wrong} of ${ab.verified}</b> VERIFIED engine-edges wrong — but <b>${ab.verified_ambiguous}</b> of them sit
       between 8.4 and 25 m, where leg noise and a per-image error look the same. §53 criterion 3 reads
-      <i>${esc(ic.s2_reads)}</i> and stays ${st("NOT MET", "fail")}.
+      <i>${esc(ic.s2_reads)}</i> and stays ${st("PARTLY", "neutral")} — the adversarial clause is MET for
+      the wrong reason (E-039), and FA/FR carry pooled numbers that are not demonstrated on the held-out site.
       ${ic.withdraw_verified ? "" : "The pre-registered withdrawal line (FDR above 10 %) was not crossed, so VERIFIED stays."}</div>
     ${notClaimed(ic.not_claimed)}`;
 }
