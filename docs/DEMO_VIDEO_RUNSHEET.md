@@ -1,5 +1,11 @@
 # Demo video — run sheet
 
+**Superseded for the SIH 2026 submission (2026-09-28):** the operative
+recording script is `D:/MyData/downloads/SIH-submission/09_Demo_Video_Shooting_Card.md`
+(full reference: `05_Demo_Video_Script.md` beside it). Those carry the EXP-023
+OHRC scene and the current counts; this file predates them and its counts are
+stale. Kept for its beat structure and fallback notes.
+
 **What this is.** Everything needed to record the submission video in one take:
 the pre-flight checks, the exact click order, the words to say, the number to
 point at in each shot, and what to do when something goes wrong on camera.
