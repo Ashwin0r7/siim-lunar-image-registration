@@ -1,0 +1,92 @@
+{
+  "dataset": "LRO NAC (LROC) real image tiles via PDS",
+  "stage": "EXP-023",
+  "region": "chandrayaan3_site",
+  "target_ground_point_lon_lat": [
+    32.319,
+    -69.373
+  ],
+  "fetch_log": [
+    {
+      "role": "Na",
+      "pdsid": "nac.m1486555640lc",
+      "bytes": 41484288,
+      "seconds": 53.5
+    },
+    {
+      "role": "N-a",
+      "pdsid": "nac.m1486555640lc",
+      "bytes": 41484288,
+      "seconds": 44.8
+    }
+  ],
+  "total_fetch_s": 104.1,
+  "licence": "NASA PDS public domain; credit NASA/GSFC/Arizona State University.",
+  "tiles": [
+    {
+      "role": "Na",
+      "pdsid": "nac.m1486555640lc",
+      "line0": 24216,
+      "sample0": 2956,
+      "n_lines": 4096,
+      "n_samples": 2048,
+      "decimation": 2,
+      "tile_npy": "data/processed/chandrayaan3_site/nac.m1486555640lc.geo.l24216s2956.n4096.tile.npy",
+      "incidence_deg": 78.3,
+      "incidence_at_target_deg": 78.33516823625524,
+      "azimuth_at_target_deg": 299.0279462592949,
+      "sun_separation_deg": 4.4172936588027625,
+      "emission_deg": 1.45,
+      "ode_map_resolution_m": 0.894,
+      "jacobian_determinant": -0.7951915871692529,
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1486555640lc.xml",
+      "start_time": "2024-11-18 07:52:52.866",
+      "image_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1061C/DATA/ESM5/2024323/NAC/M1486555640LC.IMG",
+      "img_file_name": "M1486555640LC.IMG",
+      "byte_start": 245264712,
+      "byte_count": 41484288,
+      "bytes_sha256": "86851dce0d81e0d67add5516033c3caf7151cdc7a336012bda0efd6f83d42d81",
+      "parent_shape_lines_samples": [
+        52224,
+        5064
+      ],
+      "data_type": "SignedLSB2",
+      "numpy_dtype": "<i2",
+      "index_convention": "array[row=line, column=sample], 0-based",
+      "retrieved_utc": "2026-09-24T07:19:26Z",
+      "utc_start": "2024-11-18T07:52:52.866000Z",
+      "geolocation_status": "GEOMETRY-DRIVEN (D-033): window from named archive corners"
+    },
+    {
+      "role": "N-a",
+      "pdsid": "nac.m1486555640lc",
+      "line0": 32942,
+      "sample0": 2956,
+      "n_lines": 4096,
+      "n_samples": 2048,
+      "decimation": 2,
+      "tile_npy": "data/processed/chandrayaan3_site/nac.m1486555640lc.geo.l32942s2956.n4096.tile.npy",
+      "incidence_deg": 78.3,
+      "emission_deg": 1.45,
+      "ode_map_resolution_m": 0.894,
+      "jacobian_determinant": -0.7951915871692529,
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1486555640lc.xml",
+      "start_time": "2024-11-18 07:52:52.866",
+      "image_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1061C/DATA/ESM5/2024323/NAC/M1486555640LC.IMG",
+      "img_file_name": "M1486555640LC.IMG",
+      "byte_start": 333641640,
+      "byte_count": 41484288,
+      "bytes_sha256": "b8234e1bf2e64577f058b05ea3ce89330fe0335b4ca5535f4bd613399ccd03a2",
+      "parent_shape_lines_samples": [
+        52224,
+        5064
+      ],
+      "data_type": "SignedLSB2",
+      "numpy_dtype": "<i2",
+      "index_convention": "array[row=line, column=sample], 0-based",
+      "retrieved_utc": "2026-09-24T07:20:13Z",
+      "utc_start": "2024-11-18T07:52:52.866000Z",
+      "geolocation_status": "GEOMETRY-DRIVEN (D-033): window from named archive corners"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "stage": "EXP-023",
+  "status": "PLANNED -- no pixel fetched",
+  "target_ground_point_lon_lat": [
+    32.319,
+    -69.373
+  ],
+  "tiles": [
+    {
+      "role": "Na",
+      "pdsid": "nac.m1486555640lc",
+      "line0": 24216,
+      "sample0": 2956,
+      "n_lines": 4096,
+      "n_samples": 2048,
+      "decimation": 2,
+      "tile_npy": null,
+      "incidence_deg": 78.3,
+      "incidence_at_target_deg": 78.33516823625524,
+      "azimuth_at_target_deg": 299.0279462592949,
+      "sun_separation_deg": 4.4172936588027625,
+      "emission_deg": 1.45,
+      "ode_map_resolution_m": 0.894,
+      "jacobian_determinant": -0.7951915871692529,
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1486555640lc.xml",
+      "start_time": "2024-11-18 07:52:52.866"
+    },
+    {
+      "role": "N-a",
+      "pdsid": "nac.m1486555640lc",
+      "line0": 32942,
+      "sample0": 2956,
+      "n_lines": 4096,
+      "n_samples": 2048,
+      "decimation": 2,
+      "tile_npy": null,
+      "incidence_deg": 78.3,
+      "emission_deg": 1.45,
+      "ode_map_resolution_m": 0.894,
+      "jacobian_determinant": -0.7951915871692529,
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1486555640lc.xml",
+      "start_time": "2024-11-18 07:52:52.866"
+    }
+  ]
+}

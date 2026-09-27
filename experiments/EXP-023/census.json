@@ -1,0 +1,3755 @@
+{
+  "stage": "EXP-023",
+  "preregistration": "docs/stages/EXP-023_ohrc_nac_chandrayaan3_site.md Part 1 (d273b8e)",
+  "target_lon_lat": [
+    32.319,
+    -69.373
+  ],
+  "ohrc_sun": {
+    "incidence_deg": 78.476392,
+    "azimuth_deg": 303.534993,
+    "source": "obs1 label, azimuth read clockwise from north"
+  },
+  "ode_query": {
+    "pt": "CDRNAC4",
+    "minlat": -69.393,
+    "maxlat": -69.35300000000001,
+    "westernlon": 32.299,
+    "easternlon": 32.339000000000006,
+    "limit": 2000
+  },
+  "filters": {
+    "emission_max": 20.0,
+    "tiers_deg": [
+      3.0,
+      6.0,
+      10.0
+    ],
+    "incidence_guard_deg": 0.5,
+    "overlap_min": 0.5,
+    "null_km": 8.0,
+    "implied_prefilter": "|ODE incidence - 78.476392| > 11.0; ODE emission > 21.0"
+  },
+  "funnel": {
+    "ode_returned": 116,
+    "after_implied_prefilter": 95,
+    "after_containment_emission_theta": 1,
+    "after_lr_dedupe": 1
+  },
+  "ranking_log": [
+    {
+      "pdsid": "nac.m1486555640lc",
+      "tier": 1,
+      "emission": 1.45,
+      "theta": 4.4172936588027625,
+      "overlap_fraction": {
+        "O1": 0.9863945578231292,
+        "O2": 1.0
+      },
+      "taken": true,
+      "why": "Na: first-ranked with confirmed overlap"
+    }
+  ],
+  "roles": {
+    "Na": "nac.m1486555640lc"
+  },
+  "primary_triangle": [
+    "O1",
+    "O2",
+    "Na"
+  ],
+  "nulls": {
+    "N-a": {
+      "pdsid": "nac.m1486555640lc",
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 32942,
+        "sample0": 2956
+      },
+      "displacement_lines": 8726,
+      "metres_per_line": 0.9167910875498972,
+      "displacement_km_nominal": 8.0,
+      "displacement_km_realised": 7.996858450528845,
+      "overlap_with_o1_window": 0.0,
+      "non_overlap_confirmed": true,
+      "centre_lonlat": [
+        32.521779269020314,
+        -69.62696276174363
+      ]
+    },
+    "N-b": {
+      "obs": "O1",
+      "box": {
+        "scan0": 64079,
+        "scan1": 80729,
+        "pixel0": 0,
+        "pixel1": 10674,
+        "unclipped": {
+          "scan0": 64079,
+          "scan1": 80729,
+          "pixel0": -1254,
+          "pixel1": 10674
+        },
+        "footprint_nodes_inside_swath": 79,
+        "footprint_nodes": 81,
+        "shift_scans": 29364
+      },
+      "displacement_scans": 29364,
+      "metres_per_scan": 0.2724469021906508,
+      "displacement_km_nominal": 8.0,
+      "displacement_km_realised": 8.002150941913586,
+      "overlap_with_na_tile": 0.0,
+      "non_overlap_confirmed": true,
+      "centre_lonlat": [
+        32.288061326054994,
+        -69.63654100077748
+      ]
+    }
+  },
+  "candidates": [
+    {
+      "pdsid": "nac.m1410178753lc",
+      "ode_incidence_deg": 87.52,
+      "ode_emission_deg": 1.71,
+      "map_resolution_m": 1.247,
+      "utc_start": "2022-06-18T08:04:46.535000Z",
+      "admissible": false,
+      "index_incidence_deg": 87.52,
+      "index_emission_deg": 1.71,
+      "index_resolution_m": 1.247,
+      "scaled_pixel_m": 1.245,
+      "incidence_at_target_deg": 87.52439619855352,
+      "azimuth_at_target_deg": 279.263501386541,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 87.51673594615505,
+        "difference_deg": -0.0032640538449442147
+      },
+      "sun_separation_deg": 25.706549198869304,
+      "slew_angle_deg": "0.009",
+      "start_time": "2022-06-18 08:04:46.535",
+      "orbit_number": "58422",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 15284,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 17331.58793447313,
+        "target_pixel_sample": 2247.8675720068322,
+        "unclamped_line0": 15284,
+        "unclamped_sample0": 1224,
+        "clamped_lines": 0,
+        "clamped_samples": -740,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1410178753lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1410178753rc",
+      "ode_incidence_deg": 87.63,
+      "ode_emission_deg": 1.15,
+      "map_resolution_m": 1.245,
+      "utc_start": "2022-06-18T08:04:46.535000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.3287, sample -0.0660), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m111376754rc",
+      "ode_incidence_deg": 70.53,
+      "ode_emission_deg": 1.15,
+      "map_resolution_m": 1.28,
+      "utc_start": "2009-10-28T13:44:47.568000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.2896, sample 1.0256), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m176226805rc",
+      "ode_incidence_deg": 100.62,
+      "ode_emission_deg": 1.13,
+      "map_resolution_m": 0.745,
+      "utc_start": "2011-11-18T03:38:58.107000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1409173715rc",
+      "ode_incidence_deg": 81.08,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 1.678,
+      "utc_start": "2022-06-06T16:54:08.899000Z",
+      "admissible": false,
+      "index_incidence_deg": 81.08,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 1.678,
+      "scaled_pixel_m": 1.68,
+      "incidence_at_target_deg": 80.88999496101205,
+      "azimuth_at_target_deg": 62.79911085302107,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 81.083690111875,
+        "difference_deg": 0.0036901118750023443
+      },
+      "sun_separation_deg": 116.18754106942293,
+      "slew_angle_deg": "-0.007",
+      "start_time": "2022-06-06 16:54:08.899",
+      "orbit_number": "58279",
+      "lines_samples": [
+        46080,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 6127,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 8174.027588735117,
+        "target_pixel_sample": 1891.9506038144254,
+        "unclamped_line0": 6127,
+        "unclamped_sample0": 868,
+        "clamped_lines": 0,
+        "clamped_samples": -384,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1409173715rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1399787691rc",
+      "ode_incidence_deg": 77.19,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 1.612,
+      "utc_start": "2022-02-18T01:40:24.248000Z",
+      "admissible": false,
+      "index_incidence_deg": 77.19,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 1.612,
+      "scaled_pixel_m": 1.615,
+      "incidence_at_target_deg": 76.4249729614848,
+      "azimuth_at_target_deg": 304.1580932421286,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 77.18984504387383,
+        "difference_deg": -0.00015495612616689414
+      },
+      "sun_separation_deg": 2.1396725771570964,
+      "slew_angle_deg": "0.011",
+      "start_time": "2022-02-18 01:40:24.248",
+      "orbit_number": "56942",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 3651,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 5698.9137326866,
+        "target_pixel_sample": 518.0536687825679,
+        "unclamped_line0": 3651,
+        "unclamped_sample0": -505,
+        "clamped_lines": 0,
+        "clamped_samples": 505,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1399787691rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1386717080lc",
+      "ode_incidence_deg": 70.18,
+      "ode_emission_deg": 1.72,
+      "map_resolution_m": 1.619,
+      "utc_start": "2021-09-19T18:56:53.881000Z",
+      "admissible": false,
+      "index_incidence_deg": 70.18,
+      "index_emission_deg": 1.72,
+      "index_resolution_m": 1.619,
+      "scaled_pixel_m": 1.615,
+      "incidence_at_target_deg": 71.32584562617313,
+      "azimuth_at_target_deg": 346.70321186279244,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 70.18220716422887,
+        "difference_deg": 0.0022071642288636895
+      },
+      "sun_separation_deg": 42.18437907717603,
+      "slew_angle_deg": "-0.004",
+      "start_time": "2021-09-19 18:56:53.881",
+      "orbit_number": "55084",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 756,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 2803.368508676238,
+        "target_pixel_sample": 1875.6748191258018,
+        "unclamped_line0": 756,
+        "unclamped_sample0": 852,
+        "clamped_lines": 0,
+        "clamped_samples": -368,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1386717080lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1371614436lc",
+      "ode_incidence_deg": 72.66,
+      "ode_emission_deg": 1.71,
+      "map_resolution_m": 1.369,
+      "utc_start": "2021-03-28T23:46:09.368000Z",
+      "admissible": false,
+      "index_incidence_deg": 72.66,
+      "index_emission_deg": 1.71,
+      "index_resolution_m": 1.369,
+      "scaled_pixel_m": 1.37,
+      "incidence_at_target_deg": 72.49109791608988,
+      "azimuth_at_target_deg": 319.89377632568994,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 72.65827398681483,
+        "difference_deg": -0.0017260131851628557
+      },
+      "sun_separation_deg": 16.918566125154328,
+      "slew_angle_deg": "0.012",
+      "start_time": "2021-03-28 23:46:09.368",
+      "orbit_number": "52937",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19341,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 21388.031722034317,
+        "target_pixel_sample": 2232.1056380064115,
+        "unclamped_line0": 19341,
+        "unclamped_sample0": 1209,
+        "clamped_lines": 0,
+        "clamped_samples": -725,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1371614436lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1371614436rc",
+      "ode_incidence_deg": 72.71,
+      "ode_emission_deg": 1.15,
+      "map_resolution_m": 1.367,
+      "utc_start": "2021-03-28T23:46:09.368000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4097, sample -0.0844), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1350474679lc",
+      "ode_incidence_deg": 81.66,
+      "ode_emission_deg": 1.7,
+      "map_resolution_m": 1.343,
+      "utc_start": "2020-07-27T07:36:52.143000Z",
+      "admissible": false,
+      "index_incidence_deg": 81.66,
+      "index_emission_deg": 1.7,
+      "index_resolution_m": 1.343,
+      "scaled_pixel_m": 1.345,
+      "incidence_at_target_deg": 81.38210177960363,
+      "azimuth_at_target_deg": 63.337854307561535,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 81.65970334522103,
+        "difference_deg": -0.0002966547789640117
+      },
+      "sun_separation_deg": 116.84417747357612,
+      "slew_angle_deg": "-0.006",
+      "start_time": "2020-07-27 07:36:52.143",
+      "orbit_number": "49932",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 2009,
+        "sample0": 300
+      },
+      "window_detail": {
+        "target_pixel_line": 4056.606790992482,
+        "target_pixel_sample": 1323.132534701631,
+        "unclamped_line0": 2009,
+        "unclamped_sample0": 300,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1350474679lc.xml",
+      "rejected_by": "(3) sun-vector separation 116.84 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1351501927rc",
+      "ode_incidence_deg": 88.67,
+      "ode_emission_deg": 1.14,
+      "map_resolution_m": 0.819,
+      "utc_start": "2020-08-08T04:57:40.123000Z",
+      "admissible": false,
+      "index_incidence_deg": 88.67,
+      "index_emission_deg": 1.14,
+      "index_resolution_m": 0.819,
+      "scaled_pixel_m": 0.8200000000000001,
+      "incidence_at_target_deg": 88.6609678867036,
+      "azimuth_at_target_deg": 277.03950299681253,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 88.66784309754054,
+        "difference_deg": -0.0021569024594612074
+      },
+      "sun_separation_deg": 28.193387462871364,
+      "slew_angle_deg": "0.008",
+      "start_time": "2020-08-08 04:57:40.123",
+      "orbit_number": "50078",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 14345,
+        "sample0": 3016
+      },
+      "window_detail": {
+        "target_pixel_line": 16392.77340750711,
+        "target_pixel_sample": 4266.353038613735,
+        "unclamped_line0": 14345,
+        "unclamped_sample0": 3243,
+        "clamped_lines": 0,
+        "clamped_samples": -227,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1351501927rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1273954657rc",
+      "ode_incidence_deg": 79.57,
+      "ode_emission_deg": 1.14,
+      "map_resolution_m": 0.946,
+      "utc_start": "2018-02-22T16:03:10.491000Z",
+      "admissible": false,
+      "index_incidence_deg": 79.57,
+      "index_emission_deg": 1.14,
+      "index_resolution_m": 0.946,
+      "scaled_pixel_m": 0.95,
+      "incidence_at_target_deg": 79.68551155901294,
+      "azimuth_at_target_deg": 62.68931191992861,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 79.57529608772415,
+        "difference_deg": 0.00529608772416168
+      },
+      "sun_separation_deg": 115.71279093400916,
+      "slew_angle_deg": "-0.003",
+      "start_time": "2018-02-22 16:03:10.491",
+      "orbit_number": "39045",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19964,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 22011.672081110202,
+        "target_pixel_sample": 2333.42839695268,
+        "unclamped_line0": 19964,
+        "unclamped_sample0": 1310,
+        "clamped_lines": 0,
+        "clamped_samples": -826,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1273954657rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1312876876rc",
+      "ode_incidence_deg": 71.52,
+      "ode_emission_deg": 1.15,
+      "map_resolution_m": 1.223,
+      "utc_start": "2019-05-19T03:46:49.438000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.52,
+      "index_emission_deg": 1.15,
+      "index_resolution_m": 1.223,
+      "scaled_pixel_m": 1.225,
+      "incidence_at_target_deg": 71.19057510305082,
+      "azimuth_at_target_deg": 327.30542469593104,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.52030125508989,
+        "difference_deg": 0.0003012550898944255
+      },
+      "sun_separation_deg": 24.042611232500647,
+      "slew_angle_deg": "0.010",
+      "start_time": "2019-05-19 03:46:49.438",
+      "orbit_number": "44585",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 15243,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 17290.380072122378,
+        "target_pixel_sample": 1680.5086722156914,
+        "unclamped_line0": 15243,
+        "unclamped_sample0": 657,
+        "clamped_lines": 0,
+        "clamped_samples": -173,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1312876876rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1299815827lc",
+      "ode_incidence_deg": 71.38,
+      "ode_emission_deg": 1.69,
+      "map_resolution_m": 0.955,
+      "utc_start": "2018-12-18T23:42:40.414000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.9921, sample 1.0146), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1299815827rc",
+      "ode_incidence_deg": 71.38,
+      "ode_emission_deg": 1.14,
+      "map_resolution_m": 0.953,
+      "utc_start": "2018-12-18T23:42:40.414000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.38,
+      "index_emission_deg": 1.14,
+      "index_resolution_m": 0.953,
+      "scaled_pixel_m": 0.95,
+      "incidence_at_target_deg": 70.54576053316758,
+      "azimuth_at_target_deg": 10.729089114332151,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.38526429727062,
+        "difference_deg": 0.005264297270628049
+      },
+      "sun_separation_deg": 64.87157860904145,
+      "slew_angle_deg": "0.006",
+      "start_time": "2018-12-18 23:42:40.414",
+      "orbit_number": "42726",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 48128,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 51780.62817871792,
+        "target_pixel_sample": 145.06115508650495,
+        "unclamped_line0": 49733,
+        "unclamped_sample0": -878,
+        "clamped_lines": -1605,
+        "clamped_samples": 878,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1299815827rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1118637352rc",
+      "ode_incidence_deg": 71.15,
+      "ode_emission_deg": 1.13,
+      "map_resolution_m": 0.698,
+      "utc_start": "2013-03-23T00:21:25.019000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.15,
+      "index_emission_deg": 1.13,
+      "index_resolution_m": 0.698,
+      "scaled_pixel_m": 0.6950000000000001,
+      "incidence_at_target_deg": 71.38555153946719,
+      "azimuth_at_target_deg": 17.06542072941256,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.14917053257,
+        "difference_deg": -0.00082946743000889
+      },
+      "sun_separation_deg": 70.91161844554642,
+      "slew_angle_deg": "0.010",
+      "start_time": "2013-03-23 00:21:25.019",
+      "orbit_number": "17063",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 14433,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 16480.30243378102,
+        "target_pixel_sample": 2299.799435682184,
+        "unclamped_line0": 14433,
+        "unclamped_sample0": 1276,
+        "clamped_lines": 0,
+        "clamped_samples": -792,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1118637352rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m180936077lc",
+      "ode_incidence_deg": 82.64,
+      "ode_emission_deg": 1.68,
+      "map_resolution_m": 0.754,
+      "utc_start": "2012-01-11T15:46:50.414000Z",
+      "admissible": false,
+      "index_incidence_deg": 82.64,
+      "index_emission_deg": 1.68,
+      "index_resolution_m": 0.754,
+      "scaled_pixel_m": 0.755,
+      "incidence_at_target_deg": 82.57608504808019,
+      "azimuth_at_target_deg": 293.14935291435444,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 82.63291533299142,
+        "difference_deg": -0.007084667008584233
+      },
+      "sun_separation_deg": 11.031340842202408,
+      "slew_angle_deg": "0.014",
+      "start_time": "2012-01-11 15:46:50.414",
+      "orbit_number": "11780",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 32353,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 34400.49725901097,
+        "target_pixel_sample": 2094.3004523432664,
+        "unclamped_line0": 32353,
+        "unclamped_sample0": 1071,
+        "clamped_lines": 0,
+        "clamped_samples": -587,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m180936077lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m180936077rc",
+      "ode_incidence_deg": 82.69,
+      "ode_emission_deg": 1.13,
+      "map_resolution_m": 0.753,
+      "utc_start": "2012-01-11T15:46:50.414000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.6596, sample -0.1125), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m165647365rc",
+      "ode_incidence_deg": 81.78,
+      "ode_emission_deg": 1.15,
+      "map_resolution_m": 1.206,
+      "utc_start": "2011-07-18T16:54:58.391000Z",
+      "admissible": false,
+      "index_incidence_deg": 81.78,
+      "index_emission_deg": 1.15,
+      "index_resolution_m": 1.206,
+      "scaled_pixel_m": 1.21,
+      "incidence_at_target_deg": 81.9615991122078,
+      "azimuth_at_target_deg": 289.2478016687777,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 81.77644260954312,
+        "difference_deg": -0.003557390456876419
+      },
+      "sun_separation_deg": 14.501137119198797,
+      "slew_angle_deg": "0.006",
+      "start_time": "2011-07-18 16:54:58.391",
+      "orbit_number": "9545",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 37263,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 39310.61328819587,
+        "target_pixel_sample": 985.0574454191491,
+        "unclamped_line0": 37263,
+        "unclamped_sample0": -38,
+        "clamped_lines": 0,
+        "clamped_samples": 38,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m165647365rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m155015381rc",
+      "ode_incidence_deg": 71.77,
+      "ode_emission_deg": 1.13,
+      "map_resolution_m": 0.855,
+      "utc_start": "2011-03-17T15:35:14.355000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.77,
+      "index_emission_deg": 1.13,
+      "index_resolution_m": 0.855,
+      "scaled_pixel_m": 0.855,
+      "incidence_at_target_deg": 71.05249885932234,
+      "azimuth_at_target_deg": 352.5899013516602,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.76915590681301,
+        "difference_deg": -0.0008440931869841961
+      },
+      "sun_separation_deg": 47.76297937308831,
+      "slew_angle_deg": "-0.007",
+      "start_time": "2011-03-17 15:35:14.355",
+      "orbit_number": "7978",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 48128,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 50774.23290322583,
+        "target_pixel_sample": 2040.9107367201063,
+        "unclamped_line0": 48727,
+        "unclamped_sample0": 1017,
+        "clamped_lines": -599,
+        "clamped_samples": -533,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m155015381rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m150299440lc",
+      "ode_incidence_deg": 81.59,
+      "ode_emission_deg": 1.68,
+      "map_resolution_m": 0.848,
+      "utc_start": "2011-01-22T01:36:12.622000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.7954, sample 1.0180), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m150299440rc",
+      "ode_incidence_deg": 81.65,
+      "ode_emission_deg": 1.13,
+      "map_resolution_m": 0.847,
+      "utc_start": "2011-01-22T01:36:12.622000Z",
+      "admissible": false,
+      "index_incidence_deg": 81.65,
+      "index_emission_deg": 1.13,
+      "index_resolution_m": 0.847,
+      "scaled_pixel_m": 0.845,
+      "incidence_at_target_deg": 81.42854724309814,
+      "azimuth_at_target_deg": 296.040453806983,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 81.65138372002737,
+        "difference_deg": 0.001383720027362756
+      },
+      "sun_separation_deg": 7.947209219886908,
+      "slew_angle_deg": "0.002",
+      "start_time": "2011-01-22 01:36:12.622",
+      "orbit_number": "7283",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 39492,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 41539.47124182999,
+        "target_pixel_sample": 43.758227546614016,
+        "unclamped_line0": 39492,
+        "unclamped_sample0": -980,
+        "clamped_lines": 0,
+        "clamped_samples": 980,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m150299440rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1439675403rc",
+      "ode_incidence_deg": 86.57,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 1.648,
+      "utc_start": "2023-05-25T17:35:36.810000Z",
+      "admissible": false,
+      "index_incidence_deg": 86.57,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 1.648,
+      "scaled_pixel_m": 1.65,
+      "incidence_at_target_deg": 86.58435683691175,
+      "azimuth_at_target_deg": 78.53539482679061,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 86.57290309238182,
+        "difference_deg": 0.002903092381828287
+      },
+      "sun_separation_deg": 132.82216847318688,
+      "slew_angle_deg": "0.014",
+      "start_time": "2023-05-25 17:35:36.810",
+      "orbit_number": "62622",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 1188,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 3235.3249190985434,
+        "target_pixel_sample": 685.6667544692742,
+        "unclamped_line0": 1188,
+        "unclamped_sample0": -338,
+        "clamped_lines": 0,
+        "clamped_samples": 338,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1439675403rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1421908349lc",
+      "ode_incidence_deg": 80.45,
+      "ode_emission_deg": 1.71,
+      "map_resolution_m": 1.432,
+      "utc_start": "2022-11-01T02:18:02.303000Z",
+      "admissible": false,
+      "index_incidence_deg": 80.45,
+      "index_emission_deg": 1.71,
+      "index_resolution_m": 1.432,
+      "scaled_pixel_m": 1.435,
+      "incidence_at_target_deg": 80.62923918873888,
+      "azimuth_at_target_deg": 63.548284103748344,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 80.44555308535776,
+        "difference_deg": -0.004446914642244337
+      },
+      "sun_separation_deg": 116.81109082359741,
+      "slew_angle_deg": "-0.007",
+      "start_time": "2022-11-01 02:18:02.303",
+      "orbit_number": "60091",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19048,
+        "sample0": 457
+      },
+      "window_detail": {
+        "target_pixel_line": 21095.771655764354,
+        "target_pixel_sample": 1480.9596665112824,
+        "unclamped_line0": 19048,
+        "unclamped_sample0": 457,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1421908349lc.xml",
+      "rejected_by": "(3) sun-vector separation 116.81 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1425602645rc",
+      "ode_incidence_deg": 91.89,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 1.546,
+      "utc_start": "2022-12-13T20:29:39.007000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1442997156lc",
+      "ode_incidence_deg": 73.84,
+      "ode_emission_deg": 15.27,
+      "map_resolution_m": 0.893,
+      "utc_start": "2023-07-03T04:18:08.914000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4427, sample 1.0824), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1442997156rc",
+      "ode_incidence_deg": 73.94,
+      "ode_emission_deg": 12.38,
+      "map_resolution_m": 0.886,
+      "utc_start": "2023-07-03T04:18:08.914000Z",
+      "admissible": false,
+      "index_incidence_deg": 73.94,
+      "index_emission_deg": 12.38,
+      "index_resolution_m": 0.886,
+      "scaled_pixel_m": 0.885,
+      "incidence_at_target_deg": 73.95418980517199,
+      "azimuth_at_target_deg": 326.9620513770808,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 73.94154903416222,
+        "difference_deg": 0.0015490341622239612
+      },
+      "sun_separation_deg": 23.18153618962128,
+      "slew_angle_deg": "12.907",
+      "start_time": "2023-07-03 04:18:08.914",
+      "orbit_number": "63095",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 21094,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 23141.228538477044,
+        "target_pixel_sample": 555.8241721803483,
+        "unclamped_line0": 21094,
+        "unclamped_sample0": -468,
+        "clamped_lines": 0,
+        "clamped_samples": 468,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1442997156rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1443011203lc",
+      "ode_incidence_deg": 74.24,
+      "ode_emission_deg": 0.11,
+      "map_resolution_m": 0.867,
+      "utc_start": "2023-07-03T08:12:16.570000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4491, sample 1.0593), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1443011203rc",
+      "ode_incidence_deg": 74.34,
+      "ode_emission_deg": 2.77,
+      "map_resolution_m": 0.867,
+      "utc_start": "2023-07-03T08:12:16.570000Z",
+      "admissible": false,
+      "index_incidence_deg": 74.34,
+      "index_emission_deg": 2.77,
+      "index_resolution_m": 0.867,
+      "scaled_pixel_m": 0.865,
+      "incidence_at_target_deg": 74.34469419146644,
+      "azimuth_at_target_deg": 324.94486897182856,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 74.34219286688551,
+        "difference_deg": 0.002192866885508238
+      },
+      "sun_separation_deg": 21.204819151701287,
+      "slew_angle_deg": "-1.535",
+      "start_time": "2023-07-03 08:12:16.570",
+      "orbit_number": "63097",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 21252,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 23299.308911958306,
+        "target_pixel_sample": 470.49068221487164,
+        "unclamped_line0": 21252,
+        "unclamped_sample0": -553,
+        "clamped_lines": 0,
+        "clamped_samples": 553,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1443011203rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1443025251lc",
+      "ode_incidence_deg": 74.65,
+      "ode_emission_deg": 14.6,
+      "map_resolution_m": 0.898,
+      "utc_start": "2023-07-03T12:06:23.690000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4451, sample 1.0199), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1443025251rc",
+      "ode_incidence_deg": 74.76,
+      "ode_emission_deg": 17.5,
+      "map_resolution_m": 0.903,
+      "utc_start": "2023-07-03T12:06:23.690000Z",
+      "admissible": false,
+      "index_incidence_deg": 74.76,
+      "index_emission_deg": 17.5,
+      "index_resolution_m": 0.903,
+      "scaled_pixel_m": 0.905,
+      "incidence_at_target_deg": 74.75525859418241,
+      "azimuth_at_target_deg": 322.93593369180707,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 74.752800906036,
+        "difference_deg": -0.007199093964004533
+      },
+      "sun_separation_deg": 19.228724307761638,
+      "slew_angle_deg": "-15.554",
+      "start_time": "2023-07-03 12:06:23.690",
+      "orbit_number": "63099",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 21057,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 23104.83631578564,
+        "target_pixel_sample": 315.28784494423434,
+        "unclamped_line0": 21057,
+        "unclamped_sample0": -708,
+        "clamped_lines": 0,
+        "clamped_samples": 708,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1443025251rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1443123533lc",
+      "ode_incidence_deg": 77.89,
+      "ode_emission_deg": 66.33,
+      "map_resolution_m": 2.848,
+      "utc_start": "2023-07-04T15:24:26.768000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1443123533rc",
+      "ode_incidence_deg": 78.52,
+      "ode_emission_deg": 69.92,
+      "map_resolution_m": 3.097,
+      "utc_start": "2023-07-04T15:24:26.768000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1445349174lc",
+      "ode_incidence_deg": 70.19,
+      "ode_emission_deg": 3.56,
+      "map_resolution_m": 1.782,
+      "utc_start": "2023-07-30T09:38:27.811000Z",
+      "admissible": false,
+      "index_incidence_deg": 70.19,
+      "index_emission_deg": 3.56,
+      "index_resolution_m": 1.782,
+      "scaled_pixel_m": 1.78,
+      "incidence_at_target_deg": 70.95532361850644,
+      "azimuth_at_target_deg": 355.3685288094329,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 70.19187910769101,
+        "difference_deg": 0.0018791076910105176
+      },
+      "sun_separation_deg": 50.39162413980637,
+      "slew_angle_deg": "1.740",
+      "start_time": "2023-07-30 09:38:27.811",
+      "orbit_number": "63430",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 10085,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 12132.10780208278,
+        "target_pixel_sample": 464.1828247755991,
+        "unclamped_line0": 10085,
+        "unclamped_sample0": -559,
+        "clamped_lines": 0,
+        "clamped_samples": 559,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1445349174lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1445356198rc",
+      "ode_incidence_deg": 70.18,
+      "ode_emission_deg": 1.97,
+      "map_resolution_m": 1.777,
+      "utc_start": "2023-07-30T11:35:31.609000Z",
+      "admissible": false,
+      "index_incidence_deg": 70.18,
+      "index_emission_deg": 1.97,
+      "index_resolution_m": 1.777,
+      "scaled_pixel_m": 1.78,
+      "incidence_at_target_deg": 70.9866574119049,
+      "azimuth_at_target_deg": 354.32219340922126,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 70.18877421361097,
+        "difference_deg": 0.008774213610962533
+      },
+      "sun_separation_deg": 49.4021235623385,
+      "slew_angle_deg": "-0.778",
+      "start_time": "2023-07-30 11:35:31.609",
+      "orbit_number": "63431",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 10079,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 12126.742148815689,
+        "target_pixel_sample": 1976.887939169715,
+        "unclamped_line0": 10079,
+        "unclamped_sample0": 953,
+        "clamped_lines": 0,
+        "clamped_samples": -469,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1445356198rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1447694547lc",
+      "ode_incidence_deg": 72.66,
+      "ode_emission_deg": 0.99,
+      "map_resolution_m": 1.819,
+      "utc_start": "2023-08-26T13:08:01.211000Z",
+      "admissible": false,
+      "index_incidence_deg": 72.66,
+      "index_emission_deg": 0.99,
+      "index_resolution_m": 1.819,
+      "scaled_pixel_m": 1.815,
+      "incidence_at_target_deg": 72.46783181237818,
+      "azimuth_at_target_deg": 25.211621054694472,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 72.65532963720723,
+        "difference_deg": -0.004670362792765559
+      },
+      "sun_separation_deg": 78.73001243462939,
+      "slew_angle_deg": "2.595",
+      "start_time": "2023-08-26 13:08:01.211",
+      "orbit_number": "63764",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 27485,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 29532.637151420513,
+        "target_pixel_sample": 2504.019648211388,
+        "unclamped_line0": 27485,
+        "unclamped_sample0": 1481,
+        "clamped_lines": 0,
+        "clamped_samples": -997,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1447694547lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1447694547rc",
+      "ode_incidence_deg": 72.69,
+      "ode_emission_deg": 3.89,
+      "map_resolution_m": 1.818,
+      "utc_start": "2023-08-26T13:08:01.211000Z",
+      "admissible": false,
+      "index_incidence_deg": 72.69,
+      "index_emission_deg": 3.89,
+      "index_resolution_m": 1.818,
+      "scaled_pixel_m": 1.815,
+      "incidence_at_target_deg": 72.46783181237818,
+      "azimuth_at_target_deg": 25.211621054694472,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 72.68624940423922,
+        "difference_deg": -0.003750595760777742
+      },
+      "sun_separation_deg": 78.73001243462939,
+      "slew_angle_deg": "2.595",
+      "start_time": "2023-08-26 13:08:01.211",
+      "orbit_number": "63764",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 27558,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 29605.605439873758,
+        "target_pixel_sample": 58.54145518879669,
+        "unclamped_line0": 27558,
+        "unclamped_sample0": -965,
+        "clamped_lines": 0,
+        "clamped_samples": 965,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1447694547rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1447729683rc",
+      "ode_incidence_deg": 71.81,
+      "ode_emission_deg": 29.12,
+      "map_resolution_m": 1.312,
+      "utc_start": "2023-08-26T22:53:36.904000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1447750764rc",
+      "ode_incidence_deg": 71.47,
+      "ode_emission_deg": 43.4,
+      "map_resolution_m": 1.297,
+      "utc_start": "2023-08-27T04:44:56.722000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1449856698rc",
+      "ode_incidence_deg": 86.75,
+      "ode_emission_deg": 75.66,
+      "map_resolution_m": 4.407,
+      "utc_start": "2023-09-20T13:43:51.963000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1450011206rc",
+      "ode_incidence_deg": 79.56,
+      "ode_emission_deg": 29.46,
+      "map_resolution_m": 0.824,
+      "utc_start": "2023-09-22T08:38:58.429000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1450025248rc",
+      "ode_incidence_deg": 78.96,
+      "ode_emission_deg": 16.8,
+      "map_resolution_m": 0.739,
+      "utc_start": "2023-09-22T12:33:00.824000Z",
+      "admissible": false,
+      "index_incidence_deg": 78.96,
+      "index_emission_deg": 16.8,
+      "index_resolution_m": 0.739,
+      "scaled_pixel_m": 0.74,
+      "incidence_at_target_deg": 78.95536068485018,
+      "azimuth_at_target_deg": 56.26186971689903,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 78.96576650499694,
+        "difference_deg": 0.005766504996941535
+      },
+      "sun_separation_deg": 109.46729120765234,
+      "slew_angle_deg": "14.861",
+      "start_time": "2023-09-22 12:33:00.824",
+      "orbit_number": "64096",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23090,
+        "sample0": 297
+      },
+      "window_detail": {
+        "target_pixel_line": 25137.455158827586,
+        "target_pixel_sample": 1320.472366403454,
+        "unclamped_line0": 23090,
+        "unclamped_sample0": 297,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1450025248rc.xml",
+      "rejected_by": "(3) sun-vector separation 109.47 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1450039289rc",
+      "ode_incidence_deg": 78.37,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 0.706,
+      "utc_start": "2023-09-22T16:27:01.968000Z",
+      "admissible": false,
+      "index_incidence_deg": 78.37,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 0.706,
+      "scaled_pixel_m": 0.7050000000000001,
+      "incidence_at_target_deg": 78.37237080911989,
+      "azimuth_at_target_deg": 54.33212196354604,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 78.36497476889315,
+        "difference_deg": -0.005025231106856154
+      },
+      "sun_separation_deg": 107.48759731806538,
+      "slew_angle_deg": "0.006",
+      "start_time": "2023-09-22 16:27:01.968",
+      "orbit_number": "64098",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 25183,
+        "sample0": 2540
+      },
+      "window_detail": {
+        "target_pixel_line": 27230.085425031604,
+        "target_pixel_sample": 3563.203500802866,
+        "unclamped_line0": 25183,
+        "unclamped_sample0": 2540,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1450039289rc.xml",
+      "rejected_by": "(3) sun-vector separation 107.49 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1450053330rc",
+      "ode_incidence_deg": 77.85,
+      "ode_emission_deg": 11.69,
+      "map_resolution_m": 0.724,
+      "utc_start": "2023-09-22T20:21:03.236000Z",
+      "admissible": false,
+      "index_incidence_deg": 77.85,
+      "index_emission_deg": 11.69,
+      "index_resolution_m": 0.724,
+      "scaled_pixel_m": 0.7250000000000001,
+      "incidence_at_target_deg": 77.80989912052107,
+      "azimuth_at_target_deg": 52.3814341225626,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 77.84739254439214,
+        "difference_deg": -0.0026074556078583555
+      },
+      "sun_separation_deg": 105.49781209507994,
+      "slew_angle_deg": "-12.220",
+      "start_time": "2023-09-22 20:21:03.236",
+      "orbit_number": "64100",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 25155,
+        "sample0": 215
+      },
+      "window_detail": {
+        "target_pixel_line": 27202.479458991813,
+        "target_pixel_sample": 1238.986496944609,
+        "unclamped_line0": 25155,
+        "unclamped_sample0": 215,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1450053330rc.xml",
+      "rejected_by": "(3) sun-vector separation 105.50 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1450095440rc",
+      "ode_incidence_deg": 76.19,
+      "ode_emission_deg": 44.2,
+      "map_resolution_m": 1.327,
+      "utc_start": "2023-09-23T08:02:53.484000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1452369234lc",
+      "ode_incidence_deg": 87.81,
+      "ode_emission_deg": 13.93,
+      "map_resolution_m": 1.885,
+      "utc_start": "2023-10-19T15:39:27.466000Z",
+      "admissible": false,
+      "index_incidence_deg": 87.81,
+      "index_emission_deg": 13.93,
+      "index_resolution_m": 1.885,
+      "scaled_pixel_m": 1.885,
+      "incidence_at_target_deg": 87.88653239437762,
+      "azimuth_at_target_deg": 84.37365983553586,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 87.80322116596261,
+        "difference_deg": -0.0067788340373908795
+      },
+      "sun_separation_deg": 138.75150927100324,
+      "slew_angle_deg": "14.880",
+      "start_time": "2023-10-19 15:39:27.466",
+      "orbit_number": "64430",
+      "lines_samples": [
+        22528,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 8547,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 10594.67456436964,
+        "target_pixel_sample": 2318.154033792902,
+        "unclamped_line0": 8547,
+        "unclamped_sample0": 1295,
+        "clamped_lines": 0,
+        "clamped_samples": -811,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1452369234lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1452369234rc",
+      "ode_incidence_deg": 87.95,
+      "ode_emission_deg": 16.84,
+      "map_resolution_m": 1.895,
+      "utc_start": "2023-10-19T15:39:27.466000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4735, sample -0.0507), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1452376254lc",
+      "ode_incidence_deg": 87.46,
+      "ode_emission_deg": 6.89,
+      "map_resolution_m": 1.851,
+      "utc_start": "2023-10-19T17:36:28.156000Z",
+      "admissible": false,
+      "index_incidence_deg": 87.46,
+      "index_emission_deg": 6.89,
+      "index_resolution_m": 1.851,
+      "scaled_pixel_m": 1.85,
+      "incidence_at_target_deg": 87.53974473066387,
+      "azimuth_at_target_deg": 83.44564462802539,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 87.46556098026605,
+        "difference_deg": 0.005560980266054116
+      },
+      "sun_separation_deg": 137.7615248022368,
+      "slew_angle_deg": "8.190",
+      "start_time": "2023-10-19 17:36:28.156",
+      "orbit_number": "64431",
+      "lines_samples": [
+        22528,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 8717,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 10764.174497581105,
+        "target_pixel_sample": 2346.413092414755,
+        "unclamped_line0": 8717,
+        "unclamped_sample0": 1323,
+        "clamped_lines": 0,
+        "clamped_samples": -839,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1452376254lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1452376254rc",
+      "ode_incidence_deg": 87.6,
+      "ode_emission_deg": 9.78,
+      "map_resolution_m": 1.855,
+      "utc_start": "2023-10-19T17:36:28.156000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4840, sample -0.0307), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1452383275lc",
+      "ode_incidence_deg": 87.11,
+      "ode_emission_deg": 0.35,
+      "map_resolution_m": 1.838,
+      "utc_start": "2023-10-19T19:33:28.988000Z",
+      "admissible": false,
+      "index_incidence_deg": 87.11,
+      "index_emission_deg": 0.35,
+      "index_resolution_m": 1.838,
+      "scaled_pixel_m": 1.8399999999999999,
+      "incidence_at_target_deg": 87.19360201895037,
+      "azimuth_at_target_deg": 82.51714708885153,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 87.1050207505447,
+        "difference_deg": -0.0049792494553031474
+      },
+      "sun_separation_deg": 136.77153975333474,
+      "slew_angle_deg": "1.303",
+      "start_time": "2023-10-19 19:33:28.988",
+      "orbit_number": "64432",
+      "lines_samples": [
+        23552,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 8813,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 10860.286187993634,
+        "target_pixel_sample": 2352.219396038863,
+        "unclamped_line0": 8813,
+        "unclamped_sample0": 1329,
+        "clamped_lines": 0,
+        "clamped_samples": -845,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1452383275lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1452383275rc",
+      "ode_incidence_deg": 87.24,
+      "ode_emission_deg": 2.54,
+      "map_resolution_m": 1.837,
+      "utc_start": "2023-10-19T19:33:28.988000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4668, sample -0.0303), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1460775380lc",
+      "ode_incidence_deg": 69.08,
+      "ode_emission_deg": 2.37,
+      "map_resolution_m": 1.214,
+      "utc_start": "2024-01-24T22:41:52.403000Z",
+      "admissible": false,
+      "index_incidence_deg": 69.08,
+      "index_emission_deg": 2.37,
+      "index_resolution_m": 1.214,
+      "scaled_pixel_m": 1.21,
+      "incidence_at_target_deg": 69.08205041575835,
+      "azimuth_at_target_deg": 339.11397700041573,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 69.08119816741917,
+        "difference_deg": 0.0011981674191758884
+      },
+      "sun_separation_deg": 35.3412271888827,
+      "slew_angle_deg": "-0.590",
+      "start_time": "2024-01-24 22:41:52.403",
+      "orbit_number": "65628",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23592,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 25639.81806960558,
+        "target_pixel_sample": 2471.001130283045,
+        "unclamped_line0": 23592,
+        "unclamped_sample0": 1448,
+        "clamped_lines": 0,
+        "clamped_samples": -964,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1460775380lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1460775380rc",
+      "ode_incidence_deg": 69.09,
+      "ode_emission_deg": 0.54,
+      "map_resolution_m": 1.21,
+      "utc_start": "2024-01-24T22:41:52.403000Z",
+      "admissible": false,
+      "index_incidence_deg": 69.09,
+      "index_emission_deg": 0.54,
+      "index_resolution_m": 1.21,
+      "scaled_pixel_m": 1.21,
+      "incidence_at_target_deg": 69.08205041575835,
+      "azimuth_at_target_deg": 339.11397700041573,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 69.09528923308484,
+        "difference_deg": 0.005289233084837974
+      },
+      "sun_separation_deg": 35.3412271888827,
+      "slew_angle_deg": "-0.590",
+      "start_time": "2024-01-24 22:41:52.403",
+      "orbit_number": "65628",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23946,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 25993.910298988605,
+        "target_pixel_sample": 2.5964766778622783,
+        "unclamped_line0": 23946,
+        "unclamped_sample0": -1021,
+        "clamped_lines": 0,
+        "clamped_samples": 1021,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1460775380rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1466428415lc",
+      "ode_incidence_deg": 92.09,
+      "ode_emission_deg": 12.71,
+      "map_resolution_m": 1.414,
+      "utc_start": "2024-03-30T08:59:07.907000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1467773990lc",
+      "ode_incidence_deg": 84.54,
+      "ode_emission_deg": 29.96,
+      "map_resolution_m": 2.26,
+      "utc_start": "2024-04-14T22:45:23.684000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1467773990rc",
+      "ode_incidence_deg": 84.75,
+      "ode_emission_deg": 32.92,
+      "map_resolution_m": 2.294,
+      "utc_start": "2024-04-14T22:45:23.684000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1467788002lc",
+      "ode_incidence_deg": 83.84,
+      "ode_emission_deg": 18.06,
+      "map_resolution_m": 2.029,
+      "utc_start": "2024-04-15T02:38:55.679000Z",
+      "admissible": false,
+      "index_incidence_deg": 83.84,
+      "index_emission_deg": 18.06,
+      "index_resolution_m": 2.029,
+      "scaled_pixel_m": 2.03,
+      "incidence_at_target_deg": 84.05471809444307,
+      "azimuth_at_target_deg": 73.105646075611,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 83.83368395652558,
+        "difference_deg": -0.006316043474427602
+      },
+      "sun_separation_deg": 126.87984592298238,
+      "slew_angle_deg": "-18.730",
+      "start_time": "2024-04-15 02:38:55.679",
+      "orbit_number": "66628",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 48128,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 51837.517393771166,
+        "target_pixel_sample": 2368.2519869056277,
+        "unclamped_line0": 49790,
+        "unclamped_sample0": 1345,
+        "clamped_lines": -1662,
+        "clamped_samples": -861,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1467788002lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1467788002rc",
+      "ode_incidence_deg": 84.0,
+      "ode_emission_deg": 20.98,
+      "map_resolution_m": 2.044,
+      "utc_start": "2024-04-15T02:38:55.679000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.9921, sample -0.0248), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1467795061rc",
+      "ode_incidence_deg": 83.87,
+      "ode_emission_deg": 14.21,
+      "map_resolution_m": 1.972,
+      "utc_start": "2024-04-15T04:36:35.287000Z",
+      "admissible": false,
+      "index_incidence_deg": 83.87,
+      "index_emission_deg": 14.21,
+      "index_resolution_m": 1.972,
+      "scaled_pixel_m": 1.975,
+      "incidence_at_target_deg": 83.71850045466212,
+      "azimuth_at_target_deg": 72.15848650016672,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 83.86369403278566,
+        "difference_deg": -0.006305967214345287
+      },
+      "sun_separation_deg": 125.87989175345939,
+      "slew_angle_deg": "-12.346",
+      "start_time": "2024-04-15 04:36:35.287",
+      "orbit_number": "66629",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 12724,
+        "sample0": 352
+      },
+      "window_detail": {
+        "target_pixel_line": 14771.650184848882,
+        "target_pixel_sample": 1375.007315979187,
+        "unclamped_line0": 12724,
+        "unclamped_sample0": 352,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1467795061rc.xml",
+      "rejected_by": "(3) sun-vector separation 125.88 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1467809053lc",
+      "ode_incidence_deg": 82.98,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 1.884,
+      "utc_start": "2024-04-15T08:29:46.938000Z",
+      "admissible": false,
+      "index_incidence_deg": 82.98,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 1.884,
+      "scaled_pixel_m": 1.885,
+      "incidence_at_target_deg": 83.07089794001232,
+      "azimuth_at_target_deg": 70.28552794412683,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 82.98097385197636,
+        "difference_deg": 0.0009738519763544673
+      },
+      "sun_separation_deg": 123.90989926674794,
+      "slew_angle_deg": "0.005",
+      "start_time": "2024-04-15 08:29:46.938",
+      "orbit_number": "66631",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 40970,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 43017.086780833095,
+        "target_pixel_sample": 1603.1235758664845,
+        "unclamped_line0": 40970,
+        "unclamped_sample0": 580,
+        "clamped_lines": 0,
+        "clamped_samples": -96,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1467809053lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1467816069rc",
+      "ode_incidence_deg": 82.74,
+      "ode_emission_deg": 7.44,
+      "map_resolution_m": 1.907,
+      "utc_start": "2024-04-15T10:26:42.840000Z",
+      "admissible": false,
+      "index_incidence_deg": 82.74,
+      "index_emission_deg": 7.44,
+      "index_resolution_m": 1.907,
+      "scaled_pixel_m": 1.91,
+      "incidence_at_target_deg": 82.7435616224301,
+      "azimuth_at_target_deg": 69.34401656689974,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 82.74205590789697,
+        "difference_deg": 0.002055907896973963
+      },
+      "sun_separation_deg": 122.919942121293,
+      "slew_angle_deg": "8.167",
+      "start_time": "2024-04-15 10:26:42.840",
+      "orbit_number": "66632",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 38046,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 40093.41609169869,
+        "target_pixel_sample": 455.0103357927201,
+        "unclamped_line0": 38046,
+        "unclamped_sample0": -568,
+        "clamped_lines": 0,
+        "clamped_samples": 568,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1467816069rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1467823121lc",
+      "ode_incidence_deg": 82.43,
+      "ode_emission_deg": 16.92,
+      "map_resolution_m": 1.93,
+      "utc_start": "2024-04-15T12:24:15.284000Z",
+      "admissible": false,
+      "index_incidence_deg": 82.43,
+      "index_emission_deg": 16.92,
+      "index_resolution_m": 1.93,
+      "scaled_pixel_m": 1.925,
+      "incidence_at_target_deg": 82.41497306175206,
+      "azimuth_at_target_deg": 68.39157826951458,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 82.43150569266935,
+        "difference_deg": 0.0015056926693404193
+      },
+      "sun_separation_deg": 121.91998406005344,
+      "slew_angle_deg": "14.395",
+      "start_time": "2024-04-15 12:24:15.284",
+      "orbit_number": "66633",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 6825,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 8872.604236773683,
+        "target_pixel_sample": 2162.6424261296147,
+        "unclamped_line0": 6825,
+        "unclamped_sample0": 1139,
+        "clamped_lines": 0,
+        "clamped_samples": -655,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1467823121lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1467830133lc",
+      "ode_incidence_deg": 82.08,
+      "ode_emission_deg": 23.58,
+      "map_resolution_m": 2.008,
+      "utc_start": "2024-04-15T14:21:07.182000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1468784668lc",
+      "ode_incidence_deg": 83.03,
+      "ode_emission_deg": 0.13,
+      "map_resolution_m": 0.859,
+      "utc_start": "2024-04-26T15:30:00.935000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.5195, sample 1.0402), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1468784668rc",
+      "ode_incidence_deg": 83.16,
+      "ode_emission_deg": 3.01,
+      "map_resolution_m": 0.858,
+      "utc_start": "2024-04-26T15:30:00.935000Z",
+      "admissible": false,
+      "index_incidence_deg": 83.16,
+      "index_emission_deg": 3.01,
+      "index_resolution_m": 0.858,
+      "scaled_pixel_m": 0.86,
+      "incidence_at_target_deg": 83.09912390925462,
+      "azimuth_at_target_deg": 290.5164429558994,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 83.1686271755572,
+        "difference_deg": 0.008627175557208488
+      },
+      "sun_separation_deg": 13.652599914727515,
+      "slew_angle_deg": "-1.762",
+      "start_time": "2024-04-26 15:30:00.935",
+      "orbit_number": "66770",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 24961,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 27008.896281955214,
+        "target_pixel_sample": 369.1807807548158,
+        "unclamped_line0": 24961,
+        "unclamped_sample0": -654,
+        "clamped_lines": 0,
+        "clamped_samples": 654,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1468784668rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1468798657lc",
+      "ode_incidence_deg": 83.8,
+      "ode_emission_deg": 15.09,
+      "map_resolution_m": 1.794,
+      "utc_start": "2024-04-26T19:23:10.296000Z",
+      "admissible": false,
+      "index_incidence_deg": 83.8,
+      "index_emission_deg": 15.09,
+      "index_resolution_m": 1.794,
+      "scaled_pixel_m": 1.795,
+      "incidence_at_target_deg": 83.75295807012094,
+      "azimuth_at_target_deg": 288.6459066157229,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 83.79859325762416,
+        "difference_deg": -0.001406742375834824
+      },
+      "sun_separation_deg": 15.621928654297582,
+      "slew_angle_deg": "-16.015",
+      "start_time": "2024-04-26 19:23:10.296",
+      "orbit_number": "66772",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 47648,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 49695.04302124595,
+        "target_pixel_sample": 2507.3689477079383,
+        "unclamped_line0": 47648,
+        "unclamped_sample0": 1484,
+        "clamped_lines": 0,
+        "clamped_samples": -1000,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1468798657lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1468798657rc",
+      "ode_incidence_deg": 83.94,
+      "ode_emission_deg": 17.99,
+      "map_resolution_m": 1.805,
+      "utc_start": "2024-04-26T19:23:10.296000Z",
+      "admissible": false,
+      "index_incidence_deg": 83.94,
+      "index_emission_deg": 17.99,
+      "index_resolution_m": 1.805,
+      "scaled_pixel_m": 1.8050000000000002,
+      "incidence_at_target_deg": 83.75295807012094,
+      "azimuth_at_target_deg": 288.6459066157229,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 83.93928500428053,
+        "difference_deg": -0.0007149957194627632
+      },
+      "sun_separation_deg": 15.621928654297582,
+      "slew_angle_deg": "-16.015",
+      "start_time": "2024-04-26 19:23:10.296",
+      "orbit_number": "66772",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 47662,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 49709.21287840333,
+        "target_pixel_sample": 32.80989837185978,
+        "unclamped_line0": 47662,
+        "unclamped_sample0": -991,
+        "clamped_lines": 0,
+        "clamped_samples": 991,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1468798657rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1471126841rc",
+      "ode_incidence_deg": 75.33,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 0.853,
+      "utc_start": "2024-05-23T18:06:13.905000Z",
+      "admissible": false,
+      "index_incidence_deg": 75.33,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 0.853,
+      "scaled_pixel_m": 0.855,
+      "incidence_at_target_deg": 75.36506559190809,
+      "azimuth_at_target_deg": 318.9515129392435,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 75.32997024930933,
+        "difference_deg": -2.9750690671903612e-05
+      },
+      "sun_separation_deg": 15.331128134713543,
+      "slew_angle_deg": "0.005",
+      "start_time": "2024-05-23 18:06:13.905",
+      "orbit_number": "67104",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 22358,
+        "sample0": 1932
+      },
+      "window_detail": {
+        "target_pixel_line": 24405.25845264069,
+        "target_pixel_sample": 2955.9993864922462,
+        "unclamped_line0": 22358,
+        "unclamped_sample0": 1932,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1471126841rc.xml",
+      "rejected_by": "(3) sun-vector separation 15.33 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1475797169lc",
+      "ode_incidence_deg": 72.07,
+      "ode_emission_deg": 13.36,
+      "map_resolution_m": 1.708,
+      "utc_start": "2024-07-16T19:25:02.541000Z",
+      "admissible": false,
+      "index_incidence_deg": 72.07,
+      "index_emission_deg": 13.36,
+      "index_resolution_m": 1.708,
+      "scaled_pixel_m": 1.705,
+      "incidence_at_target_deg": 72.15838345478707,
+      "azimuth_at_target_deg": 20.902477827005978,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 72.0774278479953,
+        "difference_deg": 0.0074278479953022725
+      },
+      "sun_separation_deg": 74.62173988053084,
+      "slew_angle_deg": "14.398",
+      "start_time": "2024-07-16 19:25:02.541",
+      "orbit_number": "67770",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 22613,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 24660.77061384368,
+        "target_pixel_sample": 2410.1491586877387,
+        "unclamped_line0": 22613,
+        "unclamped_sample0": 1387,
+        "clamped_lines": 0,
+        "clamped_samples": -903,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1475797169lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1475797169rc",
+      "ode_incidence_deg": 72.08,
+      "ode_emission_deg": 16.25,
+      "map_resolution_m": 1.716,
+      "utc_start": "2024-07-16T19:25:02.541000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4751, sample -0.0005), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1475811207lc",
+      "ode_incidence_deg": 71.56,
+      "ode_emission_deg": 1.72,
+      "map_resolution_m": 1.686,
+      "utc_start": "2024-07-16T23:19:00.632000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.56,
+      "index_emission_deg": 1.72,
+      "index_resolution_m": 1.686,
+      "scaled_pixel_m": 1.69,
+      "incidence_at_target_deg": 71.92018006201003,
+      "azimuth_at_target_deg": 18.826303160105486,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.5591524209046,
+        "difference_deg": -0.0008475790954065587
+      },
+      "sun_separation_deg": 72.63245538028923,
+      "slew_angle_deg": "0.011",
+      "start_time": "2024-07-16 23:19:00.632",
+      "orbit_number": "67772",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 17771,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 19818.917537522804,
+        "target_pixel_sample": 1520.1224044412245,
+        "unclamped_line0": 17771,
+        "unclamped_sample0": 497,
+        "clamped_lines": 0,
+        "clamped_samples": -13,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1475811207lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1475825241lc",
+      "ode_incidence_deg": 71.31,
+      "ode_emission_deg": 17.67,
+      "map_resolution_m": 1.743,
+      "utc_start": "2024-07-17T03:12:54.667000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.31,
+      "index_emission_deg": 17.67,
+      "index_resolution_m": 1.743,
+      "scaled_pixel_m": 1.74,
+      "incidence_at_target_deg": 71.7070662649403,
+      "azimuth_at_target_deg": 16.755026592292513,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.3104657790977,
+        "difference_deg": 0.00046577909769496273
+      },
+      "sun_separation_deg": 70.65317569028707,
+      "slew_angle_deg": "-15.205",
+      "start_time": "2024-07-17 03:12:54.667",
+      "orbit_number": "67774",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 17242,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 19289.153392126907,
+        "target_pixel_sample": 1544.7339837832226,
+        "unclamped_line0": 17242,
+        "unclamped_sample0": 521,
+        "clamped_lines": 0,
+        "clamped_samples": -37,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1475825241lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1478153786lc",
+      "ode_incidence_deg": 77.12,
+      "ode_emission_deg": 1.72,
+      "map_resolution_m": 1.672,
+      "utc_start": "2024-08-13T02:01:59.603000Z",
+      "admissible": false,
+      "index_incidence_deg": 77.12,
+      "index_emission_deg": 1.72,
+      "index_resolution_m": 1.672,
+      "scaled_pixel_m": 1.67,
+      "incidence_at_target_deg": 77.11803790494346,
+      "azimuth_at_target_deg": 48.122407813545585,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 77.11864450185611,
+        "difference_deg": -0.0013554981438943514
+      },
+      "sun_separation_deg": 101.304966135262,
+      "slew_angle_deg": "0.012",
+      "start_time": "2024-08-13 02:01:59.603",
+      "orbit_number": "68106",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 24281,
+        "sample0": 78
+      },
+      "window_detail": {
+        "target_pixel_line": 26328.15501828285,
+        "target_pixel_sample": 1101.7724859939628,
+        "unclamped_line0": 24281,
+        "unclamped_sample0": 78,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1478153786lc.xml",
+      "rejected_by": "(3) sun-vector separation 101.30 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1480510398lc",
+      "ode_incidence_deg": 85.02,
+      "ode_emission_deg": 18.78,
+      "map_resolution_m": 1.758,
+      "utc_start": "2024-09-09T08:38:51.263000Z",
+      "admissible": false,
+      "index_incidence_deg": 85.02,
+      "index_emission_deg": 18.78,
+      "index_resolution_m": 1.758,
+      "scaled_pixel_m": 1.755,
+      "incidence_at_target_deg": 84.79425810273693,
+      "azimuth_at_target_deg": 74.31197504267267,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 85.01621922626943,
+        "difference_deg": -0.0037807737305683986
+      },
+      "sun_separation_deg": 128.2567063570268,
+      "slew_angle_deg": "-16.270",
+      "start_time": "2024-09-09 08:38:51.263",
+      "orbit_number": "68442",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 34240,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 36287.38178563994,
+        "target_pixel_sample": 2210.852400737365,
+        "unclamped_line0": 34240,
+        "unclamped_sample0": 1187,
+        "clamped_lines": 0,
+        "clamped_samples": -703,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1480510398lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1482839015lc",
+      "ode_incidence_deg": 95.04,
+      "ode_emission_deg": 1.72,
+      "map_resolution_m": 0.842,
+      "utc_start": "2024-10-06T07:29:08.284000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1484212936lc",
+      "ode_incidence_deg": 88.94,
+      "ode_emission_deg": 1.92,
+      "map_resolution_m": 0.894,
+      "utc_start": "2024-10-22T05:07:48.971000Z",
+      "admissible": false,
+      "index_incidence_deg": 88.94,
+      "index_emission_deg": 1.92,
+      "index_resolution_m": 0.894,
+      "scaled_pixel_m": 0.895,
+      "incidence_at_target_deg": 88.94866697582975,
+      "azimuth_at_target_deg": 270.9196128320955,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 88.93939448369018,
+        "difference_deg": -0.0006055163098181993
+      },
+      "sun_separation_deg": 34.01865976888547,
+      "slew_angle_deg": "3.471",
+      "start_time": "2024-10-22 05:07:48.971",
+      "orbit_number": "68970",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 22270,
+        "sample0": 2113
+      },
+      "window_detail": {
+        "target_pixel_line": 24317.262055547777,
+        "target_pixel_sample": 3136.1489045072235,
+        "unclamped_line0": 22270,
+        "unclamped_sample0": 2113,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1484212936lc.xml",
+      "rejected_by": "(3) sun-vector separation 34.02 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1485160650lc",
+      "ode_incidence_deg": 104.39,
+      "ode_emission_deg": 17.89,
+      "map_resolution_m": 0.985,
+      "utc_start": "2024-11-02T04:23:03.165000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1485160650rc",
+      "ode_incidence_deg": 104.52,
+      "ode_emission_deg": 20.79,
+      "map_resolution_m": 0.991,
+      "utc_start": "2024-11-02T04:23:03.165000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1486555640lc",
+      "ode_incidence_deg": 78.3,
+      "ode_emission_deg": 1.45,
+      "map_resolution_m": 0.894,
+      "utc_start": "2024-11-18T07:52:52.866000Z",
+      "admissible": true,
+      "index_incidence_deg": 78.3,
+      "index_emission_deg": 1.45,
+      "index_resolution_m": 0.894,
+      "scaled_pixel_m": 0.89,
+      "incidence_at_target_deg": 78.33516823625524,
+      "azimuth_at_target_deg": 299.0279462592949,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 78.29579122493683,
+        "difference_deg": -0.004208775063162307
+      },
+      "sun_separation_deg": 4.4172936588027625,
+      "slew_angle_deg": "3.025",
+      "start_time": "2024-11-18 07:52:52.866",
+      "orbit_number": "69304",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 24216,
+        "sample0": 2956
+      },
+      "window_detail": {
+        "target_pixel_line": 26263.99807902876,
+        "target_pixel_sample": 3979.34097029279,
+        "unclamped_line0": 24216,
+        "unclamped_sample0": 2956,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1486555640lc.xml",
+      "jacobian_determinant": -0.7951915871692529,
+      "tier": 1,
+      "overlap_fraction": {
+        "O1": 0.9863945578231292,
+        "O2": 1.0
+      }
+    },
+    {
+      "pdsid": "nac.m1486569653lc",
+      "ode_incidence_deg": 78.89,
+      "ode_emission_deg": 15.79,
+      "map_resolution_m": 1.85,
+      "utc_start": "2024-11-18T11:46:27.068000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.5015, sample 1.0365), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1486569653rc",
+      "ode_incidence_deg": 78.99,
+      "ode_emission_deg": 18.69,
+      "map_resolution_m": 1.861,
+      "utc_start": "2024-11-18T11:46:27.068000Z",
+      "admissible": false,
+      "index_incidence_deg": 78.99,
+      "index_emission_deg": 18.69,
+      "index_resolution_m": 1.861,
+      "scaled_pixel_m": 1.8599999999999999,
+      "incidence_at_target_deg": 78.94748932489935,
+      "azimuth_at_target_deg": 297.1186072627412,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 78.9910999903801,
+        "difference_deg": 0.0010999903801121036
+      },
+      "sun_separation_deg": 6.309728936930867,
+      "slew_angle_deg": "16.680",
+      "start_time": "2024-11-18 11:46:27.068",
+      "orbit_number": "69306",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 24336,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 26383.358115912866,
+        "target_pixel_sample": 152.87906299865725,
+        "unclamped_line0": 24336,
+        "unclamped_sample0": -871,
+        "clamped_lines": 0,
+        "clamped_samples": 871,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1486569653rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1486583695rc",
+      "ode_incidence_deg": 79.95,
+      "ode_emission_deg": 31.32,
+      "map_resolution_m": 1.984,
+      "utc_start": "2024-11-18T15:40:28.744000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1488898366rc",
+      "ode_incidence_deg": 70.48,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 0.881,
+      "utc_start": "2024-12-15T10:38:19.061000Z",
+      "admissible": false,
+      "index_incidence_deg": 70.48,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 0.881,
+      "scaled_pixel_m": 0.88,
+      "incidence_at_target_deg": 70.51322318942026,
+      "azimuth_at_target_deg": 329.2810285128362,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 70.48534019867434,
+        "difference_deg": 0.0053401986743324414
+      },
+      "sun_separation_deg": 26.017709834131207,
+      "slew_angle_deg": "0.060",
+      "start_time": "2024-12-15 10:38:19.061",
+      "orbit_number": "69638",
+      "lines_samples": [
+        37888,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 17263,
+        "sample0": 3016
+      },
+      "window_detail": {
+        "target_pixel_line": 19310.964903235956,
+        "target_pixel_sample": 4743.3839948324285,
+        "unclamped_line0": 17263,
+        "unclamped_sample0": 3720,
+        "clamped_lines": 0,
+        "clamped_samples": -704,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1488898366rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1488919410lc",
+      "ode_incidence_deg": 71.16,
+      "ode_emission_deg": 22.53,
+      "map_resolution_m": 1.917,
+      "utc_start": "2024-12-15T16:29:03.840000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1488919410rc",
+      "ode_incidence_deg": 71.19,
+      "ode_emission_deg": 25.45,
+      "map_resolution_m": 1.935,
+      "utc_start": "2024-12-15T16:29:03.840000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1491239581lc",
+      "ode_incidence_deg": 68.01,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 0.882,
+      "utc_start": "2025-01-11T12:58:34.148000Z",
+      "admissible": false,
+      "index_incidence_deg": 68.01,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 0.882,
+      "scaled_pixel_m": 0.885,
+      "incidence_at_target_deg": 67.94248161524987,
+      "azimuth_at_target_deg": 1.8240102838360737,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 68.0079379588954,
+        "difference_deg": -0.00206204110460817
+      },
+      "sun_separation_deg": 56.47066673275821,
+      "slew_angle_deg": "-0.015",
+      "start_time": "2025-01-11 12:58:34.148",
+      "orbit_number": "69972",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 21391,
+        "sample0": 2747
+      },
+      "window_detail": {
+        "target_pixel_line": 23438.03141359827,
+        "target_pixel_sample": 3770.6661224108757,
+        "unclamped_line0": 21391,
+        "unclamped_sample0": 2747,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1491239581lc.xml",
+      "rejected_by": "(3) sun-vector separation 56.47 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1493566861lc",
+      "ode_incidence_deg": 71.59,
+      "ode_emission_deg": 13.81,
+      "map_resolution_m": 1.759,
+      "utc_start": "2025-02-07T11:26:34.654000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.7223, sample 1.0615), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1493566861rc",
+      "ode_incidence_deg": 71.71,
+      "ode_emission_deg": 16.71,
+      "map_resolution_m": 1.768,
+      "utc_start": "2025-02-07T11:26:34.654000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.71,
+      "index_emission_deg": 16.71,
+      "index_resolution_m": 1.768,
+      "scaled_pixel_m": 1.77,
+      "incidence_at_target_deg": 72.0593588640151,
+      "azimuth_at_target_deg": 36.0907719815902,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.71168659345621,
+        "difference_deg": 0.0016865934562133589
+      },
+      "sun_separation_deg": 88.85587619793121,
+      "slew_angle_deg": "-14.786",
+      "start_time": "2025-02-07 11:26:34.654",
+      "orbit_number": "70304",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 35641,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 37688.64870630271,
+        "target_pixel_sample": 248.52013645574672,
+        "unclamped_line0": 35641,
+        "unclamped_sample0": -775,
+        "clamped_lines": 0,
+        "clamped_samples": 775,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1493566861rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1493580891rc",
+      "ode_incidence_deg": 71.7,
+      "ode_emission_deg": 1.16,
+      "map_resolution_m": 1.779,
+      "utc_start": "2025-02-07T15:20:24.633000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.7,
+      "index_emission_deg": 1.16,
+      "index_resolution_m": 1.779,
+      "scaled_pixel_m": 1.78,
+      "incidence_at_target_deg": 71.66055955339768,
+      "azimuth_at_target_deg": 34.06096683307395,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.69184560129163,
+        "difference_deg": -0.008154398708370536
+      },
+      "sun_separation_deg": 86.88619517509544,
+      "slew_angle_deg": "-0.012",
+      "start_time": "2025-02-07 15:20:24.633",
+      "orbit_number": "70306",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 24086,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 26133.079213034664,
+        "target_pixel_sample": 941.8935065118594,
+        "unclamped_line0": 24086,
+        "unclamped_sample0": -82,
+        "clamped_lines": 0,
+        "clamped_samples": 82,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1493580891rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1498263508rc",
+      "ode_incidence_deg": 91.15,
+      "ode_emission_deg": 1.17,
+      "map_resolution_m": 1.816,
+      "utc_start": "2025-04-02T20:04:01.919000Z",
+      "admissible": false,
+      "rejected_by": "implied by theta <= 10.0: |ODE incidence - 78.476392| > 11.0"
+    },
+    {
+      "pdsid": "nac.m1499224662lc",
+      "ode_incidence_deg": 75.83,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 1.784,
+      "utc_start": "2025-04-13T23:03:15.655000Z",
+      "admissible": false,
+      "index_incidence_deg": 75.83,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 1.784,
+      "scaled_pixel_m": 1.7850000000000001,
+      "incidence_at_target_deg": 75.88272277842947,
+      "azimuth_at_target_deg": 314.98987123228443,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 75.83272115353105,
+        "difference_deg": 0.00272115353105562
+      },
+      "sun_separation_deg": 11.464530306580032,
+      "slew_angle_deg": "0.011",
+      "start_time": "2025-04-13 23:03:15.655",
+      "orbit_number": "71111",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 22332,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 24379.7212061134,
+        "target_pixel_sample": 1795.8155783480177,
+        "unclamped_line0": 22332,
+        "unclamped_sample0": 772,
+        "clamped_lines": 0,
+        "clamped_samples": -288,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1499224662lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1501551872lc",
+      "ode_incidence_deg": 71.02,
+      "ode_emission_deg": 16.48,
+      "map_resolution_m": 0.973,
+      "utc_start": "2025-05-10T21:30:04.806000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4280, sample 1.0128), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1501551872rc",
+      "ode_incidence_deg": 71.1,
+      "ode_emission_deg": 13.57,
+      "map_resolution_m": 0.966,
+      "utc_start": "2025-05-10T21:30:04.806000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.1,
+      "index_emission_deg": 13.57,
+      "index_resolution_m": 0.966,
+      "scaled_pixel_m": 0.965,
+      "incidence_at_target_deg": 71.15651665234502,
+      "azimuth_at_target_deg": 347.2185234421117,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.10263436131345,
+        "difference_deg": 0.002634361313454292
+      },
+      "sun_separation_deg": 42.6814322851614,
+      "slew_angle_deg": "13.979",
+      "start_time": "2025-05-10 21:30:04.806",
+      "orbit_number": "71443",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 20337,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 22384.62458932719,
+        "target_pixel_sample": 169.22238032780194,
+        "unclamped_line0": 20337,
+        "unclamped_sample0": -854,
+        "clamped_lines": 0,
+        "clamped_samples": 854,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1501551872rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1501565896lc",
+      "ode_incidence_deg": 71.29,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 0.945,
+      "utc_start": "2025-05-11T01:23:48.675000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.29,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 0.945,
+      "scaled_pixel_m": 0.9450000000000001,
+      "incidence_at_target_deg": 71.32316591383523,
+      "azimuth_at_target_deg": 345.13538565014335,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.28955156841863,
+        "difference_deg": -0.0004484315813755302
+      },
+      "sun_separation_deg": 40.702348710519225,
+      "slew_angle_deg": "-0.013",
+      "start_time": "2025-05-11 01:23:48.675",
+      "orbit_number": "71445",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23159,
+        "sample0": 2426
+      },
+      "window_detail": {
+        "target_pixel_line": 25206.068965708855,
+        "target_pixel_sample": 3449.7647051903987,
+        "unclamped_line0": 23159,
+        "unclamped_sample0": 2426,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1501565896lc.xml",
+      "rejected_by": "(3) sun-vector separation 40.70 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1501579923lc",
+      "ode_incidence_deg": 71.37,
+      "ode_emission_deg": 11.4,
+      "map_resolution_m": 0.962,
+      "utc_start": "2025-05-11T05:17:36.353000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.37,
+      "index_emission_deg": 11.4,
+      "index_resolution_m": 0.962,
+      "scaled_pixel_m": 0.965,
+      "incidence_at_target_deg": 71.52321879769254,
+      "azimuth_at_target_deg": 343.0683560381064,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.3728283910127,
+        "difference_deg": 0.0028283910126987166
+      },
+      "sun_separation_deg": 38.73355394940971,
+      "slew_angle_deg": "-12.467",
+      "start_time": "2025-05-11 05:17:36.353",
+      "orbit_number": "71447",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19571,
+        "sample0": 3016
+      },
+      "window_detail": {
+        "target_pixel_line": 21618.658853172677,
+        "target_pixel_sample": 4474.305341890928,
+        "unclamped_line0": 19571,
+        "unclamped_sample0": 3451,
+        "clamped_lines": 0,
+        "clamped_samples": -435,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1501579923lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1501579923rc",
+      "ode_incidence_deg": 71.45,
+      "ode_emission_deg": 14.31,
+      "map_resolution_m": 0.966,
+      "utc_start": "2025-05-11T05:17:36.353000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4151, sample -0.0722), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1503893242lc",
+      "ode_incidence_deg": 71.94,
+      "ode_emission_deg": 15.79,
+      "map_resolution_m": 1.844,
+      "utc_start": "2025-06-06T23:52:55.548000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.5344, sample 1.0111), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1503893242rc",
+      "ode_incidence_deg": 71.94,
+      "ode_emission_deg": 12.88,
+      "map_resolution_m": 1.83,
+      "utc_start": "2025-06-06T23:52:55.548000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.94,
+      "index_emission_deg": 12.88,
+      "index_resolution_m": 1.83,
+      "scaled_pixel_m": 1.83,
+      "incidence_at_target_deg": 71.85603197838554,
+      "azimuth_at_target_deg": 17.74382519055236,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.94613123628936,
+        "difference_deg": 0.006131236289363073
+      },
+      "sun_separation_deg": 71.6030808803664,
+      "slew_angle_deg": "13.307",
+      "start_time": "2025-06-06 23:52:55.548",
+      "orbit_number": "71777",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 25804,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 27851.91671838739,
+        "target_pixel_sample": 107.19888676945665,
+        "unclamped_line0": 25804,
+        "unclamped_sample0": -916,
+        "clamped_lines": 0,
+        "clamped_samples": 916,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1503893242rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1503907266lc",
+      "ode_incidence_deg": 71.64,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 1.931,
+      "utc_start": "2025-06-07T03:46:40.251000Z",
+      "admissible": false,
+      "rejected_by": "ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves to normalised (line 0.4970, sample 1.0660), and no clamping is applied"
+    },
+    {
+      "pdsid": "nac.m1503907266rc",
+      "ode_incidence_deg": 71.64,
+      "ode_emission_deg": 1.17,
+      "map_resolution_m": 1.928,
+      "utc_start": "2025-06-07T03:46:40.251000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.64,
+      "index_emission_deg": 1.17,
+      "index_resolution_m": 1.928,
+      "scaled_pixel_m": 1.9249999999999998,
+      "incidence_at_target_deg": 71.65551481705477,
+      "azimuth_at_target_deg": 15.670516184307973,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.63483793288145,
+        "difference_deg": -0.0051620671185474976
+      },
+      "sun_separation_deg": 69.62385631188987,
+      "slew_angle_deg": "-0.012",
+      "start_time": "2025-06-07 03:46:40.251",
+      "orbit_number": "71779",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 23843,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 25890.999416740702,
+        "target_pixel_sample": 245.10870461818524,
+        "unclamped_line0": 23843,
+        "unclamped_sample0": -778,
+        "clamped_lines": 0,
+        "clamped_samples": 778,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1503907266rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1503921287rc",
+      "ode_incidence_deg": 71.81,
+      "ode_emission_deg": 14.2,
+      "map_resolution_m": 1.991,
+      "utc_start": "2025-06-07T07:40:20.460000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.81,
+      "index_emission_deg": 14.2,
+      "index_resolution_m": 1.991,
+      "scaled_pixel_m": 1.99,
+      "incidence_at_target_deg": 71.47932561706784,
+      "azimuth_at_target_deg": 13.592495296428206,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.80926656397564,
+        "difference_deg": -0.0007334360243618221
+      },
+      "sun_separation_deg": 67.64464435386544,
+      "slew_angle_deg": "-12.347",
+      "start_time": "2025-06-07 07:40:20.460",
+      "orbit_number": "71781",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 29114,
+        "sample0": 15
+      },
+      "window_detail": {
+        "target_pixel_line": 31161.43087685325,
+        "target_pixel_sample": 1038.9378587798908,
+        "unclamped_line0": 29114,
+        "unclamped_sample0": 15,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1503921287rc.xml",
+      "rejected_by": "(3) sun-vector separation 67.64 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1506248767lc",
+      "ode_incidence_deg": 75.74,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 1.972,
+      "utc_start": "2025-07-04T06:11:40.784000Z",
+      "admissible": false,
+      "index_incidence_deg": 75.74,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 1.972,
+      "scaled_pixel_m": 1.9699999999999998,
+      "incidence_at_target_deg": 76.65059154498067,
+      "azimuth_at_target_deg": 45.14870586681761,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 75.73574700035277,
+        "difference_deg": -0.004252999647221145
+      },
+      "sun_separation_deg": 98.38358252971469,
+      "slew_angle_deg": "0.019",
+      "start_time": "2025-07-04 06:11:40.784",
+      "orbit_number": "72113",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 9322,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 11369.334173435995,
+        "target_pixel_sample": 2224.6413734679422,
+        "unclamped_line0": 9322,
+        "unclamped_sample0": 1201,
+        "clamped_lines": 0,
+        "clamped_samples": -717,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1506248767lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1508589889lc",
+      "ode_incidence_deg": 84.74,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 2.017,
+      "utc_start": "2025-07-31T08:30:21.012000Z",
+      "admissible": false,
+      "index_incidence_deg": 84.74,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 2.017,
+      "scaled_pixel_m": 2.015,
+      "incidence_at_target_deg": 84.90100236189811,
+      "azimuth_at_target_deg": 73.18528513416013,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 84.74873052440553,
+        "difference_deg": 0.008730524405535789
+      },
+      "sun_separation_deg": 127.22942973287599,
+      "slew_angle_deg": "0.009",
+      "start_time": "2025-07-31 08:30:21.012",
+      "orbit_number": "72447",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 21249,
+        "sample0": 356
+      },
+      "window_detail": {
+        "target_pixel_line": 23296.485864766913,
+        "target_pixel_sample": 1379.571976882008,
+        "unclamped_line0": 21249,
+        "unclamped_sample0": 356,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1508589889lc.xml",
+      "rejected_by": "(3) sun-vector separation 127.23 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1514617310rc",
+      "ode_incidence_deg": 78.86,
+      "ode_emission_deg": 30.7,
+      "map_resolution_m": 1.208,
+      "utc_start": "2025-10-09T02:47:23.524000Z",
+      "admissible": false,
+      "rejected_by": "ODE emission > 21.0 (index would fail too)"
+    },
+    {
+      "pdsid": "nac.m1514638346lc",
+      "ode_incidence_deg": 80.28,
+      "ode_emission_deg": 16.7,
+      "map_resolution_m": 2.051,
+      "utc_start": "2025-10-09T08:37:59.625000Z",
+      "admissible": false,
+      "index_incidence_deg": 80.28,
+      "index_emission_deg": 16.7,
+      "index_resolution_m": 2.051,
+      "scaled_pixel_m": 2.0500000000000003,
+      "incidence_at_target_deg": 79.70201190447571,
+      "azimuth_at_target_deg": 296.38696013495843,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 80.27774956410556,
+        "difference_deg": -0.0022504358944388514
+      },
+      "sun_separation_deg": 7.124715654162227,
+      "slew_angle_deg": "-14.079",
+      "start_time": "2025-10-09 08:37:59.625",
+      "orbit_number": "73310",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 7407,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 9454.995738874542,
+        "target_pixel_sample": 1574.2171822830533,
+        "unclamped_line0": 7407,
+        "unclamped_sample0": 551,
+        "clamped_lines": 0,
+        "clamped_samples": -67,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1514638346lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1514652338lc",
+      "ode_incidence_deg": 80.16,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 1.984,
+      "utc_start": "2025-10-09T12:31:11.995000Z",
+      "admissible": false,
+      "index_incidence_deg": 80.16,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 1.984,
+      "scaled_pixel_m": 1.9849999999999999,
+      "incidence_at_target_deg": 80.32869627667917,
+      "azimuth_at_target_deg": 294.49074722209264,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 80.15620837932883,
+        "difference_deg": -0.003791620671165674
+      },
+      "sun_separation_deg": 9.080179001674075,
+      "slew_angle_deg": "0.019",
+      "start_time": "2025-10-09 12:31:11.995",
+      "orbit_number": "73312",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 29033,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 31080.492333583574,
+        "target_pixel_sample": 81.42998693693559,
+        "unclamped_line0": 29033,
+        "unclamped_sample0": -942,
+        "clamped_lines": 0,
+        "clamped_samples": 942,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1514652338lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1516993627lc",
+      "ode_incidence_deg": 71.79,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 1.052,
+      "utc_start": "2025-11-05T14:52:40.473000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.79,
+      "index_emission_deg": 1.74,
+      "index_resolution_m": 1.052,
+      "scaled_pixel_m": 1.0550000000000002,
+      "incidence_at_target_deg": 71.74622340108452,
+      "azimuth_at_target_deg": 323.99208010019214,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.79084503607939,
+        "difference_deg": 0.0008450360793830214
+      },
+      "sun_separation_deg": 20.86468995014272,
+      "slew_angle_deg": "0.011",
+      "start_time": "2025-11-05 14:52:40.473",
+      "orbit_number": "73646",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 22772,
+        "sample0": 822
+      },
+      "window_detail": {
+        "target_pixel_line": 24819.97977268191,
+        "target_pixel_sample": 1845.6012123731655,
+        "unclamped_line0": 22772,
+        "unclamped_sample0": 822,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1516993627lc.xml",
+      "rejected_by": "(3) sun-vector separation 20.86 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1524018718lc",
+      "ode_incidence_deg": 78.08,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 1.079,
+      "utc_start": "2026-01-25T22:17:31.456000Z",
+      "admissible": false,
+      "index_incidence_deg": 78.08,
+      "index_emission_deg": 1.74,
+      "index_resolution_m": 1.079,
+      "scaled_pixel_m": 1.08,
+      "incidence_at_target_deg": 78.09250497964271,
+      "azimuth_at_target_deg": 59.02659138041907,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 78.07724377471395,
+        "difference_deg": -0.00275622528604913
+      },
+      "sun_separation_deg": 111.80259147398881,
+      "slew_angle_deg": "-0.007",
+      "start_time": "2026-01-25 22:17:31.456",
+      "orbit_number": "74648",
+      "lines_samples": [
+        47104,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19796,
+        "sample0": 2577
+      },
+      "window_detail": {
+        "target_pixel_line": 21843.438470496552,
+        "target_pixel_sample": 3600.665933186969,
+        "unclamped_line0": 19796,
+        "unclamped_sample0": 2577,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1524018718lc.xml",
+      "rejected_by": "(3) sun-vector separation 111.80 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1524966200lc",
+      "ode_incidence_deg": 84.55,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 1.026,
+      "utc_start": "2026-02-05T21:28:53.112000Z",
+      "admissible": false,
+      "index_incidence_deg": 84.55,
+      "index_emission_deg": 1.74,
+      "index_resolution_m": 1.026,
+      "scaled_pixel_m": 1.025,
+      "incidence_at_target_deg": 84.59935799134911,
+      "azimuth_at_target_deg": 282.8731127509534,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 84.55296952171959,
+        "difference_deg": 0.002969521719592194
+      },
+      "sun_separation_deg": 21.32217188266062,
+      "slew_angle_deg": "0.005",
+      "start_time": "2026-02-05 21:28:53.112",
+      "orbit_number": "74783",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 27408,
+        "sample0": 2875
+      },
+      "window_detail": {
+        "target_pixel_line": 29455.438106256126,
+        "target_pixel_sample": 3898.2568416793288,
+        "unclamped_line0": 27408,
+        "unclamped_sample0": 2875,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1524966200lc.xml",
+      "rejected_by": "(3) sun-vector separation 21.32 > 10.0"
+    },
+    {
+      "pdsid": "nac.m1526360760lc",
+      "ode_incidence_deg": 89.1,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 2.153,
+      "utc_start": "2026-02-22T00:51:33.587000Z",
+      "admissible": false,
+      "index_incidence_deg": 89.1,
+      "index_emission_deg": 1.74,
+      "index_resolution_m": 2.153,
+      "scaled_pixel_m": 2.1500000000000004,
+      "incidence_at_target_deg": 88.87517297612943,
+      "azimuth_at_target_deg": 87.5500347152074,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 89.0990966728722,
+        "difference_deg": -0.0009033271278013899
+      },
+      "sun_separation_deg": 142.07220079452247,
+      "slew_angle_deg": "0.004",
+      "start_time": "2026-02-22 00:51:33.587",
+      "orbit_number": "74982",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 32889,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 34936.464183834105,
+        "target_pixel_sample": 912.6558522346919,
+        "unclamped_line0": 32889,
+        "unclamped_sample0": -111,
+        "clamped_lines": 0,
+        "clamped_samples": 111,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1526360760lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1527308253rc",
+      "ode_incidence_deg": 75.77,
+      "ode_emission_deg": 1.18,
+      "map_resolution_m": 1.893,
+      "utc_start": "2026-03-05T00:03:07.192000Z",
+      "admissible": false,
+      "index_incidence_deg": 75.77,
+      "index_emission_deg": 1.18,
+      "index_resolution_m": 1.893,
+      "scaled_pixel_m": 1.895,
+      "incidence_at_target_deg": 76.01808124661527,
+      "azimuth_at_target_deg": 312.1588752063813,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 75.77287007699138,
+        "difference_deg": 0.0028700769913854174
+      },
+      "sun_separation_deg": 8.761941024765592,
+      "slew_angle_deg": "-0.008",
+      "start_time": "2026-03-05 00:03:07.192",
+      "orbit_number": "75117",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 14199,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 16246.222640550088,
+        "target_pixel_sample": 1811.8626107322077,
+        "unclamped_line0": 14199,
+        "unclamped_sample0": 788,
+        "clamped_lines": 0,
+        "clamped_samples": -304,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1527308253rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1529643232lc",
+      "ode_incidence_deg": 71.38,
+      "ode_emission_deg": 1.74,
+      "map_resolution_m": 1.701,
+      "utc_start": "2026-04-01T00:39:25.808000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.38,
+      "index_emission_deg": 1.74,
+      "index_resolution_m": 1.701,
+      "scaled_pixel_m": 1.7,
+      "incidence_at_target_deg": 71.02106659641066,
+      "azimuth_at_target_deg": 343.80001696154335,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.37179029571021,
+        "difference_deg": -0.008209704289782849
+      },
+      "sun_separation_deg": 39.465622037624215,
+      "slew_angle_deg": "-0.014",
+      "start_time": "2026-04-01 00:39:25.808",
+      "orbit_number": "75450",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 32503,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 34550.93553782665,
+        "target_pixel_sample": 696.4120301267063,
+        "unclamped_line0": 32503,
+        "unclamped_sample0": -327,
+        "clamped_lines": 0,
+        "clamped_samples": 327,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1529643232lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1531985241lc",
+      "ode_incidence_deg": 71.25,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 1.0,
+      "utc_start": "2026-04-28T03:12:53.804000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.25,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 1.0,
+      "scaled_pixel_m": 1.0,
+      "incidence_at_target_deg": 71.38945127509598,
+      "azimuth_at_target_deg": 14.818016484915555,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.24691310522567,
+        "difference_deg": -0.00308689477432722
+      },
+      "sun_separation_deg": 68.79304699164307,
+      "slew_angle_deg": "-0.024",
+      "start_time": "2026-04-28 03:12:53.804",
+      "orbit_number": "75784",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 20051,
+        "sample0": 3016
+      },
+      "window_detail": {
+        "target_pixel_line": 22098.846484457266,
+        "target_pixel_sample": 5036.197678178733,
+        "unclamped_line0": 20051,
+        "unclamped_sample0": 4013,
+        "clamped_lines": 0,
+        "clamped_samples": -997,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1531985241lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1531985241rc",
+      "ode_incidence_deg": 71.26,
+      "ode_emission_deg": 1.18,
+      "map_resolution_m": 0.999,
+      "utc_start": "2026-04-28T03:12:53.804000Z",
+      "admissible": false,
+      "index_incidence_deg": 71.26,
+      "index_emission_deg": 1.18,
+      "index_resolution_m": 0.999,
+      "scaled_pixel_m": 1.0,
+      "incidence_at_target_deg": 71.38945127509598,
+      "azimuth_at_target_deg": 14.818016484915555,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 71.24790517725357,
+        "difference_deg": -0.01209482274643392
+      },
+      "sun_separation_deg": 68.79304699164307,
+      "slew_angle_deg": "-0.024",
+      "start_time": "2026-04-28 03:12:53.804",
+      "orbit_number": "75784",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 19809,
+        "sample0": 0
+      },
+      "window_detail": {
+        "target_pixel_line": 21856.615463637576,
+        "target_pixel_sample": 175.63882582764913,
+        "unclamped_line0": 19809,
+        "unclamped_sample0": -848,
+        "clamped_lines": 0,
+        "clamped_samples": 848,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1531985241rc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1534313284lc",
+      "ode_incidence_deg": 77.58,
+      "ode_emission_deg": 9.7,
+      "map_resolution_m": 1.745,
+      "utc_start": "2026-05-25T01:53:37.917000Z",
+      "admissible": false,
+      "index_incidence_deg": 77.58,
+      "index_emission_deg": 9.7,
+      "index_resolution_m": 1.745,
+      "scaled_pixel_m": 1.7449999999999999,
+      "incidence_at_target_deg": 77.07409939703851,
+      "azimuth_at_target_deg": 46.488632516027046,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 77.58043143216919,
+        "difference_deg": 0.00043143216919361294
+      },
+      "sun_separation_deg": 99.7524238912763,
+      "slew_angle_deg": "10.831",
+      "start_time": "2026-05-25 01:53:37.917",
+      "orbit_number": "76116",
+      "lines_samples": [
+        52224,
+        2532
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 36288,
+        "sample0": 484
+      },
+      "window_detail": {
+        "target_pixel_line": 38335.68750692839,
+        "target_pixel_sample": 2122.9269510928584,
+        "unclamped_line0": 36288,
+        "unclamped_sample0": 1099,
+        "clamped_lines": 0,
+        "clamped_samples": -615,
+        "fully_inside_frame": false
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1534313284lc.xml",
+      "rejected_by": "(1) a full tile centred on the target does not fit unclamped"
+    },
+    {
+      "pdsid": "nac.m1534327335lc",
+      "ode_incidence_deg": 76.59,
+      "ode_emission_deg": 1.73,
+      "map_resolution_m": 0.99,
+      "utc_start": "2026-05-25T05:47:48.530000Z",
+      "admissible": false,
+      "index_incidence_deg": 76.59,
+      "index_emission_deg": 1.73,
+      "index_resolution_m": 0.99,
+      "scaled_pixel_m": 0.99,
+      "incidence_at_target_deg": 76.57656994856517,
+      "azimuth_at_target_deg": 44.52111173918226,
+      "incidence_guard": {
+        "recomputed_at_centre_deg": 76.59148763739525,
+        "difference_deg": 0.0014876373952432687
+      },
+      "sun_separation_deg": 97.7732109402328,
+      "slew_angle_deg": "0.016",
+      "start_time": "2026-05-25 05:47:48.530",
+      "orbit_number": "76118",
+      "lines_samples": [
+        52224,
+        5064
+      ],
+      "window": {
+        "n_lines": 4096,
+        "n_samples": 2048,
+        "decimation": 2,
+        "line0": 24406,
+        "sample0": 464
+      },
+      "window_detail": {
+        "target_pixel_line": 26453.10729381004,
+        "target_pixel_sample": 1487.6595464223074,
+        "unclamped_line0": 24406,
+        "unclamped_sample0": 464,
+        "clamped_lines": 0,
+        "clamped_samples": 0,
+        "fully_inside_frame": true
+      },
+      "label_path": "data/metadata/chandrayaan3_site/nac.m1534327335lc.xml",
+      "rejected_by": "(3) sun-vector separation 97.77 > 10.0"
+    }
+  ],
+  "data_read": "ODE metadata, PDS4 labels and index rows only; NO image byte",
+  "generated_utc": "2026-09-24T07:18:01Z",
+  "runtime_s": 9445.2
+}

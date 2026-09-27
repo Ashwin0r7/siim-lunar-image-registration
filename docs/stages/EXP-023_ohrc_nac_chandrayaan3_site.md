@@ -274,3 +274,180 @@ recorded in Part 2:** REAL-DATA-09's result row reads *"OHRC is over the South
 Pole; no NAC coverage there"*, and the README repeats it. That stage's own
 fuller text says only that no NAC tile was *on disk*. The census here measures
 the coverage. Both scorecards are re-scored in the audit and the gap analysis.
+
+---
+
+# Part 2 — results, written 2026-09-28 against Part 1 exactly as frozen
+
+Artefacts: `experiments/EXP-023/exp023_results.json` (runner
+`scripts/run_exp023.py`, 470 s, quicklook `exp023_quicklook.png`), census
+`census.json` + `census_attempt3.log` (attempts 1–2 kept beside: rate-limited,
+then ODE unreachable), fetch manifest `data/manifests/exp023_manifest.json`,
+`run.log` with `EXIT 0`. Three earlier launches died non-scientifically —
+console kills, the third mid-S3 — and their logs are kept
+(`run_died_v1..v3.log`); nothing frozen changed between launches, and the
+artefact was written once, by the fourth.
+
+## 7. Verdict summary
+
+**S0 MET · S1 MET · S2 NOT MET · S3 MET · S4 MET · S5 MET.**
+
+**S3 is the headline: the project's first VERIFIED Chandrayaan-2 result.**
+The primary triangle {O1, Na, O2} closes at **1.9158 Na-coarse px = 3.41 m**
+against the frozen 2.0 px line (in O1's own frame: 1.80 px; VERIFIED under
+either unit), with legs of 18 017, 18 447 and 29 422 inliers, and `assess()`
+returns **VERIFIED · moderate** on O1 → Na — moderate, not high, because
+0.299 of the overlap has no nearby constraint, and the verdict says so.
+
+**S2 is NOT MET, and not for the predicted reason.** Both OHRC → NAC edges
+pass overwhelmingly (18 017 and 17 919 inliers at 78.5° incidence — the
+failure Part 1 priced at 45 % never happened). The clause that failed is
+corroboration: against the **refined** grid the registrations sit at medians
+of **105.33 and 109.74 coarse px (187.5 / 195.3 m)** versus a **98.01 px
+(174.5 m)** floor — 7–12 % above it, so both edges read INCONCLUSIVE, not
+CONSISTENT, and S2 as frozen is NOT MET. The reading beside (not instead):
+the disagreement is dominated by a **constant eastward offset — centre
+components (+183.9 E, +42.6 S) m on O1 and (+171.8 E, +93.0 S) m on O2** —
+while the loop closes at 1.92 px and an independent engine agrees with B1 to
+**0.35–0.42 px median** (S5). A shared ~180 m eastward term between two
+independent 18 000-inlier registrations and a corner map is the signature
+EXP-019 measured for archive geometry on Serenitatis (137.6 m median,
++101 ± 74 m east, D-061) — here at 69.4° S, larger, and in the same
+direction. As frozen, that is a hypothesis for a later stage, and S2 stays
+NOT MET.
+
+## 8. S0 — harness (MET)
+
+(i) both OHRC files match their label MD5s and ingest through the unmodified
+PDS4 reader, file-size identity exact; (ii) `g_grd` reproduces the refined
+corners to 5.0e-07 / 4.0e-07 deg (≤ 1e-5 required); the system-level offset
+is recorded (§10); (iii) handedness computed from the refined grid: neither
+OHRC window is mirrored (Jacobian determinants −0.073 / −0.079); Na is not
+mirrored (−0.795); (iv) Na passes `incidence_agreement` (index 78.3° vs
+computed 78.335°); (v) NAC bytes SHA-256-manifested; the runner refused to
+run while an artefact existed (integrity rule 4 exercised during the retries).
+
+## 9. S1 — the data exists (MET), and the census funnel
+
+ODE returned **116** NAC products over the 0.04° box; 95 survived the implied
+prefilter; **exactly one** survived containment + emission ≤ 20° + θ ≤ 10°:
+`nac.m1486555640lc` (2024-11-18, emission 1.45°, incidence at target 78.34°,
+**θ = 4.42°** from obs1's Sun; footprint overlap 0.986 / 1.000 with the two
+OHRC footprints). **Nb does not exist** — the second-ranked frame Part 1
+expected at 65 % never materialised, so the primary triangle is
+**{O1, O2, Na}** by Part 1 §2.3's own rule, and the 32°-apart OHRC stereo
+edge is *inside* the primary loop rather than avoided. The acquisition gap
+OHRC → Na is 207 days (≈ 6.8 months; Part 1 said "eight months or more" —
+an approximation, noted in §15).
+
+## 10. S2 — OHRC registers to NAC (NOT MET as frozen)
+
+| edge | inliers | pass | refined-grid median | floor | verdict | centre offset (E, S) m |
+|---|---|---|---|---|---|---|
+| O1 → Na | **18 017** | yes | 105.33 px = 187.49 m | 98.01 px = 174.45 m | **INCONCLUSIVE** | +183.9, +42.6 |
+| O2 → Na | **17 919** | yes | 109.74 px = 195.33 m | 98.01 px | **INCONCLUSIVE** | +171.8, +93.0 |
+
+Both clauses of the criterion were required (pass **and** CONSISTENT); the
+second fails on both edges, by 7.3 and 11.7 px over the floor. **The
+system-level (SPICE) corners disagree by 2 871 m / 2 671 m** — the measured
+size of OHRC's own pre-refinement pointing error against NAC, reported as
+Part 1 §2.4 requires, and inside Part 1's predicted 2–3 km.
+
+What may not be done, and was not: no floor was widened (the 98 px floor is
+REAL-DATA-09's rule applied to this geometry), no clause was re-read as
+"INCONCLUSIVE counts", and the eastward-offset reading above moves nothing.
+
+## 11. S3 — the primary triangle is VERIFIED (MET)
+
+{O1, Na, O2}: legs O1 → Na 18 017, Na → O2 18 447, O2 → O1 29 422 inliers,
+every leg its own B1 run on its own pair (E-021). Loop residual **1.9158 Na
+coarse px = 3.41 m** (first-image frame: 1.80 px), against the frozen 2.0.
+`assess()` on O1 → Na, given the loop: **VERIFIED · moderate**, reasons
+verbatim: correspondences clustered (0.299 of the overlap has no nearby
+constraint) and "trust the alignment near the correspondences more than far
+from them." The margin is 4.2 % — this is a pass the way REAL-DATA-09's
+2.2131 px was a fail: near the line, and the line was set first.
+
+The reported-only stereo edge O1 → O2 passes with **30 148** inliers across a
+32° pointing difference (off-nadir 14.05° vs 18.03°, roll/pitch reversed) —
+the strongest real viewpoint evidence the project holds.
+
+## 12. S4 — the pass rule discriminates here (MET)
+
+Both nulls were placed by the census with non-overlap confirmed from geometry
+(N-a: the same NAC product displaced 7.997 km along-track; N-b: the O1 window
+displaced 8 km inside obs1) and both **fail exactly as required: 4 inliers
+each** against the > 8 rule, fit RMSE 0.59 px on N-a — the RMSE trap again,
+refused again.
+
+## 13. S5 — a second engine agrees (MET)
+
+B4L (DISK + LightGlue) passes both edges — 1 402 and 1 525 inliers — and its
+dense disagreement with B1 over the overlap is **median 0.418 px (p90 0.82)**
+on O1 → Na and **0.347 px (p90 0.75)** on O2 → Na, against the 2.0 px line.
+Two engines with no shared machinery land on the same transform to a third of
+a pixel; the verdict stays capped at INCONCLUSIVE for pairs, as frozen.
+
+## 14. Descriptive — what §2.2's rows gain (D-071)
+
+- **Scale, real cross-sensor:** OHRC 0.26 m registered against NAC at 0.89 m
+  native / 1.78 m coarse — a **3.4 : 1 native (6.8 : 1 coarse) cross-sensor
+  rung**, bridged by the recorded degrade (factor 7, 1-px PSF). The row does
+  not flip on one site; it stops being NAC-only.
+- **Viewpoint, real:** Δview O1↔Na ≈ 12.6°, O2↔Na ≈ 16.6°, and the 32° OHRC
+  stereo edge — the first real (non-synthetic) viewpoint evidence, at 30 148
+  inliers.
+- **Illumination:** matched by design (θ = 4.42°); no invariance claim (rule 8).
+- 78.5° incidence at 69.4° S is the highest-incidence success on the record —
+  D-049's 66.9–74.7° Serenitatis failures were Δinc-driven, not an incidence
+  ceiling; with Δ matched, 78.5° registers with five-digit inlier counts.
+
+## 15. Predictions graded (Part 1 §3.2), and disclosed approximations
+
+| prediction | confidence | outcome |
+|---|---|---|
+| S0 MET | 90 % | **right** |
+| S1 MET | 80 % | **right** — but Nb (65 %) **wrong**: no second frame exists |
+| S2 MET | 55 % | **wrong, doubly**: S2 failed, and not where predicted — matching (the priced risk) succeeded at 18 k inliers; the corroboration clause failed |
+| "likelier failure is O2 → Na" | — | **wrong**: neither edge failed to match |
+| S3 MET | 40 % | **right** (loop 1.9158 px; given-S2 conditional 70 % never activated as stated, since S2 failed while every leg passed) |
+| S4 MET | 85 % | **right** (4 / 4 inliers) |
+| S5 MET | 50 % | **right** (0.35–0.42 px agreement) |
+| refined geometry "tens of metres, CONSISTENT" | — | **wrong**: 187–195 m, INCONCLUSIVE on both edges |
+| system-level "2–3 km" | — | **right**: 2.87 / 2.67 km |
+| stereo edge passes | 60 % | **right** (30 148 inliers); its "closes worse than {O1, Na, Nb}" clause is unevaluable — no Nb exists |
+
+Approximate statements in Part 1, noted here rather than repaired there: the
+1.27 / 1.52 km swath-edge distances were label-derived estimates; "eight
+months or more between acquisitions" is 207 days as realised; "Kaguya TC at
+this latitude would starve under N\*" was an arithmetic expectation, not a
+measurement, and no Kaguya product was used or excluded by it.
+
+**RL numbering deviation:** Part 1 §6 reserved `RL-060`; EXP-024's Part 2
+landed first and took it. This stage's entry is **RL-061**, recorded as a
+deviation instead of renumbering a committed log.
+
+## 16. What this result is, and is not
+
+It **is**: the first VERIFIED Chandrayaan-2 ↔ NAC result; OHRC — the problem
+statement's flagship sensor — registering to LRO NAC at the Chandrayaan-3
+site with five-digit inlier counts at 78.5° incidence, a loop under the
+frozen line, both nulls refused, and two independent engines agreeing to a
+third of a pixel.
+
+It is **not**: accuracy (no check point independent of LRO exists at this
+site — OHRC's refined geometry was itself tied to LRO); gauge-free (O1's own
+distortion cancels in the loop, E-039); illumination or viewpoint invariance;
+a second site; and it is not a CONSISTENT corroboration — S2 failed as
+frozen, and §53 criterion 2 **stays NOT MET** with its OHRC sub-clause now
+reading, exactly as frozen in advance: *VERIFIED by loop closure, check
+points unavailable*.
+
+## 17. Ledger
+
+- **D-071** — what the OHRC result does to the scorecards (DECISION_LEDGER).
+- **E-062** — the "no NAC coverage" wording: REAL-DATA-09's result row and
+  the README said coverage where the record supported only "no tile on
+  disk"; the census measured 116 NAC products over the site (ERROR_LEDGER).
+- **RL-061**, STAGE-INDEX and STAGE_HISTORY rows, audit + gap-analysis
+  re-score, README status row — this commit.

@@ -1,0 +1,38 @@
+S0 harness
+  O1: md5 OK, size identity True, grid-refined 5.0e-07 deg
+  O2: md5 OK, size identity True, grid-refined 4.0e-07 deg
+
+images
+  Na nac.m1486555640lc: (2048, 1024) at 1.780 m
+  N-a nac.m1486555640lc: (2048, 1024) at 1.780 m
+  O1: scans [34715, 51365) pixels [0, 10674) -> (2378, 1524) (factor 7)
+  O2: scans [32927, 48969) pixels [0, 10725) -> (2291, 1532) (factor 7)
+
+S2 edges
+  b1   O1 -> Na                 inliers  18017  pass True  (36.1s)
+  b1   O2 -> Na                 inliers  17919  pass True  (36.2s)
+
+S3 triangles
+  b1   Na -> O2                 inliers  18447  pass True  (36.0s)
+  b1   O2 -> O1                 inliers  29422  pass True  (72.4s)
+  triangle O1-Na-O2-O1: loop 1.9158406991229187  -> VERIFIED
+
+OHRC stereo edge (reported only)
+  b1   O1 -> O2                 inliers  30148  pass True  (78.5s)
+
+S4 nulls
+  b1   O1 -> N-a                inliers      4  pass False  (40.9s)
+  b1   O1-null -> Na            inliers      4  pass False  (31.9s)
+D:\softwares\Lib\site-packages\kornia\feature\integrated.py:550: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  hw1_ = torch.tensor(hw1, device=dev)
+D:\softwares\Lib\site-packages\kornia\feature\integrated.py:554: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  hw2_ = torch.tensor(hw2, device=dev)
+
+S5 B4L
+Loaded LightGlue model
+  b4l  O1 -> Na                 inliers   1402  pass True  (42.4s)
+  b4l  O2 -> Na                 inliers   1525  pass True  (51.4s)
+
+S0 True | S2 False | S3 True (O1-Na-O2: VERIFIED, loop 1.9158406991229187) | S4 True | S5 True
+-> experiments\EXP-023\exp023_results.json (470.0 s)
+EXIT 0 

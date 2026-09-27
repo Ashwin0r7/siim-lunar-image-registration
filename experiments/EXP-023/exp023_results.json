@@ -1,0 +1,1086 @@
+{
+  "stage": "EXP-023",
+  "preregistration": "docs/stages/EXP-023_ohrc_nac_chandrayaan3_site.md Part 1 (d273b8e)",
+  "target_lon_lat": [
+    32.319,
+    -69.373
+  ],
+  "base": {
+    "model": "affine",
+    "ransac_threshold_px": 3.0,
+    "seed": 0
+  },
+  "engines": {
+    "b1": "B1",
+    "b4l": "B4L"
+  },
+  "images": {
+    "Na": {
+      "pdsid": "nac.m1486555640lc",
+      "role": "Na",
+      "decimation": 2,
+      "scaled_pixel_m": 0.89,
+      "coarse_gsd_m": 1.78,
+      "orientation": {
+        "quarter_turns_ccw": 0,
+        "mirrored": false,
+        "jacobian_determinant": -0.7951915871692529,
+        "orientation_signature_along_cross": [
+          -1,
+          1
+        ],
+        "evaluated_at_frame_pixel": [
+          26263.5,
+          3979.5
+        ],
+        "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+      },
+      "shape": [
+        2048,
+        1024
+      ]
+    },
+    "N-a": {
+      "pdsid": "nac.m1486555640lc",
+      "role": "N-a",
+      "decimation": 2,
+      "scaled_pixel_m": 0.89,
+      "coarse_gsd_m": 1.78,
+      "orientation": {
+        "quarter_turns_ccw": 0,
+        "mirrored": false,
+        "jacobian_determinant": -0.7950439406758434,
+        "orientation_signature_along_cross": [
+          -1,
+          1
+        ],
+        "evaluated_at_frame_pixel": [
+          34989.5,
+          3979.5
+        ],
+        "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+      },
+      "shape": [
+        2048,
+        1024
+      ]
+    },
+    "O1": {
+      "obs": "O1",
+      "box": {
+        "scan0": 34715,
+        "scan1": 51365,
+        "pixel0": 0,
+        "pixel1": 10674,
+        "unclipped": {
+          "scan0": 34715,
+          "scan1": 51365,
+          "pixel0": -1254,
+          "pixel1": 10674
+        },
+        "footprint_nodes_inside_swath": 79,
+        "footprint_nodes": 81,
+        "shift_scans": 0
+      },
+      "degrade_factor": 7,
+      "coarse_gsd_m_nominal": 1.82,
+      "native_m_per_scan_pixel_measured": [
+        0.2724660552703274,
+        0.2685810582875594
+      ],
+      "coarse_gsd_m": 1.8936648974526038,
+      "orientation": {
+        "quarter_turns_ccw": 0,
+        "mirrored": false,
+        "jacobian_determinant": -0.07314661526117323,
+        "orientation_signature_along_cross": [
+          -1,
+          1
+        ],
+        "evaluated_at_frame_pixel": [
+          43039.5,
+          5336.5
+        ],
+        "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+      },
+      "shape": [
+        2378,
+        1524
+      ],
+      "off_nadir_deg": 14.051931629313527
+    },
+    "O2": {
+      "obs": "O2",
+      "box": {
+        "scan0": 32927,
+        "scan1": 48969,
+        "pixel0": 0,
+        "pixel1": 10725,
+        "unclipped": {
+          "scan0": 32927,
+          "scan1": 48969,
+          "pixel0": -21,
+          "pixel1": 10725
+        },
+        "footprint_nodes_inside_swath": 81,
+        "footprint_nodes": 81,
+        "shift_scans": 0
+      },
+      "degrade_factor": 7,
+      "coarse_gsd_m_nominal": 1.82,
+      "native_m_per_scan_pixel_measured": [
+        0.27961779152847316,
+        0.2840408537696857
+      ],
+      "coarse_gsd_m": 1.972805258543556,
+      "orientation": {
+        "quarter_turns_ccw": 0,
+        "mirrored": false,
+        "jacobian_determinant": -0.07942804164293851,
+        "orientation_signature_along_cross": [
+          -1,
+          1
+        ],
+        "evaluated_at_frame_pixel": [
+          40947.5,
+          5362.0
+        ],
+        "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+      },
+      "shape": [
+        2291,
+        1532
+      ],
+      "off_nadir_deg": 18.027038962442496
+    },
+    "O1-null": {
+      "obs": "O1",
+      "box": {
+        "scan0": 64079,
+        "scan1": 80729,
+        "pixel0": 0,
+        "pixel1": 10674,
+        "unclipped": {
+          "scan0": 64079,
+          "scan1": 80729,
+          "pixel0": -1254,
+          "pixel1": 10674
+        },
+        "footprint_nodes_inside_swath": 79,
+        "footprint_nodes": 81,
+        "shift_scans": 29364
+      },
+      "degrade_factor": 7,
+      "coarse_gsd_m_nominal": 1.82,
+      "native_m_per_scan_pixel_measured": [
+        0.2722677726222244,
+        0.26832434043992964
+      ],
+      "coarse_gsd_m": 1.8920723957175392,
+      "orientation": {
+        "quarter_turns_ccw": 0,
+        "mirrored": false,
+        "jacobian_determinant": -0.07307480442615635,
+        "orientation_signature_along_cross": [
+          -1,
+          1
+        ],
+        "evaluated_at_frame_pixel": [
+          72403.5,
+          5336.5
+        ],
+        "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+      },
+      "shape": [
+        2378,
+        1524
+      ],
+      "off_nadir_deg": 14.051931629313527
+    }
+  },
+  "criteria": {
+    "S0": {
+      "met": true,
+      "i_md5_structure": true,
+      "ii_grid_is_refined": true,
+      "iii_orientation": {
+        "O1": {
+          "quarter_turns_ccw": 0,
+          "mirrored": false,
+          "jacobian_determinant": -0.07314661526117323,
+          "orientation_signature_along_cross": [
+            -1,
+            1
+          ],
+          "evaluated_at_frame_pixel": [
+            43039.5,
+            5336.5
+          ],
+          "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+        },
+        "O2": {
+          "quarter_turns_ccw": 0,
+          "mirrored": false,
+          "jacobian_determinant": -0.07942804164293851,
+          "orientation_signature_along_cross": [
+            -1,
+            1
+          ],
+          "evaluated_at_frame_pixel": [
+            40947.5,
+            5362.0
+          ],
+          "source": "archive named corner columns via the bilinear frame map; left-right flip when the Jacobian determinant is positive (E-037); no pixel value read; no interpolation"
+        }
+      },
+      "iv_incidence_guard": true,
+      "v_nac_bytes": true,
+      "detail": {
+        "ohrc": {
+          "O1": {
+            "file": "realdata/realdata/OHRC/obs1/ch2_ohr_ncp_20240425T1012478407_d_img_d18/data/calibrated/20240425/ch2_ohr_ncp_20240425T1012478407_d_img_d18.img",
+            "md5": "6bc4ab94d666321f05fa87a0de172bce",
+            "md5_label": "6bc4ab94d666321f05fa87a0de172bce",
+            "md5_match": true,
+            "file_size": 1103340000,
+            "size_identity": 1103340000,
+            "size_identity_exact": true,
+            "grid_vs_refined_max_deg": 4.999999987376214e-07,
+            "grid_vs_system_max_deg": 0.09009310000000426,
+            "system_minus_refined_corner_m": {
+              "upper_left": 2806.0589000701248,
+              "upper_right": 2828.1766871096893,
+              "lower_left": 2835.6908314116845,
+              "lower_right": 2839.0004712264313
+            },
+            "sun": {
+              "incidence_deg": 78.476392,
+              "azimuth_deg": 303.534993
+            },
+            "off_nadir_deg": 14.051931629313527,
+            "reference_data_used": "LRO",
+            "start_utc": "2024-04-25T10:12:47.8407Z"
+          },
+          "O2": {
+            "file": "realdata/realdata/OHRC/obs2/ch2_ohr_ncp_20240425T1603031918_d_img_d18 (1)/data/calibrated/20240425/ch2_ohr_ncp_20240425T1603031918_d_img_d18.img",
+            "md5": "eaa96368ca2b60bd46fb645a989dccf0",
+            "md5_label": "eaa96368ca2b60bd46fb645a989dccf0",
+            "md5_match": true,
+            "file_size": 1081776000,
+            "size_identity": 1081776000,
+            "size_identity_exact": true,
+            "grid_vs_refined_max_deg": 4.0000000467443897e-07,
+            "grid_vs_system_max_deg": 0.08399659999999898,
+            "system_minus_refined_corner_m": {
+              "upper_left": 2684.0501529685434,
+              "upper_right": 2649.1632627186145,
+              "lower_left": 2647.854857864771,
+              "lower_right": 2692.9474907939357
+            },
+            "sun": {
+              "incidence_deg": 79.097263,
+              "azimuth_deg": 304.447986
+            },
+            "off_nadir_deg": 18.027038962442496,
+            "reference_data_used": "LRO",
+            "start_utc": "2024-04-25T16:03:03.1918Z"
+          }
+        },
+        "nac": {
+          "Na": {
+            "pdsid": "nac.m1486555640lc",
+            "bytes_sha256": "86851dce0d81e0d67add5516033c3caf7151cdc7a336012bda0efd6f83d42d81",
+            "tile_exists": true,
+            "incidence_guard_difference_deg": -0.004208775063162307
+          },
+          "N-a": {
+            "pdsid": "nac.m1486555640lc",
+            "bytes_sha256": "b8234e1bf2e64577f058b05ea3ce89330fe0335b4ca5535f4bd613399ccd03a2",
+            "tile_exists": true,
+            "incidence_guard_difference_deg": -0.004208775063162307
+          }
+        }
+      }
+    },
+    "S1": {
+      "met": true,
+      "roles": {
+        "Na": "nac.m1486555640lc"
+      },
+      "primary_triangle": [
+        "O1",
+        "O2",
+        "Na"
+      ],
+      "note": "the runner only runs when the census found Na; S1's funnel is in census.json"
+    },
+    "S2": {
+      "met": false,
+      "edges": {
+        "O1->Na": {
+          "engine": "b1",
+          "edge": "O1 -> Na",
+          "src_shape": [
+            2378,
+            1524
+          ],
+          "dst_shape": [
+            2048,
+            1024
+          ],
+          "n_keypoints_src": 60251,
+          "n_keypoints_dst": 31729,
+          "n_putative": 19908,
+          "n_inliers": 18017,
+          "fit_rmse_px": 1.5037007834792115,
+          "fit_rmse_is_not_accuracy": true,
+          "pass": true,
+          "wall_s": 36.1,
+          "transform_matrix": [
+            [
+              1.0449182111679336,
+              -0.36667351166373835,
+              348.5143051627018
+            ],
+            [
+              0.30890744508637585,
+              0.9836960516190547,
+              -329.146248212033
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "geometry": {
+            "floor_px": 98.00806457510703,
+            "floor_m": 174.4543549436905,
+            "floor_note": "150 m corner quantisation in NAC coarse px + 1.2 % bilinear term (REAL-DATA-09)",
+            "refined_grid": {
+              "n_grid_nodes": 61,
+              "median_px": 105.3318436169072,
+              "p90_px": 108.63442450837707,
+              "n_points": 7197,
+              "overlap_fraction_of_source": 0.5031459731543624,
+              "median_m": 187.4906816380948,
+              "centre_offset_px_xy": [
+                103.31960453062027,
+                23.911533661601197
+              ],
+              "centre_offset_m_east_south": [
+                183.9088960645041,
+                42.56252991765013
+              ],
+              "predicted_matrix": [
+                [
+                  1.0357491041437696,
+                  -0.3630578880036095,
+                  247.87980691091923
+                ],
+                [
+                  0.3108398530065351,
+                  0.9798604447850852,
+                  -349.9706917826629
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "verdict": "INCONCLUSIVE"
+            },
+            "system_level_corners": {
+              "n_grid_nodes": 80,
+              "median_px": 1612.9767755879582,
+              "p90_px": 1616.5494018728164,
+              "n_points": 2308,
+              "overlap_fraction_of_source": 0.16135346756152125,
+              "median_m": 2871.0986605465655,
+              "centre_offset_px_xy": [
+                977.3101759367398,
+                -1273.6441648932519
+              ],
+              "centre_offset_m_east_south": [
+                1739.612113167397,
+                -2267.086613509988
+              ],
+              "predicted_matrix": [
+                [
+                  1.0463623500361623,
+                  -0.36137186663075344,
+                  -636.1965876438967
+                ],
+                [
+                  0.32245101991955155,
+                  0.9814306958482664,
+                  936.8768597793378
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          }
+        },
+        "O2->Na": {
+          "engine": "b1",
+          "edge": "O2 -> Na",
+          "src_shape": [
+            2291,
+            1532
+          ],
+          "dst_shape": [
+            2048,
+            1024
+          ],
+          "n_keypoints_src": 58966,
+          "n_keypoints_dst": 31729,
+          "n_putative": 19389,
+          "n_inliers": 17919,
+          "fit_rmse_px": 1.4843876395090183,
+          "fit_rmse_is_not_accuracy": true,
+          "pass": true,
+          "wall_s": 36.2,
+          "transform_matrix": [
+            [
+              1.106658716619788,
+              -0.32280680508647625,
+              130.74099319698706
+            ],
+            [
+              0.24394060003887685,
+              1.0227841598648992,
+              -283.2609763684984
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "geometry": {
+            "floor_px": 98.00806457510703,
+            "floor_m": 174.4543549436905,
+            "floor_note": "150 m corner quantisation in NAC coarse px + 1.2 % bilinear term (REAL-DATA-09)",
+            "refined_grid": {
+              "n_grid_nodes": 63,
+              "median_px": 109.73503933509227,
+              "p90_px": 114.84447624820021,
+              "n_points": 6693,
+              "overlap_fraction_of_source": 0.4841579861111111,
+              "median_m": 195.32837001646425,
+              "centre_offset_px_xy": [
+                96.49701208129329,
+                52.24538107384342
+              ],
+              "centre_offset_m_east_south": [
+                171.76468150470205,
+                92.99677831144129
+              ],
+              "predicted_matrix": [
+                [
+                  1.1139197597137873,
+                  -0.3219188641680516,
+                  27.66896027564107
+                ],
+                [
+                  0.2565414765007529,
+                  1.0223199202183642,
+                  -344.62077397862527
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "verdict": "INCONCLUSIVE"
+            },
+            "system_level_corners": {
+              "n_grid_nodes": 79,
+              "median_px": 1500.414120121656,
+              "p90_px": 1501.9874231867198,
+              "n_points": 2169,
+              "overlap_fraction_of_source": 0.15690104166666666,
+              "median_m": 2670.7371338165476,
+              "centre_offset_px_xy": [
+                972.1671876365508,
+                -1137.7997385514814
+              ],
+              "centre_offset_m_east_south": [
+                1730.4575939930605,
+                -2025.2835346216368
+              ],
+              "predicted_matrix": [
+                [
+                  1.1127148542141567,
+                  -0.3200790420289085,
+                  -849.185456468968
+                ],
+                [
+                  0.2562250648935606,
+                  1.022365413854123,
+                  845.6144685190616
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "S3": {
+      "met": true,
+      "primary": "O1-Na-O2",
+      "primary_triangle": {
+        "cycle": [
+          "O1",
+          "Na",
+          "O2",
+          "O1"
+        ],
+        "legs": [
+          "O1 -> Na",
+          "Na -> O2",
+          "O2 -> O1"
+        ],
+        "legs_n_inliers": [
+          18017,
+          18447,
+          29422
+        ],
+        "legs_pass": [
+          true,
+          true,
+          true
+        ],
+        "loop_residual_first_image_px": 1.80084472655445,
+        "first_image": "O1",
+        "first_image_px_in_nac_coarse_px": 1.063856683962137,
+        "loop_residual_px": 1.9158406991229187,
+        "loop_residual_unit": "Na coarse px (Part 1 section 2.3)",
+        "loop_residual_m": 3.410196444438795,
+        "status_if_first_image_px": "VERIFIED",
+        "verdict_on_first_leg": {
+          "status": "VERIFIED",
+          "confidence": "moderate",
+          "reasons": [
+            "Correspondences are clustered: 0.299 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+            "Loop closure agrees, but coverage is weak: trust the alignment near the correspondences more than far from them."
+          ],
+          "evidence": [
+            {
+              "name": "n_inliers",
+              "value": 18017.0,
+              "verdict": "supports",
+              "weight": "supporting",
+              "statement": "18017 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+            },
+            {
+              "name": "loop_error_px",
+              "value": 1.9158406991229187,
+              "verdict": "supports",
+              "weight": "decisive",
+              "statement": "Loop closure 1.916 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+            },
+            {
+              "name": "coverage_max_gap",
+              "value": 0.2988305991373178,
+              "verdict": "against",
+              "weight": "strong",
+              "statement": "Largest unconstrained region is 0.299 of the image (target <= 0.15). The transform is extrapolating where there are no correspondences."
+            },
+            {
+              "name": "inlier_ratio",
+              "value": 0.9050130600763512,
+              "verdict": "supports",
+              "weight": "supporting",
+              "statement": "18017/19908 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+            },
+            {
+              "name": "fit_rmse",
+              "value": 1.5037007834792115,
+              "verdict": "inconclusive",
+              "weight": "excluded",
+              "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+            }
+          ],
+          "metrics": {
+            "n_putative": 19908,
+            "n_inliers": 18017,
+            "inlier_ratio": 0.9050130600763512,
+            "coverage_max_gap": 0.2988305991373178,
+            "coverage_occupancy": 0.65625,
+            "fit_rmse": 1.5037007834792115,
+            "loop_error_px": 1.9158406991229187,
+            "engine_agreement_px": null,
+            "transform_model": "affine",
+            "transform_matrix": [
+              [
+                1.0449182111679336,
+                -0.36667351166373835,
+                348.5143051627018
+              ],
+              [
+                0.30890744508637585,
+                0.9836960516190547,
+                -329.146248212033
+              ],
+              [
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          },
+          "excluded": {
+            "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+            "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+            "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+          }
+        },
+        "status": "VERIFIED"
+      },
+      "all_triangles": {
+        "O1-Na-O2": {
+          "cycle": [
+            "O1",
+            "Na",
+            "O2",
+            "O1"
+          ],
+          "legs": [
+            "O1 -> Na",
+            "Na -> O2",
+            "O2 -> O1"
+          ],
+          "legs_n_inliers": [
+            18017,
+            18447,
+            29422
+          ],
+          "legs_pass": [
+            true,
+            true,
+            true
+          ],
+          "loop_residual_first_image_px": 1.80084472655445,
+          "first_image": "O1",
+          "first_image_px_in_nac_coarse_px": 1.063856683962137,
+          "loop_residual_px": 1.9158406991229187,
+          "loop_residual_unit": "Na coarse px (Part 1 section 2.3)",
+          "loop_residual_m": 3.410196444438795,
+          "status_if_first_image_px": "VERIFIED",
+          "verdict_on_first_leg": {
+            "status": "VERIFIED",
+            "confidence": "moderate",
+            "reasons": [
+              "Correspondences are clustered: 0.299 of the overlap has no nearby constraint, so the alignment is extrapolated there even if it is accurate where the points are.",
+              "Loop closure agrees, but coverage is weak: trust the alignment near the correspondences more than far from them."
+            ],
+            "evidence": [
+              {
+                "name": "n_inliers",
+                "value": 18017.0,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "18017 inliers, above the reject threshold. Weak positive evidence only: this rule's false-alarm rate was 0.369 in a mixed regime (EXP-003), so a high count is not proof of correctness."
+              },
+              {
+                "name": "loop_error_px",
+                "value": 1.9158406991229187,
+                "verdict": "supports",
+                "weight": "decisive",
+                "statement": "Loop closure 1.916 px. Independent of the fit, and the only check that detects a coherent wrong solution."
+              },
+              {
+                "name": "coverage_max_gap",
+                "value": 0.2988305991373178,
+                "verdict": "against",
+                "weight": "strong",
+                "statement": "Largest unconstrained region is 0.299 of the image (target <= 0.15). The transform is extrapolating where there are no correspondences."
+              },
+              {
+                "name": "inlier_ratio",
+                "value": 0.9050130600763512,
+                "verdict": "supports",
+                "weight": "supporting",
+                "statement": "18017/19908 putative matches survived geometric verification. Self-consistency only: misses 8.7% of failures (EXP-002)."
+              },
+              {
+                "name": "fit_rmse",
+                "value": 1.5037007834792115,
+                "verdict": "inconclusive",
+                "weight": "excluded",
+                "statement": "Reported for transparency and EXCLUDED from the verdict. ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong."
+              }
+            ],
+            "metrics": {
+              "n_putative": 19908,
+              "n_inliers": 18017,
+              "inlier_ratio": 0.9050130600763512,
+              "coverage_max_gap": 0.2988305991373178,
+              "coverage_occupancy": 0.65625,
+              "fit_rmse": 1.5037007834792115,
+              "loop_error_px": 1.9158406991229187,
+              "engine_agreement_px": null,
+              "transform_model": "affine",
+              "transform_matrix": [
+                [
+                  1.0449182111679336,
+                  -0.36667351166373835,
+                  348.5143051627018
+                ],
+                [
+                  0.30890744508637585,
+                  0.9836960516190547,
+                  -329.146248212033
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ]
+            },
+            "excluded": {
+              "fit_rmse": "ROC AUC 0.4947 as a failure detector on 192 unseen cases (EXP-002 objective 3, pre-declared negative control). Inverted in the failure regime: EXP-001 measured 10 of 17 catastrophic failures reporting fit RMSE below 1e-12 px while 190-2400 px wrong.",
+              "held_out_residual": "Detection 0.200 against coherent wrong solutions (EXP-002 objective 4, ADR-0011). A match set 64 px wrong yielded 0.468 px -- lower than a correct-but-noisy set at 1.424 px. Degeneracy detector only.",
+              "cycle_consistency": "Blind to symmetric errors by construction (E-012): forward +64 px and backward -64 px cancel exactly, scoring 0.000 on wrong cases against 0.325 on the correct one -- an inverted signal."
+            }
+          },
+          "status": "VERIFIED"
+        }
+      }
+    },
+    "S4": {
+      "met": true,
+      "nulls": {
+        "N-a": {
+          "engine": "b1",
+          "edge": "O1 -> N-a",
+          "src_shape": [
+            2378,
+            1524
+          ],
+          "dst_shape": [
+            2048,
+            1024
+          ],
+          "n_keypoints_src": 60251,
+          "n_keypoints_dst": 31416,
+          "n_putative": 207,
+          "n_inliers": 4,
+          "fit_rmse_px": 0.592122403559877,
+          "fit_rmse_is_not_accuracy": true,
+          "pass": false,
+          "wall_s": 40.9,
+          "transform_matrix": [
+            [
+              0.4735913150902131,
+              0.5855383870783131,
+              -88.16071343612839
+            ],
+            [
+              -2.9260663334550157,
+              2.344854801813666,
+              201.33668297536065
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "census": {
+            "pdsid": "nac.m1486555640lc",
+            "window": {
+              "n_lines": 4096,
+              "n_samples": 2048,
+              "decimation": 2,
+              "line0": 32942,
+              "sample0": 2956
+            },
+            "displacement_lines": 8726,
+            "metres_per_line": 0.9167910875498972,
+            "displacement_km_nominal": 8.0,
+            "displacement_km_realised": 7.996858450528845,
+            "overlap_with_o1_window": 0.0,
+            "non_overlap_confirmed": true,
+            "centre_lonlat": [
+              32.521779269020314,
+              -69.62696276174363
+            ]
+          }
+        },
+        "N-b": {
+          "engine": "b1",
+          "edge": "O1-null -> Na",
+          "src_shape": [
+            2378,
+            1524
+          ],
+          "dst_shape": [
+            2048,
+            1024
+          ],
+          "n_keypoints_src": 46714,
+          "n_keypoints_dst": 31729,
+          "n_putative": 149,
+          "n_inliers": 4,
+          "fit_rmse_px": 8.526512829121202e-14,
+          "fit_rmse_is_not_accuracy": true,
+          "pass": false,
+          "wall_s": 31.9,
+          "transform_matrix": [
+            [
+              7.50888543413851,
+              0.2851177500050085,
+              -420.621025343846
+            ],
+            [
+              3.3565238908873383,
+              0.19241866508627395,
+              1022.2239256857505
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "box": {
+            "scan0": 64079,
+            "scan1": 80729,
+            "pixel0": 0,
+            "pixel1": 10674,
+            "unclipped": {
+              "scan0": 64079,
+              "scan1": 80729,
+              "pixel0": -1254,
+              "pixel1": 10674
+            },
+            "footprint_nodes_inside_swath": 79,
+            "footprint_nodes": 81,
+            "shift_scans": 29364
+          },
+          "census": {
+            "obs": "O1",
+            "box": {
+              "scan0": 64079,
+              "scan1": 80729,
+              "pixel0": 0,
+              "pixel1": 10674,
+              "unclipped": {
+                "scan0": 64079,
+                "scan1": 80729,
+                "pixel0": -1254,
+                "pixel1": 10674
+              },
+              "footprint_nodes_inside_swath": 79,
+              "footprint_nodes": 81,
+              "shift_scans": 29364
+            },
+            "displacement_scans": 29364,
+            "metres_per_scan": 0.2724469021906508,
+            "displacement_km_nominal": 8.0,
+            "displacement_km_realised": 8.002150941913586,
+            "overlap_with_na_tile": 0.0,
+            "non_overlap_confirmed": true,
+            "centre_lonlat": [
+              32.288061326054994,
+              -69.63654100077748
+            ]
+          }
+        }
+      }
+    },
+    "S5": {
+      "met": true,
+      "rows": {
+        "O1->Na": {
+          "engine": "b4l",
+          "edge": "O1 -> Na",
+          "src_shape": [
+            2378,
+            1524
+          ],
+          "dst_shape": [
+            2048,
+            1024
+          ],
+          "n_keypoints_src": 4096,
+          "n_keypoints_dst": 4096,
+          "n_putative": 1582,
+          "n_inliers": 1402,
+          "fit_rmse_px": 1.5143164875991337,
+          "fit_rmse_is_not_accuracy": true,
+          "pass": true,
+          "wall_s": 42.4,
+          "transform_matrix": [
+            [
+              1.0455648212497564,
+              -0.3672828140022917,
+              348.46032828855374
+            ],
+            [
+              0.3086250563863683,
+              0.9839539015719341,
+              -329.3602577419365
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "agreement_with_b1": {
+            "median_px": 0.41759798663583947,
+            "p90_px": 0.8233163230910863,
+            "n_points": 6953,
+            "overlap_fraction_of_source": 0.48608780760626397
+          }
+        },
+        "O2->Na": {
+          "engine": "b4l",
+          "edge": "O2 -> Na",
+          "src_shape": [
+            2291,
+            1532
+          ],
+          "dst_shape": [
+            2048,
+            1024
+          ],
+          "n_keypoints_src": 4096,
+          "n_keypoints_dst": 4096,
+          "n_putative": 1664,
+          "n_inliers": 1525,
+          "fit_rmse_px": 1.487024503660694,
+          "fit_rmse_is_not_accuracy": true,
+          "pass": true,
+          "wall_s": 51.4,
+          "transform_matrix": [
+            [
+              1.10548820636503,
+              -0.3229766069451246,
+              131.5027078156574
+            ],
+            [
+              0.24423571471368727,
+              1.0227441234134635,
+              -283.5178348243012
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "agreement_with_b1": {
+            "median_px": 0.34674859919478385,
+            "p90_px": 0.7487386820951922,
+            "n_points": 6753,
+            "overlap_fraction_of_source": 0.4884982638888889
+          }
+        }
+      },
+      "floor_px": 2.0
+    }
+  },
+  "ohrc_stereo_edge": {
+    "engine": "b1",
+    "edge": "O1 -> O2",
+    "src_shape": [
+      2378,
+      1524
+    ],
+    "dst_shape": [
+      2291,
+      1532
+    ],
+    "n_keypoints_src": 60251,
+    "n_keypoints_dst": 58966,
+    "n_putative": 42038,
+    "n_inliers": 30148,
+    "fit_rmse_px": 1.6755253218466843,
+    "fit_rmse_is_not_accuracy": true,
+    "pass": true,
+    "wall_s": 78.5,
+    "transform_matrix": [
+      [
+        0.9639666912561715,
+        -0.04613164496899658,
+        170.3372366165213
+      ],
+      [
+        0.07135428810331643,
+        0.9717419500577025,
+        -83.80986771562311
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "descriptive": {
+    "scale": {
+      "ohrc_nominal_m": 0.26,
+      "degrade_factor": 7,
+      "nac_coarse_gsd_m": 1.78,
+      "nac_native_m": 0.89,
+      "ohrc_to_nac_native_ratio": 3.423076923076923,
+      "ohrc_to_nac_coarse_ratio": 6.846153846153846
+    },
+    "viewing": {
+      "Na": {
+        "emission_deg": 1.45
+      },
+      "N-a": {
+        "emission_deg": 1.45
+      },
+      "O1": {
+        "off_nadir_deg": 14.051931629313527
+      },
+      "O2": {
+        "off_nadir_deg": 18.027038962442496
+      }
+    },
+    "sun": {
+      "Na": {
+        "incidence_at_target_deg": 78.33516823625524,
+        "azimuth_at_target_deg": 299.0279462592949,
+        "sun_separation_deg": 4.4172936588027625,
+        "start_time": "2024-11-18 07:52:52.866"
+      },
+      "N-a": {
+        "incidence_at_target_deg": 78.33516823625524,
+        "azimuth_at_target_deg": 299.0279462592949,
+        "sun_separation_deg": 4.4172936588027625,
+        "start_time": "2024-11-18 07:52:52.866"
+      }
+    }
+  },
+  "claims_not_supported": [
+    "accuracy: no check point independent of LRO exists at this site; OHRC's refined geometry was tied to LRO",
+    "gauge-free verification: loop closure is invariant to per-image gauge (E-039); O1's distortion cancels",
+    "illumination invariance: illumination is matched by design",
+    "any second site or terrain"
+  ],
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.3.3",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "total_runtime_s": 470.0
+}

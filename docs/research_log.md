@@ -1539,3 +1539,29 @@ clear. The written criterion ("gap <= 0.15") stays NOT MET as frozen.
 Scope, always beside the numbers: synthetic truth, iid noise at the
 recorded level without its spatial structure, mare tiles only; a failing
 edge is not shown wrong and a passing edge is not shown accurate.
+
+### RL-061 - OHRC ↔ LRO NAC at the Chandrayaan-3 site (EXP-023)
+
+*(Part 1 §6 reserved RL-060 for this stage; EXP-024's Part 2 landed first and
+took it. Logged here as RL-061 — a numbering deviation, recorded rather than
+repaired by renumbering a committed log.)*
+
+**Question.** Does a Chandrayaan-2 OHRC image register to LRO NAC at the same
+ground, and does the registration close a three-image loop tightly enough for
+the frozen verdict to call it VERIFIED?
+
+**Answer: yes, and it is the project's first VERIFIED Chandrayaan-2 result.**
+One admissible NAC frame among 116 (θ = 4.42°, emission 1.45°); primary
+triangle {O1, O2, Na}; edges 18 017 / 17 919 inliers at 78.5° incidence, the
+32° stereo edge 30 148; loop **1.9158 Na-coarse px = 3.41 m** against the
+frozen 2.0 → **VERIFIED · moderate**. Nulls fail at 4 inliers each; B4L
+agrees to 0.35–0.42 px median. **S2 NOT MET as frozen**: the refined-corner
+corroboration reads 105–110 px against a 98 px floor, dominated by a
++172–184 m eastward term — EXP-019's archive-error signature at a new
+latitude, recorded as a hypothesis only. §53 criterion 2 stays NOT MET, its
+OHRC sub-clause now *VERIFIED by loop closure, check points unavailable*.
+Predictions: 6 right, 3 wrong, 1 unevaluable. D-071, E-062.
+
+**Open follow-ups:** check points independent of LRO at the site; a second
+OHRC site; whether the eastward term is the NAC corner map (a controlled
+mosaic or Kaguya-class reference at 69° S would decide it).

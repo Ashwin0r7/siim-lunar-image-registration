@@ -1,0 +1,11 @@
+Na nac.m1486555640lc: lines [24216, 28312) samples [2956, 5004)  41.5 MB
+        33.6/41.5 MB (48s)
+        41.5/41.5 MB (53s)
+   (4096, 2048) sha256=86851dce0d81e0d6... DN median 635 (53s)
+
+N-a nac.m1486555640lc: lines [32942, 37038) samples [2956, 5004)  41.5 MB
+        33.6/41.5 MB (39s)
+        41.5/41.5 MB (44s)
+   (4096, 2048) sha256=b8234e1bf2e64577... DN median 624 (45s)
+
+manifest: data\manifests\exp023_manifest.json (2 tiles, 1.7 min)

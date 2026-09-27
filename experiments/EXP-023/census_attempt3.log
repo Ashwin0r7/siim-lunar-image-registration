@@ -1,0 +1,105 @@
+== EXP-023 census: target (32.319, -69.373); OHRC obs1 Sun i=78.476392 az=303.534993 ==
+
+ODE returned 116 CDRNAC4 products intersecting the 0.04 deg box
+
+fetching labels + index rows for 95 candidates ...
+   nac.m1410178753lc: inc 87.524 az 279.26 em 1.71 theta 25.70 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1410178753rc: inc 87.63 az - em 1.15 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m111376754rc: inc 70.53 az - em 1.15 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1409173715rc: inc 80.889 az 62.799 em 1.16 theta 116.1 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1399787691rc: inc 76.424 az 304.15 em 1.16 theta 2.139 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1386717080lc: inc 71.325 az 346.70 em 1.72 theta 42.18 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1371614436lc: inc 72.491 az 319.89 em 1.71 theta 16.91 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1371614436rc: inc 72.71 az - em 1.15 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1350474679lc: inc 81.382 az 63.337 em 1.7 theta 116.8 -> (3) sun-vector separation 116.84 > 10.0
+   nac.m1351501927rc: inc 88.660 az 277.03 em 1.14 theta 28.19 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1273954657rc: inc 79.685 az 62.689 em 1.14 theta 115.7 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1312876876rc: inc 71.190 az 327.30 em 1.15 theta 24.04 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1299815827lc: inc 71.38 az - em 1.69 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1299815827rc: inc 70.545 az 10.729 em 1.14 theta 64.87 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1118637352rc: inc 71.385 az 17.065 em 1.13 theta 70.91 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m180936077lc: inc 82.576 az 293.14 em 1.68 theta 11.03 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m180936077rc: inc 82.69 az - em 1.13 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m165647365rc: inc 81.961 az 289.24 em 1.15 theta 14.50 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m155015381rc: inc 71.052 az 352.58 em 1.13 theta 47.76 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m150299440lc: inc 81.59 az - em 1.68 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m150299440rc: inc 81.428 az 296.04 em 1.13 theta 7.947 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1439675403rc: inc 86.584 az 78.535 em 1.16 theta 132.8 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1421908349lc: inc 80.629 az 63.548 em 1.71 theta 116.8 -> (3) sun-vector separation 116.81 > 10.0
+   nac.m1442997156lc: inc 73.84 az - em 15.27 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1442997156rc: inc 73.954 az 326.96 em 12.38 theta 23.18 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1443011203lc: inc 74.24 az - em 0.11 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1443011203rc: inc 74.344 az 324.94 em 2.77 theta 21.20 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1443025251lc: inc 74.65 az - em 14.6 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1443025251rc: inc 74.755 az 322.93 em 17.5 theta 19.22 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1445349174lc: inc 70.955 az 355.36 em 3.56 theta 50.39 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1445356198rc: inc 70.986 az 354.32 em 1.97 theta 49.40 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1447694547lc: inc 72.467 az 25.211 em 0.99 theta 78.73 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1447694547rc: inc 72.467 az 25.211 em 3.89 theta 78.73 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1450025248rc: inc 78.955 az 56.261 em 16.8 theta 109.4 -> (3) sun-vector separation 109.47 > 10.0
+   nac.m1450039289rc: inc 78.372 az 54.332 em 1.16 theta 107.4 -> (3) sun-vector separation 107.49 > 10.0
+   nac.m1450053330rc: inc 77.809 az 52.381 em 11.69 theta 105.4 -> (3) sun-vector separation 105.50 > 10.0
+   nac.m1452369234lc: inc 87.886 az 84.373 em 13.93 theta 138.7 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1452369234rc: inc 87.95 az - em 16.84 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1452376254lc: inc 87.539 az 83.445 em 6.89 theta 137.7 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1452376254rc: inc 87.6 az - em 9.78 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1452383275lc: inc 87.193 az 82.517 em 0.35 theta 136.7 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1452383275rc: inc 87.24 az - em 2.54 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1460775380lc: inc 69.082 az 339.11 em 2.37 theta 35.34 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1460775380rc: inc 69.082 az 339.11 em 0.54 theta 35.34 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1467788002lc: inc 84.054 az 73.105 em 18.06 theta 126.8 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1467788002rc: inc 84.0 az - em 20.98 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1467795061rc: inc 83.718 az 72.158 em 14.21 theta 125.8 -> (3) sun-vector separation 125.88 > 10.0
+   nac.m1467809053lc: inc 83.070 az 70.285 em 1.73 theta 123.9 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1467816069rc: inc 82.743 az 69.344 em 7.44 theta 122.9 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1467823121lc: inc 82.414 az 68.391 em 16.92 theta 121.9 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1468784668lc: inc 83.03 az - em 0.13 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1468784668rc: inc 83.099 az 290.51 em 3.01 theta 13.65 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1468798657lc: inc 83.752 az 288.64 em 15.09 theta 15.62 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1468798657rc: inc 83.752 az 288.64 em 17.99 theta 15.62 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1471126841rc: inc 75.365 az 318.95 em 1.16 theta 15.33 -> (3) sun-vector separation 15.33 > 10.0
+   nac.m1475797169lc: inc 72.158 az 20.902 em 13.36 theta 74.62 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1475797169rc: inc 72.08 az - em 16.25 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1475811207lc: inc 71.920 az 18.826 em 1.72 theta 72.63 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1475825241lc: inc 71.707 az 16.755 em 17.67 theta 70.65 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1478153786lc: inc 77.118 az 48.122 em 1.72 theta 101.3 -> (3) sun-vector separation 101.30 > 10.0
+   nac.m1480510398lc: inc 84.794 az 74.311 em 18.78 theta 128.2 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1484212936lc: inc 88.948 az 270.91 em 1.92 theta 34.01 -> (3) sun-vector separation 34.02 > 10.0
+   nac.m1486555640lc: inc 78.335 az 299.02 em 1.45 theta 4.417 -> ADMISSIBLE
+   nac.m1486569653lc: inc 78.89 az - em 15.79 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1486569653rc: inc 78.947 az 297.11 em 18.69 theta 6.309 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1488898366rc: inc 70.513 az 329.28 em 1.16 theta 26.01 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1491239581lc: inc 67.942 az 1.8240 em 1.73 theta 56.47 -> (3) sun-vector separation 56.47 > 10.0
+   nac.m1493566861lc: inc 71.59 az - em 13.81 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1493566861rc: inc 72.059 az 36.090 em 16.71 theta 88.85 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1493580891rc: inc 71.660 az 34.060 em 1.16 theta 86.88 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1499224662lc: inc 75.882 az 314.98 em 1.73 theta 11.46 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1501551872lc: inc 71.02 az - em 16.48 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1501551872rc: inc 71.156 az 347.21 em 13.57 theta 42.68 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1501565896lc: inc 71.323 az 345.13 em 1.73 theta 40.70 -> (3) sun-vector separation 40.70 > 10.0
+   nac.m1501579923lc: inc 71.523 az 343.06 em 11.4 theta 38.73 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1501579923rc: inc 71.45 az - em 14.31 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1503893242lc: inc 71.94 az - em 15.79 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1503893242rc: inc 71.856 az 17.743 em 12.88 theta 71.60 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1503907266lc: inc 71.64 az - em 1.74 theta - -> ValueError: (lon 32.319, lat -69.373) is outside the frame: it solves 
+   nac.m1503907266rc: inc 71.655 az 15.670 em 1.17 theta 69.62 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1503921287rc: inc 71.479 az 13.592 em 14.2 theta 67.64 -> (3) sun-vector separation 67.64 > 10.0
+   nac.m1506248767lc: inc 76.650 az 45.148 em 1.73 theta 98.38 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1508589889lc: inc 84.901 az 73.185 em 1.73 theta 127.2 -> (3) sun-vector separation 127.23 > 10.0
+   nac.m1514638346lc: inc 79.702 az 296.38 em 16.7 theta 7.124 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1514652338lc: inc 80.328 az 294.49 em 1.73 theta 9.080 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1516993627lc: inc 71.746 az 323.99 em 1.74 theta 20.86 -> (3) sun-vector separation 20.86 > 10.0
+   nac.m1524018718lc: inc 78.092 az 59.026 em 1.74 theta 111.8 -> (3) sun-vector separation 111.80 > 10.0
+   nac.m1524966200lc: inc 84.599 az 282.87 em 1.74 theta 21.32 -> (3) sun-vector separation 21.32 > 10.0
+   nac.m1526360760lc: inc 88.875 az 87.550 em 1.74 theta 142.0 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1527308253rc: inc 76.018 az 312.15 em 1.18 theta 8.761 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1529643232lc: inc 71.021 az 343.80 em 1.74 theta 39.46 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1531985241lc: inc 71.389 az 14.818 em 1.73 theta 68.79 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1531985241rc: inc 71.389 az 14.818 em 1.18 theta 68.79 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1534313284lc: inc 77.074 az 46.488 em 9.7 theta 99.75 -> (1) a full tile centred on the target does not fit unclamped
+   nac.m1534327335lc: inc 76.576 az 44.521 em 1.73 theta 97.77 -> (3) sun-vector separation 97.77 > 10.0
+
+chosen: [('Na', 'nac.m1486555640lc', 4.42, 1.45)]
+primary triangle: ['O1', 'O2', 'Na']
+nulls: {"N-a": {"pdsid": "nac.m1486555640lc", "window": {"n_lines": 4096, "n_samples": 2048, "decimation": 2, "line0": 32942, "sample0": 2956}, "displacement_lines": 8726, "metres_per_line": 0.9167910875498972, "displacement_km_nominal": 8.0, "displacement_km_realised": 7.996858450528845, "overlap_with_o1_window": 0.0, "non_overlap_confirmed": true, "centre_lonlat": [32.521779269020314, -69.62696276174363]}, "N-b": {"obs": "O1", "box": {"scan0": 64079, "scan1": 80729, "pixel0": 0, "pixel1": 10674, "unclipped": {"scan0": 64079, "scan1": 80729, "pixel0": -1254, "pixel1": 10674}, "footprint_nodes_inside
+written: experiments\EXP-023\census.json

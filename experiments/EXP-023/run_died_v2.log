@@ -1,0 +1,19 @@
+S0 harness
+  O1: md5 OK, size identity True, grid-refined 5.0e-07 deg
+  O2: md5 OK, size identity True, grid-refined 4.0e-07 deg
+
+images
+  Na nac.m1486555640lc: (2048, 1024) at 1.780 m
+  N-a nac.m1486555640lc: (2048, 1024) at 1.780 m
+  O1: scans [34715, 51365) pixels [0, 10674) -> (2378, 1524) (factor 7)
+  O2: scans [32927, 48969) pixels [0, 10725) -> (2291, 1532) (factor 7)
+
+S2 edges
+  b1   O1 -> Na                 inliers  18017  pass True  (41.0s)
+  b1   O2 -> Na                 inliers  17919  pass True  (40.2s)
+
+S3 triangles
+  b1   Na -> O2                 inliers  18447  pass True  (40.4s)
+  b1   O2 -> O1                 inliers  29422  pass True  (87.3s)
+  triangle O1-Na-O2-O1: loop 1.9158406991229187  -> VERIFIED
+EXIT 127

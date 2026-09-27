@@ -1,5 +1,23 @@
 # Project gap analysis — rewritten 2026-09-23, after five stages in two days
 
+**UPDATE 2026-09-28 — EXP-023 closed the largest named gap in its
+loop-closure form.** The problem statement's flagship case — OHRC ↔ LRO NAC —
+now has a recorded result: the triangle at the Chandrayaan-3 site closes at
+**1.9158 coarse px = 3.41 m** against the frozen 2.0 → **the first VERIFIED
+Chandrayaan-2 result** (18 017 / 17 919-inlier edges at 78.5° incidence,
+nulls refused at 4 inliers, second engine agreeing to 0.35–0.42 px; S2's
+refined-corner corroboration NOT MET at 105–110 px vs a 98 px floor — an
+eastward ~180 m term, EXP-019's archive signature at a new latitude). §53
+criterion 2 **stays NOT MET** (no check point independent of LRO exists at
+69.4° S); its OHRC sub-clause reads *VERIFIED by loop closure, check points
+unavailable* (D-071, E-062). Weak point #6 ("sub-pixel against what?") and
+corrected-path item 4 (manual check points) are now the sharpest remaining
+gaps; the check-point picker (`scripts/pick_checkpoints.py`) exists and no
+point has been picked. Counts as of this update: **30 stages run, 21 with
+Part 1 committed before code; D-071; E-062; 1,132 tests passing at HEAD.**
+Figures below this line are as of their own dates and are kept unedited
+(integrity rule 3).
+
 **This document was written on 2026-09-21 and its §4 gave a corrected path of
 five numbered items. Four of the five have since run, and so has the one item
 it ranked as already done.** The 2026-09-21 text is kept in full below under

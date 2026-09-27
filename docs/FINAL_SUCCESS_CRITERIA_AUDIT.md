@@ -11,14 +11,40 @@ is reported as a gap in the evidence, not rewritten into one that can be.
 | # | Criterion (§53, verbatim) | Verdict |
 |---|---|---|
 | 1 | H1 MET on real data at ≥ 2 rungs with the frozen rule; p ≤ 0.05 on the illumination separation with ≥ 8 edges | **MET** |
-| 2 | ≥ 1 VERIFIED Chandrayaan-2 pair per sensor against NAC, with check-point error and CI reported in coarse pixels | **NOT MET** — but no longer blocked on data (see the 2026-09-20 REAL-DATA-09 update) |
+| 2 | ≥ 1 VERIFIED Chandrayaan-2 pair per sensor against NAC, with check-point error and CI reported in coarse pixels | **NOT MET** — but no longer blocked on data (see the 2026-09-20 REAL-DATA-09 update). *(2026-09-28: EXP-023 delivers the first **VERIFIED** Chandrayaan-2 result — OHRC ↔ NAC, loop 1.9158 px — and the criterion still stays NOT MET: its check-point clause needs a reference independent of LRO and none exists at the site. The OHRC sub-clause now reads, as frozen in advance: **VERIFIED by loop closure, check points unavailable** — see the update below.)* |
 | 3 | Verdict FA ≤ 5 %, FR ≤ 20 % on validation sites; zero VERIFIED on the adversarial set | **PARTLY ANSWERED** — the adversarial clause is MET (0 of 36), but for the wrong reason (E-039); FA and FR remain unmeasurable *(2026-09-23: measured by EXP-021 — see below)*. **EXP-013 built the instrument for the blind spot E-039 exposed and measured that it cannot be deployed with the reference on hand (D-054); the blind spot is open** |
 | 4 | Coverage gap ≤ 0.15 on every VERIFIED pair | **NOT MET — and now measured to be MIS-SPECIFIED (D-057).** 14 of 39 VERIFIED edges exceed 0.15. **EXP-014** then measured both components defective: the metric placed **last of four** (D-055 reversed ADR-0006) and the threshold is **4× too tight**. **EXP-015** restated it under the metric that won, and the restatement passes 39/39 **on an exact tie at the floor, a 0.58 pp anti-vacuity margin, and 36 % of edges extrapolated** — so the restatement is **not adopted** and the original verdict stands. Answerable in neither direction until a calibration samples real inlier counts (RL-050c). *(2026-09-23: **answered by EXP-022, NOT MET on three named edges** — see the update below.)* |
 | 5 | Fresh-clone install, CPU-only, all tests pass, no non-commercial weights | **MET (measured today)** |
 
 ---
 
-## UPDATE 2026-09-24 (latest) — EXP-024: criterion 4's answer is complete, from each edge's own layout
+## UPDATE 2026-09-28 (latest) — EXP-023: the first VERIFIED Chandrayaan-2 result, and neither scorecard's verdict moves
+
+`docs/stages/EXP-023_ohrc_nac_chandrayaan3_site.md` Part 2, artefacts
+`experiments/EXP-023/`. The problem statement's own case, frozen before any
+NAC label or pixel from the Chandrayaan-3 site was read.
+
+| reading | number | verdict |
+|---|---|---|
+| OHRC → NAC edges (B1, 78.5° incidence) | **18 017 / 17 919 inliers**, both pass | matching succeeded |
+| refined-corner corroboration | 105.33 / 109.74 px against a **98.01 px floor** (187–195 m; centre terms **+184 / +172 m east**) | INCONCLUSIVE ⇒ **S2 NOT MET as frozen** |
+| primary triangle {O1, O2, Na} | loop **1.9158 Na-coarse px = 3.41 m** vs the frozen 2.0; legs 18 017 / 18 447 / 29 422 | **VERIFIED · moderate** (S3 MET) |
+| displaced-ground nulls (8 km) | **4 / 4 inliers**, both fail | S4 MET |
+| second engine (B4L) | 1 402 / 1 525 inliers; agreement with B1 **0.418 / 0.347 px median** | S5 MET |
+| system-level (SPICE) corners | 2.87 / 2.67 km | as predicted (2–3 km) |
+
+**Scorecards after EXP-023: §53 2 of 5, unchanged.** Criterion 2 stays NOT
+MET — the check-point clause is unanswerable at this site — while its OHRC
+sub-clause becomes *VERIFIED by loop closure, check points unavailable*
+(D-071), the exact wording Part 1 froze for this outcome. **§2.2 ≈ 55 %,
+unchanged in verdicts, stronger in text:** the scale row gains a real
+cross-sensor rung (OHRC 0.26 m ↔ NAC 0.89 m native, 3.4 : 1, bridged by the
+recorded degrade), and the viewpoint row gains the first real viewing
+differences (12.6° / 16.6°, and the 32° stereo edge at 30 148 inliers).
+Neither row flips on one site with matched illumination. E-062 records the
+"no NAC coverage" wording the census refuted (116 products, 1 admissible).
+
+## UPDATE 2026-09-24 — EXP-024: criterion 4's answer is complete, from each edge's own layout
 
 `docs/stages/EXP-024_coverage_direct_bound.md`, artefacts `experiments/EXP-024/`.
 EXP-022's proxy cells are replaced by the measurement they stood in for: all 22
