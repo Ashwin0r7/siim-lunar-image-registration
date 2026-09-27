@@ -2274,7 +2274,7 @@ function chandrayaan2Panel(vm) {
     <div class="lab" style="margin-top:18px">OHRC ↔ LRO NAC at the Chandrayaan-3 landing site · EXP-023 · criteria frozen before any pixel from the site was read</div>
     <div class="tiles">
       <div class="tile hero good"><div class="lab">OHRC → NAC edges</div>
-        <div class="val">${oh.edges.map(e => e.n_inliers).join(" · ")}</div>
+        <div class="val">${oh.edges[0].n_inliers} <small>· ${oh.edges[1].n_inliers}</small></div>
         <div class="note">inliers at ${fx(oh.sun_incidence_deg)}° Sun incidence · ${oh.census.admissible} admissible NAC frame of ${oh.census.ode_returned} over the site (θ ${fx(oh.census.theta_deg)}°)</div></div>
       <div class="tile ${oh.loop.residual_px > oh.loop.reject_threshold_px ? "bad" : "good"}">
         <div class="lab">three-image loop</div>
@@ -2284,7 +2284,7 @@ function chandrayaan2Panel(vm) {
         <div class="val">${oh.nulls.map(n => n.n_inliers).join(" / ")}</div>
         <div class="note">inliers on two 8 km displacements — both refused, as required</div></div>
       <div class="tile bad"><div class="lab">corner-geometry clause</div>
-        <div class="val">${oh.edges.map(e => (+e.geometry_median_px).toFixed(0)).join(" · ")} px</div>
+        <div class="val">${(+oh.edges[0].geometry_median_px).toFixed(0)} <small>· ${(+oh.edges[1].geometry_median_px).toFixed(0)} px</small></div>
         <div class="note">vs a ${(+oh.edges[0].floor_px).toFixed(0)} px floor → ${st("S2 NOT MET", "fail")} as frozen</div></div>
     </div>
     <div class="rc">
