@@ -1641,7 +1641,7 @@ function stepRegistration(vm) {
       <figcaption>
         <span class="pass">blue — inlier, survived geometric verification</span> ·
         <span class="failc">red — rejected</span> ·
-        ${vm.reg.n_keypoints_src} / ${vm.reg.n_keypoints_dst} keypoints detected
+        ${vm.reg.n_keypoints_src} / ${vm.reg.n_keypoints_dst} keypoints detected<span id="corr-sample"></span>
       </figcaption>
     </figure>
     <div class="tiles" style="margin-top:20px">
@@ -3390,7 +3390,7 @@ function renderLive(d) {
       <div class="rdbody">
       <div class="note"><b>Correspondences.</b> Blue survived geometric
         verification; red was rejected. Straight, parallel blue lines are what a correct alignment looks
-        like; a fan of crossing lines is what a wrong one looks like, whatever the count says.</div>
+        like; a fan of crossing lines is what a wrong one looks like, whatever the count says.<span id="live-corr-sample"></span></div>
       <canvas id="live-corr"></canvas>
       <div class="tscroll"><table>
         <thead><tr><th>engine</th><th class="n">putative</th><th class="n">inliers</th><th class="n">refined</th><th>model</th><th>selected by</th><th class="n">wall</th></tr></thead>
@@ -3595,17 +3595,35 @@ function drawLiveCorrespondences(d) {
     ctx.drawImage(a, 0, 0); ctx.drawImage(b, a.width, 0);
     const src = d.correspondences.src || [], dst = d.correspondences.dst || [];
     const inl = d.correspondences.inlier || [];
-    [false, true].forEach(want => {
-      ctx.strokeStyle = want ? "rgba(57,135,229,.70)" : "rgba(208,59,59,.45)";
-      ctx.lineWidth = want ? 1.1 : 0.9;
-      ctx.beginPath();
-      for (let i = 0; i < src.length; i++) {
-        if (!!inl[i] !== want) continue;
+    // Same rendering rule as the recorded case: every match as its two
+    // endpoints, lines for an even sample only, and the rate printed beside.
+    const drawSet = (want, color, lw, dotR, maxLines) => {
+      const idx = [];
+      for (let i = 0; i < src.length; i++) if (!!inl[i] === want) idx.push(i);
+      ctx.fillStyle = color;
+      for (const i of idx) {
+        ctx.fillRect(src[i][0] - dotR, src[i][1] - dotR, 2 * dotR, 2 * dotR);
+        ctx.fillRect(dst[i][0] + a.width - dotR, dst[i][1] - dotR, 2 * dotR, 2 * dotR);
+      }
+      const step = Math.max(1, Math.ceil(idx.length / maxLines));
+      ctx.strokeStyle = color; ctx.lineWidth = lw; ctx.beginPath();
+      let drawn = 0;
+      for (let j = 0; j < idx.length; j += step) {
+        const i = idx[j];
         ctx.moveTo(src[i][0], src[i][1]);
         ctx.lineTo(dst[i][0] + a.width, dst[i][1]);
+        drawn++;
       }
       ctx.stroke();
-    });
+      return {n: idx.length, step, drawn};
+    };
+    const rej = drawSet(false, "rgba(208,59,59,.50)", 0.9, 1, 40);
+    const inn = drawSet(true, "rgba(57,135,229,.65)", 1, 1.2, 110);
+    const capEl = document.getElementById("live-corr-sample");
+    if (capEl) capEl.textContent = (inn.step > 1 || rej.step > 1)
+      ? ` Every match is drawn as its two endpoints; lines connect an even 1-in-${inn.step} sample of the ${inn.n} inliers` +
+        (rej.n ? ` and 1-in-${rej.step} of the ${rej.n} rejected.` : ".")
+      : "";
   };
   a.onload = go; b.onload = go;
   a.src = d.source_png; b.src = d.reference_png;
@@ -4153,18 +4171,37 @@ function drawCorrespondences(vm) {
     // further. Scale by the ratio the API reports rather than assuming 1:1.
     const gridW = vm.grid ? vm.grid[1] : a.width;
     const k = a.width / gridW;
+    // Every match is drawn as its two endpoints, so nothing is hidden; lines
+    // connect only an even 1-in-step sample, because 1,656 full-width lines
+    // read as scribble, and the sample rate is printed under the figure.
     // Outliers first, so the inliers that matter draw on top of them.
-    [false, true].forEach(want => {
-      ctx.strokeStyle = want ? "rgba(57,135,229,.70)" : "rgba(208,59,59,.45)";
-      ctx.lineWidth = want ? 1.1 : 0.9;
-      ctx.beginPath();
-      for (let i = 0; i < src.length; i++) {
-        if (!!inlier[i] !== want) continue;
+    const drawSet = (want, color, lw, dotR, maxLines) => {
+      const idx = [];
+      for (let i = 0; i < src.length; i++) if (!!inlier[i] === want) idx.push(i);
+      ctx.fillStyle = color;
+      for (const i of idx) {
+        ctx.fillRect(src[i][0] * k - dotR, src[i][1] * k - dotR, 2 * dotR, 2 * dotR);
+        ctx.fillRect(dst[i][0] * k + a.width - dotR, dst[i][1] * k - dotR, 2 * dotR, 2 * dotR);
+      }
+      const step = Math.max(1, Math.ceil(idx.length / maxLines));
+      ctx.strokeStyle = color; ctx.lineWidth = lw; ctx.beginPath();
+      let drawn = 0;
+      for (let j = 0; j < idx.length; j += step) {
+        const i = idx[j];
         ctx.moveTo(src[i][0] * k, src[i][1] * k);
         ctx.lineTo(dst[i][0] * k + a.width, dst[i][1] * k);
+        drawn++;
       }
       ctx.stroke();
-    });
+      return {n: idx.length, step, drawn};
+    };
+    const rej = drawSet(false, "rgba(208,59,59,.50)", 0.9, 1, 40);
+    const inn = drawSet(true, "rgba(57,135,229,.65)", 1, 1.2, 110);
+    const capEl = document.getElementById("corr-sample");
+    if (capEl) capEl.textContent = (inn.step > 1 || rej.step > 1)
+      ? ` · every match is drawn as its two endpoints; lines connect an even 1-in-${inn.step} sample of the ${inn.n} inliers (${inn.drawn} lines)` +
+        (rej.n ? ` and 1-in-${rej.step} of the ${rej.n} rejected` : "")
+      : "";
   };
   a.onload = go; b.onload = go;
   a.src = vm.imgs.src; b.src = vm.imgs.dst;
